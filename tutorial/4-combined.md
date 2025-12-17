@@ -309,3 +309,49 @@ legal_schema = (extractor.create_schema()
         .field("basis", description="Legal basis for the claim")
 )
 ```
+
+## Using Confidence Scores and Character Positions with Combined Schemas
+
+When using combined schemas, `include_confidence` and `include_spans` parameters apply to all extraction types:
+
+```python
+schema = (extractor.create_schema()
+    .entities(["person", "company"])
+    .classification("sentiment", ["positive", "negative", "neutral"])
+    .relations(["works_for"])
+    .structure("product")
+        .field("name", dtype="str")
+        .field("price", dtype="str")
+)
+
+text = "Tim Cook works for Apple. The iPhone 15 costs $999. This is exciting!"
+results = extractor.extract(
+    text,
+    schema,
+    include_confidence=True,
+    include_spans=True
+)
+# Output: {
+#     'entities': {
+#         'person': [
+#             {'text': 'Tim Cook', 'confidence': 0.95, 'start': 0, 'end': 8}
+#         ],
+#         'company': [
+#             {'text': 'Apple', 'confidence': 0.92, 'start': 20, 'end': 25}
+#         ]
+#     },
+#     'sentiment': {'label': 'positive', 'confidence': 0.88},
+#     'relation_extraction': {
+#         'works_for': [{
+#             'head': {'text': 'Tim Cook', 'confidence': 0.95, 'start': 0, 'end': 8},
+#             'tail': {'text': 'Apple', 'confidence': 0.92, 'start': 20, 'end': 25}
+#         }]
+#     },
+#     'product': [{
+#         'name': {'text': 'iPhone 15', 'confidence': 0.90, 'start': 30, 'end': 39},
+#         'price': {'text': '$999', 'confidence': 0.88, 'start': 46, 'end': 51}
+#     }]
+# }
+```
+
+**Note**: The `include_confidence` and `include_spans` parameters work consistently across all extraction types (entities, classifications, relations, and structures) when using combined schemas.

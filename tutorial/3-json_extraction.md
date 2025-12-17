@@ -403,6 +403,85 @@ results = extractor.extract_json(
 # }
 ```
 
+## Confidence Scores and Character Positions
+
+You can include confidence scores and character-level start/end positions for structured extraction:
+
+```python
+# Extract with confidence scores
+text = "The MacBook Pro costs $1999 and features M3 chip, 16GB RAM, and 512GB storage."
+results = extractor.extract_json(
+    text,
+    {
+        "product": [
+            "name::str",
+            "price",
+            "features"
+        ]
+    },
+    include_confidence=True
+)
+# Output: {
+#     'product': [{
+#         'name': {'text': 'MacBook Pro', 'confidence': 0.95},
+#         'price': [{'text': '$1999', 'confidence': 0.92}],
+#         'features': [
+#             {'text': 'M3 chip', 'confidence': 0.88},
+#             {'text': '16GB RAM', 'confidence': 0.90},
+#             {'text': '512GB storage', 'confidence': 0.87}
+#         ]
+#     }]
+# }
+
+# Extract with character positions (spans)
+results = extractor.extract_json(
+    text,
+    {
+        "product": [
+            "name::str",
+            "price"
+        ]
+    },
+    include_spans=True
+)
+# Output: {
+#     'product': [{
+#         'name': {'text': 'MacBook Pro', 'start': 4, 'end': 15},
+#         'price': [{'text': '$1999', 'start': 22, 'end': 27}]
+#     }]
+# }
+
+# Extract with both confidence and spans
+results = extractor.extract_json(
+    text,
+    {
+        "product": [
+            "name::str",
+            "price",
+            "features"
+        ]
+    },
+    include_confidence=True,
+    include_spans=True
+)
+# Output: {
+#     'product': [{
+#         'name': {'text': 'MacBook Pro', 'confidence': 0.95, 'start': 4, 'end': 15},
+#         'price': [{'text': '$1999', 'confidence': 0.92, 'start': 22, 'end': 27}],
+#         'features': [
+#             {'text': 'M3 chip', 'confidence': 0.88, 'start': 32, 'end': 39},
+#             {'text': '16GB RAM', 'confidence': 0.90, 'start': 41, 'end': 49},
+#             {'text': '512GB storage', 'confidence': 0.87, 'start': 55, 'end': 68}
+#         ]
+#     }]
+# }
+```
+
+**Note**: When `include_spans` or `include_confidence` is True:
+- **String fields** (`dtype="str"`): Return dicts with `{'text': '...', 'confidence': 0.95, 'start': 0, 'end': 5}` (or subset)
+- **List fields** (`dtype="list"`): Return lists of dicts, each with text, confidence, and positions
+- **Default** (both False): Returns simple strings or lists of strings
+
 ## Best Practices
 
 ### Data Types

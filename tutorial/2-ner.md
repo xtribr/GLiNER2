@@ -138,6 +138,75 @@ results = extractor.extract_entities(
 )
 ```
 
+### With Confidence Scores and Character Positions
+
+You can include confidence scores and character-level start/end positions using `include_confidence` and `include_spans` parameters:
+
+```python
+# Extract entities with confidence scores
+text = "Apple Inc. CEO Tim Cook announced iPhone 15 in Cupertino."
+results = extractor.extract_entities(
+    text,
+    ["company", "person", "product"],
+    include_confidence=True
+)
+print(results)
+# Output: {
+#     'entities': {
+#         'company': [
+#             {'text': 'Apple Inc.', 'confidence': 0.95},
+#             {'text': 'Tim Cook', 'confidence': 0.92}
+#         ],
+#         'product': [
+#             {'text': 'iPhone 15', 'confidence': 0.88}
+#         ]
+#     }
+# }
+
+# Extract with character positions (spans)
+results = extractor.extract_entities(
+    text,
+    ["company", "person"],
+    include_spans=True
+)
+print(results)
+# Output: {
+#     'entities': {
+#         'company': [
+#             {'text': 'Apple Inc.', 'start': 0, 'end': 9}
+#         ],
+#         'person': [
+#             {'text': 'Tim Cook', 'start': 15, 'end': 23}
+#         ]
+#     }
+# }
+
+# Extract with both confidence and spans
+results = extractor.extract_entities(
+    text,
+    ["company", "product"],
+    include_confidence=True,
+    include_spans=True
+)
+print(results)
+# Output: {
+#     'entities': {
+#         'company': [
+#             {'text': 'Apple Inc.', 'confidence': 0.95, 'start': 0, 'end': 9}
+#         ],
+#         'product': [
+#             {'text': 'confidence': 0.88, 'start': 15, 'end': 24}
+#         ]
+#     }
+# }
+```
+
+**Note**: When `include_spans` is True, the output format changes:
+- **Default** (both False): Returns simple text strings: `['Apple Inc.', 'Tim Cook']`
+- **include_confidence=True**: Returns dicts with `{'text': '...', 'confidence': 0.95}`
+- **include_spans=True**: Returns dicts with `{'text': '...', 'start': 0, 'end': 9}
+- **Both True**: Returns dicts with `{'text': '...', 'confidence': 0.95, 'start': 0, 'end': 9}
+
 ### Per-Entity Thresholds
 
 ```python

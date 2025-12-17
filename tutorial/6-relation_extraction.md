@@ -193,6 +193,76 @@ schema = extractor.create_schema().relations({
 })
 ```
 
+### With Confidence Scores and Character Positions
+
+You can include confidence scores and character-level start/end positions for relation extractions:
+
+```python
+# Extract relations with confidence scores
+text = "John works for Apple Inc. and lives in San Francisco."
+results = extractor.extract_relations(
+    text,
+    ["works_for", "lives_in"],
+    include_confidence=True
+)
+print(results)
+# Output: {
+#     'relation_extraction': {
+#         'works_for': [{
+#             'head': {'text': 'John', 'confidence': 0.95},
+#             'tail': {'text': 'Apple Inc.', 'confidence': 0.92}
+#         }],
+#         'lives_in': [{
+#             'head': {'text': 'John', 'confidence': 0.94},
+#             'tail': {'text': 'San Francisco', 'confidence': 0.91}
+#         }]
+#     }
+# }
+
+# Extract with character positions (spans)
+results = extractor.extract_relations(
+    text,
+    ["works_for", "lives_in"],
+    include_spans=True
+)
+print(results)
+# Output: {
+#     'relation_extraction': {
+#         'works_for': [{
+#             'head': {'text': 'John', 'start': 0, 'end': 4},
+#             'tail': {'text': 'Apple Inc.', 'start': 15, 'end': 25}
+#         }],
+#         'lives_in': [{
+#             'head': {'text': 'John', 'start': 0, 'end': 4},
+#             'tail': {'text': 'San Francisco', 'start': 33, 'end': 46}
+#         }]
+#     }
+# }
+
+# Extract with both confidence and spans
+results = extractor.extract_relations(
+    text,
+    ["works_for", "lives_in"],
+    include_confidence=True,
+    include_spans=True
+)
+print(results)
+# Output: {
+#     'relation_extraction': {
+#         'works_for': [{
+#             'head': {'text': 'John', 'confidence': 0.95, 'start': 0, 'end': 4},
+#             'tail': {'text': 'Apple Inc.', 'confidence': 0.92, 'start': 15, 'end': 25}
+#         }],
+#         'lives_in': [{
+#             'head': {'text': 'John', 'confidence': 0.94, 'start': 0, 'end': 4},
+#             'tail': {'text': 'San Francisco', 'confidence': 0.91, 'start': 33, 'end': 46}
+#         }]
+#     }
+# }
+```
+
+**Note**: When `include_spans` or `include_confidence` is True, relations are returned as dictionaries with `head` and `tail` keys, each containing the extracted text along with optional confidence scores and character positions. When both are False (default), relations are returned as simple tuples `(head, tail)`.
+
 ## Batch Processing
 
 Process multiple texts efficiently:

@@ -87,9 +87,12 @@ results = extractor.extract_entities(
 # }
 ```
 
-### With Confidence Scores
+### With Confidence Scores and Character Positions
+
+You can include confidence scores and character-level start/end positions using `include_confidence` and `include_spans`:
 
 ```python
+# With confidence only
 results = extractor.extract_entities(
     "Microsoft acquired LinkedIn for $26.2 billion.",
     ["company", "price"],
@@ -98,11 +101,45 @@ results = extractor.extract_entities(
 # Output: {
 #     'entities': {
 #         'company': [
-#             {'text': 'Microsoft', 'confidence': 0.98, 'start': 0, 'end': 1},
-#             {'text': 'LinkedIn', 'confidence': 0.97, 'start': 2, 'end': 3}
+#             {'text': 'Microsoft', 'confidence': 0.98},
+#             {'text': 'LinkedIn', 'confidence': 0.97}
 #         ],
 #         'price': [
-#             {'text': '$26.2 billion', 'confidence': 0.95, 'start': 5, 'end': 7}
+#             {'text': '$26.2 billion', 'confidence': 0.95}
+#         ]
+#     }
+# }
+
+# With character positions (spans) only
+results = extractor.extract_entities(
+    "Microsoft acquired LinkedIn.",
+    ["company"],
+    include_spans=True
+)
+# Output: {
+#     'entities': {
+#         'company': [
+#             {'text': 'Microsoft', 'start': 0, 'end': 9},
+#             {'text': 'LinkedIn', 'start': 18, 'end': 26}
+#         ]
+#     }
+# }
+
+# With both confidence and spans
+results = extractor.extract_entities(
+    "Microsoft acquired LinkedIn for $26.2 billion.",
+    ["company", "price"],
+    include_confidence=True,
+    include_spans=True
+)
+# Output: {
+#     'entities': {
+#         'company': [
+#             {'text': 'Microsoft', 'confidence': 0.98, 'start': 0, 'end': 9},
+#             {'text': 'LinkedIn', 'confidence': 0.97, 'start': 18, 'end': 26}
+#         ],
+#         'price': [
+#             {'text': '$26.2 billion', 'confidence': 0.95, 'start': 32, 'end': 45}
 #         ]
 #     }
 # }
@@ -333,17 +370,43 @@ for i, result in enumerate(results):
     print(f"Text {i+1}: {result}")
 ```
 
-## Confidence Scores
+## Confidence Scores and Character Positions
 
 ### Entity Extraction with Confidence
 
 ```python
+# Include confidence scores
 results = extractor.extract_entities(
     "Apple released the iPhone 15 in September 2023.",
     ["company", "product", "date"],
     include_confidence=True
 )
-# Each entity includes: text, confidence, start position, end position
+# Each entity includes: {'text': '...', 'confidence': 0.95}
+```
+
+### Entity Extraction with Character Positions
+
+```python
+# Include character-level start/end positions
+results = extractor.extract_entities(
+    "Apple released the iPhone 15.",
+    ["company", "product"],
+    include_spans=True
+)
+# Each entity includes: {'text': '...', 'start': 0, 'end': 5}
+```
+
+### Both Confidence and Positions
+
+```python
+# Include both confidence and character positions
+results = extractor.extract_entities(
+    "Apple released the iPhone 15 in September 2023.",
+    ["company", "product", "date"],
+    include_confidence=True,
+    include_spans=True
+)
+# Each entity includes: {'text': '...', 'confidence': 0.95, 'start': 0, 'end': 5}
 ```
 
 ### Raw Results (Advanced)
@@ -355,9 +418,10 @@ results = extractor.extract_entities(
     "Apple CEO Tim Cook announced new products.",
     ["company", "person"],
     format_results=False,  # Get raw extraction data
-    include_confidence=True
+    include_confidence=True,
+    include_spans=True
 )
-# Returns tuples: (text, confidence, start_token, end_token)
+# Returns tuples: (text, confidence, start_char, end_char)
 ```
 
 ## Error Handling
