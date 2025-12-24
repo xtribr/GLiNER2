@@ -14,11 +14,11 @@ const UF_OPTIONS = [
 
 const PORTE_OPTIONS = [
   { value: '', label: 'Todos os Portes' },
-  { value: '1', label: 'Muito pequena (até 30)' },
-  { value: '2', label: 'Pequena (31-100)' },
-  { value: '3', label: 'Média (101-200)' },
-  { value: '4', label: 'Grande (201-400)' },
-  { value: '5', label: 'Muito grande (400+)' },
+  { value: '1', label: 'Até 30 concluintes' },
+  { value: '2', label: '31-100 concluintes' },
+  { value: '3', label: '101-200 concluintes' },
+  { value: '4', label: '201-400 concluintes' },
+  { value: '5', label: '400+ concluintes' },
 ];
 
 export default function SchoolsPage() {
@@ -168,7 +168,7 @@ export default function SchoolsPage() {
                       Porte
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Matrículas
+                      Concluintes
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Nota Média
