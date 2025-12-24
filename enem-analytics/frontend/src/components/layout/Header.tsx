@@ -2,12 +2,13 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { GraduationCap, Search, TrendingUp, GitCompare } from 'lucide-react';
+import { GraduationCap, Search, TrendingUp, GitCompare, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/', label: 'Dashboard', icon: GraduationCap },
   { href: '/schools', label: 'Escolas', icon: Search },
+  { href: '/skills', label: 'Habilidades', icon: AlertTriangle },
   { href: '/trends', label: 'Tendências', icon: TrendingUp },
   { href: '/compare', label: 'Comparar', icon: GitCompare },
 ];

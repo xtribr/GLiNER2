@@ -12,19 +12,34 @@ const UF_OPTIONS = [
   'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO'
 ];
 
+const PORTE_OPTIONS = [
+  { value: '', label: 'Todos os Portes' },
+  { value: '1', label: 'Muito pequena (até 30)' },
+  { value: '2', label: 'Pequena (31-100)' },
+  { value: '3', label: 'Média (101-200)' },
+  { value: '4', label: 'Grande (201-400)' },
+  { value: '5', label: 'Muito grande (400+)' },
+];
+
 export default function SchoolsPage() {
   const [search, setSearch] = useState('');
   const [uf, setUf] = useState('');
+  const [tipoEscola, setTipoEscola] = useState<'Privada' | 'Pública' | ''>('');
+  const [localizacao, setLocalizacao] = useState<'Urbana' | 'Rural' | ''>('');
+  const [porte, setPorte] = useState('');
   const [page, setPage] = useState(1);
   const limit = 50;
 
   const { data: schools, isLoading } = useQuery({
-    queryKey: ['schools', search, uf, page],
+    queryKey: ['schools', search, uf, tipoEscola, localizacao, porte, page],
     queryFn: () => api.listSchools({
       page,
       limit,
       search: search || undefined,
       uf: uf || undefined,
+      tipo_escola: tipoEscola || undefined,
+      localizacao: localizacao || undefined,
+      porte: porte ? parseInt(porte) : undefined,
       order_by: 'ranking',
       order: 'asc'
     }),
@@ -74,6 +89,50 @@ export default function SchoolsPage() {
               ))}
             </select>
           </div>
+          <div className="w-full md:w-40">
+            <select
+              value={tipoEscola}
+              onChange={(e) => {
+                setTipoEscola(e.target.value as 'Privada' | 'Pública' | '');
+                setPage(1);
+              }}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
+            >
+              <option value="">Todas as Redes</option>
+              <option value="Privada">Privada</option>
+              <option value="Pública">Pública</option>
+            </select>
+          </div>
+          <div className="w-full md:w-36">
+            <select
+              value={localizacao}
+              onChange={(e) => {
+                setLocalizacao(e.target.value as 'Urbana' | 'Rural' | '');
+                setPage(1);
+              }}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
+            >
+              <option value="">Todas Localizações</option>
+              <option value="Urbana">Urbana</option>
+              <option value="Rural">Rural</option>
+            </select>
+          </div>
+          <div className="w-full md:w-52">
+            <select
+              value={porte}
+              onChange={(e) => {
+                setPorte(e.target.value);
+                setPage(1);
+              }}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
+            >
+              {PORTE_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -102,11 +161,17 @@ export default function SchoolsPage() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       UF
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Nota Média
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Tipo
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Porte
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Anos
+                      Matrículas
+                    </th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Nota Média
                     </th>
                   </tr>
                 </thead>
@@ -134,11 +199,29 @@ export default function SchoolsPage() {
                           </span>
                         )}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right font-semibold text-gray-900">
-                        {formatNumber(school.ultima_nota)}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {school.tipo_escola && (
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            school.tipo_escola === 'Privada'
+                              ? 'bg-purple-100 text-purple-800'
+                              : 'bg-green-100 text-green-800'
+                          }`}>
+                            {school.tipo_escola}
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {school.porte_label && (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                            {school.porte_label}
+                          </span>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-gray-600">
-                        {school.anos_participacao}
+                        {school.qt_matriculas ? formatNumber(school.qt_matriculas) : '-'}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right font-semibold text-gray-900">
+                        {formatNumber(school.ultima_nota)}
                       </td>
                     </tr>
                   ))}

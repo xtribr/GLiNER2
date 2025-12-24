@@ -9,12 +9,19 @@ export interface SchoolScore {
   nota_redacao: number | null;
   nota_media: number | null;
   ranking_brasil: number | null;
+  desempenho_habilidades: number | null;
+  competencia_redacao_media: number | null;
 }
 
 export interface SchoolSummary {
   codigo_inep: string;
   nome_escola: string;
   uf: string | null;
+  tipo_escola: string | null;
+  localizacao: string | null;
+  porte: number | null;
+  porte_label: string | null;
+  qt_matriculas: number | null;
   ultimo_ranking: number | null;
   ultima_nota: number | null;
   anos_participacao: number;
@@ -24,6 +31,7 @@ export interface SchoolDetail {
   codigo_inep: string;
   nome_escola: string;
   uf: string | null;
+  tipo_escola: string | null;
   historico: SchoolScore[];
   tendencia: string | null;
   melhor_ano: number | null;
@@ -35,12 +43,19 @@ export interface TopSchool {
   codigo_inep: string;
   nome_escola: string;
   uf: string | null;
+  tipo_escola: string | null;
+  localizacao: string | null;
+  porte: number | null;
+  porte_label: string | null;
+  qt_matriculas: number | null;
   nota_media: number | null;
   nota_cn: number | null;
   nota_ch: number | null;
   nota_lc: number | null;
   nota_mt: number | null;
   nota_redacao: number | null;
+  desempenho_habilidades: number | null;
+  competencia_redacao_media: number | null;
 }
 
 export interface Stats {
@@ -61,6 +76,7 @@ export interface SchoolHistory {
   codigo_inep: string;
   nome_escola: string;
   uf: string | null;
+  tipo_escola: string | null;
   anos_participacao: number;
   history: {
     ano: number;
@@ -73,6 +89,8 @@ export interface SchoolHistory {
     nota_lc: number | null;
     nota_mt: number | null;
     nota_redacao: number | null;
+    desempenho_habilidades: number | null;
+    competencia_redacao_media: number | null;
   }[];
 }
 
@@ -112,6 +130,9 @@ export const api = {
     limit?: number;
     search?: string;
     uf?: string;
+    tipo_escola?: 'Privada' | 'Pública';
+    localizacao?: 'Urbana' | 'Rural';
+    porte?: number;
     ano?: number;
     order_by?: 'ranking' | 'nota' | 'nome';
     order?: 'asc' | 'desc';
@@ -136,4 +157,47 @@ export const api = {
         escola2: { nota_media: number | null; ranking: number | null };
       }[];
     }>(`/api/schools/compare/${inep1}/${inep2}`),
+
+  getWorstSkills: (area?: string, limit = 10) => {
+    const params = new URLSearchParams({ limit: limit.toString() });
+    if (area) params.set('area', area);
+    return fetchAPI<{
+      ano: number;
+      skills_by_area: Record<string, { skill_num: number; performance: number; descricao: string }[]>;
+    }>(`/api/schools/skills/worst?${params}`);
+  },
+
+  getAllSkills: (area?: string) => {
+    const params = new URLSearchParams();
+    if (area) params.set('area', area);
+    return fetchAPI<{
+      ano: number;
+      total: number;
+      skills: { area: string; skill_num: number; performance: number; descricao: string }[];
+    }>(`/api/schools/skills/all?${params}`);
+  },
+
+  getSchoolSkills: (codigo_inep: string, limit = 10) =>
+    fetchAPI<{
+      codigo_inep: string;
+      ano: number;
+      total_skills: number;
+      worst_overall: {
+        area: string;
+        skill_num: number;
+        performance: number;
+        national_avg: number | null;
+        diff: number | null;
+        descricao: string;
+        status: 'above' | 'below' | 'equal';
+      }[];
+      by_area: Record<string, {
+        skill_num: number;
+        performance: number;
+        national_avg: number | null;
+        diff: number | null;
+        descricao: string;
+        status: 'above' | 'below' | 'equal';
+      }[]>;
+    }>(`/api/schools/${codigo_inep}/skills?limit=${limit}`),
 };

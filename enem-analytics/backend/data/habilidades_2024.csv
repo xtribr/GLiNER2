@@ -1,0 +1,121 @@
+area,skill_num,performance,ano,descricao
+CH,1,0.31923424878623774,2024,Compreender a produção e o papel histórico das instituições sociais
+CH,2,0.3953953226889822,2024,Analisar a atuação dos movimentos sociais na transformação da realidade
+CH,3,0.4039597538906869,2024,Compreender conflitos gerados pela diversidade cultural
+CH,4,0.4708843299372018,2024,Avaliar relações de poder entre grupos sociais
+CH,5,0.33092038026001935,2024,Identificar transformações territoriais e paisagens
+CH,6,0.619394451851519,2024,Compreender processos de formação do Estado brasileiro
+CH,7,0.3096724751626136,2024,Analisar o papel da mídia na sociedade contemporânea
+CH,8,0.342219979526525,2024,Compreender fatores que contribuíram para revoluções históricas
+CH,9,0.34803023074822004,2024,Analisar processos migratórios e seus impactos
+CH,10,0.4066915518570862,2024,Compreender organizações políticas e sistemas de governo
+CH,11,0.4394262312868632,2024,Analisar desigualdades sociais e seus determinantes
+CH,12,0.33792245646781954,2024,Compreender processo de urbanização e problemas urbanos
+CH,13,0.3929231631648598,2024,Avaliar impactos da globalização econômica e cultural
+CH,14,0.49410122752644486,2024,Analisar formação e caracterização de blocos econômicos
+CH,15,0.5664750416810701,2024,Compreender aspectos geográficos de conflitos contemporâneos
+CH,16,0.31844291249825657,2024,Analisar processos de industrialização e impactos
+CH,17,0.42253829150603794,2024,Compreender relações entre trabalho e sociedade
+CH,18,0.3566666834914014,2024,"Analisar períodos históricos do Brasil (colonial, imperial, republicano)"
+CH,19,0.5354675032592983,2024,Compreender formação cultural brasileira e identidade nacional
+CH,20,0.4013272087274605,2024,Avaliar propostas de intervenção em problemas sociais
+CH,21,0.5860563960455935,2024,Compreender questões ambientais e desenvolvimento sustentável
+CH,22,0.7218121820743069,2024,Analisar a questão agrária brasileira e conflitos no campo
+CH,23,0.25605415941585247,2024,Compreender processos de colonização e descolonização
+CH,24,0.5627637125104121,2024,Analisar aspectos do trabalho no mundo contemporâneo
+CH,25,0.7488734506268753,2024,Compreender dinâmicas demográficas e suas consequências
+CH,26,0.3264466145874855,2024,Analisar a expansão marítima e comercial europeia
+CH,27,0.5210108521130836,2024,Compreender processos de independência na América
+CH,28,0.3069521893335174,2024,Analisar regimes autoritários e processos de democratização
+CH,29,0.387062249395981,2024,Compreender a formação dos Estados nacionais
+CH,30,0.3133840493002713,2024,Analisar movimentos culturais e artísticos ao longo da história
+CN,1,0.3915152751061237,2024,Compreender fenômenos naturais usando conceitos científicos
+CN,2,0.21467270690829934,2024,"Associar sistemas físicos, químicos e biológicos a processos naturais"
+CN,3,0.2783821384259412,2024,Enfrentar situações-problema usando conhecimentos científicos
+CN,4,0.32151401835538995,2024,Compreender o papel da evolução na diversidade biológica
+CN,5,0.2118414631930699,2024,Avaliar o impacto de intervenções humanas no ambiente
+CN,6,0.14464393192371033,2024,Interpretar experimentos científicos e seus resultados
+CN,7,0.313479536128013,2024,Analisar e compreender conceitos de genética e hereditariedade
+CN,8,0.26105025316874286,2024,Compreender processos de transformação de energia
+CN,9,0.29314145824011645,2024,Avaliar mudanças de estado físico e transformações químicas
+CN,10,0.2167493417076182,2024,Compreender a dinâmica de ecossistemas e cadeias alimentares
+CN,11,0.2885488459325421,2024,Analisar fenômenos eletromagnéticos e suas aplicações
+CN,12,0.35063170296400153,2024,Compreender processos de obtenção de materiais e substâncias
+CN,13,0.38010251571651316,2024,Avaliar propostas de intervenção no meio ambiente
+CN,14,0.27006944071882094,2024,Compreender a célula como unidade básica da vida
+CN,15,0.24941353212366846,2024,Analisar fenômenos ondulatórios e suas propriedades
+CN,16,0.14793288057681125,2024,Compreender processos metabólicos e bioquímicos
+CN,17,0.2767577659410967,2024,Avaliar aspectos quantitativos de transformações químicas
+CN,18,0.2385428200464193,2024,"Compreender movimento, forças e leis de Newton"
+CN,19,0.3667093634621458,2024,Analisar processos de nutrição e digestão
+CN,20,0.24614269167254516,2024,Compreender o sistema nervoso e seus processos
+CN,21,0.4166888474600316,2024,Analisar fenômenos térmicos e termodinâmicos
+CN,22,0.14864224370595128,2024,Compreender ciclos biogeoquímicos
+CN,23,0.38474354056409893,2024,Avaliar impactos ambientais de atividades humanas
+CN,24,0.35457343872206654,2024,Compreender processos de reprodução e desenvolvimento
+CN,25,0.24504528754491595,2024,Analisar a relação entre tecnologia e ciência
+CN,26,0.255202893080528,2024,Compreender o funcionamento do sistema imunológico
+CN,27,0.2534156453443093,2024,Analisar doenças e medidas de prevenção
+CN,28,0.5729825272594398,2024,Compreender a origem e evolução do universo
+CN,29,0.4121533597458441,2024,Analisar o uso de recursos naturais e sustentabilidade
+CN,30,0.23391824376924383,2024,Compreender processos de fotossíntese e respiração celular
+LC,1,0.3484018967947779,2024,Identificar diferentes linguagens e seus contextos de uso
+LC,2,0.7098614342898849,2024,Reconhecer a função social de diferentes gêneros textuais
+LC,3,0.8032760315681498,2024,Analisar relações entre textos e seus contextos
+LC,4,0.6404578161257223,2024,Reconhecer posicionamentos ideológicos em textos
+LC,5,0.4787617106900497,2024,Avaliar argumentos em textos de diferentes gêneros
+LC,6,0.40299907676078095,2024,Compreender propostas de intervenção social através de textos
+LC,7,0.48828994902740536,2024,Relacionar linguagens verbal e não verbal
+LC,8,0.4286465865829513,2024,Reconhecer o uso de figuras de linguagem e seus efeitos
+LC,9,0.5708951865507881,2024,Compreender variações linguísticas e seus contextos
+LC,10,0.5595097189643534,2024,Analisar recursos expressivos das linguagens artísticas
+LC,11,0.7589116975505373,2024,Reconhecer estratégias argumentativas em textos
+LC,12,0.44491207891853657,2024,Compreender a função social da literatura
+LC,13,0.38732559216579715,2024,Analisar aspectos formais e estruturais de textos
+LC,14,0.4443874819283143,2024,Identificar elementos que concorrem para a progressão temática
+LC,15,0.43344435478824006,2024,Estabelecer relações entre textos de diferentes gêneros
+LC,16,0.364922516981876,2024,Reconhecer procedimentos de convencimento em textos
+LC,17,0.4090883131620336,2024,Analisar a produção artística como expressão cultural
+LC,18,0.3916331894277836,2024,Compreender manifestações corporais e práticas esportivas
+LC,19,0.7256623576377411,2024,Avaliar o papel da mídia na construção de realidades
+LC,20,0.6138142072322742,2024,Analisar a função estética em produções culturais
+LC,21,0.804131120584779,2024,Compreender textos técnicos e científicos
+LC,22,0.21431605543136867,2024,Reconhecer recursos de coesão e coerência textual
+LC,23,0.725812059020871,2024,Analisar aspectos da língua portuguesa em uso
+LC,24,0.3854539548861249,2024,Compreender processos de formação de palavras
+LC,25,0.2670256539654244,2024,Avaliar a adequação linguística em diferentes contextos
+LC,26,0.2301918455696754,2024,Analisar produções culturais de diferentes épocas
+LC,27,0.5429091493164313,2024,Compreender o papel da tecnologia na comunicação
+LC,28,0.24328413522210598,2024,Reconhecer diferentes formas de organização textual
+LC,29,0.6011223234685623,2024,Avaliar processos de criação artística e cultural
+LC,30,0.48757087795301446,2024,Compreender relações intertextuais e suas funções
+MT,1,0.32508896118509506,2024,"Construir significados para números naturais, inteiros e racionais"
+MT,2,0.16808684802452645,2024,Utilizar conhecimentos geométricos na resolução de problemas
+MT,3,0.34336199209465734,2024,Selecionar estratégias de resolução de problemas
+MT,4,0.3524371339167238,2024,Analisar dados apresentados em gráficos e tabelas
+MT,5,0.18921459878585586,2024,Avaliar propostas de intervenção usando conceitos matemáticos
+MT,6,0.215263965284758,2024,Interpretar informações em diferentes representações matemáticas
+MT,7,0.3671405503908741,2024,Compreender o caráter aleatório de fenômenos naturais e sociais
+MT,8,0.3786046163747342,2024,Resolver problemas envolvendo grandezas proporcionais
+MT,9,0.19757919925532877,2024,Utilizar instrumentos de medida e escalas
+MT,10,0.28349474334644664,2024,Analisar informações expressas em gráficos e tabelas
+MT,11,0.12125705358185052,2024,Utilizar noções de proporcionalidade e semelhança
+MT,12,0.1939847396752126,2024,Resolver problemas envolvendo equações e inequações
+MT,13,0.19477837148216656,2024,Avaliar modelos matemáticos usados em contextos reais
+MT,14,0.1911438545550348,2024,Analisar problemas envolvendo variação de grandezas
+MT,15,0.3282918450811544,2024,Identificar regularidades e padrões matemáticos
+MT,16,0.3009995508019922,2024,Utilizar conceitos de geometria analítica
+MT,17,0.2895214887857192,2024,Compreender aplicações de razões trigonométricas
+MT,18,0.22794603072047548,2024,Resolver problemas de contagem e probabilidade
+MT,19,0.28529323942945123,2024,Avaliar propostas de tratamento de dados estatísticos
+MT,20,0.24283443212862543,2024,Analisar problemas envolvendo funções matemáticas
+MT,21,0.25193351061654756,2024,Utilizar conceitos de geometria espacial
+MT,22,0.17164952154910545,2024,Resolver problemas envolvendo sequências numéricas
+MT,23,0.3233904234020485,2024,Analisar situações envolvendo matemática financeira
+MT,24,0.3219024111396115,2024,Compreender aplicações de matrizes e determinantes
+MT,25,0.3241836687713501,2024,Resolver problemas usando sistemas de equações
+MT,26,0.5015433447170349,2024,Analisar gráficos de funções
+MT,27,0.47428280013490115,2024,Utilizar conceitos de geometria plana
+MT,28,0.22482418897650788,2024,Resolver problemas de otimização
+MT,29,0.2809845524271844,2024,Avaliar argumentos matemáticos e demonstrações
+MT,30,0.2550518442586679,2024,Compreender aplicações de polinômios e suas propriedades
