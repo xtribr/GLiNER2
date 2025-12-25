@@ -1,5 +1,5 @@
-fastapi
-uvicorn[standard]
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
 pandas
 numpy
 scikit-learn
@@ -8,7 +8,7 @@ python-multipart
 xgboost
 joblib
 scipy
-requests
+requests==2.32.3
 # Authentication
 python-jose[cryptography]
 passlib[bcrypt]
