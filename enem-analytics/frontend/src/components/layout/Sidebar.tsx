@@ -21,7 +21,7 @@ import {
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 
-const menuItems = [
+const adminMenuItems = [
   { label: 'MENU', type: 'header' as const },
   { icon: LayoutDashboard, label: 'Dashboard', href: '/' },
   { icon: School, label: 'Escolas', href: '/schools' },
@@ -29,9 +29,6 @@ const menuItems = [
   { label: 'ANALYTICS', type: 'header' as const },
   { icon: TrendingUp, label: 'Tendências', href: '/trends' },
   { icon: GitCompare, label: 'Comparar', href: '/compare' },
-];
-
-const adminMenuItems = [
   { label: 'ADMIN', type: 'header' as const },
   { icon: Shield, label: 'Painel Admin', href: '/admin' },
   { icon: Users, label: 'Usuários', href: '/admin/users' },
@@ -265,7 +262,14 @@ export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
 
-  const allMenuItems = isAdmin ? [...menuItems, ...adminMenuItems] : menuItems;
+  // Build menu based on user role
+  const schoolMenuItems = user?.codigo_inep ? [
+    { label: 'MINHA ESCOLA', type: 'header' as const },
+    { icon: School, label: 'Painel', href: `/schools/${user.codigo_inep}` },
+    { icon: TrendingUp, label: 'Roadmap', href: `/schools/${user.codigo_inep}/roadmap` },
+  ] : [];
+
+  const allMenuItems = isAdmin ? adminMenuItems : schoolMenuItems;
 
   return (
     <>
