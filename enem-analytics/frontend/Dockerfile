@@ -3,13 +3,13 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copy package files
-COPY enem-analytics/frontend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy source
-COPY enem-analytics/frontend/ .
+COPY . .
 
 # Build
 RUN npm run build
