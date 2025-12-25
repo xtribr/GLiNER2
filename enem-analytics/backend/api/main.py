@@ -92,6 +92,12 @@ async def root():
     }
 
 
+@app.get("/health")
+async def health():
+    """Health check endpoint for Railway"""
+    return {"status": "healthy", "service": "enem-analytics-api"}
+
+
 @app.get("/api/stats")
 async def get_stats():
     """Get general statistics"""
