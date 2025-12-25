@@ -367,6 +367,269 @@ def _get_improvement_recommendation(weak_skills: float) -> str:
         return "Muitos gaps críticos - priorizar fundamentos e habilidades mais frequentes no ENEM"
 
 
+@router.get("/{codigo_inep}/area-projection/{area}")
+async def get_area_projection(
+    codigo_inep: str,
+    area: str = PathParam(..., pattern="^(cn|ch|lc|mt|CN|CH|LC|MT)$")
+):
+    """
+    Get detailed TRI projection for a specific area.
+
+    Uses ALL historical TRI scores to project future performance
+    if the school masters the stretch content.
+
+    Args:
+        codigo_inep: School INEP code
+        area: Area code (cn, ch, lc, mt)
+
+    Returns:
+        Detailed projection with historical analysis and future TRI estimate
+    """
+    import numpy as np
+    from scipy import stats
+
+    model = get_prediction_model()
+
+    if model.preprocessor is None:
+        from ml.preprocessor import ENEMPreprocessor
+        model.preprocessor = ENEMPreprocessor()
+
+    preprocessor = model.preprocessor
+    area_lower = area.lower()
+    area_upper = area.upper()
+
+    # Get ALL historical data for this school
+    school_df = preprocessor.df[
+        preprocessor.df['codigo_inep'] == codigo_inep
+    ].sort_values('ano')
+
+    if len(school_df) == 0:
+        raise HTTPException(status_code=404, detail="School not found")
+
+    # Area configuration
+    area_config = {
+        'cn': ('Ciências da Natureza', 'CN', '#22c55e'),
+        'ch': ('Ciências Humanas', 'CH', '#8b5cf6'),
+        'lc': ('Linguagens', 'LC', '#ec4899'),
+        'mt': ('Matemática', 'MT', '#f97316')
+    }
+
+    if area_lower not in area_config:
+        raise HTTPException(status_code=400, detail=f"Invalid area: {area}")
+
+    area_name, area_code, color = area_config[area_lower]
+    nota_col = f'nota_{area_lower}'
+
+    # Extract historical TRI scores (all years)
+    historical_scores = []
+    for _, row in school_df.iterrows():
+        score = row.get(nota_col)
+        if pd.notna(score) and score > 0:
+            historical_scores.append({
+                'ano': int(row['ano']),
+                'score': float(score),
+                'ranking': int(row.get('ranking_brasil', 0)) if pd.notna(row.get('ranking_brasil')) else None
+            })
+
+    if len(historical_scores) == 0:
+        raise HTTPException(status_code=404, detail=f"No historical data for {area_name}")
+
+    # Calculate trend using linear regression on all historical data
+    years = np.array([h['ano'] for h in historical_scores])
+    scores = np.array([h['score'] for h in historical_scores])
+
+    # Current score (latest)
+    current_score = historical_scores[-1]['score']
+    current_year = historical_scores[-1]['ano']
+
+    # Calculate linear trend
+    if len(years) >= 2:
+        slope, intercept, r_value, p_value, std_err = stats.linregress(years, scores)
+        trend_direction = 'ascending' if slope > 0 else 'descending' if slope < 0 else 'stable'
+        annual_change = float(slope)
+        trend_strength = abs(r_value)  # R² shows how consistent the trend is
+    else:
+        slope = 0
+        intercept = current_score
+        r_value = 0
+        annual_change = 0
+        trend_direction = 'insufficient_data'
+        trend_strength = 0
+
+    # Get stretch content for this area
+    stretch_content = []
+    total_stretch_items = 0
+    if preprocessor.tri_content_df is not None:
+        area_content = preprocessor.tri_content_df[
+            preprocessor.tri_content_df['area_code'] == area_code
+        ]
+
+        # Content slightly above current level (within 100 points)
+        stretch_df = area_content[
+            (area_content['tri_score'] > current_score) &
+            (area_content['tri_score'] <= current_score + 100)
+        ].sort_values('tri_score')
+
+        total_stretch_items = len(stretch_df)
+
+        # Get sample of stretch content
+        for _, row in stretch_df.head(10).iterrows():
+            stretch_content.append({
+                'skill': row['habilidade'],
+                'tri_score': float(row['tri_score']),
+                'description': row['descricao'],
+                'gap': float(row['tri_score'] - current_score)
+            })
+
+    # Calculate projected score if school masters stretch content
+    # Method: Use historical trend + potential gain from mastering stretch content
+
+    # Base projection from trend (project to next year)
+    next_year = current_year + 1
+    trend_projection = intercept + slope * next_year
+
+    # If school masters stretch content, they could reach the highest stretch TRI
+    if len(stretch_content) > 0:
+        max_stretch_tri = max(s['tri_score'] for s in stretch_content)
+        avg_stretch_tri = sum(s['tri_score'] for s in stretch_content) / len(stretch_content)
+
+        # Conservative projection: average between trend and stretch mastery
+        # Optimistic projection: if all stretch content is mastered
+        conservative_projection = (trend_projection + avg_stretch_tri) / 2
+        optimistic_projection = max_stretch_tri
+
+        # Realistic projection based on historical improvement rate
+        historical_max = max(scores)
+        historical_min = min(scores)
+        historical_range = historical_max - historical_min
+
+        # The school's typical improvement capacity
+        if len(scores) >= 3:
+            improvements = np.diff(scores)
+            avg_improvement = np.mean(improvements[improvements > 0]) if any(improvements > 0) else 0
+            max_improvement = np.max(improvements) if len(improvements) > 0 else 0
+        else:
+            avg_improvement = annual_change if annual_change > 0 else 0
+            max_improvement = annual_change * 2 if annual_change > 0 else 20
+
+        # Realistic projection: current + realistic improvement
+        realistic_projection = current_score + min(max_improvement * 1.5, 50)  # Cap at 50 points
+        realistic_projection = min(realistic_projection, optimistic_projection)  # Can't exceed max stretch
+    else:
+        conservative_projection = trend_projection
+        optimistic_projection = trend_projection + 30
+        realistic_projection = trend_projection + 15
+        avg_improvement = annual_change if annual_change > 0 else 0
+        max_improvement = annual_change * 2 if annual_change > 0 else 20
+
+    # Calculate confidence interval using historical volatility
+    if len(scores) >= 3:
+        std_dev = np.std(scores)
+        confidence_interval = {
+            'low': float(realistic_projection - 1.96 * std_dev),
+            'high': float(realistic_projection + 1.96 * std_dev)
+        }
+    else:
+        confidence_interval = {
+            'low': float(realistic_projection - 30),
+            'high': float(realistic_projection + 30)
+        }
+
+    # Generate insights based on the analysis
+    insights = []
+
+    # Trend insight
+    if trend_direction == 'ascending':
+        insights.append({
+            'type': 'positive',
+            'title': 'Tendência de Crescimento',
+            'message': f'A escola demonstra crescimento médio de {annual_change:.1f} pontos/ano nos últimos {len(years)} anos.'
+        })
+    elif trend_direction == 'descending':
+        insights.append({
+            'type': 'warning',
+            'title': 'Tendência de Queda',
+            'message': f'A escola apresenta queda média de {abs(annual_change):.1f} pontos/ano. Atenção redobrada necessária.'
+        })
+    else:
+        insights.append({
+            'type': 'neutral',
+            'title': 'Performance Estável',
+            'message': 'A escola mantém performance consistente ao longo dos anos.'
+        })
+
+    # Stretch content insight
+    if total_stretch_items > 0:
+        insights.append({
+            'type': 'info',
+            'title': f'{total_stretch_items} Conteúdos Próximos',
+            'message': f'Existem {total_stretch_items} itens TRI entre {current_score:.0f} e {current_score + 100:.0f} pontos que podem ser dominados.'
+        })
+
+    # Projection insight
+    potential_gain = realistic_projection - current_score
+    if potential_gain > 20:
+        insights.append({
+            'type': 'positive',
+            'title': 'Alto Potencial de Melhoria',
+            'message': f'Se dominar o conteúdo stretch, a escola pode ganhar até {potential_gain:.0f} pontos.'
+        })
+    elif potential_gain > 0:
+        insights.append({
+            'type': 'neutral',
+            'title': 'Potencial de Melhoria Moderado',
+            'message': f'Projeção indica ganho potencial de {potential_gain:.0f} pontos com foco no conteúdo apropriado.'
+        })
+
+    return {
+        'codigo_inep': codigo_inep,
+        'area': area_code,
+        'area_name': area_name,
+        'color': color,
+        'current_year': current_year,
+        'current_score': current_score,
+        'historical_analysis': {
+            'total_years': len(historical_scores),
+            'scores': historical_scores,
+            'trend': {
+                'direction': trend_direction,
+                'annual_change': annual_change,
+                'strength': trend_strength,  # R² value
+                'r_squared': float(r_value ** 2) if r_value else 0
+            },
+            'statistics': {
+                'mean': float(np.mean(scores)),
+                'std': float(np.std(scores)) if len(scores) > 1 else 0,
+                'min': float(np.min(scores)),
+                'max': float(np.max(scores)),
+                'avg_improvement': float(avg_improvement),
+                'max_improvement': float(max_improvement)
+            }
+        },
+        'stretch_content': {
+            'total_items': total_stretch_items,
+            'items': stretch_content,
+            'tri_range': {
+                'min': current_score,
+                'max': current_score + 100
+            }
+        },
+        'projection': {
+            'target_year': next_year,
+            'scenarios': {
+                'trend_based': float(trend_projection),
+                'conservative': float(conservative_projection),
+                'realistic': float(realistic_projection),
+                'optimistic': float(optimistic_projection)
+            },
+            'recommended': float(realistic_projection),
+            'confidence_interval': confidence_interval,
+            'potential_gain': float(potential_gain)
+        },
+        'insights': insights
+    }
+
+
 @router.get("/{codigo_inep}/{target}", response_model=SinglePrediction)
 async def predict_single_score(
     codigo_inep: str,

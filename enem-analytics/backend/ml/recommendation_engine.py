@@ -235,10 +235,15 @@ class RecommendationEngine:
                         'change': round(float(data_2024[col] - data_2023[col]), 1)
                     }
 
+            # Normalize similarity: 100% = identical, 0% = very different
+            # Using exponential decay: similarity = 100 * exp(-distance/scale)
+            # Scale of 100 means distance of 100 gives ~37% similarity
+            similarity = 100 * np.exp(-distance / 100)
+
             improved_schools.append({
                 'codigo_inep': school_id,
                 'nome_escola': data_2024.get('nome_escola', 'Unknown'),
-                'similarity_score': round(100 - distance, 1),  # Convert to similarity
+                'similarity_score': round(float(similarity), 1),
                 'improvement': round(float(improvement), 1),
                 'area_changes': area_changes,
                 'tipo_escola': data_2024.get('tipo_escola'),
@@ -308,7 +313,8 @@ class RecommendationEngine:
             else:
                 priority = 0.2  # Low - already good
                 difficulty = 'low'
-                target = stats['p90']
+                # For excellent schools, target should be higher than current
+                target = max(stats['p90'], school_score + 10)
 
             # Find evidence from success stories
             evidence = self._find_evidence_for_area(area, success_stories)

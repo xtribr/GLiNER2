@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { formatNumber, formatRanking } from '@/lib/utils';
 import Link from 'next/link';
-import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Search, ChevronLeft, ChevronRight, Bell, School as SchoolIcon } from 'lucide-react';
 
 const UF_OPTIONS = [
   '', 'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS',
@@ -48,14 +48,30 @@ export default function SchoolsPage() {
   const hasMore = schools?.length === limit;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Escolas</h1>
-        <p className="text-gray-600 mt-1">
-          Busque e filtre escolas por nome, código INEP ou estado
-        </p>
+    <div className="min-h-screen">
+      {/* Page Header */}
+      <div className="bg-white border-b border-slate-200 sticky top-0 z-20">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                <SchoolIcon className="h-5 w-5 text-blue-600" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-slate-900">Escolas</h1>
+                <p className="text-sm text-slate-500">Busque e filtre escolas por nome ou estado</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                <Bell className="h-5 w-5 text-slate-600" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
+      <div className="p-6 space-y-6">
       {/* Filters */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
         <div className="flex flex-col md:flex-row gap-4">
@@ -251,6 +267,7 @@ export default function SchoolsPage() {
             </div>
           </>
         )}
+      </div>
       </div>
     </div>
   );

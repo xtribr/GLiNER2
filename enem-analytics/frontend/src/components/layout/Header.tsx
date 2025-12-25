@@ -22,7 +22,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             <GraduationCap className="h-8 w-8 text-blue-600" />
-            <span className="font-bold text-xl text-gray-900">ENEM Analytics</span>
+            <span className="font-bold text-xl text-gray-900">X-TRI Escolas</span>
           </Link>
 
           <nav className="flex items-center gap-1">

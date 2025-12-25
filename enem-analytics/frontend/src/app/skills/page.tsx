@@ -95,7 +95,7 @@ export default function SkillsPage() {
                   ? `${config.bgColor} ${config.textColor} shadow-md ring-2`
                   : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
               }`}
-              style={selectedArea === area ? { ringColor: config.color } : {}}
+              style={selectedArea === area ? { '--tw-ring-color': config.color } as React.CSSProperties : {}}
             >
               <Icon className="h-4 w-4" />
               {area}

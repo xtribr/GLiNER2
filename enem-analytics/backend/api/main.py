@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 import pandas as pd
 from pathlib import Path
 
-from api.routes import schools, predictions, diagnosis, clusters, recommendations
+from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights
 
 # Global data store
 data_store = {}
@@ -76,6 +76,8 @@ app.include_router(predictions.router)
 app.include_router(diagnosis.router)
 app.include_router(clusters.router)
 app.include_router(recommendations.router)
+app.include_router(tri_lists.router)
+app.include_router(gliner_insights.router, prefix="/api/gliner", tags=["GLiNER Insights"])
 
 
 @app.get("/")

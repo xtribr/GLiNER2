@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { formatNumber } from '@/lib/utils';
 import Link from 'next/link';
-import { Trophy, School, Calendar, MapPin } from 'lucide-react';
+import { Trophy, School, Calendar, MapPin, Bell, Sparkles } from 'lucide-react';
 
 export default function Dashboard() {
   const { data: stats, isLoading: statsLoading } = useQuery({
@@ -25,13 +25,62 @@ export default function Dashboard() {
     );
   }
 
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('pt-BR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard ENEM</h1>
-        <p className="text-gray-600 mt-1">
-          Análise de desempenho de escolas no ENEM ({stats?.years[0]} - {stats?.years[stats?.years.length - 1]})
-        </p>
+    <div className="min-h-screen">
+      {/* Page Header */}
+      <div className="bg-white border-b border-slate-200 sticky top-0 z-20">
+        <div className="px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xl font-bold text-slate-900">Dashboard ENEM</h1>
+              <p className="text-sm text-slate-500 capitalize">{dateStr}</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <button className="p-2 hover:bg-slate-100 rounded-lg transition-colors">
+                <Bell className="h-5 w-5 text-slate-600" />
+              </button>
+              <div className="h-9 w-9 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                AD
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-6 space-y-6">
+
+      {/* 2025 Data Coming Soon Banner */}
+      <div className="relative overflow-hidden rounded-2xl p-5 text-white" style={{ background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)' }}>
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-white/20">
+              <Bell className="h-6 w-6" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-bold">ENEM 2025 - Em Breve!</h2>
+                <span className="px-2 py-0.5 rounded-full bg-white/20 text-xs font-medium">Junho 2025</span>
+              </div>
+              <p className="text-white/80 text-sm mt-1">
+                Os dados do ENEM 2025 serão integrados assim que divulgados pelo INEP.
+              </p>
+            </div>
+          </div>
+          <div className="hidden md:flex items-center gap-3">
+            <Sparkles className="h-5 w-5 text-yellow-300" />
+            <span className="text-sm font-medium">Novas predições e análises em breve</span>
+          </div>
+        </div>
+        <div className="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+        <div className="absolute -left-10 -bottom-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
       </div>
 
       {/* Stats Cards */}
@@ -108,8 +157,14 @@ export default function Dashboard() {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   UF
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Tipo
+                </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Média
+                </th>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Hab.
                 </th>
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   CN
@@ -158,8 +213,24 @@ export default function Dashboard() {
                       {school.uf}
                     </span>
                   </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {school.tipo_escola && (
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        school.tipo_escola === 'Privada'
+                          ? 'bg-purple-100 text-purple-800'
+                          : 'bg-green-100 text-green-800'
+                      }`}>
+                        {school.tipo_escola}
+                      </span>
+                    )}
+                  </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right font-semibold text-gray-900">
                     {formatNumber(school.nota_media)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-gray-600">
+                    {school.desempenho_habilidades
+                      ? `${(school.desempenho_habilidades * 100).toFixed(0)}%`
+                      : '-'}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-gray-600">
                     {formatNumber(school.nota_cn)}
@@ -181,6 +252,7 @@ export default function Dashboard() {
             </tbody>
           </table>
         </div>
+      </div>
       </div>
     </div>
   );

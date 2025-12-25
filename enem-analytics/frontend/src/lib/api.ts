@@ -302,6 +302,75 @@ export interface TRIAnalysisResult {
   };
 }
 
+// TRI Area Projection Types
+export interface TRIHistoricalScore {
+  ano: number;
+  score: number;
+  ranking: number | null;
+}
+
+export interface TRIProjectionInsight {
+  type: 'positive' | 'warning' | 'neutral' | 'info';
+  title: string;
+  message: string;
+}
+
+export interface TRIAreaProjection {
+  codigo_inep: string;
+  area: string;
+  area_name: string;
+  color: string;
+  current_year: number;
+  current_score: number;
+  historical_analysis: {
+    total_years: number;
+    scores: TRIHistoricalScore[];
+    trend: {
+      direction: 'ascending' | 'descending' | 'stable' | 'insufficient_data';
+      annual_change: number;
+      strength: number;
+      r_squared: number;
+    };
+    statistics: {
+      mean: number;
+      std: number;
+      min: number;
+      max: number;
+      avg_improvement: number;
+      max_improvement: number;
+    };
+  };
+  stretch_content: {
+    total_items: number;
+    items: {
+      skill: string;
+      tri_score: number;
+      description: string;
+      gap: number;
+    }[];
+    tri_range: {
+      min: number;
+      max: number;
+    };
+  };
+  projection: {
+    target_year: number;
+    scenarios: {
+      trend_based: number;
+      conservative: number;
+      realistic: number;
+      optimistic: number;
+    };
+    recommended: number;
+    confidence_interval: {
+      low: number;
+      high: number;
+    };
+    potential_gain: number;
+  };
+  insights: TRIProjectionInsight[];
+}
+
 export interface SchoolHistory {
   codigo_inep: string;
   nome_escola: string;
@@ -440,6 +509,9 @@ export const api = {
 
   getTRIAnalysis: (codigo_inep: string) =>
     fetchAPI<TRIAnalysisResult>(`/api/predictions/${codigo_inep}/tri-analysis`),
+
+  getAreaProjection: (codigo_inep: string, area: string) =>
+    fetchAPI<TRIAreaProjection>(`/api/predictions/${codigo_inep}/area-projection/${area}`),
 
   // ML APIs - Diagnosis
   getDiagnosis: (codigo_inep: string) =>
