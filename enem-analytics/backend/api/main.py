@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 import pandas as pd
 from pathlib import Path
 
-from api.routes import schools
+from api.routes import schools, predictions, diagnosis, clusters, recommendations
 
 # Global data store
 data_store = {}
@@ -72,6 +72,10 @@ app.add_middleware(
 
 # Include routers
 app.include_router(schools.router, prefix="/api/schools", tags=["Schools"])
+app.include_router(predictions.router)
+app.include_router(diagnosis.router)
+app.include_router(clusters.router)
+app.include_router(recommendations.router)
 
 
 @app.get("/")
