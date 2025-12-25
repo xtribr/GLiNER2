@@ -94,4 +94,5 @@ Thumbs.db
 # Logs
 *.log
 
-test_api_client.py
+test_api_client.pyenem-analytics/backend/data/microdados_censo_escolar_2024/
+enem-analytics/backend/data/microdados_censo_2024.zip
