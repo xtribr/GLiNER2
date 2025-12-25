@@ -20,7 +20,10 @@ class ENEMPreprocessor:
         self.df = None
         self.skills_df = None
         self.school_skills_df = None
+        self.tri_content_df = None  # TRI content with GLiNER entities
+        self.skill_tri_map = None   # Mapping of skills to TRI difficulty
         self._load_data()
+        self._compute_tri_mappings()
 
     def _load_data(self):
         """Load all required datasets"""
@@ -40,6 +43,52 @@ class ENEMPreprocessor:
         if school_skills_file.exists():
             self.school_skills_df = pd.read_csv(school_skills_file)
             print(f"Loaded {len(self.school_skills_df)} school skill records")
+
+        # TRI content data with GLiNER entities
+        tri_content_file = self.data_path / "conteudos_tri_gliner.csv"
+        if tri_content_file.exists():
+            self.tri_content_df = pd.read_csv(tri_content_file)
+            print(f"Loaded {len(self.tri_content_df)} TRI content records")
+
+    def _compute_tri_mappings(self):
+        """Compute TRI difficulty mappings per skill and area"""
+        if self.tri_content_df is None:
+            self.skill_tri_map = {}
+            self.area_tri_stats = {}
+            return
+
+        # Compute average TRI score per skill (habilidade)
+        skill_stats = self.tri_content_df.groupby(['area_code', 'habilidade']).agg({
+            'tri_score': ['mean', 'std', 'min', 'max', 'count']
+        }).reset_index()
+        skill_stats.columns = ['area_code', 'habilidade', 'tri_mean', 'tri_std', 'tri_min', 'tri_max', 'tri_count']
+
+        self.skill_tri_map = {}
+        for _, row in skill_stats.iterrows():
+            key = f"{row['area_code']}_{row['habilidade']}"
+            self.skill_tri_map[key] = {
+                'mean': row['tri_mean'],
+                'std': row['tri_std'] if not pd.isna(row['tri_std']) else 50,
+                'min': row['tri_min'],
+                'max': row['tri_max'],
+                'count': row['tri_count']
+            }
+
+        # Compute area-level TRI statistics
+        self.area_tri_stats = {}
+        for area in ['CN', 'CH', 'LC', 'MT']:
+            area_data = self.tri_content_df[self.tri_content_df['area_code'] == area]
+            if len(area_data) > 0:
+                self.area_tri_stats[area] = {
+                    'mean': area_data['tri_score'].mean(),
+                    'std': area_data['tri_score'].std(),
+                    'p25': area_data['tri_score'].quantile(0.25),
+                    'p50': area_data['tri_score'].quantile(0.50),
+                    'p75': area_data['tri_score'].quantile(0.75),
+                    'count': len(area_data)
+                }
+
+        print(f"Computed TRI mappings for {len(self.skill_tri_map)} skills")
 
     def create_lagged_features(self, school_df: pd.DataFrame, n_lags: int = 3) -> Dict[str, float]:
         """
@@ -166,6 +215,207 @@ class ENEMPreprocessor:
 
         return features
 
+    def create_tri_based_features(self, school_df: pd.DataFrame) -> Dict[str, float]:
+        """
+        Create TRI-based prediction features using content difficulty analysis.
+
+        Maps school's score to expected TRI difficulty level they should master.
+
+        Args:
+            school_df: DataFrame with school's historical data
+
+        Returns:
+            Dictionary of TRI-based features
+        """
+        features = {}
+
+        if self.tri_content_df is None or len(self.area_tri_stats) == 0:
+            # Return default features if no TRI data
+            for area in ['cn', 'ch', 'lc', 'mt']:
+                features[f'tri_mastery_level_{area}'] = 0.5
+                features[f'tri_gap_to_median_{area}'] = 0
+                features[f'tri_potential_{area}'] = 0
+            features['overall_tri_mastery'] = 0.5
+            return features
+
+        # Get most recent scores
+        latest = school_df.sort_values('ano').iloc[-1]
+
+        area_mapping = {
+            'cn': ('nota_cn', 'CN'),
+            'ch': ('nota_ch', 'CH'),
+            'lc': ('nota_lc', 'LC'),
+            'mt': ('nota_mt', 'MT')
+        }
+
+        mastery_levels = []
+
+        for area_key, (score_col, area_code) in area_mapping.items():
+            score = latest.get(score_col, 500)
+            if pd.isna(score):
+                score = 500
+
+            if area_code in self.area_tri_stats:
+                stats = self.area_tri_stats[area_code]
+
+                # TRI Mastery Level: What percentage of TRI content can this school handle?
+                # Score maps to TRI difficulty - higher score = can handle harder questions
+                # Normalize to 0-1 range based on TRI distribution
+                if stats['std'] > 0:
+                    z_score = (score - stats['mean']) / stats['std']
+                    # Convert z-score to percentile-like mastery (0-1)
+                    mastery = 0.5 + 0.5 * np.tanh(z_score / 2)
+                else:
+                    mastery = 0.5
+                features[f'tri_mastery_level_{area_key}'] = mastery
+                mastery_levels.append(mastery)
+
+                # Gap to median: How far is the school from median difficulty?
+                gap_to_median = score - stats['p50']
+                features[f'tri_gap_to_median_{area_key}'] = gap_to_median
+
+                # TRI Potential: Room for improvement based on current position
+                # Higher if currently below median, lower if already at top
+                potential = max(0, (stats['p75'] - score) / (stats['p75'] - stats['p25'])) if stats['p75'] != stats['p25'] else 0
+                features[f'tri_potential_{area_key}'] = potential
+
+            else:
+                features[f'tri_mastery_level_{area_key}'] = 0.5
+                features[f'tri_gap_to_median_{area_key}'] = 0
+                features[f'tri_potential_{area_key}'] = 0
+                mastery_levels.append(0.5)
+
+        # Overall TRI mastery (average across areas)
+        features['overall_tri_mastery'] = np.mean(mastery_levels)
+
+        return features
+
+    def create_skill_gap_features(self, school_df: pd.DataFrame) -> Dict[str, float]:
+        """
+        Create features based on skill performance gaps vs national average.
+
+        Args:
+            school_df: DataFrame with school's historical data
+
+        Returns:
+            Dictionary of skill gap features
+        """
+        features = {}
+
+        if self.skills_df is None:
+            for area in ['cn', 'ch', 'lc', 'mt']:
+                features[f'skill_gap_national_{area}'] = 0
+                features[f'low_skill_count_{area}'] = 0
+            features['total_weak_skills'] = 0
+            return features
+
+        # Get school's latest scores and estimate skill gaps
+        latest = school_df.sort_values('ano').iloc[-1]
+
+        area_mapping = {
+            'cn': ('nota_cn', 'Ciências da Natureza'),
+            'ch': ('nota_ch', 'Ciências Humanas'),
+            'lc': ('nota_lc', 'Linguagens'),
+            'mt': ('nota_mt', 'Matemática')
+        }
+
+        total_weak_skills = 0
+
+        for area_key, (score_col, area_name) in area_mapping.items():
+            score = latest.get(score_col, 500)
+            if pd.isna(score):
+                score = 500
+
+            # Get national skill performance for this area
+            area_skills = self.skills_df[self.skills_df['area'] == area_name]
+
+            if len(area_skills) > 0:
+                # National average skill performance (0-1)
+                national_avg = area_skills['performance'].mean()
+
+                # Estimate school's skill performance based on score
+                # Score of 400 ~ 0.3 performance, 700 ~ 0.7 performance
+                estimated_performance = (score - 350) / 500
+                estimated_performance = max(0, min(1, estimated_performance))
+
+                # Gap to national average
+                gap = estimated_performance - national_avg
+                features[f'skill_gap_national_{area_key}'] = gap
+
+                # Count "weak" skills (below 40% threshold nationally)
+                weak_skills = area_skills[area_skills['performance'] < 0.4]
+                # If school is below national average, these weak skills are even weaker for them
+                if gap < 0:
+                    low_count = len(weak_skills) * (1 + abs(gap))
+                else:
+                    low_count = len(weak_skills) * (1 - gap * 0.5)
+                features[f'low_skill_count_{area_key}'] = low_count
+                total_weak_skills += low_count
+            else:
+                features[f'skill_gap_national_{area_key}'] = 0
+                features[f'low_skill_count_{area_key}'] = 0
+
+        features['total_weak_skills'] = total_weak_skills
+
+        return features
+
+    def estimate_tri_score_by_content(self, codigo_inep: str) -> Dict[str, float]:
+        """
+        Estimate what TRI score a school should achieve based on content mastery.
+
+        This uses the GLiNER-extracted concepts to estimate skill coverage.
+
+        Args:
+            codigo_inep: School INEP code
+
+        Returns:
+            Dictionary with estimated TRI scores per area
+        """
+        estimates = {}
+
+        if self.tri_content_df is None:
+            return {'cn': 500, 'ch': 500, 'lc': 500, 'mt': 500}
+
+        # Get school's historical performance
+        school_df = self.df[self.df['codigo_inep'] == codigo_inep]
+        if len(school_df) == 0:
+            return {'cn': 500, 'ch': 500, 'lc': 500, 'mt': 500}
+
+        latest = school_df.sort_values('ano').iloc[-1]
+
+        area_mapping = {
+            'cn': ('nota_cn', 'CN'),
+            'ch': ('nota_ch', 'CH'),
+            'lc': ('nota_lc', 'LC'),
+            'mt': ('nota_mt', 'MT')
+        }
+
+        for area_key, (score_col, area_code) in area_mapping.items():
+            current_score = latest.get(score_col, 500)
+            if pd.isna(current_score):
+                current_score = 500
+
+            # Get TRI content for this area
+            area_content = self.tri_content_df[self.tri_content_df['area_code'] == area_code]
+
+            if len(area_content) > 0:
+                # Find content items the school should be able to handle
+                # (TRI score <= current score + margin)
+                accessible = area_content[area_content['tri_score'] <= current_score + 50]
+
+                # Estimate: if they master accessible content, they can reach slightly higher
+                if len(accessible) > 0:
+                    max_accessible = accessible['tri_score'].max()
+                    # Potential score is weighted average of current and max accessible
+                    potential = (current_score * 0.7 + max_accessible * 0.3)
+                    estimates[area_key] = potential
+                else:
+                    estimates[area_key] = current_score
+            else:
+                estimates[area_key] = current_score
+
+        return estimates
+
     def prepare_features_for_school(self, codigo_inep: str) -> Dict[str, float]:
         """
         Prepare all features for a single school
@@ -188,6 +438,10 @@ class ENEMPreprocessor:
         features.update(self.create_trend_features(school_df))
         features.update(self.create_school_features(school_df))
         features.update(self.create_skill_aggregate_features(codigo_inep))
+
+        # NEW: Add TRI-based features
+        features.update(self.create_tri_based_features(school_df))
+        features.update(self.create_skill_gap_features(school_df))
 
         return features
 
@@ -235,6 +489,9 @@ class ENEMPreprocessor:
             features.update(self.create_lagged_features(train_df))
             features.update(self.create_trend_features(train_df))
             features.update(self.create_school_features(train_df))
+            # NEW: Add TRI-based features for training
+            features.update(self.create_tri_based_features(train_df))
+            features.update(self.create_skill_gap_features(train_df))
 
             X_list.append(features)
             y_list.append(target_2023)

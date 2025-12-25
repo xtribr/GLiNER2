@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8081';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export interface SchoolScore {
   ano: number;
@@ -266,6 +266,42 @@ export interface RoadmapResult {
   success_stories: SuccessStory[];
 }
 
+// TRI Analysis Types
+export interface TRIContentSample {
+  skill: string;
+  tri_score: number;
+  description: string;
+  gap?: number;
+}
+
+export interface TRIAreaAnalysis {
+  area: string;
+  area_name: string;
+  color: string;
+  current_score: number;
+  predicted_score: number;
+  expected_change: number;
+  tri_mastery_level: number;
+  tri_gap_to_median: number;
+  tri_potential: number;
+  skill_gap_national: number;
+  weak_skill_count: number;
+  accessible_content_sample: TRIContentSample[];
+  stretch_content_sample: TRIContentSample[];
+  content_based_estimate: number;
+}
+
+export interface TRIAnalysisResult {
+  codigo_inep: string;
+  overall_tri_mastery: number;
+  total_weak_skills: number;
+  area_analysis: TRIAreaAnalysis[];
+  insights: {
+    mastery_interpretation: string;
+    recommendation: string;
+  };
+}
+
 export interface SchoolHistory {
   codigo_inep: string;
   nome_escola: string;
@@ -402,6 +438,9 @@ export const api = {
   getPredictionComparison: (codigo_inep: string) =>
     fetchAPI<PredictionComparison>(`/api/predictions/comparison/${codigo_inep}`),
 
+  getTRIAnalysis: (codigo_inep: string) =>
+    fetchAPI<TRIAnalysisResult>(`/api/predictions/${codigo_inep}/tri-analysis`),
+
   // ML APIs - Diagnosis
   getDiagnosis: (codigo_inep: string) =>
     fetchAPI<DiagnosisResult>(`/api/diagnosis/${codigo_inep}`),
@@ -512,4 +551,229 @@ export const api = {
       phases_count: number;
       success_stories_count: number;
     }>(`/api/recommendations/${codigo_inep}/action-plan`),
+
+  // TRI Lists APIs
+  getTriAreas: () =>
+    fetchAPI<{
+      areas: {
+        code: string;
+        name: string;
+        total_content: number;
+        tri_min: number | null;
+        tri_max: number | null;
+        ranges: Record<string, number>;
+      }[];
+      total_content: number;
+    }>('/api/tri-lists/areas'),
+
+  getTriRanges: () =>
+    fetchAPI<{
+      ranges: {
+        code: string;
+        min: number;
+        max: number;
+        label: string;
+        description: string;
+      }[];
+    }>('/api/tri-lists/ranges'),
+
+  getTriContent: (area: string, params?: { tri_range?: string; habilidade?: string; limit?: number; offset?: number }) => {
+    const searchParams = new URLSearchParams();
+    if (params?.tri_range) searchParams.set('tri_range', params.tri_range);
+    if (params?.habilidade) searchParams.set('habilidade', params.habilidade);
+    if (params?.limit) searchParams.set('limit', params.limit.toString());
+    if (params?.offset) searchParams.set('offset', params.offset.toString());
+    const query = searchParams.toString();
+    return fetchAPI<{
+      area: string;
+      area_name: string;
+      tri_range: string | null;
+      total: number;
+      offset: number;
+      limit: number;
+      items: {
+        habilidade: string;
+        descricao: string;
+        tri_score: number;
+        tri_range: string;
+      }[];
+    }>(`/api/tri-lists/content/${area}${query ? `?${query}` : ''}`);
+  },
+
+  getTriRecommendations: (codigo_inep: string) =>
+    fetchAPI<{
+      codigo_inep: string;
+      recommendations: {
+        area: string;
+        area_name: string;
+        predicted_score: number;
+        recommended_range: string;
+        range_info: {
+          min: number;
+          max: number;
+          label: string;
+          description: string;
+        };
+        content_count: number;
+        sample_content: {
+          habilidade: string;
+          descricao: string;
+          tri_score: number;
+        }[];
+        stretch_goals: {
+          habilidade: string;
+          descricao: string;
+          tri_score: number;
+        }[];
+      }[];
+      download_available: boolean;
+      download_url: string;
+    }>(`/api/tri-lists/recommend/${codigo_inep}`),
+
+  getTriMaterials: () =>
+    fetchAPI<{
+      materials: {
+        area: string;
+        area_name: string;
+        tri_range: string;
+        filename: string;
+        format: string;
+        size_kb: number;
+        download_url: string;
+      }[];
+      total: number;
+      brand: string;
+    }>('/api/tri-lists/download/materials'),
+
+  getTriSkills: (area: string) =>
+    fetchAPI<{
+      area: string;
+      area_name: string;
+      total_skills: number;
+      skills: {
+        code: string;
+        content_count: number;
+        tri_min: number;
+        tri_max: number;
+        tri_avg: number;
+        ranges: Record<string, number>;
+      }[];
+    }>(`/api/tri-lists/skills/${area}`),
+
+  // GLiNER Enhanced Insights
+  getGlinerConceptAnalysis: (codigo_inep: string, topN?: number) =>
+    fetchAPI<{
+      codigo_inep: string;
+      area_analyses: {
+        area: string;
+        area_name: string;
+        color: string;
+        predicted_score: number;
+        total_content_items: number;
+        unique_concepts: number;
+        unique_semantic_fields: number;
+        unique_lexical_fields: number;
+        top_concepts: {
+          concept: string;
+          count: number;
+          frequency: number;
+          confidence: number;
+          semantic_fields: string[];
+          lexical_fields: string[];
+          related_skills: string[];
+          importance: 'high' | 'medium' | 'low';
+        }[];
+        semantic_fields: { field: string; count: number }[];
+        lexical_fields: { field: string; count: number }[];
+        processes_phenomena: { process: string; count: number }[];
+        historical_contexts: { context: string; count: number }[];
+        compound_skills: { skill: string; count: number }[];
+      }[];
+      priority_concepts: {
+        concept: string;
+        area: string;
+        area_name: string;
+        frequency: number;
+      }[];
+      entity_definitions: Record<string, string>;
+      summary: {
+        total_areas: number;
+        total_unique_concepts: number;
+        total_semantic_fields: number;
+        total_lexical_fields: number;
+      };
+    }>(`/api/gliner/school/${codigo_inep}/concepts${topN ? `?top_n=${topN}` : ''}`),
+
+  getGlinerKnowledgeGraph: (codigo_inep: string, area?: string) =>
+    fetchAPI<{
+      codigo_inep: string;
+      area: string | null;
+      nodes: {
+        id: string;
+        label: string;
+        type: 'conceito_cientifico' | 'campo_semantico' | 'campo_lexical';
+        size: number;
+        color: string;
+        count: number;
+      }[];
+      edges: {
+        source: string;
+        target: string;
+        weight: number;
+        type: string;
+      }[];
+      stats: {
+        total_nodes: number;
+        total_edges: number;
+        concept_nodes: number;
+        semantic_nodes: number;
+        lexical_nodes: number;
+      };
+    }>(`/api/gliner/school/${codigo_inep}/knowledge-graph${area ? `?area=${area}` : ''}`),
+
+  getGlinerStudyFocus: (codigo_inep: string) =>
+    fetchAPI<{
+      codigo_inep: string;
+      focus_areas: {
+        area: string;
+        area_name: string;
+        color: string;
+        current_score: number;
+        target_range: [number, number];
+        level: string;
+        study_sequence: {
+          concept: string;
+          frequency: number;
+          avg_difficulty: number;
+          semantic_fields: string[];
+          lexical_fields: string[];
+          related_processes: string[];
+          priority: 'high' | 'medium' | 'low';
+          estimated_impact: number;
+        }[];
+        total_concepts: number;
+        estimated_total_impact: number;
+      }[];
+      total_estimated_improvement: number;
+      study_plan: {
+        phase_1: { name: string; description: string; concepts_count: number };
+        phase_2: { name: string; description: string; concepts_count: number };
+        phase_3: { name: string; description: string; concepts_count: number };
+      };
+    }>(`/api/gliner/school/${codigo_inep}/study-focus`),
+
+  getGlinerTrendingConcepts: (area?: string, limit?: number) =>
+    fetchAPI<{
+      area: string | null;
+      trending_concepts: {
+        concept: string;
+        total_count: number;
+        avg_tri_score: number;
+        areas: { area: string; area_name: string; count: number }[];
+        primary_area: string | null;
+        difficulty: 'hard' | 'medium' | 'easy';
+      }[];
+      total_unique_concepts: number;
+      summary_by_area: Record<string, { name: string; unique_concepts: number }>;
+    }>(`/api/gliner/global/trending-concepts${area || limit ? `?${area ? `area=${area}` : ''}${limit ? `&limit=${limit}` : ''}` : ''}`),
 };

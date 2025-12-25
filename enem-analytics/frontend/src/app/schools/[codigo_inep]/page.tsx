@@ -6,7 +6,9 @@ import { useParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import { formatNumber, formatRanking } from '@/lib/utils';
 import Link from 'next/link';
-import { ArrowLeft, TrendingUp, TrendingDown, Award, BookOpen, Calculator, PenTool, Grid3X3, AlertTriangle, CheckCircle, Lightbulb, Brain } from 'lucide-react';
+import { ArrowLeft, TrendingUp, TrendingDown, Award, BookOpen, Calculator, PenTool, Grid3X3, AlertTriangle, CheckCircle, Lightbulb, Brain, Target, Users, Sparkles, ChevronRight, Activity } from 'lucide-react';
+import { GLiNERInsights } from '@/components/gliner/GLiNERInsights';
+import TRIAnalysis from '@/components/predictions/TRIAnalysis';
 import {
   LineChart,
   Line,
@@ -37,6 +39,31 @@ export default function SchoolDetailPage() {
   const { data: schoolSkills, isLoading: skillsLoading } = useQuery({
     queryKey: ['schoolSkills', codigo_inep],
     queryFn: () => api.getSchoolSkills(codigo_inep, 10),
+  });
+
+  // ML Analytics queries
+  const { data: predictions } = useQuery({
+    queryKey: ['predictions', codigo_inep],
+    queryFn: () => api.getPredictions(codigo_inep, 2025),
+    enabled: !!school,
+  });
+
+  const { data: diagnosis } = useQuery({
+    queryKey: ['diagnosis', codigo_inep],
+    queryFn: () => api.getDiagnosis(codigo_inep),
+    enabled: !!school,
+  });
+
+  const { data: cluster } = useQuery({
+    queryKey: ['cluster', codigo_inep],
+    queryFn: () => api.getSchoolCluster(codigo_inep),
+    enabled: !!school,
+  });
+
+  const { data: recommendations } = useQuery({
+    queryKey: ['recommendations', codigo_inep],
+    queryFn: () => api.getRecommendations(codigo_inep),
+    enabled: !!school,
   });
 
   // Selected areas for chart - state for interactive selection (must be before early returns)
@@ -274,7 +301,7 @@ export default function SchoolDetailPage() {
                     boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
                     fontSize: '12px'
                   }}
-                  formatter={(value: number) => [value?.toFixed(1), '']}
+                  formatter={(value) => [typeof value === 'number' ? value.toFixed(1) : value, '']}
                 />
                 {selectedAreas.map((area, index) => (
                   <Line
@@ -398,7 +425,7 @@ export default function SchoolDetailPage() {
                       ))}
                     </Pie>
                     <Tooltip
-                      formatter={(value: number, name: string) => [formatNumber(value), name]}
+                      formatter={(value, name) => [typeof value === 'number' ? formatNumber(value) : value, name]}
                       contentStyle={{
                         backgroundColor: 'white',
                         border: 'none',
@@ -569,7 +596,7 @@ export default function SchoolDetailPage() {
             {/* Skills List */}
             <div className="space-y-3">
               {(selectedSkillArea
-                ? schoolSkills.by_area[selectedSkillArea] || []
+                ? (schoolSkills.by_area[selectedSkillArea] || []).map(s => ({ ...s, area: selectedSkillArea }))
                 : schoolSkills.worst_overall
               ).map((skill, index) => {
                 const areaColors: Record<string, { bg: string; text: string; border: string }> = {
@@ -578,7 +605,7 @@ export default function SchoolDetailPage() {
                   LC: { bg: 'bg-pink-50', text: 'text-pink-700', border: 'border-pink-200' },
                   MT: { bg: 'bg-orange-50', text: 'text-orange-700', border: 'border-orange-200' },
                 };
-                const area = 'area' in skill ? skill.area : selectedSkillArea || 'CN';
+                const area = skill.area;
                 const colors = areaColors[area] || areaColors.CN;
 
                 return (
@@ -597,11 +624,9 @@ export default function SchoolDetailPage() {
                       {/* Skill Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          {'area' in skill && (
-                            <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors.bg} ${colors.text}`}>
-                              {skill.area}
-                            </span>
-                          )}
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors.bg} ${colors.text}`}>
+                            {area}
+                          </span>
                           <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors.bg} ${colors.text}`}>
                             H{skill.skill_num.toString().padStart(2, '0')}
                           </span>
@@ -708,6 +733,210 @@ export default function SchoolDetailPage() {
           </div>
         )}
       </div>
+
+      {/* ML Analytics Section */}
+      <div className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-2xl shadow-sm border border-indigo-100 overflow-hidden">
+        <div className="px-5 py-4 border-b border-indigo-100/50 bg-white/50">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600">
+              <Brain className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <h2 className="text-base font-semibold text-gray-900">Análise Inteligente</h2>
+              <p className="text-xs text-gray-500">Predições, diagnóstico e recomendações baseadas em ML</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="p-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+            {/* Prediction Card */}
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-2 mb-3">
+                <Target className="h-4 w-4 text-blue-600" />
+                <h3 className="text-sm font-semibold text-gray-900">Predição 2025</h3>
+              </div>
+              {predictions ? (
+                <div className="space-y-2">
+                  <div className="text-2xl font-bold text-blue-600">
+                    {predictions.scores.media?.toFixed(1) || 'N/A'}
+                  </div>
+                  <p className="text-xs text-gray-500">Média estimada</p>
+                  <div className="space-y-1 mt-3">
+                    {['cn', 'ch', 'lc', 'mt', 'redacao'].map((area) => {
+                      const score = predictions.scores[area];
+                      if (!score) return null;
+                      return (
+                        <div key={area} className="flex justify-between text-xs">
+                          <span className="text-gray-500 uppercase">{area}</span>
+                          <span className="font-medium text-gray-700">{(score as number).toFixed(0)}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <p className="text-xs text-indigo-500 mt-2 pt-2 border-t border-gray-100">
+                    Dados reais em junho/2025
+                  </p>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-24">
+                  <div className="animate-pulse text-xs text-gray-400">Carregando...</div>
+                </div>
+              )}
+            </div>
+
+            {/* Diagnosis Card */}
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-2 mb-3">
+                <Activity className="h-4 w-4 text-purple-600" />
+                <h3 className="text-sm font-semibold text-gray-900">Saúde Geral</h3>
+              </div>
+              {diagnosis ? (
+                <div className="space-y-2">
+                  <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${
+                    diagnosis.overall_health === 'excellent' ? 'bg-green-100 text-green-700' :
+                    diagnosis.overall_health === 'good' ? 'bg-blue-100 text-blue-700' :
+                    diagnosis.overall_health === 'needs_attention' ? 'bg-yellow-100 text-yellow-700' :
+                    'bg-red-100 text-red-700'
+                  }`}>
+                    {diagnosis.overall_health === 'excellent' ? <CheckCircle className="h-4 w-4" /> :
+                     diagnosis.overall_health === 'good' ? <CheckCircle className="h-4 w-4" /> :
+                     <AlertTriangle className="h-4 w-4" />}
+                    {diagnosis.overall_health === 'excellent' ? 'Excelente' :
+                     diagnosis.overall_health === 'good' ? 'Bom' :
+                     diagnosis.overall_health === 'needs_attention' ? 'Atenção' : 'Crítico'}
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 mt-3">
+                    <div className="text-center p-2 bg-green-50 rounded-lg">
+                      <div className="text-lg font-bold text-green-600">{diagnosis.health_summary.excellent_areas}</div>
+                      <div className="text-xs text-gray-500">Excelentes</div>
+                    </div>
+                    <div className="text-center p-2 bg-red-50 rounded-lg">
+                      <div className="text-lg font-bold text-red-600">{diagnosis.health_summary.critical_areas}</div>
+                      <div className="text-xs text-gray-500">Críticas</div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-24">
+                  <div className="animate-pulse text-xs text-gray-400">Carregando...</div>
+                </div>
+              )}
+            </div>
+
+            {/* Cluster/Persona Card */}
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-2 mb-3">
+                <Users className="h-4 w-4 text-indigo-600" />
+                <h3 className="text-sm font-semibold text-gray-900">Perfil</h3>
+              </div>
+              {cluster ? (
+                <div className="space-y-2">
+                  <div
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium"
+                    style={{ backgroundColor: `${cluster.persona.color}20`, color: cluster.persona.color }}
+                  >
+                    <Sparkles className="h-4 w-4" />
+                    {cluster.persona.name}
+                  </div>
+                  <p className="text-xs text-gray-500 line-clamp-3 mt-2">
+                    {cluster.persona.description}
+                  </p>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-24">
+                  <div className="animate-pulse text-xs text-gray-400">Carregando...</div>
+                </div>
+              )}
+            </div>
+
+            {/* Quick Recommendations Card */}
+            <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+              <div className="flex items-center gap-2 mb-3">
+                <Lightbulb className="h-4 w-4 text-amber-600" />
+                <h3 className="text-sm font-semibold text-gray-900">Quick Wins</h3>
+              </div>
+              {recommendations?.quick_wins ? (
+                <div className="space-y-2">
+                  {recommendations.quick_wins.slice(0, 2).map((qw, idx) => (
+                    <div key={idx} className="flex items-start gap-2 text-xs">
+                      <ChevronRight className="h-3 w-3 text-amber-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-600 line-clamp-2">
+                        <span className="font-medium text-gray-900">{qw.area_name}:</span> +{qw.expected_gain.toFixed(0)} pts
+                      </span>
+                    </div>
+                  ))}
+                  {recommendations.summary.quick_wins_count > 2 && (
+                    <p className="text-xs text-amber-600 font-medium mt-2">
+                      +{recommendations.summary.quick_wins_count - 2} mais oportunidades
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-24">
+                  <div className="animate-pulse text-xs text-gray-400">Carregando...</div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Priority Areas */}
+          {diagnosis?.priority_areas && diagnosis.priority_areas.length > 0 && (
+            <div className="mt-5 pt-5 border-t border-gray-100">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-orange-500" />
+                Áreas Prioritárias
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {diagnosis.priority_areas.slice(0, 3).map((area) => (
+                  <div
+                    key={area.area}
+                    className={`p-3 rounded-lg border ${
+                      area.status === 'critical' ? 'bg-red-50 border-red-200' :
+                      area.status === 'needs_attention' ? 'bg-yellow-50 border-yellow-200' :
+                      'bg-gray-50 border-gray-200'
+                    }`}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <p className="text-sm font-medium text-gray-900">{area.area_name}</p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          Score: {area.school_score.toFixed(0)} | Nacional: {area.national_avg.toFixed(0)}
+                        </p>
+                      </div>
+                      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+                        area.gap_to_national < -20 ? 'bg-red-100 text-red-700' :
+                        area.gap_to_national < 0 ? 'bg-yellow-100 text-yellow-700' :
+                        'bg-green-100 text-green-700'
+                      }`}>
+                        {area.gap_to_national >= 0 ? '+' : ''}{area.gap_to_national.toFixed(0)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Link to full roadmap */}
+          <div className="mt-5 pt-4 border-t border-gray-100 flex justify-end">
+            <Link
+              href={`/schools/${codigo_inep}/roadmap`}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors"
+            >
+              Ver plano de melhoria completo
+              <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* TRI Analysis Section */}
+      <TRIAnalysis codigoInep={codigo_inep} />
+
+      {/* GLiNER Insights Section */}
+      <GLiNERInsights codigoInep={codigo_inep} />
     </div>
   );
 }
