@@ -1,0 +1,65 @@
+{
+  "jobIds": [
+    "c9d3a59b-bf39-4cbe-8a00-f40fe85b61e8"
+  ],
+  "results": [
+    {
+      "jobId": "c9d3a59b-bf39-4cbe-8a00-f40fe85b61e8",
+      "result": {
+        "data": {
+          "timestamp": "2025-12-24T18:07:47.635Z",
+          "rootActivityId": "c0c69783-6a7f-4555-8b34-021513758b4a",
+          "metrics": {
+            "Version": "1.0.0",
+            "Events": [
+              {
+                "Id": "741c39ea-0104-4e89-babb-c0feffaa9620",
+                "Name": "Execute Semantic Query",
+                "Component": "DSE",
+                "Start": "2025-12-24T18:07:47.6352626Z",
+                "End": "2025-12-24T18:07:47.6352626Z"
+              }
+            ]
+          },
+          "fromCache": false,
+          "dsr": {
+            "DataShapes": [
+              {
+                "odata.error": {
+                  "code": "CouldNotResolveSemanticQueryDefinition",
+                  "source": "User",
+                  "message": {
+                    "lang": "en-US",
+                    "value": "Could not resolve QueryDefinition due to invalid Measure reference '_rank_area_escola' in the SourceEntity ''.'cur-enem-school-tri-area-rank'. This error often happens after the Measure or Entity was renamed or deleted. Please update the query/visual to use the new name or undo the name change."
+                  },
+                  "azure:values": [
+                    {
+                      "timestamp": "2025-12-24T18:07:47.6352626Z"
+                    },
+                    {
+                      "additionalMessages": [
+                        {
+                          "Code": "CouldNotResolveSemanticQueryDefinition",
+                          "Severity": "Error",
+                          "Message": "Could not resolve QueryDefinition due to invalid Measure reference '_rank_area_escola' in the SourceEntity ''.'cur-enem-school-tri-area-rank'. This error often happens after the Measure or Entity was renamed or deleted. Please update the query/visual to use the new name or undo the name change."
+                        },
+                        {
+                          "Code": "CouldNotResolveModelReferencesInSemanticQuery",
+                          "Severity": "Error",
+                          "Message": "Could not resolve model references in the Semantic Query.",
+                          "AffectedItems": [
+                            "cur-enem-school-tri-area-rank[_rank_area_escola]"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
