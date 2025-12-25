@@ -5,6 +5,9 @@ WORKDIR /app
 # Copy all files first
 COPY . .
 
+# Debug - list files to see what was copied
+RUN ls -la && cat requirements.txt
+
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
