@@ -10,6 +10,10 @@ import pandas as pd
 from pathlib import Path
 
 from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights
+from api.auth import router as auth_router
+from api.admin import router as admin_router
+from database.config import engine
+from database.models import Base
 
 # Global data store
 data_store = {}
@@ -44,7 +48,13 @@ def load_data():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load data on startup"""
+    """Load data and initialize database on startup"""
+    # Create database tables
+    print("Initializing database...")
+    Base.metadata.create_all(bind=engine)
+    print("Database ready")
+
+    # Load ENEM data
     print("Loading ENEM data...")
     data_store["df"] = load_data()
     print(f"Loaded {len(data_store['df']):,} records")
@@ -71,6 +81,8 @@ app.add_middleware(
 )
 
 # Include routers
+app.include_router(auth_router, tags=["Authentication"])
+app.include_router(admin_router, tags=["Admin"])
 app.include_router(schools.router, prefix="/api/schools", tags=["Schools"])
 app.include_router(predictions.router)
 app.include_router(diagnosis.router)

@@ -1,3 +1,5 @@
+import { getToken, removeToken, User } from './auth';
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 export interface SchoolScore {
@@ -393,8 +395,29 @@ export interface SchoolHistory {
   }[];
 }
 
-async function fetchAPI<T>(endpoint: string): Promise<T> {
-  const response = await fetch(`${API_BASE}${endpoint}`);
+async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  const token = getToken();
+  const headers: HeadersInit = {
+    ...options?.headers,
+  };
+
+  if (token) {
+    (headers as Record<string, string>)['Authorization'] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(`${API_BASE}${endpoint}`, {
+    ...options,
+    headers,
+  });
+
+  if (response.status === 401) {
+    removeToken();
+    if (typeof window !== 'undefined') {
+      window.location.href = '/login';
+    }
+    throw new Error('Sessão expirada');
+  }
+
   if (!response.ok) {
     throw new Error(`API Error: ${response.status}`);
   }
@@ -848,4 +871,34 @@ export const api = {
       total_unique_concepts: number;
       summary_by_area: Record<string, { name: string; unique_concepts: number }>;
     }>(`/api/gliner/global/trending-concepts${area || limit ? `?${area ? `area=${area}` : ''}${limit ? `&limit=${limit}` : ''}` : ''}`),
+
+  // Admin APIs
+  listUsers: (skip = 0, limit = 100) =>
+    fetchAPI<User[]>(`/api/admin/users?skip=${skip}&limit=${limit}`),
+
+  getUser: (userId: number) =>
+    fetchAPI<User>(`/api/admin/users/${userId}`),
+
+  createUser: (data: { codigo_inep: string; nome_escola: string; email: string; password: string; is_admin?: boolean }) =>
+    fetchAPI<User>('/api/admin/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }),
+
+  updateUser: (userId: number, data: { nome_escola?: string; email?: string; password?: string; is_active?: boolean; is_admin?: boolean }) =>
+    fetchAPI<User>(`/api/admin/users/${userId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }),
+
+  deleteUser: (userId: number) =>
+    fetch(`${API_BASE}/api/admin/users/${userId}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${getToken()}` },
+    }),
+
+  getAdminStats: () =>
+    fetchAPI<{ total_users: number; active_users: number; inactive_users: number; admin_users: number }>('/api/admin/stats'),
 };

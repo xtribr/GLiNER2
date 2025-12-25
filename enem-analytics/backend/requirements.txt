@@ -3,9 +3,16 @@ uvicorn[standard]
 pandas
 numpy
 scikit-learn
-pydantic
+pydantic[email]
 python-multipart
 xgboost
 joblib
 scipy
 requests
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+# Database
+sqlalchemy
+psycopg2-binary
+python-dotenv

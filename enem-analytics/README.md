@@ -59,13 +59,43 @@ enem-analytics/
 ### Backend
 ```env
 PORT=8000
-PIONEER_API_KEY=sua_chave_pioneer  # Para GLiNER
+PIONEER_API_KEY=sua_chave_pioneer  # Para BrainX/GLiNER
+
+# Autenticação (obrigatório para deploy)
+DATABASE_URL=postgresql://user:pass@host:5432/dbname
+JWT_SECRET_KEY=sua-chave-secreta-aqui
+JWT_ALGORITHM=HS256
+JWT_EXPIRE_MINUTES=10080  # 7 dias
 ```
 
 ### Frontend
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
+
+## Sistema de Autenticação
+
+### Criar Usuário Admin
+
+Após o deploy, execute o script para criar o primeiro admin:
+
+```bash
+cd enem-analytics/backend
+python scripts/create_admin.py admin@xtri.online senha123 "Admin X-TRI"
+```
+
+### Endpoints de Auth
+
+- `POST /api/auth/login` - Login (retorna JWT)
+- `GET /api/auth/me` - Dados do usuário logado
+
+### Endpoints de Admin (requer is_admin=true)
+
+- `GET /api/admin/users` - Listar escolas
+- `POST /api/admin/users` - Cadastrar escola
+- `PUT /api/admin/users/{id}` - Editar escola
+- `DELETE /api/admin/users/{id}` - Desativar escola
+- `GET /api/admin/stats` - Estatísticas de usuários
 
 ## Desenvolvimento Local
 

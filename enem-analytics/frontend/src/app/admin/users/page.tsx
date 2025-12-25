@@ -1,0 +1,464 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/auth-context';
+import { api } from '@/lib/api';
+import { User } from '@/lib/auth';
+import {
+  Users,
+  Plus,
+  Search,
+  Edit2,
+  Trash2,
+  X,
+  Check,
+  AlertCircle,
+  Shield,
+  ShieldOff,
+  Eye,
+  EyeOff,
+} from 'lucide-react';
+
+interface UserFormData {
+  codigo_inep: string;
+  nome_escola: string;
+  email: string;
+  password: string;
+  is_admin: boolean;
+}
+
+function UserModal({
+  isOpen,
+  onClose,
+  onSave,
+  user,
+  isEdit,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  onSave: () => void;
+  user: User | null;
+  isEdit: boolean;
+}) {
+  const [formData, setFormData] = useState<UserFormData>({
+    codigo_inep: '',
+    nome_escola: '',
+    email: '',
+    password: '',
+    is_admin: false,
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (user && isEdit) {
+      setFormData({
+        codigo_inep: user.codigo_inep,
+        nome_escola: user.nome_escola,
+        email: user.email,
+        password: '',
+        is_admin: user.is_admin,
+      });
+    } else {
+      setFormData({
+        codigo_inep: '',
+        nome_escola: '',
+        email: '',
+        password: '',
+        is_admin: false,
+      });
+    }
+    setError('');
+  }, [user, isEdit, isOpen]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    try {
+      if (isEdit && user) {
+        const updateData: Record<string, string | boolean> = {
+          nome_escola: formData.nome_escola,
+          email: formData.email,
+          is_admin: formData.is_admin,
+        };
+        if (formData.password) {
+          updateData.password = formData.password;
+        }
+        await api.updateUser(user.id, updateData);
+      } else {
+        await api.createUser(formData);
+      }
+      onSave();
+      onClose();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Erro ao salvar usuário');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+
+      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md">
+        <div className="sticky top-0 bg-gradient-to-r from-sky-400 to-orange-500 px-6 py-4 rounded-t-2xl">
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-1 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+          >
+            <X className="h-5 w-5 text-white" />
+          </button>
+          <h2 className="text-lg font-bold text-white">
+            {isEdit ? 'Editar Escola' : 'Nova Escola'}
+          </h2>
+        </div>
+
+        {error && (
+          <div className="mx-6 mt-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-700 text-sm">
+            <AlertCircle className="h-4 w-4 flex-shrink-0" />
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Código INEP *
+            </label>
+            <input
+              type="text"
+              required
+              disabled={isEdit}
+              value={formData.codigo_inep}
+              onChange={(e) => setFormData({ ...formData, codigo_inep: e.target.value })}
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all text-gray-900 disabled:bg-gray-100"
+              placeholder="12345678"
+              maxLength={8}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Nome da Escola *
+            </label>
+            <input
+              type="text"
+              required
+              value={formData.nome_escola}
+              onChange={(e) => setFormData({ ...formData, nome_escola: e.target.value })}
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all text-gray-900"
+              placeholder="Nome completo da escola"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Email *
+            </label>
+            <input
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all text-gray-900"
+              placeholder="escola@email.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Senha {isEdit ? '(deixe em branco para manter)' : '*'}
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                required={!isEdit}
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="w-full px-4 py-2.5 pr-12 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all text-gray-900"
+                placeholder={isEdit ? '••••••••' : 'Senha de acesso'}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+              </button>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+            <button
+              type="button"
+              onClick={() => setFormData({ ...formData, is_admin: !formData.is_admin })}
+              className={`relative w-12 h-6 rounded-full transition-colors ${
+                formData.is_admin ? 'bg-orange-500' : 'bg-gray-300'
+              }`}
+            >
+              <span
+                className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                  formData.is_admin ? 'translate-x-6' : ''
+                }`}
+              />
+            </button>
+            <div>
+              <p className="text-sm font-medium text-gray-900">Administrador</p>
+              <p className="text-xs text-gray-500">Pode gerenciar outros usuários</p>
+            </div>
+          </div>
+
+          <div className="flex gap-3 pt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex-1 px-4 py-2.5 border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors font-medium"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="flex-1 bg-gradient-to-r from-sky-400 to-orange-500 text-white font-semibold py-2.5 rounded-xl hover:from-sky-500 hover:to-orange-600 transition-all disabled:opacity-70 flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <div className="h-5 w-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <>
+                  <Check className="h-5 w-5" />
+                  Salvar
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default function UsersPage() {
+  const router = useRouter();
+  const { isLoading: authLoading, isAdmin } = useAuth();
+  const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!authLoading && !isAdmin) {
+      router.push('/');
+    }
+  }, [authLoading, isAdmin, router]);
+
+  const loadUsers = async () => {
+    try {
+      const data = await api.listUsers();
+      setUsers(data);
+    } catch (error) {
+      console.error('Error loading users:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isAdmin) {
+      loadUsers();
+    }
+  }, [isAdmin]);
+
+  const handleDelete = async (userId: number) => {
+    if (!confirm('Deseja realmente desativar este usuário?')) return;
+
+    setDeletingId(userId);
+    try {
+      await api.deleteUser(userId);
+      loadUsers();
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.nome_escola.toLowerCase().includes(search.toLowerCase()) ||
+      user.email.toLowerCase().includes(search.toLowerCase()) ||
+      user.codigo_inep.includes(search)
+  );
+
+  if (authLoading || !isAdmin) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="h-8 w-8 border-4 border-sky-400 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Gerenciar Escolas</h1>
+          <p className="text-gray-500">{users.length} escolas cadastradas</p>
+        </div>
+        <button
+          onClick={() => {
+            setEditingUser(null);
+            setIsModalOpen(true);
+          }}
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-400 to-orange-500 text-white font-medium rounded-xl hover:from-sky-500 hover:to-orange-600 transition-all shadow-lg"
+        >
+          <Plus className="h-5 w-5" />
+          Adicionar Escola
+        </button>
+      </div>
+
+      {/* Search */}
+      <div className="relative">
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Buscar por nome, email ou código INEP..."
+          className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all text-gray-900"
+        />
+      </div>
+
+      {/* Users Table */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-50 border-b border-gray-100">
+              <tr>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                  Escola
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                  Código INEP
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                  Email
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                  Status
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                  Tipo
+                </th>
+                <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase">
+                  Ações
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {isLoading ? (
+                <tr>
+                  <td colSpan={6} className="px-6 py-12 text-center">
+                    <div className="h-8 w-8 border-4 border-sky-400 border-t-transparent rounded-full animate-spin mx-auto" />
+                  </td>
+                </tr>
+              ) : filteredUsers.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="px-6 py-12 text-center text-gray-500">
+                    {search ? 'Nenhum usuário encontrado' : 'Nenhuma escola cadastrada'}
+                  </td>
+                </tr>
+              ) : (
+                filteredUsers.map((user) => (
+                  <tr key={user.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 bg-sky-100 rounded-lg flex items-center justify-center">
+                          <Users className="h-5 w-5 text-sky-600" />
+                        </div>
+                        <span className="font-medium text-gray-900">{user.nome_escola}</span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-gray-600 font-mono">{user.codigo_inep}</td>
+                    <td className="px-6 py-4 text-gray-600">{user.email}</td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${
+                          user.is_active
+                            ? 'bg-green-100 text-green-700'
+                            : 'bg-gray-100 text-gray-600'
+                        }`}
+                      >
+                        {user.is_active ? 'Ativo' : 'Inativo'}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      {user.is_admin ? (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-700">
+                          <Shield className="h-3 w-3" />
+                          Admin
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                          <ShieldOff className="h-3 w-3" />
+                          Escola
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center justify-end gap-2">
+                        <button
+                          onClick={() => {
+                            setEditingUser(user);
+                            setIsModalOpen(true);
+                          }}
+                          className="p-2 text-gray-400 hover:text-sky-600 hover:bg-sky-50 rounded-lg transition-colors"
+                          title="Editar"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(user.id)}
+                          disabled={deletingId === user.id}
+                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                          title="Desativar"
+                        >
+                          {deletingId === user.id ? (
+                            <div className="h-4 w-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+                          ) : (
+                            <Trash2 className="h-4 w-4" />
+                          )}
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Modal */}
+      <UserModal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setEditingUser(null);
+        }}
+        onSave={loadUsers}
+        user={editingUser}
+        isEdit={!!editingUser}
+      />
+    </div>
+  );
+}

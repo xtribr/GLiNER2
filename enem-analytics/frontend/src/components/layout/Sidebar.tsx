@@ -12,20 +12,29 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  MessageCircle,
   Send,
   CheckCircle,
+  LogOut,
+  Shield,
+  Users,
 } from 'lucide-react';
 import { useState } from 'react';
+import { useAuth } from '@/lib/auth-context';
 
 const menuItems = [
-  { label: 'MENU', type: 'header' },
+  { label: 'MENU', type: 'header' as const },
   { icon: LayoutDashboard, label: 'Dashboard', href: '/' },
   { icon: School, label: 'Escolas', href: '/schools' },
   { icon: BarChart3, label: 'Habilidades', href: '/skills' },
-  { label: 'ANALYTICS', type: 'header' },
+  { label: 'ANALYTICS', type: 'header' as const },
   { icon: TrendingUp, label: 'Tendências', href: '/trends' },
   { icon: GitCompare, label: 'Comparar', href: '/compare' },
+];
+
+const adminMenuItems = [
+  { label: 'ADMIN', type: 'header' as const },
+  { icon: Shield, label: 'Painel Admin', href: '/admin' },
+  { icon: Users, label: 'Usuários', href: '/admin/users' },
 ];
 
 interface ContactFormData {
@@ -252,8 +261,11 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { user, isAdmin, logout, isAuthenticated } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
+
+  const allMenuItems = isAdmin ? [...menuItems, ...adminMenuItems] : menuItems;
 
   return (
     <>
@@ -295,7 +307,7 @@ export default function Sidebar() {
         {/* Navigation */}
         <nav className="flex-1 px-3 py-4 overflow-y-auto">
           <ul className="space-y-1">
-            {menuItems.map((item, idx) => {
+            {allMenuItems.map((item, idx) => {
               if (item.type === 'header') {
                 if (collapsed) return null;
                 return (
@@ -333,6 +345,28 @@ export default function Sidebar() {
           </ul>
         </nav>
 
+        {/* User Info & Logout */}
+        {isAuthenticated && (
+          <div className={`px-3 py-2 border-t border-slate-700 ${collapsed ? 'text-center' : ''}`}>
+            {!collapsed && user && (
+              <div className="px-3 py-2 mb-2">
+                <p className="text-sm font-medium text-white truncate">{user.nome_escola}</p>
+                <p className="text-xs text-slate-400 truncate">{user.email}</p>
+              </div>
+            )}
+            <button
+              onClick={logout}
+              className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-all ${
+                collapsed ? 'justify-center' : ''
+              }`}
+              title="Sair"
+            >
+              <LogOut className="h-5 w-5 flex-shrink-0" />
+              {!collapsed && 'Sair'}
+            </button>
+          </div>
+        )}
+
         {/* Contact Card */}
         {!collapsed && (
           <div className="p-4">
@@ -342,7 +376,7 @@ export default function Sidebar() {
               </div>
               <h4 className="font-semibold text-white mb-1">X-TRI Pro</h4>
               <p className="text-xs text-white/80 mb-3">
-                Análises avançadas e relatórios personalizados
+                Solicite um estudo da sua ESCOLA em comparação com seus CONCORRENTES.
               </p>
               <button
                 onClick={() => setIsContactOpen(true)}
