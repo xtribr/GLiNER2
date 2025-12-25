@@ -2,11 +2,8 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy all files first
-COPY . .
-
-# Debug - list files to see what was copied
-RUN ls -la && cat requirements.txt
+# Copy backend files (context is repo root)
+COPY enem-analytics/backend/ .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
