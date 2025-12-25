@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
-import { api } from '@/lib/api';
+import { api, API_BASE } from '@/lib/api';
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -522,7 +522,7 @@ export default function RoadmapPage() {
                           {areaMaterials.slice(0, 2).map((mat: any, idx: number) => (
                             <a
                               key={idx}
-                              href={`http://localhost:8000${mat.download_url}`}
+                              href={`${API_BASE}${mat.download_url}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center gap-2 text-xs text-blue-600 hover:text-blue-800"
