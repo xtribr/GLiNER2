@@ -16,3 +16,4 @@ passlib[bcrypt]
 sqlalchemy
 psycopg2-binary
 python-dotenv
+# Force rebuild qui 25 dez 2025 15:37:57 -03
