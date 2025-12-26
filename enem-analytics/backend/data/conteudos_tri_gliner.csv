@@ -1928,381 +1928,381 @@ Natureza,H30,Biologia/Ecologia: Controle biológico de pragas.,557.7,CN,550-650,
 Natureza,H21,Física/Eletricidade: Cálculo de potência e energia em um circuito.,565.8,CN,550-650,,,,,,,
 Natureza,H26,Química: Reações de polímeros.,569.7,CN,550-650,,,,,,,
 Natureza,H21,Física/Hidrostática: Princípio de Arquimedes e empuxo.,812.5,CN,750+,,,,,,,
-Matematica,H1,Representação de números em sistema decimal posicional (Quipus).,459.4,MT,450-550,,,,,,,
-Matematica,H1,Razão entre assentos vendidos e total de assentos de um ônibus.,491.4,MT,450-550,,,,,,,
-Matematica,H1,"Representação numérica de grandes valores (1,35 bilhão).",497.6,MT,450-550,,,,,,,
-Matematica,H1,Razão entre cadeiras reservadas e o total de cadeiras de um setor.,530.8,MT,450-550,,,,,,,
-Matematica,H1,Análise de dados em uma matriz para identificar o dia com maior quantidade de acertos.,537.2,MT,450-550,,,,,,,
+Matematica,H1,Representação de números em sistema decimal posicional (Quipus).,459.4,MT,450-550,sistema decimal posicional,,,,,,sistema decimal posicional
+Matematica,H1,Razão entre assentos vendidos e total de assentos de um ônibus.,491.4,MT,450-550,total de assentos,,,,,,total de assentos
+Matematica,H1,"Representação numérica de grandes valores (1,35 bilhão).",497.6,MT,450-550,Representação numérica de grandes valores,,,,,,Representação numérica de grandes valores
+Matematica,H1,Razão entre cadeiras reservadas e o total de cadeiras de um setor.,530.8,MT,450-550,cadeiras reservadas,,,,,,cadeiras reservadas
+Matematica,H1,Análise de dados em uma matriz para identificar o dia com maior quantidade de acertos.,537.2,MT,450-550,Análise de dados,,,"Análise de dados, identificar o dia com maior quantidade de acertos",,Análise de dados,"Análise de dados, Análise de dados, identificar o dia com maior quantidade de acertos, Análise de dados"
 Matematica,H1,Notação científica para representar o diâmetro de um vírus.,542.9,MT,450-550,,,,,,,
-Matematica,H1,Sistema de numeração decimal e valor posicional (centena de milhar).,560.3,MT,550-650,,,,,,,
-Matematica,H1,Padrão de contagem de uma cultura indígena.,563.3,MT,550-650,,,,,,,
-Matematica,H1,"Equivalência entre diferentes representações de números racionais (fração, porcentagem, decimal).",596.4,MT,550-650,,,,,,,
-Matematica,H1,Notação científica para representar grandes distâncias (distância Terra-asteroide).,601.9,MT,550-650,,,,,,,
-Matematica,H1,Sistema de numeração romano e cálculo de tempo decorrido.,621.3,MT,550-650,,,,,,,
-Matematica,H1,Comparação de números decimais para encontrar o valor mais próximo de uma medida.,626.5,MT,550-650,,,,,,,
-Matematica,H1,Adição de números na base binária.,640.3,MT,550-650,,,,,,,
-Matematica,H1,Leitura de números em um ábaco com disposição não usual.,652.1,MT,650-750,,,,,,,
-Matematica,H1,Algoritmo para cálculo de dígito verificador de uma agência bancária.,692.2,MT,650-750,,,,,,,
-Matematica,H1,Leitura e interpretação de temperaturas em um termômetro de máxima e mínima.,694.3,MT,650-750,,,,,,,
+Matematica,H1,Sistema de numeração decimal e valor posicional (centena de milhar).,560.3,MT,550-650,"valor posicional, Sistema de numeração decimal, centena de milhar",,,,,,"valor posicional, Sistema de numeração decimal, centena de milhar"
+Matematica,H1,Padrão de contagem de uma cultura indígena.,563.3,MT,550-650,Padrão de contagem,,,,cultura indígena,,"Padrão de contagem, cultura indígena"
+Matematica,H1,"Equivalência entre diferentes representações de números racionais (fração, porcentagem, decimal).",596.4,MT,550-650,números racionais,,,,,,números racionais
+Matematica,H1,Notação científica para representar grandes distâncias (distância Terra-asteroide).,601.9,MT,550-650,"distância Terra-asteroide, grandes distâncias",,,,,,"distância Terra-asteroide, grandes distâncias"
+Matematica,H1,Sistema de numeração romano e cálculo de tempo decorrido.,621.3,MT,550-650,"Sistema de numeração romano, cálculo de tempo decorrido",,,,,,"Sistema de numeração romano, cálculo de tempo decorrido"
+Matematica,H1,Comparação de números decimais para encontrar o valor mais próximo de uma medida.,626.5,MT,550-650,números decimais,,,Comparação,,,"números decimais, Comparação"
+Matematica,H1,Adição de números na base binária.,640.3,MT,550-650,base binária,,,Adição de números,,,"base binária, Adição de números"
+Matematica,H1,Leitura de números em um ábaco com disposição não usual.,652.1,MT,650-750,disposição não usual,,,Leitura de números,,,"disposição não usual, Leitura de números"
+Matematica,H1,Algoritmo para cálculo de dígito verificador de uma agência bancária.,692.2,MT,650-750,,,,cálculo de dígito verificador,agência bancária,,"cálculo de dígito verificador, agência bancária"
+Matematica,H1,Leitura e interpretação de temperaturas em um termômetro de máxima e mínima.,694.3,MT,650-750,termômetro de máxima e mínima,,,interpretação,,interpretação,"termômetro de máxima e mínima, interpretação, interpretação"
 Matematica,H1,Notação científica para representar o comprimento de uma miniatura.,731.1,MT,650-750,,,,,,,
 Matematica,H1,Análise de uma matriz para identificar o banco que transferiu a maior quantia.,741.9,MT,650-750,,,,,,,
-Matematica,H1,Comparação de números decimais para encontrar o diâmetro mais próximo.,765.8,MT,750+,,,,,,,
-Matematica,H2,Padrão de decrescimento em uma progressão geométrica (intensidade luminosa).,577.8,MT,550-650,,,,,,,
-Matematica,H2,Padrão de construção de quadrados em uma sequência recursiva (progressão geométrica).,634.0,MT,550-650,,,,,,,
-Matematica,H2,Identificação de padrão em uma sequência de números pentagonais (progressão aritmética de 2ª ordem).,634.5,MT,550-650,,,,,,,
-Matematica,H2,Análise de um torneio de tênis em sistema de eliminatória simples (soma de PG).,663.3,MT,650-750,,,,,,,
-Matematica,H2,Padrão na representação de potências da proporção áurea (Sequência de Fibonacci).,673.9,MT,650-750,,,,,,,
-Matematica,H2,Combinação com repetição para determinar modelos de um brinquedo.,674.8,MT,650-750,,,,,,,
-Matematica,H2,Análise combinatória: combinação simples para escolher tecidos e pedras.,687.5,MT,650-750,,,,,,,
-Matematica,H2,Permutação com repetição para determinar a quantidade de trens com vagões coloridos.,693.4,MT,650-750,,,,,,,
-Matematica,H2,Análise combinatória: princípio fundamental da contagem para senhas.,705.9,MT,650-750,,,,,,,
-Matematica,H2,Combinação simples para escolher apartamentos em um andar.,716.9,MT,650-750,,,,,,,
+Matematica,H1,Comparação de números decimais para encontrar o diâmetro mais próximo.,765.8,MT,750+,números decimais,,,Comparação,,,"números decimais, Comparação"
+Matematica,H2,Padrão de decrescimento em uma progressão geométrica (intensidade luminosa).,577.8,MT,550-650,"progressão geométrica, intensidade luminosa, Padrão de decrescimento",,,,,,"progressão geométrica, intensidade luminosa, Padrão de decrescimento"
+Matematica,H2,Padrão de construção de quadrados em uma sequência recursiva (progressão geométrica).,634.0,MT,550-650,"progressão geométrica, sequência recursiva, Padrão de construção de quadrados",,,construção de quadrados,,,"progressão geométrica, sequência recursiva, Padrão de construção de quadrados, construção de quadrados"
+Matematica,H2,Identificação de padrão em uma sequência de números pentagonais (progressão aritmética de 2ª ordem).,634.5,MT,550-650,"progressão aritmética de 2ª ordem, sequência de números pentagonais",,,Identificação de padrão,,,"progressão aritmética de 2ª ordem, sequência de números pentagonais, Identificação de padrão"
+Matematica,H2,Análise de um torneio de tênis em sistema de eliminatória simples (soma de PG).,663.3,MT,650-750,"sistema de eliminatória simples, soma de PG, torneio de tênis",,,,,,"sistema de eliminatória simples, soma de PG, torneio de tênis"
+Matematica,H2,Padrão na representação de potências da proporção áurea (Sequência de Fibonacci).,673.9,MT,650-750,"Sequência de Fibonacci, proporção áurea",,,,,,"Sequência de Fibonacci, proporção áurea"
+Matematica,H2,Combinação com repetição para determinar modelos de um brinquedo.,674.8,MT,650-750,repetição,,,"repetição, Combinação",,"repetição, Combinação","repetição, repetição, Combinação, repetição, Combinação"
+Matematica,H2,Análise combinatória: combinação simples para escolher tecidos e pedras.,687.5,MT,650-750,"Análise combinatória, combinação",,,,,,"Análise combinatória, combinação"
+Matematica,H2,Permutação com repetição para determinar a quantidade de trens com vagões coloridos.,693.4,MT,650-750,"repetição, vagões coloridos",,,Permutação com repetição,,,"repetição, vagões coloridos, Permutação com repetição"
+Matematica,H2,Análise combinatória: princípio fundamental da contagem para senhas.,705.9,MT,650-750,"Análise combinatória, princípio fundamental da contagem",,,,,,"Análise combinatória, princípio fundamental da contagem"
+Matematica,H2,Combinação simples para escolher apartamentos em um andar.,716.9,MT,650-750,Combinação,,,,,,Combinação
 Matematica,H2,Anagramas com restrição (vogais e consoantes intercaladas).,717.7,MT,650-750,,,,,,,
-Matematica,H2,Análise combinatória: contagem de possibilidades com restrição.,742.3,MT,650-750,,,,,,,
-Matematica,H2,Sequência de treinamentos com padrão repetitivo (divisão com resto).,754.2,MT,750+,,,,,,,
-Matematica,H2,"Análise combinatória: senhas com letras e algarismos, com arranjo e permutação.",759.6,MT,750+,,,,,,,
-Matematica,H2,Combinação simples para compor estandes de exposição.,797.5,MT,750+,,,,,,,
+Matematica,H2,Análise combinatória: contagem de possibilidades com restrição.,742.3,MT,650-750,Análise combinatória,,,contagem de possibilidades com restrição,,,"Análise combinatória, contagem de possibilidades com restrição"
+Matematica,H2,Sequência de treinamentos com padrão repetitivo (divisão com resto).,754.2,MT,750+,"padrão repetitivo, divisão com resto",,,"divisão com resto, Sequência de treinamentos",,,"padrão repetitivo, divisão com resto, divisão com resto, Sequência de treinamentos"
+Matematica,H2,"Análise combinatória: senhas com letras e algarismos, com arranjo e permutação.",759.6,MT,750+,"Análise combinatória, permutação, senhas com letras",,,permutação,,,"Análise combinatória, permutação, senhas com letras, permutação"
+Matematica,H2,Combinação simples para compor estandes de exposição.,797.5,MT,750+,"estandes de exposição, Combinação simples",,,,,,"estandes de exposição, Combinação simples"
 Matematica,H2,Arranjo simples para acomodar pessoas em poltronas disponíveis.,819.6,MT,750+,,,,,,,
-Matematica,H2,Teoria dos números: cálculo do número de divisores de um número.,876.9,MT,750+,,,,,,,
-Matematica,H2,Identificação de padrão em uma sequência numérica repetitiva.,878.1,MT,750+,,,,,,,
-Matematica,H2,Análise combinatória para determinar formas de alugar filmes.,1061.3,MT,750+,,,,,,,
-Matematica,H2,Análise combinatória: princípio da multiplicação para colorir vértices de um losango.,2262.4,MT,750+,,,,,,,
-Matematica,H3,Soma dos termos de uma progressão aritmética (cartas de baralho).,495.3,MT,450-550,,,,,,,
-Matematica,H3,Porcentagem e distribuição de cargas em pontos de sustentação.,534.7,MT,450-550,,,,,,,
+Matematica,H2,Teoria dos números: cálculo do número de divisores de um número.,876.9,MT,750+,Teoria dos números,,,,,,Teoria dos números
+Matematica,H2,Identificação de padrão em uma sequência numérica repetitiva.,878.1,MT,750+,sequência numérica repetitiva,,,Identificação de padrão,,,"sequência numérica repetitiva, Identificação de padrão"
+Matematica,H2,Análise combinatória para determinar formas de alugar filmes.,1061.3,MT,750+,Análise combinatória,,,,alugar filmes,,"Análise combinatória, alugar filmes"
+Matematica,H2,Análise combinatória: princípio da multiplicação para colorir vértices de um losango.,2262.4,MT,750+,"Análise combinatória, princípio da multiplicação",,,multiplicação,,colorir vértices,"Análise combinatória, princípio da multiplicação, multiplicação, colorir vértices"
+Matematica,H3,Soma dos termos de uma progressão aritmética (cartas de baralho).,495.3,MT,450-550,"progressão aritmética, cartas de baralho",,,,,,"progressão aritmética, cartas de baralho"
+Matematica,H3,Porcentagem e distribuição de cargas em pontos de sustentação.,534.7,MT,450-550,"Porcentagem e distribuição de cargas, pontos de sustentação",,,,,,"Porcentagem e distribuição de cargas, pontos de sustentação"
 Matematica,H3,Porcentagem para cálculo de imposto de renda sobre lucro.,602.0,MT,550-650,,,,,,,
-Matematica,H3,Cálculo de área e valor total de venda de terrenos em um loteamento.,621.5,MT,550-650,,,,,,,
+Matematica,H3,Cálculo de área e valor total de venda de terrenos em um loteamento.,621.5,MT,550-650,Cálculo de área,,,Cálculo de área,,,"Cálculo de área, Cálculo de área"
 Matematica,H3,Cálculo de porcentagem de área de agricultura em relação ao território.,622.4,MT,550-650,,,,,,,
 Matematica,H3,Conversão entre diferentes calendários (Haab e Tzolkim).,653.9,MT,650-750,,,,,,,
-Matematica,H3,Cálculo de vagas criadas com base em uma queda percentual.,656.7,MT,650-750,,,,,,,
-Matematica,H3,Resolução de problema envolvendo sequência de movimentos em um elevador.,657.0,MT,650-750,,,,,,,
-Matematica,H3,Teoria dos conjuntos aplicada a tipos sanguíneos.,665.2,MT,650-750,,,,,,,
-Matematica,H3,Análise de custos e economia na utilização de laboratórios.,671.6,MT,650-750,,,,,,,
-Matematica,H3,Análise combinatória para pintar uma logomarca com restrições de cores.,681.6,MT,650-750,,,,,,,
-Matematica,H3,Proporcionalidade e cálculo de tempo em um encontro de bondinhos.,704.6,MT,650-750,,,,,,,
-Matematica,H3,Cálculo de aumento percentual sobre um valor com base em outro aumento.,735.7,MT,650-750,,,,,,,
-Matematica,H3,Relações de proporcionalidade entre massa e volume para ordenar densidades.,745.3,MT,650-750,,,,,,,
-Matematica,H3,Divisão de laranjas em proporções diferentes em duas etapas de um trajeto.,746.7,MT,650-750,,,,,,,
-Matematica,H3,Análise combinatória: formação de duplas com restrição.,761.2,MT,750+,,,,,,,
-Matematica,H3,Soma dos termos de uma PA e cálculo de custo (postes de iluminação).,766.8,MT,750+,,,,,,,
+Matematica,H3,Cálculo de vagas criadas com base em uma queda percentual.,656.7,MT,650-750,queda percentual,,,,,,queda percentual
+Matematica,H3,Resolução de problema envolvendo sequência de movimentos em um elevador.,657.0,MT,650-750,sequência de movimentos,,,sequência de movimentos,,Resolução de problema,"sequência de movimentos, sequência de movimentos, Resolução de problema"
+Matematica,H3,Teoria dos conjuntos aplicada a tipos sanguíneos.,665.2,MT,650-750,Teoria dos conjuntos,,tipos sanguíneos,,,,"Teoria dos conjuntos, tipos sanguíneos"
+Matematica,H3,Análise de custos e economia na utilização de laboratórios.,671.6,MT,650-750,Análise de custos,,,,utilização de laboratórios,,"Análise de custos, utilização de laboratórios"
+Matematica,H3,Análise combinatória para pintar uma logomarca com restrições de cores.,681.6,MT,650-750,"Análise combinatória, restrições de cores",,,pintar uma logomarca,,,"Análise combinatória, restrições de cores, pintar uma logomarca"
+Matematica,H3,Proporcionalidade e cálculo de tempo em um encontro de bondinhos.,704.6,MT,650-750,Proporcionalidade e cálculo de tempo,,,,encontro de bondinhos,,"Proporcionalidade e cálculo de tempo, encontro de bondinhos"
+Matematica,H3,Cálculo de aumento percentual sobre um valor com base em outro aumento.,735.7,MT,650-750,aumento percentual,,,,,,aumento percentual
+Matematica,H3,Relações de proporcionalidade entre massa e volume para ordenar densidades.,745.3,MT,650-750,Relações de proporcionalidade,,,,,,Relações de proporcionalidade
+Matematica,H3,Divisão de laranjas em proporções diferentes em duas etapas de um trajeto.,746.7,MT,650-750,,,,Divisão de laranjas,,,Divisão de laranjas
+Matematica,H3,Análise combinatória: formação de duplas com restrição.,761.2,MT,750+,"Análise combinatória, restrição",,,formação de duplas,,,"Análise combinatória, restrição, formação de duplas"
+Matematica,H3,Soma dos termos de uma PA e cálculo de custo (postes de iluminação).,766.8,MT,750+,"cálculo de custo, postes de iluminação",,,,postes de iluminação,,"cálculo de custo, postes de iluminação, postes de iluminação"
 Matematica,H3,Contagem de algarismos necessários para numerar quartos de um hotel.,768.0,MT,750+,,,,,,,
-Matematica,H3,Divisão e interpretação para determinar o ciclo de atividade solar.,774.4,MT,750+,,,,,,,
-Matematica,H3,Resolução de problema envolvendo duas progressões aritméticas.,781.5,MT,750+,,,,,,,
-Matematica,H3,Análise de um financiamento com parcelas decrescentes (PA).,782.5,MT,750+,,,,,,,
-Matematica,H3,Análise de distribuição de renda a partir de porcentagens.,803.0,MT,750+,,,,,,,
-Matematica,H3,Análise combinatória: contagem de cores em um sistema de símbolos.,825.5,MT,750+,,,,,,,
-Matematica,H3,Contagem de caminhos em uma malha com restrição.,829.9,MT,750+,,,,,,,
-Matematica,H3,Análise de um cronograma de torneio com restrições de descanso.,830.1,MT,750+,,,,,,,
-Matematica,H4,Proporcionalidade direta para calcular o valor gasto para obter tíquetes.,595.6,MT,550-650,,,,,,,
-Matematica,H4,Análise de custos de diferentes trajetos para encontrar o menor valor.,597.6,MT,550-650,,,,,,,
-Matematica,H4,Perímetro e divisão para calcular a quantidade mínima de rolos de tela.,599.0,MT,550-650,,,,,,,
-Matematica,H4,Comparação entre o número de alunos e o de respostas possíveis.,607.1,MT,550-650,,,,,,,
-Matematica,H4,Cálculo de índice de infestação (LIRAa) para diferentes bairros.,616.3,MT,550-650,,,,,,,
-Matematica,H4,Divisão e conversão de unidades para calcular o tempo mínimo de passagem.,616.6,MT,550-650,,,,,,,
-Matematica,H4,Conversão de moeda e cálculo de gasto diário para escolher destino de viagem.,616.7,MT,550-650,,,,,,,
-Matematica,H4,Cálculo de reduções percentuais sucessivas na taxa de colesterol.,634.9,MT,550-650,,,,,,,
-Matematica,H4,Resolução de problema de otimização para minimizar o número de lavagens.,637.9,MT,550-650,,,,,,,
-Matematica,H4,Cálculo de faixa aeróbica ideal com base na frequência cardíaca máxima.,649.9,MT,550-650,,,,,,,
-Matematica,H4,"Análise de preço normal, promocional e com desconto para encontrar a diferença.",658.6,MT,650-750,,,,,,,
-Matematica,H4,Análise de consumo de combustível e autonomia para determinar a distância máxima.,684.5,MT,650-750,,,,,,,
-Matematica,H4,Análise de um triângulo mágico com restrições de progressão aritmética.,688.7,MT,650-750,,,,,,,
-Matematica,H4,Comparação de potências de um número entre 0 e 1 para determinar o maior IDH.,695.8,MT,650-750,,,,,,,
-Matematica,H4,Máximo divisor comum para distribuir ingressos de forma igualitária.,717.5,MT,650-750,,,,,,,
-Matematica,H4,Análise de uma matriz de fluxo de famílias para determinar o maior destino.,738.3,MT,650-750,,,,,,,
+Matematica,H3,Divisão e interpretação para determinar o ciclo de atividade solar.,774.4,MT,750+,"ciclo de atividade solar, Divisão e interpretação",,ciclo de atividade solar,interpretação,,interpretação,"ciclo de atividade solar, Divisão e interpretação, ciclo de atividade solar, interpretação, interpretação"
+Matematica,H3,Resolução de problema envolvendo duas progressões aritméticas.,781.5,MT,750+,progressões aritméticas,,,Resolução de problema,,Resolução de problema,"progressões aritméticas, Resolução de problema, Resolução de problema"
+Matematica,H3,Análise de um financiamento com parcelas decrescentes (PA).,782.5,MT,750+,parcelas decrescentes,,,,,,parcelas decrescentes
+Matematica,H3,Análise de distribuição de renda a partir de porcentagens.,803.0,MT,750+,Análise de distribuição de renda,,,,,,Análise de distribuição de renda
+Matematica,H3,Análise combinatória: contagem de cores em um sistema de símbolos.,825.5,MT,750+,"Análise combinatória, sistema de símbolos",,,contagem de cores,,,"Análise combinatória, sistema de símbolos, contagem de cores"
+Matematica,H3,Contagem de caminhos em uma malha com restrição.,829.9,MT,750+,restrição,,,Contagem de caminhos,,,"restrição, Contagem de caminhos"
+Matematica,H3,Análise de um cronograma de torneio com restrições de descanso.,830.1,MT,750+,"cronograma de torneio, restrições de descanso",,,,,,"cronograma de torneio, restrições de descanso"
+Matematica,H4,Proporcionalidade direta para calcular o valor gasto para obter tíquetes.,595.6,MT,550-650,Proporcionalidade direta,,,,,,Proporcionalidade direta
+Matematica,H4,Análise de custos de diferentes trajetos para encontrar o menor valor.,597.6,MT,550-650,Análise de custos,,,"encontrar o menor valor, Análise de custos",,,"Análise de custos, encontrar o menor valor, Análise de custos"
+Matematica,H4,Perímetro e divisão para calcular a quantidade mínima de rolos de tela.,599.0,MT,550-650,rolos de tela,rolos de tela,rolos de tela,,,,"rolos de tela, rolos de tela, rolos de tela"
+Matematica,H4,Comparação entre o número de alunos e o de respostas possíveis.,607.1,MT,550-650,,,,Comparação,,,Comparação
+Matematica,H4,Cálculo de índice de infestação (LIRAa) para diferentes bairros.,616.3,MT,550-650,índice de infestação,,,,,,índice de infestação
+Matematica,H4,Divisão e conversão de unidades para calcular o tempo mínimo de passagem.,616.6,MT,550-650,"tempo mínimo de passagem, Divisão e conversão de unidades",,,Divisão e conversão de unidades,,,"tempo mínimo de passagem, Divisão e conversão de unidades, Divisão e conversão de unidades"
+Matematica,H4,Conversão de moeda e cálculo de gasto diário para escolher destino de viagem.,616.7,MT,550-650,"cálculo de gasto diário, Conversão de moeda",,,"Conversão de moeda, escolher destino de viagem, cálculo de gasto diário",escolher destino de viagem,,"cálculo de gasto diário, Conversão de moeda, Conversão de moeda, escolher destino de viagem, cálculo de gasto diário, escolher destino de viagem"
+Matematica,H4,Cálculo de reduções percentuais sucessivas na taxa de colesterol.,634.9,MT,550-650,"taxa de colesterol, reduções percentuais sucessivas",,,,,,"taxa de colesterol, reduções percentuais sucessivas"
+Matematica,H4,Resolução de problema de otimização para minimizar o número de lavagens.,637.9,MT,550-650,otimização,,,"otimização, minimizar o número de lavagens",,Resolução de problema,"otimização, otimização, minimizar o número de lavagens, Resolução de problema"
+Matematica,H4,Cálculo de faixa aeróbica ideal com base na frequência cardíaca máxima.,649.9,MT,550-650,"frequência cardíaca máxima, faixa aeróbica ideal",,,,,,"frequência cardíaca máxima, faixa aeróbica ideal"
+Matematica,H4,"Análise de preço normal, promocional e com desconto para encontrar a diferença.",658.6,MT,650-750,,,,encontrar a diferença,,,encontrar a diferença
+Matematica,H4,Análise de consumo de combustível e autonomia para determinar a distância máxima.,684.5,MT,650-750,"autonomia, distância máxima, consumo de combustível",,,determinar a distância máxima,,,"autonomia, distância máxima, consumo de combustível, determinar a distância máxima"
+Matematica,H4,Análise de um triângulo mágico com restrições de progressão aritmética.,688.7,MT,650-750,"progressão aritmética, triângulo mágico",,,,,,"progressão aritmética, triângulo mágico"
+Matematica,H4,Comparação de potências de um número entre 0 e 1 para determinar o maior IDH.,695.8,MT,650-750,,,,Comparação,,,Comparação
+Matematica,H4,Máximo divisor comum para distribuir ingressos de forma igualitária.,717.5,MT,650-750,Máximo divisor comum,,,distribuir ingressos,,,"Máximo divisor comum, distribuir ingressos"
+Matematica,H4,Análise de uma matriz de fluxo de famílias para determinar o maior destino.,738.3,MT,650-750,matriz de fluxo de famílias,,,,,,matriz de fluxo de famílias
 Matematica,H4,Análise da variação da porcentagem de luz que atravessa vidro e película.,743.6,MT,650-750,,,,,,,
-Matematica,H4,Análise de custos (preço do cimento + frete) para determinar a opção mais econômica.,750.6,MT,750+,,,,,,,
-Matematica,H4,Cálculo de razão entre dentes de coroa e catraca para determinar a menor velocidade.,790.7,MT,750+,,,,,,,
-Matematica,H5,Análise de acréscimos percentuais e cálculo de redução para manter despesa.,615.4,MT,550-650,,,,,,,
-Matematica,H5,Cálculo de tempo de espera em filas para determinar a opção mais rápida.,615.6,MT,550-650,,,,,,,
-Matematica,H5,Análise de preços e descontos em diferentes farmácias para minimizar despesa.,630.3,MT,550-650,,,,,,,
-Matematica,H5,Cálculo de custo/benefício para escolher produtos de diferentes tipos.,639.1,MT,550-650,,,,,,,
-Matematica,H5,Cálculo de valor de venda de picolés para atingir um lucro desejado.,647.1,MT,550-650,,,,,,,
-Matematica,H5,Cálculo do número de salas a construir para atingir uma meta de redução na lista de espera.,652.6,MT,650-750,,,,,,,
-Matematica,H5,"Cálculo de porcentagem de recompensa, considerando custos e valor do objeto.",661.6,MT,650-750,,,,,,,
+Matematica,H4,Análise de custos (preço do cimento + frete) para determinar a opção mais econômica.,750.6,MT,750+,"preço do cimento, Análise de custos",,,determinar a opção mais econômica,,,"preço do cimento, Análise de custos, determinar a opção mais econômica"
+Matematica,H4,Cálculo de razão entre dentes de coroa e catraca para determinar a menor velocidade.,790.7,MT,750+,"dentes de coroa, velocidade",dentes de coroa,dentes de coroa,,,,"dentes de coroa, velocidade, dentes de coroa, dentes de coroa"
+Matematica,H5,Análise de acréscimos percentuais e cálculo de redução para manter despesa.,615.4,MT,550-650,"acréscimos percentuais, cálculo de redução",,,,manter despesa,,"acréscimos percentuais, cálculo de redução, manter despesa"
+Matematica,H5,Cálculo de tempo de espera em filas para determinar a opção mais rápida.,615.6,MT,550-650,tempo de espera,,,determinar a opção mais rápida,,,"tempo de espera, determinar a opção mais rápida"
+Matematica,H5,Análise de preços e descontos em diferentes farmácias para minimizar despesa.,630.3,MT,550-650,,,,minimizar despesa,,,minimizar despesa
+Matematica,H5,Cálculo de custo/benefício para escolher produtos de diferentes tipos.,639.1,MT,550-650,Cálculo de custo/benefício,,,Cálculo de custo/benefício,,,"Cálculo de custo/benefício, Cálculo de custo/benefício"
+Matematica,H5,Cálculo de valor de venda de picolés para atingir um lucro desejado.,647.1,MT,550-650,valor de venda,,,,,,valor de venda
+Matematica,H5,Cálculo do número de salas a construir para atingir uma meta de redução na lista de espera.,652.6,MT,650-750,,,,,lista de espera,,lista de espera
+Matematica,H5,"Cálculo de porcentagem de recompensa, considerando custos e valor do objeto.",661.6,MT,650-750,porcentagem de recompensa,,,,,,porcentagem de recompensa
 Matematica,H5,Divisão para determinar o número máximo de viagens de um maquinista.,662.8,MT,650-750,,,,,,,
-Matematica,H5,Análise combinatória: cálculo de senhas possíveis para escolher um formato.,676.2,MT,650-750,,,,,,,
+Matematica,H5,Análise combinatória: cálculo de senhas possíveis para escolher um formato.,676.2,MT,650-750,Análise combinatória,,,escolher um formato,,,"Análise combinatória, escolher um formato"
 Matematica,H5,Cálculo de redução no preço de um produto para manter o custo de um suco.,715.6,MT,650-750,,,,,,,
-Matematica,H5,Análise da conta de energia para determinar o consumo máximo para uma redução de custo.,732.2,MT,650-750,,,,,,,
-Matematica,H5,"Análise de lucro, custos fixos e variáveis para determinar o número mínimo de ajudantes.",755.6,MT,750+,,,,,,,
-Matematica,H5,Máximo divisor comum para determinar o maior tamanho possível de peças de madeira.,759.3,MT,750+,,,,,,,
-Matematica,H5,Análise de produtividade e aumento de produção para determinar a área mínima a ser comprada.,790.4,MT,750+,,,,,,,
-Matematica,H5,Análise combinatória para determinar a quantidade mínima de cores de um carro.,833.6,MT,750+,,,,,,,
-Matematica,H6,Vista lateral de uma cadeira fechada (projeção ortogonal).,459.2,MT,450-550,,,,,,,
-Matematica,H6,Planta de um telhado com três quedas d'água (projeção ortogonal).,459.6,MT,450-550,,,,,,,
+Matematica,H5,Análise da conta de energia para determinar o consumo máximo para uma redução de custo.,732.2,MT,650-750,"consumo máximo, redução de custo, conta de energia",,,determinar o consumo máximo,,,"consumo máximo, redução de custo, conta de energia, determinar o consumo máximo"
+Matematica,H5,"Análise de lucro, custos fixos e variáveis para determinar o número mínimo de ajudantes.",755.6,MT,750+,"custos fixos e variáveis, Análise de lucro, número mínimo de ajudantes",,,determinar o número mínimo de ajudantes,,,"custos fixos e variáveis, Análise de lucro, número mínimo de ajudantes, determinar o número mínimo de ajudantes"
+Matematica,H5,Máximo divisor comum para determinar o maior tamanho possível de peças de madeira.,759.3,MT,750+,Máximo divisor comum,,peças de madeira,,,,"Máximo divisor comum, peças de madeira"
+Matematica,H5,Análise de produtividade e aumento de produção para determinar a área mínima a ser comprada.,790.4,MT,750+,"aumento de produção, Análise de produtividade, área mínima",,,,,,"aumento de produção, Análise de produtividade, área mínima"
+Matematica,H5,Análise combinatória para determinar a quantidade mínima de cores de um carro.,833.6,MT,750+,Análise combinatória,,,,,,Análise combinatória
+Matematica,H6,Vista lateral de uma cadeira fechada (projeção ortogonal).,459.2,MT,450-550,"cadeira fechada, projeção ortogonal, Vista lateral",,,,,,"cadeira fechada, projeção ortogonal, Vista lateral"
+Matematica,H6,Planta de um telhado com três quedas d'água (projeção ortogonal).,459.6,MT,450-550,"projeção ortogonal, quedas d'água, Planta de um telhado",,,projeção ortogonal,,,"projeção ortogonal, quedas d'água, Planta de um telhado, projeção ortogonal"
 Matematica,H6,Localização de poltrona em um cinema a partir de um mapa e instruções.,471.1,MT,450-550,,,,,,,
-Matematica,H6,Localização em um mapa a partir de instruções de deslocamento (pontos cardeais).,513.6,MT,450-550,,,,,,,
-Matematica,H6,Projeção ortogonal de um deslocamento sobre as arestas de uma pirâmide.,575.4,MT,550-650,,,,,,,
-Matematica,H6,Projeção ortogonal (sombra) de uma escultura de letras.,588.6,MT,550-650,,,,,,,
-Matematica,H6,"Descrição de um trajeto em uma malha quadriculada usando códigos (E, F, D).",594.7,MT,550-650,,,,,,,
-Matematica,H6,Movimentação angular em uma rosa dos ventos.,650.3,MT,650-750,,,,,,,
-Matematica,H6,Projeção ortogonal de um trajeto sobre o corrimão de uma escada caracol.,699.5,MT,650-750,,,,,,,
+Matematica,H6,Localização em um mapa a partir de instruções de deslocamento (pontos cardeais).,513.6,MT,450-550,"pontos cardeais, instruções de deslocamento",,,Localização,,,"pontos cardeais, instruções de deslocamento, Localização"
+Matematica,H6,Projeção ortogonal de um deslocamento sobre as arestas de uma pirâmide.,575.4,MT,550-650,Projeção ortogonal,,,Projeção ortogonal,,,"Projeção ortogonal, Projeção ortogonal"
+Matematica,H6,Projeção ortogonal (sombra) de uma escultura de letras.,588.6,MT,550-650,Projeção ortogonal,,,,,,Projeção ortogonal
+Matematica,H6,"Descrição de um trajeto em uma malha quadriculada usando códigos (E, F, D).",594.7,MT,550-650,malha quadriculada,,,,,,malha quadriculada
+Matematica,H6,Movimentação angular em uma rosa dos ventos.,650.3,MT,650-750,"Movimentação angular, rosa dos ventos",,,Movimentação angular,,,"Movimentação angular, rosa dos ventos, Movimentação angular"
+Matematica,H6,Projeção ortogonal de um trajeto sobre o corrimão de uma escada caracol.,699.5,MT,650-750,escada caracol,,,Projeção ortogonal,,,"escada caracol, Projeção ortogonal"
 Matematica,H6,Projeção ortogonal de trajetórias sobre a superfície de um globo.,703.6,MT,650-750,,,,,,,
-Matematica,H6,Projeção ortogonal da trajetória dos pontos de uma gangorra.,712.9,MT,650-750,,,,,,,
-Matematica,H6,Projeção ortogonal do trajeto de um motoqueiro em um globo da morte.,721.8,MT,650-750,,,,,,,
-Matematica,H6,Projeção ortogonal do trajeto de um robô sobre um cubo.,743.2,MT,650-750,,,,,,,
-Matematica,H6,Projeção ortogonal de um caminho sobre paralelos e meridianos de um globo.,750.9,MT,750+,,,,,,,
-Matematica,H6,Coordenadas cartesianas de um ponto em um percurso.,754.3,MT,750+,,,,,,,
+Matematica,H6,Projeção ortogonal da trajetória dos pontos de uma gangorra.,712.9,MT,650-750,,,,Projeção ortogonal,,,Projeção ortogonal
+Matematica,H6,Projeção ortogonal do trajeto de um motoqueiro em um globo da morte.,721.8,MT,650-750,"globo da morte, trajeto de um motoqueiro",,,Projeção ortogonal,,,"globo da morte, trajeto de um motoqueiro, Projeção ortogonal"
+Matematica,H6,Projeção ortogonal do trajeto de um robô sobre um cubo.,743.2,MT,650-750,trajeto de um robô,,,Projeção ortogonal,,,"trajeto de um robô, Projeção ortogonal"
+Matematica,H6,Projeção ortogonal de um caminho sobre paralelos e meridianos de um globo.,750.9,MT,750+,,,,Projeção ortogonal,,,Projeção ortogonal
+Matematica,H6,Coordenadas cartesianas de um ponto em um percurso.,754.3,MT,750+,Coordenadas cartesianas,,,,,,Coordenadas cartesianas
 Matematica,H6,Análise de um gráfico de distância x tempo para inferir a trajetória em vista superior.,757.7,MT,750+,,,,,,,
-Matematica,H6,Projeção ortogonal do trajeto de um visitante no Atomium.,978.3,MT,750+,,,,,,,
-Matematica,H7,"Identificação de sólidos a partir de planificações (cilindro, prisma, pirâmide).",474.8,MT,450-550,,,,,,,
-Matematica,H7,Identificação de sólidos em uma forma de bolo (tronco de cone e cilindro).,496.7,MT,450-550,,,,,,,
-Matematica,H7,Identificação da forma de um adesivo para revestir um tronco de cone.,557.5,MT,550-650,,,,,,,
-Matematica,H7,Identificação de projeções ortogonais de um sólido formado por cubos.,585.0,MT,550-650,,,,,,,
-Matematica,H7,Identificação da forma geométrica de uma estrutura de sustentação (prisma triangular reto).,634.7,MT,550-650,,,,,,,
-Matematica,H7,Identificação das figuras planas formadas por uma estrutura de brinquedo.,659.9,MT,650-750,,,,,,,
-Matematica,H7,Classificação de um triângulo (obtusângulo isósceles) formado por remos de um barco.,665.0,MT,650-750,,,,,,,
-Matematica,H7,Identificação das faces de um tronco de pirâmide de base quadrada.,689.0,MT,650-750,,,,,,,
-Matematica,H7,Representação da parte da lua escondida atrás de uma torre (setor circular).,691.6,MT,650-750,,,,,,,
+Matematica,H6,Projeção ortogonal do trajeto de um visitante no Atomium.,978.3,MT,750+,Projeção ortogonal,,,Projeção ortogonal,,,"Projeção ortogonal, Projeção ortogonal"
+Matematica,H7,"Identificação de sólidos a partir de planificações (cilindro, prisma, pirâmide).",474.8,MT,450-550,,,,Identificação,,,Identificação
+Matematica,H7,Identificação de sólidos em uma forma de bolo (tronco de cone e cilindro).,496.7,MT,450-550,"tronco de cone e cilindro, forma de bolo",,,Identificação,,,"tronco de cone e cilindro, forma de bolo, Identificação"
+Matematica,H7,Identificação da forma de um adesivo para revestir um tronco de cone.,557.5,MT,550-650,tronco de cone,,,Identificação da forma,,,"tronco de cone, Identificação da forma"
+Matematica,H7,Identificação de projeções ortogonais de um sólido formado por cubos.,585.0,MT,550-650,projeções ortogonais,,,,,,projeções ortogonais
+Matematica,H7,Identificação da forma geométrica de uma estrutura de sustentação (prisma triangular reto).,634.7,MT,550-650,"estrutura de sustentação, prisma triangular reto, forma geométrica",,,Identificação,,,"estrutura de sustentação, prisma triangular reto, forma geométrica, Identificação"
+Matematica,H7,Identificação das figuras planas formadas por uma estrutura de brinquedo.,659.9,MT,650-750,"estrutura de brinquedo, figuras planas",,,Identificação,,,"estrutura de brinquedo, figuras planas, Identificação"
+Matematica,H7,Classificação de um triângulo (obtusângulo isósceles) formado por remos de um barco.,665.0,MT,650-750,obtusângulo isósceles,,,Classificação,,,"obtusângulo isósceles, Classificação"
+Matematica,H7,Identificação das faces de um tronco de pirâmide de base quadrada.,689.0,MT,650-750,tronco de pirâmide de base quadrada,,,Identificação,,,"tronco de pirâmide de base quadrada, Identificação"
+Matematica,H7,Representação da parte da lua escondida atrás de uma torre (setor circular).,691.6,MT,650-750,setor circular,,,,,,setor circular
 Matematica,H7,Determinação do número de faces de um poliedro obtido por cortes em um cubo.,701.1,MT,650-750,,,,,,,
-Matematica,H7,Identificação da forma de uma bandeirinha após cortes em papel dobrado.,710.0,MT,650-750,,,,,,,
-Matematica,H7,Identificação de faces opostas em um octaedro a partir de sua planificação.,716.2,MT,650-750,,,,,,,
-Matematica,H7,Comparação do perímetro de losangos formados por circunferências tangentes.,722.7,MT,650-750,,,,,,,
+Matematica,H7,Identificação da forma de uma bandeirinha após cortes em papel dobrado.,710.0,MT,650-750,,,,Identificação da forma,,,Identificação da forma
+Matematica,H7,Identificação de faces opostas em um octaedro a partir de sua planificação.,716.2,MT,650-750,"planificação, faces opostas",,,"planificação, Identificação de faces opostas",,,"planificação, faces opostas, planificação, Identificação de faces opostas"
+Matematica,H7,Comparação do perímetro de losangos formados por circunferências tangentes.,722.7,MT,650-750,"perímetro de losangos, circunferências tangentes",,,Comparação,,,"perímetro de losangos, circunferências tangentes, Comparação"
 Matematica,H7,Identificação da figura obtida após desdobrar um papel recortado.,740.7,MT,650-750,,,,,,,
-Matematica,H7,Identificação das faces de um tetraedro truncado.,742.1,MT,650-750,,,,,,,
-Matematica,H7,Identificação da planificação correta de um cubo com faces pintadas.,745.1,MT,650-750,,,,,,,
-Matematica,H7,Construção de uma figura com simetria em relação a um ponto.,758.6,MT,750+,,,,,,,
-Matematica,H7,Polígonos obtidos pela intersecção de um plano com uma pirâmide.,908.7,MT,750+,,,,,,,
-Matematica,H8,Geometria plana e trigonometria para calcular a altura mínima de um viaduto.,521.0,MT,450-550,,,,,,,
-Matematica,H8,Geometria espacial para calcular a altura mínima de uma pilha de contêineres.,594.3,MT,550-650,,,,,,,
-Matematica,H8,Geometria analítica (distância entre pontos) para localizar um imóvel.,611.7,MT,550-650,,,,,,,
-Matematica,H8,Trigonometria no triângulo retângulo para calcular a redução da intensidade luminosa.,659.1,MT,650-750,,,,,,,
-Matematica,H8,Geometria plana e relações métricas para calcular o raio de um cano maior.,667.8,MT,650-750,,,,,,,
-Matematica,H8,Geometria plana para calcular a ampliação da área de cobertura de antenas.,680.8,MT,650-750,,,,,,,
-Matematica,H8,Geometria plana (Teorema de Pitágoras) para calcular o lado de um quadrado.,689.1,MT,650-750,,,,,,,
-Matematica,H8,Geometria espacial e planificação para calcular a área a ser revestida em uma escada.,698.4,MT,650-750,,,,,,,
-Matematica,H8,Geometria espacial e proporcionalidade para calcular o volume de petróleo derramado.,703.8,MT,650-750,,,,,,,
-Matematica,H8,Geometria espacial (volume de prisma trapezoidal) para calcular a quantidade de forragem.,705.5,MT,650-750,,,,,,,
-Matematica,H8,Geometria plana (área de polígonos) para calcular o custo de um vitral.,706.2,MT,650-750,,,,,,,
-Matematica,H8,Volume de cilindro e proporcionalidade para encontrar a relação entre raios.,718.0,MT,650-750,,,,,,,
-Matematica,H8,Relações métricas no triângulo equilátero para calcular o comprimento de uma barra.,723.1,MT,650-750,,,,,,,
-Matematica,H8,Volume de cilindros e princípio dos vasos comunicantes para calcular a altura da água.,730.0,MT,650-750,,,,,,,
-Matematica,H8,Geometria espacial: volume de um tronco de cone.,740.9,MT,650-750,,,,,,,
-Matematica,H8,Geometria espacial: volume de tronco de cone e cilindro.,744.8,MT,650-750,,,,,,,
-Matematica,H8,Geometria espacial: volume de cilindro e esfera para calcular a quantidade de peças.,757.8,MT,750+,,,,,,,
-Matematica,H8,Geometria plana (Teorema de Pitágoras) para calcular a medida de um segmento.,772.2,MT,750+,,,,,,,
-Matematica,H8,Geometria analítica e trigonometria em um problema de postes e cabos de aço.,787.0,MT,750+,,,,,,,
-Matematica,H8,Geometria plana para calcular a área de um passeio em uma praça circular.,789.3,MT,750+,,,,,,,
-Matematica,H8,Desigualdade triangular para determinar a quantidade de triângulos possíveis.,1644.0,MT,750+,,,,,,,
-Matematica,H9,Geometria espacial e visualização para identificar a peça que completa um cubo.,512.2,MT,450-550,,,,,,,
-Matematica,H9,Análise de rotação de uma tela para determinar o menor ângulo de giro.,602.9,MT,550-650,,,,,,,
-Matematica,H9,Trigonometria e geometria analítica para determinar o raio de uma tampa de panela.,627.7,MT,550-650,,,,,,,
-Matematica,H9,Geometria plana (área de polígonos) para representar porcentagens de alimentos.,656.7,MT,650-750,,,,,,,
-Matematica,H9,Geometria espacial e planificação para determinar a dimensão de uma caixa.,670.6,MT,650-750,,,,,,,
-Matematica,H9,Análise de áreas e afastamentos em projetos de construção.,673.6,MT,650-750,,,,,,,
-Matematica,H9,Proporcionalidade entre áreas de paredes e piso com alteração de dimensões.,682.2,MT,650-750,,,,,,,
-Matematica,H9,Comparação de volumes de cilindros com dimensões relacionadas.,689.0,MT,650-750,,,,,,,
-Matematica,H9,Identificação de formas geométricas necessárias para preencher espaços em um painel.,693.5,MT,650-750,,,,,,,
-Matematica,H9,"Geometria analítica (círculos) para determinar a possibilidade de um ""match"".",698.1,MT,650-750,,,,,,,
-Matematica,H9,Geometria plana (área de coroa circular) para avaliar a suficiência de material.,698.7,MT,650-750,,,,,,,
-Matematica,H9,Geometria plana (arco capaz) para determinar a posição de um jogador.,719.1,MT,650-750,,,,,,,
-Matematica,H9,Trigonometria em um prisma oblíquo para calcular a área da base.,719.5,MT,650-750,,,,,,,
-Matematica,H9,Trigonometria no triângulo retângulo para determinar o menor comprimento de cabos.,727.0,MT,650-750,,,,,,,
-Matematica,H9,Relações métricas no triângulo equilátero para escolher um tampo de mesa.,731.7,MT,650-750,,,,,,,
-Matematica,H9,Análise de proporções e geometria para determinar a capacidade de uma bandeja.,740.6,MT,650-750,,,,,,,
-Matematica,H9,Relação entre o lado de um quadrado e o raio da circunferência circunscrita.,740.8,MT,650-750,,,,,,,
-Matematica,H9,Análise de perímetros para escolher a serra copo adequada.,780.4,MT,750+,,,,,,,
-Matematica,H9,Geometria analítica (distância entre pontos) para determinar o menor percurso.,1127.5,MT,750+,,,,,,,
+Matematica,H7,Identificação das faces de um tetraedro truncado.,742.1,MT,650-750,tetraedro truncado,,,Identificação,,,"tetraedro truncado, Identificação"
+Matematica,H7,Identificação da planificação correta de um cubo com faces pintadas.,745.1,MT,650-750,"planificação correta, faces pintadas",,,Identificação,,,"planificação correta, faces pintadas, Identificação"
+Matematica,H7,Construção de uma figura com simetria em relação a um ponto.,758.6,MT,750+,simetria,,,Construção,,,"simetria, Construção"
+Matematica,H7,Polígonos obtidos pela intersecção de um plano com uma pirâmide.,908.7,MT,750+,,,,intersecção,,,intersecção
+Matematica,H8,Geometria plana e trigonometria para calcular a altura mínima de um viaduto.,521.0,MT,450-550,altura mínima,"trigonometria, Geometria",trigonometria,,,,"altura mínima, trigonometria, Geometria, trigonometria"
+Matematica,H8,Geometria espacial para calcular a altura mínima de uma pilha de contêineres.,594.3,MT,550-650,altura mínima,Geometria,"Geometria espacial, pilha de contêineres",,,,"altura mínima, Geometria, Geometria espacial, pilha de contêineres"
+Matematica,H8,Geometria analítica (distância entre pontos) para localizar um imóvel.,611.7,MT,550-650,"Geometria analítica, distância entre pontos",Geometria,Geometria,localizar um imóvel,,,"Geometria analítica, distância entre pontos, Geometria, Geometria, localizar um imóvel"
+Matematica,H8,Trigonometria no triângulo retângulo para calcular a redução da intensidade luminosa.,659.1,MT,650-750,"intensidade luminosa, triângulo retângulo, Trigonometria","Trigonometria, triângulo retângulo","Trigonometria, triângulo retângulo",,,,"intensidade luminosa, triângulo retângulo, Trigonometria, Trigonometria, triângulo retângulo, Trigonometria, triângulo retângulo"
+Matematica,H8,Geometria plana e relações métricas para calcular o raio de um cano maior.,667.8,MT,650-750,"relações métricas, Geometria plana",Geometria,,,,,"relações métricas, Geometria plana, Geometria"
+Matematica,H8,Geometria plana para calcular a ampliação da área de cobertura de antenas.,680.8,MT,650-750,Geometria plana,Geometria,Geometria,,,,"Geometria plana, Geometria, Geometria"
+Matematica,H8,Geometria plana (Teorema de Pitágoras) para calcular o lado de um quadrado.,689.1,MT,650-750,"Teorema de Pitágoras, Geometria plana",Geometria,Geometria,calcular o lado de um quadrado,,,"Teorema de Pitágoras, Geometria plana, Geometria, Geometria, calcular o lado de um quadrado"
+Matematica,H8,Geometria espacial e planificação para calcular a área a ser revestida em uma escada.,698.4,MT,650-750,"planificação, Geometria espacial","Geometria, planificação","Geometria espacial, planificação",calcular a área,,,"planificação, Geometria espacial, Geometria, planificação, Geometria espacial, planificação, calcular a área"
+Matematica,H8,Geometria espacial e proporcionalidade para calcular o volume de petróleo derramado.,703.8,MT,650-750,Geometria espacial e proporcionalidade,Geometria,Geometria espacial,,,,"Geometria espacial e proporcionalidade, Geometria, Geometria espacial"
+Matematica,H8,Geometria espacial (volume de prisma trapezoidal) para calcular a quantidade de forragem.,705.5,MT,650-750,"volume de prisma trapezoidal, Geometria espacial",Geometria,Geometria espacial,,,,"volume de prisma trapezoidal, Geometria espacial, Geometria, Geometria espacial"
+Matematica,H8,Geometria plana (área de polígonos) para calcular o custo de um vitral.,706.2,MT,650-750,"área de polígonos, Geometria plana",Geometria,Geometria,,,,"área de polígonos, Geometria plana, Geometria, Geometria"
+Matematica,H8,Volume de cilindro e proporcionalidade para encontrar a relação entre raios.,718.0,MT,650-750,Volume de cilindro e proporcionalidade,,,encontrar a relação entre raios,,,"Volume de cilindro e proporcionalidade, encontrar a relação entre raios"
+Matematica,H8,Relações métricas no triângulo equilátero para calcular o comprimento de uma barra.,723.1,MT,650-750,"Relações métricas, triângulo equilátero",triângulo equilátero,triângulo equilátero,,,,"Relações métricas, triângulo equilátero, triângulo equilátero, triângulo equilátero"
+Matematica,H8,Volume de cilindros e princípio dos vasos comunicantes para calcular a altura da água.,730.0,MT,650-750,"Volume de cilindros, princípio dos vasos comunicantes, altura da água",,,,,,"Volume de cilindros, princípio dos vasos comunicantes, altura da água"
+Matematica,H8,Geometria espacial: volume de um tronco de cone.,740.9,MT,650-750,"volume de um tronco de cone, Geometria espacial",Geometria,Geometria espacial,,,,"volume de um tronco de cone, Geometria espacial, Geometria, Geometria espacial"
+Matematica,H8,Geometria espacial: volume de tronco de cone e cilindro.,744.8,MT,650-750,"volume de tronco de cone e cilindro, Geometria espacial",Geometria,Geometria espacial,,,,"volume de tronco de cone e cilindro, Geometria espacial, Geometria, Geometria espacial"
+Matematica,H8,Geometria espacial: volume de cilindro e esfera para calcular a quantidade de peças.,757.8,MT,750+,"volume de cilindro, quantidade de peças, Geometria espacial",Geometria,Geometria espacial,,,,"volume de cilindro, quantidade de peças, Geometria espacial, Geometria, Geometria espacial"
+Matematica,H8,Geometria plana (Teorema de Pitágoras) para calcular a medida de um segmento.,772.2,MT,750+,"Teorema de Pitágoras, Geometria plana",Geometria,,,,,"Teorema de Pitágoras, Geometria plana, Geometria"
+Matematica,H8,Geometria analítica e trigonometria em um problema de postes e cabos de aço.,787.0,MT,750+,"Geometria analítica, trigonometria","Geometria, trigonometria","Geometria, trigonometria",,problema de postes e cabos de aço,,"Geometria analítica, trigonometria, Geometria, trigonometria, Geometria, trigonometria, problema de postes e cabos de aço"
+Matematica,H8,Geometria plana para calcular a área de um passeio em uma praça circular.,789.3,MT,750+,"Geometria plana, praça circular","Geometria, praça circular","Geometria, praça circular",calcular a área,,,"Geometria plana, praça circular, Geometria, praça circular, Geometria, praça circular, calcular a área"
+Matematica,H8,Desigualdade triangular para determinar a quantidade de triângulos possíveis.,1644.0,MT,750+,Desigualdade triangular,,,,,,Desigualdade triangular
+Matematica,H9,Geometria espacial e visualização para identificar a peça que completa um cubo.,512.2,MT,450-550,Geometria espacial,Geometria,Geometria espacial,,,visualização,"Geometria espacial, Geometria, Geometria espacial, visualização"
+Matematica,H9,Análise de rotação de uma tela para determinar o menor ângulo de giro.,602.9,MT,550-650,"ângulo de giro, rotação de uma tela",,,,,,"ângulo de giro, rotação de uma tela"
+Matematica,H9,Trigonometria e geometria analítica para determinar o raio de uma tampa de panela.,627.7,MT,550-650,"geometria analítica, Trigonometria","Trigonometria, geometria",tampa de panela,,,,"geometria analítica, Trigonometria, Trigonometria, geometria, tampa de panela"
+Matematica,H9,Geometria plana (área de polígonos) para representar porcentagens de alimentos.,656.7,MT,650-750,"área de polígonos, Geometria plana, porcentagens de alimentos",Geometria,"porcentagens de alimentos, Geometria",,,,"área de polígonos, Geometria plana, porcentagens de alimentos, Geometria, porcentagens de alimentos, Geometria"
+Matematica,H9,Geometria espacial e planificação para determinar a dimensão de uma caixa.,670.6,MT,650-750,"planificação, Geometria espacial",Geometria,Geometria espacial,determinar a dimensão de uma caixa,,,"planificação, Geometria espacial, Geometria, Geometria espacial, determinar a dimensão de uma caixa"
+Matematica,H9,Análise de áreas e afastamentos em projetos de construção.,673.6,MT,650-750,Análise de áreas,,,Análise de áreas,projetos de construção,,"Análise de áreas, Análise de áreas, projetos de construção"
+Matematica,H9,Proporcionalidade entre áreas de paredes e piso com alteração de dimensões.,682.2,MT,650-750,"Proporcionalidade, alteração de dimensões",,,,,,"Proporcionalidade, alteração de dimensões"
+Matematica,H9,Comparação de volumes de cilindros com dimensões relacionadas.,689.0,MT,650-750,"volumes de cilindros, dimensões relacionadas",,,Comparação,,,"volumes de cilindros, dimensões relacionadas, Comparação"
+Matematica,H9,Identificação de formas geométricas necessárias para preencher espaços em um painel.,693.5,MT,650-750,formas geométricas,,,Identificação,,,"formas geométricas, Identificação"
+Matematica,H9,"Geometria analítica (círculos) para determinar a possibilidade de um ""match"".",698.1,MT,650-750,Geometria analítica,Geometria,Geometria,determinar a possibilidade,,,"Geometria analítica, Geometria, Geometria, determinar a possibilidade"
+Matematica,H9,Geometria plana (área de coroa circular) para avaliar a suficiência de material.,698.7,MT,650-750,"área de coroa circular, Geometria plana",Geometria,Geometria,avaliar a suficiência de material,,,"área de coroa circular, Geometria plana, Geometria, Geometria, avaliar a suficiência de material"
+Matematica,H9,Geometria plana (arco capaz) para determinar a posição de um jogador.,719.1,MT,650-750,"arco capaz, Geometria plana",Geometria,,,,,"arco capaz, Geometria plana, Geometria"
+Matematica,H9,Trigonometria em um prisma oblíquo para calcular a área da base.,719.5,MT,650-750,"prisma oblíquo, Trigonometria",Trigonometria,Trigonometria,,,,"prisma oblíquo, Trigonometria, Trigonometria, Trigonometria"
+Matematica,H9,Trigonometria no triângulo retângulo para determinar o menor comprimento de cabos.,727.0,MT,650-750,"triângulo retângulo, Trigonometria, comprimento de cabos","Trigonometria, triângulo retângulo",Trigonometria,,,,"triângulo retângulo, Trigonometria, comprimento de cabos, Trigonometria, triângulo retângulo, Trigonometria"
+Matematica,H9,Relações métricas no triângulo equilátero para escolher um tampo de mesa.,731.7,MT,650-750,"Relações métricas, triângulo equilátero",triângulo equilátero,"tampo de mesa, triângulo equilátero",escolher um tampo de mesa,,,"Relações métricas, triângulo equilátero, triângulo equilátero, tampo de mesa, triângulo equilátero, escolher um tampo de mesa"
+Matematica,H9,Análise de proporções e geometria para determinar a capacidade de uma bandeja.,740.6,MT,650-750,"geometria, capacidade",geometria,,,,,"geometria, capacidade, geometria"
+Matematica,H9,Relação entre o lado de um quadrado e o raio da circunferência circunscrita.,740.8,MT,650-750,"raio da circunferência circunscrita, lado de um quadrado",,,,,,"raio da circunferência circunscrita, lado de um quadrado"
+Matematica,H9,Análise de perímetros para escolher a serra copo adequada.,780.4,MT,750+,"Análise de perímetros, serra copo",,,Análise de perímetros,,,"Análise de perímetros, serra copo, Análise de perímetros"
+Matematica,H9,Geometria analítica (distância entre pontos) para determinar o menor percurso.,1127.5,MT,750+,"Geometria analítica, distância entre pontos",Geometria,Geometria,determinar o menor percurso,,,"Geometria analítica, distância entre pontos, Geometria, Geometria, determinar o menor percurso"
 Matematica,H10,"Conversão de unidades de medida (pés, polegadas, centímetros, metros).",554.4,MT,550-650,,,,,,,
-Matematica,H10,"Relação entre distância, velocidade e tempo para comparar percursos.",636.1,MT,550-650,,,,,,,
-Matematica,H10,"Conversão de coordenadas geográficas (graus, minutos, segundos) para forma decimal.",665.9,MT,650-750,,,,,,,
-Matematica,H10,Conversão entre metro cúbico e litro para calcular a capacidade de um reservatório.,670.5,MT,650-750,,,,,,,
-Matematica,H10,Conversão entre hectare e metro quadrado.,673.1,MT,650-750,,,,,,,
-Matematica,H10,"Relação entre densidade, massa e volume para calcular quantidade de gasolina.",689.8,MT,650-750,,,,,,,
-Matematica,H10,Análise de unidades de medida para o parâmetro de economia de corrida (EC).,711.2,MT,650-750,,,,,,,
-Matematica,H10,Análise dimensional para determinar a unidade do módulo volumétrico.,721.3,MT,650-750,,,,,,,
+Matematica,H10,"Relação entre distância, velocidade e tempo para comparar percursos.",636.1,MT,550-650,velocidade,,,comparar percursos,,,"velocidade, comparar percursos"
+Matematica,H10,"Conversão de coordenadas geográficas (graus, minutos, segundos) para forma decimal.",665.9,MT,650-750,,,coordenadas geográficas,,,,coordenadas geográficas
+Matematica,H10,Conversão entre metro cúbico e litro para calcular a capacidade de um reservatório.,670.5,MT,650-750,"capacidade, metro cúbico",,,,,,"capacidade, metro cúbico"
+Matematica,H10,Conversão entre hectare e metro quadrado.,673.1,MT,650-750,metro quadrado,metro quadrado,,,,,"metro quadrado, metro quadrado"
+Matematica,H10,"Relação entre densidade, massa e volume para calcular quantidade de gasolina.",689.8,MT,650-750,densidade,,,,,,densidade
+Matematica,H10,Análise de unidades de medida para o parâmetro de economia de corrida (EC).,711.2,MT,650-750,"parâmetro de economia de corrida (EC), unidades de medida",,,,,,"parâmetro de economia de corrida (EC), unidades de medida"
+Matematica,H10,Análise dimensional para determinar a unidade do módulo volumétrico.,721.3,MT,650-750,"Análise dimensional, módulo volumétrico",,,,,,"Análise dimensional, módulo volumétrico"
 Matematica,H10,Conversão entre unidades de tempo (dias terrestres e anos de um planeta Z).,730.1,MT,650-750,,,,,,,
-Matematica,H10,Conversão de toneladas para quilogramas e uso de notação científica.,733.1,MT,650-750,,,,,,,
+Matematica,H10,Conversão de toneladas para quilogramas e uso de notação científica.,733.1,MT,650-750,notação científica,,,"uso de notação científica, Conversão de toneladas para quilogramas",,,"notação científica, uso de notação científica, Conversão de toneladas para quilogramas"
 Matematica,H10,"Conversão entre jarda, pé e polegada.",748.4,MT,650-750,,,,,,,
 Matematica,H10,Relação entre diferentes formas de medir o consumo de combustível.,777.7,MT,750+,,,,,,,
-Matematica,H10,Inferência a partir de um gráfico sobre horas de estudo e desempenho no Pisa.,1923.4,MT,750+,,,,,,,
-Matematica,H11,Utilização de escala para determinar medidas reais de uma pegada.,610.4,MT,550-650,,,,,,,
-Matematica,H11,Análise de representações em diferentes escalas para determinar a maior árvore real.,628.6,MT,550-650,,,,,,,
-Matematica,H11,Cálculo com escala para determinar a capacidade de um reservatório.,631.6,MT,550-650,,,,,,,
-Matematica,H11,Comparação de áreas em mapas com escalas diferentes.,632.5,MT,550-650,,,,,,,
-Matematica,H11,Determinação da escala utilizada na construção de uma réplica.,653.2,MT,650-750,,,,,,,
-Matematica,H11,Cálculo da escala de representação em uma tela de instrumento de voo.,655.7,MT,650-750,,,,,,,
+Matematica,H10,Inferência a partir de um gráfico sobre horas de estudo e desempenho no Pisa.,1923.4,MT,750+,horas de estudo,,,,,,horas de estudo
+Matematica,H11,Utilização de escala para determinar medidas reais de uma pegada.,610.4,MT,550-650,,,medidas reais,,,,medidas reais
+Matematica,H11,Análise de representações em diferentes escalas para determinar a maior árvore real.,628.6,MT,550-650,,,,Análise de representações,,,Análise de representações
+Matematica,H11,Cálculo com escala para determinar a capacidade de um reservatório.,631.6,MT,550-650,capacidade,,,determinar a capacidade de um reservatório,,,"capacidade, determinar a capacidade de um reservatório"
+Matematica,H11,Comparação de áreas em mapas com escalas diferentes.,632.5,MT,550-650,,,,Comparação de áreas,,,Comparação de áreas
+Matematica,H11,Determinação da escala utilizada na construção de uma réplica.,653.2,MT,650-750,,,,"construção, Determinação",,,"construção, Determinação"
+Matematica,H11,Cálculo da escala de representação em uma tela de instrumento de voo.,655.7,MT,650-750,escala de representação,,,,tela de instrumento de voo,,"escala de representação, tela de instrumento de voo"
 Matematica,H11,Utilização de escala para calcular a distância percorrida em um trajeto.,660.4,MT,650-750,,,,,,,
-Matematica,H11,Cálculo de dimensões de um desenho com redução percentual em uma escala.,663.2,MT,650-750,,,,,,,
-Matematica,H11,Utilização de escala para calcular o volume real de um armário.,676.5,MT,650-750,,,,,,,
+Matematica,H11,Cálculo de dimensões de um desenho com redução percentual em uma escala.,663.2,MT,650-750,redução percentual,,,Cálculo de dimensões,,,"redução percentual, Cálculo de dimensões"
+Matematica,H11,Utilização de escala para calcular o volume real de um armário.,676.5,MT,650-750,volume real,,,,,,volume real
 Matematica,H11,Utilização de escala para calcular o volume de um monumento.,680.8,MT,650-750,,,,,,,
-Matematica,H11,Utilização de escala para calcular a medida real de um segmento de reta.,698.2,MT,650-750,,,,,,,
-Matematica,H11,Cálculo da escala entre uma representação e um percurso real.,721.4,MT,650-750,,,,,,,
-Matematica,H11,Utilização de escala para calcular a área real de uma varanda.,733.3,MT,650-750,,,,,,,
-Matematica,H11,Cálculo com escala para determinar a altura de uma caixa de vidro.,749.9,MT,650-750,,,,,,,
+Matematica,H11,Utilização de escala para calcular a medida real de um segmento de reta.,698.2,MT,650-750,"medida real, segmento de reta",,,,,,"medida real, segmento de reta"
+Matematica,H11,Cálculo da escala entre uma representação e um percurso real.,721.4,MT,650-750,"representação, percurso real","representação, percurso real",representação,,,,"representação, percurso real, representação, percurso real, representação"
+Matematica,H11,Utilização de escala para calcular a área real de uma varanda.,733.3,MT,650-750,área real,,,,,,área real
+Matematica,H11,Cálculo com escala para determinar a altura de uma caixa de vidro.,749.9,MT,650-750,,,caixa de vidro,determinar a altura de uma caixa de vidro,,,"caixa de vidro, determinar a altura de uma caixa de vidro"
 Matematica,H11,Cálculo da escala de uma gravura reproduzida em uma folha.,752.7,MT,750+,,,,,,,
-Matematica,H11,Utilização de escala e considerações de espaçamento para determinar as dimensões de um refrigerador.,786.0,MT,750+,,,,,,,
-Matematica,H11,Determinação do intervalo de valores possíveis para uma escala.,802.4,MT,750+,,,,,,,
+Matematica,H11,Utilização de escala e considerações de espaçamento para determinar as dimensões de um refrigerador.,786.0,MT,750+,considerações de espaçamento,,,,,,considerações de espaçamento
+Matematica,H11,Determinação do intervalo de valores possíveis para uma escala.,802.4,MT,750+,intervalo de valores possíveis,,,Determinação,,,"intervalo de valores possíveis, Determinação"
 Matematica,H11,Utilização de escala para determinar o volume de uma caixa-d'água.,834.2,MT,750+,,,,,,,
-Matematica,H12,Cálculo de volume de um cosmético para preencher uma banheira.,547.9,MT,450-550,,,,,,,
-Matematica,H12,Cálculo de volume de água desperdiçada por gotejamento.,587.6,MT,550-650,,,,,,,
-Matematica,H12,Cálculo da capacidade mínima de um ar-condicionado em BTU/h.,630.6,MT,550-650,,,,,,,
-Matematica,H12,Geometria espacial para determinar a altura de corte de uma calota esférica.,633.8,MT,550-650,,,,,,,
-Matematica,H12,Cálculo da área de uma calçada ao redor de uma piscina quadrada.,648.7,MT,550-650,,,,,,,
-Matematica,H12,Leitura e interpretação de um hidrômetro para determinar o consumo total.,651.5,MT,650-750,,,,,,,
-Matematica,H12,Cálculo de tempo necessário para encher um balde com gotejamento.,657.7,MT,650-750,,,,,,,
+Matematica,H12,Cálculo de volume de um cosmético para preencher uma banheira.,547.9,MT,450-550,Cálculo de volume,,,Cálculo de volume,,,"Cálculo de volume, Cálculo de volume"
+Matematica,H12,Cálculo de volume de água desperdiçada por gotejamento.,587.6,MT,550-650,volume de água desperdiçada,,,,,,volume de água desperdiçada
+Matematica,H12,Cálculo da capacidade mínima de um ar-condicionado em BTU/h.,630.6,MT,550-650,capacidade mínima,,,,,,capacidade mínima
+Matematica,H12,Geometria espacial para determinar a altura de corte de uma calota esférica.,633.8,MT,550-650,"calota esférica, altura de corte, Geometria espacial","Geometria, calota esférica","Geometria espacial, calota esférica",,,,"calota esférica, altura de corte, Geometria espacial, Geometria, calota esférica, Geometria espacial, calota esférica"
+Matematica,H12,Cálculo da área de uma calçada ao redor de uma piscina quadrada.,648.7,MT,550-650,,,,Cálculo da área,,,Cálculo da área
+Matematica,H12,Leitura e interpretação de um hidrômetro para determinar o consumo total.,651.5,MT,650-750,consumo total,,consumo total,interpretação,,interpretação,"consumo total, consumo total, interpretação, interpretação"
+Matematica,H12,Cálculo de tempo necessário para encher um balde com gotejamento.,657.7,MT,650-750,Cálculo de tempo,,,encher um balde,,,"Cálculo de tempo, encher um balde"
 Matematica,H12,Cálculo da quantidade de inseticida liberada a cada acionamento.,664.5,MT,650-750,,,,,,,
-Matematica,H12,Cálculo do número de gotas por minuto de soro endovenoso.,690.2,MT,650-750,,,,,,,
-Matematica,H12,"Conversão entre unidades de volume (mL, cL, onça fluida).",693.0,MT,650-750,,,,,,,
-Matematica,H12,Cálculo da área de placas de sinalização.,694.5,MT,650-750,,,,,,,
-Matematica,H12,Cálculo do novo desempenho de um automóvel após economia de combustível.,710.0,MT,650-750,,,,,,,
-Matematica,H12,Cálculo do número de viagens para transportar grãos de um silo.,711.1,MT,650-750,,,,,,,
-Matematica,H12,Cálculo da vazão de um curso d'água a partir do nível de uma cisterna.,723.4,MT,650-750,,,,,,,
-Matematica,H12,Cálculo do número de porções de massa para produzir docinhos de maior diâmetro.,756.7,MT,750+,,,,,,,
-Matematica,H12,Cálculo do índice pluviométrico a partir da água acumulada em uma lata.,781.6,MT,750+,,,,,,,
-Matematica,H12,Geometria plana e espacial para determinar a área mínima de uma bandeja.,870.5,MT,750+,,,,,,,
-Matematica,H12,Trigonometria e geometria espacial para calcular a altura de um cilindro.,977.9,MT,750+,,,,,,,
-Matematica,H13,Análise de alturas para instalação de tomadas e interruptores para cadeirantes.,495.2,MT,450-550,,,,,,,
-Matematica,H13,Comparação da concentração de fibras em diferentes marcas de pão.,580.3,MT,550-650,,,,,,,
-Matematica,H13,Geometria espacial e otimização para determinar a menor quantidade de caminhões.,640.1,MT,550-650,,,,,,,
-Matematica,H13,Estimativa do número de pessoas em uma manifestação usando densidades.,660.3,MT,650-750,,,,,,,
-Matematica,H13,Cálculo de área para determinar a alteração na área de garrafões de basquete.,668.4,MT,650-750,,,,,,,
-Matematica,H13,Geometria espacial para determinar o que acontece com o nível da água em um tanque.,676.0,MT,650-750,,,,,,,
+Matematica,H12,Cálculo do número de gotas por minuto de soro endovenoso.,690.2,MT,650-750,"soro endovenoso, número de gotas por minuto",,,,,,"soro endovenoso, número de gotas por minuto"
+Matematica,H12,"Conversão entre unidades de volume (mL, cL, onça fluida).",693.0,MT,650-750,"unidades de volume, onça fluida",,,,,,"unidades de volume, onça fluida"
+Matematica,H12,Cálculo da área de placas de sinalização.,694.5,MT,650-750,"placas de sinalização, Cálculo da área",,,Cálculo da área,,,"placas de sinalização, Cálculo da área, Cálculo da área"
+Matematica,H12,Cálculo do novo desempenho de um automóvel após economia de combustível.,710.0,MT,650-750,economia de combustível,,,,economia de combustível,,"economia de combustível, economia de combustível"
+Matematica,H12,Cálculo do número de viagens para transportar grãos de um silo.,711.1,MT,650-750,,,,,transportar grãos de um silo,,transportar grãos de um silo
+Matematica,H12,Cálculo da vazão de um curso d'água a partir do nível de uma cisterna.,723.4,MT,650-750,curso d'água,,,,,,curso d'água
+Matematica,H12,Cálculo do número de porções de massa para produzir docinhos de maior diâmetro.,756.7,MT,750+,porções de massa,,,,,,porções de massa
+Matematica,H12,Cálculo do índice pluviométrico a partir da água acumulada em uma lata.,781.6,MT,750+,índice pluviométrico,,,,,,índice pluviométrico
+Matematica,H12,Geometria plana e espacial para determinar a área mínima de uma bandeja.,870.5,MT,750+,área mínima,Geometria,Geometria,determinar a área mínima,,,"área mínima, Geometria, Geometria, determinar a área mínima"
+Matematica,H12,Trigonometria e geometria espacial para calcular a altura de um cilindro.,977.9,MT,750+,"Trigonometria, geometria espacial","Trigonometria, geometria espacial","geometria espacial, Trigonometria",,,,"Trigonometria, geometria espacial, Trigonometria, geometria espacial, geometria espacial, Trigonometria"
+Matematica,H13,Análise de alturas para instalação de tomadas e interruptores para cadeirantes.,495.2,MT,450-550,Análise de alturas,,,,instalação de tomadas,,"Análise de alturas, instalação de tomadas"
+Matematica,H13,Comparação da concentração de fibras em diferentes marcas de pão.,580.3,MT,550-650,concentração,,,Comparação,,,"concentração, Comparação"
+Matematica,H13,Geometria espacial e otimização para determinar a menor quantidade de caminhões.,640.1,MT,550-650,"otimização, Geometria espacial",Geometria,Geometria espacial,,,,"otimização, Geometria espacial, Geometria, Geometria espacial"
+Matematica,H13,Estimativa do número de pessoas em uma manifestação usando densidades.,660.3,MT,650-750,,,,,manifestação,,manifestação
+Matematica,H13,Cálculo de área para determinar a alteração na área de garrafões de basquete.,668.4,MT,650-750,"Cálculo de área, área de garrafões de basquete",,área de garrafões de basquete,Cálculo de área,,,"Cálculo de área, área de garrafões de basquete, área de garrafões de basquete, Cálculo de área"
+Matematica,H13,Geometria espacial para determinar o que acontece com o nível da água em um tanque.,676.0,MT,650-750,"nível da água, Geometria espacial",Geometria,Geometria espacial,,,,"nível da água, Geometria espacial, Geometria, Geometria espacial"
 Matematica,H13,Otimização do armazenamento de potes em caixas organizadoras.,688.1,MT,650-750,,,,,,,
-Matematica,H13,Cálculo de área de diferentes polígonos para escolher um modelo de cartão.,688.6,MT,650-750,,,,,,,
-Matematica,H13,Análise da velocidade média para escolher a melhor rota em um teste de radares.,694.7,MT,650-750,,,,,,,
-Matematica,H13,Otimização da compra de caixas de porcelanato para minimizar o custo e a sobra.,723.3,MT,650-750,,,,,,,
+Matematica,H13,Cálculo de área de diferentes polígonos para escolher um modelo de cartão.,688.6,MT,650-750,"modelo de cartão, Cálculo de área",,,"Cálculo de área, modelo de cartão",,,"modelo de cartão, Cálculo de área, Cálculo de área, modelo de cartão"
+Matematica,H13,Análise da velocidade média para escolher a melhor rota em um teste de radares.,694.7,MT,650-750,velocidade média,,,escolher a melhor rota,teste de radares,,"velocidade média, escolher a melhor rota, teste de radares"
+Matematica,H13,Otimização da compra de caixas de porcelanato para minimizar o custo e a sobra.,723.3,MT,650-750,,,,Otimização,,,Otimização
 Matematica,H13,Relação entre o ângulo de um triângulo formado por pizzas e a área.,737.2,MT,650-750,,,,,,,
-Matematica,H13,Cálculo da redução percentual da área de uma peça de cerâmica após contração.,752.3,MT,750+,,,,,,,
-Matematica,H13,Otimização da área de revestimento para escolher um projeto de piscina.,758.9,MT,750+,,,,,,,
-Matematica,H13,Análise de dimensões para escolher a caixa com menor espaço livre.,824.7,MT,750+,,,,,,,
-Matematica,H14,Cálculo da quantidade de células solares para atingir uma meta de produção de energia.,651.2,MT,650-750,,,,,,,
-Matematica,H14,Cálculo do número mínimo de bolinhas para elevar o nível da água.,660.8,MT,650-750,,,,,,,
-Matematica,H14,Trigonometria e geometria espacial para determinar o raio de uma circunferência de fixação.,677.0,MT,650-750,,,,,,,
-Matematica,H14,Otimização da compra de aquecedores com base na área e consumo de gás.,691.1,MT,650-750,,,,,,,
-Matematica,H14,Geometria espacial (volume de cilindro) para calcular o aumento no raio de uma cisterna.,693.1,MT,650-750,,,,,,,
-Matematica,H14,Cálculo da altura interna mínima de um reservatório cilíndrico.,694.0,MT,650-750,,,,,,,
-Matematica,H14,Geometria espacial e volume para determinar o raio máximo de uma ilha de lazer.,694.9,MT,650-750,,,,,,,
-Matematica,H14,Análise de volume e aumento percentual na fabricação de sorvete.,701.4,MT,650-750,,,,,,,
-Matematica,H14,Conversão de unidades e cálculo de dosagem de medicamento infantil.,701.6,MT,650-750,,,,,,,
-Matematica,H14,Análise da inclinação de uma rampa e ajuste do nível da garagem.,732.2,MT,650-750,,,,,,,
+Matematica,H13,Cálculo da redução percentual da área de uma peça de cerâmica após contração.,752.3,MT,750+,contração,,,contração,,,"contração, contração"
+Matematica,H13,Otimização da área de revestimento para escolher um projeto de piscina.,758.9,MT,750+,,,,"escolher um projeto de piscina, Otimização da área de revestimento",,,"escolher um projeto de piscina, Otimização da área de revestimento"
+Matematica,H13,Análise de dimensões para escolher a caixa com menor espaço livre.,824.7,MT,750+,"Análise de dimensões, espaço livre",,,Análise de dimensões,,,"Análise de dimensões, espaço livre, Análise de dimensões"
+Matematica,H14,Cálculo da quantidade de células solares para atingir uma meta de produção de energia.,651.2,MT,650-750,"células solares, produção de energia",,,,,,"células solares, produção de energia"
+Matematica,H14,Cálculo do número mínimo de bolinhas para elevar o nível da água.,660.8,MT,650-750,"número mínimo de bolinhas, nível da água",,,elevar o nível da água,,,"número mínimo de bolinhas, nível da água, elevar o nível da água"
+Matematica,H14,Trigonometria e geometria espacial para determinar o raio de uma circunferência de fixação.,677.0,MT,650-750,"circunferência de fixação, geometria espacial, Trigonometria","Trigonometria, geometria","geometria espacial, Trigonometria, circunferência de fixação",,,,"circunferência de fixação, geometria espacial, Trigonometria, Trigonometria, geometria, geometria espacial, Trigonometria, circunferência de fixação"
+Matematica,H14,Otimização da compra de aquecedores com base na área e consumo de gás.,691.1,MT,650-750,consumo de gás,,,,,,consumo de gás
+Matematica,H14,Geometria espacial (volume de cilindro) para calcular o aumento no raio de uma cisterna.,693.1,MT,650-750,"volume de cilindro, Geometria espacial, aumento no raio",Geometria,"Geometria espacial, volume de cilindro",,,,"volume de cilindro, Geometria espacial, aumento no raio, Geometria, Geometria espacial, volume de cilindro"
+Matematica,H14,Cálculo da altura interna mínima de um reservatório cilíndrico.,694.0,MT,650-750,"altura interna mínima, reservatório cilíndrico",reservatório cilíndrico,reservatório cilíndrico,,,,"altura interna mínima, reservatório cilíndrico, reservatório cilíndrico, reservatório cilíndrico"
+Matematica,H14,Geometria espacial e volume para determinar o raio máximo de uma ilha de lazer.,694.9,MT,650-750,"raio máximo, Geometria espacial",Geometria,"Geometria espacial, ilha de lazer",,ilha de lazer,,"raio máximo, Geometria espacial, Geometria, Geometria espacial, ilha de lazer, ilha de lazer"
+Matematica,H14,Análise de volume e aumento percentual na fabricação de sorvete.,701.4,MT,650-750,"aumento percentual, Análise de volume",,,Análise de volume,fabricação de sorvete,,"aumento percentual, Análise de volume, Análise de volume, fabricação de sorvete"
+Matematica,H14,Conversão de unidades e cálculo de dosagem de medicamento infantil.,701.6,MT,650-750,"cálculo de dosagem, Conversão de unidades",,medicamento infantil,"Conversão de unidades, cálculo de dosagem",medicamento infantil,,"cálculo de dosagem, Conversão de unidades, medicamento infantil, Conversão de unidades, cálculo de dosagem, medicamento infantil"
+Matematica,H14,Análise da inclinação de uma rampa e ajuste do nível da garagem.,732.2,MT,650-750,inclinação,,,,,,inclinação
 Matematica,H14,Cálculo da economia média diária de água por morador.,742.2,MT,650-750,,,,,,,
-Matematica,H14,Cálculo da quantidade de produto para tratamento de água de uma piscina.,744.3,MT,650-750,,,,,,,
-Matematica,H14,Geometria espacial e porcentagem para calcular o novo raio de um cone de chocolate.,744.8,MT,650-750,,,,,,,
-Matematica,H14,Resolução de sistema de equações para determinar as medidas de um terreno.,746.7,MT,650-750,,,,,,,
-Matematica,H14,Geometria espacial para calcular a redução do volume de uma pílula.,778.9,MT,750+,,,,,,,
-Matematica,H14,Trigonometria para determinar a altura de vigas de um pergolado.,802.0,MT,750+,,,,,,,
-Matematica,H15,Interpretação de gráfico de um plano de telefonia celular.,460.0,MT,450-550,,,,,,,
-Matematica,H15,Interpretação de gráfico sobre salário mensal de um vendedor com comissão.,563.3,MT,550-650,,,,,,,
-Matematica,H15,Análise de gráfico sobre preço de produto e imposto devido.,627.9,MT,550-650,,,,,,,
-Matematica,H15,Análise gráfica da Lei da Gravitação Universal de Newton.,644.4,MT,550-650,,,,,,,
-Matematica,H15,Análise gráfica da altura de uma pessoa em uma roda-gigante.,652.4,MT,650-750,,,,,,,
+Matematica,H14,Cálculo da quantidade de produto para tratamento de água de uma piscina.,744.3,MT,650-750,quantidade de produto,,,,,,quantidade de produto
+Matematica,H14,Geometria espacial e porcentagem para calcular o novo raio de um cone de chocolate.,744.8,MT,650-750,Geometria espacial,"Geometria, cone de chocolate","Geometria espacial, cone de chocolate",,,,"Geometria espacial, Geometria, cone de chocolate, Geometria espacial, cone de chocolate"
+Matematica,H14,Resolução de sistema de equações para determinar as medidas de um terreno.,746.7,MT,650-750,sistema de equações,,medidas de um terreno,Resolução de sistema de equações,,,"sistema de equações, medidas de um terreno, Resolução de sistema de equações"
+Matematica,H14,Geometria espacial para calcular a redução do volume de uma pílula.,778.9,MT,750+,"redução do volume, Geometria espacial",Geometria,Geometria espacial,,,,"redução do volume, Geometria espacial, Geometria, Geometria espacial"
+Matematica,H14,Trigonometria para determinar a altura de vigas de um pergolado.,802.0,MT,750+,Trigonometria,Trigonometria,Trigonometria,,,,"Trigonometria, Trigonometria, Trigonometria"
+Matematica,H15,Interpretação de gráfico de um plano de telefonia celular.,460.0,MT,450-550,,,,Interpretação de gráfico,plano de telefonia celular,Interpretação de gráfico,"Interpretação de gráfico, plano de telefonia celular, Interpretação de gráfico"
+Matematica,H15,Interpretação de gráfico sobre salário mensal de um vendedor com comissão.,563.3,MT,550-650,,,salário mensal,Interpretação de gráfico,vendedor com comissão,Interpretação de gráfico,"salário mensal, Interpretação de gráfico, vendedor com comissão, Interpretação de gráfico"
+Matematica,H15,Análise de gráfico sobre preço de produto e imposto devido.,627.9,MT,550-650,"imposto devido, preço de produto, Análise de gráfico",,"preço de produto, imposto devido",Análise de gráfico,,,"imposto devido, preço de produto, Análise de gráfico, preço de produto, imposto devido, Análise de gráfico"
+Matematica,H15,Análise gráfica da Lei da Gravitação Universal de Newton.,644.4,MT,550-650,Lei da Gravitação Universal de Newton,,,Análise gráfica,,,"Lei da Gravitação Universal de Newton, Análise gráfica"
+Matematica,H15,Análise gráfica da altura de uma pessoa em uma roda-gigante.,652.4,MT,650-750,,,,Análise gráfica,,,Análise gráfica
 Matematica,H15,Relação entre área e quantidade de placas em uma caixa.,676.9,MT,650-750,,,,,,,
-Matematica,H15,Análise gráfica da relação entre energia consumida e corrente elétrica em um chuveiro.,685.1,MT,650-750,,,,,,,
-Matematica,H15,Análise gráfica da variação da altura de um líquido em uma garrafa.,703.4,MT,650-750,,,,,,,
-Matematica,H15,Análise gráfica da arrecadação em função do desconto no preço de ingresso.,710.5,MT,650-750,,,,,,,
-Matematica,H15,"Análise da relação entre luminosidade, raio e temperatura de estrelas.",725.2,MT,650-750,,,,,,,
-Matematica,H15,Análise gráfica da altura do nível da água em reservatórios comunicantes.,733.7,MT,650-750,,,,,,,
-Matematica,H15,Análise de custo de isolamento acústico em função da distância.,743.3,MT,650-750,,,,,,,
-Matematica,H15,Análise gráfica do volume de água acumulado em uma torneira inteligente.,784.3,MT,750+,,,,,,,
-Matematica,H15,Análise gráfica do valor a pagar pelo serviço de abastecimento de água.,805.2,MT,750+,,,,,,,
-Matematica,H15,Análise gráfica do movimento de uma viga içada por um guindaste.,886.5,MT,750+,,,,,,,
-Matematica,H16,Proporcionalidade direta para calcular a massa corporal de uma criança.,458.2,MT,450-550,,,,,,,
-Matematica,H16,Proporcionalidade para calcular a economia diária de água com bacias ecológicas.,587.5,MT,550-650,,,,,,,
-Matematica,H16,Proporcionalidade para calcular a dose diária de um medicamento para felinos.,606.7,MT,550-650,,,,,,,
-Matematica,H16,Divisão em partes proporcionais para determinar o volume de cimento.,615.1,MT,550-650,,,,,,,
-Matematica,H16,Divisão em partes inversamente proporcionais para determinar o valor pago a uma empresa.,624.4,MT,550-650,,,,,,,
-Matematica,H16,Proporcionalidade para determinar a quantidade de tijolos em um caminhão.,630.0,MT,550-650,,,,,,,
-Matematica,H16,"Relação entre densidade superficial, área e massa de papel.",684.7,MT,650-750,,,,,,,
-Matematica,H16,Proporcionalidade e sistema de equações para obter um tipo de prata.,686.9,MT,650-750,,,,,,,
-Matematica,H16,Proporcionalidade para determinar o número de policiais em um evento.,697.0,MT,650-750,,,,,,,
-Matematica,H16,Cálculo de consumo de carboidratos e quantidade de pães para um período.,698.5,MT,650-750,,,,,,,
-Matematica,H16,Proporcionalidade entre volume e tempo de enchimento de um depósito.,704.9,MT,650-750,,,,,,,
-Matematica,H16,Proporcionalidade inversa para calcular o tempo de troca de pneus.,734.9,MT,650-750,,,,,,,
-Matematica,H16,Proporcionalidade para determinar a nova largura de uma porta.,737.6,MT,650-750,,,,,,,
-Matematica,H16,Cálculo de consumo de combustível com base em variações percentuais.,738.5,MT,650-750,,,,,,,
-Matematica,H16,Análise de vazão de entrada e saída para determinar o tempo de escoamento.,744.6,MT,650-750,,,,,,,
-Matematica,H17,Proporcionalidade entre distância percorrida às cegas e tempo.,777.2,MT,750+,,,,,,,
+Matematica,H15,Análise gráfica da relação entre energia consumida e corrente elétrica em um chuveiro.,685.1,MT,650-750,"corrente elétrica, energia consumida",,,Análise gráfica,,,"corrente elétrica, energia consumida, Análise gráfica"
+Matematica,H15,Análise gráfica da variação da altura de um líquido em uma garrafa.,703.4,MT,650-750,Análise gráfica,,,Análise gráfica,,,"Análise gráfica, Análise gráfica"
+Matematica,H15,Análise gráfica da arrecadação em função do desconto no preço de ingresso.,710.5,MT,650-750,"Análise gráfica, arrecadação, preço de ingresso",,,Análise gráfica,,,"Análise gráfica, arrecadação, preço de ingresso, Análise gráfica"
+Matematica,H15,"Análise da relação entre luminosidade, raio e temperatura de estrelas.",725.2,MT,650-750,luminosidade,,,,,,luminosidade
+Matematica,H15,Análise gráfica da altura do nível da água em reservatórios comunicantes.,733.7,MT,650-750,"altura do nível da água, Análise gráfica",,,Análise gráfica,reservatórios comunicantes,,"altura do nível da água, Análise gráfica, Análise gráfica, reservatórios comunicantes"
+Matematica,H15,Análise de custo de isolamento acústico em função da distância.,743.3,MT,650-750,"isolamento acústico, Análise de custo",,,,,,"isolamento acústico, Análise de custo"
+Matematica,H15,Análise gráfica do volume de água acumulado em uma torneira inteligente.,784.3,MT,750+,"torneira inteligente, volume de água, Análise gráfica",,,Análise gráfica,,,"torneira inteligente, volume de água, Análise gráfica, Análise gráfica"
+Matematica,H15,Análise gráfica do valor a pagar pelo serviço de abastecimento de água.,805.2,MT,750+,Análise gráfica,,,Análise gráfica,serviço de abastecimento de água,,"Análise gráfica, Análise gráfica, serviço de abastecimento de água"
+Matematica,H15,Análise gráfica do movimento de uma viga içada por um guindaste.,886.5,MT,750+,Análise gráfica,,,Análise gráfica,,,"Análise gráfica, Análise gráfica"
+Matematica,H16,Proporcionalidade direta para calcular a massa corporal de uma criança.,458.2,MT,450-550,"Proporcionalidade direta, massa corporal",,,,,,"Proporcionalidade direta, massa corporal"
+Matematica,H16,Proporcionalidade para calcular a economia diária de água com bacias ecológicas.,587.5,MT,550-650,"Proporcionalidade, bacias ecológicas, economia diária de água",,bacias ecológicas,,,,"Proporcionalidade, bacias ecológicas, economia diária de água, bacias ecológicas"
+Matematica,H16,Proporcionalidade para calcular a dose diária de um medicamento para felinos.,606.7,MT,550-650,Proporcionalidade,,dose diária,,medicamento para felinos,,"Proporcionalidade, dose diária, medicamento para felinos"
+Matematica,H16,Divisão em partes proporcionais para determinar o volume de cimento.,615.1,MT,550-650,"volume de cimento, partes proporcionais",,,Divisão em partes proporcionais,,,"volume de cimento, partes proporcionais, Divisão em partes proporcionais"
+Matematica,H16,Divisão em partes inversamente proporcionais para determinar o valor pago a uma empresa.,624.4,MT,550-650,partes inversamente proporcionais,,,,,,partes inversamente proporcionais
+Matematica,H16,Proporcionalidade para determinar a quantidade de tijolos em um caminhão.,630.0,MT,550-650,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H16,"Relação entre densidade superficial, área e massa de papel.",684.7,MT,650-750,"densidade superficial, massa de papel",,,,,,"densidade superficial, massa de papel"
+Matematica,H16,Proporcionalidade e sistema de equações para obter um tipo de prata.,686.9,MT,650-750,Proporcionalidade e sistema de equações,,,,,,Proporcionalidade e sistema de equações
+Matematica,H16,Proporcionalidade para determinar o número de policiais em um evento.,697.0,MT,650-750,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H16,Cálculo de consumo de carboidratos e quantidade de pães para um período.,698.5,MT,650-750,quantidade de pães,,,,,,quantidade de pães
+Matematica,H16,Proporcionalidade entre volume e tempo de enchimento de um depósito.,704.9,MT,650-750,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H16,Proporcionalidade inversa para calcular o tempo de troca de pneus.,734.9,MT,650-750,Proporcionalidade inversa,,,,troca de pneus,,"Proporcionalidade inversa, troca de pneus"
+Matematica,H16,Proporcionalidade para determinar a nova largura de uma porta.,737.6,MT,650-750,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H16,Cálculo de consumo de combustível com base em variações percentuais.,738.5,MT,650-750,variações percentuais,,,,,,variações percentuais
+Matematica,H16,Análise de vazão de entrada e saída para determinar o tempo de escoamento.,744.6,MT,650-750,"vazão de entrada e saída, tempo de escoamento",,,determinar o tempo de escoamento,,,"vazão de entrada e saída, tempo de escoamento, determinar o tempo de escoamento"
+Matematica,H17,Proporcionalidade entre distância percorrida às cegas e tempo.,777.2,MT,750+,Proporcionalidade,,,,,,Proporcionalidade
 Matematica,H17,Divisão de um montante de forma proporcional ao investimento de cada sócio.,801.3,MT,750+,,,,,,,
-Matematica,H17,Análise de desempenho (razão entre total de pinos derrubados e jogadas).,464.0,MT,450-550,,,,,,,
-Matematica,H17,Cálculo de tempo de espera para escolher o caixa mais rápido.,513.9,MT,450-550,,,,,,,
+Matematica,H17,Análise de desempenho (razão entre total de pinos derrubados e jogadas).,464.0,MT,450-550,"Análise de desempenho, razão entre total de pinos derrubados e jogadas",,,,,,"Análise de desempenho, razão entre total de pinos derrubados e jogadas"
+Matematica,H17,Cálculo de tempo de espera para escolher o caixa mais rápido.,513.9,MT,450-550,tempo de espera,,,"Cálculo de tempo de espera, escolher o caixa mais rápido",,,"tempo de espera, Cálculo de tempo de espera, escolher o caixa mais rápido"
 Matematica,H17,Cálculo de volume de água necessário e escolha do tipo de garrafa.,580.6,MT,550-650,,,,,,,
-Matematica,H17,Comparação de tempo de deslocamento para escolher o meio de transporte mais rápido.,584.3,MT,550-650,,,,,,,
-Matematica,H17,Análise da razão entre massa de contaminantes e dias para avaliar filtros.,600.6,MT,550-650,,,,,,,
-Matematica,H17,Otimização da compra de suplementos para suprir necessidades e minimizar custos.,604.2,MT,550-650,,,,,,,
-Matematica,H17,Cálculo de economia adicional com o uso de um cartão fidelidade.,661.5,MT,650-750,,,,,,,
-Matematica,H17,Cálculo de tempo de atividade física com base na ingestão de água.,702.1,MT,650-750,,,,,,,
-Matematica,H17,Análise de erro em pesquisas eleitorais para escolher a mais adequada.,703.9,MT,650-750,,,,,,,
-Matematica,H17,Cálculo da redução de volume de uma travessa de argila após contração.,752.1,MT,750+,,,,,,,
+Matematica,H17,Comparação de tempo de deslocamento para escolher o meio de transporte mais rápido.,584.3,MT,550-650,,,,Comparação,,,Comparação
+Matematica,H17,Análise da razão entre massa de contaminantes e dias para avaliar filtros.,600.6,MT,550-650,massa de contaminantes,,,avaliar filtros,avaliar filtros,,"massa de contaminantes, avaliar filtros, avaliar filtros"
+Matematica,H17,Otimização da compra de suplementos para suprir necessidades e minimizar custos.,604.2,MT,550-650,,,,"minimizar custos, Otimização da compra de suplementos, suprir necessidades",,,"minimizar custos, Otimização da compra de suplementos, suprir necessidades"
+Matematica,H17,Cálculo de economia adicional com o uso de um cartão fidelidade.,661.5,MT,650-750,cartão fidelidade,,,,,,cartão fidelidade
+Matematica,H17,Cálculo de tempo de atividade física com base na ingestão de água.,702.1,MT,650-750,"ingestão de água, tempo de atividade física",,,,,,"ingestão de água, tempo de atividade física"
+Matematica,H17,Análise de erro em pesquisas eleitorais para escolher a mais adequada.,703.9,MT,650-750,Análise de erro,,,"escolher a mais adequada, Análise de erro",pesquisas eleitorais,,"Análise de erro, escolher a mais adequada, Análise de erro, pesquisas eleitorais"
+Matematica,H17,Cálculo da redução de volume de uma travessa de argila após contração.,752.1,MT,750+,"redução de volume, travessa de argila, contração",,,"contração, redução de volume",,,"redução de volume, travessa de argila, contração, contração, redução de volume"
 Matematica,H17,Cálculo do número máximo de aplicações de insulina de um refil.,760.0,MT,750+,,,,,,,
-Matematica,H17,Análise de códigos de pneus para escolher o de menor altura.,768.5,MT,750+,,,,,,,
-Matematica,H17,Análise de forças de ataque e defesa em um jogo online.,778.8,MT,750+,,,,,,,
-Matematica,H17,Análise da Lei de Moore para estimar o ano em que a densidade de transistores será atingida.,858.2,MT,750+,,,,,,,
+Matematica,H17,Análise de códigos de pneus para escolher o de menor altura.,768.5,MT,750+,códigos de pneus,,,,,,códigos de pneus
+Matematica,H17,Análise de forças de ataque e defesa em um jogo online.,778.8,MT,750+,forças de ataque e defesa,,,,jogo online,,"forças de ataque e defesa, jogo online"
+Matematica,H17,Análise da Lei de Moore para estimar o ano em que a densidade de transistores será atingida.,858.2,MT,750+,"Lei de Moore, densidade de transistores",,,,,,"Lei de Moore, densidade de transistores"
 Matematica,H17,Análise do aumento na quantidade de compradores após um novo investimento em marketing.,948.7,MT,750+,,,,,,,
-Matematica,H18,Cálculo da quantidade de recipientes para distribuir álcool em gel.,577.8,MT,550-650,,,,,,,
-Matematica,H18,Cálculo do novo percentual de esgoto tratado após uma meta de redução.,652.4,MT,650-750,,,,,,,
-Matematica,H18,Proporcionalidade para determinar a quantidade de ralos de um novo reservatório.,672.1,MT,650-750,,,,,,,
-Matematica,H18,Cálculo da redução percentual na quantidade de frango para manter o custo de uma refeição.,691.3,MT,650-750,,,,,,,
-Matematica,H18,Cálculo do desconto necessário para comprar folhas de papel ofício.,693.9,MT,650-750,,,,,,,
-Matematica,H18,Cálculo da economia diária de água com a adoção de consumo moderado.,712.8,MT,650-750,,,,,,,
+Matematica,H18,Cálculo da quantidade de recipientes para distribuir álcool em gel.,577.8,MT,550-650,álcool em gel,,,,,,álcool em gel
+Matematica,H18,Cálculo do novo percentual de esgoto tratado após uma meta de redução.,652.4,MT,650-750,meta de redução,,,,após uma meta de redução,,"meta de redução, após uma meta de redução"
+Matematica,H18,Proporcionalidade para determinar a quantidade de ralos de um novo reservatório.,672.1,MT,650-750,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H18,Cálculo da redução percentual na quantidade de frango para manter o custo de uma refeição.,691.3,MT,650-750,redução percentual,,,,refeição,,"redução percentual, refeição"
+Matematica,H18,Cálculo do desconto necessário para comprar folhas de papel ofício.,693.9,MT,650-750,,,,,comprar folhas de papel ofício,,comprar folhas de papel ofício
+Matematica,H18,Cálculo da economia diária de água com a adoção de consumo moderado.,712.8,MT,650-750,adoção de consumo moderado,,,,,,adoção de consumo moderado
 Matematica,H18,Cálculo da redução na altura de uma lata para manter o mesmo volume.,724.8,MT,650-750,,,,,,,
-Matematica,H18,Cálculo das dimensões de uma bandeira com base em módulos e proporções.,733.1,MT,650-750,,,,,,,
-Matematica,H18,Cálculo da quantidade mínima de combustível para uma viagem de moto.,740.8,MT,650-750,,,,,,,
-Matematica,H18,Proporcionalidade para determinar a quantidade de moedas de ouro em um pacote de jogo.,758.4,MT,750+,,,,,,,
-Matematica,H18,Cálculo da área de painéis para dobrar a economia de energia.,801.6,MT,750+,,,,,,,
-Matematica,H18,Análise da variação de uma função para determinar o ponto de máximo.,873.8,MT,750+,,,,,,,
-Matematica,H18,"Análise da relação entre população urbana, rural e total para determinar a taxa de urbanização.",885.4,MT,750+,,,,,,,
-Matematica,H18,Análise da área de um terreno para determinar o número máximo de árvores plantadas.,1136.8,MT,750+,,,,,,,
-Matematica,H18,Cálculo de volume de concreto para uma laje.,1512.4,MT,750+,,,,,,,
-Matematica,H18,Cálculo do volume de um tronco de cone.,1741.7,MT,750+,,,,,,,
-Matematica,H19,Expressão algébrica para o preço do concreto bombeado.,586.0,MT,550-650,,,,,,,
-Matematica,H19,Expressão algébrica para a resistência de uma viga de madeira.,626.7,MT,550-650,,,,,,,
-Matematica,H19,Expressão algébrica para a área perdida de um forro após lavagem.,640.6,MT,550-650,,,,,,,
-Matematica,H19,Expressão algébrica para a concentração de álcool no sangue.,645.1,MT,550-650,,,,,,,
-Matematica,H19,Expressão para a concentração alcoólica prejudicial à saúde.,647.0,MT,550-650,,,,,,,
+Matematica,H18,Cálculo das dimensões de uma bandeira com base em módulos e proporções.,733.1,MT,650-750,módulos e proporções,,,,,,módulos e proporções
+Matematica,H18,Cálculo da quantidade mínima de combustível para uma viagem de moto.,740.8,MT,650-750,quantidade mínima de combustível,,,,viagem de moto,,"quantidade mínima de combustível, viagem de moto"
+Matematica,H18,Proporcionalidade para determinar a quantidade de moedas de ouro em um pacote de jogo.,758.4,MT,750+,Proporcionalidade,,,,pacote de jogo,,"Proporcionalidade, pacote de jogo"
+Matematica,H18,Cálculo da área de painéis para dobrar a economia de energia.,801.6,MT,750+,"área de painéis, economia de energia",economia de energia,economia de energia,Cálculo da área,,,"área de painéis, economia de energia, economia de energia, economia de energia, Cálculo da área"
+Matematica,H18,Análise da variação de uma função para determinar o ponto de máximo.,873.8,MT,750+,"ponto de máximo, variação",,,,,,"ponto de máximo, variação"
+Matematica,H18,"Análise da relação entre população urbana, rural e total para determinar a taxa de urbanização.",885.4,MT,750+,taxa de urbanização,,taxa de urbanização,,,,"taxa de urbanização, taxa de urbanização"
+Matematica,H18,Análise da área de um terreno para determinar o número máximo de árvores plantadas.,1136.8,MT,750+,Análise da área,,,"Análise da área, determinar o número máximo de árvores plantadas",,,"Análise da área, Análise da área, determinar o número máximo de árvores plantadas"
+Matematica,H18,Cálculo de volume de concreto para uma laje.,1512.4,MT,750+,volume de concreto,,,,,,volume de concreto
+Matematica,H18,Cálculo do volume de um tronco de cone.,1741.7,MT,750+,tronco de cone,,,,,,tronco de cone
+Matematica,H19,Expressão algébrica para o preço do concreto bombeado.,586.0,MT,550-650,"Expressão algébrica, preço do concreto bombeado",,,,,,"Expressão algébrica, preço do concreto bombeado"
+Matematica,H19,Expressão algébrica para a resistência de uma viga de madeira.,626.7,MT,550-650,"Expressão algébrica, viga de madeira",,,,,,"Expressão algébrica, viga de madeira"
+Matematica,H19,Expressão algébrica para a área perdida de um forro após lavagem.,640.6,MT,550-650,Expressão algébrica,,,,,,Expressão algébrica
+Matematica,H19,Expressão algébrica para a concentração de álcool no sangue.,645.1,MT,550-650,Expressão algébrica,,,,,,Expressão algébrica
+Matematica,H19,Expressão para a concentração alcoólica prejudicial à saúde.,647.0,MT,550-650,concentração alcoólica,,,,,,concentração alcoólica
 Matematica,H19,Expressão para o gasto semanal de uma empresa com salários.,651.8,MT,650-750,,,,,,,
-Matematica,H19,Expressão para o preço de hospedagem em um aplicativo.,659.3,MT,650-750,,,,,,,
-Matematica,H19,Relação alométrica entre área da superfície e massa de um mamífero.,660.0,MT,650-750,,,,,,,
-Matematica,H19,Expressão para a quantidade de produtos fabricados em função do tempo.,682.4,MT,650-750,,,,,,,
+Matematica,H19,Expressão para o preço de hospedagem em um aplicativo.,659.3,MT,650-750,preço de hospedagem,,,,,,preço de hospedagem
+Matematica,H19,Relação alométrica entre área da superfície e massa de um mamífero.,660.0,MT,650-750,"Relação alométrica, área da superfície",,,,,,"Relação alométrica, área da superfície"
+Matematica,H19,Expressão para a quantidade de produtos fabricados em função do tempo.,682.4,MT,650-750,"quantidade de produtos fabricados, função do tempo",,,,,,"quantidade de produtos fabricados, função do tempo"
 Matematica,H19,Expressão para o lado de uma folha de papel para confeccionar um diploma.,700.3,MT,650-750,,,,,,,
-Matematica,H19,Expressão para o número de pessoas alcançadas por uma campanha publicitária.,705.3,MT,650-750,,,,,,,
-Matematica,H19,Relação entre as alturas de colunas de líquido em um processo de aeração.,706.6,MT,650-750,,,,,,,
-Matematica,H19,Expressão da função altura de uma cadeira em uma roda-gigante.,708.9,MT,650-750,,,,,,,
+Matematica,H19,Expressão para o número de pessoas alcançadas por uma campanha publicitária.,705.3,MT,650-750,,,,,campanha publicitária,,campanha publicitária
+Matematica,H19,Relação entre as alturas de colunas de líquido em um processo de aeração.,706.6,MT,650-750,alturas de colunas de líquido,,,processo de aeração,,,"alturas de colunas de líquido, processo de aeração"
+Matematica,H19,Expressão da função altura de uma cadeira em uma roda-gigante.,708.9,MT,650-750,função altura de uma cadeira,,,,,,função altura de uma cadeira
 Matematica,H19,Relação entre os tempos das luzes de um semáforo.,732.5,MT,650-750,,,,,,,
 Matematica,H19,Expressão para o volume de uma bola de futebol americano em função de uma de suas medidas.,744.2,MT,650-750,,,,,,,
-Matematica,H19,Relação logarítmica (Lei de Zipf) entre frequência e ranking de uma palavra.,782.3,MT,750+,,,,,,,
-Matematica,H19,Função cosseno para modelar a pressão arterial.,785.1,MT,750+,,,,,,,
-Matematica,H19,Relação logarítmica (Escala Richter) entre magnitude e energia de terremotos.,806.6,MT,750+,,,,,,,
+Matematica,H19,Relação logarítmica (Lei de Zipf) entre frequência e ranking de uma palavra.,782.3,MT,750+,"Lei de Zipf, Relação logarítmica",,,,,,"Lei de Zipf, Relação logarítmica"
+Matematica,H19,Função cosseno para modelar a pressão arterial.,785.1,MT,750+,"Função cosseno, pressão arterial",,,,,,"Função cosseno, pressão arterial"
+Matematica,H19,Relação logarítmica (Escala Richter) entre magnitude e energia de terremotos.,806.6,MT,750+,"Escala Richter, Relação logarítmica",,,,,,"Escala Richter, Relação logarítmica"
 Matematica,H19,Função que descreve a trajetória do assento de um balanço.,830.4,MT,750+,,,,,,,
 Matematica,H19,Expressão para o valor total pago na quitação de um empréstimo.,914.3,MT,750+,,,,,,,
-Matematica,H20,Leitura de gráfico para identificar os meses de maior e menor venda.,374.1,MT,200-450,,,,,,,
-Matematica,H20,Leitura de gráfico para determinar o tempo sem sinal de internet.,537.8,MT,450-550,,,,,,,
-Matematica,H20,Leitura de gráfico para determinar o tempo com ruído acima de 55 decibéis.,544.1,MT,450-550,,,,,,,
-Matematica,H20,Leitura de gráfico para determinar o dia com a quantidade máxima de bactérias.,548.7,MT,450-550,,,,,,,
-Matematica,H20,Análise de gráfico para determinar o intervalo de distância onde uma locadora é mais barata.,556.6,MT,550-650,,,,,,,
-Matematica,H20,Análise de gráfico para determinar a atividade com maior consumo de calorias por minuto.,580.7,MT,550-650,,,,,,,
-Matematica,H20,Leitura de gráfico para determinar em quantos instantes uma criptomoeda estava mais valorizada.,586.2,MT,550-650,,,,,,,
-Matematica,H20,Análise do gráfico de lucro a partir dos gráficos de receita e custo.,615.2,MT,550-650,,,,,,,
-Matematica,H20,Análise de um gráfico de consumo de energia para determinar uma sequência de deslocamentos.,615.3,MT,550-650,,,,,,,
-Matematica,H20,Leitura de gráfico para determinar por quantos minutos um veículo permaneceu imóvel.,644.1,MT,550-650,,,,,,,
-Matematica,H20,Análise de gráfico de planos telefônicos para encontrar o mais vantajoso.,647.3,MT,550-650,,,,,,,
-Matematica,H20,Análise gráfica da força gravitacional em função da massa e do raio da órbita.,650.6,MT,650-750,,,,,,,
-Matematica,H20,Análise de gráficos de vazão para determinar o intervalo de enchimento constante.,670.4,MT,650-750,,,,,,,
-Matematica,H20,Leitura de gráfico para determinar o número de ultrapassagens de um veículo.,677.7,MT,650-750,,,,,,,
-Matematica,H20,Identificação da representação gráfica de cinco conjuntos algébricos.,687.6,MT,650-750,,,,,,,
-Matematica,H20,Análise de gráfico de esvaziamento de uma cisterna para calcular a vazão de uma bomba.,689.6,MT,650-750,,,,,,,
-Matematica,H20,Análise do gráfico da altura da água em uma escultura em forma de ampulheta.,729.4,MT,650-750,,,,,,,
-Matematica,H20,Expressão algébrica para descrever um movimento periódico a partir de um gráfico.,733.2,MT,650-750,,,,,,,
-Matematica,H20,Descrição algébrica de um conjunto de pontos na forma de um triângulo.,794.2,MT,750+,,,,,,,
-Matematica,H21,Resolução de sistema de equações para encontrar o preço de equilíbrio de mercado.,582.6,MT,550-650,,,,,,,
-Matematica,H21,Análise de uma função seno para determinar o parâmetro que garante uma boa potência de um motor.,663.3,MT,650-750,,,,,,,
-Matematica,H21,Resolução de um problema envolvendo reajuste de preço e alteração de quantidade.,681.5,MT,650-750,,,,,,,
-Matematica,H21,Resolução de sistema de equações para determinar o preço de uma cartela de tíquetes.,683.0,MT,650-750,,,,,,,
-Matematica,H21,Uso de produto de matrizes para calcular médias anuais de disciplinas.,695.3,MT,650-750,,,,,,,
+Matematica,H20,Leitura de gráfico para identificar os meses de maior e menor venda.,374.1,MT,200-450,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
+Matematica,H20,Leitura de gráfico para determinar o tempo sem sinal de internet.,537.8,MT,450-550,sinal de internet,,,"determinar o tempo, Leitura de gráfico",,Leitura de gráfico,"sinal de internet, determinar o tempo, Leitura de gráfico, Leitura de gráfico"
+Matematica,H20,Leitura de gráfico para determinar o tempo com ruído acima de 55 decibéis.,544.1,MT,450-550,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
+Matematica,H20,Leitura de gráfico para determinar o dia com a quantidade máxima de bactérias.,548.7,MT,450-550,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
+Matematica,H20,Análise de gráfico para determinar o intervalo de distância onde uma locadora é mais barata.,556.6,MT,550-650,"Análise de gráfico, intervalo de distância",,intervalo de distância,"Análise de gráfico, determinar o intervalo de distância",,,"Análise de gráfico, intervalo de distância, intervalo de distância, Análise de gráfico, determinar o intervalo de distância"
+Matematica,H20,Análise de gráfico para determinar a atividade com maior consumo de calorias por minuto.,580.7,MT,550-650,"Análise de gráfico, consumo de calorias por minuto",,,"Análise de gráfico, determinar a atividade",,,"Análise de gráfico, consumo de calorias por minuto, Análise de gráfico, determinar a atividade"
+Matematica,H20,Leitura de gráfico para determinar em quantos instantes uma criptomoeda estava mais valorizada.,586.2,MT,550-650,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
+Matematica,H20,Análise do gráfico de lucro a partir dos gráficos de receita e custo.,615.2,MT,550-650,"gráficos de receita e custo, gráfico de lucro",,,,,,"gráficos de receita e custo, gráfico de lucro"
+Matematica,H20,Análise de um gráfico de consumo de energia para determinar uma sequência de deslocamentos.,615.3,MT,550-650,"sequência de deslocamentos, gráfico de consumo de energia",,,,,,"sequência de deslocamentos, gráfico de consumo de energia"
+Matematica,H20,Leitura de gráfico para determinar por quantos minutos um veículo permaneceu imóvel.,644.1,MT,550-650,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
+Matematica,H20,Análise de gráfico de planos telefônicos para encontrar o mais vantajoso.,647.3,MT,550-650,Análise de gráfico,,planos telefônicos,Análise de gráfico,planos telefônicos,,"Análise de gráfico, planos telefônicos, Análise de gráfico, planos telefônicos"
+Matematica,H20,Análise gráfica da força gravitacional em função da massa e do raio da órbita.,650.6,MT,650-750,"força gravitacional, raio da órbita, Análise gráfica",,,Análise gráfica,,,"força gravitacional, raio da órbita, Análise gráfica, Análise gráfica"
+Matematica,H20,Análise de gráficos de vazão para determinar o intervalo de enchimento constante.,670.4,MT,650-750,intervalo de enchimento constante,,,Análise de gráficos,Análise de gráficos,,"intervalo de enchimento constante, Análise de gráficos, Análise de gráficos"
+Matematica,H20,Leitura de gráfico para determinar o número de ultrapassagens de um veículo.,677.7,MT,650-750,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
+Matematica,H20,Identificação da representação gráfica de cinco conjuntos algébricos.,687.6,MT,650-750,conjuntos algébricos,,,"Identificação, representação gráfica",,,"conjuntos algébricos, Identificação, representação gráfica"
+Matematica,H20,Análise de gráfico de esvaziamento de uma cisterna para calcular a vazão de uma bomba.,689.6,MT,650-750,,,,Análise de gráfico,,,Análise de gráfico
+Matematica,H20,Análise do gráfico da altura da água em uma escultura em forma de ampulheta.,729.4,MT,650-750,altura da água,,,Análise do gráfico,,,"altura da água, Análise do gráfico"
+Matematica,H20,Expressão algébrica para descrever um movimento periódico a partir de um gráfico.,733.2,MT,650-750,"movimento periódico, Expressão algébrica",,,,,,"movimento periódico, Expressão algébrica"
+Matematica,H20,Descrição algébrica de um conjunto de pontos na forma de um triângulo.,794.2,MT,750+,conjunto de pontos,,,,,,conjunto de pontos
+Matematica,H21,Resolução de sistema de equações para encontrar o preço de equilíbrio de mercado.,582.6,MT,550-650,"sistema de equações, preço de equilíbrio de mercado",,,Resolução de sistema de equações,,,"sistema de equações, preço de equilíbrio de mercado, Resolução de sistema de equações"
+Matematica,H21,Análise de uma função seno para determinar o parâmetro que garante uma boa potência de um motor.,663.3,MT,650-750,função seno,,,,,,função seno
+Matematica,H21,Resolução de um problema envolvendo reajuste de preço e alteração de quantidade.,681.5,MT,650-750,"alteração de quantidade, reajuste de preço",,,Resolução de um problema,,Resolução de um problema,"alteração de quantidade, reajuste de preço, Resolução de um problema, Resolução de um problema"
+Matematica,H21,Resolução de sistema de equações para determinar o preço de uma cartela de tíquetes.,683.0,MT,650-750,"sistema de equações, cartela de tíquetes",,cartela de tíquetes,"Resolução de sistema de equações, determinar o preço de uma cartela de tíquetes",,,"sistema de equações, cartela de tíquetes, cartela de tíquetes, Resolução de sistema de equações, determinar o preço de uma cartela de tíquetes"
+Matematica,H21,Uso de produto de matrizes para calcular médias anuais de disciplinas.,695.3,MT,650-750,produto de matrizes,,,,médias anuais,,"produto de matrizes, médias anuais"
 Matematica,H21,Uso de logaritmos para calcular a magnitude de um terremoto.,705.3,MT,650-750,,,,,,,
-Matematica,H21,Análise da relação alométrica entre área e massa de um indivíduo.,708.4,MT,650-750,,,,,,,
-Matematica,H21,Uso de logaritmos e conceito de meia-vida para determinar o tempo de redução de massa radioativa.,719.0,MT,650-750,,,,,,,
-Matematica,H21,Relação entre pH e concentração de íon hidrogênio.,721.7,MT,650-750,,,,,,,
-Matematica,H21,Geometria analítica (equação da parábola) para calcular a altura de uma abóbada.,740.1,MT,650-750,,,,,,,
-Matematica,H21,Resolução de sistema de equações para determinar o número de voltas em circuitos.,741.5,MT,650-750,,,,,,,
-Matematica,H21,Maximização de área de um retângulo com perímetro fixo.,759.6,MT,750+,,,,,,,
-Matematica,H21,Cálculo da área sob uma parábola.,763.6,MT,750+,,,,,,,
-Matematica,H21,Geometria analítica (vértice da parábola) para determinar a altura do líquido em uma taça.,768.5,MT,750+,,,,,,,
+Matematica,H21,Análise da relação alométrica entre área e massa de um indivíduo.,708.4,MT,650-750,relação alométrica,,,,,,relação alométrica
+Matematica,H21,Uso de logaritmos e conceito de meia-vida para determinar o tempo de redução de massa radioativa.,719.0,MT,650-750,conceito de meia-vida,,,redução de massa radioativa,,,"conceito de meia-vida, redução de massa radioativa"
+Matematica,H21,Relação entre pH e concentração de íon hidrogênio.,721.7,MT,650-750,concentração de íon hidrogênio,,,,,,concentração de íon hidrogênio
+Matematica,H21,Geometria analítica (equação da parábola) para calcular a altura de uma abóbada.,740.1,MT,650-750,"equação da parábola, Geometria analítica",Geometria,Geometria,,,,"equação da parábola, Geometria analítica, Geometria, Geometria"
+Matematica,H21,Resolução de sistema de equações para determinar o número de voltas em circuitos.,741.5,MT,650-750,"sistema de equações, número de voltas",,,Resolução de sistema de equações,,,"sistema de equações, número de voltas, Resolução de sistema de equações"
+Matematica,H21,Maximização de área de um retângulo com perímetro fixo.,759.6,MT,750+,,,,Maximização de área,,,Maximização de área
+Matematica,H21,Cálculo da área sob uma parábola.,763.6,MT,750+,Cálculo da área,,,Cálculo da área,,,"Cálculo da área, Cálculo da área"
+Matematica,H21,Geometria analítica (vértice da parábola) para determinar a altura do líquido em uma taça.,768.5,MT,750+,"Geometria analítica, vértice da parábola",Geometria,Geometria,,,,"Geometria analítica, vértice da parábola, Geometria, Geometria"
 Matematica,H21,Análise de inequações para determinar o intervalo da profundidade da pisada de um degrau.,786.2,MT,750+,,,,,,,
-Matematica,H21,Resolução de um problema envolvendo o número de bilhetes de uma rifa.,800.8,MT,750+,,,,,,,
-Matematica,H21,Modelagem de um problema de financiamento para determinar o número de parcelas.,802.4,MT,750+,,,,,,,
-Matematica,H21,Uso de logaritmos para determinar o tempo para uma liga metálica atingir uma temperatura.,892.0,MT,750+,,,,,,,
-Matematica,H21,Análise da taxa de cobertura de uma malha de proteção solar.,911.4,MT,750+,,,,,,,
-Matematica,H21,Expressão para a altura de um vidro em função da medida de sua base.,931.6,MT,750+,,,,,,,
-Matematica,H21,Resolução de uma equação envolvendo operações não convencionais.,996.8,MT,750+,,,,,,,
+Matematica,H21,Resolução de um problema envolvendo o número de bilhetes de uma rifa.,800.8,MT,750+,,,,Resolução de um problema,,Resolução de um problema,"Resolução de um problema, Resolução de um problema"
+Matematica,H21,Modelagem de um problema de financiamento para determinar o número de parcelas.,802.4,MT,750+,,,,,problema de financiamento,,problema de financiamento
+Matematica,H21,Uso de logaritmos para determinar o tempo para uma liga metálica atingir uma temperatura.,892.0,MT,750+,liga metálica,,liga metálica,determinar o tempo,,,"liga metálica, liga metálica, determinar o tempo"
+Matematica,H21,Análise da taxa de cobertura de uma malha de proteção solar.,911.4,MT,750+,"taxa de cobertura, malha de proteção solar",,,,,,"taxa de cobertura, malha de proteção solar"
+Matematica,H21,Expressão para a altura de um vidro em função da medida de sua base.,931.6,MT,750+,altura de um vidro,,,,,,altura de um vidro
+Matematica,H21,Resolução de uma equação envolvendo operações não convencionais.,996.8,MT,750+,operações não convencionais,,,operações não convencionais,,,"operações não convencionais, operações não convencionais"
 Matematica,H22,Resolução de um sistema de equações para determinar a quantidade de camisetas em uma mala.,577.6,MT,550-650,sistema de equações,,,Resolução,,,"sistema de equações, Resolução"
 Matematica,H22,Geometria analítica (circuncentro) para determinar a localização de uma torre.,594.5,MT,550-650,Geometria analítica,Geometria,localização de uma torre,,,,"Geometria analítica, Geometria, localização de uma torre"
 Matematica,H22,Análise de dados de fósseis e meia-vida para determinar o mais antigo.,678.2,MT,650-750,Análise de dados,,,"determinar o mais antigo, Análise de dados",,,"Análise de dados, determinar o mais antigo, Análise de dados"

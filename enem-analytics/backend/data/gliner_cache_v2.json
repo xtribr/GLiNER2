@@ -17991,5 +17991,3531 @@
         "Expressão algébrica"
       ]
     }
+  },
+  "Representação de números em sistema decimal posicional (Quipus).": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema decimal posicional"
+      ]
+    }
+  },
+  "Razão entre assentos vendidos e total de assentos de um ônibus.": {
+    "entities": {
+      "conceito_cientifico": [
+        "total de assentos"
+      ]
+    }
+  },
+  "Representação numérica de grandes valores (1,35 bilhão).": {
+    "entities": {
+      "conceito_cientifico": [
+        "Representação numérica de grandes valores"
+      ]
+    }
+  },
+  "Razão entre cadeiras reservadas e o total de cadeiras de um setor.": {
+    "entities": {
+      "conceito_cientifico": [
+        "cadeiras reservadas"
+      ]
+    }
+  },
+  "Análise de dados em uma matriz para identificar o dia com maior quantidade de acertos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de dados"
+      ],
+      "processo_fenomeno": [
+        "Análise de dados",
+        "identificar o dia com maior quantidade de acertos"
+      ],
+      "habilidade_composta": [
+        "Análise de dados"
+      ]
+    }
+  },
+  "Notação científica para representar o diâmetro de um vírus.": {
+    "entities": {}
+  },
+  "Sistema de numeração decimal e valor posicional (centena de milhar).": {
+    "entities": {
+      "conceito_cientifico": [
+        "valor posicional",
+        "Sistema de numeração decimal",
+        "centena de milhar"
+      ]
+    }
+  },
+  "Padrão de contagem de uma cultura indígena.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Padrão de contagem"
+      ],
+      "contexto_historico": [
+        "cultura indígena"
+      ]
+    }
+  },
+  "Equivalência entre diferentes representações de números racionais (fração, porcentagem, decimal).": {
+    "entities": {
+      "conceito_cientifico": [
+        "números racionais"
+      ]
+    }
+  },
+  "Notação científica para representar grandes distâncias (distância Terra-asteroide).": {
+    "entities": {
+      "conceito_cientifico": [
+        "distância Terra-asteroide",
+        "grandes distâncias"
+      ]
+    }
+  },
+  "Sistema de numeração romano e cálculo de tempo decorrido.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Sistema de numeração romano",
+        "cálculo de tempo decorrido"
+      ]
+    }
+  },
+  "Comparação de números decimais para encontrar o valor mais próximo de uma medida.": {
+    "entities": {
+      "conceito_cientifico": [
+        "números decimais"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Adição de números na base binária.": {
+    "entities": {
+      "conceito_cientifico": [
+        "base binária"
+      ],
+      "processo_fenomeno": [
+        "Adição de números"
+      ]
+    }
+  },
+  "Leitura de números em um ábaco com disposição não usual.": {
+    "entities": {
+      "conceito_cientifico": [
+        "disposição não usual"
+      ],
+      "processo_fenomeno": [
+        "Leitura de números"
+      ]
+    }
+  },
+  "Algoritmo para cálculo de dígito verificador de uma agência bancária.": {
+    "entities": {
+      "processo_fenomeno": [
+        "cálculo de dígito verificador"
+      ],
+      "contexto_historico": [
+        "agência bancária"
+      ]
+    }
+  },
+  "Leitura e interpretação de temperaturas em um termômetro de máxima e mínima.": {
+    "entities": {
+      "conceito_cientifico": [
+        "termômetro de máxima e mínima"
+      ],
+      "processo_fenomeno": [
+        "interpretação"
+      ],
+      "habilidade_composta": [
+        "interpretação"
+      ]
+    }
+  },
+  "Notação científica para representar o comprimento de uma miniatura.": {
+    "entities": {}
+  },
+  "Análise de uma matriz para identificar o banco que transferiu a maior quantia.": {
+    "entities": {}
+  },
+  "Comparação de números decimais para encontrar o diâmetro mais próximo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "números decimais"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Padrão de decrescimento em uma progressão geométrica (intensidade luminosa).": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão geométrica",
+        "intensidade luminosa",
+        "Padrão de decrescimento"
+      ]
+    }
+  },
+  "Padrão de construção de quadrados em uma sequência recursiva (progressão geométrica).": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão geométrica",
+        "sequência recursiva",
+        "Padrão de construção de quadrados"
+      ],
+      "processo_fenomeno": [
+        "construção de quadrados"
+      ]
+    }
+  },
+  "Identificação de padrão em uma sequência de números pentagonais (progressão aritmética de 2ª ordem).": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão aritmética de 2ª ordem",
+        "sequência de números pentagonais"
+      ],
+      "processo_fenomeno": [
+        "Identificação de padrão"
+      ]
+    }
+  },
+  "Análise de um torneio de tênis em sistema de eliminatória simples (soma de PG).": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema de eliminatória simples",
+        "soma de PG",
+        "torneio de tênis"
+      ]
+    }
+  },
+  "Padrão na representação de potências da proporção áurea (Sequência de Fibonacci).": {
+    "entities": {
+      "conceito_cientifico": [
+        "Sequência de Fibonacci",
+        "proporção áurea"
+      ]
+    }
+  },
+  "Combinação com repetição para determinar modelos de um brinquedo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "repetição"
+      ],
+      "processo_fenomeno": [
+        "repetição",
+        "Combinação"
+      ],
+      "habilidade_composta": [
+        "repetição",
+        "Combinação"
+      ]
+    }
+  },
+  "Análise combinatória: combinação simples para escolher tecidos e pedras.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "combinação"
+      ]
+    }
+  },
+  "Permutação com repetição para determinar a quantidade de trens com vagões coloridos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "repetição",
+        "vagões coloridos"
+      ],
+      "processo_fenomeno": [
+        "Permutação com repetição"
+      ]
+    }
+  },
+  "Análise combinatória: princípio fundamental da contagem para senhas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "princípio fundamental da contagem"
+      ]
+    }
+  },
+  "Combinação simples para escolher apartamentos em um andar.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Combinação"
+      ]
+    }
+  },
+  "Anagramas com restrição (vogais e consoantes intercaladas).": {
+    "entities": {}
+  },
+  "Análise combinatória: contagem de possibilidades com restrição.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória"
+      ],
+      "processo_fenomeno": [
+        "contagem de possibilidades com restrição"
+      ]
+    }
+  },
+  "Sequência de treinamentos com padrão repetitivo (divisão com resto).": {
+    "entities": {
+      "conceito_cientifico": [
+        "padrão repetitivo",
+        "divisão com resto"
+      ],
+      "processo_fenomeno": [
+        "divisão com resto",
+        "Sequência de treinamentos"
+      ]
+    }
+  },
+  "Análise combinatória: senhas com letras e algarismos, com arranjo e permutação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "permutação",
+        "senhas com letras"
+      ],
+      "processo_fenomeno": [
+        "permutação"
+      ]
+    }
+  },
+  "Combinação simples para compor estandes de exposição.": {
+    "entities": {
+      "conceito_cientifico": [
+        "estandes de exposição",
+        "Combinação simples"
+      ]
+    }
+  },
+  "Arranjo simples para acomodar pessoas em poltronas disponíveis.": {
+    "entities": {}
+  },
+  "Teoria dos números: cálculo do número de divisores de um número.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Teoria dos números"
+      ]
+    }
+  },
+  "Identificação de padrão em uma sequência numérica repetitiva.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sequência numérica repetitiva"
+      ],
+      "processo_fenomeno": [
+        "Identificação de padrão"
+      ]
+    }
+  },
+  "Análise combinatória para determinar formas de alugar filmes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória"
+      ],
+      "contexto_historico": [
+        "alugar filmes"
+      ]
+    }
+  },
+  "Análise combinatória: princípio da multiplicação para colorir vértices de um losango.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "princípio da multiplicação"
+      ],
+      "processo_fenomeno": [
+        "multiplicação"
+      ],
+      "habilidade_composta": [
+        "colorir vértices"
+      ]
+    }
+  },
+  "Soma dos termos de uma progressão aritmética (cartas de baralho).": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão aritmética",
+        "cartas de baralho"
+      ]
+    }
+  },
+  "Porcentagem e distribuição de cargas em pontos de sustentação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Porcentagem e distribuição de cargas",
+        "pontos de sustentação"
+      ]
+    }
+  },
+  "Porcentagem para cálculo de imposto de renda sobre lucro.": {
+    "entities": {}
+  },
+  "Cálculo de área e valor total de venda de terrenos em um loteamento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de área"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de área"
+      ]
+    }
+  },
+  "Cálculo de porcentagem de área de agricultura em relação ao território.": {
+    "entities": {}
+  },
+  "Conversão entre diferentes calendários (Haab e Tzolkim).": {
+    "entities": {}
+  },
+  "Cálculo de vagas criadas com base em uma queda percentual.": {
+    "entities": {
+      "conceito_cientifico": [
+        "queda percentual"
+      ]
+    }
+  },
+  "Resolução de problema envolvendo sequência de movimentos em um elevador.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sequência de movimentos"
+      ],
+      "processo_fenomeno": [
+        "sequência de movimentos"
+      ],
+      "habilidade_composta": [
+        "Resolução de problema"
+      ]
+    }
+  },
+  "Teoria dos conjuntos aplicada a tipos sanguíneos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Teoria dos conjuntos"
+      ],
+      "campo_lexical": [
+        "tipos sanguíneos"
+      ]
+    }
+  },
+  "Análise de custos e economia na utilização de laboratórios.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de custos"
+      ],
+      "contexto_historico": [
+        "utilização de laboratórios"
+      ]
+    }
+  },
+  "Análise combinatória para pintar uma logomarca com restrições de cores.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "restrições de cores"
+      ],
+      "processo_fenomeno": [
+        "pintar uma logomarca"
+      ]
+    }
+  },
+  "Proporcionalidade e cálculo de tempo em um encontro de bondinhos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade e cálculo de tempo"
+      ],
+      "contexto_historico": [
+        "encontro de bondinhos"
+      ]
+    }
+  },
+  "Cálculo de aumento percentual sobre um valor com base em outro aumento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "aumento percentual"
+      ]
+    }
+  },
+  "Relações de proporcionalidade entre massa e volume para ordenar densidades.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Relações de proporcionalidade"
+      ]
+    }
+  },
+  "Divisão de laranjas em proporções diferentes em duas etapas de um trajeto.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Divisão de laranjas"
+      ]
+    }
+  },
+  "Análise combinatória: formação de duplas com restrição.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "restrição"
+      ],
+      "processo_fenomeno": [
+        "formação de duplas"
+      ]
+    }
+  },
+  "Soma dos termos de uma PA e cálculo de custo (postes de iluminação).": {
+    "entities": {
+      "conceito_cientifico": [
+        "cálculo de custo",
+        "postes de iluminação"
+      ],
+      "contexto_historico": [
+        "postes de iluminação"
+      ]
+    }
+  },
+  "Contagem de algarismos necessários para numerar quartos de um hotel.": {
+    "entities": {}
+  },
+  "Divisão e interpretação para determinar o ciclo de atividade solar.": {
+    "entities": {
+      "conceito_cientifico": [
+        "ciclo de atividade solar",
+        "Divisão e interpretação"
+      ],
+      "campo_lexical": [
+        "ciclo de atividade solar"
+      ],
+      "processo_fenomeno": [
+        "interpretação"
+      ],
+      "habilidade_composta": [
+        "interpretação"
+      ]
+    }
+  },
+  "Resolução de problema envolvendo duas progressões aritméticas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressões aritméticas"
+      ],
+      "processo_fenomeno": [
+        "Resolução de problema"
+      ],
+      "habilidade_composta": [
+        "Resolução de problema"
+      ]
+    }
+  },
+  "Análise de um financiamento com parcelas decrescentes (PA).": {
+    "entities": {
+      "conceito_cientifico": [
+        "parcelas decrescentes"
+      ]
+    }
+  },
+  "Análise de distribuição de renda a partir de porcentagens.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de distribuição de renda"
+      ]
+    }
+  },
+  "Análise combinatória: contagem de cores em um sistema de símbolos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "sistema de símbolos"
+      ],
+      "processo_fenomeno": [
+        "contagem de cores"
+      ]
+    }
+  },
+  "Contagem de caminhos em uma malha com restrição.": {
+    "entities": {
+      "conceito_cientifico": [
+        "restrição"
+      ],
+      "processo_fenomeno": [
+        "Contagem de caminhos"
+      ]
+    }
+  },
+  "Análise de um cronograma de torneio com restrições de descanso.": {
+    "entities": {
+      "conceito_cientifico": [
+        "cronograma de torneio",
+        "restrições de descanso"
+      ]
+    }
+  },
+  "Proporcionalidade direta para calcular o valor gasto para obter tíquetes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade direta"
+      ]
+    }
+  },
+  "Análise de custos de diferentes trajetos para encontrar o menor valor.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de custos"
+      ],
+      "processo_fenomeno": [
+        "encontrar o menor valor",
+        "Análise de custos"
+      ]
+    }
+  },
+  "Perímetro e divisão para calcular a quantidade mínima de rolos de tela.": {
+    "entities": {
+      "conceito_cientifico": [
+        "rolos de tela"
+      ],
+      "campo_semantico": [
+        "rolos de tela"
+      ],
+      "campo_lexical": [
+        "rolos de tela"
+      ]
+    }
+  },
+  "Comparação entre o número de alunos e o de respostas possíveis.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Cálculo de índice de infestação (LIRAa) para diferentes bairros.": {
+    "entities": {
+      "conceito_cientifico": [
+        "índice de infestação"
+      ]
+    }
+  },
+  "Divisão e conversão de unidades para calcular o tempo mínimo de passagem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tempo mínimo de passagem",
+        "Divisão e conversão de unidades"
+      ],
+      "processo_fenomeno": [
+        "Divisão e conversão de unidades"
+      ]
+    }
+  },
+  "Conversão de moeda e cálculo de gasto diário para escolher destino de viagem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "cálculo de gasto diário",
+        "Conversão de moeda"
+      ],
+      "processo_fenomeno": [
+        "Conversão de moeda",
+        "escolher destino de viagem",
+        "cálculo de gasto diário"
+      ],
+      "contexto_historico": [
+        "escolher destino de viagem"
+      ]
+    }
+  },
+  "Cálculo de reduções percentuais sucessivas na taxa de colesterol.": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa de colesterol",
+        "reduções percentuais sucessivas"
+      ]
+    }
+  },
+  "Resolução de problema de otimização para minimizar o número de lavagens.": {
+    "entities": {
+      "conceito_cientifico": [
+        "otimização"
+      ],
+      "processo_fenomeno": [
+        "otimização",
+        "minimizar o número de lavagens"
+      ],
+      "habilidade_composta": [
+        "Resolução de problema"
+      ]
+    }
+  },
+  "Cálculo de faixa aeróbica ideal com base na frequência cardíaca máxima.": {
+    "entities": {
+      "conceito_cientifico": [
+        "frequência cardíaca máxima",
+        "faixa aeróbica ideal"
+      ]
+    }
+  },
+  "Análise de preço normal, promocional e com desconto para encontrar a diferença.": {
+    "entities": {
+      "processo_fenomeno": [
+        "encontrar a diferença"
+      ]
+    }
+  },
+  "Análise de consumo de combustível e autonomia para determinar a distância máxima.": {
+    "entities": {
+      "conceito_cientifico": [
+        "autonomia",
+        "distância máxima",
+        "consumo de combustível"
+      ],
+      "processo_fenomeno": [
+        "determinar a distância máxima"
+      ]
+    }
+  },
+  "Análise de um triângulo mágico com restrições de progressão aritmética.": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão aritmética",
+        "triângulo mágico"
+      ]
+    }
+  },
+  "Comparação de potências de um número entre 0 e 1 para determinar o maior IDH.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Máximo divisor comum para distribuir ingressos de forma igualitária.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Máximo divisor comum"
+      ],
+      "processo_fenomeno": [
+        "distribuir ingressos"
+      ]
+    }
+  },
+  "Análise de uma matriz de fluxo de famílias para determinar o maior destino.": {
+    "entities": {
+      "conceito_cientifico": [
+        "matriz de fluxo de famílias"
+      ]
+    }
+  },
+  "Análise da variação da porcentagem de luz que atravessa vidro e película.": {
+    "entities": {}
+  },
+  "Análise de custos (preço do cimento + frete) para determinar a opção mais econômica.": {
+    "entities": {
+      "conceito_cientifico": [
+        "preço do cimento",
+        "Análise de custos"
+      ],
+      "processo_fenomeno": [
+        "determinar a opção mais econômica"
+      ]
+    }
+  },
+  "Cálculo de razão entre dentes de coroa e catraca para determinar a menor velocidade.": {
+    "entities": {
+      "conceito_cientifico": [
+        "dentes de coroa",
+        "velocidade"
+      ],
+      "campo_semantico": [
+        "dentes de coroa"
+      ],
+      "campo_lexical": [
+        "dentes de coroa"
+      ]
+    }
+  },
+  "Análise de acréscimos percentuais e cálculo de redução para manter despesa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "acréscimos percentuais",
+        "cálculo de redução"
+      ],
+      "contexto_historico": [
+        "manter despesa"
+      ]
+    }
+  },
+  "Cálculo de tempo de espera em filas para determinar a opção mais rápida.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tempo de espera"
+      ],
+      "processo_fenomeno": [
+        "determinar a opção mais rápida"
+      ]
+    }
+  },
+  "Análise de preços e descontos em diferentes farmácias para minimizar despesa.": {
+    "entities": {
+      "processo_fenomeno": [
+        "minimizar despesa"
+      ]
+    }
+  },
+  "Cálculo de custo/benefício para escolher produtos de diferentes tipos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de custo/benefício"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de custo/benefício"
+      ]
+    }
+  },
+  "Cálculo de valor de venda de picolés para atingir um lucro desejado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "valor de venda"
+      ]
+    }
+  },
+  "Cálculo do número de salas a construir para atingir uma meta de redução na lista de espera.": {
+    "entities": {
+      "contexto_historico": [
+        "lista de espera"
+      ]
+    }
+  },
+  "Cálculo de porcentagem de recompensa, considerando custos e valor do objeto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "porcentagem de recompensa"
+      ]
+    }
+  },
+  "Divisão para determinar o número máximo de viagens de um maquinista.": {
+    "entities": {}
+  },
+  "Análise combinatória: cálculo de senhas possíveis para escolher um formato.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória"
+      ],
+      "processo_fenomeno": [
+        "escolher um formato"
+      ]
+    }
+  },
+  "Cálculo de redução no preço de um produto para manter o custo de um suco.": {
+    "entities": {}
+  },
+  "Análise da conta de energia para determinar o consumo máximo para uma redução de custo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "consumo máximo",
+        "redução de custo",
+        "conta de energia"
+      ],
+      "processo_fenomeno": [
+        "determinar o consumo máximo"
+      ]
+    }
+  },
+  "Análise de lucro, custos fixos e variáveis para determinar o número mínimo de ajudantes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "custos fixos e variáveis",
+        "Análise de lucro",
+        "número mínimo de ajudantes"
+      ],
+      "processo_fenomeno": [
+        "determinar o número mínimo de ajudantes"
+      ]
+    }
+  },
+  "Máximo divisor comum para determinar o maior tamanho possível de peças de madeira.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Máximo divisor comum"
+      ],
+      "campo_lexical": [
+        "peças de madeira"
+      ]
+    }
+  },
+  "Análise de produtividade e aumento de produção para determinar a área mínima a ser comprada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "aumento de produção",
+        "Análise de produtividade",
+        "área mínima"
+      ]
+    }
+  },
+  "Análise combinatória para determinar a quantidade mínima de cores de um carro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória"
+      ]
+    }
+  },
+  "Vista lateral de uma cadeira fechada (projeção ortogonal).": {
+    "entities": {
+      "conceito_cientifico": [
+        "cadeira fechada",
+        "projeção ortogonal",
+        "Vista lateral"
+      ]
+    }
+  },
+  "Planta de um telhado com três quedas d'água (projeção ortogonal).": {
+    "entities": {
+      "conceito_cientifico": [
+        "projeção ortogonal",
+        "quedas d'água",
+        "Planta de um telhado"
+      ],
+      "processo_fenomeno": [
+        "projeção ortogonal"
+      ]
+    }
+  },
+  "Localização de poltrona em um cinema a partir de um mapa e instruções.": {
+    "entities": {}
+  },
+  "Localização em um mapa a partir de instruções de deslocamento (pontos cardeais).": {
+    "entities": {
+      "conceito_cientifico": [
+        "pontos cardeais",
+        "instruções de deslocamento"
+      ],
+      "processo_fenomeno": [
+        "Localização"
+      ]
+    }
+  },
+  "Projeção ortogonal de um deslocamento sobre as arestas de uma pirâmide.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Projeção ortogonal"
+      ],
+      "processo_fenomeno": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Projeção ortogonal (sombra) de uma escultura de letras.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Descrição de um trajeto em uma malha quadriculada usando códigos (E, F, D).": {
+    "entities": {
+      "conceito_cientifico": [
+        "malha quadriculada"
+      ]
+    }
+  },
+  "Movimentação angular em uma rosa dos ventos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Movimentação angular",
+        "rosa dos ventos"
+      ],
+      "processo_fenomeno": [
+        "Movimentação angular"
+      ]
+    }
+  },
+  "Projeção ortogonal de um trajeto sobre o corrimão de uma escada caracol.": {
+    "entities": {
+      "conceito_cientifico": [
+        "escada caracol"
+      ],
+      "processo_fenomeno": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Projeção ortogonal de trajetórias sobre a superfície de um globo.": {
+    "entities": {}
+  },
+  "Projeção ortogonal da trajetória dos pontos de uma gangorra.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Projeção ortogonal do trajeto de um motoqueiro em um globo da morte.": {
+    "entities": {
+      "conceito_cientifico": [
+        "globo da morte",
+        "trajeto de um motoqueiro"
+      ],
+      "processo_fenomeno": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Projeção ortogonal do trajeto de um robô sobre um cubo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "trajeto de um robô"
+      ],
+      "processo_fenomeno": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Projeção ortogonal de um caminho sobre paralelos e meridianos de um globo.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Coordenadas cartesianas de um ponto em um percurso.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Coordenadas cartesianas"
+      ]
+    }
+  },
+  "Análise de um gráfico de distância x tempo para inferir a trajetória em vista superior.": {
+    "entities": {}
+  },
+  "Projeção ortogonal do trajeto de um visitante no Atomium.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Projeção ortogonal"
+      ],
+      "processo_fenomeno": [
+        "Projeção ortogonal"
+      ]
+    }
+  },
+  "Identificação de sólidos a partir de planificações (cilindro, prisma, pirâmide).": {
+    "entities": {
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Identificação de sólidos em uma forma de bolo (tronco de cone e cilindro).": {
+    "entities": {
+      "conceito_cientifico": [
+        "tronco de cone e cilindro",
+        "forma de bolo"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Identificação da forma de um adesivo para revestir um tronco de cone.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tronco de cone"
+      ],
+      "processo_fenomeno": [
+        "Identificação da forma"
+      ]
+    }
+  },
+  "Identificação de projeções ortogonais de um sólido formado por cubos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "projeções ortogonais"
+      ]
+    }
+  },
+  "Identificação da forma geométrica de uma estrutura de sustentação (prisma triangular reto).": {
+    "entities": {
+      "conceito_cientifico": [
+        "estrutura de sustentação",
+        "prisma triangular reto",
+        "forma geométrica"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Identificação das figuras planas formadas por uma estrutura de brinquedo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "estrutura de brinquedo",
+        "figuras planas"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Classificação de um triângulo (obtusângulo isósceles) formado por remos de um barco.": {
+    "entities": {
+      "conceito_cientifico": [
+        "obtusângulo isósceles"
+      ],
+      "processo_fenomeno": [
+        "Classificação"
+      ]
+    }
+  },
+  "Identificação das faces de um tronco de pirâmide de base quadrada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tronco de pirâmide de base quadrada"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Representação da parte da lua escondida atrás de uma torre (setor circular).": {
+    "entities": {
+      "conceito_cientifico": [
+        "setor circular"
+      ]
+    }
+  },
+  "Determinação do número de faces de um poliedro obtido por cortes em um cubo.": {
+    "entities": {}
+  },
+  "Identificação da forma de uma bandeirinha após cortes em papel dobrado.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Identificação da forma"
+      ]
+    }
+  },
+  "Identificação de faces opostas em um octaedro a partir de sua planificação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "planificação",
+        "faces opostas"
+      ],
+      "processo_fenomeno": [
+        "planificação",
+        "Identificação de faces opostas"
+      ]
+    }
+  },
+  "Comparação do perímetro de losangos formados por circunferências tangentes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "perímetro de losangos",
+        "circunferências tangentes"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Identificação da figura obtida após desdobrar um papel recortado.": {
+    "entities": {}
+  },
+  "Identificação das faces de um tetraedro truncado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tetraedro truncado"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Identificação da planificação correta de um cubo com faces pintadas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "planificação correta",
+        "faces pintadas"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Construção de uma figura com simetria em relação a um ponto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "simetria"
+      ],
+      "processo_fenomeno": [
+        "Construção"
+      ]
+    }
+  },
+  "Polígonos obtidos pela intersecção de um plano com uma pirâmide.": {
+    "entities": {
+      "processo_fenomeno": [
+        "intersecção"
+      ]
+    }
+  },
+  "Geometria plana e trigonometria para calcular a altura mínima de um viaduto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "altura mínima"
+      ],
+      "campo_semantico": [
+        "trigonometria",
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "trigonometria"
+      ]
+    }
+  },
+  "Geometria espacial para calcular a altura mínima de uma pilha de contêineres.": {
+    "entities": {
+      "conceito_cientifico": [
+        "altura mínima"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "pilha de contêineres"
+      ]
+    }
+  },
+  "Geometria analítica (distância entre pontos) para localizar um imóvel.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica",
+        "distância entre pontos"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ],
+      "processo_fenomeno": [
+        "localizar um imóvel"
+      ]
+    }
+  },
+  "Trigonometria no triângulo retângulo para calcular a redução da intensidade luminosa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "intensidade luminosa",
+        "triângulo retângulo",
+        "Trigonometria"
+      ],
+      "campo_semantico": [
+        "Trigonometria",
+        "triângulo retângulo"
+      ],
+      "campo_lexical": [
+        "Trigonometria",
+        "triângulo retângulo"
+      ]
+    }
+  },
+  "Geometria plana e relações métricas para calcular o raio de um cano maior.": {
+    "entities": {
+      "conceito_cientifico": [
+        "relações métricas",
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ]
+    }
+  },
+  "Geometria plana para calcular a ampliação da área de cobertura de antenas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ]
+    }
+  },
+  "Geometria plana (Teorema de Pitágoras) para calcular o lado de um quadrado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Teorema de Pitágoras",
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ],
+      "processo_fenomeno": [
+        "calcular o lado de um quadrado"
+      ]
+    }
+  },
+  "Geometria espacial e planificação para calcular a área a ser revestida em uma escada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "planificação",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria",
+        "planificação"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "planificação"
+      ],
+      "processo_fenomeno": [
+        "calcular a área"
+      ]
+    }
+  },
+  "Geometria espacial e proporcionalidade para calcular o volume de petróleo derramado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria espacial e proporcionalidade"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Geometria espacial (volume de prisma trapezoidal) para calcular a quantidade de forragem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de prisma trapezoidal",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Geometria plana (área de polígonos) para calcular o custo de um vitral.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área de polígonos",
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ]
+    }
+  },
+  "Volume de cilindro e proporcionalidade para encontrar a relação entre raios.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Volume de cilindro e proporcionalidade"
+      ],
+      "processo_fenomeno": [
+        "encontrar a relação entre raios"
+      ]
+    }
+  },
+  "Relações métricas no triângulo equilátero para calcular o comprimento de uma barra.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Relações métricas",
+        "triângulo equilátero"
+      ],
+      "campo_semantico": [
+        "triângulo equilátero"
+      ],
+      "campo_lexical": [
+        "triângulo equilátero"
+      ]
+    }
+  },
+  "Volume de cilindros e princípio dos vasos comunicantes para calcular a altura da água.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Volume de cilindros",
+        "princípio dos vasos comunicantes",
+        "altura da água"
+      ]
+    }
+  },
+  "Geometria espacial: volume de um tronco de cone.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de um tronco de cone",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Geometria espacial: volume de tronco de cone e cilindro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de tronco de cone e cilindro",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Geometria espacial: volume de cilindro e esfera para calcular a quantidade de peças.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de cilindro",
+        "quantidade de peças",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Geometria plana (Teorema de Pitágoras) para calcular a medida de um segmento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Teorema de Pitágoras",
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ]
+    }
+  },
+  "Geometria analítica e trigonometria em um problema de postes e cabos de aço.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica",
+        "trigonometria"
+      ],
+      "campo_semantico": [
+        "Geometria",
+        "trigonometria"
+      ],
+      "campo_lexical": [
+        "Geometria",
+        "trigonometria"
+      ],
+      "contexto_historico": [
+        "problema de postes e cabos de aço"
+      ]
+    }
+  },
+  "Geometria plana para calcular a área de um passeio em uma praça circular.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria plana",
+        "praça circular"
+      ],
+      "campo_semantico": [
+        "Geometria",
+        "praça circular"
+      ],
+      "campo_lexical": [
+        "Geometria",
+        "praça circular"
+      ],
+      "processo_fenomeno": [
+        "calcular a área"
+      ]
+    }
+  },
+  "Desigualdade triangular para determinar a quantidade de triângulos possíveis.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Desigualdade triangular"
+      ]
+    }
+  },
+  "Geometria espacial e visualização para identificar a peça que completa um cubo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ],
+      "habilidade_composta": [
+        "visualização"
+      ]
+    }
+  },
+  "Análise de rotação de uma tela para determinar o menor ângulo de giro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "ângulo de giro",
+        "rotação de uma tela"
+      ]
+    }
+  },
+  "Trigonometria e geometria analítica para determinar o raio de uma tampa de panela.": {
+    "entities": {
+      "conceito_cientifico": [
+        "geometria analítica",
+        "Trigonometria"
+      ],
+      "campo_semantico": [
+        "Trigonometria",
+        "geometria"
+      ],
+      "campo_lexical": [
+        "tampa de panela"
+      ]
+    }
+  },
+  "Geometria plana (área de polígonos) para representar porcentagens de alimentos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área de polígonos",
+        "Geometria plana",
+        "porcentagens de alimentos"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "porcentagens de alimentos",
+        "Geometria"
+      ]
+    }
+  },
+  "Geometria espacial e planificação para determinar a dimensão de uma caixa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "planificação",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ],
+      "processo_fenomeno": [
+        "determinar a dimensão de uma caixa"
+      ]
+    }
+  },
+  "Análise de áreas e afastamentos em projetos de construção.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de áreas"
+      ],
+      "processo_fenomeno": [
+        "Análise de áreas"
+      ],
+      "contexto_historico": [
+        "projetos de construção"
+      ]
+    }
+  },
+  "Proporcionalidade entre áreas de paredes e piso com alteração de dimensões.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade",
+        "alteração de dimensões"
+      ]
+    }
+  },
+  "Comparação de volumes de cilindros com dimensões relacionadas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volumes de cilindros",
+        "dimensões relacionadas"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Identificação de formas geométricas necessárias para preencher espaços em um painel.": {
+    "entities": {
+      "conceito_cientifico": [
+        "formas geométricas"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Geometria analítica (círculos) para determinar a possibilidade de um \"match\".": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ],
+      "processo_fenomeno": [
+        "determinar a possibilidade"
+      ]
+    }
+  },
+  "Geometria plana (área de coroa circular) para avaliar a suficiência de material.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área de coroa circular",
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ],
+      "processo_fenomeno": [
+        "avaliar a suficiência de material"
+      ]
+    }
+  },
+  "Geometria plana (arco capaz) para determinar a posição de um jogador.": {
+    "entities": {
+      "conceito_cientifico": [
+        "arco capaz",
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ]
+    }
+  },
+  "Trigonometria em um prisma oblíquo para calcular a área da base.": {
+    "entities": {
+      "conceito_cientifico": [
+        "prisma oblíquo",
+        "Trigonometria"
+      ],
+      "campo_semantico": [
+        "Trigonometria"
+      ],
+      "campo_lexical": [
+        "Trigonometria"
+      ]
+    }
+  },
+  "Trigonometria no triângulo retângulo para determinar o menor comprimento de cabos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "triângulo retângulo",
+        "Trigonometria",
+        "comprimento de cabos"
+      ],
+      "campo_semantico": [
+        "Trigonometria",
+        "triângulo retângulo"
+      ],
+      "campo_lexical": [
+        "Trigonometria"
+      ]
+    }
+  },
+  "Relações métricas no triângulo equilátero para escolher um tampo de mesa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Relações métricas",
+        "triângulo equilátero"
+      ],
+      "campo_semantico": [
+        "triângulo equilátero"
+      ],
+      "campo_lexical": [
+        "tampo de mesa",
+        "triângulo equilátero"
+      ],
+      "processo_fenomeno": [
+        "escolher um tampo de mesa"
+      ]
+    }
+  },
+  "Análise de proporções e geometria para determinar a capacidade de uma bandeja.": {
+    "entities": {
+      "conceito_cientifico": [
+        "geometria",
+        "capacidade"
+      ],
+      "campo_semantico": [
+        "geometria"
+      ]
+    }
+  },
+  "Relação entre o lado de um quadrado e o raio da circunferência circunscrita.": {
+    "entities": {
+      "conceito_cientifico": [
+        "raio da circunferência circunscrita",
+        "lado de um quadrado"
+      ]
+    }
+  },
+  "Análise de perímetros para escolher a serra copo adequada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de perímetros",
+        "serra copo"
+      ],
+      "processo_fenomeno": [
+        "Análise de perímetros"
+      ]
+    }
+  },
+  "Geometria analítica (distância entre pontos) para determinar o menor percurso.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica",
+        "distância entre pontos"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ],
+      "processo_fenomeno": [
+        "determinar o menor percurso"
+      ]
+    }
+  },
+  "Conversão de unidades de medida (pés, polegadas, centímetros, metros).": {
+    "entities": {}
+  },
+  "Relação entre distância, velocidade e tempo para comparar percursos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "velocidade"
+      ],
+      "processo_fenomeno": [
+        "comparar percursos"
+      ]
+    }
+  },
+  "Conversão de coordenadas geográficas (graus, minutos, segundos) para forma decimal.": {
+    "entities": {
+      "campo_lexical": [
+        "coordenadas geográficas"
+      ]
+    }
+  },
+  "Conversão entre metro cúbico e litro para calcular a capacidade de um reservatório.": {
+    "entities": {
+      "conceito_cientifico": [
+        "capacidade",
+        "metro cúbico"
+      ]
+    }
+  },
+  "Conversão entre hectare e metro quadrado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "metro quadrado"
+      ],
+      "campo_semantico": [
+        "metro quadrado"
+      ]
+    }
+  },
+  "Relação entre densidade, massa e volume para calcular quantidade de gasolina.": {
+    "entities": {
+      "conceito_cientifico": [
+        "densidade"
+      ]
+    }
+  },
+  "Análise de unidades de medida para o parâmetro de economia de corrida (EC).": {
+    "entities": {
+      "conceito_cientifico": [
+        "parâmetro de economia de corrida (EC)",
+        "unidades de medida"
+      ]
+    }
+  },
+  "Análise dimensional para determinar a unidade do módulo volumétrico.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise dimensional",
+        "módulo volumétrico"
+      ]
+    }
+  },
+  "Conversão entre unidades de tempo (dias terrestres e anos de um planeta Z).": {
+    "entities": {}
+  },
+  "Conversão de toneladas para quilogramas e uso de notação científica.": {
+    "entities": {
+      "conceito_cientifico": [
+        "notação científica"
+      ],
+      "processo_fenomeno": [
+        "uso de notação científica",
+        "Conversão de toneladas para quilogramas"
+      ]
+    }
+  },
+  "Conversão entre jarda, pé e polegada.": {
+    "entities": {}
+  },
+  "Relação entre diferentes formas de medir o consumo de combustível.": {
+    "entities": {}
+  },
+  "Inferência a partir de um gráfico sobre horas de estudo e desempenho no Pisa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "horas de estudo"
+      ]
+    }
+  },
+  "Utilização de escala para determinar medidas reais de uma pegada.": {
+    "entities": {
+      "campo_lexical": [
+        "medidas reais"
+      ]
+    }
+  },
+  "Análise de representações em diferentes escalas para determinar a maior árvore real.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Análise de representações"
+      ]
+    }
+  },
+  "Cálculo com escala para determinar a capacidade de um reservatório.": {
+    "entities": {
+      "conceito_cientifico": [
+        "capacidade"
+      ],
+      "processo_fenomeno": [
+        "determinar a capacidade de um reservatório"
+      ]
+    }
+  },
+  "Comparação de áreas em mapas com escalas diferentes.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação de áreas"
+      ]
+    }
+  },
+  "Determinação da escala utilizada na construção de uma réplica.": {
+    "entities": {
+      "processo_fenomeno": [
+        "construção",
+        "Determinação"
+      ]
+    }
+  },
+  "Cálculo da escala de representação em uma tela de instrumento de voo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "escala de representação"
+      ],
+      "contexto_historico": [
+        "tela de instrumento de voo"
+      ]
+    }
+  },
+  "Utilização de escala para calcular a distância percorrida em um trajeto.": {
+    "entities": {}
+  },
+  "Cálculo de dimensões de um desenho com redução percentual em uma escala.": {
+    "entities": {
+      "conceito_cientifico": [
+        "redução percentual"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de dimensões"
+      ]
+    }
+  },
+  "Utilização de escala para calcular o volume real de um armário.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume real"
+      ]
+    }
+  },
+  "Utilização de escala para calcular o volume de um monumento.": {
+    "entities": {}
+  },
+  "Utilização de escala para calcular a medida real de um segmento de reta.": {
+    "entities": {
+      "conceito_cientifico": [
+        "medida real",
+        "segmento de reta"
+      ]
+    }
+  },
+  "Cálculo da escala entre uma representação e um percurso real.": {
+    "entities": {
+      "conceito_cientifico": [
+        "representação",
+        "percurso real"
+      ],
+      "campo_semantico": [
+        "representação",
+        "percurso real"
+      ],
+      "campo_lexical": [
+        "representação"
+      ]
+    }
+  },
+  "Utilização de escala para calcular a área real de uma varanda.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área real"
+      ]
+    }
+  },
+  "Cálculo com escala para determinar a altura de uma caixa de vidro.": {
+    "entities": {
+      "campo_lexical": [
+        "caixa de vidro"
+      ],
+      "processo_fenomeno": [
+        "determinar a altura de uma caixa de vidro"
+      ]
+    }
+  },
+  "Cálculo da escala de uma gravura reproduzida em uma folha.": {
+    "entities": {}
+  },
+  "Utilização de escala e considerações de espaçamento para determinar as dimensões de um refrigerador.": {
+    "entities": {
+      "conceito_cientifico": [
+        "considerações de espaçamento"
+      ]
+    }
+  },
+  "Determinação do intervalo de valores possíveis para uma escala.": {
+    "entities": {
+      "conceito_cientifico": [
+        "intervalo de valores possíveis"
+      ],
+      "processo_fenomeno": [
+        "Determinação"
+      ]
+    }
+  },
+  "Utilização de escala para determinar o volume de uma caixa-d'água.": {
+    "entities": {}
+  },
+  "Cálculo de volume de um cosmético para preencher uma banheira.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de volume"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de volume"
+      ]
+    }
+  },
+  "Cálculo de volume de água desperdiçada por gotejamento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de água desperdiçada"
+      ]
+    }
+  },
+  "Cálculo da capacidade mínima de um ar-condicionado em BTU/h.": {
+    "entities": {
+      "conceito_cientifico": [
+        "capacidade mínima"
+      ]
+    }
+  },
+  "Geometria espacial para determinar a altura de corte de uma calota esférica.": {
+    "entities": {
+      "conceito_cientifico": [
+        "calota esférica",
+        "altura de corte",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria",
+        "calota esférica"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "calota esférica"
+      ]
+    }
+  },
+  "Cálculo da área de uma calçada ao redor de uma piscina quadrada.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Cálculo da área"
+      ]
+    }
+  },
+  "Leitura e interpretação de um hidrômetro para determinar o consumo total.": {
+    "entities": {
+      "conceito_cientifico": [
+        "consumo total"
+      ],
+      "campo_lexical": [
+        "consumo total"
+      ],
+      "processo_fenomeno": [
+        "interpretação"
+      ],
+      "habilidade_composta": [
+        "interpretação"
+      ]
+    }
+  },
+  "Cálculo de tempo necessário para encher um balde com gotejamento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de tempo"
+      ],
+      "processo_fenomeno": [
+        "encher um balde"
+      ]
+    }
+  },
+  "Cálculo da quantidade de inseticida liberada a cada acionamento.": {
+    "entities": {}
+  },
+  "Cálculo do número de gotas por minuto de soro endovenoso.": {
+    "entities": {
+      "conceito_cientifico": [
+        "soro endovenoso",
+        "número de gotas por minuto"
+      ]
+    }
+  },
+  "Conversão entre unidades de volume (mL, cL, onça fluida).": {
+    "entities": {
+      "conceito_cientifico": [
+        "unidades de volume",
+        "onça fluida"
+      ]
+    }
+  },
+  "Cálculo da área de placas de sinalização.": {
+    "entities": {
+      "conceito_cientifico": [
+        "placas de sinalização",
+        "Cálculo da área"
+      ],
+      "processo_fenomeno": [
+        "Cálculo da área"
+      ]
+    }
+  },
+  "Cálculo do novo desempenho de um automóvel após economia de combustível.": {
+    "entities": {
+      "conceito_cientifico": [
+        "economia de combustível"
+      ],
+      "contexto_historico": [
+        "economia de combustível"
+      ]
+    }
+  },
+  "Cálculo do número de viagens para transportar grãos de um silo.": {
+    "entities": {
+      "contexto_historico": [
+        "transportar grãos de um silo"
+      ]
+    }
+  },
+  "Cálculo da vazão de um curso d'água a partir do nível de uma cisterna.": {
+    "entities": {
+      "conceito_cientifico": [
+        "curso d'água"
+      ]
+    }
+  },
+  "Cálculo do número de porções de massa para produzir docinhos de maior diâmetro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "porções de massa"
+      ]
+    }
+  },
+  "Cálculo do índice pluviométrico a partir da água acumulada em uma lata.": {
+    "entities": {
+      "conceito_cientifico": [
+        "índice pluviométrico"
+      ]
+    }
+  },
+  "Geometria plana e espacial para determinar a área mínima de uma bandeja.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área mínima"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ],
+      "processo_fenomeno": [
+        "determinar a área mínima"
+      ]
+    }
+  },
+  "Trigonometria e geometria espacial para calcular a altura de um cilindro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Trigonometria",
+        "geometria espacial"
+      ],
+      "campo_semantico": [
+        "Trigonometria",
+        "geometria espacial"
+      ],
+      "campo_lexical": [
+        "geometria espacial",
+        "Trigonometria"
+      ]
+    }
+  },
+  "Análise de alturas para instalação de tomadas e interruptores para cadeirantes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de alturas"
+      ],
+      "contexto_historico": [
+        "instalação de tomadas"
+      ]
+    }
+  },
+  "Comparação da concentração de fibras em diferentes marcas de pão.": {
+    "entities": {
+      "conceito_cientifico": [
+        "concentração"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Geometria espacial e otimização para determinar a menor quantidade de caminhões.": {
+    "entities": {
+      "conceito_cientifico": [
+        "otimização",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Estimativa do número de pessoas em uma manifestação usando densidades.": {
+    "entities": {
+      "contexto_historico": [
+        "manifestação"
+      ]
+    }
+  },
+  "Cálculo de área para determinar a alteração na área de garrafões de basquete.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de área",
+        "área de garrafões de basquete"
+      ],
+      "campo_lexical": [
+        "área de garrafões de basquete"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de área"
+      ]
+    }
+  },
+  "Geometria espacial para determinar o que acontece com o nível da água em um tanque.": {
+    "entities": {
+      "conceito_cientifico": [
+        "nível da água",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Otimização do armazenamento de potes em caixas organizadoras.": {
+    "entities": {}
+  },
+  "Cálculo de área de diferentes polígonos para escolher um modelo de cartão.": {
+    "entities": {
+      "conceito_cientifico": [
+        "modelo de cartão",
+        "Cálculo de área"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de área",
+        "modelo de cartão"
+      ]
+    }
+  },
+  "Análise da velocidade média para escolher a melhor rota em um teste de radares.": {
+    "entities": {
+      "conceito_cientifico": [
+        "velocidade média"
+      ],
+      "processo_fenomeno": [
+        "escolher a melhor rota"
+      ],
+      "contexto_historico": [
+        "teste de radares"
+      ]
+    }
+  },
+  "Otimização da compra de caixas de porcelanato para minimizar o custo e a sobra.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Otimização"
+      ]
+    }
+  },
+  "Relação entre o ângulo de um triângulo formado por pizzas e a área.": {
+    "entities": {}
+  },
+  "Cálculo da redução percentual da área de uma peça de cerâmica após contração.": {
+    "entities": {
+      "conceito_cientifico": [
+        "contração"
+      ],
+      "processo_fenomeno": [
+        "contração"
+      ]
+    }
+  },
+  "Otimização da área de revestimento para escolher um projeto de piscina.": {
+    "entities": {
+      "processo_fenomeno": [
+        "escolher um projeto de piscina",
+        "Otimização da área de revestimento"
+      ]
+    }
+  },
+  "Análise de dimensões para escolher a caixa com menor espaço livre.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de dimensões",
+        "espaço livre"
+      ],
+      "processo_fenomeno": [
+        "Análise de dimensões"
+      ]
+    }
+  },
+  "Cálculo da quantidade de células solares para atingir uma meta de produção de energia.": {
+    "entities": {
+      "conceito_cientifico": [
+        "células solares",
+        "produção de energia"
+      ]
+    }
+  },
+  "Cálculo do número mínimo de bolinhas para elevar o nível da água.": {
+    "entities": {
+      "conceito_cientifico": [
+        "número mínimo de bolinhas",
+        "nível da água"
+      ],
+      "processo_fenomeno": [
+        "elevar o nível da água"
+      ]
+    }
+  },
+  "Trigonometria e geometria espacial para determinar o raio de uma circunferência de fixação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "circunferência de fixação",
+        "geometria espacial",
+        "Trigonometria"
+      ],
+      "campo_semantico": [
+        "Trigonometria",
+        "geometria"
+      ],
+      "campo_lexical": [
+        "geometria espacial",
+        "Trigonometria",
+        "circunferência de fixação"
+      ]
+    }
+  },
+  "Otimização da compra de aquecedores com base na área e consumo de gás.": {
+    "entities": {
+      "conceito_cientifico": [
+        "consumo de gás"
+      ]
+    }
+  },
+  "Geometria espacial (volume de cilindro) para calcular o aumento no raio de uma cisterna.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de cilindro",
+        "Geometria espacial",
+        "aumento no raio"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "volume de cilindro"
+      ]
+    }
+  },
+  "Cálculo da altura interna mínima de um reservatório cilíndrico.": {
+    "entities": {
+      "conceito_cientifico": [
+        "altura interna mínima",
+        "reservatório cilíndrico"
+      ],
+      "campo_semantico": [
+        "reservatório cilíndrico"
+      ],
+      "campo_lexical": [
+        "reservatório cilíndrico"
+      ]
+    }
+  },
+  "Geometria espacial e volume para determinar o raio máximo de uma ilha de lazer.": {
+    "entities": {
+      "conceito_cientifico": [
+        "raio máximo",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "ilha de lazer"
+      ],
+      "contexto_historico": [
+        "ilha de lazer"
+      ]
+    }
+  },
+  "Análise de volume e aumento percentual na fabricação de sorvete.": {
+    "entities": {
+      "conceito_cientifico": [
+        "aumento percentual",
+        "Análise de volume"
+      ],
+      "processo_fenomeno": [
+        "Análise de volume"
+      ],
+      "contexto_historico": [
+        "fabricação de sorvete"
+      ]
+    }
+  },
+  "Conversão de unidades e cálculo de dosagem de medicamento infantil.": {
+    "entities": {
+      "conceito_cientifico": [
+        "cálculo de dosagem",
+        "Conversão de unidades"
+      ],
+      "campo_lexical": [
+        "medicamento infantil"
+      ],
+      "processo_fenomeno": [
+        "Conversão de unidades",
+        "cálculo de dosagem"
+      ],
+      "contexto_historico": [
+        "medicamento infantil"
+      ]
+    }
+  },
+  "Análise da inclinação de uma rampa e ajuste do nível da garagem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "inclinação"
+      ]
+    }
+  },
+  "Cálculo da economia média diária de água por morador.": {
+    "entities": {}
+  },
+  "Cálculo da quantidade de produto para tratamento de água de uma piscina.": {
+    "entities": {
+      "conceito_cientifico": [
+        "quantidade de produto"
+      ]
+    }
+  },
+  "Geometria espacial e porcentagem para calcular o novo raio de um cone de chocolate.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria",
+        "cone de chocolate"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "cone de chocolate"
+      ]
+    }
+  },
+  "Resolução de sistema de equações para determinar as medidas de um terreno.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema de equações"
+      ],
+      "campo_lexical": [
+        "medidas de um terreno"
+      ],
+      "processo_fenomeno": [
+        "Resolução de sistema de equações"
+      ]
+    }
+  },
+  "Geometria espacial para calcular a redução do volume de uma pílula.": {
+    "entities": {
+      "conceito_cientifico": [
+        "redução do volume",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Trigonometria para determinar a altura de vigas de um pergolado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Trigonometria"
+      ],
+      "campo_semantico": [
+        "Trigonometria"
+      ],
+      "campo_lexical": [
+        "Trigonometria"
+      ]
+    }
+  },
+  "Interpretação de gráfico de um plano de telefonia celular.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Interpretação de gráfico"
+      ],
+      "contexto_historico": [
+        "plano de telefonia celular"
+      ],
+      "habilidade_composta": [
+        "Interpretação de gráfico"
+      ]
+    }
+  },
+  "Interpretação de gráfico sobre salário mensal de um vendedor com comissão.": {
+    "entities": {
+      "campo_lexical": [
+        "salário mensal"
+      ],
+      "processo_fenomeno": [
+        "Interpretação de gráfico"
+      ],
+      "contexto_historico": [
+        "vendedor com comissão"
+      ],
+      "habilidade_composta": [
+        "Interpretação de gráfico"
+      ]
+    }
+  },
+  "Análise de gráfico sobre preço de produto e imposto devido.": {
+    "entities": {
+      "conceito_cientifico": [
+        "imposto devido",
+        "preço de produto",
+        "Análise de gráfico"
+      ],
+      "campo_lexical": [
+        "preço de produto",
+        "imposto devido"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Análise gráfica da Lei da Gravitação Universal de Newton.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Lei da Gravitação Universal de Newton"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Análise gráfica da altura de uma pessoa em uma roda-gigante.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Relação entre área e quantidade de placas em uma caixa.": {
+    "entities": {}
+  },
+  "Análise gráfica da relação entre energia consumida e corrente elétrica em um chuveiro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "corrente elétrica",
+        "energia consumida"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Análise gráfica da variação da altura de um líquido em uma garrafa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise gráfica"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Análise gráfica da arrecadação em função do desconto no preço de ingresso.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise gráfica",
+        "arrecadação",
+        "preço de ingresso"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Análise da relação entre luminosidade, raio e temperatura de estrelas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "luminosidade"
+      ]
+    }
+  },
+  "Análise gráfica da altura do nível da água em reservatórios comunicantes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "altura do nível da água",
+        "Análise gráfica"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ],
+      "contexto_historico": [
+        "reservatórios comunicantes"
+      ]
+    }
+  },
+  "Análise de custo de isolamento acústico em função da distância.": {
+    "entities": {
+      "conceito_cientifico": [
+        "isolamento acústico",
+        "Análise de custo"
+      ]
+    }
+  },
+  "Análise gráfica do volume de água acumulado em uma torneira inteligente.": {
+    "entities": {
+      "conceito_cientifico": [
+        "torneira inteligente",
+        "volume de água",
+        "Análise gráfica"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Análise gráfica do valor a pagar pelo serviço de abastecimento de água.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise gráfica"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ],
+      "contexto_historico": [
+        "serviço de abastecimento de água"
+      ]
+    }
+  },
+  "Análise gráfica do movimento de uma viga içada por um guindaste.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise gráfica"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Proporcionalidade direta para calcular a massa corporal de uma criança.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade direta",
+        "massa corporal"
+      ]
+    }
+  },
+  "Proporcionalidade para calcular a economia diária de água com bacias ecológicas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade",
+        "bacias ecológicas",
+        "economia diária de água"
+      ],
+      "campo_lexical": [
+        "bacias ecológicas"
+      ]
+    }
+  },
+  "Proporcionalidade para calcular a dose diária de um medicamento para felinos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ],
+      "campo_lexical": [
+        "dose diária"
+      ],
+      "contexto_historico": [
+        "medicamento para felinos"
+      ]
+    }
+  },
+  "Divisão em partes proporcionais para determinar o volume de cimento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de cimento",
+        "partes proporcionais"
+      ],
+      "processo_fenomeno": [
+        "Divisão em partes proporcionais"
+      ]
+    }
+  },
+  "Divisão em partes inversamente proporcionais para determinar o valor pago a uma empresa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "partes inversamente proporcionais"
+      ]
+    }
+  },
+  "Proporcionalidade para determinar a quantidade de tijolos em um caminhão.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Relação entre densidade superficial, área e massa de papel.": {
+    "entities": {
+      "conceito_cientifico": [
+        "densidade superficial",
+        "massa de papel"
+      ]
+    }
+  },
+  "Proporcionalidade e sistema de equações para obter um tipo de prata.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade e sistema de equações"
+      ]
+    }
+  },
+  "Proporcionalidade para determinar o número de policiais em um evento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Cálculo de consumo de carboidratos e quantidade de pães para um período.": {
+    "entities": {
+      "conceito_cientifico": [
+        "quantidade de pães"
+      ]
+    }
+  },
+  "Proporcionalidade entre volume e tempo de enchimento de um depósito.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Proporcionalidade inversa para calcular o tempo de troca de pneus.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade inversa"
+      ],
+      "contexto_historico": [
+        "troca de pneus"
+      ]
+    }
+  },
+  "Proporcionalidade para determinar a nova largura de uma porta.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Cálculo de consumo de combustível com base em variações percentuais.": {
+    "entities": {
+      "conceito_cientifico": [
+        "variações percentuais"
+      ]
+    }
+  },
+  "Análise de vazão de entrada e saída para determinar o tempo de escoamento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "vazão de entrada e saída",
+        "tempo de escoamento"
+      ],
+      "processo_fenomeno": [
+        "determinar o tempo de escoamento"
+      ]
+    }
+  },
+  "Proporcionalidade entre distância percorrida às cegas e tempo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Divisão de um montante de forma proporcional ao investimento de cada sócio.": {
+    "entities": {}
+  },
+  "Análise de desempenho (razão entre total de pinos derrubados e jogadas).": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de desempenho",
+        "razão entre total de pinos derrubados e jogadas"
+      ]
+    }
+  },
+  "Cálculo de tempo de espera para escolher o caixa mais rápido.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tempo de espera"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de tempo de espera",
+        "escolher o caixa mais rápido"
+      ]
+    }
+  },
+  "Cálculo de volume de água necessário e escolha do tipo de garrafa.": {
+    "entities": {}
+  },
+  "Comparação de tempo de deslocamento para escolher o meio de transporte mais rápido.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Análise da razão entre massa de contaminantes e dias para avaliar filtros.": {
+    "entities": {
+      "conceito_cientifico": [
+        "massa de contaminantes"
+      ],
+      "processo_fenomeno": [
+        "avaliar filtros"
+      ],
+      "contexto_historico": [
+        "avaliar filtros"
+      ]
+    }
+  },
+  "Otimização da compra de suplementos para suprir necessidades e minimizar custos.": {
+    "entities": {
+      "processo_fenomeno": [
+        "minimizar custos",
+        "Otimização da compra de suplementos",
+        "suprir necessidades"
+      ]
+    }
+  },
+  "Cálculo de economia adicional com o uso de um cartão fidelidade.": {
+    "entities": {
+      "conceito_cientifico": [
+        "cartão fidelidade"
+      ]
+    }
+  },
+  "Cálculo de tempo de atividade física com base na ingestão de água.": {
+    "entities": {
+      "conceito_cientifico": [
+        "ingestão de água",
+        "tempo de atividade física"
+      ]
+    }
+  },
+  "Análise de erro em pesquisas eleitorais para escolher a mais adequada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de erro"
+      ],
+      "processo_fenomeno": [
+        "escolher a mais adequada",
+        "Análise de erro"
+      ],
+      "contexto_historico": [
+        "pesquisas eleitorais"
+      ]
+    }
+  },
+  "Cálculo da redução de volume de uma travessa de argila após contração.": {
+    "entities": {
+      "conceito_cientifico": [
+        "redução de volume",
+        "travessa de argila",
+        "contração"
+      ],
+      "processo_fenomeno": [
+        "contração",
+        "redução de volume"
+      ]
+    }
+  },
+  "Cálculo do número máximo de aplicações de insulina de um refil.": {
+    "entities": {}
+  },
+  "Análise de códigos de pneus para escolher o de menor altura.": {
+    "entities": {
+      "conceito_cientifico": [
+        "códigos de pneus"
+      ]
+    }
+  },
+  "Análise de forças de ataque e defesa em um jogo online.": {
+    "entities": {
+      "conceito_cientifico": [
+        "forças de ataque e defesa"
+      ],
+      "contexto_historico": [
+        "jogo online"
+      ]
+    }
+  },
+  "Análise da Lei de Moore para estimar o ano em que a densidade de transistores será atingida.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Lei de Moore",
+        "densidade de transistores"
+      ]
+    }
+  },
+  "Análise do aumento na quantidade de compradores após um novo investimento em marketing.": {
+    "entities": {}
+  },
+  "Cálculo da quantidade de recipientes para distribuir álcool em gel.": {
+    "entities": {
+      "conceito_cientifico": [
+        "álcool em gel"
+      ]
+    }
+  },
+  "Cálculo do novo percentual de esgoto tratado após uma meta de redução.": {
+    "entities": {
+      "conceito_cientifico": [
+        "meta de redução"
+      ],
+      "contexto_historico": [
+        "após uma meta de redução"
+      ]
+    }
+  },
+  "Proporcionalidade para determinar a quantidade de ralos de um novo reservatório.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Cálculo da redução percentual na quantidade de frango para manter o custo de uma refeição.": {
+    "entities": {
+      "conceito_cientifico": [
+        "redução percentual"
+      ],
+      "contexto_historico": [
+        "refeição"
+      ]
+    }
+  },
+  "Cálculo do desconto necessário para comprar folhas de papel ofício.": {
+    "entities": {
+      "contexto_historico": [
+        "comprar folhas de papel ofício"
+      ]
+    }
+  },
+  "Cálculo da economia diária de água com a adoção de consumo moderado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "adoção de consumo moderado"
+      ]
+    }
+  },
+  "Cálculo da redução na altura de uma lata para manter o mesmo volume.": {
+    "entities": {}
+  },
+  "Cálculo das dimensões de uma bandeira com base em módulos e proporções.": {
+    "entities": {
+      "conceito_cientifico": [
+        "módulos e proporções"
+      ]
+    }
+  },
+  "Cálculo da quantidade mínima de combustível para uma viagem de moto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "quantidade mínima de combustível"
+      ],
+      "contexto_historico": [
+        "viagem de moto"
+      ]
+    }
+  },
+  "Proporcionalidade para determinar a quantidade de moedas de ouro em um pacote de jogo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ],
+      "contexto_historico": [
+        "pacote de jogo"
+      ]
+    }
+  },
+  "Cálculo da área de painéis para dobrar a economia de energia.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área de painéis",
+        "economia de energia"
+      ],
+      "campo_semantico": [
+        "economia de energia"
+      ],
+      "campo_lexical": [
+        "economia de energia"
+      ],
+      "processo_fenomeno": [
+        "Cálculo da área"
+      ]
+    }
+  },
+  "Análise da variação de uma função para determinar o ponto de máximo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "ponto de máximo",
+        "variação"
+      ]
+    }
+  },
+  "Análise da relação entre população urbana, rural e total para determinar a taxa de urbanização.": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa de urbanização"
+      ],
+      "campo_lexical": [
+        "taxa de urbanização"
+      ]
+    }
+  },
+  "Análise da área de um terreno para determinar o número máximo de árvores plantadas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise da área"
+      ],
+      "processo_fenomeno": [
+        "Análise da área",
+        "determinar o número máximo de árvores plantadas"
+      ]
+    }
+  },
+  "Cálculo de volume de concreto para uma laje.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de concreto"
+      ]
+    }
+  },
+  "Cálculo do volume de um tronco de cone.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tronco de cone"
+      ]
+    }
+  },
+  "Expressão algébrica para o preço do concreto bombeado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Expressão algébrica",
+        "preço do concreto bombeado"
+      ]
+    }
+  },
+  "Expressão algébrica para a resistência de uma viga de madeira.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Expressão algébrica",
+        "viga de madeira"
+      ]
+    }
+  },
+  "Expressão algébrica para a área perdida de um forro após lavagem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Expressão algébrica"
+      ]
+    }
+  },
+  "Expressão algébrica para a concentração de álcool no sangue.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Expressão algébrica"
+      ]
+    }
+  },
+  "Expressão para a concentração alcoólica prejudicial à saúde.": {
+    "entities": {
+      "conceito_cientifico": [
+        "concentração alcoólica"
+      ]
+    }
+  },
+  "Expressão para o gasto semanal de uma empresa com salários.": {
+    "entities": {}
+  },
+  "Expressão para o preço de hospedagem em um aplicativo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "preço de hospedagem"
+      ]
+    }
+  },
+  "Relação alométrica entre área da superfície e massa de um mamífero.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Relação alométrica",
+        "área da superfície"
+      ]
+    }
+  },
+  "Expressão para a quantidade de produtos fabricados em função do tempo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "quantidade de produtos fabricados",
+        "função do tempo"
+      ]
+    }
+  },
+  "Expressão para o lado de uma folha de papel para confeccionar um diploma.": {
+    "entities": {}
+  },
+  "Expressão para o número de pessoas alcançadas por uma campanha publicitária.": {
+    "entities": {
+      "contexto_historico": [
+        "campanha publicitária"
+      ]
+    }
+  },
+  "Relação entre as alturas de colunas de líquido em um processo de aeração.": {
+    "entities": {
+      "conceito_cientifico": [
+        "alturas de colunas de líquido"
+      ],
+      "processo_fenomeno": [
+        "processo de aeração"
+      ]
+    }
+  },
+  "Expressão da função altura de uma cadeira em uma roda-gigante.": {
+    "entities": {
+      "conceito_cientifico": [
+        "função altura de uma cadeira"
+      ]
+    }
+  },
+  "Relação entre os tempos das luzes de um semáforo.": {
+    "entities": {}
+  },
+  "Expressão para o volume de uma bola de futebol americano em função de uma de suas medidas.": {
+    "entities": {}
+  },
+  "Relação logarítmica (Lei de Zipf) entre frequência e ranking de uma palavra.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Lei de Zipf",
+        "Relação logarítmica"
+      ]
+    }
+  },
+  "Função cosseno para modelar a pressão arterial.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Função cosseno",
+        "pressão arterial"
+      ]
+    }
+  },
+  "Relação logarítmica (Escala Richter) entre magnitude e energia de terremotos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Escala Richter",
+        "Relação logarítmica"
+      ]
+    }
+  },
+  "Função que descreve a trajetória do assento de um balanço.": {
+    "entities": {}
+  },
+  "Expressão para o valor total pago na quitação de um empréstimo.": {
+    "entities": {}
+  },
+  "Leitura de gráfico para identificar os meses de maior e menor venda.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Leitura de gráfico para determinar o tempo sem sinal de internet.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sinal de internet"
+      ],
+      "processo_fenomeno": [
+        "determinar o tempo",
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Leitura de gráfico para determinar o tempo com ruído acima de 55 decibéis.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Leitura de gráfico para determinar o dia com a quantidade máxima de bactérias.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Análise de gráfico para determinar o intervalo de distância onde uma locadora é mais barata.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico",
+        "intervalo de distância"
+      ],
+      "campo_lexical": [
+        "intervalo de distância"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico",
+        "determinar o intervalo de distância"
+      ]
+    }
+  },
+  "Análise de gráfico para determinar a atividade com maior consumo de calorias por minuto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico",
+        "consumo de calorias por minuto"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico",
+        "determinar a atividade"
+      ]
+    }
+  },
+  "Leitura de gráfico para determinar em quantos instantes uma criptomoeda estava mais valorizada.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Análise do gráfico de lucro a partir dos gráficos de receita e custo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráficos de receita e custo",
+        "gráfico de lucro"
+      ]
+    }
+  },
+  "Análise de um gráfico de consumo de energia para determinar uma sequência de deslocamentos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sequência de deslocamentos",
+        "gráfico de consumo de energia"
+      ]
+    }
+  },
+  "Leitura de gráfico para determinar por quantos minutos um veículo permaneceu imóvel.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Análise de gráfico de planos telefônicos para encontrar o mais vantajoso.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico"
+      ],
+      "campo_lexical": [
+        "planos telefônicos"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ],
+      "contexto_historico": [
+        "planos telefônicos"
+      ]
+    }
+  },
+  "Análise gráfica da força gravitacional em função da massa e do raio da órbita.": {
+    "entities": {
+      "conceito_cientifico": [
+        "força gravitacional",
+        "raio da órbita",
+        "Análise gráfica"
+      ],
+      "processo_fenomeno": [
+        "Análise gráfica"
+      ]
+    }
+  },
+  "Análise de gráficos de vazão para determinar o intervalo de enchimento constante.": {
+    "entities": {
+      "conceito_cientifico": [
+        "intervalo de enchimento constante"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos"
+      ],
+      "contexto_historico": [
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Leitura de gráfico para determinar o número de ultrapassagens de um veículo.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Identificação da representação gráfica de cinco conjuntos algébricos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "conjuntos algébricos"
+      ],
+      "processo_fenomeno": [
+        "Identificação",
+        "representação gráfica"
+      ]
+    }
+  },
+  "Análise de gráfico de esvaziamento de uma cisterna para calcular a vazão de uma bomba.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Análise do gráfico da altura da água em uma escultura em forma de ampulheta.": {
+    "entities": {
+      "conceito_cientifico": [
+        "altura da água"
+      ],
+      "processo_fenomeno": [
+        "Análise do gráfico"
+      ]
+    }
+  },
+  "Expressão algébrica para descrever um movimento periódico a partir de um gráfico.": {
+    "entities": {
+      "conceito_cientifico": [
+        "movimento periódico",
+        "Expressão algébrica"
+      ]
+    }
+  },
+  "Descrição algébrica de um conjunto de pontos na forma de um triângulo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "conjunto de pontos"
+      ]
+    }
+  },
+  "Resolução de sistema de equações para encontrar o preço de equilíbrio de mercado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema de equações",
+        "preço de equilíbrio de mercado"
+      ],
+      "processo_fenomeno": [
+        "Resolução de sistema de equações"
+      ]
+    }
+  },
+  "Análise de uma função seno para determinar o parâmetro que garante uma boa potência de um motor.": {
+    "entities": {
+      "conceito_cientifico": [
+        "função seno"
+      ]
+    }
+  },
+  "Resolução de um problema envolvendo reajuste de preço e alteração de quantidade.": {
+    "entities": {
+      "conceito_cientifico": [
+        "alteração de quantidade",
+        "reajuste de preço"
+      ],
+      "processo_fenomeno": [
+        "Resolução de um problema"
+      ],
+      "habilidade_composta": [
+        "Resolução de um problema"
+      ]
+    }
+  },
+  "Resolução de sistema de equações para determinar o preço de uma cartela de tíquetes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema de equações",
+        "cartela de tíquetes"
+      ],
+      "campo_lexical": [
+        "cartela de tíquetes"
+      ],
+      "processo_fenomeno": [
+        "Resolução de sistema de equações",
+        "determinar o preço de uma cartela de tíquetes"
+      ]
+    }
+  },
+  "Uso de produto de matrizes para calcular médias anuais de disciplinas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "produto de matrizes"
+      ],
+      "contexto_historico": [
+        "médias anuais"
+      ]
+    }
+  },
+  "Uso de logaritmos para calcular a magnitude de um terremoto.": {
+    "entities": {}
+  },
+  "Análise da relação alométrica entre área e massa de um indivíduo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "relação alométrica"
+      ]
+    }
+  },
+  "Uso de logaritmos e conceito de meia-vida para determinar o tempo de redução de massa radioativa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "conceito de meia-vida"
+      ],
+      "processo_fenomeno": [
+        "redução de massa radioativa"
+      ]
+    }
+  },
+  "Relação entre pH e concentração de íon hidrogênio.": {
+    "entities": {
+      "conceito_cientifico": [
+        "concentração de íon hidrogênio"
+      ]
+    }
+  },
+  "Geometria analítica (equação da parábola) para calcular a altura de uma abóbada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "equação da parábola",
+        "Geometria analítica"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ]
+    }
+  },
+  "Resolução de sistema de equações para determinar o número de voltas em circuitos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema de equações",
+        "número de voltas"
+      ],
+      "processo_fenomeno": [
+        "Resolução de sistema de equações"
+      ]
+    }
+  },
+  "Maximização de área de um retângulo com perímetro fixo.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Maximização de área"
+      ]
+    }
+  },
+  "Cálculo da área sob uma parábola.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo da área"
+      ],
+      "processo_fenomeno": [
+        "Cálculo da área"
+      ]
+    }
+  },
+  "Geometria analítica (vértice da parábola) para determinar a altura do líquido em uma taça.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica",
+        "vértice da parábola"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ]
+    }
+  },
+  "Análise de inequações para determinar o intervalo da profundidade da pisada de um degrau.": {
+    "entities": {}
+  },
+  "Resolução de um problema envolvendo o número de bilhetes de uma rifa.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Resolução de um problema"
+      ],
+      "habilidade_composta": [
+        "Resolução de um problema"
+      ]
+    }
+  },
+  "Modelagem de um problema de financiamento para determinar o número de parcelas.": {
+    "entities": {
+      "contexto_historico": [
+        "problema de financiamento"
+      ]
+    }
+  },
+  "Uso de logaritmos para determinar o tempo para uma liga metálica atingir uma temperatura.": {
+    "entities": {
+      "conceito_cientifico": [
+        "liga metálica"
+      ],
+      "campo_lexical": [
+        "liga metálica"
+      ],
+      "processo_fenomeno": [
+        "determinar o tempo"
+      ]
+    }
+  },
+  "Análise da taxa de cobertura de uma malha de proteção solar.": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa de cobertura",
+        "malha de proteção solar"
+      ]
+    }
+  },
+  "Expressão para a altura de um vidro em função da medida de sua base.": {
+    "entities": {
+      "conceito_cientifico": [
+        "altura de um vidro"
+      ]
+    }
+  },
+  "Resolução de uma equação envolvendo operações não convencionais.": {
+    "entities": {
+      "conceito_cientifico": [
+        "operações não convencionais"
+      ],
+      "processo_fenomeno": [
+        "operações não convencionais"
+      ]
+    }
   }
 }
