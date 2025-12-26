@@ -13,6 +13,17 @@ router = APIRouter(prefix="/api/oracle", tags=["oracle"])
 PREDICTIONS_FILE = Path(__file__).parent.parent.parent / "data" / "predictions_2026.json"
 
 
+@router.get("/debug")
+async def debug_path():
+    """Debug endpoint to check file path."""
+    return {
+        "file_path": str(PREDICTIONS_FILE),
+        "file_exists": PREDICTIONS_FILE.exists(),
+        "cwd": str(Path.cwd()),
+        "routes_dir": str(Path(__file__).parent),
+    }
+
+
 def load_predictions():
     """Load predictions from JSON file."""
     if not PREDICTIONS_FILE.exists():
