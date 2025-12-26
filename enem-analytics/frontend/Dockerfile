@@ -2,6 +2,10 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Build argument for API URL
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 # Copy package files
 COPY package*.json ./
 
@@ -11,8 +15,8 @@ RUN npm install
 # Copy source
 COPY . .
 
-# Build
-RUN npm run build
+# Build with env var
+RUN echo "Building with API_URL: $NEXT_PUBLIC_API_URL" && npm run build
 
 # Production image
 FROM node:20-alpine AS runner
