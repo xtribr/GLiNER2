@@ -39,7 +39,8 @@ def get_tri_content_gliner() -> pd.DataFrame:
     if _tri_content_gliner is None:
         gliner_path = DATA_DIR / "conteudos_tri_gliner.csv"
         if gliner_path.exists():
-            _tri_content_gliner = pd.read_csv(gliner_path)
+            # Use quoting=1 (QUOTE_ALL) to properly handle fields with commas
+            _tri_content_gliner = pd.read_csv(gliner_path, quoting=1)
         else:
             # Fall back to regular content
             _tri_content_gliner = get_tri_content()

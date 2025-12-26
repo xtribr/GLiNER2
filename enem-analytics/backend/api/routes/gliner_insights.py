@@ -33,7 +33,8 @@ def get_gliner_data() -> pd.DataFrame:
         gliner_path = DADOS_DIR / "conteudos_tri_gliner.csv"
         if not gliner_path.exists():
             raise HTTPException(status_code=500, detail="GLiNER data not found")
-        _gliner_df = pd.read_csv(gliner_path)
+        # Use quoting=1 (QUOTE_ALL) to properly handle fields with commas
+        _gliner_df = pd.read_csv(gliner_path, quoting=1)
     return _gliner_df
 
 

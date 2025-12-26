@@ -47,7 +47,8 @@ class ENEMPreprocessor:
         # TRI content data with GLiNER entities
         tri_content_file = self.data_path / "conteudos_tri_gliner.csv"
         if tri_content_file.exists():
-            self.tri_content_df = pd.read_csv(tri_content_file)
+            # Use quoting=1 (QUOTE_ALL) to properly handle fields with commas
+            self.tri_content_df = pd.read_csv(tri_content_file, quoting=1)
             print(f"Loaded {len(self.tri_content_df)} TRI content records")
 
     def _compute_tri_mappings(self):
