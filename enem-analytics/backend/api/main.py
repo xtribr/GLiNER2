@@ -49,10 +49,13 @@ def load_data():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Load data and initialize database on startup"""
-    # Create database tables
-    print("Initializing database...")
-    Base.metadata.create_all(bind=engine)
-    print("Database ready")
+    # Create database tables (if database is configured)
+    if engine:
+        print("Initializing database...")
+        Base.metadata.create_all(bind=engine)
+        print("Database ready")
+    else:
+        print("Database not configured (DATABASE_URL not set)")
 
     # Load ENEM data
     print("Loading ENEM data...")

@@ -10,6 +10,7 @@ COPY enem-analytics/backend/api/ ./api/
 COPY enem-analytics/backend/ml/ ./ml/
 COPY enem-analytics/backend/data/ ./data/
 COPY enem-analytics/backend/scripts/ ./scripts/
+COPY enem-analytics/backend/database/ ./database/
 
 # Expose port
 EXPOSE 8000
