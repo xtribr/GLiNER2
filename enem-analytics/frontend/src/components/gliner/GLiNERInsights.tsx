@@ -1089,20 +1089,26 @@ function NetworkTab({
                 </defs>
 
                 {/* Draw edges with optional flow animation */}
-                {filteredEdges.slice(0, 80).map((edge, idx) => {
+                {filteredEdges.slice(0, 120).map((edge, idx) => {
                   const sourcePos = nodePositions[edge.source];
                   const targetPos = nodePositions[edge.target];
                   if (!sourcePos || !targetPos) return null;
 
                   const isHighlighted = hoveredNode === edge.source || hoveredNode === edge.target ||
                                        selectedNode === edge.source || selectedNode === edge.target;
+                  const isInterdisciplinary = (edge as { type?: string }).type === 'interdisciplinary';
 
                   // Calculate path for curved connections
                   const midX = (sourcePos.x + targetPos.x) / 2;
                   const midY = (sourcePos.y + targetPos.y) / 2;
-                  const curvature = 2 + (idx % 3);
+                  // More curve for interdisciplinary edges to make them stand out
+                  const curvature = isInterdisciplinary ? 8 + (idx % 5) : 2 + (idx % 3);
                   const curveX = midX + curvature;
                   const curveY = midY - curvature;
+
+                  // Colors: interdisciplinary = amber/gold, normal = purple
+                  const highlightColor = isInterdisciplinary ? 'rgba(251, 191, 36, 0.9)' : 'rgba(168, 85, 247, 0.8)';
+                  const normalColor = isInterdisciplinary ? 'rgba(251, 191, 36, 0.25)' : 'rgba(148, 163, 184, 0.15)';
 
                   return (
                     <g key={idx}>
@@ -1110,8 +1116,9 @@ function NetworkTab({
                       <path
                         d={`M ${sourcePos.x}% ${sourcePos.y}% Q ${curveX}% ${curveY}% ${targetPos.x}% ${targetPos.y}%`}
                         fill="none"
-                        stroke={isHighlighted ? 'rgba(168, 85, 247, 0.8)' : 'rgba(148, 163, 184, 0.15)'}
-                        strokeWidth={isHighlighted ? 2 : 1}
+                        stroke={isHighlighted ? highlightColor : normalColor}
+                        strokeWidth={isHighlighted ? (isInterdisciplinary ? 3 : 2) : (isInterdisciplinary ? 1.5 : 1)}
+                        strokeDasharray={isInterdisciplinary ? '8 4' : undefined}
                         filter={isHighlighted ? 'url(#glowEnhanced)' : undefined}
                         className="transition-all duration-300"
                       />
@@ -1119,14 +1126,14 @@ function NetworkTab({
                       {/* Flow animation particles */}
                       {animationEnabled && isHighlighted && (
                         <>
-                          <circle r="3" fill="rgba(168, 85, 247, 0.9)">
+                          <circle r="3" fill={isInterdisciplinary ? 'rgba(251, 191, 36, 0.9)' : 'rgba(168, 85, 247, 0.9)'}>
                             <animateMotion
                               dur={`${1.5 + (idx % 3) * 0.5}s`}
                               repeatCount="indefinite"
                               path={`M ${sourcePos.x * 10} ${sourcePos.y * 5} Q ${curveX * 10} ${curveY * 5} ${targetPos.x * 10} ${targetPos.y * 5}`}
                             />
                           </circle>
-                          <circle r="2" fill="rgba(59, 130, 246, 0.7)">
+                          <circle r="2" fill={isInterdisciplinary ? 'rgba(245, 158, 11, 0.7)' : 'rgba(59, 130, 246, 0.7)'}>
                             <animateMotion
                               dur={`${2 + (idx % 2) * 0.5}s`}
                               repeatCount="indefinite"
@@ -1403,6 +1410,11 @@ function NetworkTab({
                     <span className="text-xs text-slate-400">Campo Lexical</span>
                   </div>
                 )}
+                {/* Interdisciplinary connection legend */}
+                <div className="flex items-center gap-2 ml-4 pl-4 border-l border-slate-700">
+                  <div className="w-8 h-0.5 bg-amber-400 rounded" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #fbbf24 0, #fbbf24 8px, transparent 8px, transparent 12px)' }} />
+                  <span className="text-xs text-amber-400">Interdisciplinar</span>
+                </div>
               </div>
               <div className="flex items-center gap-3">
                 {viewMode === 'clusters' && (

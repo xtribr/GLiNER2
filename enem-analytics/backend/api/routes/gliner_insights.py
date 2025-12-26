@@ -405,8 +405,71 @@ async def get_knowledge_graph(
                 'type': 'concept-lexical'
             })
 
-    # Count interdisciplinary nodes
+    # Add interdisciplinary edges (cross-area connections)
+    # Connect concepts from different areas that share semantic/lexical fields
+    added_interdisciplinary = set()
+
+    # Find semantic fields that appear in multiple areas
+    for sem, sem_area_dist in semantic_areas.items():
+        if len(sem_area_dist) > 1:  # Appears in multiple areas
+            sem_id = f"semantic_{sem}"
+            if sem_id not in node_ids:
+                continue
+
+            # Get all concepts connected to this semantic field
+            connected_concepts = [
+                concept for (concept, s), _ in concept_semantic_edges.items()
+                if s == sem and f"concept_{concept}" in node_ids
+            ]
+
+            # Create edges between concepts from different areas through this semantic field
+            for i, c1 in enumerate(connected_concepts):
+                c1_area = get_primary_area(concept_areas.get(c1, Counter()))
+                for c2 in connected_concepts[i+1:]:
+                    c2_area = get_primary_area(concept_areas.get(c2, Counter()))
+                    if c1_area != c2_area:  # Different areas = interdisciplinary
+                        edge_key = tuple(sorted([f"concept_{c1}", f"concept_{c2}"]))
+                        if edge_key not in added_interdisciplinary:
+                            edges.append({
+                                'source': f"concept_{c1}",
+                                'target': f"concept_{c2}",
+                                'weight': 1,
+                                'type': 'interdisciplinary',
+                                'via': sem
+                            })
+                            added_interdisciplinary.add(edge_key)
+
+    # Same for lexical fields
+    for lex, lex_area_dist in lexical_areas.items():
+        if len(lex_area_dist) > 1:  # Appears in multiple areas
+            lex_id = f"lexical_{lex}"
+            if lex_id not in node_ids:
+                continue
+
+            connected_concepts = [
+                concept for (concept, l), _ in concept_lexical_edges.items()
+                if l == lex and f"concept_{concept}" in node_ids
+            ]
+
+            for i, c1 in enumerate(connected_concepts):
+                c1_area = get_primary_area(concept_areas.get(c1, Counter()))
+                for c2 in connected_concepts[i+1:]:
+                    c2_area = get_primary_area(concept_areas.get(c2, Counter()))
+                    if c1_area != c2_area:
+                        edge_key = tuple(sorted([f"concept_{c1}", f"concept_{c2}"]))
+                        if edge_key not in added_interdisciplinary:
+                            edges.append({
+                                'source': f"concept_{c1}",
+                                'target': f"concept_{c2}",
+                                'weight': 1,
+                                'type': 'interdisciplinary',
+                                'via': lex
+                            })
+                            added_interdisciplinary.add(edge_key)
+
+    # Count interdisciplinary nodes and edges
     interdisciplinary_count = len([n for n in nodes if n.get('is_interdisciplinary', False)])
+    interdisciplinary_edges = len([e for e in edges if e.get('type') == 'interdisciplinary'])
 
     return {
         'codigo_inep': codigo_inep,
@@ -420,6 +483,7 @@ async def get_knowledge_graph(
             'semantic_nodes': len([n for n in nodes if n['type'] == 'campo_semantico']),
             'lexical_nodes': len([n for n in nodes if n['type'] == 'campo_lexical']),
             'interdisciplinary_nodes': interdisciplinary_count,
+            'interdisciplinary_edges': interdisciplinary_edges,
             'nodes_by_area': {
                 area_code: len([n for n in nodes if n.get('area') == area_code])
                 for area_code in ['CN', 'CH', 'LC', 'MT']
