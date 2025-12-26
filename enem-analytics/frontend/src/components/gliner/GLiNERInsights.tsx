@@ -585,54 +585,47 @@ function NetworkTab({
           </div>
 
           {/* Visual Network Representation */}
-          <div className="h-72 relative bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl overflow-hidden">
-            {/* Concept Nodes */}
-            <div className="absolute inset-0 flex flex-wrap items-center justify-center gap-2 p-4">
-              {graphData.nodes.slice(0, 30).map((node, idx) => {
-                const angle = (idx / 30) * Math.PI * 2;
-                const radius = node.type === 'conceito_cientifico' ? 35 : node.type === 'campo_semantico' ? 42 : 48;
-                const x = 50 + Math.cos(angle) * radius;
-                const y = 50 + Math.sin(angle) * radius;
-
-                return (
+          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4">
+            {/* Nodes Grid */}
+            <div className="flex flex-wrap gap-2 justify-center">
+              {graphData.nodes.slice(0, 40).map((node) => (
+                <div
+                  key={node.id}
+                  className="group relative"
+                >
                   <div
-                    key={node.id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all hover:scale-110 hover:z-10"
+                    className="px-3 py-1.5 rounded-full text-white text-xs font-medium shadow-sm cursor-pointer transition-all hover:scale-105 hover:shadow-md"
                     style={{
-                      left: `${x}%`,
-                      top: `${y}%`,
+                      backgroundColor: node.color,
                     }}
-                    title={`${node.label} (${node.count}x)`}
                   >
-                    <div
-                      className="rounded-full flex items-center justify-center text-white text-[8px] font-medium shadow-md cursor-pointer"
-                      style={{
-                        width: `${node.size}px`,
-                        height: `${node.size}px`,
-                        backgroundColor: node.color,
-                        opacity: 0.8 + (node.count / 50) * 0.2,
-                      }}
-                    >
-                      {node.label.length > 6 ? node.label.slice(0, 6) + '...' : node.label}
-                    </div>
+                    {node.label.length > 15 ? node.label.slice(0, 15) + '...' : node.label}
                   </div>
-                );
-              })}
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-lg">
+                    <p className="font-semibold">{node.label}</p>
+                    <p className="text-gray-300">
+                      {node.type === 'conceito_cientifico' ? 'Conceito' :
+                       node.type === 'campo_semantico' ? 'Campo Semântico' : 'Campo Lexical'}
+                    </p>
+                    <p className="text-gray-300">Frequência: {node.count}x</p>
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* Legend */}
-            <div className="absolute bottom-3 left-3 bg-white/90 rounded-lg p-2 text-xs">
-              <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-blue-500" /> Conceito
-                </span>
-                <span className="flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-purple-500" /> Semântico
-                </span>
-                <span className="flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-green-500" /> Lexical
-                </span>
-              </div>
+            <div className="flex items-center justify-center gap-6 mt-4 pt-3 border-t border-slate-200">
+              <span className="flex items-center gap-1.5 text-xs text-gray-600">
+                <div className="w-3 h-3 rounded-full bg-blue-500" /> Conceito
+              </span>
+              <span className="flex items-center gap-1.5 text-xs text-gray-600">
+                <div className="w-3 h-3 rounded-full bg-purple-500" /> Semântico
+              </span>
+              <span className="flex items-center gap-1.5 text-xs text-gray-600">
+                <div className="w-3 h-3 rounded-full bg-green-500" /> Lexical
+              </span>
             </div>
           </div>
 
