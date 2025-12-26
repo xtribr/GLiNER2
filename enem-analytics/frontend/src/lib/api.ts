@@ -470,7 +470,7 @@ export const api = {
         searchParams.set(key, value.toString());
       }
     });
-    return fetchAPI<SchoolSummary[]>(`/api/schools?${searchParams}`);
+    return fetchAPI<SchoolSummary[]>(`/api/schools/?${searchParams}`);
   },
 
   compareSchools: (inep1: string, inep2: string) =>
