@@ -15138,5 +15138,2858 @@
         "identificação de monômeros"
       ]
     }
+  },
+  "Resolução de um sistema de equações para determinar a quantidade de camisetas em uma mala.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema de equações"
+      ],
+      "processo_fenomeno": [
+        "Resolução"
+      ]
+    }
+  },
+  "Geometria analítica (circuncentro) para determinar a localização de uma torre.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "localização de uma torre"
+      ]
+    }
+  },
+  "Análise de dados de fósseis e meia-vida para determinar o mais antigo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de dados"
+      ],
+      "processo_fenomeno": [
+        "determinar o mais antigo",
+        "Análise de dados"
+      ]
+    }
+  },
+  "Geometria plana (área de setor circular) para determinar o raio de uma piscina.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área de setor circular",
+        "Geometria plana"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "raio de uma piscina"
+      ]
+    }
+  },
+  "Análise de velocidades de torres de um pivô de irrigação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "velocidades de torres"
+      ],
+      "contexto_historico": [
+        "pivô de irrigação"
+      ]
+    }
+  },
+  "Análise da representação geométrica de uma equação (ramo de hipérbole).": {
+    "entities": {
+      "conceito_cientifico": [
+        "representação geométrica"
+      ]
+    }
+  },
+  "Comparação de tempo de construção de uma galeria por diferentes trajetos.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Análise de uma função quadrática para classificar o desempenho de uma empresa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "função quadrática"
+      ]
+    }
+  },
+  "Geometria analítica (equações de reta e circunferência) para maximizar pontuação em um jogo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica",
+        "equações de reta e circunferência"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ],
+      "processo_fenomeno": [
+        "maximizar pontuação"
+      ]
+    }
+  },
+  "Uso de logaritmos para determinar o nível de intensidade de som de uma máquina.": {
+    "entities": {
+      "conceito_cientifico": [
+        "intensidade de som"
+      ]
+    }
+  },
+  "Análise da trajetória parabólica de uma bola de vôlei para verificar se o saque foi invalidado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "trajetória parabólica",
+        "bola de vôlei"
+      ]
+    }
+  },
+  "Geometria analítica (lugar geométrico) para determinar a distância entre bombeiros.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica",
+        "lugar geométrico"
+      ],
+      "campo_semantico": [
+        "Geometria",
+        "lugar geométrico"
+      ],
+      "campo_lexical": [
+        "Geometria",
+        "lugar geométrico"
+      ]
+    }
+  },
+  "Análise de uma função cosseno para determinar o mês de produção máxima de um produto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "função cosseno",
+        "mês de produção máxima"
+      ]
+    }
+  },
+  "Aplicação da \"Fórmula de Young\" para calcular a dose infantil de um medicamento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Fórmula de Young"
+      ],
+      "campo_lexical": [
+        "dose infantil"
+      ]
+    }
+  },
+  "Análise de uma progressão geométrica para determinar o momento de aplicar um produto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão geométrica"
+      ]
+    }
+  },
+  "Cálculo do valor à vista de um produto a partir de pagamentos a prazo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "valor à vista",
+        "pagamentos a prazo"
+      ],
+      "contexto_historico": [
+        "pagamentos a prazo"
+      ]
+    }
+  },
+  "Análise de opções de pagamento e investimento para escolher a mais vantajosa.": {
+    "entities": {}
+  },
+  "Análise de fusos horários e tempo de viagem para determinar o horário de um voo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tempo de viagem",
+        "fusos horários"
+      ]
+    }
+  },
+  "Resolução de uma equação do segundo grau para determinar o tempo de espera para abrir um forno.": {
+    "entities": {
+      "conceito_cientifico": [
+        "equação do segundo grau"
+      ],
+      "campo_lexical": [
+        "equação do segundo grau"
+      ],
+      "processo_fenomeno": [
+        "abrir um forno",
+        "determinar o tempo de espera",
+        "Resolução"
+      ],
+      "contexto_historico": [
+        "abrir um forno"
+      ],
+      "habilidade_composta": [
+        "Resolução"
+      ]
+    }
+  },
+  "Determinação da expressão de uma função polinomial para alterar notas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "função polinomial"
+      ],
+      "processo_fenomeno": [
+        "alterar notas",
+        "Determinação da expressão"
+      ]
+    }
+  },
+  "Divisão em partes proporcionais para igualar a participação de sócios.": {
+    "entities": {
+      "conceito_cientifico": [
+        "partes proporcionais"
+      ],
+      "processo_fenomeno": [
+        "Divisão em partes proporcionais",
+        "igualar a participação de sócios"
+      ]
+    }
+  },
+  "Análise da Lei de Cotas para determinar o número mínimo de contratações.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Lei de Cotas"
+      ]
+    }
+  },
+  "Análise de uma função quadrática para determinar o mês com maior número de infectados.": {
+    "entities": {
+      "conceito_cientifico": [
+        "função quadrática"
+      ]
+    }
+  },
+  "Análise da redução da área a ser pintada em uma fonte para determinar o tamanho adequado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "redução da área"
+      ],
+      "processo_fenomeno": [
+        "determinar o tamanho adequado",
+        "redução da área"
+      ]
+    }
+  },
+  "Análise de uma função quadrática para determinar a temperatura máxima de uma estufa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "função quadrática",
+        "temperatura máxima"
+      ]
+    }
+  },
+  "Análise de uma fórmula de prestação para determinar o menor número de parcelas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "fórmula de prestação"
+      ],
+      "campo_lexical": [
+        "fórmula de prestação"
+      ]
+    }
+  },
+  "Interpolação linear para estimar a esperança de vida ao nascer.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Interpolação linear"
+      ],
+      "campo_semantico": [
+        "esperança de vida"
+      ],
+      "campo_lexical": [
+        "esperança de vida"
+      ],
+      "contexto_historico": [
+        "ao nascer"
+      ]
+    }
+  },
+  "Identificação de padrão em uma tabela para determinar o número de partidas de um torneio.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Soma dos termos de uma progressão aritmética para calcular a produção total de arroz.": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão aritmética",
+        "produção total de arroz"
+      ]
+    }
+  },
+  "Análise de gráfico de receitas e despesas para determinar o mês de maior lucro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico"
+      ],
+      "campo_lexical": [
+        "receitas e despesas"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ],
+      "contexto_historico": [
+        "mês de maior lucro"
+      ]
+    }
+  },
+  "Interpolação linear para estimar a cobertura de uma campanha de vacinação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Interpolação linear"
+      ],
+      "campo_lexical": [
+        "campanha de vacinação"
+      ],
+      "contexto_historico": [
+        "campanha de vacinação"
+      ]
+    }
+  },
+  "Análise de tendência linear em um gráfico para prever vendas futuras.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tendência linear"
+      ],
+      "processo_fenomeno": [
+        "prever vendas futuras"
+      ],
+      "contexto_historico": [
+        "prever vendas futuras"
+      ]
+    }
+  },
+  "Análise de tendências lineares para determinar quando as vendas de um produto superarão as de outro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tendências lineares"
+      ]
+    }
+  },
+  "Análise de um gráfico de níveis de substâncias para determinar o número de vezes em que foram iguais": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de níveis de substâncias"
+      ]
+    }
+  },
+  "Análise de uma progressão aritmética para determinar o ano em que o tempo de estudo atingirá uma met": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão aritmética"
+      ]
+    }
+  },
+  "Análise de tendência linear para prever quando um reservatório atingirá o nível zero.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tendência linear",
+        "nível zero"
+      ]
+    }
+  },
+  "Análise de tendência de redução para prever o número de acidentes em um ano futuro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tendência de redução"
+      ],
+      "processo_fenomeno": [
+        "prever o número de acidentes"
+      ],
+      "contexto_historico": [
+        "ano futuro"
+      ]
+    }
+  },
+  "Projeção estatística para determinar o número de médicos por mil habitantes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Projeção estatística"
+      ],
+      "processo_fenomeno": [
+        "determinar o número de médicos por mil habitantes"
+      ]
+    }
+  },
+  "Cálculo de variação percentual para prever a taxa de fecundidade futura.": {
+    "entities": {
+      "conceito_cientifico": [
+        "variação percentual",
+        "taxa de fecundidade"
+      ]
+    }
+  },
+  "Análise de uma tabela de notas para determinar o número de configurações que tornariam uma escola ca": {
+    "entities": {
+      "conceito_cientifico": [
+        "escola campeã",
+        "tabela de notas"
+      ],
+      "campo_lexical": [
+        "escola campeã",
+        "tabela de notas"
+      ],
+      "processo_fenomeno": [
+        "determinar o número de configurações"
+      ]
+    }
+  },
+  "Análise de um gráfico de variação de valor de ações para determinar o número de operações de um inve": {
+    "entities": {
+      "conceito_cientifico": [
+        "número de operações",
+        "gráfico de variação de valor de ações"
+      ]
+    }
+  },
+  "Leitura de gráfico e cálculo da diferença entre o maior e o menor valor.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Análise de gráfico e tabela para determinar o investidor que fez o melhor negócio.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico"
+      ],
+      "processo_fenomeno": [
+        "determinar o investidor",
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Leitura de gráfico de custos de envio para calcular o valor total gasto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "valor total gasto",
+        "custos de envio"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Leitura de tabela para calcular as horas gastas em atividades escolares na semana.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de tabela"
+      ],
+      "contexto_historico": [
+        "atividades escolares"
+      ],
+      "habilidade_composta": [
+        "Leitura de tabela"
+      ]
+    }
+  },
+  "Leitura de tabela para calcular o número total de candidatos inscritos.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de tabela"
+      ]
+    }
+  },
+  "Cálculo de reduções percentuais para classificar a taxa de glicose.": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa de glicose",
+        "reduções percentuais"
+      ]
+    }
+  },
+  "Cálculo do lucro médio anual para escolher a melhor empresa para comprar.": {
+    "entities": {
+      "conceito_cientifico": [
+        "lucro médio anual"
+      ]
+    }
+  },
+  "Aplicação do Método de Borda para determinar a poesia vencedora.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Método de Borda"
+      ],
+      "campo_lexical": [
+        "poesia vencedora"
+      ]
+    }
+  },
+  "Análise de gráfico de setores para determinar o número de jovens que trabalham.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico de setores"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico de setores"
+      ]
+    }
+  },
+  "Análise de frequência de letras em um texto codificado com Cifra de César.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cifra de César"
+      ],
+      "processo_fenomeno": [
+        "Análise de frequência de letras"
+      ]
+    }
+  },
+  "Análise de um gráfico sobre desemprego aberto e oculto.": {
+    "entities": {}
+  },
+  "Análise de gráfico sobre a população economicamente ativa para fazer inferências.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico",
+        "população economicamente ativa"
+      ],
+      "campo_lexical": [
+        "população economicamente ativa"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ],
+      "contexto_historico": [
+        "população economicamente ativa"
+      ]
+    }
+  },
+  "Leitura de tabela para determinar a porcentagem de pessoas vacinadas de grupos de risco.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de tabela"
+      ]
+    }
+  },
+  "Análise de gráfico sobre a quantidade de água em reservatórios.": {
+    "entities": {
+      "conceito_cientifico": [
+        "quantidade de água",
+        "Análise de gráfico"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Leitura de gráfico para calcular o aumento percentual no volume de vendas de medicamentos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "aumento percentual",
+        "volume de vendas de medicamentos"
+      ],
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Leitura de gráfico e cálculo de porcentagem para determinar a profundidade de um rio.": {
+    "entities": {
+      "conceito_cientifico": [
+        "profundidade",
+        "cálculo de porcentagem"
+      ],
+      "campo_lexical": [
+        "profundidade"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico",
+        "cálculo de porcentagem"
+      ]
+    }
+  },
+  "Análise de um gráfico de crescimento infantil para calcular o aumento percentual da altura.": {
+    "entities": {
+      "conceito_cientifico": [
+        "aumento percentual da altura",
+        "gráfico de crescimento infantil"
+      ]
+    }
+  },
+  "Análise de gráficos de setores para determinar a quantidade de PET reciclado para um fim específico.": {
+    "entities": {
+      "conceito_cientifico": [
+        "PET reciclado",
+        "Análise de gráficos de setores"
+      ],
+      "campo_lexical": [
+        "fim específico"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise de gráficos e tabelas para determinar o aumento necessário na receita de uma empresa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráficos"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise de um gráfico de temperatura para determinar quantas vezes a velocidade de um pistão se anul": {
+    "entities": {
+      "conceito_cientifico": [
+        "velocidade",
+        "gráfico de temperatura"
+      ]
+    }
+  },
+  "Análise de um gráfico de vendas para estimar a quantidade a mais de pastéis a serem vendidos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de vendas"
+      ]
+    }
+  },
+  "Análise de gráfico e média aritmética para determinar quando as vendas voltarão a ser piores que em ": {
+    "entities": {
+      "conceito_cientifico": [
+        "média aritmética",
+        "Análise de gráfico"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Análise de uma tabela de censo demográfico para calcular o percentual de aumento da população.": {
+    "entities": {
+      "conceito_cientifico": [
+        "percentual de aumento da população",
+        "tabela de censo demográfico"
+      ]
+    }
+  },
+  "Análise de gráfico de barras para escolher a melhor forma de promoção para diferentes classes sociai": {
+    "entities": {
+      "processo_fenomeno": [
+        "Análise de gráfico de barras",
+        "escolher a melhor forma de promoção"
+      ]
+    }
+  },
+  "Análise de um gráfico de linha para identificar os dias de maior eficiência em um SAC.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de linha"
+      ]
+    }
+  },
+  "Análise de gráfico sobre extensão de gelo marítimo para inferir o ano de maior aquecimento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "extensão de gelo marítimo",
+        "Análise de gráfico"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ],
+      "habilidade_composta": [
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Análise de gráficos para determinar o dia com a metodologia de trabalho mais eficiente.": {
+    "entities": {
+      "conceito_cientifico": [
+        "metodologia de trabalho",
+        "Análise de gráficos"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos",
+        "metodologia de trabalho",
+        "determinar o dia"
+      ],
+      "contexto_historico": [
+        "determinar o dia",
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise de uma tabela de custos para escolher o operário mais econômico.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tabela de custos"
+      ],
+      "processo_fenomeno": [
+        "escolher o operário mais econômico"
+      ]
+    }
+  },
+  "Análise de tabela sobre doação de sangue para identificar regiões prioritárias para campanhas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "doação de sangue",
+        "Análise de tabela",
+        "regiões prioritárias"
+      ],
+      "campo_lexical": [
+        "doação de sangue"
+      ],
+      "processo_fenomeno": [
+        "Análise de tabela",
+        "identificar regiões prioritárias"
+      ]
+    }
+  },
+  "Análise de gráfico de setores para determinar o reservatório com maior volume de água.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico de setores"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico de setores"
+      ]
+    }
+  },
+  "Análise de gráficos para determinar o tipo de perfume que gerou maior arrecadação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráficos",
+        "arrecadação"
+      ],
+      "campo_lexical": [
+        "arrecadação"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos"
+      ],
+      "contexto_historico": [
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise de tabelas para determinar o dia com maior gasto calórico.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gasto calórico",
+        "Análise de tabelas"
+      ],
+      "processo_fenomeno": [
+        "Análise de tabelas",
+        "determinar o dia"
+      ]
+    }
+  },
+  "Análise de gráficos para determinar o ano de maior rentabilidade de aluguel.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráficos",
+        "rentabilidade"
+      ],
+      "campo_semantico": [
+        "rentabilidade"
+      ],
+      "campo_lexical": [
+        "rentabilidade de aluguel",
+        "Análise de gráficos"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos"
+      ],
+      "contexto_historico": [
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise de gráficos de trajetória para determinar a alteração necessária para a interceptação de pro": {
+    "entities": {
+      "conceito_cientifico": [
+        "interceptação de projéteis",
+        "Análise de gráficos de trajetória"
+      ],
+      "processo_fenomeno": [
+        "interceptação de projéteis",
+        "Análise de gráficos de trajetória",
+        "determinar a alteração necessária"
+      ],
+      "contexto_historico": [
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise de gráficos de setores para determinar a maior taxa de aumento no tempo de acesso a um site.": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa de aumento",
+        "tempo de acesso",
+        "Análise de gráficos de setores"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos de setores"
+      ]
+    }
+  },
+  "Análise de um gráfico de previsão do tempo para verificar a correção de alertas emitidos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de previsão do tempo",
+        "correção de alertas"
+      ]
+    }
+  },
+  "Análise de um histograma de preços de apartamentos para verificar uma afirmação da corretora.": {
+    "entities": {}
+  },
+  "Análise de tabelas de notas e probabilidades para escolher o melhor salto ornamental.": {
+    "entities": {
+      "conceito_cientifico": [
+        "salto ornamental"
+      ],
+      "processo_fenomeno": [
+        "escolher o melhor salto ornamental"
+      ]
+    }
+  },
+  "Análise de um gráfico com dados climáticos para escolher o melhor mês para o plantio.": {
+    "entities": {
+      "conceito_cientifico": [
+        "dados climáticos"
+      ],
+      "processo_fenomeno": [
+        "Análise de um gráfico",
+        "escolher o melhor mês para o plantio"
+      ]
+    }
+  },
+  "Cálculo do índice de eficiência de vacas para determinar a mais eficiente.": {
+    "entities": {
+      "conceito_cientifico": [
+        "índice de eficiência de vacas"
+      ]
+    }
+  },
+  "Geometria analítica e cálculo de distâncias em uma malha para determinar o percurso mais curto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria analítica",
+        "cálculo de distâncias"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria"
+      ]
+    }
+  },
+  "Análise de gráficos para calcular a taxa de urbanização e determinar qual município receberá investi": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa de urbanização",
+        "Análise de gráficos"
+      ],
+      "campo_lexical": [
+        "taxa de urbanização"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráficos"
+      ],
+      "contexto_historico": [
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise da distorção visual em gráficos para calcular a diferença entre razões de alturas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "razões de alturas",
+        "distorção visual"
+      ]
+    }
+  },
+  "Cálculo de média aritmética para determinar o lucro mínimo para um gerente.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média aritmética",
+        "lucro mínimo"
+      ],
+      "campo_lexical": [
+        "lucro mínimo"
+      ]
+    }
+  },
+  "Cálculo de média aritmética ponderada dos salários de funcionários.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média aritmética ponderada"
+      ],
+      "contexto_historico": [
+        "salários de funcionários"
+      ]
+    }
+  },
+  "Cálculo de média ponderada para escolher a empresa mais bem avaliada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de média ponderada"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de média ponderada"
+      ]
+    }
+  },
+  "Cálculo da mediana do número de terremotos em um período.": {
+    "entities": {}
+  },
+  "Cálculo da média de idades a partir de um gráfico de frequências.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de frequências",
+        "média de idades"
+      ],
+      "campo_semantico": [
+        "média de idades"
+      ],
+      "campo_lexical": [
+        "média de idades"
+      ]
+    }
+  },
+  "Cálculo da média anual do número de carros vendidos por uma marca.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média anual"
+      ]
+    }
+  },
+  "Cálculo da mediana dos tempos de atletas em uma prova de natação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "mediana dos tempos"
+      ],
+      "contexto_historico": [
+        "prova de natação"
+      ]
+    }
+  },
+  "Cálculo da moda do número de pessoas em um elevador.": {
+    "entities": {}
+  },
+  "Cálculo da média do número de acidentes por funcionário em uma amostra.": {
+    "entities": {}
+  },
+  "Comparação entre a média aritmética simples e a média após descarte da maior e menor nota.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Cálculo da média diária de garrafas fora das especificações.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média diária de garrafas"
+      ],
+      "contexto_historico": [
+        "fora das especificações"
+      ]
+    }
+  },
+  "Comparação entre média, mediana e moda de uma distribuição de dados.": {
+    "entities": {
+      "conceito_cientifico": [
+        "distribuição de dados"
+      ],
+      "campo_lexical": [
+        "distribuição de dados"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Cálculo da mediana da quantidade de crianças por família.": {
+    "entities": {}
+  },
+  "Análise de séries de experimentos para encontrar o reagente com mais resultados acima da média.": {
+    "entities": {
+      "conceito_cientifico": [
+        "reagente",
+        "Análise de séries de experimentos"
+      ],
+      "processo_fenomeno": [
+        "Análise de séries de experimentos",
+        "encontrar o reagente"
+      ]
+    }
+  },
+  "Cálculo da mediana dos valores dos lucros apurados por uma empresa.": {
+    "entities": {}
+  },
+  "Cálculo da mediana dos empregos formais surgidos a partir de um gráfico.": {
+    "entities": {
+      "campo_semantico": [
+        "empregos formais"
+      ],
+      "campo_lexical": [
+        "empregos formais"
+      ],
+      "contexto_historico": [
+        "empregos formais"
+      ]
+    }
+  },
+  "Cálculo da variância das produções de talhões.": {
+    "entities": {
+      "conceito_cientifico": [
+        "produções de talhões"
+      ]
+    }
+  },
+  "Cálculo da mediana do valor da diária a partir de um gráfico de áreas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de áreas"
+      ],
+      "processo_fenomeno": [
+        "Cálculo da mediana"
+      ]
+    }
+  },
+  "Cálculo da mediana da taxa de desemprego em um período.": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa de desemprego"
+      ]
+    }
+  },
+  "Cálculo de probabilidade simples (senha sorteada).": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidade simples",
+        "senha sorteada"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de média e comparação para determinar a contratação de funcionários.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de média e comparação"
+      ],
+      "campo_lexical": [
+        "contratação de funcionários"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de média e comparação",
+        "determinar a contratação de funcionários"
+      ],
+      "contexto_historico": [
+        "contratação de funcionários"
+      ]
+    }
+  },
+  "Cálculo de probabilidade em um sorteio com ordem decrescente de idade.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidade",
+        "ordem decrescente de idade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade em um sorteio com diferentes \"pesos\" para os participantes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de média ponderada para determinar a nota mínima para aprovação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de média ponderada",
+        "nota mínima"
+      ],
+      "processo_fenomeno": [
+        "determinar a nota mínima",
+        "Cálculo de média ponderada"
+      ],
+      "contexto_historico": [
+        "aprovação"
+      ]
+    }
+  },
+  "Cálculo do número de perguntas a serem acrescentadas para atingir uma probabilidade desejada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade condicional (declaração ser inconsistente, dado que era fraudulenta).": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade condicional"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Análise do coeficiente de variação para avaliar a eficiência de uma ração.": {
+    "entities": {
+      "conceito_cientifico": [
+        "coeficiente de variação"
+      ]
+    }
+  },
+  "Cálculo da nova média de altura de um time após uma substituição.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média de altura",
+        "substituição"
+      ],
+      "contexto_historico": [
+        "após uma substituição"
+      ]
+    }
+  },
+  "Cálculo de probabilidade de dois eventos independentes ocorrerem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Resolução de sistema de equações para determinar a distribuição percentual de entrevistados.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sistema de equações",
+        "distribuição percentual"
+      ],
+      "processo_fenomeno": [
+        "Resolução de sistema de equações"
+      ]
+    }
+  },
+  "Cálculo de probabilidades em um sorteio com etapas e restrições.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidades"
+      ]
+    }
+  },
+  "Cálculo da probabilidade de uma opinião ser escolhida em uma enquete.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade total (probabilidade de atraso com ou sem chuva).": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidade total",
+        "probabilidade de atraso com ou sem chuva"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade condicional (aluno falar espanhol, dado que não fala inglês).": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade condicional"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ],
+      "contexto_historico": [
+        "aluno falar espanhol"
+      ]
+    }
+  },
+  "Cálculo da sensibilidade de um teste diagnóstico a partir de uma tabela.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sensibilidade"
+      ],
+      "contexto_historico": [
+        "teste diagnóstico"
+      ]
+    }
+  },
+  "Cálculo de probabilidade binomial (observar exatamente um sinal verde em 10).": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade binomial",
+        "sinal verde"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade de um evento ocorrer em uma determinada tentativa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade de um percurso em um mapa com ramificações.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo da probabilidade de pelo menos um de três eventos ocorrer.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade em um campeonato disputado em melhor de sete jogos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo da média de vendas para determinar qual lanche será incluído no cardápio.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média de vendas"
+      ]
+    }
+  },
+  "Cálculo da média de lucros para tomar uma decisão de compra de matéria-prima.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média de lucros"
+      ],
+      "contexto_historico": [
+        "compra de matéria-prima"
+      ]
+    }
+  },
+  "Cálculo da média da receita bruta anual para escolher empresas para comprar.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média da receita bruta anual"
+      ],
+      "contexto_historico": [
+        "escolher empresas para comprar"
+      ]
+    }
+  },
+  "Análise de pontuações para determinar qual jogador precisa de menos pontos para atingir uma média.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de pontuações"
+      ],
+      "processo_fenomeno": [
+        "Análise de pontuações",
+        "atingir uma média"
+      ]
+    }
+  },
+  "Cálculo do coeficiente de rendimento climático (CRC) para escolher o melhor pneu.": {
+    "entities": {
+      "conceito_cientifico": [
+        "coeficiente de rendimento climático (CRC)"
+      ],
+      "contexto_historico": [
+        "escolher o melhor pneu"
+      ]
+    }
+  },
+  "Cálculo da média de faturamento mensal para determinar a comissão a ser recebida.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média de faturamento mensal"
+      ],
+      "campo_lexical": [
+        "média de faturamento mensal"
+      ]
+    }
+  },
+  "Cálculo da mediana das notas para determinar o candidato aprovado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "mediana das notas"
+      ],
+      "processo_fenomeno": [
+        "determinar o candidato aprovado"
+      ]
+    }
+  },
+  "Análise do desvio padrão para determinar os atletas mais e menos regulares.": {
+    "entities": {
+      "conceito_cientifico": [
+        "desvio padrão"
+      ]
+    }
+  },
+  "Análise de média, mediana, moda e média da cor para determinar qual sapato não será mais vendido.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média da cor"
+      ],
+      "processo_fenomeno": [
+        "determinar qual sapato não será mais vendido"
+      ]
+    }
+  },
+  "Análise combinatória para determinar o tipo de senha com menor probabilidade de ser descoberta.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidades para escolher o quadrado com menor chance de conter uma mina.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidades"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de probabilidades"
+      ]
+    }
+  },
+  "Cálculo de média e análise de critério de desempate para classificar candidatos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de média",
+        "análise de critério de desempate"
+      ],
+      "processo_fenomeno": [
+        "classificar candidatos"
+      ],
+      "contexto_historico": [
+        "classificar candidatos"
+      ]
+    }
+  },
+  "Análise de média, mediana e moda das alturas para determinar em qual time os alunos jogaram.": {
+    "entities": {
+      "processo_fenomeno": [
+        "determinar em qual time os alunos jogaram"
+      ]
+    }
+  },
+  "Cálculo de probabilidades de somas no lançamento de dois dados.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidades de somas"
+      ],
+      "processo_fenomeno": [
+        "lançamento de dois dados"
+      ],
+      "contexto_historico": [
+        "lançamento de dois dados"
+      ]
+    }
+  },
+  "Cálculo e comparação de probabilidades para escolher a opção mais vantajosa para ganhar um prêmio.": {
+    "entities": {
+      "processo_fenomeno": [
+        "comparação"
+      ],
+      "contexto_historico": [
+        "ganhar um prêmio"
+      ]
+    }
+  },
+  "Cálculo da probabilidade de um parafuso ser defeituoso para classificar o desempenho de máquinas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ],
+      "processo_fenomeno": [
+        "classificar o desempenho de máquinas"
+      ]
+    }
+  },
+  "Análise de dados de horários (moda e mediana) para calcular uma probabilidade máxima.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade máxima",
+        "Análise de dados",
+        "moda e mediana"
+      ],
+      "campo_semantico": [
+        "probabilidade",
+        "Análise de dados"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ],
+      "processo_fenomeno": [
+        "Análise de dados"
+      ],
+      "habilidade_composta": [
+        "Análise de dados"
+      ]
+    }
+  },
+  "Cálculo da média aritmética das notas para determinar quais alunos foram reprovados.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média aritmética"
+      ],
+      "processo_fenomeno": [
+        "determinar quais alunos foram reprovados"
+      ]
+    }
+  },
+  "Comparação de probabilidades de um atleta ser escolhido para um exame antidoping.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação de probabilidades"
+      ],
+      "contexto_historico": [
+        "exame antidoping"
+      ]
+    }
+  },
+  "Análise de índice de precipitação para escolher o melhor momento para o plantio.": {
+    "entities": {
+      "conceito_cientifico": [
+        "índice de precipitação"
+      ],
+      "processo_fenomeno": [
+        "escolher o melhor momento para o plantio"
+      ]
+    }
+  },
+  "Cálculo de probabilidade para determinar a quantidade mínima de placas de propaganda.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "placas de propaganda",
+        "probabilidade"
+      ],
+      "contexto_historico": [
+        "placas de propaganda"
+      ]
+    }
+  },
+  "Cálculo da menor nota necessária em uma disciplina para vencer uma competição.": {
+    "entities": {
+      "contexto_historico": [
+        "competição"
+      ]
+    }
+  },
+  "Cálculo de probabilidades para escolher a cor com maior chance de ganhar um jogo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidades"
+      ]
+    }
+  },
+  "Cálculo da nota mínima em uma disciplina para atingir uma avaliação \"Bom\" ou \"Excelente\".": {
+    "entities": {
+      "conceito_cientifico": [
+        "nota mínima"
+      ]
+    }
+  },
+  "Análise de probabilidades e custos para determinar os apostadores com maiores chances.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de probabilidades e custos"
+      ],
+      "processo_fenomeno": [
+        "determinar os apostadores"
+      ]
+    }
+  },
+  "Cálculo do percentual máximo de reajuste salarial para não ultrapassar uma média.": {
+    "entities": {
+      "conceito_cientifico": [
+        "percentual máximo"
+      ]
+    }
+  },
+  "Cálculo da quantidade de vacinas a serem adquiridas para reposição de estoque.": {
+    "entities": {
+      "contexto_historico": [
+        "reposição de estoque"
+      ]
+    }
+  },
+  "Cálculo da média mínima de estaturas para novos jogadores de um time.": {
+    "entities": {
+      "conceito_cientifico": [
+        "média mínima de estaturas"
+      ],
+      "contexto_historico": [
+        "novos jogadores de um time"
+      ]
+    }
+  },
+  "Cálculo da quantidade mínima de dardos para que a probabilidade de pontuar seja atingida.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade de pontuar",
+        "quantidade mínima de dardos"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo do número de bolinhas a serem adicionadas para alterar a probabilidade de ganhar um voucher.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Análise de probabilidade para determinar a dimensão mínima de um tabuleiro de jogo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de probabilidade",
+        "dimensão mínima",
+        "tabuleiro de jogo"
+      ],
+      "campo_semantico": [
+        "probabilidade",
+        "tabuleiro de jogo"
+      ],
+      "campo_lexical": [
+        "tabuleiro de jogo",
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo da porcentagem de vacinação necessária para que a probabilidade de desenvolver uma doença se": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade",
+        "porcentagem de vacinação"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Reconhecimento de formas em um quebra-cabeças (anéis de Borromeo).": {
+    "entities": {
+      "conceito_cientifico": [
+        "anéis de Borromeo"
+      ],
+      "processo_fenomeno": [
+        "Reconhecimento de formas"
+      ]
+    }
+  },
+  "Rotação de peças em um quebra-cabeças.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Rotação de peças"
+      ],
+      "processo_fenomeno": [
+        "Rotação de peças"
+      ]
+    }
+  },
+  "Cálculo de consumo de biodiesel com base em uma mudança de porcentagem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "mudança de porcentagem"
+      ]
+    }
+  },
+  "Análise de um gráfico de um pacote promocional de hospedagem.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Análise de um gráfico"
+      ],
+      "contexto_historico": [
+        "pacote promocional de hospedagem"
+      ]
+    }
+  },
+  "Análise de gráfico sobre a relação entre consumo de cigarros e câncer de pulmão.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Cálculo de tempo de percurso com velocidade constante.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tempo de percurso",
+        "velocidade"
+      ]
+    }
+  },
+  "Proporcionalidade em uma rampa para calcular a distância restante.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Identificação da expressão algébrica que relaciona o nível da água com o número de bolas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "expressão algébrica",
+        "nível da água",
+        "número de bolas"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Resolução de um problema envolvendo cotas para uma festa.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Resolução de um problema"
+      ],
+      "habilidade_composta": [
+        "Resolução de um problema"
+      ]
+    }
+  },
+  "Cálculo da porcentagem da área de um terreno.": {
+    "entities": {}
+  },
+  "Cálculo de peso de um carro de Fórmula 1 com base em densidade e volume.": {
+    "entities": {
+      "conceito_cientifico": [
+        "densidade",
+        "Fórmula 1"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de peso"
+      ]
+    }
+  },
+  "Cálculo da diferença entre valores médios de investimentos.": {
+    "entities": {}
+  },
+  "Análise da área de preservação em um terreno.": {
+    "entities": {
+      "conceito_cientifico": [
+        "área de preservação"
+      ]
+    }
+  },
+  "Cálculo da vazão de uma canaleta após uma reforma.": {
+    "entities": {
+      "contexto_historico": [
+        "após uma reforma"
+      ]
+    }
+  },
+  "Análise de um contrato de trabalho para atender a exigências de produção e custo.": {
+    "entities": {
+      "campo_lexical": [
+        "contrato de trabalho"
+      ],
+      "contexto_historico": [
+        "exigências de produção e custo",
+        "contrato de trabalho"
+      ]
+    }
+  },
+  "Inferência sobre o total de passageiros transportados a partir de um índice de produtividade.": {
+    "entities": {
+      "conceito_cientifico": [
+        "índice de produtividade",
+        "total de passageiros transportados"
+      ]
+    }
+  },
+  "Expressão que relaciona o valor arrecadado com a venda de álcool e o desconto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "valor arrecadado"
+      ]
+    }
+  },
+  "Cálculo da quantidade de alimentos arrecadados em uma campanha.": {
+    "entities": {}
+  },
+  "Análise da interseção de um plano com uma escultura formada por prismas.": {
+    "entities": {}
+  },
+  "Conversão de área para determinar o número de campos de futebol correspondentes a um bioma.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Conversão de área",
+        "campos de futebol"
+      ],
+      "campo_semantico": [
+        "campos de futebol"
+      ],
+      "campo_lexical": [
+        "campos de futebol"
+      ],
+      "processo_fenomeno": [
+        "Conversão de área"
+      ]
+    }
+  },
+  "Cálculo da probabilidade de uma pessoa ter 60 anos ou mais em 2050.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Estimativa de população com base em um modelo exponencial.": {
+    "entities": {
+      "conceito_cientifico": [
+        "modelo exponencial",
+        "Estimativa de população"
+      ],
+      "processo_fenomeno": [
+        "Estimativa de população"
+      ]
+    }
+  },
+  "Cálculo dos dígitos verificadores de um CPF.": {
+    "entities": {
+      "conceito_cientifico": [
+        "dígitos verificadores"
+      ]
+    }
+  },
+  "Comparação entre a capacidade de um aquífero e um reservatório.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Análise da fórmula de um compasso musical para preencher um trecho musical.": {
+    "entities": {
+      "conceito_cientifico": [
+        "compasso musical",
+        "trecho musical"
+      ]
+    }
+  },
+  "Cálculo da probabilidade de um evento ocorrer em um subconjunto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Cálculo da taxa média de variação a partir de uma tabela.": {
+    "entities": {
+      "conceito_cientifico": [
+        "taxa média de variação"
+      ]
+    }
+  },
+  "Cálculo da mediana de uma cotação mensal.": {
+    "entities": {
+      "campo_semantico": [
+        "cotação mensal"
+      ],
+      "campo_lexical": [
+        "cotação mensal"
+      ]
+    }
+  },
+  "Análise combinatória: combinação e arranjo para escolher times.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "combinação e arranjo"
+      ],
+      "processo_fenomeno": [
+        "escolher times"
+      ]
+    }
+  },
+  "Análise da mediana das notas de uma equipe em uma gincana.": {
+    "entities": {
+      "conceito_cientifico": [
+        "mediana das notas"
+      ]
+    }
+  },
+  "Argumentação sobre os polígonos obtidos pela intersecção de um plano com uma pirâmide.": {
+    "entities": {
+      "processo_fenomeno": [
+        "intersecção"
+      ]
+    }
+  },
+  "Cálculo de espaço de armazenamento para imagens digitais.": {
+    "entities": {
+      "conceito_cientifico": [
+        "espaço de armazenamento"
+      ],
+      "campo_lexical": [
+        "imagens digitais"
+      ],
+      "processo_fenomeno": [
+        "Cálculo de espaço de armazenamento"
+      ],
+      "contexto_historico": [
+        "imagens digitais"
+      ]
+    }
+  },
+  "Cálculo das dimensões de um telhado para atender a uma demanda de água.": {
+    "entities": {
+      "conceito_cientifico": [
+        "demanda de água"
+      ]
+    }
+  },
+  "Análise de tempo gasto em exercícios e descanso em uma academia.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de tempo"
+      ]
+    }
+  },
+  "Cálculo de volume de parafina para fabricar uma vela.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Cálculo de volume"
+      ],
+      "contexto_historico": [
+        "fabricar uma vela"
+      ]
+    }
+  },
+  "Análise de rotas aéreas e ângulos para determinar uma conexão.": {
+    "entities": {
+      "conceito_cientifico": [
+        "rotas aéreas e ângulos"
+      ]
+    }
+  },
+  "Cálculo do número máximo de esferas em uma caixa cúbica.": {
+    "entities": {
+      "conceito_cientifico": [
+        "número máximo de esferas",
+        "caixa cúbica"
+      ],
+      "campo_semantico": [
+        "caixa cúbica"
+      ],
+      "campo_lexical": [
+        "caixa cúbica"
+      ]
+    }
+  },
+  "Expressão para a distância percorrida pela projeção de um ponto em uma circunferência.": {
+    "entities": {
+      "conceito_cientifico": [
+        "projeção"
+      ],
+      "processo_fenomeno": [
+        "projeção"
+      ]
+    }
+  },
+  "Análise de um indicador para determinar o número de famílias em um cadastro.": {
+    "entities": {}
+  },
+  "Cálculo das dimensões mínimas de uma folha para desenhar um avião em escala.": {
+    "entities": {
+      "conceito_cientifico": [
+        "dimensões mínimas",
+        "avião em escala"
+      ],
+      "processo_fenomeno": [
+        "desenhar um avião em escala"
+      ]
+    }
+  },
+  "Cálculo da taxa média de variação da emissão de dióxido de carbono.": {
+    "entities": {
+      "conceito_cientifico": [
+        "dióxido de carbono",
+        "taxa média de variação"
+      ]
+    }
+  },
+  "Análise de opções de pagamento e empréstimo para encontrar o menor gasto.": {
+    "entities": {
+      "processo_fenomeno": [
+        "encontrar o menor gasto"
+      ]
+    }
+  },
+  "Cálculo da diferença entre importações e exportações de petróleo.": {
+    "entities": {}
+  },
+  "Representação gráfica de porcentagens.": {
+    "entities": {}
+  },
+  "Análise de gráfico sobre o crescimento de uma criança.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de gráfico"
+      ],
+      "processo_fenomeno": [
+        "Análise de gráfico"
+      ]
+    }
+  },
+  "Leitura de gráfico de setores e cálculo de porcentagem.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de setores",
+        "cálculo de porcentagem"
+      ],
+      "processo_fenomeno": [
+        "cálculo de porcentagem"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico de setores"
+      ]
+    }
+  },
+  "Leitura de gráfico de barras para inferir o número de desempregados.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de barras"
+      ]
+    }
+  },
+  "Identificação da planificação de um semicilindro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "planificação"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Proporcionalidade para determinar quantas Terras cabem em Júpiter.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Análise de dimensões para identificar a grandeza volume.": {
+    "entities": {
+      "conceito_cientifico": [
+        "grandeza volume"
+      ]
+    }
+  },
+  "Análise de um quadro de medalhas para determinar uma classificação.": {
+    "entities": {
+      "conceito_cientifico": [
+        "quadro de medalhas"
+      ],
+      "campo_lexical": [
+        "quadro de medalhas"
+      ],
+      "processo_fenomeno": [
+        "determinar uma classificação"
+      ]
+    }
+  },
+  "Leitura de gráfico para determinar o gasto militar dos EUA.": {
+    "entities": {
+      "campo_lexical": [
+        "gasto militar"
+      ],
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "contexto_historico": [
+        "gasto militar"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Proporcionalidade para calcular a quantidade de água contaminada por óleo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Geometria espacial para determinar a aresta de um cubo com volume conhecido.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Análise de média, mediana e desvio padrão para classificar candidatos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "desvio padrão",
+        "Análise de média"
+      ],
+      "processo_fenomeno": [
+        "classificar candidatos"
+      ],
+      "contexto_historico": [
+        "classificar candidatos"
+      ]
+    }
+  },
+  "Identificação de padrão na soma dos números de uma sequência de caixas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "sequência de caixas",
+        "soma dos números"
+      ],
+      "processo_fenomeno": [
+        "Identificação de padrão"
+      ]
+    }
+  },
+  "Razão entre diâmetros para calcular a escala entre o olho humano e um telescópio.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Razão entre diâmetros"
+      ]
+    }
+  },
+  "Análise de custos para determinar a relação entre duas encomendas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de custos"
+      ],
+      "processo_fenomeno": [
+        "determinar a relação"
+      ]
+    }
+  },
+  "Análise de figuras para determinar a proporcionalidade entre resistência, comprimento e área.": {
+    "entities": {
+      "conceito_cientifico": [
+        "proporcionalidade",
+        "Análise de figuras"
+      ],
+      "processo_fenomeno": [
+        "Análise de figuras",
+        "determinar a proporcionalidade"
+      ]
+    }
+  },
+  "Cálculo de probabilidade condicional.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade condicional"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Geometria espacial para calcular o volume de madeira de um porta-lápis.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volume de madeira",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Cálculo de crescimento percentual para classificar o desempenho de uma empresa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "crescimento percentual"
+      ]
+    }
+  },
+  "Expressão para a quantidade de canudos em função do número de quadrados.": {
+    "entities": {}
+  },
+  "Geometria plana e porcentagem para determinar a medida do lado de um retângulo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria plana e porcentagem"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ]
+    }
+  },
+  "Análise de uma figura para determinar a área a ser calçada.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Análise de uma figura"
+      ]
+    }
+  },
+  "Análise de um gráfico de tendência linear para prever o número de favelas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tendência linear"
+      ]
+    }
+  },
+  "Trigonometria no triângulo retângulo para calcular a altura de um balão.": {
+    "entities": {
+      "conceito_cientifico": [
+        "triângulo retângulo",
+        "Trigonometria"
+      ],
+      "campo_semantico": [
+        "Trigonometria",
+        "triângulo retângulo"
+      ],
+      "campo_lexical": [
+        "Trigonometria"
+      ]
+    }
+  },
+  "Resolução de um problema envolvendo compra de selos e envio de folhetos.": {
+    "entities": {
+      "processo_fenomeno": [
+        "envio de folhetos",
+        "compra de selos"
+      ],
+      "habilidade_composta": [
+        "Resolução de um problema"
+      ]
+    }
+  },
+  "Comparação de volumes de cilindros.": {
+    "entities": {
+      "conceito_cientifico": [
+        "volumes de cilindros"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Análise do Índice de Massa Corporal (IMC) e Recíproco do Índice Ponderal (RIP).": {
+    "entities": {
+      "conceito_cientifico": [
+        "Índice de Massa Corporal (IMC)",
+        "Índice Ponderal"
+      ]
+    }
+  },
+  "Leitura de gráfico e cálculo de desmatamento médio por estado.": {
+    "entities": {
+      "conceito_cientifico": [
+        "desmatamento médio"
+      ],
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Cálculo de volume e densidade para determinar a carga de toras de madeira.": {
+    "entities": {
+      "conceito_cientifico": [
+        "densidade",
+        "carga de toras de madeira"
+      ]
+    }
+  },
+  "Análise de um mapa com curvas de nível para determinar a altitude de um local.": {
+    "entities": {
+      "conceito_cientifico": [
+        "curvas de nível"
+      ]
+    }
+  },
+  "Análise da relação área/capacidade para escolher um tanque de combustível.": {
+    "entities": {
+      "conceito_cientifico": [
+        "relação área/capacidade",
+        "tanque de combustível"
+      ]
+    }
+  },
+  "Geometria plana e espacial para determinar o raio de uma perfuração em uma peça.": {
+    "entities": {
+      "conceito_cientifico": [
+        "perfuração"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria plana e espacial"
+      ]
+    }
+  },
+  "Análise de probabilidades para determinar o melhor trajeto com menor chance de engarrafamento.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de probabilidades"
+      ],
+      "processo_fenomeno": [
+        "Análise de probabilidades"
+      ]
+    }
+  },
+  "Cálculo de porcentagens para determinar a cura proporcionada por tratamentos inovadores.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de porcentagens",
+        "tratamentos inovadores"
+      ],
+      "contexto_historico": [
+        "tratamentos inovadores"
+      ]
+    }
+  },
+  "Cálculo de aumento percentual na produção de etanol.": {
+    "entities": {
+      "conceito_cientifico": [
+        "aumento percentual"
+      ]
+    }
+  },
+  "Geometria espacial para calcular o preço de uma manilha de esgoto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "manilha de esgoto",
+        "Geometria espacial"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "manilha de esgoto"
+      ]
+    }
+  },
+  "Análise de uma progressão aritmética no Salto Triplo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão aritmética",
+        "Salto Triplo"
+      ]
+    }
+  },
+  "Cálculo de média, mediana e moda de uma distribuição de gols.": {
+    "entities": {
+      "conceito_cientifico": [
+        "distribuição de gols"
+      ],
+      "campo_semantico": [
+        "distribuição de gols"
+      ],
+      "campo_lexical": [
+        "distribuição de gols"
+      ]
+    }
+  },
+  "Análise combinatória para calcular o tempo de verificação de sequências.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "tempo de verificação de sequências"
+      ]
+    }
+  },
+  "Geometria espacial para determinar a altura do volume de champanhe em uma taça cônica.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria espacial",
+        "volume de champanhe"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial",
+        "taça cônica"
+      ],
+      "contexto_historico": [
+        "taça cônica"
+      ]
+    }
+  },
+  "Cálculo da mediana das quantidades de gols em Copas do Mundo.": {
+    "entities": {
+      "contexto_historico": [
+        "Copas do Mundo"
+      ]
+    }
+  },
+  "Análise de uma função definida por partes para determinar o tempo de permanência de uma peça em um f": {
+    "entities": {
+      "conceito_cientifico": [
+        "função definida por partes",
+        "tempo de permanência"
+      ]
+    }
+  },
+  "Leitura de gráfico sobre a participação do agronegócio no PIB.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Leitura de gráfico"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico"
+      ]
+    }
+  },
+  "Análise de um mapa para determinar um caminho entre pontos.": {
+    "entities": {}
+  },
+  "Comparação de números decimais para escolher um pistão de diâmetro mais próximo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "números decimais",
+        "pistão de diâmetro"
+      ],
+      "campo_lexical": [
+        "pistão de diâmetro"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Leitura de gráfico de setores para determinar o número de internautas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "gráfico de setores"
+      ],
+      "campo_lexical": [
+        "gráfico de setores"
+      ],
+      "processo_fenomeno": [
+        "determinar o número de internautas",
+        "Leitura de gráfico de setores"
+      ]
+    }
+  },
+  "Análise de uma progressão aritmética para determinar o número de passagens vendidas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "progressão aritmética"
+      ],
+      "campo_lexical": [
+        "número de passagens vendidas"
+      ]
+    }
+  },
+  "Conversão de unidades de medida (milímetros para metros).": {
+    "entities": {}
+  },
+  "Proporcionalidade para calcular a quantidade de alimentos e bebidas para uma festa.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ]
+    }
+  },
+  "Identificação de uma superfície de revolução (cone).": {
+    "entities": {
+      "conceito_cientifico": [
+        "superfície de revolução"
+      ],
+      "processo_fenomeno": [
+        "Identificação"
+      ]
+    }
+  },
+  "Leitura de relógios de ponteiro em um medidor de energia.": {
+    "entities": {
+      "conceito_cientifico": [
+        "relógios de ponteiro"
+      ],
+      "contexto_historico": [
+        "medidor de energia"
+      ]
+    }
+  },
+  "Identificação do gráfico que representa a relação entre preço e quantidade de um produto.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Identificação do gráfico"
+      ],
+      "habilidade_composta": [
+        "Identificação do gráfico"
+      ]
+    }
+  },
+  "Proporcionalidade para calcular o tempo gasto em atividades para queimar calorias.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade"
+      ],
+      "processo_fenomeno": [
+        "queimar calorias"
+      ]
+    }
+  },
+  "Cálculo do percentual médio de medalhistas de uma região.": {
+    "entities": {
+      "conceito_cientifico": [
+        "percentual médio"
+      ]
+    }
+  },
+  "Proporcionalidade para calcular o acréscimo de internações de homens por AVC.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Proporcionalidade",
+        "internações de homens"
+      ],
+      "campo_lexical": [
+        "internações de homens"
+      ]
+    }
+  },
+  "Análise de gráficos de planos de telefonia.": {
+    "entities": {
+      "processo_fenomeno": [
+        "Análise de gráficos"
+      ],
+      "contexto_historico": [
+        "planos de telefonia",
+        "Análise de gráficos"
+      ]
+    }
+  },
+  "Análise de raias em uma pista de atletismo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de raias"
+      ],
+      "contexto_historico": [
+        "pista de atletismo"
+      ]
+    }
+  },
+  "Cálculo do consumo de energia de um chuveiro.": {
+    "entities": {
+      "conceito_cientifico": [
+        "consumo de energia"
+      ]
+    }
+  },
+  "Conversão de unidades (metros para pés) e cálculo de diferença de altitudes.": {
+    "entities": {
+      "conceito_cientifico": [
+        "cálculo de diferença de altitudes",
+        "metros para pés",
+        "Conversão de unidades"
+      ],
+      "processo_fenomeno": [
+        "Conversão de unidades"
+      ]
+    }
+  },
+  "Análise de perímetro e área para escolher um terreno para uma praça.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de perímetro e área"
+      ],
+      "processo_fenomeno": [
+        "escolher um terreno"
+      ]
+    }
+  },
+  "Cálculo da probabilidade de uma pessoa ser portadora de doença crônica.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade",
+        "doença crônica"
+      ]
+    }
+  },
+  "Cálculo da densidade demográfica de uma região.": {
+    "entities": {
+      "conceito_cientifico": [
+        "densidade demográfica"
+      ]
+    }
+  },
+  "Cálculo de aumento percentual no consumo de café.": {
+    "entities": {
+      "conceito_cientifico": [
+        "aumento percentual"
+      ],
+      "contexto_historico": [
+        "consumo de café"
+      ]
+    }
+  },
+  "Utilização de escala para construir uma maquete de quadra de esportes.": {
+    "entities": {}
+  },
+  "Análise de funções de custo e faturamento para determinar a quantidade mínima para não ter prejuízo.": {
+    "entities": {
+      "conceito_cientifico": [
+        "funções de custo e faturamento",
+        "quantidade mínima"
+      ],
+      "processo_fenomeno": [
+        "determinar a quantidade mínima"
+      ]
+    }
+  },
+  "Modelagem de um problema para encontrar a extensão de uma rodovia.": {
+    "entities": {
+      "processo_fenomeno": [
+        "encontrar a extensão de uma rodovia"
+      ]
+    }
+  },
+  "Expressão algébrica para a resistência de vigas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "resistência de vigas",
+        "Expressão algébrica"
+      ]
+    }
+  },
+  "Cálculo de média, mediana e moda de um conjunto de temperaturas.": {
+    "entities": {}
+  },
+  "Análise de rotação para identificar a invariância de uma figura.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de rotação"
+      ]
+    }
+  },
+  "Análise do IMC para classificar a categoria de peso de pessoas.": {
+    "entities": {}
+  },
+  "Cálculo de probabilidades para determinar quem tem a maior chance de ganhar um jogo de sinuca.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Cálculo de probabilidades"
+      ],
+      "campo_lexical": [
+        "jogo de sinuca"
+      ],
+      "contexto_historico": [
+        "jogo de sinuca"
+      ]
+    }
+  },
+  "Análise de uma tabela sobre a luminosidade de estrelas.": {
+    "entities": {
+      "conceito_cientifico": [
+        "luminosidade de estrelas"
+      ]
+    }
+  },
+  "Uso de logaritmos para calcular o momento sísmico de um terremoto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "momento sísmico"
+      ]
+    }
+  },
+  "Cálculo da escala de um mapa.": {
+    "entities": {}
+  },
+  "Análise da distância de um hospital a uma estação de metrô.": {
+    "entities": {}
+  },
+  "Leitura de gráfico de setores para calcular a chance de haver banda larga de conexão.": {
+    "entities": {
+      "conceito_cientifico": [
+        "banda larga de conexão",
+        "gráfico de setores"
+      ],
+      "processo_fenomeno": [
+        "Leitura de gráfico de setores"
+      ],
+      "habilidade_composta": [
+        "Leitura de gráfico de setores"
+      ]
+    }
+  },
+  "Análise de rendimento e imposto para escolher o investimento mais vantajoso.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise de rendimento e imposto"
+      ],
+      "processo_fenomeno": [
+        "escolher o investimento mais vantajoso"
+      ]
+    }
+  },
+  "Análise do Índice de Adiposidade Corporal (IAC).": {
+    "entities": {
+      "conceito_cientifico": [
+        "Índice de Adiposidade Corporal (IAC)"
+      ]
+    }
+  },
+  "Identificação dos formatos dos sólidos descartados na fabricação de uma pirâmide.": {
+    "entities": {
+      "processo_fenomeno": [
+        "fabricação"
+      ],
+      "contexto_historico": [
+        "fabricação de uma pirâmide"
+      ]
+    }
+  },
+  "Comparação de rentabilidades anuais de diferentes investimentos.": {
+    "entities": {
+      "conceito_cientifico": [
+        "rentabilidades anuais"
+      ],
+      "processo_fenomeno": [
+        "Comparação"
+      ]
+    }
+  },
+  "Análise de um gráfico de temperaturas para calcular a probabilidade de escolher uma região adequada.": {
+    "entities": {
+      "conceito_cientifico": [
+        "probabilidade",
+        "gráfico de temperaturas"
+      ],
+      "campo_semantico": [
+        "probabilidade"
+      ],
+      "campo_lexical": [
+        "probabilidade"
+      ]
+    }
+  },
+  "Resolução de um problema envolvendo porcentagens para encontrar a quantia inicial de um investimento": {
+    "entities": {
+      "conceito_cientifico": [
+        "quantia inicial"
+      ],
+      "processo_fenomeno": [
+        "Resolução de um problema",
+        "encontrar a quantia inicial"
+      ],
+      "habilidade_composta": [
+        "Resolução de um problema"
+      ]
+    }
+  },
+  "Análise de uma tabela de consumo de energia para calcular a diferença de gasto.": {
+    "entities": {
+      "conceito_cientifico": [
+        "tabela de consumo de energia",
+        "diferença de gasto"
+      ]
+    }
+  },
+  "Geometria espacial e proporcionalidade para calcular a quantidade de água em uma mistura.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Geometria espacial e proporcionalidade"
+      ],
+      "campo_semantico": [
+        "Geometria"
+      ],
+      "campo_lexical": [
+        "Geometria espacial"
+      ]
+    }
+  },
+  "Análise combinatória para determinar a ordem de chamada de um candidato.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Análise combinatória",
+        "ordem de chamada"
+      ],
+      "campo_lexical": [
+        "ordem de chamada"
+      ],
+      "processo_fenomeno": [
+        "determinar a ordem de chamada"
+      ]
+    }
+  },
+  "Trigonometria no triângulo retângulo para determinar a distância de um barco à praia.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Trigonometria",
+        "triângulo retângulo"
+      ],
+      "campo_semantico": [
+        "Trigonometria",
+        "triângulo retângulo"
+      ],
+      "campo_lexical": [
+        "Trigonometria"
+      ]
+    }
+  },
+  "Expressão algébrica que relaciona a quantidade de trabalhadores e os meses.": {
+    "entities": {
+      "conceito_cientifico": [
+        "Expressão algébrica"
+      ]
+    }
   }
 }

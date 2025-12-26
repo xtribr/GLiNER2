@@ -2303,289 +2303,289 @@ Matematica,H21,Uso de logaritmos para determinar o tempo para uma liga metálica
 Matematica,H21,Análise da taxa de cobertura de uma malha de proteção solar.,911.4,MT,750+,,,,,,,
 Matematica,H21,Expressão para a altura de um vidro em função da medida de sua base.,931.6,MT,750+,,,,,,,
 Matematica,H21,Resolução de uma equação envolvendo operações não convencionais.,996.8,MT,750+,,,,,,,
-Matematica,H22,Resolução de um sistema de equações para determinar a quantidade de camisetas em uma mala.,577.6,MT,550-650,,,,,,,
-Matematica,H22,Geometria analítica (circuncentro) para determinar a localização de uma torre.,594.5,MT,550-650,,,,,,,
-Matematica,H22,Análise de dados de fósseis e meia-vida para determinar o mais antigo.,678.2,MT,650-750,,,,,,,
-Matematica,H22,Geometria plana (área de setor circular) para determinar o raio de uma piscina.,740.1,MT,650-750,,,,,,,
-Matematica,H22,Análise de velocidades de torres de um pivô de irrigação.,741.8,MT,650-750,,,,,,,
-Matematica,H22,Análise da representação geométrica de uma equação (ramo de hipérbole).,751.1,MT,750+,,,,,,,
-Matematica,H22,Comparação de tempo de construção de uma galeria por diferentes trajetos.,764.7,MT,750+,,,,,,,
-Matematica,H22,Análise de uma função quadrática para classificar o desempenho de uma empresa.,767.2,MT,750+,,,,,,,
-Matematica,H22,Geometria analítica (equações de reta e circunferência) para maximizar pontuação em um jogo.,795.0,MT,750+,,,,,,,
-Matematica,H22,Uso de logaritmos para determinar o nível de intensidade de som de uma máquina.,800.1,MT,750+,,,,,,,
-Matematica,H22,Análise da trajetória parabólica de uma bola de vôlei para verificar se o saque foi invalidado.,822.2,MT,750+,,,,,,,
-Matematica,H22,Geometria analítica (lugar geométrico) para determinar a distância entre bombeiros.,845.7,MT,750+,,,,,,,
-Matematica,H22,Análise de uma função cosseno para determinar o mês de produção máxima de um produto.,1035.0,MT,750+,,,,,,,
-Matematica,H23,"Aplicação da ""Fórmula de Young"" para calcular a dose infantil de um medicamento.",606.3,MT,550-650,,,,,,,
-Matematica,H23,Análise de uma progressão geométrica para determinar o momento de aplicar um produto.,627.7,MT,550-650,,,,,,,
-Matematica,H23,Cálculo do valor à vista de um produto a partir de pagamentos a prazo.,653.8,MT,650-750,,,,,,,
+Matematica,H22,Resolução de um sistema de equações para determinar a quantidade de camisetas em uma mala.,577.6,MT,550-650,sistema de equações,,,Resolução,,,"sistema de equações, Resolução"
+Matematica,H22,Geometria analítica (circuncentro) para determinar a localização de uma torre.,594.5,MT,550-650,Geometria analítica,Geometria,localização de uma torre,,,,"Geometria analítica, Geometria, localização de uma torre"
+Matematica,H22,Análise de dados de fósseis e meia-vida para determinar o mais antigo.,678.2,MT,650-750,Análise de dados,,,"determinar o mais antigo, Análise de dados",,,"Análise de dados, determinar o mais antigo, Análise de dados"
+Matematica,H22,Geometria plana (área de setor circular) para determinar o raio de uma piscina.,740.1,MT,650-750,"área de setor circular, Geometria plana",Geometria,raio de uma piscina,,,,"área de setor circular, Geometria plana, Geometria, raio de uma piscina"
+Matematica,H22,Análise de velocidades de torres de um pivô de irrigação.,741.8,MT,650-750,velocidades de torres,,,,pivô de irrigação,,"velocidades de torres, pivô de irrigação"
+Matematica,H22,Análise da representação geométrica de uma equação (ramo de hipérbole).,751.1,MT,750+,representação geométrica,,,,,,representação geométrica
+Matematica,H22,Comparação de tempo de construção de uma galeria por diferentes trajetos.,764.7,MT,750+,,,,Comparação,,,Comparação
+Matematica,H22,Análise de uma função quadrática para classificar o desempenho de uma empresa.,767.2,MT,750+,função quadrática,,,,,,função quadrática
+Matematica,H22,Geometria analítica (equações de reta e circunferência) para maximizar pontuação em um jogo.,795.0,MT,750+,"Geometria analítica, equações de reta e circunferência",Geometria,Geometria,maximizar pontuação,,,"Geometria analítica, equações de reta e circunferência, Geometria, Geometria, maximizar pontuação"
+Matematica,H22,Uso de logaritmos para determinar o nível de intensidade de som de uma máquina.,800.1,MT,750+,intensidade de som,,,,,,intensidade de som
+Matematica,H22,Análise da trajetória parabólica de uma bola de vôlei para verificar se o saque foi invalidado.,822.2,MT,750+,"trajetória parabólica, bola de vôlei",,,,,,"trajetória parabólica, bola de vôlei"
+Matematica,H22,Geometria analítica (lugar geométrico) para determinar a distância entre bombeiros.,845.7,MT,750+,"Geometria analítica, lugar geométrico","Geometria, lugar geométrico","Geometria, lugar geométrico",,,,"Geometria analítica, lugar geométrico, Geometria, lugar geométrico, Geometria, lugar geométrico"
+Matematica,H22,Análise de uma função cosseno para determinar o mês de produção máxima de um produto.,1035.0,MT,750+,"função cosseno, mês de produção máxima",,,,,,"função cosseno, mês de produção máxima"
+Matematica,H23,"Aplicação da ""Fórmula de Young"" para calcular a dose infantil de um medicamento.",606.3,MT,550-650,Fórmula de Young,,dose infantil,,,,"Fórmula de Young, dose infantil"
+Matematica,H23,Análise de uma progressão geométrica para determinar o momento de aplicar um produto.,627.7,MT,550-650,progressão geométrica,,,,,,progressão geométrica
+Matematica,H23,Cálculo do valor à vista de um produto a partir de pagamentos a prazo.,653.8,MT,650-750,"valor à vista, pagamentos a prazo",,,,pagamentos a prazo,,"valor à vista, pagamentos a prazo, pagamentos a prazo"
 Matematica,H23,Análise de opções de pagamento e investimento para escolher a mais vantajosa.,661.7,MT,650-750,,,,,,,
-Matematica,H23,Análise de fusos horários e tempo de viagem para determinar o horário de um voo.,688.9,MT,650-750,,,,,,,
-Matematica,H23,Resolução de uma equação do segundo grau para determinar o tempo de espera para abrir um forno.,694.0,MT,650-750,,,,,,,
-Matematica,H23,Determinação da expressão de uma função polinomial para alterar notas.,696.1,MT,650-750,,,,,,,
-Matematica,H23,Divisão em partes proporcionais para igualar a participação de sócios.,710.9,MT,650-750,,,,,,,
-Matematica,H23,Análise da Lei de Cotas para determinar o número mínimo de contratações.,711.3,MT,650-750,,,,,,,
-Matematica,H23,Análise de uma função quadrática para determinar o mês com maior número de infectados.,737.3,MT,650-750,,,,,,,
-Matematica,H23,Análise da redução da área a ser pintada em uma fonte para determinar o tamanho adequado.,831.9,MT,750+,,,,,,,
-Matematica,H23,Análise de uma função quadrática para determinar a temperatura máxima de uma estufa.,851.9,MT,750+,,,,,,,
-Matematica,H23,Análise de uma fórmula de prestação para determinar o menor número de parcelas.,965.6,MT,750+,,,,,,,
-Matematica,H24,Interpolação linear para estimar a esperança de vida ao nascer.,546.7,MT,450-550,,,,,,,
-Matematica,H24,Identificação de padrão em uma tabela para determinar o número de partidas de um torneio.,558.1,MT,550-650,,,,,,,
-Matematica,H24,Soma dos termos de uma progressão aritmética para calcular a produção total de arroz.,569.8,MT,550-650,,,,,,,
-Matematica,H24,Análise de gráfico de receitas e despesas para determinar o mês de maior lucro.,609.1,MT,550-650,,,,,,,
-Matematica,H24,Interpolação linear para estimar a cobertura de uma campanha de vacinação.,627.3,MT,550-650,,,,,,,
-Matematica,H24,Análise de tendência linear em um gráfico para prever vendas futuras.,638.1,MT,550-650,,,,,,,
-Matematica,H24,Análise de tendências lineares para determinar quando as vendas de um produto superarão as de outro.,675.7,MT,650-750,,,,,,,
-Matematica,H24,Análise de um gráfico de níveis de substâncias para determinar o número de vezes em que foram iguais.,684.9,MT,650-750,,,,,,,
-Matematica,H24,Análise de uma progressão aritmética para determinar o ano em que o tempo de estudo atingirá uma meta.,692.3,MT,650-750,,,,,,,
-Matematica,H24,Análise de tendência linear para prever quando um reservatório atingirá o nível zero.,694.0,MT,650-750,,,,,,,
-Matematica,H24,Análise de tendência de redução para prever o número de acidentes em um ano futuro.,711.1,MT,650-750,,,,,,,
-Matematica,H24,Projeção estatística para determinar o número de médicos por mil habitantes.,743.3,MT,650-750,,,,,,,
-Matematica,H24,Cálculo de variação percentual para prever a taxa de fecundidade futura.,745.2,MT,650-750,,,,,,,
-Matematica,H24,Análise de uma tabela de notas para determinar o número de configurações que tornariam uma escola campeã.,782.0,MT,750+,,,,,,,
-Matematica,H24,Análise de um gráfico de variação de valor de ações para determinar o número de operações de um investidor.,783.9,MT,750+,,,,,,,
-Matematica,H25,Leitura de gráfico e cálculo da diferença entre o maior e o menor valor.,481.7,MT,450-550,,,,,,,
-Matematica,H25,Análise de gráfico e tabela para determinar o investidor que fez o melhor negócio.,546.5,MT,450-550,,,,,,,
-Matematica,H25,Leitura de gráfico de custos de envio para calcular o valor total gasto.,553.9,MT,550-650,,,,,,,
-Matematica,H25,Leitura de tabela para calcular as horas gastas em atividades escolares na semana.,555.0,MT,550-650,,,,,,,
-Matematica,H25,Leitura de tabela para calcular o número total de candidatos inscritos.,564.0,MT,550-650,,,,,,,
-Matematica,H25,Cálculo de reduções percentuais para classificar a taxa de glicose.,569.9,MT,550-650,,,,,,,
-Matematica,H25,Cálculo do lucro médio anual para escolher a melhor empresa para comprar.,577.4,MT,550-650,,,,,,,
-Matematica,H25,Aplicação do Método de Borda para determinar a poesia vencedora.,588.4,MT,550-650,,,,,,,
-Matematica,H25,Análise de gráfico de setores para determinar o número de jovens que trabalham.,589.6,MT,550-650,,,,,,,
-Matematica,H25,Análise de frequência de letras em um texto codificado com Cifra de César.,606.5,MT,550-650,,,,,,,
+Matematica,H23,Análise de fusos horários e tempo de viagem para determinar o horário de um voo.,688.9,MT,650-750,"tempo de viagem, fusos horários",,,,,,"tempo de viagem, fusos horários"
+Matematica,H23,Resolução de uma equação do segundo grau para determinar o tempo de espera para abrir um forno.,694.0,MT,650-750,equação do segundo grau,,equação do segundo grau,"abrir um forno, determinar o tempo de espera, Resolução",abrir um forno,Resolução,"equação do segundo grau, equação do segundo grau, abrir um forno, determinar o tempo de espera, Resolução, abrir um forno, Resolução"
+Matematica,H23,Determinação da expressão de uma função polinomial para alterar notas.,696.1,MT,650-750,função polinomial,,,"alterar notas, Determinação da expressão",,,"função polinomial, alterar notas, Determinação da expressão"
+Matematica,H23,Divisão em partes proporcionais para igualar a participação de sócios.,710.9,MT,650-750,partes proporcionais,,,"Divisão em partes proporcionais, igualar a participação de sócios",,,"partes proporcionais, Divisão em partes proporcionais, igualar a participação de sócios"
+Matematica,H23,Análise da Lei de Cotas para determinar o número mínimo de contratações.,711.3,MT,650-750,Lei de Cotas,,,,,,Lei de Cotas
+Matematica,H23,Análise de uma função quadrática para determinar o mês com maior número de infectados.,737.3,MT,650-750,função quadrática,,,,,,função quadrática
+Matematica,H23,Análise da redução da área a ser pintada em uma fonte para determinar o tamanho adequado.,831.9,MT,750+,redução da área,,,"determinar o tamanho adequado, redução da área",,,"redução da área, determinar o tamanho adequado, redução da área"
+Matematica,H23,Análise de uma função quadrática para determinar a temperatura máxima de uma estufa.,851.9,MT,750+,"função quadrática, temperatura máxima",,,,,,"função quadrática, temperatura máxima"
+Matematica,H23,Análise de uma fórmula de prestação para determinar o menor número de parcelas.,965.6,MT,750+,fórmula de prestação,,fórmula de prestação,,,,"fórmula de prestação, fórmula de prestação"
+Matematica,H24,Interpolação linear para estimar a esperança de vida ao nascer.,546.7,MT,450-550,Interpolação linear,esperança de vida,esperança de vida,,ao nascer,,"Interpolação linear, esperança de vida, esperança de vida, ao nascer"
+Matematica,H24,Identificação de padrão em uma tabela para determinar o número de partidas de um torneio.,558.1,MT,550-650,,,,Identificação,,,Identificação
+Matematica,H24,Soma dos termos de uma progressão aritmética para calcular a produção total de arroz.,569.8,MT,550-650,"progressão aritmética, produção total de arroz",,,,,,"progressão aritmética, produção total de arroz"
+Matematica,H24,Análise de gráfico de receitas e despesas para determinar o mês de maior lucro.,609.1,MT,550-650,Análise de gráfico,,receitas e despesas,Análise de gráfico,mês de maior lucro,,"Análise de gráfico, receitas e despesas, Análise de gráfico, mês de maior lucro"
+Matematica,H24,Interpolação linear para estimar a cobertura de uma campanha de vacinação.,627.3,MT,550-650,Interpolação linear,,campanha de vacinação,,campanha de vacinação,,"Interpolação linear, campanha de vacinação, campanha de vacinação"
+Matematica,H24,Análise de tendência linear em um gráfico para prever vendas futuras.,638.1,MT,550-650,tendência linear,,,prever vendas futuras,prever vendas futuras,,"tendência linear, prever vendas futuras, prever vendas futuras"
+Matematica,H24,Análise de tendências lineares para determinar quando as vendas de um produto superarão as de outro.,675.7,MT,650-750,tendências lineares,,,,,,tendências lineares
+Matematica,H24,Análise de um gráfico de níveis de substâncias para determinar o número de vezes em que foram iguais.,684.9,MT,650-750,gráfico de níveis de substâncias,,,,,,gráfico de níveis de substâncias
+Matematica,H24,Análise de uma progressão aritmética para determinar o ano em que o tempo de estudo atingirá uma meta.,692.3,MT,650-750,progressão aritmética,,,,,,progressão aritmética
+Matematica,H24,Análise de tendência linear para prever quando um reservatório atingirá o nível zero.,694.0,MT,650-750,"tendência linear, nível zero",,,,,,"tendência linear, nível zero"
+Matematica,H24,Análise de tendência de redução para prever o número de acidentes em um ano futuro.,711.1,MT,650-750,tendência de redução,,,prever o número de acidentes,ano futuro,,"tendência de redução, prever o número de acidentes, ano futuro"
+Matematica,H24,Projeção estatística para determinar o número de médicos por mil habitantes.,743.3,MT,650-750,Projeção estatística,,,determinar o número de médicos por mil habitantes,,,"Projeção estatística, determinar o número de médicos por mil habitantes"
+Matematica,H24,Cálculo de variação percentual para prever a taxa de fecundidade futura.,745.2,MT,650-750,"variação percentual, taxa de fecundidade",,,,,,"variação percentual, taxa de fecundidade"
+Matematica,H24,Análise de uma tabela de notas para determinar o número de configurações que tornariam uma escola campeã.,782.0,MT,750+,"escola campeã, tabela de notas",,"escola campeã, tabela de notas",determinar o número de configurações,,,"escola campeã, tabela de notas, escola campeã, tabela de notas, determinar o número de configurações"
+Matematica,H24,Análise de um gráfico de variação de valor de ações para determinar o número de operações de um investidor.,783.9,MT,750+,"número de operações, gráfico de variação de valor de ações",,,,,,"número de operações, gráfico de variação de valor de ações"
+Matematica,H25,Leitura de gráfico e cálculo da diferença entre o maior e o menor valor.,481.7,MT,450-550,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
+Matematica,H25,Análise de gráfico e tabela para determinar o investidor que fez o melhor negócio.,546.5,MT,450-550,Análise de gráfico,,,"determinar o investidor, Análise de gráfico",,,"Análise de gráfico, determinar o investidor, Análise de gráfico"
+Matematica,H25,Leitura de gráfico de custos de envio para calcular o valor total gasto.,553.9,MT,550-650,"valor total gasto, custos de envio",,,,,Leitura de gráfico,"valor total gasto, custos de envio, Leitura de gráfico"
+Matematica,H25,Leitura de tabela para calcular as horas gastas em atividades escolares na semana.,555.0,MT,550-650,,,,Leitura de tabela,atividades escolares,Leitura de tabela,"Leitura de tabela, atividades escolares, Leitura de tabela"
+Matematica,H25,Leitura de tabela para calcular o número total de candidatos inscritos.,564.0,MT,550-650,,,,Leitura de tabela,,,Leitura de tabela
+Matematica,H25,Cálculo de reduções percentuais para classificar a taxa de glicose.,569.9,MT,550-650,"taxa de glicose, reduções percentuais",,,,,,"taxa de glicose, reduções percentuais"
+Matematica,H25,Cálculo do lucro médio anual para escolher a melhor empresa para comprar.,577.4,MT,550-650,lucro médio anual,,,,,,lucro médio anual
+Matematica,H25,Aplicação do Método de Borda para determinar a poesia vencedora.,588.4,MT,550-650,Método de Borda,,poesia vencedora,,,,"Método de Borda, poesia vencedora"
+Matematica,H25,Análise de gráfico de setores para determinar o número de jovens que trabalham.,589.6,MT,550-650,Análise de gráfico de setores,,,Análise de gráfico de setores,,,"Análise de gráfico de setores, Análise de gráfico de setores"
+Matematica,H25,Análise de frequência de letras em um texto codificado com Cifra de César.,606.5,MT,550-650,Cifra de César,,,Análise de frequência de letras,,,"Cifra de César, Análise de frequência de letras"
 Matematica,H25,Análise de um gráfico sobre desemprego aberto e oculto.,615.8,MT,550-650,,,,,,,
-Matematica,H25,Análise de gráfico sobre a população economicamente ativa para fazer inferências.,623.8,MT,550-650,,,,,,,
-Matematica,H25,Leitura de tabela para determinar a porcentagem de pessoas vacinadas de grupos de risco.,644.9,MT,550-650,,,,,,,
-Matematica,H25,Análise de gráfico sobre a quantidade de água em reservatórios.,655.6,MT,650-750,,,,,,,
-Matematica,H25,Leitura de gráfico para calcular o aumento percentual no volume de vendas de medicamentos.,669.0,MT,650-750,,,,,,,
-Matematica,H25,Leitura de gráfico e cálculo de porcentagem para determinar a profundidade de um rio.,681.1,MT,650-750,,,,,,,
-Matematica,H25,Análise de um gráfico de crescimento infantil para calcular o aumento percentual da altura.,682.9,MT,650-750,,,,,,,
-Matematica,H25,Análise de gráficos de setores para determinar a quantidade de PET reciclado para um fim específico.,704.2,MT,650-750,,,,,,,
-Matematica,H25,Análise de gráficos e tabelas para determinar o aumento necessário na receita de uma empresa.,734.4,MT,650-750,,,,,,,
-Matematica,H25,Análise de um gráfico de temperatura para determinar quantas vezes a velocidade de um pistão se anulou.,740.9,MT,650-750,,,,,,,
-Matematica,H25,Análise de um gráfico de vendas para estimar a quantidade a mais de pastéis a serem vendidos.,788.9,MT,750+,,,,,,,
-Matematica,H25,Análise de gráfico e média aritmética para determinar quando as vendas voltarão a ser piores que em um dado mês.,800.3,MT,750+,,,,,,,
-Matematica,H25,Análise de uma tabela de censo demográfico para calcular o percentual de aumento da população.,812.6,MT,750+,,,,,,,
-Matematica,H26,Análise de gráfico de barras para escolher a melhor forma de promoção para diferentes classes sociais.,457.7,MT,450-550,,,,,,,
-Matematica,H26,Análise de um gráfico de linha para identificar os dias de maior eficiência em um SAC.,545.2,MT,450-550,,,,,,,
-Matematica,H26,Análise de gráfico sobre extensão de gelo marítimo para inferir o ano de maior aquecimento.,546.0,MT,450-550,,,,,,,
-Matematica,H26,Análise de gráficos para determinar o dia com a metodologia de trabalho mais eficiente.,562.4,MT,550-650,,,,,,,
-Matematica,H26,Análise de uma tabela de custos para escolher o operário mais econômico.,564.8,MT,550-650,,,,,,,
-Matematica,H26,Análise de tabela sobre doação de sangue para identificar regiões prioritárias para campanhas.,566.6,MT,550-650,,,,,,,
-Matematica,H26,Análise de gráfico de setores para determinar o reservatório com maior volume de água.,594.5,MT,550-650,,,,,,,
-Matematica,H26,Análise de gráficos para determinar o tipo de perfume que gerou maior arrecadação.,608.2,MT,550-650,,,,,,,
-Matematica,H26,Análise de tabelas para determinar o dia com maior gasto calórico.,616.5,MT,550-650,,,,,,,
-Matematica,H26,Análise de gráficos para determinar o ano de maior rentabilidade de aluguel.,633.0,MT,550-650,,,,,,,
-Matematica,H26,Análise de gráficos de trajetória para determinar a alteração necessária para a interceptação de projéteis.,689.3,MT,650-750,,,,,,,
-Matematica,H26,Análise de gráficos de setores para determinar a maior taxa de aumento no tempo de acesso a um site.,689.6,MT,650-750,,,,,,,
-Matematica,H26,Análise de um gráfico de previsão do tempo para verificar a correção de alertas emitidos.,692.9,MT,650-750,,,,,,,
+Matematica,H25,Análise de gráfico sobre a população economicamente ativa para fazer inferências.,623.8,MT,550-650,"Análise de gráfico, população economicamente ativa",,população economicamente ativa,Análise de gráfico,população economicamente ativa,,"Análise de gráfico, população economicamente ativa, população economicamente ativa, Análise de gráfico, população economicamente ativa"
+Matematica,H25,Leitura de tabela para determinar a porcentagem de pessoas vacinadas de grupos de risco.,644.9,MT,550-650,,,,Leitura de tabela,,,Leitura de tabela
+Matematica,H25,Análise de gráfico sobre a quantidade de água em reservatórios.,655.6,MT,650-750,"quantidade de água, Análise de gráfico",,,Análise de gráfico,,,"quantidade de água, Análise de gráfico, Análise de gráfico"
+Matematica,H25,Leitura de gráfico para calcular o aumento percentual no volume de vendas de medicamentos.,669.0,MT,650-750,"aumento percentual, volume de vendas de medicamentos",,,Leitura de gráfico,,Leitura de gráfico,"aumento percentual, volume de vendas de medicamentos, Leitura de gráfico, Leitura de gráfico"
+Matematica,H25,Leitura de gráfico e cálculo de porcentagem para determinar a profundidade de um rio.,681.1,MT,650-750,"profundidade, cálculo de porcentagem",,profundidade,,,"Leitura de gráfico, cálculo de porcentagem","profundidade, cálculo de porcentagem, profundidade, Leitura de gráfico, cálculo de porcentagem"
+Matematica,H25,Análise de um gráfico de crescimento infantil para calcular o aumento percentual da altura.,682.9,MT,650-750,"aumento percentual da altura, gráfico de crescimento infantil",,,,,,"aumento percentual da altura, gráfico de crescimento infantil"
+Matematica,H25,Análise de gráficos de setores para determinar a quantidade de PET reciclado para um fim específico.,704.2,MT,650-750,"PET reciclado, Análise de gráficos de setores",,fim específico,Análise de gráficos,,,"PET reciclado, Análise de gráficos de setores, fim específico, Análise de gráficos"
+Matematica,H25,Análise de gráficos e tabelas para determinar o aumento necessário na receita de uma empresa.,734.4,MT,650-750,Análise de gráficos,,,Análise de gráficos,,,"Análise de gráficos, Análise de gráficos"
+Matematica,H25,Análise de um gráfico de temperatura para determinar quantas vezes a velocidade de um pistão se anulou.,740.9,MT,650-750,"velocidade, gráfico de temperatura",,,,,,"velocidade, gráfico de temperatura"
+Matematica,H25,Análise de um gráfico de vendas para estimar a quantidade a mais de pastéis a serem vendidos.,788.9,MT,750+,gráfico de vendas,,,,,,gráfico de vendas
+Matematica,H25,Análise de gráfico e média aritmética para determinar quando as vendas voltarão a ser piores que em um dado mês.,800.3,MT,750+,"média aritmética, Análise de gráfico",,,Análise de gráfico,,,"média aritmética, Análise de gráfico, Análise de gráfico"
+Matematica,H25,Análise de uma tabela de censo demográfico para calcular o percentual de aumento da população.,812.6,MT,750+,"percentual de aumento da população, tabela de censo demográfico",,,,,,"percentual de aumento da população, tabela de censo demográfico"
+Matematica,H26,Análise de gráfico de barras para escolher a melhor forma de promoção para diferentes classes sociais.,457.7,MT,450-550,,,,"Análise de gráfico de barras, escolher a melhor forma de promoção",,,"Análise de gráfico de barras, escolher a melhor forma de promoção"
+Matematica,H26,Análise de um gráfico de linha para identificar os dias de maior eficiência em um SAC.,545.2,MT,450-550,gráfico de linha,,,,,,gráfico de linha
+Matematica,H26,Análise de gráfico sobre extensão de gelo marítimo para inferir o ano de maior aquecimento.,546.0,MT,450-550,"extensão de gelo marítimo, Análise de gráfico",,,Análise de gráfico,,Análise de gráfico,"extensão de gelo marítimo, Análise de gráfico, Análise de gráfico, Análise de gráfico"
+Matematica,H26,Análise de gráficos para determinar o dia com a metodologia de trabalho mais eficiente.,562.4,MT,550-650,"metodologia de trabalho, Análise de gráficos",,,"Análise de gráficos, metodologia de trabalho, determinar o dia","determinar o dia, Análise de gráficos",,"metodologia de trabalho, Análise de gráficos, Análise de gráficos, metodologia de trabalho, determinar o dia, determinar o dia, Análise de gráficos"
+Matematica,H26,Análise de uma tabela de custos para escolher o operário mais econômico.,564.8,MT,550-650,tabela de custos,,,escolher o operário mais econômico,,,"tabela de custos, escolher o operário mais econômico"
+Matematica,H26,Análise de tabela sobre doação de sangue para identificar regiões prioritárias para campanhas.,566.6,MT,550-650,"doação de sangue, Análise de tabela, regiões prioritárias",,doação de sangue,"Análise de tabela, identificar regiões prioritárias",,,"doação de sangue, Análise de tabela, regiões prioritárias, doação de sangue, Análise de tabela, identificar regiões prioritárias"
+Matematica,H26,Análise de gráfico de setores para determinar o reservatório com maior volume de água.,594.5,MT,550-650,Análise de gráfico de setores,,,Análise de gráfico de setores,,,"Análise de gráfico de setores, Análise de gráfico de setores"
+Matematica,H26,Análise de gráficos para determinar o tipo de perfume que gerou maior arrecadação.,608.2,MT,550-650,"Análise de gráficos, arrecadação",,arrecadação,Análise de gráficos,Análise de gráficos,,"Análise de gráficos, arrecadação, arrecadação, Análise de gráficos, Análise de gráficos"
+Matematica,H26,Análise de tabelas para determinar o dia com maior gasto calórico.,616.5,MT,550-650,"gasto calórico, Análise de tabelas",,,"Análise de tabelas, determinar o dia",,,"gasto calórico, Análise de tabelas, Análise de tabelas, determinar o dia"
+Matematica,H26,Análise de gráficos para determinar o ano de maior rentabilidade de aluguel.,633.0,MT,550-650,"Análise de gráficos, rentabilidade",rentabilidade,"rentabilidade de aluguel, Análise de gráficos",Análise de gráficos,Análise de gráficos,,"Análise de gráficos, rentabilidade, rentabilidade, rentabilidade de aluguel, Análise de gráficos, Análise de gráficos, Análise de gráficos"
+Matematica,H26,Análise de gráficos de trajetória para determinar a alteração necessária para a interceptação de projéteis.,689.3,MT,650-750,"interceptação de projéteis, Análise de gráficos de trajetória",,,"interceptação de projéteis, Análise de gráficos de trajetória, determinar a alteração necessária",Análise de gráficos,,"interceptação de projéteis, Análise de gráficos de trajetória, interceptação de projéteis, Análise de gráficos de trajetória, determinar a alteração necessária, Análise de gráficos"
+Matematica,H26,Análise de gráficos de setores para determinar a maior taxa de aumento no tempo de acesso a um site.,689.6,MT,650-750,"taxa de aumento, tempo de acesso, Análise de gráficos de setores",,,Análise de gráficos de setores,,,"taxa de aumento, tempo de acesso, Análise de gráficos de setores, Análise de gráficos de setores"
+Matematica,H26,Análise de um gráfico de previsão do tempo para verificar a correção de alertas emitidos.,692.9,MT,650-750,"gráfico de previsão do tempo, correção de alertas",,,,,,"gráfico de previsão do tempo, correção de alertas"
 Matematica,H26,Análise de um histograma de preços de apartamentos para verificar uma afirmação da corretora.,695.8,MT,650-750,,,,,,,
-Matematica,H26,Análise de tabelas de notas e probabilidades para escolher o melhor salto ornamental.,703.3,MT,650-750,,,,,,,
-Matematica,H26,Análise de um gráfico com dados climáticos para escolher o melhor mês para o plantio.,710.6,MT,650-750,,,,,,,
-Matematica,H26,Cálculo do índice de eficiência de vacas para determinar a mais eficiente.,770.5,MT,750+,,,,,,,
-Matematica,H26,Geometria analítica e cálculo de distâncias em uma malha para determinar o percurso mais curto.,831.3,MT,750+,,,,,,,
-Matematica,H26,Análise de gráficos para calcular a taxa de urbanização e determinar qual município receberá investimento.,834.3,MT,750+,,,,,,,
-Matematica,H26,Análise da distorção visual em gráficos para calcular a diferença entre razões de alturas.,862.8,MT,750+,,,,,,,
-Matematica,H27,Cálculo de média aritmética para determinar o lucro mínimo para um gerente.,590.6,MT,550-650,,,,,,,
-Matematica,H27,Cálculo de média aritmética ponderada dos salários de funcionários.,608.0,MT,550-650,,,,,,,
-Matematica,H27,Cálculo de média ponderada para escolher a empresa mais bem avaliada.,633.4,MT,550-650,,,,,,,
+Matematica,H26,Análise de tabelas de notas e probabilidades para escolher o melhor salto ornamental.,703.3,MT,650-750,salto ornamental,,,escolher o melhor salto ornamental,,,"salto ornamental, escolher o melhor salto ornamental"
+Matematica,H26,Análise de um gráfico com dados climáticos para escolher o melhor mês para o plantio.,710.6,MT,650-750,dados climáticos,,,"Análise de um gráfico, escolher o melhor mês para o plantio",,,"dados climáticos, Análise de um gráfico, escolher o melhor mês para o plantio"
+Matematica,H26,Cálculo do índice de eficiência de vacas para determinar a mais eficiente.,770.5,MT,750+,índice de eficiência de vacas,,,,,,índice de eficiência de vacas
+Matematica,H26,Geometria analítica e cálculo de distâncias em uma malha para determinar o percurso mais curto.,831.3,MT,750+,"Geometria analítica, cálculo de distâncias",Geometria,Geometria,,,,"Geometria analítica, cálculo de distâncias, Geometria, Geometria"
+Matematica,H26,Análise de gráficos para calcular a taxa de urbanização e determinar qual município receberá investimento.,834.3,MT,750+,"taxa de urbanização, Análise de gráficos",,taxa de urbanização,Análise de gráficos,Análise de gráficos,,"taxa de urbanização, Análise de gráficos, taxa de urbanização, Análise de gráficos, Análise de gráficos"
+Matematica,H26,Análise da distorção visual em gráficos para calcular a diferença entre razões de alturas.,862.8,MT,750+,"razões de alturas, distorção visual",,,,,,"razões de alturas, distorção visual"
+Matematica,H27,Cálculo de média aritmética para determinar o lucro mínimo para um gerente.,590.6,MT,550-650,"média aritmética, lucro mínimo",,lucro mínimo,,,,"média aritmética, lucro mínimo, lucro mínimo"
+Matematica,H27,Cálculo de média aritmética ponderada dos salários de funcionários.,608.0,MT,550-650,média aritmética ponderada,,,,salários de funcionários,,"média aritmética ponderada, salários de funcionários"
+Matematica,H27,Cálculo de média ponderada para escolher a empresa mais bem avaliada.,633.4,MT,550-650,Cálculo de média ponderada,,,Cálculo de média ponderada,,,"Cálculo de média ponderada, Cálculo de média ponderada"
 Matematica,H27,Cálculo da mediana do número de terremotos em um período.,646.8,MT,550-650,,,,,,,
-Matematica,H27,Cálculo da média de idades a partir de um gráfico de frequências.,647.5,MT,550-650,,,,,,,
-Matematica,H27,Cálculo da média anual do número de carros vendidos por uma marca.,655.0,MT,650-750,,,,,,,
-Matematica,H27,Cálculo da mediana dos tempos de atletas em uma prova de natação.,672.6,MT,650-750,,,,,,,
+Matematica,H27,Cálculo da média de idades a partir de um gráfico de frequências.,647.5,MT,550-650,"gráfico de frequências, média de idades",média de idades,média de idades,,,,"gráfico de frequências, média de idades, média de idades, média de idades"
+Matematica,H27,Cálculo da média anual do número de carros vendidos por uma marca.,655.0,MT,650-750,média anual,,,,,,média anual
+Matematica,H27,Cálculo da mediana dos tempos de atletas em uma prova de natação.,672.6,MT,650-750,mediana dos tempos,,,,prova de natação,,"mediana dos tempos, prova de natação"
 Matematica,H27,Cálculo da moda do número de pessoas em um elevador.,679.6,MT,650-750,,,,,,,
 Matematica,H27,Cálculo da média do número de acidentes por funcionário em uma amostra.,680.2,MT,650-750,,,,,,,
-Matematica,H27,Comparação entre a média aritmética simples e a média após descarte da maior e menor nota.,686.3,MT,650-750,,,,,,,
-Matematica,H27,Cálculo da média diária de garrafas fora das especificações.,687.9,MT,650-750,,,,,,,
-Matematica,H27,"Comparação entre média, mediana e moda de uma distribuição de dados.",719.6,MT,650-750,,,,,,,
+Matematica,H27,Comparação entre a média aritmética simples e a média após descarte da maior e menor nota.,686.3,MT,650-750,,,,Comparação,,,Comparação
+Matematica,H27,Cálculo da média diária de garrafas fora das especificações.,687.9,MT,650-750,média diária de garrafas,,,,fora das especificações,,"média diária de garrafas, fora das especificações"
+Matematica,H27,"Comparação entre média, mediana e moda de uma distribuição de dados.",719.6,MT,650-750,distribuição de dados,,distribuição de dados,Comparação,,,"distribuição de dados, distribuição de dados, Comparação"
 Matematica,H27,Cálculo da mediana da quantidade de crianças por família.,721.3,MT,650-750,,,,,,,
-Matematica,H27,Análise de séries de experimentos para encontrar o reagente com mais resultados acima da média.,723.7,MT,650-750,,,,,,,
+Matematica,H27,Análise de séries de experimentos para encontrar o reagente com mais resultados acima da média.,723.7,MT,650-750,"reagente, Análise de séries de experimentos",,,"Análise de séries de experimentos, encontrar o reagente",,,"reagente, Análise de séries de experimentos, Análise de séries de experimentos, encontrar o reagente"
 Matematica,H27,Cálculo da mediana dos valores dos lucros apurados por uma empresa.,727.6,MT,650-750,,,,,,,
-Matematica,H27,Cálculo da mediana dos empregos formais surgidos a partir de um gráfico.,771.9,MT,750+,,,,,,,
-Matematica,H27,Cálculo da variância das produções de talhões.,823.6,MT,750+,,,,,,,
-Matematica,H27,Cálculo da mediana do valor da diária a partir de um gráfico de áreas.,927.9,MT,750+,,,,,,,
-Matematica,H27,Cálculo da mediana da taxa de desemprego em um período.,1292.1,MT,750+,,,,,,,
-Matematica,H28,Cálculo de probabilidade simples (senha sorteada).,476.1,MT,450-550,,,,,,,
-Matematica,H28,Cálculo de média e comparação para determinar a contratação de funcionários.,527.9,MT,450-550,,,,,,,
-Matematica,H28,Cálculo de probabilidade em um sorteio com ordem decrescente de idade.,599.4,MT,550-650,,,,,,,
-Matematica,H28,"Cálculo de probabilidade em um sorteio com diferentes ""pesos"" para os participantes.",636.8,MT,550-650,,,,,,,
-Matematica,H28,Cálculo de média ponderada para determinar a nota mínima para aprovação.,686.5,MT,650-750,,,,,,,
-Matematica,H28,Cálculo do número de perguntas a serem acrescentadas para atingir uma probabilidade desejada.,687.8,MT,650-750,,,,,,,
-Matematica,H28,"Cálculo de probabilidade condicional (declaração ser inconsistente, dado que era fraudulenta).",691.2,MT,650-750,,,,,,,
-Matematica,H28,Análise do coeficiente de variação para avaliar a eficiência de uma ração.,693.2,MT,650-750,,,,,,,
-Matematica,H28,Cálculo da nova média de altura de um time após uma substituição.,695.3,MT,650-750,,,,,,,
-Matematica,H28,Cálculo de probabilidade de dois eventos independentes ocorrerem.,700.8,MT,650-750,,,,,,,
-Matematica,H28,Resolução de sistema de equações para determinar a distribuição percentual de entrevistados.,747.5,MT,650-750,,,,,,,
-Matematica,H28,Cálculo de probabilidades em um sorteio com etapas e restrições.,750.5,MT,750+,,,,,,,
-Matematica,H28,Cálculo da probabilidade de uma opinião ser escolhida em uma enquete.,767.7,MT,750+,,,,,,,
-Matematica,H28,Cálculo de probabilidade total (probabilidade de atraso com ou sem chuva).,768.7,MT,750+,,,,,,,
-Matematica,H28,"Cálculo de probabilidade condicional (aluno falar espanhol, dado que não fala inglês).",769.3,MT,750+,,,,,,,
-Matematica,H28,Cálculo da sensibilidade de um teste diagnóstico a partir de uma tabela.,798.8,MT,750+,,,,,,,
-Matematica,H28,Cálculo de probabilidade binomial (observar exatamente um sinal verde em 10).,804.3,MT,750+,,,,,,,
-Matematica,H28,Cálculo de probabilidade de um evento ocorrer em uma determinada tentativa.,871.3,MT,750+,,,,,,,
-Matematica,H28,Cálculo de probabilidade de um percurso em um mapa com ramificações.,874.7,MT,750+,,,,,,,
-Matematica,H28,Cálculo da probabilidade de pelo menos um de três eventos ocorrer.,887.9,MT,750+,,,,,,,
-Matematica,H28,Cálculo de probabilidade em um campeonato disputado em melhor de sete jogos.,965.3,MT,750+,,,,,,,
-Matematica,H29,Cálculo da média de vendas para determinar qual lanche será incluído no cardápio.,557.0,MT,550-650,,,,,,,
-Matematica,H29,Cálculo da média de lucros para tomar uma decisão de compra de matéria-prima.,576.9,MT,550-650,,,,,,,
-Matematica,H29,Cálculo da média da receita bruta anual para escolher empresas para comprar.,579.5,MT,550-650,,,,,,,
-Matematica,H29,Análise de pontuações para determinar qual jogador precisa de menos pontos para atingir uma média.,587.5,MT,550-650,,,,,,,
-Matematica,H29,Cálculo do coeficiente de rendimento climático (CRC) para escolher o melhor pneu.,610.9,MT,550-650,,,,,,,
-Matematica,H29,Cálculo da média de faturamento mensal para determinar a comissão a ser recebida.,657.2,MT,650-750,,,,,,,
-Matematica,H29,Cálculo da mediana das notas para determinar o candidato aprovado.,670.7,MT,650-750,,,,,,,
-Matematica,H29,Análise do desvio padrão para determinar os atletas mais e menos regulares.,686.6,MT,650-750,,,,,,,
-Matematica,H29,"Análise de média, mediana, moda e média da cor para determinar qual sapato não será mais vendido.",703.6,MT,650-750,,,,,,,
-Matematica,H29,Análise combinatória para determinar o tipo de senha com menor probabilidade de ser descoberta.,738.0,MT,650-750,,,,,,,
-Matematica,H29,Cálculo de probabilidades para escolher o quadrado com menor chance de conter uma mina.,741.7,MT,650-750,,,,,,,
-Matematica,H29,Cálculo de média e análise de critério de desempate para classificar candidatos.,778.7,MT,750+,,,,,,,
-Matematica,H29,"Análise de média, mediana e moda das alturas para determinar em qual time os alunos jogaram.",795.7,MT,750+,,,,,,,
-Matematica,H29,Cálculo de probabilidades de somas no lançamento de dois dados.,824.2,MT,750+,,,,,,,
-Matematica,H29,Cálculo e comparação de probabilidades para escolher a opção mais vantajosa para ganhar um prêmio.,847.8,MT,750+,,,,,,,
-Matematica,H29,Cálculo da probabilidade de um parafuso ser defeituoso para classificar o desempenho de máquinas.,868.4,MT,750+,,,,,,,
-Matematica,H29,Análise de dados de horários (moda e mediana) para calcular uma probabilidade máxima.,872.6,MT,750+,,,,,,,
-Matematica,H29,Cálculo da média aritmética das notas para determinar quais alunos foram reprovados.,880.1,MT,750+,,,,,,,
-Matematica,H29,Comparação de probabilidades de um atleta ser escolhido para um exame antidoping.,880.6,MT,750+,,,,,,,
-Matematica,H30,Análise de índice de precipitação para escolher o melhor momento para o plantio.,574.3,MT,550-650,,,,,,,
-Matematica,H30,Cálculo de probabilidade para determinar a quantidade mínima de placas de propaganda.,641.7,MT,550-650,,,,,,,
-Matematica,H30,Cálculo da menor nota necessária em uma disciplina para vencer uma competição.,653.3,MT,650-750,,,,,,,
-Matematica,H30,Cálculo de probabilidades para escolher a cor com maior chance de ganhar um jogo.,683.7,MT,650-750,,,,,,,
-Matematica,H30,"Cálculo da nota mínima em uma disciplina para atingir uma avaliação ""Bom"" ou ""Excelente"".",707.6,MT,650-750,,,,,,,
-Matematica,H30,Análise de probabilidades e custos para determinar os apostadores com maiores chances.,714.3,MT,650-750,,,,,,,
-Matematica,H30,Cálculo do percentual máximo de reajuste salarial para não ultrapassar uma média.,740.4,MT,650-750,,,,,,,
-Matematica,H30,Cálculo da quantidade de vacinas a serem adquiridas para reposição de estoque.,757.5,MT,750+,,,,,,,
-Matematica,H30,Cálculo da média mínima de estaturas para novos jogadores de um time.,783.0,MT,750+,,,,,,,
-Matematica,H30,Cálculo da quantidade mínima de dardos para que a probabilidade de pontuar seja atingida.,788.5,MT,750+,,,,,,,
-Matematica,H30,Cálculo do número de bolinhas a serem adicionadas para alterar a probabilidade de ganhar um voucher.,791.9,MT,750+,,,,,,,
-Matematica,H30,Análise de probabilidade para determinar a dimensão mínima de um tabuleiro de jogo.,844.3,MT,750+,,,,,,,
-Matematica,H30,Cálculo da porcentagem de vacinação necessária para que a probabilidade de desenvolver uma doença seja atingida.,951.7,MT,750+,,,,,,,
-Matematica,H7,Reconhecimento de formas em um quebra-cabeças (anéis de Borromeo).,403.3,MT,200-450,,,,,,,
-Matematica,H6,Rotação de peças em um quebra-cabeças.,513.1,MT,450-550,,,,,,,
-Matematica,H23,Cálculo de consumo de biodiesel com base em uma mudança de porcentagem.,579.7,MT,550-650,,,,,,,
-Matematica,H26,Análise de um gráfico de um pacote promocional de hospedagem.,602.7,MT,550-650,,,,,,,
-Matematica,H26,Análise de gráfico sobre a relação entre consumo de cigarros e câncer de pulmão.,627.3,MT,550-650,,,,,,,
-Matematica,H12,Cálculo de tempo de percurso com velocidade constante.,628.9,MT,550-650,,,,,,,
-Matematica,H15,Proporcionalidade em uma rampa para calcular a distância restante.,644.8,MT,550-650,,,,,,,
-Matematica,H19,Identificação da expressão algébrica que relaciona o nível da água com o número de bolas.,656.1,MT,650-750,,,,,,,
-Matematica,H22,Resolução de um problema envolvendo cotas para uma festa.,668.0,MT,650-750,,,,,,,
+Matematica,H27,Cálculo da mediana dos empregos formais surgidos a partir de um gráfico.,771.9,MT,750+,,empregos formais,empregos formais,,empregos formais,,"empregos formais, empregos formais, empregos formais"
+Matematica,H27,Cálculo da variância das produções de talhões.,823.6,MT,750+,produções de talhões,,,,,,produções de talhões
+Matematica,H27,Cálculo da mediana do valor da diária a partir de um gráfico de áreas.,927.9,MT,750+,gráfico de áreas,,,Cálculo da mediana,,,"gráfico de áreas, Cálculo da mediana"
+Matematica,H27,Cálculo da mediana da taxa de desemprego em um período.,1292.1,MT,750+,taxa de desemprego,,,,,,taxa de desemprego
+Matematica,H28,Cálculo de probabilidade simples (senha sorteada).,476.1,MT,450-550,"Cálculo de probabilidade simples, senha sorteada",probabilidade,probabilidade,,,,"Cálculo de probabilidade simples, senha sorteada, probabilidade, probabilidade"
+Matematica,H28,Cálculo de média e comparação para determinar a contratação de funcionários.,527.9,MT,450-550,Cálculo de média e comparação,,contratação de funcionários,"Cálculo de média e comparação, determinar a contratação de funcionários",contratação de funcionários,,"Cálculo de média e comparação, contratação de funcionários, Cálculo de média e comparação, determinar a contratação de funcionários, contratação de funcionários"
+Matematica,H28,Cálculo de probabilidade em um sorteio com ordem decrescente de idade.,599.4,MT,550-650,"Cálculo de probabilidade, ordem decrescente de idade",probabilidade,probabilidade,,,,"Cálculo de probabilidade, ordem decrescente de idade, probabilidade, probabilidade"
+Matematica,H28,"Cálculo de probabilidade em um sorteio com diferentes ""pesos"" para os participantes.",636.8,MT,550-650,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H28,Cálculo de média ponderada para determinar a nota mínima para aprovação.,686.5,MT,650-750,"Cálculo de média ponderada, nota mínima",,,"determinar a nota mínima, Cálculo de média ponderada",aprovação,,"Cálculo de média ponderada, nota mínima, determinar a nota mínima, Cálculo de média ponderada, aprovação"
+Matematica,H28,Cálculo do número de perguntas a serem acrescentadas para atingir uma probabilidade desejada.,687.8,MT,650-750,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H28,"Cálculo de probabilidade condicional (declaração ser inconsistente, dado que era fraudulenta).",691.2,MT,650-750,probabilidade condicional,probabilidade,probabilidade,,,,"probabilidade condicional, probabilidade, probabilidade"
+Matematica,H28,Análise do coeficiente de variação para avaliar a eficiência de uma ração.,693.2,MT,650-750,coeficiente de variação,,,,,,coeficiente de variação
+Matematica,H28,Cálculo da nova média de altura de um time após uma substituição.,695.3,MT,650-750,"média de altura, substituição",,,,após uma substituição,,"média de altura, substituição, após uma substituição"
+Matematica,H28,Cálculo de probabilidade de dois eventos independentes ocorrerem.,700.8,MT,650-750,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H28,Resolução de sistema de equações para determinar a distribuição percentual de entrevistados.,747.5,MT,650-750,"sistema de equações, distribuição percentual",,,Resolução de sistema de equações,,,"sistema de equações, distribuição percentual, Resolução de sistema de equações"
+Matematica,H28,Cálculo de probabilidades em um sorteio com etapas e restrições.,750.5,MT,750+,Cálculo de probabilidades,,,,,,Cálculo de probabilidades
+Matematica,H28,Cálculo da probabilidade de uma opinião ser escolhida em uma enquete.,767.7,MT,750+,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H28,Cálculo de probabilidade total (probabilidade de atraso com ou sem chuva).,768.7,MT,750+,"Cálculo de probabilidade total, probabilidade de atraso com ou sem chuva",probabilidade,probabilidade,,,,"Cálculo de probabilidade total, probabilidade de atraso com ou sem chuva, probabilidade, probabilidade"
+Matematica,H28,"Cálculo de probabilidade condicional (aluno falar espanhol, dado que não fala inglês).",769.3,MT,750+,probabilidade condicional,probabilidade,probabilidade,,aluno falar espanhol,,"probabilidade condicional, probabilidade, probabilidade, aluno falar espanhol"
+Matematica,H28,Cálculo da sensibilidade de um teste diagnóstico a partir de uma tabela.,798.8,MT,750+,sensibilidade,,,,teste diagnóstico,,"sensibilidade, teste diagnóstico"
+Matematica,H28,Cálculo de probabilidade binomial (observar exatamente um sinal verde em 10).,804.3,MT,750+,"probabilidade binomial, sinal verde",probabilidade,probabilidade,,,,"probabilidade binomial, sinal verde, probabilidade, probabilidade"
+Matematica,H28,Cálculo de probabilidade de um evento ocorrer em uma determinada tentativa.,871.3,MT,750+,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H28,Cálculo de probabilidade de um percurso em um mapa com ramificações.,874.7,MT,750+,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H28,Cálculo da probabilidade de pelo menos um de três eventos ocorrer.,887.9,MT,750+,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H28,Cálculo de probabilidade em um campeonato disputado em melhor de sete jogos.,965.3,MT,750+,Cálculo de probabilidade,probabilidade,probabilidade,,,,"Cálculo de probabilidade, probabilidade, probabilidade"
+Matematica,H29,Cálculo da média de vendas para determinar qual lanche será incluído no cardápio.,557.0,MT,550-650,média de vendas,,,,,,média de vendas
+Matematica,H29,Cálculo da média de lucros para tomar uma decisão de compra de matéria-prima.,576.9,MT,550-650,média de lucros,,,,compra de matéria-prima,,"média de lucros, compra de matéria-prima"
+Matematica,H29,Cálculo da média da receita bruta anual para escolher empresas para comprar.,579.5,MT,550-650,média da receita bruta anual,,,,escolher empresas para comprar,,"média da receita bruta anual, escolher empresas para comprar"
+Matematica,H29,Análise de pontuações para determinar qual jogador precisa de menos pontos para atingir uma média.,587.5,MT,550-650,Análise de pontuações,,,"Análise de pontuações, atingir uma média",,,"Análise de pontuações, Análise de pontuações, atingir uma média"
+Matematica,H29,Cálculo do coeficiente de rendimento climático (CRC) para escolher o melhor pneu.,610.9,MT,550-650,coeficiente de rendimento climático (CRC),,,,escolher o melhor pneu,,"coeficiente de rendimento climático (CRC), escolher o melhor pneu"
+Matematica,H29,Cálculo da média de faturamento mensal para determinar a comissão a ser recebida.,657.2,MT,650-750,média de faturamento mensal,,média de faturamento mensal,,,,"média de faturamento mensal, média de faturamento mensal"
+Matematica,H29,Cálculo da mediana das notas para determinar o candidato aprovado.,670.7,MT,650-750,mediana das notas,,,determinar o candidato aprovado,,,"mediana das notas, determinar o candidato aprovado"
+Matematica,H29,Análise do desvio padrão para determinar os atletas mais e menos regulares.,686.6,MT,650-750,desvio padrão,,,,,,desvio padrão
+Matematica,H29,"Análise de média, mediana, moda e média da cor para determinar qual sapato não será mais vendido.",703.6,MT,650-750,média da cor,,,determinar qual sapato não será mais vendido,,,"média da cor, determinar qual sapato não será mais vendido"
+Matematica,H29,Análise combinatória para determinar o tipo de senha com menor probabilidade de ser descoberta.,738.0,MT,650-750,Análise combinatória,probabilidade,,,,,"Análise combinatória, probabilidade"
+Matematica,H29,Cálculo de probabilidades para escolher o quadrado com menor chance de conter uma mina.,741.7,MT,650-750,Cálculo de probabilidades,,,Cálculo de probabilidades,,,"Cálculo de probabilidades, Cálculo de probabilidades"
+Matematica,H29,Cálculo de média e análise de critério de desempate para classificar candidatos.,778.7,MT,750+,"Cálculo de média, análise de critério de desempate",,,classificar candidatos,classificar candidatos,,"Cálculo de média, análise de critério de desempate, classificar candidatos, classificar candidatos"
+Matematica,H29,"Análise de média, mediana e moda das alturas para determinar em qual time os alunos jogaram.",795.7,MT,750+,,,,determinar em qual time os alunos jogaram,,,determinar em qual time os alunos jogaram
+Matematica,H29,Cálculo de probabilidades de somas no lançamento de dois dados.,824.2,MT,750+,probabilidades de somas,,,lançamento de dois dados,lançamento de dois dados,,"probabilidades de somas, lançamento de dois dados, lançamento de dois dados"
+Matematica,H29,Cálculo e comparação de probabilidades para escolher a opção mais vantajosa para ganhar um prêmio.,847.8,MT,750+,,,,comparação,ganhar um prêmio,,"comparação, ganhar um prêmio"
+Matematica,H29,Cálculo da probabilidade de um parafuso ser defeituoso para classificar o desempenho de máquinas.,868.4,MT,750+,probabilidade,probabilidade,probabilidade,classificar o desempenho de máquinas,,,"probabilidade, probabilidade, probabilidade, classificar o desempenho de máquinas"
+Matematica,H29,Análise de dados de horários (moda e mediana) para calcular uma probabilidade máxima.,872.6,MT,750+,"probabilidade máxima, Análise de dados, moda e mediana","probabilidade, Análise de dados",probabilidade,Análise de dados,,Análise de dados,"probabilidade máxima, Análise de dados, moda e mediana, probabilidade, Análise de dados, probabilidade, Análise de dados, Análise de dados"
+Matematica,H29,Cálculo da média aritmética das notas para determinar quais alunos foram reprovados.,880.1,MT,750+,média aritmética,,,determinar quais alunos foram reprovados,,,"média aritmética, determinar quais alunos foram reprovados"
+Matematica,H29,Comparação de probabilidades de um atleta ser escolhido para um exame antidoping.,880.6,MT,750+,,,,Comparação de probabilidades,exame antidoping,,"Comparação de probabilidades, exame antidoping"
+Matematica,H30,Análise de índice de precipitação para escolher o melhor momento para o plantio.,574.3,MT,550-650,índice de precipitação,,,escolher o melhor momento para o plantio,,,"índice de precipitação, escolher o melhor momento para o plantio"
+Matematica,H30,Cálculo de probabilidade para determinar a quantidade mínima de placas de propaganda.,641.7,MT,550-650,Cálculo de probabilidade,probabilidade,"placas de propaganda, probabilidade",,placas de propaganda,,"Cálculo de probabilidade, probabilidade, placas de propaganda, probabilidade, placas de propaganda"
+Matematica,H30,Cálculo da menor nota necessária em uma disciplina para vencer uma competição.,653.3,MT,650-750,,,,,competição,,competição
+Matematica,H30,Cálculo de probabilidades para escolher a cor com maior chance de ganhar um jogo.,683.7,MT,650-750,Cálculo de probabilidades,,,,,,Cálculo de probabilidades
+Matematica,H30,"Cálculo da nota mínima em uma disciplina para atingir uma avaliação ""Bom"" ou ""Excelente"".",707.6,MT,650-750,nota mínima,,,,,,nota mínima
+Matematica,H30,Análise de probabilidades e custos para determinar os apostadores com maiores chances.,714.3,MT,650-750,Análise de probabilidades e custos,,,determinar os apostadores,,,"Análise de probabilidades e custos, determinar os apostadores"
+Matematica,H30,Cálculo do percentual máximo de reajuste salarial para não ultrapassar uma média.,740.4,MT,650-750,percentual máximo,,,,,,percentual máximo
+Matematica,H30,Cálculo da quantidade de vacinas a serem adquiridas para reposição de estoque.,757.5,MT,750+,,,,,reposição de estoque,,reposição de estoque
+Matematica,H30,Cálculo da média mínima de estaturas para novos jogadores de um time.,783.0,MT,750+,média mínima de estaturas,,,,novos jogadores de um time,,"média mínima de estaturas, novos jogadores de um time"
+Matematica,H30,Cálculo da quantidade mínima de dardos para que a probabilidade de pontuar seja atingida.,788.5,MT,750+,"probabilidade de pontuar, quantidade mínima de dardos",probabilidade,probabilidade,,,,"probabilidade de pontuar, quantidade mínima de dardos, probabilidade, probabilidade"
+Matematica,H30,Cálculo do número de bolinhas a serem adicionadas para alterar a probabilidade de ganhar um voucher.,791.9,MT,750+,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H30,Análise de probabilidade para determinar a dimensão mínima de um tabuleiro de jogo.,844.3,MT,750+,"Análise de probabilidade, dimensão mínima, tabuleiro de jogo","probabilidade, tabuleiro de jogo","tabuleiro de jogo, probabilidade",,,,"Análise de probabilidade, dimensão mínima, tabuleiro de jogo, probabilidade, tabuleiro de jogo, tabuleiro de jogo, probabilidade"
+Matematica,H30,Cálculo da porcentagem de vacinação necessária para que a probabilidade de desenvolver uma doença seja atingida.,951.7,MT,750+,"probabilidade, porcentagem de vacinação",probabilidade,probabilidade,,,,"probabilidade, porcentagem de vacinação, probabilidade, probabilidade"
+Matematica,H7,Reconhecimento de formas em um quebra-cabeças (anéis de Borromeo).,403.3,MT,200-450,anéis de Borromeo,,,Reconhecimento de formas,,,"anéis de Borromeo, Reconhecimento de formas"
+Matematica,H6,Rotação de peças em um quebra-cabeças.,513.1,MT,450-550,Rotação de peças,,,Rotação de peças,,,"Rotação de peças, Rotação de peças"
+Matematica,H23,Cálculo de consumo de biodiesel com base em uma mudança de porcentagem.,579.7,MT,550-650,mudança de porcentagem,,,,,,mudança de porcentagem
+Matematica,H26,Análise de um gráfico de um pacote promocional de hospedagem.,602.7,MT,550-650,,,,Análise de um gráfico,pacote promocional de hospedagem,,"Análise de um gráfico, pacote promocional de hospedagem"
+Matematica,H26,Análise de gráfico sobre a relação entre consumo de cigarros e câncer de pulmão.,627.3,MT,550-650,Análise de gráfico,,,Análise de gráfico,,,"Análise de gráfico, Análise de gráfico"
+Matematica,H12,Cálculo de tempo de percurso com velocidade constante.,628.9,MT,550-650,"tempo de percurso, velocidade",,,,,,"tempo de percurso, velocidade"
+Matematica,H15,Proporcionalidade em uma rampa para calcular a distância restante.,644.8,MT,550-650,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H19,Identificação da expressão algébrica que relaciona o nível da água com o número de bolas.,656.1,MT,650-750,"expressão algébrica, nível da água, número de bolas",,,Identificação,,,"expressão algébrica, nível da água, número de bolas, Identificação"
+Matematica,H22,Resolução de um problema envolvendo cotas para uma festa.,668.0,MT,650-750,,,,Resolução de um problema,,Resolução de um problema,"Resolução de um problema, Resolução de um problema"
 Matematica,H8,Cálculo da porcentagem da área de um terreno.,672.7,MT,650-750,,,,,,,
-Matematica,H12,Cálculo de peso de um carro de Fórmula 1 com base em densidade e volume.,681.4,MT,650-750,,,,,,,
+Matematica,H12,Cálculo de peso de um carro de Fórmula 1 com base em densidade e volume.,681.4,MT,650-750,"densidade, Fórmula 1",,,Cálculo de peso,,,"densidade, Fórmula 1, Cálculo de peso"
 Matematica,H27,Cálculo da diferença entre valores médios de investimentos.,688.6,MT,650-750,,,,,,,
-Matematica,H18,Análise da área de preservação em um terreno.,691.3,MT,650-750,,,,,,,
-Matematica,H18,Cálculo da vazão de uma canaleta após uma reforma.,694.1,MT,650-750,,,,,,,
-Matematica,H17,Análise de um contrato de trabalho para atender a exigências de produção e custo.,700.5,MT,650-750,,,,,,,
-Matematica,H24,Inferência sobre o total de passageiros transportados a partir de um índice de produtividade.,710.2,MT,650-750,,,,,,,
-Matematica,H19,Expressão que relaciona o valor arrecadado com a venda de álcool e o desconto.,716.4,MT,650-750,,,,,,,
+Matematica,H18,Análise da área de preservação em um terreno.,691.3,MT,650-750,área de preservação,,,,,,área de preservação
+Matematica,H18,Cálculo da vazão de uma canaleta após uma reforma.,694.1,MT,650-750,,,,,após uma reforma,,após uma reforma
+Matematica,H17,Análise de um contrato de trabalho para atender a exigências de produção e custo.,700.5,MT,650-750,,,contrato de trabalho,,"exigências de produção e custo, contrato de trabalho",,"contrato de trabalho, exigências de produção e custo, contrato de trabalho"
+Matematica,H24,Inferência sobre o total de passageiros transportados a partir de um índice de produtividade.,710.2,MT,650-750,"índice de produtividade, total de passageiros transportados",,,,,,"índice de produtividade, total de passageiros transportados"
+Matematica,H19,Expressão que relaciona o valor arrecadado com a venda de álcool e o desconto.,716.4,MT,650-750,valor arrecadado,,,,,,valor arrecadado
 Matematica,H16,Cálculo da quantidade de alimentos arrecadados em uma campanha.,723.4,MT,650-750,,,,,,,
 Matematica,H8,Análise da interseção de um plano com uma escultura formada por prismas.,724.1,MT,650-750,,,,,,,
-Matematica,H25,Conversão de área para determinar o número de campos de futebol correspondentes a um bioma.,725.6,MT,650-750,,,,,,,
-Matematica,H28,Cálculo da probabilidade de uma pessoa ter 60 anos ou mais em 2050.,725.8,MT,650-750,,,,,,,
-Matematica,H24,Estimativa de população com base em um modelo exponencial.,726.2,MT,650-750,,,,,,,
-Matematica,H3,Cálculo dos dígitos verificadores de um CPF.,727.1,MT,650-750,,,,,,,
-Matematica,H13,Comparação entre a capacidade de um aquífero e um reservatório.,732.1,MT,650-750,,,,,,,
-Matematica,H1,Análise da fórmula de um compasso musical para preencher um trecho musical.,741.7,MT,650-750,,,,,,,
-Matematica,H29,Cálculo da probabilidade de um evento ocorrer em um subconjunto.,747.6,MT,650-750,,,,,,,
-Matematica,H24,Cálculo da taxa média de variação a partir de uma tabela.,760.0,MT,750+,,,,,,,
-Matematica,H27,Cálculo da mediana de uma cotação mensal.,761.7,MT,750+,,,,,,,
-Matematica,H2,Análise combinatória: combinação e arranjo para escolher times.,768.2,MT,750+,,,,,,,
-Matematica,H28,Análise da mediana das notas de uma equipe em uma gincana.,770.6,MT,750+,,,,,,,
-Matematica,H9,Argumentação sobre os polígonos obtidos pela intersecção de um plano com uma pirâmide.,771.5,MT,750+,,,,,,,
-Matematica,H4,Cálculo de espaço de armazenamento para imagens digitais.,775.4,MT,750+,,,,,,,
-Matematica,H13,Cálculo das dimensões de um telhado para atender a uma demanda de água.,781.2,MT,750+,,,,,,,
-Matematica,H4,Análise de tempo gasto em exercícios e descanso em uma academia.,782.2,MT,750+,,,,,,,
-Matematica,H14,Cálculo de volume de parafina para fabricar uma vela.,786.7,MT,750+,,,,,,,
-Matematica,H6,Análise de rotas aéreas e ângulos para determinar uma conexão.,792.8,MT,750+,,,,,,,
-Matematica,H14,Cálculo do número máximo de esferas em uma caixa cúbica.,793.5,MT,750+,,,,,,,
-Matematica,H19,Expressão para a distância percorrida pela projeção de um ponto em uma circunferência.,816.8,MT,750+,,,,,,,
+Matematica,H25,Conversão de área para determinar o número de campos de futebol correspondentes a um bioma.,725.6,MT,650-750,"Conversão de área, campos de futebol",campos de futebol,campos de futebol,Conversão de área,,,"Conversão de área, campos de futebol, campos de futebol, campos de futebol, Conversão de área"
+Matematica,H28,Cálculo da probabilidade de uma pessoa ter 60 anos ou mais em 2050.,725.8,MT,650-750,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H24,Estimativa de população com base em um modelo exponencial.,726.2,MT,650-750,"modelo exponencial, Estimativa de população",,,Estimativa de população,,,"modelo exponencial, Estimativa de população, Estimativa de população"
+Matematica,H3,Cálculo dos dígitos verificadores de um CPF.,727.1,MT,650-750,dígitos verificadores,,,,,,dígitos verificadores
+Matematica,H13,Comparação entre a capacidade de um aquífero e um reservatório.,732.1,MT,650-750,,,,Comparação,,,Comparação
+Matematica,H1,Análise da fórmula de um compasso musical para preencher um trecho musical.,741.7,MT,650-750,"compasso musical, trecho musical",,,,,,"compasso musical, trecho musical"
+Matematica,H29,Cálculo da probabilidade de um evento ocorrer em um subconjunto.,747.6,MT,650-750,probabilidade,probabilidade,probabilidade,,,,"probabilidade, probabilidade, probabilidade"
+Matematica,H24,Cálculo da taxa média de variação a partir de uma tabela.,760.0,MT,750+,taxa média de variação,,,,,,taxa média de variação
+Matematica,H27,Cálculo da mediana de uma cotação mensal.,761.7,MT,750+,,cotação mensal,cotação mensal,,,,"cotação mensal, cotação mensal"
+Matematica,H2,Análise combinatória: combinação e arranjo para escolher times.,768.2,MT,750+,"Análise combinatória, combinação e arranjo",,,escolher times,,,"Análise combinatória, combinação e arranjo, escolher times"
+Matematica,H28,Análise da mediana das notas de uma equipe em uma gincana.,770.6,MT,750+,mediana das notas,,,,,,mediana das notas
+Matematica,H9,Argumentação sobre os polígonos obtidos pela intersecção de um plano com uma pirâmide.,771.5,MT,750+,,,,intersecção,,,intersecção
+Matematica,H4,Cálculo de espaço de armazenamento para imagens digitais.,775.4,MT,750+,espaço de armazenamento,,imagens digitais,Cálculo de espaço de armazenamento,imagens digitais,,"espaço de armazenamento, imagens digitais, Cálculo de espaço de armazenamento, imagens digitais"
+Matematica,H13,Cálculo das dimensões de um telhado para atender a uma demanda de água.,781.2,MT,750+,demanda de água,,,,,,demanda de água
+Matematica,H4,Análise de tempo gasto em exercícios e descanso em uma academia.,782.2,MT,750+,Análise de tempo,,,,,,Análise de tempo
+Matematica,H14,Cálculo de volume de parafina para fabricar uma vela.,786.7,MT,750+,,,,Cálculo de volume,fabricar uma vela,,"Cálculo de volume, fabricar uma vela"
+Matematica,H6,Análise de rotas aéreas e ângulos para determinar uma conexão.,792.8,MT,750+,rotas aéreas e ângulos,,,,,,rotas aéreas e ângulos
+Matematica,H14,Cálculo do número máximo de esferas em uma caixa cúbica.,793.5,MT,750+,"número máximo de esferas, caixa cúbica",caixa cúbica,caixa cúbica,,,,"número máximo de esferas, caixa cúbica, caixa cúbica, caixa cúbica"
+Matematica,H19,Expressão para a distância percorrida pela projeção de um ponto em uma circunferência.,816.8,MT,750+,projeção,,,projeção,,,"projeção, projeção"
 Matematica,H21,Análise de um indicador para determinar o número de famílias em um cadastro.,826.8,MT,750+,,,,,,,
-Matematica,H11,Cálculo das dimensões mínimas de uma folha para desenhar um avião em escala.,853.1,MT,750+,,,,,,,
-Matematica,H24,Cálculo da taxa média de variação da emissão de dióxido de carbono.,854.9,MT,750+,,,,,,,
-Matematica,H5,Análise de opções de pagamento e empréstimo para encontrar o menor gasto.,900.4,MT,750+,,,,,,,
+Matematica,H11,Cálculo das dimensões mínimas de uma folha para desenhar um avião em escala.,853.1,MT,750+,"dimensões mínimas, avião em escala",,,desenhar um avião em escala,,,"dimensões mínimas, avião em escala, desenhar um avião em escala"
+Matematica,H24,Cálculo da taxa média de variação da emissão de dióxido de carbono.,854.9,MT,750+,"dióxido de carbono, taxa média de variação",,,,,,"dióxido de carbono, taxa média de variação"
+Matematica,H5,Análise de opções de pagamento e empréstimo para encontrar o menor gasto.,900.4,MT,750+,,,,encontrar o menor gasto,,,encontrar o menor gasto
 Matematica,H25,Cálculo da diferença entre importações e exportações de petróleo.,928.2,MT,750+,,,,,,,
 Matematica,H1,Representação gráfica de porcentagens.,428.4,MT,200-450,,,,,,,
-Matematica,H15,Análise de gráfico sobre o crescimento de uma criança.,507.3,MT,450-550,,,,,,,
-Matematica,H25,Leitura de gráfico de setores e cálculo de porcentagem.,526.5,MT,450-550,,,,,,,
-Matematica,H24,Leitura de gráfico de barras para inferir o número de desempregados.,539.5,MT,450-550,,,,,,,
-Matematica,H7,Identificação da planificação de um semicilindro.,544.7,MT,450-550,,,,,,,
-Matematica,H16,Proporcionalidade para determinar quantas Terras cabem em Júpiter.,558.9,MT,550-650,,,,,,,
-Matematica,H10,Análise de dimensões para identificar a grandeza volume.,563.5,MT,550-650,,,,,,,
-Matematica,H26,Análise de um quadro de medalhas para determinar uma classificação.,569.5,MT,550-650,,,,,,,
-Matematica,H20,Leitura de gráfico para determinar o gasto militar dos EUA.,582.7,MT,550-650,,,,,,,
-Matematica,H18,Proporcionalidade para calcular a quantidade de água contaminada por óleo.,594.5,MT,550-650,,,,,,,
-Matematica,H12,Geometria espacial para determinar a aresta de um cubo com volume conhecido.,620.9,MT,550-650,,,,,,,
-Matematica,H29,"Análise de média, mediana e desvio padrão para classificar candidatos.",623.2,MT,550-650,,,,,,,
-Matematica,H2,Identificação de padrão na soma dos números de uma sequência de caixas.,628.9,MT,550-650,,,,,,,
-Matematica,H11,Razão entre diâmetros para calcular a escala entre o olho humano e um telescópio.,629.6,MT,550-650,,,,,,,
-Matematica,H17,Análise de custos para determinar a relação entre duas encomendas.,633.2,MT,550-650,,,,,,,
-Matematica,H15,"Análise de figuras para determinar a proporcionalidade entre resistência, comprimento e área.",636.0,MT,550-650,,,,,,,
-Matematica,H28,Cálculo de probabilidade condicional.,640.6,MT,550-650,,,,,,,
-Matematica,H8,Geometria espacial para calcular o volume de madeira de um porta-lápis.,646.0,MT,550-650,,,,,,,
-Matematica,H4,Cálculo de crescimento percentual para classificar o desempenho de uma empresa.,655.5,MT,650-750,,,,,,,
+Matematica,H15,Análise de gráfico sobre o crescimento de uma criança.,507.3,MT,450-550,Análise de gráfico,,,Análise de gráfico,,,"Análise de gráfico, Análise de gráfico"
+Matematica,H25,Leitura de gráfico de setores e cálculo de porcentagem.,526.5,MT,450-550,"gráfico de setores, cálculo de porcentagem",,,cálculo de porcentagem,,Leitura de gráfico de setores,"gráfico de setores, cálculo de porcentagem, cálculo de porcentagem, Leitura de gráfico de setores"
+Matematica,H24,Leitura de gráfico de barras para inferir o número de desempregados.,539.5,MT,450-550,gráfico de barras,,,,,,gráfico de barras
+Matematica,H7,Identificação da planificação de um semicilindro.,544.7,MT,450-550,planificação,,,Identificação,,,"planificação, Identificação"
+Matematica,H16,Proporcionalidade para determinar quantas Terras cabem em Júpiter.,558.9,MT,550-650,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H10,Análise de dimensões para identificar a grandeza volume.,563.5,MT,550-650,grandeza volume,,,,,,grandeza volume
+Matematica,H26,Análise de um quadro de medalhas para determinar uma classificação.,569.5,MT,550-650,quadro de medalhas,,quadro de medalhas,determinar uma classificação,,,"quadro de medalhas, quadro de medalhas, determinar uma classificação"
+Matematica,H20,Leitura de gráfico para determinar o gasto militar dos EUA.,582.7,MT,550-650,,,gasto militar,Leitura de gráfico,gasto militar,Leitura de gráfico,"gasto militar, Leitura de gráfico, gasto militar, Leitura de gráfico"
+Matematica,H18,Proporcionalidade para calcular a quantidade de água contaminada por óleo.,594.5,MT,550-650,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H12,Geometria espacial para determinar a aresta de um cubo com volume conhecido.,620.9,MT,550-650,Geometria espacial,Geometria,Geometria espacial,,,,"Geometria espacial, Geometria, Geometria espacial"
+Matematica,H29,"Análise de média, mediana e desvio padrão para classificar candidatos.",623.2,MT,550-650,"desvio padrão, Análise de média",,,classificar candidatos,classificar candidatos,,"desvio padrão, Análise de média, classificar candidatos, classificar candidatos"
+Matematica,H2,Identificação de padrão na soma dos números de uma sequência de caixas.,628.9,MT,550-650,"sequência de caixas, soma dos números",,,Identificação de padrão,,,"sequência de caixas, soma dos números, Identificação de padrão"
+Matematica,H11,Razão entre diâmetros para calcular a escala entre o olho humano e um telescópio.,629.6,MT,550-650,Razão entre diâmetros,,,,,,Razão entre diâmetros
+Matematica,H17,Análise de custos para determinar a relação entre duas encomendas.,633.2,MT,550-650,Análise de custos,,,determinar a relação,,,"Análise de custos, determinar a relação"
+Matematica,H15,"Análise de figuras para determinar a proporcionalidade entre resistência, comprimento e área.",636.0,MT,550-650,"proporcionalidade, Análise de figuras",,,"Análise de figuras, determinar a proporcionalidade",,,"proporcionalidade, Análise de figuras, Análise de figuras, determinar a proporcionalidade"
+Matematica,H28,Cálculo de probabilidade condicional.,640.6,MT,550-650,probabilidade condicional,probabilidade,probabilidade,,,,"probabilidade condicional, probabilidade, probabilidade"
+Matematica,H8,Geometria espacial para calcular o volume de madeira de um porta-lápis.,646.0,MT,550-650,"volume de madeira, Geometria espacial",Geometria,Geometria espacial,,,,"volume de madeira, Geometria espacial, Geometria, Geometria espacial"
+Matematica,H4,Cálculo de crescimento percentual para classificar o desempenho de uma empresa.,655.5,MT,650-750,crescimento percentual,,,,,,crescimento percentual
 Matematica,H19,Expressão para a quantidade de canudos em função do número de quadrados.,655.6,MT,650-750,,,,,,,
-Matematica,H16,Geometria plana e porcentagem para determinar a medida do lado de um retângulo.,658.6,MT,650-750,,,,,,,
-Matematica,H7,Análise de uma figura para determinar a área a ser calçada.,662.6,MT,650-750,,,,,,,
-Matematica,H26,Análise de um gráfico de tendência linear para prever o número de favelas.,678.7,MT,650-750,,,,,,,
-Matematica,H8,Trigonometria no triângulo retângulo para calcular a altura de um balão.,689.6,MT,650-750,,,,,,,
-Matematica,H3,Resolução de um problema envolvendo compra de selos e envio de folhetos.,700.6,MT,650-750,,,,,,,
-Matematica,H9,Comparação de volumes de cilindros.,714.1,MT,650-750,,,,,,,
-Matematica,H23,Análise do Índice de Massa Corporal (IMC) e Recíproco do Índice Ponderal (RIP).,714.5,MT,650-750,,,,,,,
-Matematica,H25,Leitura de gráfico e cálculo de desmatamento médio por estado.,716.0,MT,650-750,,,,,,,
-Matematica,H14,Cálculo de volume e densidade para determinar a carga de toras de madeira.,717.5,MT,650-750,,,,,,,
-Matematica,H6,Análise de um mapa com curvas de nível para determinar a altitude de um local.,724.8,MT,650-750,,,,,,,
-Matematica,H14,Análise da relação área/capacidade para escolher um tanque de combustível.,738.9,MT,650-750,,,,,,,
-Matematica,H9,Geometria plana e espacial para determinar o raio de uma perfuração em uma peça.,752.6,MT,750+,,,,,,,
-Matematica,H30,Análise de probabilidades para determinar o melhor trajeto com menor chance de engarrafamento.,753.9,MT,750+,,,,,,,
-Matematica,H5,Cálculo de porcentagens para determinar a cura proporcionada por tratamentos inovadores.,755.5,MT,750+,,,,,,,
-Matematica,H5,Cálculo de aumento percentual na produção de etanol.,784.1,MT,750+,,,,,,,
-Matematica,H12,Geometria espacial para calcular o preço de uma manilha de esgoto.,786.4,MT,750+,,,,,,,
-Matematica,H13,Análise de uma progressão aritmética no Salto Triplo.,788.1,MT,750+,,,,,,,
-Matematica,H27,"Cálculo de média, mediana e moda de uma distribuição de gols.",797.4,MT,750+,,,,,,,
-Matematica,H4,Análise combinatória para calcular o tempo de verificação de sequências.,822.0,MT,750+,,,,,,,
-Matematica,H8,Geometria espacial para determinar a altura do volume de champanhe em uma taça cônica.,829.4,MT,750+,,,,,,,
-Matematica,H27,Cálculo da mediana das quantidades de gols em Copas do Mundo.,842.0,MT,750+,,,,,,,
-Matematica,H21,Análise de uma função definida por partes para determinar o tempo de permanência de uma peça em um forno.,861.5,MT,750+,,,,,,,
-Matematica,H20,Leitura de gráfico sobre a participação do agronegócio no PIB.,504.8,MT,450-550,,,,,,,
+Matematica,H16,Geometria plana e porcentagem para determinar a medida do lado de um retângulo.,658.6,MT,650-750,Geometria plana e porcentagem,Geometria,,,,,"Geometria plana e porcentagem, Geometria"
+Matematica,H7,Análise de uma figura para determinar a área a ser calçada.,662.6,MT,650-750,,,,Análise de uma figura,,,Análise de uma figura
+Matematica,H26,Análise de um gráfico de tendência linear para prever o número de favelas.,678.7,MT,650-750,tendência linear,,,,,,tendência linear
+Matematica,H8,Trigonometria no triângulo retângulo para calcular a altura de um balão.,689.6,MT,650-750,"triângulo retângulo, Trigonometria","Trigonometria, triângulo retângulo",Trigonometria,,,,"triângulo retângulo, Trigonometria, Trigonometria, triângulo retângulo, Trigonometria"
+Matematica,H3,Resolução de um problema envolvendo compra de selos e envio de folhetos.,700.6,MT,650-750,,,,"envio de folhetos, compra de selos",,Resolução de um problema,"envio de folhetos, compra de selos, Resolução de um problema"
+Matematica,H9,Comparação de volumes de cilindros.,714.1,MT,650-750,volumes de cilindros,,,Comparação,,,"volumes de cilindros, Comparação"
+Matematica,H23,Análise do Índice de Massa Corporal (IMC) e Recíproco do Índice Ponderal (RIP).,714.5,MT,650-750,"Índice de Massa Corporal (IMC), Índice Ponderal",,,,,,"Índice de Massa Corporal (IMC), Índice Ponderal"
+Matematica,H25,Leitura de gráfico e cálculo de desmatamento médio por estado.,716.0,MT,650-750,desmatamento médio,,,Leitura de gráfico,,Leitura de gráfico,"desmatamento médio, Leitura de gráfico, Leitura de gráfico"
+Matematica,H14,Cálculo de volume e densidade para determinar a carga de toras de madeira.,717.5,MT,650-750,"densidade, carga de toras de madeira",,,,,,"densidade, carga de toras de madeira"
+Matematica,H6,Análise de um mapa com curvas de nível para determinar a altitude de um local.,724.8,MT,650-750,curvas de nível,,,,,,curvas de nível
+Matematica,H14,Análise da relação área/capacidade para escolher um tanque de combustível.,738.9,MT,650-750,"relação área/capacidade, tanque de combustível",,,,,,"relação área/capacidade, tanque de combustível"
+Matematica,H9,Geometria plana e espacial para determinar o raio de uma perfuração em uma peça.,752.6,MT,750+,perfuração,Geometria,Geometria plana e espacial,,,,"perfuração, Geometria, Geometria plana e espacial"
+Matematica,H30,Análise de probabilidades para determinar o melhor trajeto com menor chance de engarrafamento.,753.9,MT,750+,Análise de probabilidades,,,Análise de probabilidades,,,"Análise de probabilidades, Análise de probabilidades"
+Matematica,H5,Cálculo de porcentagens para determinar a cura proporcionada por tratamentos inovadores.,755.5,MT,750+,"Cálculo de porcentagens, tratamentos inovadores",,,,tratamentos inovadores,,"Cálculo de porcentagens, tratamentos inovadores, tratamentos inovadores"
+Matematica,H5,Cálculo de aumento percentual na produção de etanol.,784.1,MT,750+,aumento percentual,,,,,,aumento percentual
+Matematica,H12,Geometria espacial para calcular o preço de uma manilha de esgoto.,786.4,MT,750+,"manilha de esgoto, Geometria espacial",Geometria,"Geometria espacial, manilha de esgoto",,,,"manilha de esgoto, Geometria espacial, Geometria, Geometria espacial, manilha de esgoto"
+Matematica,H13,Análise de uma progressão aritmética no Salto Triplo.,788.1,MT,750+,"progressão aritmética, Salto Triplo",,,,,,"progressão aritmética, Salto Triplo"
+Matematica,H27,"Cálculo de média, mediana e moda de uma distribuição de gols.",797.4,MT,750+,distribuição de gols,distribuição de gols,distribuição de gols,,,,"distribuição de gols, distribuição de gols, distribuição de gols"
+Matematica,H4,Análise combinatória para calcular o tempo de verificação de sequências.,822.0,MT,750+,"Análise combinatória, tempo de verificação de sequências",,,,,,"Análise combinatória, tempo de verificação de sequências"
+Matematica,H8,Geometria espacial para determinar a altura do volume de champanhe em uma taça cônica.,829.4,MT,750+,"Geometria espacial, volume de champanhe",Geometria,"Geometria espacial, taça cônica",,taça cônica,,"Geometria espacial, volume de champanhe, Geometria, Geometria espacial, taça cônica, taça cônica"
+Matematica,H27,Cálculo da mediana das quantidades de gols em Copas do Mundo.,842.0,MT,750+,,,,,Copas do Mundo,,Copas do Mundo
+Matematica,H21,Análise de uma função definida por partes para determinar o tempo de permanência de uma peça em um forno.,861.5,MT,750+,"função definida por partes, tempo de permanência",,,,,,"função definida por partes, tempo de permanência"
+Matematica,H20,Leitura de gráfico sobre a participação do agronegócio no PIB.,504.8,MT,450-550,,,,Leitura de gráfico,,Leitura de gráfico,"Leitura de gráfico, Leitura de gráfico"
 Matematica,H6,Análise de um mapa para determinar um caminho entre pontos.,526.7,MT,450-550,,,,,,,
-Matematica,H5,Comparação de números decimais para escolher um pistão de diâmetro mais próximo.,528.9,MT,450-550,,,,,,,
-Matematica,H25,Leitura de gráfico de setores para determinar o número de internautas.,545.3,MT,450-550,,,,,,,
-Matematica,H2,Análise de uma progressão aritmética para determinar o número de passagens vendidas.,548.6,MT,450-550,,,,,,,
+Matematica,H5,Comparação de números decimais para escolher um pistão de diâmetro mais próximo.,528.9,MT,450-550,"números decimais, pistão de diâmetro",,pistão de diâmetro,Comparação,,,"números decimais, pistão de diâmetro, pistão de diâmetro, Comparação"
+Matematica,H25,Leitura de gráfico de setores para determinar o número de internautas.,545.3,MT,450-550,gráfico de setores,,gráfico de setores,"determinar o número de internautas, Leitura de gráfico de setores",,,"gráfico de setores, gráfico de setores, determinar o número de internautas, Leitura de gráfico de setores"
+Matematica,H2,Análise de uma progressão aritmética para determinar o número de passagens vendidas.,548.6,MT,450-550,progressão aritmética,,número de passagens vendidas,,,,"progressão aritmética, número de passagens vendidas"
 Matematica,H10,Conversão de unidades de medida (milímetros para metros).,555.5,MT,550-650,,,,,,,
-Matematica,H18,Proporcionalidade para calcular a quantidade de alimentos e bebidas para uma festa.,561.2,MT,550-650,,,,,,,
-Matematica,H7,Identificação de uma superfície de revolução (cone).,561.9,MT,550-650,,,,,,,
-Matematica,H1,Leitura de relógios de ponteiro em um medidor de energia.,573.5,MT,550-650,,,,,,,
-Matematica,H15,Identificação do gráfico que representa a relação entre preço e quantidade de um produto.,578.3,MT,550-650,,,,,,,
-Matematica,H12,Proporcionalidade para calcular o tempo gasto em atividades para queimar calorias.,580.1,MT,550-650,,,,,,,
-Matematica,H27,Cálculo do percentual médio de medalhistas de uma região.,590.0,MT,550-650,,,,,,,
-Matematica,H16,Proporcionalidade para calcular o acréscimo de internações de homens por AVC.,609.1,MT,550-650,,,,,,,
-Matematica,H15,Análise de gráficos de planos de telefonia.,620.7,MT,550-650,,,,,,,
-Matematica,H9,Análise de raias em uma pista de atletismo.,621.5,MT,550-650,,,,,,,
-Matematica,H16,Cálculo do consumo de energia de um chuveiro.,630.0,MT,550-650,,,,,,,
-Matematica,H10,Conversão de unidades (metros para pés) e cálculo de diferença de altitudes.,631.4,MT,550-650,,,,,,,
-Matematica,H13,Análise de perímetro e área para escolher um terreno para uma praça.,640.1,MT,550-650,,,,,,,
-Matematica,H28,Cálculo da probabilidade de uma pessoa ser portadora de doença crônica.,645.1,MT,550-650,,,,,,,
-Matematica,H3,Cálculo da densidade demográfica de uma região.,647.9,MT,550-650,,,,,,,
-Matematica,H17,Cálculo de aumento percentual no consumo de café.,652.2,MT,650-750,,,,,,,
+Matematica,H18,Proporcionalidade para calcular a quantidade de alimentos e bebidas para uma festa.,561.2,MT,550-650,Proporcionalidade,,,,,,Proporcionalidade
+Matematica,H7,Identificação de uma superfície de revolução (cone).,561.9,MT,550-650,superfície de revolução,,,Identificação,,,"superfície de revolução, Identificação"
+Matematica,H1,Leitura de relógios de ponteiro em um medidor de energia.,573.5,MT,550-650,relógios de ponteiro,,,,medidor de energia,,"relógios de ponteiro, medidor de energia"
+Matematica,H15,Identificação do gráfico que representa a relação entre preço e quantidade de um produto.,578.3,MT,550-650,,,,Identificação do gráfico,,Identificação do gráfico,"Identificação do gráfico, Identificação do gráfico"
+Matematica,H12,Proporcionalidade para calcular o tempo gasto em atividades para queimar calorias.,580.1,MT,550-650,Proporcionalidade,,,queimar calorias,,,"Proporcionalidade, queimar calorias"
+Matematica,H27,Cálculo do percentual médio de medalhistas de uma região.,590.0,MT,550-650,percentual médio,,,,,,percentual médio
+Matematica,H16,Proporcionalidade para calcular o acréscimo de internações de homens por AVC.,609.1,MT,550-650,"Proporcionalidade, internações de homens",,internações de homens,,,,"Proporcionalidade, internações de homens, internações de homens"
+Matematica,H15,Análise de gráficos de planos de telefonia.,620.7,MT,550-650,,,,Análise de gráficos,"planos de telefonia, Análise de gráficos",,"Análise de gráficos, planos de telefonia, Análise de gráficos"
+Matematica,H9,Análise de raias em uma pista de atletismo.,621.5,MT,550-650,Análise de raias,,,,pista de atletismo,,"Análise de raias, pista de atletismo"
+Matematica,H16,Cálculo do consumo de energia de um chuveiro.,630.0,MT,550-650,consumo de energia,,,,,,consumo de energia
+Matematica,H10,Conversão de unidades (metros para pés) e cálculo de diferença de altitudes.,631.4,MT,550-650,"cálculo de diferença de altitudes, metros para pés, Conversão de unidades",,,Conversão de unidades,,,"cálculo de diferença de altitudes, metros para pés, Conversão de unidades, Conversão de unidades"
+Matematica,H13,Análise de perímetro e área para escolher um terreno para uma praça.,640.1,MT,550-650,Análise de perímetro e área,,,escolher um terreno,,,"Análise de perímetro e área, escolher um terreno"
+Matematica,H28,Cálculo da probabilidade de uma pessoa ser portadora de doença crônica.,645.1,MT,550-650,probabilidade,probabilidade,"probabilidade, doença crônica",,,,"probabilidade, probabilidade, probabilidade, doença crônica"
+Matematica,H3,Cálculo da densidade demográfica de uma região.,647.9,MT,550-650,densidade demográfica,,,,,,densidade demográfica
+Matematica,H17,Cálculo de aumento percentual no consumo de café.,652.2,MT,650-750,aumento percentual,,,,consumo de café,,"aumento percentual, consumo de café"
 Matematica,H11,Utilização de escala para construir uma maquete de quadra de esportes.,658.6,MT,650-750,,,,,,,
-Matematica,H21,Análise de funções de custo e faturamento para determinar a quantidade mínima para não ter prejuízo.,666.5,MT,650-750,,,,,,,
-Matematica,H23,Modelagem de um problema para encontrar a extensão de uma rodovia.,668.1,MT,650-750,,,,,,,
-Matematica,H19,Expressão algébrica para a resistência de vigas.,669.8,MT,650-750,,,,,,,
+Matematica,H21,Análise de funções de custo e faturamento para determinar a quantidade mínima para não ter prejuízo.,666.5,MT,650-750,"funções de custo e faturamento, quantidade mínima",,,determinar a quantidade mínima,,,"funções de custo e faturamento, quantidade mínima, determinar a quantidade mínima"
+Matematica,H23,Modelagem de um problema para encontrar a extensão de uma rodovia.,668.1,MT,650-750,,,,encontrar a extensão de uma rodovia,,,encontrar a extensão de uma rodovia
+Matematica,H19,Expressão algébrica para a resistência de vigas.,669.8,MT,650-750,"resistência de vigas, Expressão algébrica",,,,,,"resistência de vigas, Expressão algébrica"
 Matematica,H27,"Cálculo de média, mediana e moda de um conjunto de temperaturas.",682.8,MT,650-750,,,,,,,
-Matematica,H8,Análise de rotação para identificar a invariância de uma figura.,683.7,MT,650-750,,,,,,,
+Matematica,H8,Análise de rotação para identificar a invariância de uma figura.,683.7,MT,650-750,Análise de rotação,,,,,,Análise de rotação
 Matematica,H26,Análise do IMC para classificar a categoria de peso de pessoas.,686.9,MT,650-750,,,,,,,
-Matematica,H29,Cálculo de probabilidades para determinar quem tem a maior chance de ganhar um jogo de sinuca.,689.0,MT,650-750,,,,,,,
-Matematica,H24,Análise de uma tabela sobre a luminosidade de estrelas.,696.8,MT,650-750,,,,,,,
-Matematica,H21,Uso de logaritmos para calcular o momento sísmico de um terremoto.,702.8,MT,650-750,,,,,,,
+Matematica,H29,Cálculo de probabilidades para determinar quem tem a maior chance de ganhar um jogo de sinuca.,689.0,MT,650-750,Cálculo de probabilidades,,jogo de sinuca,,jogo de sinuca,,"Cálculo de probabilidades, jogo de sinuca, jogo de sinuca"
+Matematica,H24,Análise de uma tabela sobre a luminosidade de estrelas.,696.8,MT,650-750,luminosidade de estrelas,,,,,,luminosidade de estrelas
+Matematica,H21,Uso de logaritmos para calcular o momento sísmico de um terremoto.,702.8,MT,650-750,momento sísmico,,,,,,momento sísmico
 Matematica,H11,Cálculo da escala de um mapa.,708.6,MT,650-750,,,,,,,
 Matematica,H22,Análise da distância de um hospital a uma estação de metrô.,708.8,MT,650-750,,,,,,,
-Matematica,H28,Leitura de gráfico de setores para calcular a chance de haver banda larga de conexão.,711.9,MT,650-750,,,,,,,
-Matematica,H4,Análise de rendimento e imposto para escolher o investimento mais vantajoso.,714.2,MT,650-750,,,,,,,
-Matematica,H23,Análise do Índice de Adiposidade Corporal (IAC).,720.2,MT,650-750,,,,,,,
-Matematica,H7,Identificação dos formatos dos sólidos descartados na fabricação de uma pirâmide.,732.6,MT,650-750,,,,,,,
-Matematica,H17,Comparação de rentabilidades anuais de diferentes investimentos.,735.6,MT,650-750,,,,,,,
-Matematica,H30,Análise de um gráfico de temperaturas para calcular a probabilidade de escolher uma região adequada.,736.8,MT,650-750,,,,,,,
-Matematica,H3,Resolução de um problema envolvendo porcentagens para encontrar a quantia inicial de um investimento.,737.6,MT,650-750,,,,,,,
-Matematica,H25,Análise de uma tabela de consumo de energia para calcular a diferença de gasto.,751.7,MT,750+,,,,,,,
-Matematica,H12,Geometria espacial e proporcionalidade para calcular a quantidade de água em uma mistura.,757.5,MT,750+,,,,,,,
-Matematica,H2,Análise combinatória para determinar a ordem de chamada de um candidato.,768.6,MT,750+,,,,,,,
-Matematica,H8,Trigonometria no triângulo retângulo para determinar a distância de um barco à praia.,790.5,MT,750+,,,,,,,
-Matematica,H19,Expressão algébrica que relaciona a quantidade de trabalhadores e os meses.,813.7,MT,750+,,,,,,,
+Matematica,H28,Leitura de gráfico de setores para calcular a chance de haver banda larga de conexão.,711.9,MT,650-750,"banda larga de conexão, gráfico de setores",,,Leitura de gráfico de setores,,Leitura de gráfico de setores,"banda larga de conexão, gráfico de setores, Leitura de gráfico de setores, Leitura de gráfico de setores"
+Matematica,H4,Análise de rendimento e imposto para escolher o investimento mais vantajoso.,714.2,MT,650-750,Análise de rendimento e imposto,,,escolher o investimento mais vantajoso,,,"Análise de rendimento e imposto, escolher o investimento mais vantajoso"
+Matematica,H23,Análise do Índice de Adiposidade Corporal (IAC).,720.2,MT,650-750,Índice de Adiposidade Corporal (IAC),,,,,,Índice de Adiposidade Corporal (IAC)
+Matematica,H7,Identificação dos formatos dos sólidos descartados na fabricação de uma pirâmide.,732.6,MT,650-750,,,,fabricação,fabricação de uma pirâmide,,"fabricação, fabricação de uma pirâmide"
+Matematica,H17,Comparação de rentabilidades anuais de diferentes investimentos.,735.6,MT,650-750,rentabilidades anuais,,,Comparação,,,"rentabilidades anuais, Comparação"
+Matematica,H30,Análise de um gráfico de temperaturas para calcular a probabilidade de escolher uma região adequada.,736.8,MT,650-750,"probabilidade, gráfico de temperaturas",probabilidade,probabilidade,,,,"probabilidade, gráfico de temperaturas, probabilidade, probabilidade"
+Matematica,H3,Resolução de um problema envolvendo porcentagens para encontrar a quantia inicial de um investimento.,737.6,MT,650-750,quantia inicial,,,"Resolução de um problema, encontrar a quantia inicial",,Resolução de um problema,"quantia inicial, Resolução de um problema, encontrar a quantia inicial, Resolução de um problema"
+Matematica,H25,Análise de uma tabela de consumo de energia para calcular a diferença de gasto.,751.7,MT,750+,"tabela de consumo de energia, diferença de gasto",,,,,,"tabela de consumo de energia, diferença de gasto"
+Matematica,H12,Geometria espacial e proporcionalidade para calcular a quantidade de água em uma mistura.,757.5,MT,750+,Geometria espacial e proporcionalidade,Geometria,Geometria espacial,,,,"Geometria espacial e proporcionalidade, Geometria, Geometria espacial"
+Matematica,H2,Análise combinatória para determinar a ordem de chamada de um candidato.,768.6,MT,750+,"Análise combinatória, ordem de chamada",,ordem de chamada,determinar a ordem de chamada,,,"Análise combinatória, ordem de chamada, ordem de chamada, determinar a ordem de chamada"
+Matematica,H8,Trigonometria no triângulo retângulo para determinar a distância de um barco à praia.,790.5,MT,750+,"Trigonometria, triângulo retângulo","Trigonometria, triângulo retângulo",Trigonometria,,,,"Trigonometria, triângulo retângulo, Trigonometria, triângulo retângulo, Trigonometria"
+Matematica,H19,Expressão algébrica que relaciona a quantidade de trabalhadores e os meses.,813.7,MT,750+,Expressão algébrica,,,,,,Expressão algébrica
