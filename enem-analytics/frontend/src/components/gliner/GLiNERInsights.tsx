@@ -980,33 +980,46 @@ function NetworkTab({
                     </div>
                   )}
 
-                  {/* Tooltip */}
-                  <div className={`absolute left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none ${
-                    isHovered ? 'opacity-100 -top-24' : 'opacity-0 -top-20'
-                  }`} style={{ zIndex: 50 }}>
-                    <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[220px]">
-                      <p className="font-semibold text-white text-sm mb-1">{node.label}</p>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span
-                          className="px-2 py-0.5 rounded-full text-[10px] font-medium flex items-center gap-1"
-                          style={{ backgroundColor: `${node.color}30`, color: node.color }}
-                        >
-                          {isSemantic && <Brain className="w-3 h-3" />}
-                          {node.type === 'conceito_cientifico' ? 'Conceito Científico' :
-                           node.type === 'campo_semantico' ? 'Campo Semântico' : 'Campo Lexical'}
-                        </span>
+                  {/* Tooltip - appears below if node is in top half */}
+                  {y < 50 ? (
+                    <div className={`absolute left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none ${
+                      isHovered ? 'opacity-100 top-full mt-2' : 'opacity-0 top-full mt-0'
+                    }`} style={{ zIndex: 50 }}>
+                      <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[200px]">
+                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900/95 border-l border-t border-white/20 transform rotate-45" />
+                        <p className="font-semibold text-white text-sm mb-1">{node.label}</p>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span
+                            className="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                            style={{ backgroundColor: `${node.color}30`, color: node.color }}
+                          >
+                            {node.type === 'conceito_cientifico' ? 'Conceito' :
+                             node.type === 'campo_semantico' ? 'Semântico' : 'Lexical'}
+                          </span>
+                          <span className="text-[10px] text-slate-400">{node.count}x</span>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-400">Frequência</span>
-                        <span className="text-white font-semibold">{node.count}x</span>
-                      </div>
-                      <div className="flex items-center justify-between text-xs mt-1">
-                        <span className="text-slate-400">Conexões</span>
-                        <span className="text-white font-semibold">{getConnectedNodes(id).size}</span>
-                      </div>
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900/95 border-r border-b border-white/20 transform rotate-45" />
                     </div>
-                  </div>
+                  ) : (
+                    <div className={`absolute left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none ${
+                      isHovered ? 'opacity-100 bottom-full mb-2' : 'opacity-0 bottom-full mb-0'
+                    }`} style={{ zIndex: 50 }}>
+                      <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[200px]">
+                        <p className="font-semibold text-white text-sm mb-1">{node.label}</p>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span
+                            className="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                            style={{ backgroundColor: `${node.color}30`, color: node.color }}
+                          >
+                            {node.type === 'conceito_cientifico' ? 'Conceito' :
+                             node.type === 'campo_semantico' ? 'Semântico' : 'Lexical'}
+                          </span>
+                          <span className="text-[10px] text-slate-400">{node.count}x</span>
+                        </div>
+                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900/95 border-r border-b border-white/20 transform rotate-45" />
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
