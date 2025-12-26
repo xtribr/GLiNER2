@@ -48,7 +48,7 @@ def lazy_import():
     return Extractor, GLiNER2Trainer, TrainingConfig, InputExample
 
 
-# Entity type descriptions for ENEM - IMPROVED
+# Entity type descriptions for ENEM - IMPROVED with Matriz de Referência
 ENTITY_TYPES = {
     "campo_semantico": "Área temática ou campo de conhecimento amplo, como 'Ecologia e meio ambiente', 'Tecnologia e sociedade', 'Direitos humanos', 'Matemática financeira', 'Física e energia'",
 
@@ -60,7 +60,16 @@ ENTITY_TYPES = {
 
     "contexto_historico": "Período, movimento ou contexto histórico-social específico, como 'Brasil Colonial', 'Ditadura Militar', 'Iluminismo', 'Revolução Francesa', 'Semana de 22'",
 
-    "habilidade_composta": "Habilidade cognitiva ou competência composta, como 'Análise crítica de textos', 'Interpretação de gráficos', 'Modelagem matemática', 'Argumentação fundamentada'"
+    "habilidade_composta": "Habilidade cognitiva ou competência composta, como 'Análise crítica de textos', 'Interpretação de gráficos', 'Modelagem matemática', 'Argumentação fundamentada'",
+
+    # New types from Matriz de Referência ENEM
+    "habilidade_enem": "Habilidade específica da Matriz de Referência ENEM (H1-H30 por área), como 'Identificar diferentes linguagens', 'Resolver situação-problema', 'Avaliar propostas de intervenção'",
+
+    "competencia_enem": "Competência da Matriz ENEM, como 'Dominar linguagens e recursos expressivos', 'Compreender fenômenos naturais', 'Construir argumentação consistente'",
+
+    "objeto_conhecimento": "Objeto de conhecimento ou tema curricular da Matriz ENEM, como 'Estudo do texto', 'Conhecimentos numéricos', 'Transformações químicas', 'Ecologia e ciências ambientais'",
+
+    "eixo_cognitivo": "Eixo cognitivo comum a todas as áreas do ENEM, como 'Dominar linguagens', 'Compreender fenômenos', 'Enfrentar situações-problema', 'Construir argumentação', 'Elaborar propostas'"
 }
 
 

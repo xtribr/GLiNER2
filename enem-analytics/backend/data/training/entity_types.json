@@ -160,5 +160,42 @@
     "Inferência textual",
     "Modelagem matemática",
     "Análise de dados"
+  ],
+  "habilidade_enem": [
+    "Identificar diferentes linguagens",
+    "Reconhecer recursos expressivos",
+    "Resolver situação-problema",
+    "Analisar informações em gráficos",
+    "Avaliar propostas de intervenção",
+    "Interpretar fenômenos naturais",
+    "Compreender processos históricos",
+    "Relacionar conceitos científicos",
+    "Contextualizar produção artística",
+    "Aplicar conhecimentos matemáticos"
+  ],
+  "competencia_enem": [
+    "Dominar linguagens e seus recursos expressivos",
+    "Compreender fenômenos naturais e sociais",
+    "Construir argumentação consistente",
+    "Elaborar propostas de intervenção",
+    "Utilizar conhecimento geométrico",
+    "Apropriar-se de conhecimentos científicos"
+  ],
+  "objeto_conhecimento": [
+    "Estudo do texto e gêneros textuais",
+    "Conhecimentos numéricos e algébricos",
+    "Transformações químicas e energia",
+    "Ecologia e ciências ambientais",
+    "Diversidade cultural e movimentos sociais",
+    "Hereditariedade e evolução",
+    "Fenômenos elétricos e magnéticos",
+    "Organização social e política"
+  ],
+  "eixo_cognitivo": [
+    "Dominar linguagens",
+    "Compreender fenômenos",
+    "Enfrentar situações-problema",
+    "Construir argumentação",
+    "Elaborar propostas"
   ]
 }
