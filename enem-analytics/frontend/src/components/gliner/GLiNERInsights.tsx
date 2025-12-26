@@ -524,15 +524,16 @@ function NetworkTab({
   });
 
   // Calculate node positions in a force-directed-like layout
-  const calculatePositions = (nodes: typeof graphData.nodes) => {
-    if (!nodes) return [];
+  type GraphNode = { id: string; label: string; type: string; color: string; size: number; count: number };
+  const calculatePositions = (nodes: GraphNode[]) => {
+    if (!nodes) return {};
 
     // Separate nodes by type
     const semanticNodes = nodes.filter(n => n.type === 'campo_semantico');
     const lexicalNodes = nodes.filter(n => n.type === 'campo_lexical');
     const conceptNodes = nodes.filter(n => n.type === 'conceito_cientifico');
 
-    const positions: { [key: string]: { x: number; y: number; node: typeof nodes[0] } } = {};
+    const positions: { [key: string]: { x: number; y: number; node: GraphNode } } = {};
 
     // Place semantic nodes in inner ring (main hubs)
     semanticNodes.slice(0, 8).forEach((node, i) => {
