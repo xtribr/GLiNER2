@@ -60,9 +60,9 @@ export default function RoadmapPage() {
     queryFn: () => api.getSchoolCluster(codigo_inep),
   });
 
-  const { data: triMaterials } = useQuery({
-    queryKey: ['triMaterials'],
-    queryFn: () => api.getTriMaterials(),
+  const { data: schoolMaterials } = useQuery({
+    queryKey: ['schoolMaterials', codigo_inep],
+    queryFn: () => api.getSchoolMaterials(codigo_inep),
   });
 
   const { data: triRecommendations } = useQuery({
@@ -144,6 +144,14 @@ export default function RoadmapPage() {
                 </span>
               )}
               <span className="text-sm text-slate-500">INEP: {codigo_inep}</span>
+              <a
+                href={api.getExportPlanUrl(codigo_inep)}
+                download
+                className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors"
+              >
+                <Download className="h-4 w-4" />
+                Exportar Plano CSV
+              </a>
             </div>
           </div>
         </div>
@@ -481,8 +489,8 @@ export default function RoadmapPage() {
             </div>
 
 
-            {/* Download Materials */}
-            {triMaterials && triMaterials.materials?.length > 0 && (
+            {/* Download Materials - Filtered by School's TRI Range */}
+            {schoolMaterials && schoolMaterials.total_materials > 0 && (
               <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex-1 flex flex-col">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="h-10 w-10 bg-green-100 rounded-xl flex items-center justify-center">
@@ -490,36 +498,50 @@ export default function RoadmapPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-slate-900">Material de Estudo</h3>
-                    <p className="text-xs text-slate-500">Listas TRI personalizadas</p>
+                    <p className="text-xs text-slate-500">Listas TRI para seu nível</p>
                   </div>
                 </div>
 
                 <div className="p-3 bg-blue-50 rounded-xl mb-4">
                   <p className="text-xs text-blue-800">
-                    <span className="font-semibold">Prezado gestor,</span> listas selecionadas para o nível da sua escola.
+                    <span className="font-semibold">Prezado gestor,</span> materiais filtrados pela amplitude TRI recomendada para sua escola.
                   </p>
                 </div>
 
-                <div className="space-y-2 flex-1">
+                <div className="space-y-2 flex-1 overflow-y-auto max-h-80">
                   {['LC', 'CH', 'CN', 'MT'].map((area) => {
-                    const areaMaterials = triMaterials.materials?.filter((m: any) => m.area === area) || [];
-                    if (areaMaterials.length === 0) return null;
+                    const areaData = schoolMaterials.materials_by_area?.[area];
+                    if (!areaData || areaData.materials.length === 0) return null;
 
                     return (
                       <div key={area} className="p-3 bg-slate-50 rounded-xl">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div
-                            className="h-6 w-6 rounded-lg flex items-center justify-center"
-                            style={{ backgroundColor: areaColors[area] }}
-                          >
-                            <span className="text-white text-xs font-bold">{area}</span>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <div
+                              className="h-6 w-6 rounded-lg flex items-center justify-center"
+                              style={{ backgroundColor: areaColors[area] }}
+                            >
+                              <span className="text-white text-xs font-bold">{area}</span>
+                            </div>
+                            <span className="text-sm font-medium text-slate-900">
+                              {areaNames[area]}
+                            </span>
                           </div>
-                          <span className="text-sm font-medium text-slate-900">
-                            {areaNames[area]}
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                            areaData.amplitude?.label === 'Elite' ? 'bg-purple-100 text-purple-700' :
+                            areaData.amplitude?.label === 'Excelência' ? 'bg-indigo-100 text-indigo-700' :
+                            areaData.amplitude?.label === 'Avançado' ? 'bg-blue-100 text-blue-700' :
+                            areaData.amplitude?.label === 'Intermediário' ? 'bg-green-100 text-green-700' :
+                            'bg-amber-100 text-amber-700'
+                          }`}>
+                            {areaData.amplitude?.label} ({areaData.recommended_range})
                           </span>
                         </div>
+                        <div className="text-[10px] text-slate-500 mb-2">
+                          Score: {areaData.predicted_score?.toFixed(0)} pts • {areaData.total_files} arquivos
+                        </div>
                         <div className="space-y-1">
-                          {areaMaterials.slice(0, 2).map((mat: any, idx: number) => (
+                          {areaData.materials.slice(0, 3).map((mat, idx) => (
                             <a
                               key={idx}
                               href={`${API_BASE}${mat.download_url}`}
@@ -529,8 +551,14 @@ export default function RoadmapPage() {
                             >
                               <FileText className="h-3 w-3" />
                               <span className="truncate">{mat.filename}</span>
+                              <span className="text-[10px] text-slate-400">({mat.format})</span>
                             </a>
                           ))}
+                          {areaData.materials.length > 3 && (
+                            <p className="text-[10px] text-slate-400">
+                              +{areaData.materials.length - 3} mais arquivos
+                            </p>
+                          )}
                         </div>
                       </div>
                     );

@@ -761,6 +761,37 @@ export const api = {
       }[];
     }>(`/api/tri-lists/skills/${area}`),
 
+  // TRI Materials filtered by school's TRI range
+  getSchoolMaterials: (codigo_inep: string) =>
+    fetchAPI<{
+      codigo_inep: string;
+      escola: { nome?: string };
+      materials_by_area: Record<string, {
+        area_name: string;
+        predicted_score: number;
+        recommended_range: string;
+        amplitude: {
+          min: number;
+          max: number;
+          label: string;
+          description: string;
+        };
+        materials: {
+          filename: string;
+          tri_range: string;
+          format: string;
+          size_kb: number;
+          download_url: string;
+        }[];
+        total_files: number;
+      }>;
+      total_materials: number;
+    }>(`/api/tri-lists/download/escola/${codigo_inep}`),
+
+  // Export improvement plan as CSV
+  getExportPlanUrl: (codigo_inep: string) =>
+    `${API_BASE}/api/tri-lists/export/plano/${codigo_inep}`,
+
   // GLiNER Enhanced Insights
   getGlinerConceptAnalysis: (codigo_inep: string, topN?: number) =>
     fetchAPI<{

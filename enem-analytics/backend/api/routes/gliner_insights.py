@@ -246,6 +246,7 @@ async def get_knowledge_graph(
     Get knowledge graph data showing relationships between concepts, themes, and skills.
 
     Returns nodes (concepts, themes, skills) and edges (relationships) for visualization.
+    Each node includes its primary area for proper clustering.
     """
     from ml.prediction_model import ENEMPredictionModel
 
@@ -272,38 +273,70 @@ async def get_knowledge_graph(
     lexical_counts = Counter()
     concept_counts = Counter()
 
+    # Track area distribution for each entity (for proper clustering)
+    concept_areas: Dict[str, Counter] = {}
+    semantic_areas: Dict[str, Counter] = {}
+    lexical_areas: Dict[str, Counter] = {}
+
     for _, row in df.iterrows():
         concepts = parse_list_field(row.get('conceitos_cientificos'))
         semantic_fields = parse_list_field(row.get('campos_semanticos'))
         lexical_fields = parse_list_field(row.get('campos_lexicais'))
         processes = parse_list_field(row.get('processos_fenomenos'))
+        row_area = row.get('area_code', '')
 
         for concept in concepts:
             concept_counts[concept] += 1
+            # Track which area this concept appears in
+            if concept not in concept_areas:
+                concept_areas[concept] = Counter()
+            concept_areas[concept][row_area] += 1
 
             for sem in semantic_fields:
                 semantic_counts[sem] += 1
+                if sem not in semantic_areas:
+                    semantic_areas[sem] = Counter()
+                semantic_areas[sem][row_area] += 1
                 edge_key = (concept, sem)
                 concept_semantic_edges[edge_key] += 1
 
             for lex in lexical_fields:
                 lexical_counts[lex] += 1
+                if lex not in lexical_areas:
+                    lexical_areas[lex] = Counter()
+                lexical_areas[lex][row_area] += 1
                 concept_lexical_edges[(concept, lex)] += 1
 
             for proc in processes:
                 concept_process_edges[(concept, proc)] += 1
 
+    def get_primary_area(area_counter: Counter) -> str:
+        """Get the most common area for an entity."""
+        if not area_counter:
+            return 'CN'  # Default
+        return area_counter.most_common(1)[0][0]
+
+    def get_area_distribution(area_counter: Counter) -> Dict[str, int]:
+        """Get the full area distribution for interdisciplinary concepts."""
+        return dict(area_counter)
+
     # Add concept nodes (top 30) - scientific concepts in blue
     for concept, count in concept_counts.most_common(30):
         node_id = f"concept_{concept}"
         if node_id not in node_ids:
+            primary_area = get_primary_area(concept_areas.get(concept, Counter()))
+            area_dist = get_area_distribution(concept_areas.get(concept, Counter()))
             nodes.append({
                 'id': node_id,
                 'label': concept,
                 'type': 'conceito_cientifico',
                 'size': min(40, 15 + count * 2),
                 'color': '#3b82f6',  # blue
-                'count': count
+                'count': count,
+                'area': primary_area,
+                'area_name': AREA_NAMES.get(primary_area, primary_area),
+                'area_distribution': area_dist,
+                'is_interdisciplinary': len(area_dist) > 1
             })
             node_ids.add(node_id)
 
@@ -311,13 +344,19 @@ async def get_knowledge_graph(
     for sem, count in semantic_counts.most_common(20):
         node_id = f"semantic_{sem}"
         if node_id not in node_ids:
+            primary_area = get_primary_area(semantic_areas.get(sem, Counter()))
+            area_dist = get_area_distribution(semantic_areas.get(sem, Counter()))
             nodes.append({
                 'id': node_id,
                 'label': sem,
                 'type': 'campo_semantico',
                 'size': min(35, 12 + count * 1.5),
                 'color': '#8b5cf6',  # purple
-                'count': count
+                'count': count,
+                'area': primary_area,
+                'area_name': AREA_NAMES.get(primary_area, primary_area),
+                'area_distribution': area_dist,
+                'is_interdisciplinary': len(area_dist) > 1
             })
             node_ids.add(node_id)
 
@@ -325,13 +364,19 @@ async def get_knowledge_graph(
     for lex, count in lexical_counts.most_common(15):
         node_id = f"lexical_{lex}"
         if node_id not in node_ids:
+            primary_area = get_primary_area(lexical_areas.get(lex, Counter()))
+            area_dist = get_area_distribution(lexical_areas.get(lex, Counter()))
             nodes.append({
                 'id': node_id,
                 'label': lex,
                 'type': 'campo_lexical',
                 'size': min(30, 10 + count * 1.2),
                 'color': '#22c55e',  # green
-                'count': count
+                'count': count,
+                'area': primary_area,
+                'area_name': AREA_NAMES.get(primary_area, primary_area),
+                'area_distribution': area_dist,
+                'is_interdisciplinary': len(area_dist) > 1
             })
             node_ids.add(node_id)
 
@@ -359,6 +404,9 @@ async def get_knowledge_graph(
                 'type': 'concept-lexical'
             })
 
+    # Count interdisciplinary nodes
+    interdisciplinary_count = len([n for n in nodes if n.get('is_interdisciplinary', False)])
+
     return {
         'codigo_inep': codigo_inep,
         'area': area,
@@ -369,7 +417,12 @@ async def get_knowledge_graph(
             'total_edges': len(edges),
             'concept_nodes': len([n for n in nodes if n['type'] == 'conceito_cientifico']),
             'semantic_nodes': len([n for n in nodes if n['type'] == 'campo_semantico']),
-            'lexical_nodes': len([n for n in nodes if n['type'] == 'campo_lexical'])
+            'lexical_nodes': len([n for n in nodes if n['type'] == 'campo_lexical']),
+            'interdisciplinary_nodes': interdisciplinary_count,
+            'nodes_by_area': {
+                area_code: len([n for n in nodes if n.get('area') == area_code])
+                for area_code in ['CN', 'CH', 'LC', 'MT']
+            }
         }
     }
 

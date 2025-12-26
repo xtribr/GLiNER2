@@ -365,6 +365,231 @@ async def download_material(area: str, tri_range: str, filename: str):
     )
 
 
+@router.get("/download/escola/{codigo_inep}")
+async def get_school_materials(codigo_inep: str):
+    """
+    Get downloadable materials filtered by school's recommended TRI ranges.
+    Returns only materials within the amplitude suitable for the school's level.
+    """
+    # Import prediction model
+    from ml.prediction_model import ENEMPredictionModel
+
+    try:
+        model = ENEMPredictionModel()
+        predictions = model.predict_all_scores(codigo_inep)
+
+        if 'error' in predictions:
+            raise HTTPException(status_code=404, detail=predictions['error'])
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
+
+    # Get all materials
+    listas_dir = DADOS_DIR / "Listas TRI"
+    if not listas_dir.exists():
+        return {'materials': [], 'message': 'Materials directory not found'}
+
+    area_map = {
+        'lc': ('LC', 'Linguagens'),
+        'ch': ('CH', 'Ciências Humanas'),
+        'cn': ('CN', 'Ciências da Natureza'),
+        'mt': ('MT', 'Matemática')
+    }
+
+    materials_by_area = {}
+
+    for score_key, (area_code, area_name) in area_map.items():
+        predicted_score = predictions.get('scores', {}).get(score_key, 550)
+        recommended_range = get_recommended_range(predicted_score)
+
+        # Map recommended range to folder name patterns
+        range_patterns = {
+            '200-450': ['200', '200 - 500', '200-500', '300', '400', '450'],
+            '450-550': ['450', '450 - 550', '450-550', '500', '500 - 550'],
+            '550-650': ['550', '550 - 650', '550-650', '600', '600 - 650'],
+            '650-750': ['650', '650 - 750', '650-750', '700'],
+            '750+': ['750', '750+', '800', '850', '900']
+        }
+
+        patterns = range_patterns.get(recommended_range, [])
+
+        # Find area directory
+        area_dir = None
+        for d in listas_dir.iterdir():
+            if d.is_dir() and not d.name.startswith('.'):
+                d_lower = d.name.lower()
+                if ('natureza' in d_lower and area_code == 'CN') or \
+                   ('humanas' in d_lower and area_code == 'CH') or \
+                   ('linguagens' in d_lower and area_code == 'LC') or \
+                   ('matem' in d_lower and area_code == 'MT'):
+                    area_dir = d
+                    break
+
+        materials = []
+        if area_dir:
+            for range_dir in area_dir.iterdir():
+                if not range_dir.is_dir() or range_dir.name.startswith('.'):
+                    continue
+
+                # Check if this folder matches any of our patterns
+                folder_name = range_dir.name
+                matches = any(pattern in folder_name for pattern in patterns)
+
+                if matches:
+                    for file in range_dir.iterdir():
+                        if file.suffix.lower() in ['.pdf', '.docx']:
+                            materials.append({
+                                'filename': file.name,
+                                'tri_range': folder_name,
+                                'format': file.suffix[1:].upper(),
+                                'size_kb': round(file.stat().st_size / 1024, 1),
+                                'download_url': f'/api/tri-lists/download/file/{area_code}/{folder_name}/{file.name}'
+                            })
+
+        materials_by_area[area_code] = {
+            'area_name': area_name,
+            'predicted_score': round(predicted_score, 1),
+            'recommended_range': recommended_range,
+            'amplitude': TRI_RANGES[recommended_range],
+            'materials': materials,
+            'total_files': len(materials)
+        }
+
+    return {
+        'codigo_inep': codigo_inep,
+        'escola': predictions.get('escola', {}),
+        'materials_by_area': materials_by_area,
+        'total_materials': sum(m['total_files'] for m in materials_by_area.values())
+    }
+
+
+@router.get("/export/plano/{codigo_inep}")
+async def export_improvement_plan(codigo_inep: str):
+    """
+    Export school's improvement plan as downloadable CSV with TRI amplitudes.
+    Includes: areas, current scores, target scores, recommended TRI ranges, content suggestions.
+    """
+    import io
+    import csv
+    from fastapi.responses import StreamingResponse
+    from ml.prediction_model import ENEMPredictionModel
+    from ml.recommendation_engine import RecommendationEngine
+
+    try:
+        # Get predictions
+        model = ENEMPredictionModel()
+        predictions = model.predict_all_scores(codigo_inep)
+
+        if 'error' in predictions:
+            raise HTTPException(status_code=404, detail=predictions['error'])
+
+        # Get recommendations
+        rec_engine = RecommendationEngine()
+        roadmap = rec_engine.generate_roadmap(codigo_inep)
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating plan: {str(e)}")
+
+    # Get TRI content for recommendations
+    df = get_tri_content()
+
+    # Create CSV content
+    output = io.StringIO()
+    writer = csv.writer(output, delimiter=';')
+
+    # Header
+    writer.writerow(['PLANO DE MELHORIA - ENEM', '', '', '', ''])
+    writer.writerow(['Escola:', predictions.get('escola', {}).get('nome', codigo_inep)])
+    writer.writerow(['Código INEP:', codigo_inep])
+    writer.writerow(['Data:', pd.Timestamp.now().strftime('%d/%m/%Y')])
+    writer.writerow([])
+
+    # Scores summary
+    writer.writerow(['=== RESUMO DE SCORES ==='])
+    writer.writerow(['Área', 'Score Atual', 'Meta', 'Amplitude TRI Recomendada', 'Faixa Min', 'Faixa Max'])
+
+    area_names = {
+        'lc': 'Linguagens e Códigos',
+        'ch': 'Ciências Humanas',
+        'cn': 'Ciências da Natureza',
+        'mt': 'Matemática'
+    }
+
+    for area_key, area_name in area_names.items():
+        score = predictions.get('scores', {}).get(area_key, 550)
+        target = score + 50  # Meta de melhoria
+        rec_range = get_recommended_range(score)
+        range_info = TRI_RANGES[rec_range]
+
+        writer.writerow([
+            area_name,
+            f"{score:.1f}",
+            f"{target:.1f}",
+            rec_range,
+            range_info['min'],
+            range_info['max']
+        ])
+
+    writer.writerow([])
+
+    # Detailed content by area
+    writer.writerow(['=== CONTEÚDOS POR AMPLITUDE TRI ==='])
+
+    for area_key, area_name in area_names.items():
+        area_code = area_key.upper()
+        score = predictions.get('scores', {}).get(area_key, 550)
+        rec_range = get_recommended_range(score)
+
+        writer.writerow([])
+        writer.writerow([f'--- {area_name} ({area_code}) ---'])
+        writer.writerow([f'Score Predito: {score:.1f}', f'Amplitude: {rec_range}'])
+        writer.writerow(['Habilidade', 'Descrição', 'TRI Score', 'Nível'])
+
+        # Filter content by area and range
+        area_df = df[(df['area_code'] == area_code)]
+        range_info = TRI_RANGES[rec_range]
+        area_df = area_df[(area_df['tri_score'] >= range_info['min']) & (area_df['tri_score'] <= range_info['max'])]
+        area_df = area_df.sort_values('tri_score')
+
+        for _, row in area_df.head(20).iterrows():
+            writer.writerow([
+                row['habilidade'],
+                row['descricao'][:100],
+                f"{row['tri_score']:.1f}",
+                row.get('tri_range', rec_range)
+            ])
+
+    writer.writerow([])
+
+    # Roadmap phases
+    if roadmap and 'phases' in roadmap:
+        writer.writerow(['=== FASES DO PLANO DE MELHORIA ==='])
+        writer.writerow(['Fase', 'Objetivo', 'Ganho Esperado', 'Ações'])
+
+        for phase in roadmap['phases']:
+            actions = '; '.join(phase.get('actions', [])[:3])
+            writer.writerow([
+                phase.get('name', ''),
+                phase.get('objective', ''),
+                f"+{phase.get('expected_gain', 0):.0f} pts",
+                actions
+            ])
+
+    writer.writerow([])
+    writer.writerow(['Gerado por X-TRI Escolas - Sistema de Análise ENEM'])
+
+    # Create response
+    output.seek(0)
+    escola_nome = predictions.get('escola', {}).get('nome', codigo_inep).replace(' ', '_')[:30]
+
+    return StreamingResponse(
+        iter([output.getvalue()]),
+        media_type='text/csv',
+        headers={
+            'Content-Disposition': f'attachment; filename=Plano_Melhoria_{escola_nome}_{codigo_inep}.csv'
+        }
+    )
+
+
 @router.get("/skills/{area}")
 async def get_area_skills(area: str):
     """Get all skills (habilidades) for an area with content distribution"""

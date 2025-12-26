@@ -612,7 +612,18 @@ function NetworkTab({
   };
 
   // Enhanced node positioning with cluster support
-  type GraphNode = { id: string; label: string; type: string; color: string; size: number; count: number; area?: string };
+  type GraphNode = {
+    id: string;
+    label: string;
+    type: string;
+    color: string;
+    size: number;
+    count: number;
+    area?: string;
+    area_name?: string;
+    area_distribution?: { [key: string]: number };
+    is_interdisciplinary?: boolean;
+  };
   const calculatePositions = useCallback((nodes: GraphNode[]) => {
     if (!nodes || nodes.length === 0) return {};
 
@@ -629,13 +640,12 @@ function NetworkTab({
         MT: { cx: 75, cy: 70 },
       };
 
-      // Group nodes by area (use conceptAnalysis to determine area)
+      // Group nodes by area (now using actual area from backend)
       const nodesByArea: { [key: string]: GraphNode[] } = { CN: [], CH: [], LC: [], MT: [], other: [] };
 
       nodes.forEach(node => {
-        // Try to determine area from node properties or use distribution
-        const area = (node as GraphNode & { area?: string }).area ||
-                     ['CN', 'CH', 'LC', 'MT'][Math.floor(Math.random() * 4)];
+        // Use the area provided by backend (primary area based on frequency)
+        const area = node.area || 'other';
         if (clusterPositions[area]) {
           nodesByArea[area].push(node);
         } else {
@@ -1260,15 +1270,25 @@ function NetworkTab({
                       </div>
                     )}
 
+                    {/* Interdisciplinary indicator badge */}
+                    {node.is_interdisciplinary && viewMode === 'clusters' && (
+                      <div
+                        className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border-2 border-slate-900 flex items-center justify-center animate-pulse"
+                        title="Conceito Interdisciplinar"
+                      >
+                        <span className="text-[8px] font-bold text-slate-900">+</span>
+                      </div>
+                    )}
+
                     {/* Tooltip */}
                     {y < 50 ? (
                       <div className={`absolute left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none ${
                         isHovered ? 'opacity-100 top-full mt-2' : 'opacity-0 top-full mt-0'
                       }`} style={{ zIndex: 50 }}>
-                        <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[200px]">
+                        <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[220px]">
                           <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900/95 border-l border-t border-white/20 transform rotate-45" />
                           <p className="font-semibold text-white text-sm mb-1">{node.label}</p>
-                          <div className="flex items-center gap-2 mb-2">
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
                             <span
                               className="px-2 py-0.5 rounded-full text-[10px] font-medium"
                               style={{ backgroundColor: `${node.color}30`, color: node.color }}
@@ -1277,16 +1297,33 @@ function NetworkTab({
                                node.type === 'campo_semantico' ? 'Semântico' : 'Lexical'}
                             </span>
                             <span className="text-[10px] text-slate-400">{node.count}x</span>
+                            {node.area && (
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-700 text-slate-300">
+                                {node.area_name || node.area}
+                              </span>
+                            )}
                           </div>
+                          {node.is_interdisciplinary && node.area_distribution && (
+                            <div className="mt-2 pt-2 border-t border-white/10">
+                              <p className="text-[10px] text-amber-400 mb-1">Interdisciplinar:</p>
+                              <div className="flex gap-1 flex-wrap">
+                                {Object.entries(node.area_distribution).map(([area, count]) => (
+                                  <span key={area} className="text-[9px] px-1.5 py-0.5 bg-slate-700/50 rounded text-slate-400">
+                                    {area}: {count}x
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ) : (
                       <div className={`absolute left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none ${
                         isHovered ? 'opacity-100 bottom-full mb-2' : 'opacity-0 bottom-full mb-0'
                       }`} style={{ zIndex: 50 }}>
-                        <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[200px]">
+                        <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[220px]">
                           <p className="font-semibold text-white text-sm mb-1">{node.label}</p>
-                          <div className="flex items-center gap-2 mb-2">
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
                             <span
                               className="px-2 py-0.5 rounded-full text-[10px] font-medium"
                               style={{ backgroundColor: `${node.color}30`, color: node.color }}
@@ -1295,7 +1332,24 @@ function NetworkTab({
                                node.type === 'campo_semantico' ? 'Semântico' : 'Lexical'}
                             </span>
                             <span className="text-[10px] text-slate-400">{node.count}x</span>
+                            {node.area && (
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-slate-700 text-slate-300">
+                                {node.area_name || node.area}
+                              </span>
+                            )}
                           </div>
+                          {node.is_interdisciplinary && node.area_distribution && (
+                            <div className="mt-2 pt-2 border-t border-white/10">
+                              <p className="text-[10px] text-amber-400 mb-1">Interdisciplinar:</p>
+                              <div className="flex gap-1 flex-wrap">
+                                {Object.entries(node.area_distribution).map(([area, count]) => (
+                                  <span key={area} className="text-[9px] px-1.5 py-0.5 bg-slate-700/50 rounded text-slate-400">
+                                    {area}: {count}x
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                           <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900/95 border-r border-b border-white/20 transform rotate-45" />
                         </div>
                       </div>
