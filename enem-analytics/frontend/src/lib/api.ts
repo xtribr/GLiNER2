@@ -847,6 +847,10 @@ export const api = {
         size: number;
         color: string;
         count: number;
+        area?: string;
+        area_name?: string;
+        area_distribution?: Record<string, number>;
+        is_interdisciplinary?: boolean;
       }[];
       edges: {
         source: string;
