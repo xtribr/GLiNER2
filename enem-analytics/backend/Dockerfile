@@ -2,7 +2,7 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy all files (root directory is enem-analytics/backend)
+# Copy all files (expects Root Directory set to enem-analytics/backend in Railway)
 COPY . .
 
 # Install dependencies
