@@ -321,6 +321,13 @@ async def get_knowledge_graph(
         """Get the full area distribution for interdisciplinary concepts."""
         return dict(area_counter)
 
+    # Track which labels have already been added (to avoid duplicates across types)
+    added_labels: set = set()
+
+    def normalize_label(label: str) -> str:
+        """Normalize label for deduplication comparison."""
+        return label.lower().strip()
+
     # Dynamic limits: more nodes when showing all areas (4x for 4 areas)
     multiplier = 1 if area else 4
     concept_limit = 30 * multiplier
@@ -329,8 +336,11 @@ async def get_knowledge_graph(
     concept_semantic_edge_limit = 80 * multiplier
     concept_lexical_edge_limit = 60 * multiplier
 
-    # Add concept nodes - scientific concepts in blue
+    # Add concept nodes - scientific concepts in blue (highest priority)
     for concept, count in concept_counts.most_common(concept_limit):
+        normalized = normalize_label(concept)
+        if normalized in added_labels:
+            continue  # Skip duplicate label
         node_id = f"concept_{concept}"
         if node_id not in node_ids:
             primary_area = get_primary_area(concept_areas.get(concept, Counter()))
@@ -348,9 +358,13 @@ async def get_knowledge_graph(
                 'is_interdisciplinary': len(area_dist) > 1
             })
             node_ids.add(node_id)
+            added_labels.add(normalized)
 
-    # Add semantic field nodes - purple
+    # Add semantic field nodes - purple (second priority)
     for sem, count in semantic_counts.most_common(semantic_limit):
+        normalized = normalize_label(sem)
+        if normalized in added_labels:
+            continue  # Skip duplicate label
         node_id = f"semantic_{sem}"
         if node_id not in node_ids:
             primary_area = get_primary_area(semantic_areas.get(sem, Counter()))
@@ -368,9 +382,13 @@ async def get_knowledge_graph(
                 'is_interdisciplinary': len(area_dist) > 1
             })
             node_ids.add(node_id)
+            added_labels.add(normalized)
 
-    # Add lexical field nodes - green
+    # Add lexical field nodes - green (lowest priority)
     for lex, count in lexical_counts.most_common(lexical_limit):
+        normalized = normalize_label(lex)
+        if normalized in added_labels:
+            continue  # Skip duplicate label
         node_id = f"lexical_{lex}"
         if node_id not in node_ids:
             primary_area = get_primary_area(lexical_areas.get(lex, Counter()))
@@ -388,6 +406,7 @@ async def get_knowledge_graph(
                 'is_interdisciplinary': len(area_dist) > 1
             })
             node_ids.add(node_id)
+            added_labels.add(normalized)
 
     # Add edges (concept-semantic relationships)
     for (concept, sem), weight in concept_semantic_edges.most_common(concept_semantic_edge_limit):
