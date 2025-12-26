@@ -1089,7 +1089,7 @@ function NetworkTab({
                 </defs>
 
                 {/* Draw edges with optional flow animation */}
-                {filteredEdges.slice(0, 120).map((edge, idx) => {
+                {filteredEdges.slice(0, 300).map((edge, idx) => {
                   const sourcePos = nodePositions[edge.source];
                   const targetPos = nodePositions[edge.target];
                   if (!sourcePos || !targetPos) return null;

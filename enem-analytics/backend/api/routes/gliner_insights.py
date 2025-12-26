@@ -321,8 +321,16 @@ async def get_knowledge_graph(
         """Get the full area distribution for interdisciplinary concepts."""
         return dict(area_counter)
 
-    # Add concept nodes (top 30) - scientific concepts in blue
-    for concept, count in concept_counts.most_common(30):
+    # Dynamic limits: more nodes when showing all areas (4x for 4 areas)
+    multiplier = 1 if area else 4
+    concept_limit = 30 * multiplier
+    semantic_limit = 20 * multiplier
+    lexical_limit = 15 * multiplier
+    concept_semantic_edge_limit = 80 * multiplier
+    concept_lexical_edge_limit = 60 * multiplier
+
+    # Add concept nodes - scientific concepts in blue
+    for concept, count in concept_counts.most_common(concept_limit):
         node_id = f"concept_{concept}"
         if node_id not in node_ids:
             primary_area = get_primary_area(concept_areas.get(concept, Counter()))
@@ -341,8 +349,8 @@ async def get_knowledge_graph(
             })
             node_ids.add(node_id)
 
-    # Add semantic field nodes (top 20) - purple
-    for sem, count in semantic_counts.most_common(20):
+    # Add semantic field nodes - purple
+    for sem, count in semantic_counts.most_common(semantic_limit):
         node_id = f"semantic_{sem}"
         if node_id not in node_ids:
             primary_area = get_primary_area(semantic_areas.get(sem, Counter()))
@@ -361,8 +369,8 @@ async def get_knowledge_graph(
             })
             node_ids.add(node_id)
 
-    # Add lexical field nodes (top 15) - green
-    for lex, count in lexical_counts.most_common(15):
+    # Add lexical field nodes - green
+    for lex, count in lexical_counts.most_common(lexical_limit):
         node_id = f"lexical_{lex}"
         if node_id not in node_ids:
             primary_area = get_primary_area(lexical_areas.get(lex, Counter()))
@@ -382,7 +390,7 @@ async def get_knowledge_graph(
             node_ids.add(node_id)
 
     # Add edges (concept-semantic relationships)
-    for (concept, sem), weight in concept_semantic_edges.most_common(80):
+    for (concept, sem), weight in concept_semantic_edges.most_common(concept_semantic_edge_limit):
         source_id = f"concept_{concept}"
         target_id = f"semantic_{sem}"
         if source_id in node_ids and target_id in node_ids:
@@ -394,7 +402,7 @@ async def get_knowledge_graph(
             })
 
     # Add edges (concept-lexical relationships)
-    for (concept, lex), weight in concept_lexical_edges.most_common(60):
+    for (concept, lex), weight in concept_lexical_edges.most_common(concept_lexical_edge_limit):
         source_id = f"concept_{concept}"
         target_id = f"lexical_{lex}"
         if source_id in node_ids and target_id in node_ids:
