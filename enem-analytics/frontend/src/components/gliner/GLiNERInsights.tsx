@@ -719,48 +719,118 @@ function NetworkTab({
         };
       });
     } else {
-      // Standard hierarchical layout
-      const semanticNodes = nodes.filter(n => n.type === 'campo_semantico');
-      const lexicalNodes = nodes.filter(n => n.type === 'campo_lexical');
-      const conceptNodes = nodes.filter(n => n.type === 'conceito_cientifico');
+      // Radial layout grouped by area - ALL nodes positioned
+      // Areas are distributed in 4 quadrants around center
+      const areaAngles: { [key: string]: number } = {
+        CN: Math.PI * 0.75,  // Top-left (135°)
+        CH: Math.PI * 0.25,  // Top-right (45°)
+        LC: Math.PI * 1.25,  // Bottom-left (225°)
+        MT: Math.PI * 1.75,  // Bottom-right (315°)
+      };
 
-      // Core ring: Semantic fields
-      const semanticCount = Math.min(semanticNodes.length, 8);
-      semanticNodes.slice(0, semanticCount).forEach((node, i) => {
-        const angle = (i / semanticCount) * Math.PI * 2 - Math.PI / 2;
-        positions[node.id] = {
-          x: centerX + Math.cos(angle) * 12,
-          y: centerY + Math.sin(angle) * 12,
-          node,
-          ring: 1,
-          emphasis: true,
-        };
+      // Group nodes by area, then by type within each area
+      const nodesByArea: { [area: string]: { semantic: GraphNode[], lexical: GraphNode[], concept: GraphNode[] } } = {
+        CN: { semantic: [], lexical: [], concept: [] },
+        CH: { semantic: [], lexical: [], concept: [] },
+        LC: { semantic: [], lexical: [], concept: [] },
+        MT: { semantic: [], lexical: [], concept: [] },
+        other: { semantic: [], lexical: [], concept: [] },
+      };
+
+      nodes.forEach(node => {
+        const area = node.area && areaAngles[node.area] !== undefined ? node.area : 'other';
+        if (node.type === 'campo_semantico') {
+          nodesByArea[area].semantic.push(node);
+        } else if (node.type === 'campo_lexical') {
+          nodesByArea[area].lexical.push(node);
+        } else {
+          nodesByArea[area].concept.push(node);
+        }
       });
 
-      // Middle ring: Lexical fields
-      const lexicalCount = Math.min(lexicalNodes.length, 14);
-      lexicalNodes.slice(0, lexicalCount).forEach((node, i) => {
-        const angle = (i / lexicalCount) * Math.PI * 2 - Math.PI / 6;
-        const jitter = (i % 2) * 1;
-        positions[node.id] = {
-          x: centerX + Math.cos(angle) * (24 + jitter),
-          y: centerY + Math.sin(angle) * (24 + jitter),
-          node,
-          ring: 2,
-          emphasis: false,
-        };
+      // Position nodes in radial arcs for each area
+      Object.entries(nodesByArea).forEach(([area, typeNodes]) => {
+        if (area === 'other') return;
+
+        const baseAngle = areaAngles[area];
+        const arcSpread = Math.PI / 2.5; // 72° spread for each area
+        const allAreaNodes = [...typeNodes.semantic, ...typeNodes.lexical, ...typeNodes.concept];
+
+        if (allAreaNodes.length === 0) return;
+
+        // Sort by importance: semantic first (inner), then lexical (mid), then concepts (outer)
+        // Ring 1 (inner): semantic fields - radius 10-18
+        // Ring 2 (middle): lexical fields - radius 20-28
+        // Ring 3 (outer): concepts - radius 30-42
+
+        // Position semantic nodes (inner ring)
+        typeNodes.semantic.forEach((node, i) => {
+          const count = typeNodes.semantic.length;
+          const angleOffset = count > 1 ? (i / (count - 1) - 0.5) * arcSpread * 0.6 : 0;
+          const angle = baseAngle + angleOffset;
+          const radius = 12 + (i % 3) * 2;
+          positions[node.id] = {
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+            node,
+            ring: 1,
+            emphasis: true,
+            cluster: area,
+          };
+        });
+
+        // Position lexical nodes (middle ring)
+        typeNodes.lexical.forEach((node, i) => {
+          const count = typeNodes.lexical.length;
+          const angleOffset = count > 1 ? (i / (count - 1) - 0.5) * arcSpread * 0.8 : 0;
+          const angle = baseAngle + angleOffset;
+          const radius = 22 + (i % 3) * 2;
+          positions[node.id] = {
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+            node,
+            ring: 2,
+            emphasis: false,
+            cluster: area,
+          };
+        });
+
+        // Position concept nodes (outer ring) - may need multiple sub-rings
+        const conceptsPerRing = 12;
+        typeNodes.concept.forEach((node, i) => {
+          const count = typeNodes.concept.length;
+          const ringIndex = Math.floor(i / conceptsPerRing);
+          const indexInRing = i % conceptsPerRing;
+          const nodesInThisRing = Math.min(conceptsPerRing, count - ringIndex * conceptsPerRing);
+
+          const angleOffset = nodesInThisRing > 1
+            ? (indexInRing / (nodesInThisRing - 1) - 0.5) * arcSpread
+            : 0;
+          const angle = baseAngle + angleOffset;
+          const radius = 32 + ringIndex * 6 + (indexInRing % 2) * 1.5;
+
+          positions[node.id] = {
+            x: centerX + Math.cos(angle) * radius,
+            y: centerY + Math.sin(angle) * radius,
+            node,
+            ring: 3 + ringIndex,
+            emphasis: false,
+            cluster: area,
+          };
+        });
       });
 
-      // Outer ring: Concepts
-      const conceptCount = Math.min(conceptNodes.length, 20);
-      conceptNodes.slice(0, conceptCount).forEach((node, i) => {
-        const angle = (i / conceptCount) * Math.PI * 2;
+      // Position "other" nodes (no area) in center
+      const otherNodes = [...nodesByArea.other.semantic, ...nodesByArea.other.lexical, ...nodesByArea.other.concept];
+      otherNodes.forEach((node, i) => {
+        const angle = (i / Math.max(otherNodes.length, 1)) * Math.PI * 2;
+        const radius = 5 + (i % 3) * 2;
         positions[node.id] = {
-          x: centerX + Math.cos(angle) * 36,
-          y: centerY + Math.sin(angle) * 36,
+          x: centerX + Math.cos(angle) * radius,
+          y: centerY + Math.sin(angle) * radius,
           node,
-          ring: 3,
-          emphasis: false,
+          ring: 0,
+          emphasis: node.type === 'campo_semantico',
         };
       });
     }
