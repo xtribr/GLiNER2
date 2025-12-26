@@ -536,6 +536,10 @@ function NetworkTab({
 
     const positions: { [key: string]: { x: number; y: number; node: GraphNode; ring: number; emphasis: boolean } } = {};
 
+    // Center point adjusted to keep nodes in view (shifted down slightly)
+    const centerX = 50;
+    const centerY = 52;
+
     // Determine layout based on view mode
     if (viewMode === 'semantic') {
       // Semantic-focused: Large grid layout for semantic fields
@@ -544,9 +548,9 @@ function NetworkTab({
         const cols = 4;
         const row = Math.floor(i / cols);
         const col = i % cols;
-        const spacing = 22;
-        const startX = 50 - ((cols - 1) * spacing) / 2;
-        const startY = 35;
+        const spacing = 20;
+        const startX = centerX - ((cols - 1) * spacing) / 2;
+        const startY = 25;
         positions[node.id] = {
           x: startX + col * spacing,
           y: startY + row * spacing,
@@ -558,27 +562,26 @@ function NetworkTab({
     } else if (viewMode === 'lexical') {
       // Lexical-focused: Hexagonal layout
       const count = Math.min(allLexicalNodes.length, 19);
-      const rings = [[0], [1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]];
       allLexicalNodes.slice(0, count).forEach((node, i) => {
         if (i === 0) {
-          positions[node.id] = { x: 50, y: 50, node, ring: 0, emphasis: true };
+          positions[node.id] = { x: centerX, y: centerY, node, ring: 0, emphasis: true };
         } else if (i <= 6) {
           const angle = ((i - 1) / 6) * Math.PI * 2 - Math.PI / 2;
-          positions[node.id] = { x: 50 + Math.cos(angle) * 20, y: 50 + Math.sin(angle) * 20, node, ring: 1, emphasis: true };
+          positions[node.id] = { x: centerX + Math.cos(angle) * 18, y: centerY + Math.sin(angle) * 18, node, ring: 1, emphasis: true };
         } else {
           const angle = ((i - 7) / 12) * Math.PI * 2 - Math.PI / 6;
-          positions[node.id] = { x: 50 + Math.cos(angle) * 38, y: 50 + Math.sin(angle) * 38, node, ring: 2, emphasis: true };
+          positions[node.id] = { x: centerX + Math.cos(angle) * 35, y: centerY + Math.sin(angle) * 35, node, ring: 2, emphasis: true };
         }
       });
     } else if (viewMode === 'concepts') {
       // Concepts-focused: Spiral layout for many concepts
       const count = Math.min(allConceptNodes.length, 36);
       allConceptNodes.slice(0, count).forEach((node, i) => {
-        const spiralRadius = 12 + (i * 1.2);
+        const spiralRadius = 10 + (i * 1.1);
         const angle = (i * 0.5) - Math.PI / 2;
         positions[node.id] = {
-          x: 50 + Math.cos(angle) * Math.min(spiralRadius, 42),
-          y: 50 + Math.sin(angle) * Math.min(spiralRadius, 42),
+          x: centerX + Math.cos(angle) * Math.min(spiralRadius, 38),
+          y: centerY + Math.sin(angle) * Math.min(spiralRadius, 38),
           node,
           ring: Math.floor(i / 12) + 1,
           emphasis: true
@@ -591,10 +594,10 @@ function NetworkTab({
       const semanticCount = Math.min(allSemanticNodes.length, 8);
       allSemanticNodes.slice(0, semanticCount).forEach((node, i) => {
         const angle = (i / semanticCount) * Math.PI * 2 - Math.PI / 2;
-        const radius = 16;
+        const radius = 14;
         positions[node.id] = {
-          x: 50 + Math.cos(angle) * radius,
-          y: 50 + Math.sin(angle) * radius,
+          x: centerX + Math.cos(angle) * radius,
+          y: centerY + Math.sin(angle) * radius,
           node,
           ring: 1,
           emphasis: true
@@ -605,11 +608,11 @@ function NetworkTab({
       const lexicalCount = Math.min(allLexicalNodes.length, 14);
       allLexicalNodes.slice(0, lexicalCount).forEach((node, i) => {
         const angle = (i / lexicalCount) * Math.PI * 2 - Math.PI / 6;
-        const radius = 30;
+        const radius = 27;
         const jitter = (i % 2) * 1.5;
         positions[node.id] = {
-          x: 50 + Math.cos(angle) * (radius + jitter),
-          y: 50 + Math.sin(angle) * (radius + jitter),
+          x: centerX + Math.cos(angle) * (radius + jitter),
+          y: centerY + Math.sin(angle) * (radius + jitter),
           node,
           ring: 2,
           emphasis: false
@@ -620,10 +623,10 @@ function NetworkTab({
       const conceptCount = Math.min(allConceptNodes.length, 20);
       allConceptNodes.slice(0, conceptCount).forEach((node, i) => {
         const angle = (i / conceptCount) * Math.PI * 2;
-        const radius = 44;
+        const radius = 40;
         positions[node.id] = {
-          x: 50 + Math.cos(angle) * radius,
-          y: 50 + Math.sin(angle) * radius,
+          x: centerX + Math.cos(angle) * radius,
+          y: centerY + Math.sin(angle) * radius,
           node,
           ring: 3,
           emphasis: false
