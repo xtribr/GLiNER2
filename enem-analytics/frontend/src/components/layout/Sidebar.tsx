@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
+import { useSidebar } from '@/lib/sidebar-context';
 
 const adminMenuItems = [
   { label: 'MENU', type: 'header' as const },
@@ -259,7 +260,7 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
 export default function Sidebar() {
   const pathname = usePathname();
   const { user, isAdmin, logout, isAuthenticated } = useAuth();
-  const [collapsed, setCollapsed] = useState(false);
+  const { collapsed, setCollapsed } = useSidebar();
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   // Build menu based on user role

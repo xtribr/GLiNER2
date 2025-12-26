@@ -4,11 +4,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Sidebar from './Sidebar';
 import { useAuth } from '@/lib/auth-context';
+import { useSidebar } from '@/lib/sidebar-context';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, isAuthenticated, isAdmin, isLoading } = useAuth();
+  const { collapsed } = useSidebar();
   const isLoginPage = pathname === '/login';
 
   useEffect(() => {
@@ -56,7 +58,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <div className="flex">
       <Sidebar />
-      <main className="flex-1 ml-64 min-h-screen transition-all duration-300 p-6">
+      <main className={`flex-1 min-h-screen transition-all duration-300 p-6 ${
+        collapsed ? 'ml-20' : 'ml-64'
+      }`}>
         {children}
       </main>
     </div>
