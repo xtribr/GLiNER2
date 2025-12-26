@@ -632,73 +632,87 @@ function NetworkTab({
     const centerY = 50;
 
     if (viewMode === 'clusters') {
-      // Cluster layout by area
-      const clusterPositions: { [key: string]: { cx: number; cy: number } } = {
-        CN: { cx: 25, cy: 30 },
-        CH: { cx: 75, cy: 30 },
-        LC: { cx: 25, cy: 70 },
-        MT: { cx: 75, cy: 70 },
+      // Word cloud style layout - larger areas that can overlap
+      // Areas positioned in quadrants but with generous boundaries
+      const areaRegions: { [key: string]: { xMin: number; xMax: number; yMin: number; yMax: number } } = {
+        CN: { xMin: 3, xMax: 48, yMin: 3, yMax: 48 },      // Top-left
+        CH: { xMin: 52, xMax: 97, yMin: 3, yMax: 48 },     // Top-right
+        LC: { xMin: 3, xMax: 48, yMin: 52, yMax: 97 },     // Bottom-left
+        MT: { xMin: 52, xMax: 97, yMin: 52, yMax: 97 },    // Bottom-right
       };
 
-      // Group nodes by area (now using actual area from backend)
+      // Group nodes by area
       const nodesByArea: { [key: string]: GraphNode[] } = { CN: [], CH: [], LC: [], MT: [], other: [] };
 
       nodes.forEach(node => {
-        // Use the area provided by backend (primary area based on frequency)
         const area = node.area || 'other';
-        if (clusterPositions[area]) {
+        if (areaRegions[area]) {
           nodesByArea[area].push(node);
         } else {
           nodesByArea.other.push(node);
         }
       });
 
-      // Position nodes within each cluster using spiral layout
+      // Word cloud distribution within each area
       Object.entries(nodesByArea).forEach(([area, areaNodes]) => {
         if (area === 'other' || areaNodes.length === 0) return;
-        const cluster = clusterPositions[area];
+        const region = areaRegions[area];
+        const width = region.xMax - region.xMin;
+        const height = region.yMax - region.yMin;
 
-        // Sort: semantic fields first (center), then lexical, then concepts (outer)
+        // Sort by importance: semantic first, then by count
         const sortedNodes = [...areaNodes].sort((a, b) => {
           const typeOrder: Record<string, number> = { 'campo_semantico': 0, 'campo_lexical': 1, 'conceito_cientifico': 2 };
-          return (typeOrder[a.type] || 2) - (typeOrder[b.type] || 2);
+          const typeCompare = (typeOrder[a.type] || 2) - (typeOrder[b.type] || 2);
+          if (typeCompare !== 0) return typeCompare;
+          return b.count - a.count;
         });
 
-        // Spiral distribution - more spread out
-        const maxRadius = 18;
-        const minRadius = 3;
-        const totalNodes = sortedNodes.length;
+        // Grid-based word cloud - fill area more evenly
+        const cols = Math.ceil(Math.sqrt(sortedNodes.length * 1.5));
+        const rows = Math.ceil(sortedNodes.length / cols);
+        const cellWidth = width / cols;
+        const cellHeight = height / rows;
 
         sortedNodes.forEach((node, i) => {
-          // Golden angle spiral for even distribution
-          const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-          const angle = i * goldenAngle;
+          const col = i % cols;
+          const row = Math.floor(i / cols);
 
-          // Radius grows with index, semantic fields closer to center
-          const progress = i / Math.max(totalNodes - 1, 1);
-          const r = minRadius + progress * (maxRadius - minRadius);
+          // Base position in grid cell
+          let x = region.xMin + (col + 0.5) * cellWidth;
+          let y = region.yMin + (row + 0.5) * cellHeight;
 
-          // Add slight randomness for organic feel
-          const jitterX = (Math.sin(i * 7) * 0.8);
-          const jitterY = (Math.cos(i * 11) * 0.8);
+          // Add organic jitter to avoid rigid grid look
+          const jitterX = (Math.sin(i * 13 + col * 7) * cellWidth * 0.3);
+          const jitterY = (Math.cos(i * 17 + row * 11) * cellHeight * 0.3);
+          x += jitterX;
+          y += jitterY;
+
+          // Interdisciplinary nodes get pushed toward borders (closer to other areas)
+          if (node.is_interdisciplinary) {
+            // Move toward center of canvas (where areas meet)
+            x = x + (centerX - x) * 0.15;
+            y = y + (centerY - y) * 0.15;
+          }
 
           positions[node.id] = {
-            x: cluster.cx + Math.cos(angle) * r + jitterX,
-            y: cluster.cy + Math.sin(angle) * r + jitterY,
+            x: Math.max(region.xMin + 2, Math.min(region.xMax - 2, x)),
+            y: Math.max(region.yMin + 2, Math.min(region.yMax - 2, y)),
             node,
-            ring: Math.floor(progress * 3) + 1,
+            ring: Math.floor(i / cols) + 1,
             emphasis: node.type === 'campo_semantico',
             cluster: area,
           };
         });
       });
 
-      // Position "other" nodes in the center
+      // Position "other" nodes in the very center (where all areas meet)
       nodesByArea.other.forEach((node, i) => {
         const angle = (i / Math.max(nodesByArea.other.length, 1)) * Math.PI * 2;
+        const r = 5 + (i % 3) * 3;
         positions[node.id] = {
-          x: centerX + Math.cos(angle) * 8,
-          y: centerY + Math.sin(angle) * 8,
+          x: centerX + Math.cos(angle) * r,
+          y: centerY + Math.sin(angle) * r,
           node,
           ring: 0,
           emphasis: false,
@@ -1034,7 +1048,7 @@ function NetworkTab({
             <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-            {/* Cluster backgrounds (when in cluster mode) */}
+            {/* Cluster backgrounds (when in cluster mode) - Full quadrants */}
             {viewMode === 'clusters' && (
               <div
                 className="absolute inset-0 pointer-events-none"
@@ -1044,27 +1058,25 @@ function NetworkTab({
                 }}
               >
                 {Object.entries(areaColors).map(([area, colors]) => {
-                  const positions: { [key: string]: { cx: number; cy: number } } = {
-                    CN: { cx: 25, cy: 30 },
-                    CH: { cx: 75, cy: 30 },
-                    LC: { cx: 25, cy: 70 },
-                    MT: { cx: 75, cy: 70 },
+                  // Full quadrant positions matching the word cloud layout
+                  const regions: { [key: string]: { left: string; top: string; width: string; height: string } } = {
+                    CN: { left: '1%', top: '1%', width: '48%', height: '48%' },
+                    CH: { left: '51%', top: '1%', width: '48%', height: '48%' },
+                    LC: { left: '1%', top: '51%', width: '48%', height: '48%' },
+                    MT: { left: '51%', top: '51%', width: '48%', height: '48%' },
                   };
-                  const pos = positions[area];
+                  const region = regions[area];
                   return (
                     <div
                       key={area}
-                      className="absolute rounded-3xl border-2 border-dashed"
+                      className="absolute rounded-2xl border border-dashed"
                       style={{
-                        left: `${pos.cx - 20}%`,
-                        top: `${pos.cy - 18}%`,
-                        width: '40%',
-                        height: '36%',
+                        ...region,
                         backgroundColor: colors.bg,
                         borderColor: colors.border,
                       }}
                     >
-                      <div className="absolute -top-3 left-4 px-2 py-0.5 bg-slate-800 rounded text-xs text-slate-300">
+                      <div className="absolute top-2 left-3 px-2 py-0.5 bg-slate-800/80 rounded text-xs text-slate-300 font-medium">
                         {colors.label}
                       </div>
                     </div>
