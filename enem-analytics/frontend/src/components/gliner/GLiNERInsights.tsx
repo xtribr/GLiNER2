@@ -506,7 +506,7 @@ function StudyFocusTab({
   );
 }
 
-// Network Tab Component
+// Network Tab Component with Neural Network Visualization
 function NetworkTab({
   codigoInep,
   conceptAnalysis,
@@ -515,11 +515,76 @@ function NetworkTab({
   conceptAnalysis: Awaited<ReturnType<typeof api.getGlinerConceptAnalysis>> | undefined;
 }) {
   const [networkArea, setNetworkArea] = useState<string | undefined>(undefined);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
 
   const { data: graphData, isLoading } = useQuery({
     queryKey: ['glinerGraph', codigoInep, networkArea],
     queryFn: () => api.getGlinerKnowledgeGraph(codigoInep, networkArea),
   });
+
+  // Calculate node positions in a force-directed-like layout
+  const calculatePositions = (nodes: typeof graphData.nodes) => {
+    if (!nodes) return [];
+
+    // Separate nodes by type
+    const semanticNodes = nodes.filter(n => n.type === 'campo_semantico');
+    const lexicalNodes = nodes.filter(n => n.type === 'campo_lexical');
+    const conceptNodes = nodes.filter(n => n.type === 'conceito_cientifico');
+
+    const positions: { [key: string]: { x: number; y: number; node: typeof nodes[0] } } = {};
+
+    // Place semantic nodes in inner ring (main hubs)
+    semanticNodes.slice(0, 8).forEach((node, i) => {
+      const angle = (i / Math.min(semanticNodes.length, 8)) * Math.PI * 2 - Math.PI / 2;
+      const radius = 25;
+      positions[node.id] = {
+        x: 50 + Math.cos(angle) * radius,
+        y: 50 + Math.sin(angle) * radius,
+        node
+      };
+    });
+
+    // Place lexical nodes in middle ring
+    lexicalNodes.slice(0, 12).forEach((node, i) => {
+      const angle = (i / Math.min(lexicalNodes.length, 12)) * Math.PI * 2 - Math.PI / 4;
+      const radius = 38;
+      positions[node.id] = {
+        x: 50 + Math.cos(angle) * radius,
+        y: 50 + Math.sin(angle) * radius,
+        node
+      };
+    });
+
+    // Place concept nodes in outer ring
+    conceptNodes.slice(0, 20).forEach((node, i) => {
+      const angle = (i / Math.min(conceptNodes.length, 20)) * Math.PI * 2;
+      const radius = 46;
+      positions[node.id] = {
+        x: 50 + Math.cos(angle) * radius,
+        y: 50 + Math.sin(angle) * radius,
+        node
+      };
+    });
+
+    return positions;
+  };
+
+  const nodePositions = graphData ? calculatePositions(graphData.nodes) : {};
+
+  // Get connected nodes for highlighting
+  const getConnectedNodes = (nodeId: string) => {
+    if (!graphData) return new Set<string>();
+    const connected = new Set<string>();
+    graphData.edges.forEach(edge => {
+      if (edge.source === nodeId) connected.add(edge.target);
+      if (edge.target === nodeId) connected.add(edge.source);
+    });
+    return connected;
+  };
+
+  const connectedNodes = hoveredNode ? getConnectedNodes(hoveredNode) : new Set<string>();
+  const selectedConnections = selectedNode ? getConnectedNodes(selectedNode) : new Set<string>();
 
   return (
     <div className="space-y-4">
@@ -557,93 +622,270 @@ function NetworkTab({
       </div>
 
       {isLoading ? (
-        <div className="h-80 bg-white rounded-xl flex items-center justify-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600" />
+        <div className="h-[500px] bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl flex items-center justify-center">
+          <div className="text-center">
+            <div className="relative w-16 h-16 mx-auto mb-4">
+              <div className="absolute inset-0 rounded-full border-4 border-purple-500/30 animate-ping" />
+              <div className="absolute inset-2 rounded-full border-4 border-purple-400/50 animate-pulse" />
+              <div className="absolute inset-4 rounded-full bg-purple-500 animate-pulse" />
+            </div>
+            <p className="text-purple-300 text-sm">Carregando rede neural...</p>
+          </div>
         </div>
       ) : graphData ? (
-        <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Network className="h-5 w-5 text-purple-600" />
-              <h3 className="font-semibold text-gray-900">Rede de Conhecimento</h3>
+        <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 rounded-2xl overflow-hidden shadow-2xl">
+          {/* Header Stats */}
+          <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-purple-500 rounded-xl blur-lg opacity-50" />
+                <div className="relative p-2 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl">
+                  <Network className="h-5 w-5 text-white" />
+                </div>
+              </div>
+              <div>
+                <h3 className="font-semibold text-white">Rede Neural de Conhecimento</h3>
+                <p className="text-xs text-slate-400">Visualização interativa de conexões conceituais</p>
+              </div>
             </div>
-            <div className="flex items-center gap-4 text-xs text-gray-500">
-              <span className="flex items-center gap-1">
-                <div className="w-3 h-3 rounded-full bg-blue-500" />
-                {graphData.stats.concept_nodes} conceitos
-              </span>
-              <span className="flex items-center gap-1">
-                <div className="w-3 h-3 rounded-full bg-purple-500" />
-                {graphData.stats.semantic_nodes} c. semânticos
-              </span>
-              <span className="flex items-center gap-1">
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                {graphData.stats.lexical_nodes} c. lexicais
-              </span>
-              <span>{graphData.stats.total_edges} conexões</span>
+            <div className="flex items-center gap-6 text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50" />
+                <span className="text-slate-300">{graphData.stats.concept_nodes} conceitos</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-purple-500 shadow-lg shadow-purple-500/50" />
+                <span className="text-slate-300">{graphData.stats.semantic_nodes} semânticos</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50" />
+                <span className="text-slate-300">{graphData.stats.lexical_nodes} lexicais</span>
+              </div>
+              <div className="px-3 py-1 bg-white/10 rounded-full">
+                <span className="text-slate-300">{graphData.stats.total_edges} conexões</span>
+              </div>
             </div>
           </div>
 
-          {/* Visual Network Representation */}
-          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4">
-            {/* Nodes Grid */}
-            <div className="flex flex-wrap gap-2 justify-center">
-              {graphData.nodes.slice(0, 40).map((node) => (
-                <div
-                  key={node.id}
-                  className="group relative"
-                >
-                  <div
-                    className="px-3 py-1.5 rounded-full text-white text-xs font-medium shadow-sm cursor-pointer transition-all hover:scale-105 hover:shadow-md"
-                    style={{
-                      backgroundColor: node.color,
-                    }}
-                  >
-                    {node.label.length > 15 ? node.label.slice(0, 15) + '...' : node.label}
-                  </div>
-                  {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-lg">
-                    <p className="font-semibold">{node.label}</p>
-                    <p className="text-gray-300">
-                      {node.type === 'conceito_cientifico' ? 'Conceito' :
-                       node.type === 'campo_semantico' ? 'Campo Semântico' : 'Campo Lexical'}
-                    </p>
-                    <p className="text-gray-300">Frequência: {node.count}x</p>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
-                  </div>
-                </div>
-              ))}
+          {/* Neural Network Visualization */}
+          <div className="relative h-[450px] overflow-hidden">
+            {/* Background Grid Effect */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{
+                backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+                backgroundSize: '40px 40px'
+              }} />
             </div>
 
-            {/* Legend */}
-            <div className="flex items-center justify-center gap-6 mt-4 pt-3 border-t border-slate-200">
-              <span className="flex items-center gap-1.5 text-xs text-gray-600">
-                <div className="w-3 h-3 rounded-full bg-blue-500" /> Conceito
-              </span>
-              <span className="flex items-center gap-1.5 text-xs text-gray-600">
-                <div className="w-3 h-3 rounded-full bg-purple-500" /> Semântico
-              </span>
-              <span className="flex items-center gap-1.5 text-xs text-gray-600">
-                <div className="w-3 h-3 rounded-full bg-green-500" /> Lexical
-              </span>
+            {/* Glow Effects */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl" />
+            <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl" />
+
+            {/* SVG for connections */}
+            <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
+              <defs>
+                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="rgba(139, 92, 246, 0.6)" />
+                  <stop offset="100%" stopColor="rgba(59, 130, 246, 0.6)" />
+                </linearGradient>
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              {/* Draw edges */}
+              {graphData.edges.slice(0, 50).map((edge, idx) => {
+                const sourcePos = nodePositions[edge.source];
+                const targetPos = nodePositions[edge.target];
+                if (!sourcePos || !targetPos) return null;
+
+                const isHighlighted = hoveredNode === edge.source || hoveredNode === edge.target ||
+                                     selectedNode === edge.source || selectedNode === edge.target;
+
+                return (
+                  <line
+                    key={idx}
+                    x1={`${sourcePos.x}%`}
+                    y1={`${sourcePos.y}%`}
+                    x2={`${targetPos.x}%`}
+                    y2={`${targetPos.y}%`}
+                    stroke={isHighlighted ? 'rgba(168, 85, 247, 0.8)' : 'rgba(148, 163, 184, 0.15)'}
+                    strokeWidth={isHighlighted ? 2 : 1}
+                    filter={isHighlighted ? 'url(#glow)' : undefined}
+                    className="transition-all duration-300"
+                  />
+                );
+              })}
+
+              {/* Animated pulse rings on hovered node */}
+              {hoveredNode && nodePositions[hoveredNode] && (
+                <>
+                  <circle
+                    cx={`${nodePositions[hoveredNode].x}%`}
+                    cy={`${nodePositions[hoveredNode].y}%`}
+                    r="30"
+                    fill="none"
+                    stroke="rgba(168, 85, 247, 0.4)"
+                    strokeWidth="2"
+                    className="animate-ping"
+                  />
+                  <circle
+                    cx={`${nodePositions[hoveredNode].x}%`}
+                    cy={`${nodePositions[hoveredNode].y}%`}
+                    r="20"
+                    fill="none"
+                    stroke="rgba(168, 85, 247, 0.6)"
+                    strokeWidth="1"
+                    className="animate-pulse"
+                  />
+                </>
+              )}
+            </svg>
+
+            {/* Nodes */}
+            {Object.entries(nodePositions).map(([id, { x, y, node }]) => {
+              const isHovered = hoveredNode === id;
+              const isConnected = connectedNodes.has(id) || selectedConnections.has(id);
+              const isSelected = selectedNode === id;
+              const isDimmed = (hoveredNode || selectedNode) && !isHovered && !isConnected && !isSelected;
+
+              const baseSize = node.type === 'campo_semantico' ? 56 : node.type === 'campo_lexical' ? 48 : 40;
+              const size = isHovered || isSelected ? baseSize + 8 : baseSize;
+
+              return (
+                <div
+                  key={id}
+                  className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 cursor-pointer group"
+                  style={{
+                    left: `${x}%`,
+                    top: `${y}%`,
+                    zIndex: isHovered || isSelected ? 20 : isConnected ? 15 : 10,
+                    opacity: isDimmed ? 0.3 : 1,
+                  }}
+                  onMouseEnter={() => setHoveredNode(id)}
+                  onMouseLeave={() => setHoveredNode(null)}
+                  onClick={() => setSelectedNode(selectedNode === id ? null : id)}
+                >
+                  {/* Glow effect */}
+                  {(isHovered || isSelected || isConnected) && (
+                    <div
+                      className="absolute inset-0 rounded-full blur-md transition-all"
+                      style={{
+                        backgroundColor: node.color,
+                        opacity: isHovered || isSelected ? 0.6 : 0.3,
+                        transform: 'scale(1.5)',
+                      }}
+                    />
+                  )}
+
+                  {/* Node */}
+                  <div
+                    className="relative rounded-full flex items-center justify-center text-white font-medium shadow-lg transition-all duration-300"
+                    style={{
+                      width: `${size}px`,
+                      height: `${size}px`,
+                      backgroundColor: node.color,
+                      boxShadow: isHovered || isSelected
+                        ? `0 0 30px ${node.color}80, 0 0 60px ${node.color}40`
+                        : `0 4px 20px ${node.color}40`,
+                      border: isSelected ? '3px solid white' : '2px solid rgba(255,255,255,0.2)',
+                    }}
+                  >
+                    <span className="text-[9px] text-center leading-tight px-1 drop-shadow-md">
+                      {node.label.length > 10 ? node.label.slice(0, 10) + '...' : node.label}
+                    </span>
+                  </div>
+
+                  {/* Tooltip */}
+                  <div className={`absolute left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none ${
+                    isHovered ? 'opacity-100 -top-20' : 'opacity-0 -top-16'
+                  }`} style={{ zIndex: 50 }}>
+                    <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[200px]">
+                      <p className="font-semibold text-white text-sm mb-1">{node.label}</p>
+                      <div className="flex items-center gap-2 mb-2">
+                        <span
+                          className="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                          style={{ backgroundColor: `${node.color}30`, color: node.color }}
+                        >
+                          {node.type === 'conceito_cientifico' ? 'Conceito' :
+                           node.type === 'campo_semantico' ? 'Campo Semântico' : 'Campo Lexical'}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs">
+                        <span className="text-slate-400">Frequência</span>
+                        <span className="text-white font-semibold">{node.count}x</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs mt-1">
+                        <span className="text-slate-400">Conexões</span>
+                        <span className="text-white font-semibold">{getConnectedNodes(id).size}</span>
+                      </div>
+                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900/95 border-r border-b border-white/20 transform rotate-45" />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Center decoration */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <div className="relative">
+                <div className="absolute inset-0 w-20 h-20 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 blur-xl" />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center">
+                  <Brain className="w-8 h-8 text-purple-400" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Legend & Selected Info */}
+          <div className="px-6 py-4 border-t border-white/10 bg-black/20">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-blue-500 shadow-lg shadow-blue-500/30" />
+                  <span className="text-xs text-slate-400">Conceito Científico</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 rounded-full bg-purple-500 shadow-lg shadow-purple-500/30" />
+                  <span className="text-xs text-slate-400">Campo Semântico</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/30" />
+                  <span className="text-xs text-slate-400">Campo Lexical</span>
+                </div>
+              </div>
+              <p className="text-xs text-slate-500">Clique em um nó para fixar | Passe o mouse para explorar conexões</p>
             </div>
           </div>
 
           {/* Top Connections */}
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <h4 className="text-sm font-medium text-gray-700 mb-2">Principais Conexões</h4>
+          <div className="px-6 py-4 border-t border-white/10">
+            <h4 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
+              <Zap className="w-4 h-4 text-amber-400" />
+              Principais Conexões Identificadas
+            </h4>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-              {graphData.edges.slice(0, 8).map((edge, idx) => (
-                <div key={idx} className="flex items-center gap-2 text-xs text-gray-600 p-2 bg-gray-50 rounded-lg">
-                  <span className="font-medium truncate">
-                    {edge.source.replace('concept_', '').replace('semantic_', '').replace('lexical_', '')}
-                  </span>
-                  <ArrowUpRight className="h-3 w-3 text-gray-400 flex-shrink-0" />
-                  <span className="truncate">
-                    {edge.target.replace('concept_', '').replace('semantic_', '').replace('lexical_', '')}
-                  </span>
-                </div>
-              ))}
+              {graphData.edges.slice(0, 8).map((edge, idx) => {
+                const sourceName = edge.source.replace('concept_', '').replace('semantic_', '').replace('lexical_', '');
+                const targetName = edge.target.replace('concept_', '').replace('semantic_', '').replace('lexical_', '');
+                return (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-2 text-xs p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/5 transition-colors cursor-pointer"
+                  >
+                    <span className="font-medium text-slate-300 truncate flex-1">{sourceName}</span>
+                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-purple-500/30 to-blue-500/30 flex items-center justify-center">
+                      <ArrowUpRight className="h-3 w-3 text-purple-400" />
+                    </div>
+                    <span className="text-slate-400 truncate flex-1">{targetName}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
