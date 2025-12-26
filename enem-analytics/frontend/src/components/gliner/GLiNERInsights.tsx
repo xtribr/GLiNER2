@@ -574,10 +574,19 @@ function NetworkTab({
     }));
   }, []);
 
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
-    const delta = e.deltaY > 0 ? -0.1 : 0.1;
-    handleZoom(delta);
+  // Use effect to add wheel listener with passive: false
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheelEvent = (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.1 : 0.1;
+      handleZoom(delta);
+    };
+
+    container.addEventListener('wheel', handleWheelEvent, { passive: false });
+    return () => container.removeEventListener('wheel', handleWheelEvent);
   }, [handleZoom]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
@@ -1099,7 +1108,6 @@ function NetworkTab({
           <div
             ref={containerRef}
             className="relative h-[650px] overflow-hidden cursor-grab active:cursor-grabbing"
-            onWheel={handleWheel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -1165,7 +1173,7 @@ function NetworkTab({
               }}
             >
               {/* SVG for connections with flow animation */}
-              <svg className="absolute inset-0 w-full h-full" style={{ zIndex: 1 }}>
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none" style={{ zIndex: 1 }}>
                 <defs>
                   <linearGradient id="lineGradientEnhanced" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="rgba(139, 92, 246, 0.6)" />
@@ -1216,11 +1224,11 @@ function NetworkTab({
                     <g key={idx}>
                       {/* Main edge line */}
                       <path
-                        d={`M ${sourcePos.x}% ${sourcePos.y}% Q ${curveX}% ${curveY}% ${targetPos.x}% ${targetPos.y}%`}
+                        d={`M ${sourcePos.x} ${sourcePos.y} Q ${curveX} ${curveY} ${targetPos.x} ${targetPos.y}`}
                         fill="none"
                         stroke={isHighlighted ? highlightColor : normalColor}
-                        strokeWidth={isHighlighted ? (isInterdisciplinary ? 3 : 2) : (isInterdisciplinary ? 1.5 : 1)}
-                        strokeDasharray={isInterdisciplinary ? '8 4' : undefined}
+                        strokeWidth={isHighlighted ? (isInterdisciplinary ? 0.4 : 0.3) : (isInterdisciplinary ? 0.2 : 0.15)}
+                        strokeDasharray={isInterdisciplinary ? '1.5 0.8' : undefined}
                         filter={isHighlighted ? 'url(#glowEnhanced)' : undefined}
                         className="transition-all duration-300"
                       />
@@ -1228,19 +1236,19 @@ function NetworkTab({
                       {/* Flow animation particles */}
                       {animationEnabled && isHighlighted && (
                         <>
-                          <circle r="3" fill={isInterdisciplinary ? 'rgba(251, 191, 36, 0.9)' : 'rgba(168, 85, 247, 0.9)'}>
+                          <circle r="0.8" fill={isInterdisciplinary ? 'rgba(251, 191, 36, 0.9)' : 'rgba(168, 85, 247, 0.9)'}>
                             <animateMotion
                               dur={`${1.5 + (idx % 3) * 0.5}s`}
                               repeatCount="indefinite"
-                              path={`M ${sourcePos.x * 10} ${sourcePos.y * 5} Q ${curveX * 10} ${curveY * 5} ${targetPos.x * 10} ${targetPos.y * 5}`}
+                              path={`M ${sourcePos.x} ${sourcePos.y} Q ${curveX} ${curveY} ${targetPos.x} ${targetPos.y}`}
                             />
                           </circle>
-                          <circle r="2" fill={isInterdisciplinary ? 'rgba(245, 158, 11, 0.7)' : 'rgba(59, 130, 246, 0.7)'}>
+                          <circle r="0.5" fill={isInterdisciplinary ? 'rgba(245, 158, 11, 0.7)' : 'rgba(59, 130, 246, 0.7)'}>
                             <animateMotion
                               dur={`${2 + (idx % 2) * 0.5}s`}
                               repeatCount="indefinite"
                               begin="0.5s"
-                              path={`M ${sourcePos.x * 10} ${sourcePos.y * 5} Q ${curveX * 10} ${curveY * 5} ${targetPos.x * 10} ${targetPos.y * 5}`}
+                              path={`M ${sourcePos.x} ${sourcePos.y} Q ${curveX} ${curveY} ${targetPos.x} ${targetPos.y}`}
                             />
                           </circle>
                         </>
@@ -1253,21 +1261,21 @@ function NetworkTab({
                 {hoveredNode && nodePositions[hoveredNode] && (
                   <>
                     <circle
-                      cx={`${nodePositions[hoveredNode].x}%`}
-                      cy={`${nodePositions[hoveredNode].y}%`}
-                      r="30"
+                      cx={nodePositions[hoveredNode].x}
+                      cy={nodePositions[hoveredNode].y}
+                      r="4"
                       fill="none"
                       stroke="rgba(168, 85, 247, 0.4)"
-                      strokeWidth="2"
+                      strokeWidth="0.3"
                       className="animate-ping"
                     />
                     <circle
-                      cx={`${nodePositions[hoveredNode].x}%`}
-                      cy={`${nodePositions[hoveredNode].y}%`}
-                      r="20"
+                      cx={nodePositions[hoveredNode].x}
+                      cy={nodePositions[hoveredNode].y}
+                      r="2.5"
                       fill="none"
                       stroke="rgba(168, 85, 247, 0.6)"
-                      strokeWidth="1"
+                      strokeWidth="0.2"
                       className="animate-pulse"
                     />
                   </>
