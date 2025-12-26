@@ -300,7 +300,7 @@ export default function SchoolDetailPage() {
             ))}
           </div>
         </div>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={300} minWidth={0}>
           <LineChart data={lineChartData} margin={{ top: 30, right: 30, left: 0, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
             <XAxis
@@ -436,7 +436,7 @@ export default function SchoolDetailPage() {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Distribuição por Área</h3>
           <div className="relative">
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={200} minWidth={0}>
               <PieChart>
                 <Pie
                   data={pieData}

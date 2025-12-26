@@ -232,7 +232,7 @@ export default function RoadmapPage() {
               </select>
             </div>
             <div className="h-72">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <BarChart data={areaChartData} barGap={8}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                   <XAxis dataKey="name" tick={{ fontSize: 12 }} stroke="#64748B" />
@@ -263,7 +263,7 @@ export default function RoadmapPage() {
               <p className="text-sm text-slate-500">Meta: {targetScore.toFixed(0)} pontos</p>
             </div>
             <div className="h-56 flex items-center justify-center">
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <RadialBarChart
                   cx="50%"
                   cy="50%"
