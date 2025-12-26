@@ -17,15 +17,45 @@ import {
   Filter
 } from 'lucide-react';
 
+interface HabilidadeMatriz {
+  codigo: string;
+  habilidade: string;
+  descricao: string;
+  competencia: number;
+  competencia_descricao: string;
+  relevancia: number;
+}
+
+interface ObjetoConhecimento {
+  tema: string;
+  sub_area?: string;
+  descricao?: string;
+  conteudos: string[];
+  relevancia: number;
+}
+
+interface EixoCognitivo {
+  codigo: string;
+  nome: string;
+  descricao: string;
+  relevancia: number;
+}
+
 interface Prediction {
   rank: number;
   area: string;
+  area_codigo?: string;
   tema: string;
   conceitos: string[];
+  conceitos_matriz?: string[];
   habilidades: string[];
+  habilidades_matriz?: HabilidadeMatriz[];
+  objetos_conhecimento?: ObjetoConhecimento[];
+  eixos_cognitivos?: EixoCognitivo[];
   probabilidade: number;
   tipo: string;
   justificativa: string;
+  justificativa_detalhada?: string;
 }
 
 interface OracleResponse {
@@ -256,32 +286,109 @@ export default function OraculoPage() {
                         </td>
                       </tr>
                       {expandedRow === pred.rank && (
-                        <tr className="bg-slate-50">
-                          <td colSpan={6} className="px-4 py-4">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                              <div>
-                                <h4 className="text-xs font-semibold text-slate-500 uppercase mb-2">Conceitos Relacionados</h4>
-                                <div className="flex flex-wrap gap-1">
-                                  {pred.conceitos.map((c, i) => (
-                                    <span key={i} className="px-2 py-1 bg-white border border-slate-200 rounded text-xs text-slate-700">
-                                      {c}
-                                    </span>
-                                  ))}
+                        <tr className="bg-gradient-to-br from-slate-50 to-indigo-50/30">
+                          <td colSpan={6} className="px-4 py-5">
+                            <div className="space-y-4">
+                              {/* Habilidades da Matriz ENEM */}
+                              {pred.habilidades_matriz && pred.habilidades_matriz.length > 0 && (
+                                <div>
+                                  <h4 className="text-xs font-semibold text-indigo-600 uppercase mb-2 flex items-center gap-1">
+                                    <Brain className="h-3.5 w-3.5" />
+                                    Habilidades da Matriz ENEM
+                                  </h4>
+                                  <div className="space-y-2">
+                                    {pred.habilidades_matriz.slice(0, 3).map((h, i) => (
+                                      <div key={i} className="bg-white rounded-lg p-3 border border-indigo-100 shadow-sm">
+                                        <div className="flex items-start gap-2">
+                                          <span className="px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded text-xs font-bold flex-shrink-0">
+                                            {h.codigo}
+                                          </span>
+                                          <div className="flex-1 min-w-0">
+                                            <p className="text-xs text-slate-700 leading-relaxed">{h.descricao}</p>
+                                            <p className="text-[10px] text-slate-400 mt-1">
+                                              Competência {h.competencia}: {h.competencia_descricao}
+                                            </p>
+                                          </div>
+                                          <span className="text-[10px] text-slate-400 flex-shrink-0">
+                                            {(h.relevancia * 100).toFixed(0)}%
+                                          </span>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {/* Objetos de Conhecimento */}
+                                {pred.objetos_conhecimento && pred.objetos_conhecimento.length > 0 && (
+                                  <div>
+                                    <h4 className="text-xs font-semibold text-green-600 uppercase mb-2 flex items-center gap-1">
+                                      <BookOpen className="h-3.5 w-3.5" />
+                                      Objetos de Conhecimento
+                                    </h4>
+                                    <div className="space-y-2">
+                                      {pred.objetos_conhecimento.slice(0, 2).map((obj, i) => (
+                                        <div key={i} className="bg-white rounded-lg p-3 border border-green-100">
+                                          <p className="text-xs font-medium text-slate-800">{obj.tema}</p>
+                                          {obj.sub_area && (
+                                            <span className="text-[10px] text-green-600 uppercase">{obj.sub_area}</span>
+                                          )}
+                                          {obj.conteudos.length > 0 && (
+                                            <div className="flex flex-wrap gap-1 mt-2">
+                                              {obj.conteudos.slice(0, 4).map((c, j) => (
+                                                <span key={j} className="px-1.5 py-0.5 bg-green-50 text-green-700 rounded text-[10px]">
+                                                  {c}
+                                                </span>
+                                              ))}
+                                            </div>
+                                          )}
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Eixos Cognitivos e Conceitos */}
+                                <div className="space-y-4">
+                                  {pred.eixos_cognitivos && pred.eixos_cognitivos.length > 0 && (
+                                    <div>
+                                      <h4 className="text-xs font-semibold text-purple-600 uppercase mb-2 flex items-center gap-1">
+                                        <Sparkles className="h-3.5 w-3.5" />
+                                        Eixos Cognitivos
+                                      </h4>
+                                      <div className="flex flex-wrap gap-1">
+                                        {pred.eixos_cognitivos.map((e, i) => (
+                                          <span key={i} className="px-2 py-1 bg-purple-50 border border-purple-200 rounded text-xs text-purple-700" title={e.descricao}>
+                                            {e.codigo} - {e.nome}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* Conceitos da Matriz */}
+                                  {pred.conceitos_matriz && pred.conceitos_matriz.length > 0 && (
+                                    <div>
+                                      <h4 className="text-xs font-semibold text-slate-500 uppercase mb-2">Conceitos Curriculares</h4>
+                                      <div className="flex flex-wrap gap-1">
+                                        {pred.conceitos_matriz.slice(0, 6).map((c, i) => (
+                                          <span key={i} className="px-2 py-1 bg-white border border-slate-200 rounded text-xs text-slate-700">
+                                            {c}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
-                              <div>
-                                <h4 className="text-xs font-semibold text-slate-500 uppercase mb-2">Habilidades Prováveis</h4>
-                                <div className="flex flex-wrap gap-1">
-                                  {pred.habilidades.map((h, i) => (
-                                    <span key={i} className="px-2 py-1 bg-indigo-50 border border-indigo-200 rounded text-xs text-indigo-700 font-medium">
-                                      {h}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                              <div>
-                                <h4 className="text-xs font-semibold text-slate-500 uppercase mb-2">Justificativa</h4>
-                                <p className="text-xs text-slate-600">{pred.justificativa}</p>
+
+                              {/* Justificativa */}
+                              <div className="bg-amber-50 rounded-lg p-3 border border-amber-100">
+                                <h4 className="text-xs font-semibold text-amber-700 uppercase mb-1">Justificativa</h4>
+                                <p className="text-xs text-amber-800">
+                                  {pred.justificativa_detalhada || pred.justificativa}
+                                </p>
                               </div>
                             </div>
                           </td>
