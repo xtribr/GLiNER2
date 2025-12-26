@@ -1,5 +1,6 @@
 FROM python:3.11-slim
 
+# Build cache buster: 2024-12-26-v2
 WORKDIR /app
 
 # Copy backend files from enem-analytics/backend
