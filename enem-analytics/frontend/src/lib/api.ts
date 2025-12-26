@@ -2,6 +2,11 @@ import { getToken, removeToken, User } from './auth';
 
 export const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
+// Debug log - remove after fixing
+if (typeof window !== 'undefined') {
+  console.log('[API_BASE]', API_BASE);
+}
+
 export interface SchoolScore {
   ano: number;
   nota_cn: number | null;

@@ -2,8 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 import { User, getToken, getStoredUser, setToken, setStoredUser, removeToken } from './auth';
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+import { API_BASE } from './api';
 
 interface AuthContextType {
   user: User | null;
