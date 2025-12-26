@@ -2,6 +2,9 @@
 builder = "DOCKERFILE"
 dockerfilePath = "./Dockerfile"
 
+[build.args]
+NEXT_PUBLIC_API_URL = "https://alert-trust-production.up.railway.app"
+
 [deploy]
 healthcheckPath = "/"
 healthcheckTimeout = 300
