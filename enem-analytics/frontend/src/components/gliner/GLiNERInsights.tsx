@@ -653,20 +653,40 @@ function NetworkTab({
         }
       });
 
-      // Position nodes within each cluster
+      // Position nodes within each cluster using spiral layout
       Object.entries(nodesByArea).forEach(([area, areaNodes]) => {
         if (area === 'other' || areaNodes.length === 0) return;
         const cluster = clusterPositions[area];
-        const radius = 15;
 
-        areaNodes.forEach((node, i) => {
-          const angle = (i / areaNodes.length) * Math.PI * 2 - Math.PI / 2;
-          const r = areaNodes.length > 6 ? radius * (0.5 + (i % 2) * 0.5) : radius * 0.7;
+        // Sort: semantic fields first (center), then lexical, then concepts (outer)
+        const sortedNodes = [...areaNodes].sort((a, b) => {
+          const typeOrder: Record<string, number> = { 'campo_semantico': 0, 'campo_lexical': 1, 'conceito_cientifico': 2 };
+          return (typeOrder[a.type] || 2) - (typeOrder[b.type] || 2);
+        });
+
+        // Spiral distribution - more spread out
+        const maxRadius = 18;
+        const minRadius = 3;
+        const totalNodes = sortedNodes.length;
+
+        sortedNodes.forEach((node, i) => {
+          // Golden angle spiral for even distribution
+          const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+          const angle = i * goldenAngle;
+
+          // Radius grows with index, semantic fields closer to center
+          const progress = i / Math.max(totalNodes - 1, 1);
+          const r = minRadius + progress * (maxRadius - minRadius);
+
+          // Add slight randomness for organic feel
+          const jitterX = (Math.sin(i * 7) * 0.8);
+          const jitterY = (Math.cos(i * 11) * 0.8);
+
           positions[node.id] = {
-            x: cluster.cx + Math.cos(angle) * r,
-            y: cluster.cy + Math.sin(angle) * r,
+            x: cluster.cx + Math.cos(angle) * r + jitterX,
+            y: cluster.cy + Math.sin(angle) * r + jitterY,
             node,
-            ring: 1,
+            ring: Math.floor(progress * 3) + 1,
             emphasis: node.type === 'campo_semantico',
             cluster: area,
           };
@@ -994,7 +1014,7 @@ function NetworkTab({
           {/* Neural Network Visualization with Zoom/Pan */}
           <div
             ref={containerRef}
-            className="relative h-[500px] overflow-hidden cursor-grab active:cursor-grabbing"
+            className="relative h-[650px] overflow-hidden cursor-grab active:cursor-grabbing"
             onWheel={handleWheel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
@@ -1427,35 +1447,6 @@ function NetworkTab({
             </div>
           </div>
 
-          {/* Top Connections */}
-          <div className="px-6 py-4 border-t border-white/10">
-            <h4 className="text-sm font-medium text-slate-300 mb-3 flex items-center gap-2">
-              <Zap className={`w-4 h-4 text-amber-400 ${animationEnabled ? 'animate-pulse' : ''}`} />
-              Principais Conexões Identificadas
-            </h4>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-              {filteredEdges.slice(0, 8).map((edge, idx) => {
-                const sourceName = edge.source.replace('concept_', '').replace('semantic_', '').replace('lexical_', '');
-                const targetName = edge.target.replace('concept_', '').replace('semantic_', '').replace('lexical_', '');
-                return (
-                  <div
-                    key={idx}
-                    className="flex items-center gap-2 text-xs p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/5 transition-colors cursor-pointer"
-                    onMouseEnter={() => {
-                      setHoveredNode(edge.source);
-                    }}
-                    onMouseLeave={() => setHoveredNode(null)}
-                  >
-                    <span className="font-medium text-slate-300 truncate flex-1">{sourceName}</span>
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-purple-500/30 to-blue-500/30 flex items-center justify-center">
-                      <ArrowUpRight className="h-3 w-3 text-purple-400" />
-                    </div>
-                    <span className="text-slate-400 truncate flex-1">{targetName}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </div>
       ) : null}
     </div>
