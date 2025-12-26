@@ -34,7 +34,7 @@ async def get_all_predictions(
     Args:
         limit: Limitar número de resultados
         area: Filtrar por área (Linguagens, Ciências Humanas, etc.)
-        tipo: Filtrar por tipo (Recorrente, Tendência 2025)
+        tipo: Filtrar por tipo (Recorrente, Tendência 2026)
 
     Returns:
         Lista de predições rankeadas por probabilidade

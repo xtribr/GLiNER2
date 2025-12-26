@@ -80,7 +80,7 @@ const AREA_COLORS: Record<string, string> = {
 };
 
 const TIPO_COLORS: Record<string, string> = {
-  'Tendência 2025': 'bg-red-100 text-red-700',
+  'Tendência 2026': 'bg-red-100 text-red-700',
   'Recorrente': 'bg-gray-100 text-gray-700'
 };
 
@@ -186,7 +186,7 @@ export default function OraculoPage() {
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none bg-white text-sm"
             >
               <option value="">Todos os Tipos</option>
-              <option value="Tendência">Tendência 2025</option>
+              <option value="Tendência">Tendência 2026</option>
               <option value="Recorrente">Recorrente</option>
             </select>
 

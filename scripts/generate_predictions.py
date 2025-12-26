@@ -32,7 +32,7 @@ THEME_PATTERNS = {
             "Cultura popular brasileira",
             "Língua estrangeira: interpretação"
         ],
-        "trending_2025": [
+        "trending_2026": [
             "Inteligência artificial e linguagem",
             "Redes sociais e comunicação",
             "Fake news e verificação de fatos",
@@ -62,7 +62,7 @@ THEME_PATTERNS = {
             "Migrações internacionais",
             "Geopolítica mundial"
         ],
-        "trending_2025": [
+        "trending_2026": [
             "Democracia e polarização política",
             "Crise climática global",
             "Desigualdade digital",
@@ -92,7 +92,7 @@ THEME_PATTERNS = {
             "Equilíbrio químico",
             "Evolução biológica"
         ],
-        "trending_2025": [
+        "trending_2026": [
             "Vacinas e imunização (mRNA)",
             "Energias renováveis",
             "Mudanças climáticas",
@@ -123,7 +123,7 @@ THEME_PATTERNS = {
             "Trigonometria básica",
             "Sistemas de equações"
         ],
-        "trending_2025": [
+        "trending_2026": [
             "Análise de dados (Big Data)",
             "Matemática financeira digital",
             "Crescimento exponencial (pandemias)",
@@ -207,7 +207,7 @@ def generate_predictions_2026() -> List[Dict]:
             predictions.append(pred)
 
         # Process trending themes (higher probability)
-        for theme in patterns["trending_2025"]:
+        for theme in patterns["trending_2026"]:
             pred = {
                 "rank": 0,
                 "area": area,
@@ -215,7 +215,7 @@ def generate_predictions_2026() -> List[Dict]:
                 "conceitos": extract_concepts(theme, area),
                 "habilidades": list(patterns["skills"].keys())[:3],
                 "probabilidade": calculate_probability(theme, area, True, 2),
-                "tipo": "Tendência 2025",
+                "tipo": "Tendência 2026",
                 "justificativa": f"Tema em alta devido a eventos recentes e tendências atuais"
             }
             predictions.append(pred)

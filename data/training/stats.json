@@ -1,0 +1,12 @@
+{
+  "total_questions": 3099,
+  "training_examples": 3099,
+  "train_split": 2479,
+  "eval_split": 620,
+  "areas": [
+    "languages",
+    "natural-sciences",
+    "mathematics",
+    "human-sciences"
+  ]
+}
