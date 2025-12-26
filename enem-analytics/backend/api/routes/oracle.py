@@ -33,8 +33,8 @@ async def get_all_predictions(
 
     Args:
         limit: Limitar número de resultados
-        area: Filtrar por área (Linguagens, Ciências Humanas, etc.)
-        tipo: Filtrar por tipo (Recorrente, Tendência 2026)
+        area: Filtrar por área (Linguagens, Humanas, Natureza, Matematica)
+        tipo: Filtrar por tipo (Recorrente, Frequente, Ocasional)
 
     Returns:
         Lista de predições rankeadas por probabilidade
@@ -45,7 +45,7 @@ async def get_all_predictions(
 
     predictions = data.get("predicoes_temas", [])
 
-    # Filter by area
+    # Filter by area (case insensitive)
     if area:
         predictions = [p for p in predictions if p["area"].lower() == area.lower()]
 
@@ -61,6 +61,9 @@ async def get_all_predictions(
         "total": len(predictions),
         "ano_predicao": data.get("ano_predicao"),
         "gerado_em": data.get("gerado_em"),
+        "modelo": data.get("modelo"),
+        "versao": data.get("versao"),
+        "metodologia": data.get("metodologia"),
         "predicoes": predictions
     }
 
