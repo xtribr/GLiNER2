@@ -17,6 +17,7 @@ import {
   LogOut,
   Shield,
   Users,
+  Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
@@ -30,6 +31,7 @@ const adminMenuItems = [
   { label: 'ANALYTICS', type: 'header' as const },
   { icon: TrendingUp, label: 'Tendências', href: '/trends' },
   { icon: GitCompare, label: 'Comparar', href: '/compare' },
+  { icon: Sparkles, label: 'Oráculo 2026', href: '/oraculo' },
   { label: 'ADMIN', type: 'header' as const },
   { icon: Shield, label: 'Painel Admin', href: '/admin' },
   { icon: Users, label: 'Usuários', href: '/admin/users' },
