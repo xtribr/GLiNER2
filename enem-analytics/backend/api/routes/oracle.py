@@ -9,8 +9,8 @@ from pathlib import Path
 
 router = APIRouter(prefix="/api/oracle", tags=["oracle"])
 
-# Load predictions from file
-PREDICTIONS_FILE = Path(__file__).parent.parent.parent.parent.parent / "data" / "predictions_2026.json"
+# Load predictions from file (relative to backend/data/)
+PREDICTIONS_FILE = Path(__file__).parent.parent.parent / "data" / "predictions_2026.json"
 
 
 def load_predictions():

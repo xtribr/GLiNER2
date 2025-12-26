@@ -1,0 +1,1205 @@
+{
+  "ano_predicao": 2026,
+  "gerado_em": "2025-12-26",
+  "modelo": "GLiNER2-ENEM-Oracle",
+  "total_predicoes": 61,
+  "predicoes_temas": [
+    {
+      "rank": 1,
+      "area": "Ciências da Natureza",
+      "tema": "Poluição e saúde",
+      "conceitos": [
+        "Conceito de Poluição e saúde"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6312722174217382,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 2,
+      "area": "Matemática",
+      "tema": "Análise de dados (Big Data)",
+      "conceitos": [
+        "Conceito de Análise de dados (Big Data)"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6154635440469742,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 3,
+      "area": "Ciências da Natureza",
+      "tema": "Mudanças climáticas",
+      "conceitos": [
+        "Conceito de Mudanças climáticas"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6138305291371199,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 4,
+      "area": "Linguagens",
+      "tema": "Inclusão e diversidade na literatura",
+      "conceitos": [
+        "Conceito de Inclusão e diversidade na literatura"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6132416045921609,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 5,
+      "area": "Matemática",
+      "tema": "Estatística e fake news",
+      "conceitos": [
+        "Conceito de Estatística e fake news"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6109513296602072,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 6,
+      "area": "Matemática",
+      "tema": "Crescimento exponencial (pandemias)",
+      "conceitos": [
+        "Conceito de Crescimento exponencial (pandemias)"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6104002824456821,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 7,
+      "area": "Ciências Humanas",
+      "tema": "Crise climática global",
+      "conceitos": [
+        "Conceito de Crise climática global"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6061055006082074,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 8,
+      "area": "Ciências Humanas",
+      "tema": "Conflitos geopolíticos atuais",
+      "conceitos": [
+        "Conceito de Conflitos geopolíticos atuais"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6047980395452762,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 9,
+      "area": "Ciências da Natureza",
+      "tema": "Vacinas e imunização (mRNA)",
+      "conceitos": [
+        "Anticorpo",
+        "Antígeno",
+        "Sistema imune",
+        "RNA mensageiro"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.6041701847703461,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 10,
+      "area": "Ciências Humanas",
+      "tema": "Movimentos sociais contemporâneos",
+      "conceitos": [
+        "Conceito de Movimentos sociais contemporâneos"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5985797012651739,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 11,
+      "area": "Matemática",
+      "tema": "Geometria espacial: volumes",
+      "conceitos": [
+        "Conceito de Geometria espacial: volumes"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5959796875219789,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 12,
+      "area": "Ciências Humanas",
+      "tema": "Questão ambiental e sustentabilidade",
+      "conceitos": [
+        "Conceito de Questão ambiental e sustentabilidade"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.594948060491039,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 13,
+      "area": "Ciências Humanas",
+      "tema": "Desigualdade digital",
+      "conceitos": [
+        "Conceito de Desigualdade digital"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5934714281664508,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 14,
+      "area": "Ciências Humanas",
+      "tema": "Movimentos antirracistas",
+      "conceitos": [
+        "Conceito de Movimentos antirracistas"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5930816441984865,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 15,
+      "area": "Linguagens",
+      "tema": "Redes sociais e comunicação",
+      "conceitos": [
+        "Conceito de Redes sociais e comunicação"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5903991795846892,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 16,
+      "area": "Ciências Humanas",
+      "tema": "Ditadura militar brasileira",
+      "conceitos": [
+        "Conceito de Ditadura militar brasileira"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.58919703381276,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 17,
+      "area": "Matemática",
+      "tema": "Algoritmos e decisões",
+      "conceitos": [
+        "Conceito de Algoritmos e decisões"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5884744347579814,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 18,
+      "area": "Linguagens",
+      "tema": "Intertextualidade",
+      "conceitos": [
+        "Conceito de Intertextualidade"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5847962664822595,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 19,
+      "area": "Linguagens",
+      "tema": "Arte e sociedade",
+      "conceitos": [
+        "Conceito de Arte e sociedade"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5819554735780409,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 20,
+      "area": "Linguagens",
+      "tema": "Fake news e verificação de fatos",
+      "conceitos": [
+        "Conceito de Fake news e verificação de fatos"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5764461170911124,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 21,
+      "area": "Matemática",
+      "tema": "Análise de gráficos",
+      "conceitos": [
+        "Conceito de Análise de gráficos"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5732101494382825,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 22,
+      "area": "Ciências da Natureza",
+      "tema": "Energia e sustentabilidade",
+      "conceitos": [
+        "Matriz energética",
+        "Fontes renováveis",
+        "Impacto ambiental"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5706555319141897,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 23,
+      "area": "Ciências da Natureza",
+      "tema": "Evolução biológica",
+      "conceitos": [
+        "Conceito de Evolução biológica"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5690803443654726,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 24,
+      "area": "Ciências da Natureza",
+      "tema": "Nanotecnologia",
+      "conceitos": [
+        "Conceito de Nanotecnologia"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5690715918161279,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 25,
+      "area": "Ciências da Natureza",
+      "tema": "CRISPR e edição genética",
+      "conceitos": [
+        "Conceito de CRISPR e edição genética"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5683240254776214,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 26,
+      "area": "Ciências da Natureza",
+      "tema": "Química orgânica no cotidiano",
+      "conceitos": [
+        "Conceito de Química orgânica no cotidiano"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5646219997162756,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 27,
+      "area": "Ciências Humanas",
+      "tema": "Brasil República: Era Vargas",
+      "conceitos": [
+        "Conceito de Brasil República: Era Vargas"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5645641247529789,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 28,
+      "area": "Ciências Humanas",
+      "tema": "Migrações internacionais",
+      "conceitos": [
+        "Conceito de Migrações internacionais"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5644815994399023,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 29,
+      "area": "Linguagens",
+      "tema": "Inteligência artificial e linguagem",
+      "conceitos": [
+        "Algoritmo",
+        "Processamento de linguagem",
+        "Ética digital"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5637578563166779,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 30,
+      "area": "Ciências Humanas",
+      "tema": "Cidadania e direitos humanos",
+      "conceitos": [
+        "Constituição",
+        "Democracia",
+        "Igualdade",
+        "Diversidade"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5634674399237362,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 31,
+      "area": "Linguagens",
+      "tema": "Gêneros textuais digitais",
+      "conceitos": [
+        "Conceito de Gêneros textuais digitais"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5597260639095262,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 32,
+      "area": "Linguagens",
+      "tema": "Cultura popular brasileira",
+      "conceitos": [
+        "Conceito de Cultura popular brasileira"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5583664534168797,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 33,
+      "area": "Linguagens",
+      "tema": "Patrimônio cultural imaterial",
+      "conceitos": [
+        "Conceito de Patrimônio cultural imaterial"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5533038192078172,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 34,
+      "area": "Ciências da Natureza",
+      "tema": "Energias renováveis",
+      "conceitos": [
+        "Conceito de Energias renováveis"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5512264054938437,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 35,
+      "area": "Ciências Humanas",
+      "tema": "Escravidão e suas heranças",
+      "conceitos": [
+        "Conceito de Escravidão e suas heranças"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5502906074044651,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 36,
+      "area": "Linguagens",
+      "tema": "Modernismo brasileiro",
+      "conceitos": [
+        "Conceito de Modernismo brasileiro"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5486142745020441,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 37,
+      "area": "Matemática",
+      "tema": "Razão e proporção",
+      "conceitos": [
+        "Conceito de Razão e proporção"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5464076558251091,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 38,
+      "area": "Matemática",
+      "tema": "Matemática financeira digital",
+      "conceitos": [
+        "Conceito de Matemática financeira digital"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5446555968792788,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 39,
+      "area": "Ciências Humanas",
+      "tema": "Democracia e polarização política",
+      "conceitos": [
+        "Eleições",
+        "Representação",
+        "Participação",
+        "Mídia"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5444879339999611,
+      "tipo": "Tendência 2025",
+      "justificativa": "Tema em alta devido a eventos recentes e tendências atuais"
+    },
+    {
+      "rank": 40,
+      "area": "Ciências da Natureza",
+      "tema": "Genética e biotecnologia",
+      "conceitos": [
+        "DNA",
+        "RNA",
+        "Hereditariedade",
+        "Mutação",
+        "CRISPR"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.542937546640024,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 41,
+      "area": "Linguagens",
+      "tema": "Língua estrangeira: interpretação",
+      "conceitos": [
+        "Conceito de Língua estrangeira: interpretação"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5385389431549452,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 42,
+      "area": "Ciências Humanas",
+      "tema": "Globalização e suas consequências",
+      "conceitos": [
+        "Mercado",
+        "Cultura",
+        "Tecnologia",
+        "Desigualdade"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5371394400498192,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 43,
+      "area": "Matemática",
+      "tema": "Funções: linear, quadrática",
+      "conceitos": [
+        "Conceito de Funções: linear, quadrática"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5364025255467928,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 44,
+      "area": "Ciências da Natureza",
+      "tema": "Mecânica: movimento e forças",
+      "conceitos": [
+        "Conceito de Mecânica: movimento e forças"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5361028436803825,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 45,
+      "area": "Matemática",
+      "tema": "Porcentagem e juros",
+      "conceitos": [
+        "Taxa",
+        "Montante",
+        "Capital",
+        "Período"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5358002255314593,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 46,
+      "area": "Matemática",
+      "tema": "Probabilidade",
+      "conceitos": [
+        "Conceito de Probabilidade"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5350959653482555,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 47,
+      "area": "Matemática",
+      "tema": "Geometria plana: áreas",
+      "conceitos": [
+        "Conceito de Geometria plana: áreas"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5344371021822047,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 48,
+      "area": "Ciências da Natureza",
+      "tema": "Eletricidade e magnetismo",
+      "conceitos": [
+        "Conceito de Eletricidade e magnetismo"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.533702419390064,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 49,
+      "area": "Matemática",
+      "tema": "Trigonometria básica",
+      "conceitos": [
+        "Conceito de Trigonometria básica"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5329163745749179,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 50,
+      "area": "Ciências Humanas",
+      "tema": "Geopolítica mundial",
+      "conceitos": [
+        "Conceito de Geopolítica mundial"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5311866687335461,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 51,
+      "area": "Matemática",
+      "tema": "Estatística: média, mediana, moda",
+      "conceitos": [
+        "Conceito de Estatística: média, mediana, moda"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5281877717045357,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 52,
+      "area": "Ciências da Natureza",
+      "tema": "Equilíbrio químico",
+      "conceitos": [
+        "Conceito de Equilíbrio químico"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5272590875185612,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 53,
+      "area": "Linguagens",
+      "tema": "Interpretação de texto literário",
+      "conceitos": [
+        "Gênero textual",
+        "Coesão",
+        "Coerência",
+        "Inferência"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5222316842150829,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 54,
+      "area": "Matemática",
+      "tema": "Sistemas de equações",
+      "conceitos": [
+        "Conceito de Sistemas de equações"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5205405279925472,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Matemática"
+    },
+    {
+      "rank": 55,
+      "area": "Linguagens",
+      "tema": "Funções da linguagem",
+      "conceitos": [
+        "Conceito de Funções da linguagem"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5202535967805308,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 56,
+      "area": "Ciências Humanas",
+      "tema": "Urbanização e problemas urbanos",
+      "conceitos": [
+        "Conceito de Urbanização e problemas urbanos"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5201396485706794,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências Humanas"
+    },
+    {
+      "rank": 57,
+      "area": "Ciências da Natureza",
+      "tema": "Termoquímica e energias",
+      "conceitos": [
+        "Conceito de Termoquímica e energias"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5200106114052525,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 58,
+      "area": "Ciências da Natureza",
+      "tema": "Fisiologia humana: sistemas",
+      "conceitos": [
+        "Conceito de Fisiologia humana: sistemas"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.516964147167273,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    },
+    {
+      "rank": 59,
+      "area": "Linguagens",
+      "tema": "Variação linguística regional",
+      "conceitos": [
+        "Conceito de Variação linguística regional"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5126026545910044,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 60,
+      "area": "Linguagens",
+      "tema": "Literatura contemporânea brasileira",
+      "conceitos": [
+        "Conceito de Literatura contemporânea brasileira"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5124112736175168,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Linguagens"
+    },
+    {
+      "rank": 61,
+      "area": "Ciências da Natureza",
+      "tema": "Ecologia e meio ambiente",
+      "conceitos": [
+        "Cadeia alimentar",
+        "Ciclo biogeoquímico",
+        "Bioma",
+        "Sustentabilidade"
+      ],
+      "habilidades": [
+        "H1",
+        "H2",
+        "H3"
+      ],
+      "probabilidade": 0.5118538833317048,
+      "tipo": "Recorrente",
+      "justificativa": "Tema frequente em provas anteriores de Ciências da Natureza"
+    }
+  ],
+  "predicoes_habilidades": {
+    "Linguagens": [
+      {
+        "codigo": "H1",
+        "descricao": "Identificar manifestações culturais",
+        "probabilidade": 0.7,
+        "questoes_estimadas": 8
+      },
+      {
+        "codigo": "H2",
+        "descricao": "Reconhecer funções da linguagem",
+        "probabilidade": 0.64,
+        "questoes_estimadas": 6
+      },
+      {
+        "codigo": "H3",
+        "descricao": "Relacionar textos a contextos",
+        "probabilidade": 0.64,
+        "questoes_estimadas": 5
+      },
+      {
+        "codigo": "H5",
+        "descricao": "Analisar recursos expressivos",
+        "probabilidade": 0.62,
+        "questoes_estimadas": 8
+      },
+      {
+        "codigo": "H4",
+        "descricao": "Reconhecer variação linguística",
+        "probabilidade": 0.6,
+        "questoes_estimadas": 8
+      },
+      {
+        "codigo": "H7",
+        "descricao": "Reconhecer sentidos em textos",
+        "probabilidade": 0.58,
+        "questoes_estimadas": 6
+      },
+      {
+        "codigo": "H6",
+        "descricao": "Relacionar arte e realidade",
+        "probabilidade": 0.43,
+        "questoes_estimadas": 4
+      }
+    ],
+    "Ciências Humanas": [
+      {
+        "codigo": "H3",
+        "descricao": "Associar cultura e identidade",
+        "probabilidade": 0.71,
+        "questoes_estimadas": 4
+      },
+      {
+        "codigo": "H6",
+        "descricao": "Compreender transformações espaciais",
+        "probabilidade": 0.65,
+        "questoes_estimadas": 4
+      },
+      {
+        "codigo": "H5",
+        "descricao": "Identificar conflitos sociais",
+        "probabilidade": 0.6,
+        "questoes_estimadas": 6
+      },
+      {
+        "codigo": "H2",
+        "descricao": "Analisar movimentos sociais",
+        "probabilidade": 0.56,
+        "questoes_estimadas": 6
+      },
+      {
+        "codigo": "H4",
+        "descricao": "Comparar processos históricos",
+        "probabilidade": 0.5,
+        "questoes_estimadas": 5
+      },
+      {
+        "codigo": "H7",
+        "descricao": "Identificar registro históricos",
+        "probabilidade": 0.42,
+        "questoes_estimadas": 4
+      },
+      {
+        "codigo": "H1",
+        "descricao": "Interpretar processos históricos",
+        "probabilidade": 0.41,
+        "questoes_estimadas": 5
+      }
+    ],
+    "Ciências da Natureza": [
+      {
+        "codigo": "H4",
+        "descricao": "Avaliar propostas de intervenção",
+        "probabilidade": 0.74,
+        "questoes_estimadas": 5
+      },
+      {
+        "codigo": "H7",
+        "descricao": "Apropriar-se de conhecimentos",
+        "probabilidade": 0.69,
+        "questoes_estimadas": 4
+      },
+      {
+        "codigo": "H5",
+        "descricao": "Relacionar conhecimento científico",
+        "probabilidade": 0.63,
+        "questoes_estimadas": 4
+      },
+      {
+        "codigo": "H6",
+        "descricao": "Utilizar códigos científicos",
+        "probabilidade": 0.59,
+        "questoes_estimadas": 7
+      },
+      {
+        "codigo": "H2",
+        "descricao": "Identificar etapas de processos",
+        "probabilidade": 0.49,
+        "questoes_estimadas": 7
+      },
+      {
+        "codigo": "H3",
+        "descricao": "Confrontar interpretações científicas",
+        "probabilidade": 0.46,
+        "questoes_estimadas": 5
+      },
+      {
+        "codigo": "H1",
+        "descricao": "Compreender fenômenos naturais",
+        "probabilidade": 0.45,
+        "questoes_estimadas": 5
+      }
+    ],
+    "Matemática": [
+      {
+        "codigo": "H4",
+        "descricao": "Avaliar unidades de medida",
+        "probabilidade": 0.78,
+        "questoes_estimadas": 5
+      },
+      {
+        "codigo": "H7",
+        "descricao": "Utilizar noções geométricas",
+        "probabilidade": 0.72,
+        "questoes_estimadas": 4
+      },
+      {
+        "codigo": "H5",
+        "descricao": "Resolver situações-problema",
+        "probabilidade": 0.71,
+        "questoes_estimadas": 7
+      },
+      {
+        "codigo": "H6",
+        "descricao": "Interpretar informações estatísticas",
+        "probabilidade": 0.71,
+        "questoes_estimadas": 6
+      },
+      {
+        "codigo": "H2",
+        "descricao": "Identificar regularidades",
+        "probabilidade": 0.6,
+        "questoes_estimadas": 6
+      },
+      {
+        "codigo": "H1",
+        "descricao": "Reconhecer linguagem matemática",
+        "probabilidade": 0.54,
+        "questoes_estimadas": 8
+      },
+      {
+        "codigo": "H3",
+        "descricao": "Fazer estimativas",
+        "probabilidade": 0.49,
+        "questoes_estimadas": 8
+      }
+    ]
+  },
+  "areas": [
+    "Linguagens",
+    "Ciências Humanas",
+    "Ciências da Natureza",
+    "Matemática"
+  ],
+  "metodologia": {
+    "descricao": "Predições baseadas em análise de padrões históricos do ENEM (2009-2025), tendências atuais e modelo GLiNER2 treinado com LoRA.",
+    "fontes": [
+      "Questões ENEM 2009-2025",
+      "Mapeamento TRI por habilidades",
+      "Tendências educacionais 2025"
+    ]
+  }
+}
