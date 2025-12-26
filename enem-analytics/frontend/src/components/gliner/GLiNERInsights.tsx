@@ -536,9 +536,9 @@ function NetworkTab({
 
     const positions: { [key: string]: { x: number; y: number; node: GraphNode; ring: number; emphasis: boolean } } = {};
 
-    // Center point adjusted to keep nodes in view (shifted down slightly)
+    // Center point adjusted to keep nodes in view (shifted down to prevent top overflow)
     const centerX = 50;
-    const centerY = 52;
+    const centerY = 55;
 
     // Determine layout based on view mode
     if (viewMode === 'semantic') {
@@ -594,7 +594,7 @@ function NetworkTab({
       const semanticCount = Math.min(allSemanticNodes.length, 8);
       allSemanticNodes.slice(0, semanticCount).forEach((node, i) => {
         const angle = (i / semanticCount) * Math.PI * 2 - Math.PI / 2;
-        const radius = 14;
+        const radius = 12;
         positions[node.id] = {
           x: centerX + Math.cos(angle) * radius,
           y: centerY + Math.sin(angle) * radius,
@@ -608,8 +608,8 @@ function NetworkTab({
       const lexicalCount = Math.min(allLexicalNodes.length, 14);
       allLexicalNodes.slice(0, lexicalCount).forEach((node, i) => {
         const angle = (i / lexicalCount) * Math.PI * 2 - Math.PI / 6;
-        const radius = 27;
-        const jitter = (i % 2) * 1.5;
+        const radius = 24;
+        const jitter = (i % 2) * 1;
         positions[node.id] = {
           x: centerX + Math.cos(angle) * (radius + jitter),
           y: centerY + Math.sin(angle) * (radius + jitter),
@@ -623,7 +623,7 @@ function NetworkTab({
       const conceptCount = Math.min(allConceptNodes.length, 20);
       allConceptNodes.slice(0, conceptCount).forEach((node, i) => {
         const angle = (i / conceptCount) * Math.PI * 2;
-        const radius = 40;
+        const radius = 35;
         positions[node.id] = {
           x: centerX + Math.cos(angle) * radius,
           y: centerY + Math.sin(angle) * radius,
