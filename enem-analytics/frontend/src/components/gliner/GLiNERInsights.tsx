@@ -506,7 +506,7 @@ function StudyFocusTab({
   );
 }
 
-// Network Tab Component with Neural Network Visualization
+// Network Tab Component with Enhanced Neural Network Visualization
 function NetworkTab({
   codigoInep,
   conceptAnalysis,
@@ -517,56 +517,119 @@ function NetworkTab({
   const [networkArea, setNetworkArea] = useState<string | undefined>(undefined);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'all' | 'semantic' | 'lexical' | 'concepts'>('all');
 
   const { data: graphData, isLoading } = useQuery({
     queryKey: ['glinerGraph', codigoInep, networkArea],
     queryFn: () => api.getGlinerKnowledgeGraph(codigoInep, networkArea),
   });
 
-  // Calculate node positions in a force-directed-like layout
+  // Enhanced node positioning with spiral/cluster layout
   type GraphNode = { id: string; label: string; type: string; color: string; size: number; count: number };
   const calculatePositions = (nodes: GraphNode[]) => {
     if (!nodes) return {};
 
-    // Separate nodes by type
-    const semanticNodes = nodes.filter(n => n.type === 'campo_semantico');
-    const lexicalNodes = nodes.filter(n => n.type === 'campo_lexical');
-    const conceptNodes = nodes.filter(n => n.type === 'conceito_cientifico');
+    // Separate nodes by type first
+    const allSemanticNodes = nodes.filter(n => n.type === 'campo_semantico');
+    const allLexicalNodes = nodes.filter(n => n.type === 'campo_lexical');
+    const allConceptNodes = nodes.filter(n => n.type === 'conceito_cientifico');
 
-    const positions: { [key: string]: { x: number; y: number; node: GraphNode } } = {};
+    const positions: { [key: string]: { x: number; y: number; node: GraphNode; ring: number; emphasis: boolean } } = {};
 
-    // Place semantic nodes in inner ring (main hubs)
-    semanticNodes.slice(0, 8).forEach((node, i) => {
-      const angle = (i / Math.min(semanticNodes.length, 8)) * Math.PI * 2 - Math.PI / 2;
-      const radius = 25;
-      positions[node.id] = {
-        x: 50 + Math.cos(angle) * radius,
-        y: 50 + Math.sin(angle) * radius,
-        node
-      };
-    });
+    // Determine layout based on view mode
+    if (viewMode === 'semantic') {
+      // Semantic-focused: Large grid layout for semantic fields
+      const count = Math.min(allSemanticNodes.length, 16);
+      allSemanticNodes.slice(0, count).forEach((node, i) => {
+        const cols = 4;
+        const row = Math.floor(i / cols);
+        const col = i % cols;
+        const spacing = 22;
+        const startX = 50 - ((cols - 1) * spacing) / 2;
+        const startY = 35;
+        positions[node.id] = {
+          x: startX + col * spacing,
+          y: startY + row * spacing,
+          node,
+          ring: 1,
+          emphasis: true
+        };
+      });
+    } else if (viewMode === 'lexical') {
+      // Lexical-focused: Hexagonal layout
+      const count = Math.min(allLexicalNodes.length, 19);
+      const rings = [[0], [1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]];
+      allLexicalNodes.slice(0, count).forEach((node, i) => {
+        if (i === 0) {
+          positions[node.id] = { x: 50, y: 50, node, ring: 0, emphasis: true };
+        } else if (i <= 6) {
+          const angle = ((i - 1) / 6) * Math.PI * 2 - Math.PI / 2;
+          positions[node.id] = { x: 50 + Math.cos(angle) * 20, y: 50 + Math.sin(angle) * 20, node, ring: 1, emphasis: true };
+        } else {
+          const angle = ((i - 7) / 12) * Math.PI * 2 - Math.PI / 6;
+          positions[node.id] = { x: 50 + Math.cos(angle) * 38, y: 50 + Math.sin(angle) * 38, node, ring: 2, emphasis: true };
+        }
+      });
+    } else if (viewMode === 'concepts') {
+      // Concepts-focused: Spiral layout for many concepts
+      const count = Math.min(allConceptNodes.length, 36);
+      allConceptNodes.slice(0, count).forEach((node, i) => {
+        const spiralRadius = 12 + (i * 1.2);
+        const angle = (i * 0.5) - Math.PI / 2;
+        positions[node.id] = {
+          x: 50 + Math.cos(angle) * Math.min(spiralRadius, 42),
+          y: 50 + Math.sin(angle) * Math.min(spiralRadius, 42),
+          node,
+          ring: Math.floor(i / 12) + 1,
+          emphasis: true
+        };
+      });
+    } else {
+      // All mode: Hierarchical rings with semantic fields as the core
 
-    // Place lexical nodes in middle ring
-    lexicalNodes.slice(0, 12).forEach((node, i) => {
-      const angle = (i / Math.min(lexicalNodes.length, 12)) * Math.PI * 2 - Math.PI / 4;
-      const radius = 38;
-      positions[node.id] = {
-        x: 50 + Math.cos(angle) * radius,
-        y: 50 + Math.sin(angle) * radius,
-        node
-      };
-    });
+      // Core ring: Semantic fields (inner, larger, more prominent)
+      const semanticCount = Math.min(allSemanticNodes.length, 8);
+      allSemanticNodes.slice(0, semanticCount).forEach((node, i) => {
+        const angle = (i / semanticCount) * Math.PI * 2 - Math.PI / 2;
+        const radius = 16;
+        positions[node.id] = {
+          x: 50 + Math.cos(angle) * radius,
+          y: 50 + Math.sin(angle) * radius,
+          node,
+          ring: 1,
+          emphasis: true
+        };
+      });
 
-    // Place concept nodes in outer ring
-    conceptNodes.slice(0, 20).forEach((node, i) => {
-      const angle = (i / Math.min(conceptNodes.length, 20)) * Math.PI * 2;
-      const radius = 46;
-      positions[node.id] = {
-        x: 50 + Math.cos(angle) * radius,
-        y: 50 + Math.sin(angle) * radius,
-        node
-      };
-    });
+      // Middle ring: Lexical fields
+      const lexicalCount = Math.min(allLexicalNodes.length, 14);
+      allLexicalNodes.slice(0, lexicalCount).forEach((node, i) => {
+        const angle = (i / lexicalCount) * Math.PI * 2 - Math.PI / 6;
+        const radius = 30;
+        const jitter = (i % 2) * 1.5;
+        positions[node.id] = {
+          x: 50 + Math.cos(angle) * (radius + jitter),
+          y: 50 + Math.sin(angle) * (radius + jitter),
+          node,
+          ring: 2,
+          emphasis: false
+        };
+      });
+
+      // Outer ring: Concepts (smaller, more numerous)
+      const conceptCount = Math.min(allConceptNodes.length, 20);
+      allConceptNodes.slice(0, conceptCount).forEach((node, i) => {
+        const angle = (i / conceptCount) * Math.PI * 2;
+        const radius = 44;
+        positions[node.id] = {
+          x: 50 + Math.cos(angle) * radius,
+          y: 50 + Math.sin(angle) * radius,
+          node,
+          ring: 3,
+          emphasis: false
+        };
+      });
+    }
 
     return positions;
   };
@@ -589,36 +652,89 @@ function NetworkTab({
 
   return (
     <div className="space-y-4">
-      {/* Area Filter */}
-      <div className="flex items-center gap-2">
-        <span className="text-xs text-gray-500">Filtrar por área:</span>
-        <div className="flex gap-1">
-          <button
-            onClick={() => setNetworkArea(undefined)}
-            className={`px-3 py-1 text-xs rounded-lg transition-all ${
-              !networkArea
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            Todas
-          </button>
-          {conceptAnalysis?.area_analyses.map((area) => (
+      {/* Filters Row */}
+      <div className="flex items-center justify-between gap-4 flex-wrap">
+        {/* Area Filter */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-500">Área:</span>
+          <div className="flex gap-1">
             <button
-              key={area.area}
-              onClick={() => setNetworkArea(area.area)}
+              onClick={() => setNetworkArea(undefined)}
               className={`px-3 py-1 text-xs rounded-lg transition-all ${
-                networkArea === area.area
-                  ? 'text-white'
+                !networkArea
+                  ? 'bg-purple-600 text-white'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
-              style={
-                networkArea === area.area ? { backgroundColor: area.color } : undefined
-              }
             >
-              {area.area}
+              Todas
             </button>
-          ))}
+            {conceptAnalysis?.area_analyses.map((area) => (
+              <button
+                key={area.area}
+                onClick={() => setNetworkArea(area.area)}
+                className={`px-3 py-1 text-xs rounded-lg transition-all ${
+                  networkArea === area.area
+                    ? 'text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+                style={
+                  networkArea === area.area ? { backgroundColor: area.color } : undefined
+                }
+              >
+                {area.area}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* View Mode Filter */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-500">Visualizar:</span>
+          <div className="flex gap-1 bg-gray-100 rounded-lg p-0.5">
+            <button
+              onClick={() => setViewMode('all')}
+              className={`px-3 py-1 text-xs rounded-md transition-all ${
+                viewMode === 'all'
+                  ? 'bg-white text-gray-900 shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Todos
+            </button>
+            <button
+              onClick={() => setViewMode('semantic')}
+              className={`px-3 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+                viewMode === 'semantic'
+                  ? 'bg-purple-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <div className="w-2 h-2 rounded-full bg-purple-500" />
+              Semânticos
+            </button>
+            <button
+              onClick={() => setViewMode('lexical')}
+              className={`px-3 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+                viewMode === 'lexical'
+                  ? 'bg-emerald-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <div className="w-2 h-2 rounded-full bg-emerald-500" />
+              Lexicais
+            </button>
+            <button
+              onClick={() => setViewMode('concepts')}
+              className={`px-3 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+                viewMode === 'concepts'
+                  ? 'bg-blue-500 text-white shadow-sm'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <div className="w-2 h-2 rounded-full bg-blue-500" />
+              Conceitos
+            </button>
+          </div>
         </div>
       </div>
 
@@ -749,14 +865,36 @@ function NetworkTab({
             </svg>
 
             {/* Nodes */}
-            {Object.entries(nodePositions).map(([id, { x, y, node }]) => {
+            {Object.entries(nodePositions).map(([id, { x, y, node, emphasis }]) => {
               const isHovered = hoveredNode === id;
               const isConnected = connectedNodes.has(id) || selectedConnections.has(id);
               const isSelected = selectedNode === id;
               const isDimmed = (hoveredNode || selectedNode) && !isHovered && !isConnected && !isSelected;
 
-              const baseSize = node.type === 'campo_semantico' ? 56 : node.type === 'campo_lexical' ? 48 : 40;
-              const size = isHovered || isSelected ? baseSize + 8 : baseSize;
+              // Semantic fields are more prominent in focused views
+              const isSemantic = node.type === 'campo_semantico';
+              const isLexical = node.type === 'campo_lexical';
+
+              // Dynamic sizing based on view mode and type
+              let baseSize = 40;
+              if (viewMode === 'semantic' && isSemantic) {
+                baseSize = 72;
+              } else if (viewMode === 'lexical' && isLexical) {
+                baseSize = 64;
+              } else if (viewMode === 'concepts') {
+                baseSize = 44;
+              } else if (isSemantic) {
+                baseSize = 60;
+              } else if (isLexical) {
+                baseSize = 50;
+              }
+
+              const size = isHovered || isSelected ? baseSize + 10 : baseSize;
+              const labelMaxLength = baseSize > 55 ? 14 : 10;
+
+              // Enhanced glow for semantic fields
+              const hasGlow = emphasis || isHovered || isSelected || isConnected;
+              const glowIntensity = isSemantic ? 1.2 : isLexical ? 1 : 0.8;
 
               return (
                 <div
@@ -765,21 +903,36 @@ function NetworkTab({
                   style={{
                     left: `${x}%`,
                     top: `${y}%`,
-                    zIndex: isHovered || isSelected ? 20 : isConnected ? 15 : 10,
-                    opacity: isDimmed ? 0.3 : 1,
+                    zIndex: isHovered || isSelected ? 30 : isConnected ? 25 : isSemantic ? 20 : isLexical ? 15 : 10,
+                    opacity: isDimmed ? 0.25 : 1,
                   }}
                   onMouseEnter={() => setHoveredNode(id)}
                   onMouseLeave={() => setHoveredNode(null)}
                   onClick={() => setSelectedNode(selectedNode === id ? null : id)}
                 >
-                  {/* Glow effect */}
-                  {(isHovered || isSelected || isConnected) && (
+                  {/* Ambient glow for semantic/lexical fields */}
+                  {isSemantic && (
                     <div
-                      className="absolute inset-0 rounded-full blur-md transition-all"
+                      className="absolute rounded-full animate-pulse"
+                      style={{
+                        width: `${size * 1.8}px`,
+                        height: `${size * 1.8}px`,
+                        left: `${-size * 0.4}px`,
+                        top: `${-size * 0.4}px`,
+                        background: `radial-gradient(circle, ${node.color}40 0%, transparent 70%)`,
+                      }}
+                    />
+                  )}
+
+                  {/* Glow effect */}
+                  {hasGlow && (
+                    <div
+                      className="absolute inset-0 rounded-full transition-all"
                       style={{
                         backgroundColor: node.color,
-                        opacity: isHovered || isSelected ? 0.6 : 0.3,
-                        transform: 'scale(1.5)',
+                        opacity: (isHovered || isSelected ? 0.7 : 0.4) * glowIntensity,
+                        transform: `scale(${1.4 + glowIntensity * 0.2})`,
+                        filter: 'blur(12px)',
                       }}
                     />
                   )}
@@ -790,30 +943,53 @@ function NetworkTab({
                     style={{
                       width: `${size}px`,
                       height: `${size}px`,
-                      backgroundColor: node.color,
+                      background: isSemantic
+                        ? `linear-gradient(135deg, ${node.color}, ${node.color}dd)`
+                        : node.color,
                       boxShadow: isHovered || isSelected
-                        ? `0 0 30px ${node.color}80, 0 0 60px ${node.color}40`
+                        ? `0 0 40px ${node.color}90, 0 0 80px ${node.color}50, inset 0 0 20px rgba(255,255,255,0.1)`
+                        : isSemantic
+                        ? `0 8px 32px ${node.color}60, inset 0 0 15px rgba(255,255,255,0.1)`
                         : `0 4px 20px ${node.color}40`,
-                      border: isSelected ? '3px solid white' : '2px solid rgba(255,255,255,0.2)',
+                      border: isSelected
+                        ? '3px solid white'
+                        : isSemantic
+                        ? '2px solid rgba(255,255,255,0.4)'
+                        : '2px solid rgba(255,255,255,0.2)',
                     }}
                   >
-                    <span className="text-[9px] text-center leading-tight px-1 drop-shadow-md">
-                      {node.label.length > 10 ? node.label.slice(0, 10) + '...' : node.label}
+                    <span
+                      className={`text-center leading-tight px-1 drop-shadow-md ${
+                        baseSize > 55 ? 'text-[11px]' : 'text-[9px]'
+                      }`}
+                    >
+                      {node.label.length > labelMaxLength ? node.label.slice(0, labelMaxLength) + '...' : node.label}
                     </span>
                   </div>
 
+                  {/* Type indicator badge for semantic fields */}
+                  {isSemantic && viewMode === 'all' && (
+                    <div
+                      className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-purple-400 border-2 border-slate-900 flex items-center justify-center"
+                      title="Campo Semântico"
+                    >
+                      <Brain className="w-2 h-2 text-white" />
+                    </div>
+                  )}
+
                   {/* Tooltip */}
                   <div className={`absolute left-1/2 -translate-x-1/2 transition-all duration-200 pointer-events-none ${
-                    isHovered ? 'opacity-100 -top-20' : 'opacity-0 -top-16'
+                    isHovered ? 'opacity-100 -top-24' : 'opacity-0 -top-20'
                   }`} style={{ zIndex: 50 }}>
-                    <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[200px]">
+                    <div className="bg-slate-900/95 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 shadow-2xl min-w-[220px]">
                       <p className="font-semibold text-white text-sm mb-1">{node.label}</p>
                       <div className="flex items-center gap-2 mb-2">
                         <span
-                          className="px-2 py-0.5 rounded-full text-[10px] font-medium"
+                          className="px-2 py-0.5 rounded-full text-[10px] font-medium flex items-center gap-1"
                           style={{ backgroundColor: `${node.color}30`, color: node.color }}
                         >
-                          {node.type === 'conceito_cientifico' ? 'Conceito' :
+                          {isSemantic && <Brain className="w-3 h-3" />}
+                          {node.type === 'conceito_cientifico' ? 'Conceito Científico' :
                            node.type === 'campo_semantico' ? 'Campo Semântico' : 'Campo Lexical'}
                         </span>
                       </div>
@@ -847,20 +1023,30 @@ function NetworkTab({
           <div className="px-6 py-4 border-t border-white/10 bg-black/20">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2">
+                <div className={`flex items-center gap-2 transition-opacity ${viewMode === 'concepts' || viewMode === 'all' ? 'opacity-100' : 'opacity-40'}`}>
                   <div className="w-4 h-4 rounded-full bg-blue-500 shadow-lg shadow-blue-500/30" />
                   <span className="text-xs text-slate-400">Conceito Científico</span>
+                  <span className="text-xs text-slate-500">({graphData.stats.concept_nodes})</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-full bg-purple-500 shadow-lg shadow-purple-500/30" />
-                  <span className="text-xs text-slate-400">Campo Semântico</span>
+                <div className={`flex items-center gap-2 transition-opacity ${viewMode === 'semantic' || viewMode === 'all' ? 'opacity-100' : 'opacity-40'}`}>
+                  <div className="w-5 h-5 rounded-full bg-purple-500 shadow-lg shadow-purple-500/30 animate-pulse" />
+                  <span className="text-xs text-slate-300 font-medium">Campo Semântico</span>
+                  <span className="text-xs text-purple-400 font-semibold">({graphData.stats.semantic_nodes})</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className={`flex items-center gap-2 transition-opacity ${viewMode === 'lexical' || viewMode === 'all' ? 'opacity-100' : 'opacity-40'}`}>
                   <div className="w-4 h-4 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/30" />
                   <span className="text-xs text-slate-400">Campo Lexical</span>
+                  <span className="text-xs text-slate-500">({graphData.stats.lexical_nodes})</span>
                 </div>
               </div>
-              <p className="text-xs text-slate-500">Clique em um nó para fixar | Passe o mouse para explorar conexões</p>
+              <div className="flex items-center gap-3">
+                {viewMode !== 'all' && (
+                  <span className="text-xs text-purple-400 bg-purple-500/20 px-2 py-1 rounded-full">
+                    Visualizando: {viewMode === 'semantic' ? 'Campos Semânticos' : viewMode === 'lexical' ? 'Campos Lexicais' : 'Conceitos'}
+                  </span>
+                )}
+                <p className="text-xs text-slate-500">Clique para fixar | Hover para conexões</p>
+              </div>
             </div>
           </div>
 

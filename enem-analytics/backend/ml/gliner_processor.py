@@ -154,7 +154,8 @@ class GLiNERProcessor:
 
         self.client = GLiNER2API(api_key=self.api_key)
         self._cache = {}
-        self._cache_file = Path(__file__).parent.parent / "data" / "gliner_cache_v2.json"
+        # Use local fine-tuned model cache (97% more semantic fields, 127% more lexical fields)
+        self._cache_file = Path(__file__).parent.parent / "data" / "gliner_cache_local.json"
 
         if clear_cache and self._cache_file.exists():
             self._cache_file.unlink()
