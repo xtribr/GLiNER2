@@ -1192,7 +1192,7 @@ function NetworkTab({
                 )}
               </svg>
 
-              {/* Nodes */}
+              {/* Nodes as Tags */}
               {Object.entries(nodePositions).map(([id, { x, y, node, emphasis }]) => {
                 const isHovered = hoveredNode === id;
                 const isConnected = connectedNodes.has(id) || selectedConnections.has(id);
@@ -1202,26 +1202,22 @@ function NetworkTab({
                 const isSemantic = node.type === 'campo_semantico';
                 const isLexical = node.type === 'campo_lexical';
 
-                // Dynamic sizing
-                let baseSize = 40;
-                if (isSemantic) baseSize = 60;
-                else if (isLexical) baseSize = 50;
-
-                const size = isHovered || isSelected ? baseSize + 10 : baseSize;
-                const labelMaxLength = baseSize > 55 ? 14 : 10;
-
-                const hasGlow = emphasis || isHovered || isSelected || isConnected;
-                const glowIntensity = isSemantic ? 1.2 : isLexical ? 1 : 0.8;
+                // Tag colors based on type
+                const tagColors = {
+                  bg: isSemantic ? 'rgba(139, 92, 246, 0.9)' : isLexical ? 'rgba(34, 197, 94, 0.9)' : 'rgba(59, 130, 246, 0.8)',
+                  border: isSemantic ? 'rgba(167, 139, 250, 0.6)' : isLexical ? 'rgba(74, 222, 128, 0.5)' : 'rgba(96, 165, 250, 0.4)',
+                  glow: isSemantic ? 'rgba(139, 92, 246, 0.5)' : isLexical ? 'rgba(34, 197, 94, 0.4)' : 'rgba(59, 130, 246, 0.3)',
+                };
 
                 return (
                   <div
                     key={id}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 cursor-pointer group"
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-200 cursor-pointer"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
-                      zIndex: isHovered || isSelected ? 30 : isConnected ? 25 : isSemantic ? 20 : isLexical ? 15 : 10,
-                      opacity: isDimmed ? 0.25 : 1,
+                      zIndex: isHovered || isSelected ? 50 : isConnected ? 40 : isSemantic ? 30 : isLexical ? 20 : 10,
+                      opacity: isDimmed ? 0.3 : 1,
                     }}
                     onMouseEnter={() => setHoveredNode(id)}
                     onMouseLeave={() => setHoveredNode(null)}
@@ -1230,82 +1226,28 @@ function NetworkTab({
                       setSelectedNode(selectedNode === id ? null : id);
                     }}
                   >
-                    {/* Ambient glow for semantic fields */}
-                    {isSemantic && (
-                      <div
-                        className={`absolute rounded-full ${animationEnabled ? 'animate-pulse' : ''}`}
-                        style={{
-                          width: `${size * 1.8}px`,
-                          height: `${size * 1.8}px`,
-                          left: `${-size * 0.4}px`,
-                          top: `${-size * 0.4}px`,
-                          background: `radial-gradient(circle, ${node.color}40 0%, transparent 70%)`,
-                        }}
-                      />
-                    )}
-
-                    {/* Glow effect */}
-                    {hasGlow && (
-                      <div
-                        className="absolute inset-0 rounded-full transition-all"
-                        style={{
-                          backgroundColor: node.color,
-                          opacity: (isHovered || isSelected ? 0.7 : 0.4) * glowIntensity,
-                          transform: `scale(${1.4 + glowIntensity * 0.2})`,
-                          filter: 'blur(12px)',
-                        }}
-                      />
-                    )}
-
-                    {/* Node */}
+                    {/* Tag pill */}
                     <div
-                      className="relative rounded-full flex items-center justify-center text-white font-medium shadow-lg transition-all duration-300"
+                      className={`relative px-2.5 py-1 rounded-full text-white font-medium whitespace-nowrap transition-all duration-200 ${
+                        isHovered || isSelected ? 'scale-110' : ''
+                      }`}
                       style={{
-                        width: `${size}px`,
-                        height: `${size}px`,
-                        background: isSemantic
-                          ? `linear-gradient(135deg, ${node.color}, ${node.color}dd)`
-                          : node.color,
-                        boxShadow: isHovered || isSelected
-                          ? `0 0 40px ${node.color}90, 0 0 80px ${node.color}50, inset 0 0 20px rgba(255,255,255,0.1)`
-                          : isSemantic
-                          ? `0 8px 32px ${node.color}60, inset 0 0 15px rgba(255,255,255,0.1)`
-                          : `0 4px 20px ${node.color}40`,
-                        border: isSelected
-                          ? '3px solid white'
-                          : isSemantic
-                          ? '2px solid rgba(255,255,255,0.4)'
-                          : '2px solid rgba(255,255,255,0.2)',
+                        fontSize: isSemantic ? '11px' : '10px',
+                        backgroundColor: tagColors.bg,
+                        border: `1px solid ${isSelected ? 'white' : tagColors.border}`,
+                        boxShadow: isHovered || isSelected || isConnected
+                          ? `0 0 20px ${tagColors.glow}, 0 4px 12px rgba(0,0,0,0.3)`
+                          : '0 2px 8px rgba(0,0,0,0.2)',
+                        maxWidth: '140px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
                       }}
                     >
-                      <span
-                        className={`text-center leading-tight px-1 drop-shadow-md ${
-                          baseSize > 55 ? 'text-[11px]' : 'text-[9px]'
-                        }`}
-                      >
-                        {node.label.length > labelMaxLength ? node.label.slice(0, labelMaxLength) + '...' : node.label}
-                      </span>
+                      {node.label.length > 20 ? node.label.slice(0, 20) + '...' : node.label}
+                      {node.is_interdisciplinary && (
+                        <span className="ml-1 text-amber-300">•</span>
+                      )}
                     </div>
-
-                    {/* Type indicator badge */}
-                    {isSemantic && viewMode === 'all' && (
-                      <div
-                        className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-purple-400 border-2 border-slate-900 flex items-center justify-center"
-                        title="Campo Semântico"
-                      >
-                        <Brain className="w-2 h-2 text-white" />
-                      </div>
-                    )}
-
-                    {/* Interdisciplinary indicator badge */}
-                    {node.is_interdisciplinary && viewMode === 'clusters' && (
-                      <div
-                        className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border-2 border-slate-900 flex items-center justify-center animate-pulse"
-                        title="Conceito Interdisciplinar"
-                      >
-                        <span className="text-[8px] font-bold text-slate-900">+</span>
-                      </div>
-                    )}
 
                     {/* Tooltip */}
                     {y < 50 ? (
