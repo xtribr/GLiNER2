@@ -524,7 +524,7 @@ function NetworkTab({
   const [networkArea, setNetworkArea] = useState<string | undefined>(undefined);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'all' | 'clusters'>('all');
+  const [viewMode, setViewMode] = useState<'all' | 'clusters'>('clusters');
 
   // Entity type filters (multi-select)
   const [entityFilters, setEntityFilters] = useState({
@@ -534,6 +534,16 @@ function NetworkTab({
   });
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
+  // Node limit and visibility controls
+  const [maxNodes, setMaxNodes] = useState(60);
+  const [showAllLabels, setShowAllLabels] = useState(false);
+  const labelThreshold = 5; // Only show labels for nodes with count >= this
+
+  // Area visibility toggles (for filtering individual areas)
+  const [areaVisibility, setAreaVisibility] = useState({
+    CN: true, CH: true, LC: true, MT: true
+  });
+
   // Zoom and Pan state
   const [transform, setTransform] = useState({ scale: 1, x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -541,18 +551,30 @@ function NetworkTab({
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Animation state
-  const [animationEnabled, setAnimationEnabled] = useState(true);
+  const [animationEnabled, setAnimationEnabled] = useState(false);
 
   const { data: graphData, isLoading } = useQuery({
     queryKey: ['glinerGraph', codigoInep, networkArea],
     queryFn: () => api.getGlinerKnowledgeGraph(codigoInep, networkArea),
   });
 
-  // Filter nodes based on entity type selection
+  // Filter and sort nodes by relevance (count), then limit
   const filteredNodes = useMemo(() => {
     if (!graphData?.nodes) return [];
-    return graphData.nodes.filter(node => entityFilters[node.type as keyof typeof entityFilters]);
-  }, [graphData?.nodes, entityFilters]);
+
+    // Filter by entity type and area visibility
+    const filtered = graphData.nodes.filter(node => {
+      const typeAllowed = entityFilters[node.type as keyof typeof entityFilters];
+      const areaAllowed = !node.area || areaVisibility[node.area as keyof typeof areaVisibility];
+      return typeAllowed && areaAllowed;
+    });
+
+    // Sort by count (relevance) descending
+    const sorted = [...filtered].sort((a, b) => b.count - a.count);
+
+    // Limit to maxNodes
+    return sorted.slice(0, maxNodes);
+  }, [graphData?.nodes, entityFilters, areaVisibility, maxNodes]);
 
   // Filter edges to only include those with visible nodes
   const filteredEdges = useMemo(() => {
@@ -560,6 +582,20 @@ function NetworkTab({
     const nodeIds = new Set(filteredNodes.map(n => n.id));
     return graphData.edges.filter(edge => nodeIds.has(edge.source) && nodeIds.has(edge.target));
   }, [graphData?.edges, filteredNodes]);
+
+  // Zoom to area function
+  const zoomToArea = useCallback((area: string) => {
+    const areaPositions: Record<string, { x: number; y: number }> = {
+      CN: { x: 150, y: 100 },
+      CH: { x: -150, y: 100 },
+      LC: { x: 150, y: -100 },
+      MT: { x: -150, y: -100 },
+    };
+    const pos = areaPositions[area];
+    if (pos) {
+      setTransform({ scale: 1.8, x: pos.x, y: pos.y });
+    }
+  }, []);
 
   // Toggle entity filter
   const toggleEntityFilter = (type: keyof typeof entityFilters) => {
@@ -641,13 +677,13 @@ function NetworkTab({
     const centerY = 50;
 
     if (viewMode === 'clusters') {
-      // Word cloud style layout - larger areas that can overlap
-      // Areas positioned in quadrants but with generous boundaries
+      // Word cloud style layout with CLEAR separation between quadrants
+      // Increased margins between areas for better readability
       const areaRegions: { [key: string]: { xMin: number; xMax: number; yMin: number; yMax: number } } = {
-        CN: { xMin: 3, xMax: 48, yMin: 3, yMax: 48 },      // Top-left
-        CH: { xMin: 52, xMax: 97, yMin: 3, yMax: 48 },     // Top-right
-        LC: { xMin: 3, xMax: 48, yMin: 52, yMax: 97 },     // Bottom-left
-        MT: { xMin: 52, xMax: 97, yMin: 52, yMax: 97 },    // Bottom-right
+        CN: { xMin: 2, xMax: 44, yMin: 2, yMax: 44 },      // Top-left (green)
+        CH: { xMin: 56, xMax: 98, yMin: 2, yMax: 44 },     // Top-right (yellow)
+        LC: { xMin: 2, xMax: 44, yMin: 56, yMax: 98 },     // Bottom-left (red)
+        MT: { xMin: 56, xMax: 98, yMin: 56, yMax: 98 },    // Bottom-right (blue)
       };
 
       // Group nodes by area
@@ -868,136 +904,95 @@ function NetworkTab({
   // Count active filters
   const activeFilterCount = Object.values(entityFilters).filter(Boolean).length;
 
+  // Area colors with full config
+  const areaConfig: Record<string, { color: string; name: string }> = {
+    CN: { color: '#22c55e', name: 'Ciências da Natureza' },
+    CH: { color: '#eab308', name: 'Ciências Humanas' },
+    LC: { color: '#ef4444', name: 'Linguagens' },
+    MT: { color: '#3b82f6', name: 'Matemática' },
+  };
+
   return (
-    <div className="space-y-4">
-      {/* Enhanced Filters Row */}
-      <div className="flex items-center justify-between gap-4 flex-wrap">
-        {/* Area Filter */}
+    <div className="space-y-3">
+      {/* Controls Row 1: Area toggles + Node slider */}
+      <div className="flex items-center justify-between gap-4 flex-wrap bg-white/5 rounded-xl p-3">
+        {/* Area Toggle Buttons */}
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500">Área:</span>
+          <span className="text-xs text-gray-500">Áreas:</span>
           <div className="flex gap-1">
-            <button
-              onClick={() => setNetworkArea(undefined)}
-              className={`px-3 py-1 text-xs rounded-lg transition-all ${
-                !networkArea
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-              }`}
-            >
-              Todas
-            </button>
-            {conceptAnalysis?.area_analyses.map((area) => (
+            {(['CN', 'CH', 'LC', 'MT'] as const).map((area) => (
               <button
-                key={area.area}
-                onClick={() => setNetworkArea(area.area)}
-                className={`px-3 py-1 text-xs rounded-lg transition-all ${
-                  networkArea === area.area
-                    ? 'text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                key={area}
+                onClick={() => setAreaVisibility(prev => ({ ...prev, [area]: !prev[area] }))}
+                onDoubleClick={() => zoomToArea(area)}
+                className={`px-2.5 py-1 text-xs rounded-lg transition-all font-medium ${
+                  areaVisibility[area]
+                    ? 'text-white shadow-sm'
+                    : 'bg-gray-100 text-gray-400 opacity-50'
                 }`}
-                style={
-                  networkArea === area.area ? { backgroundColor: area.color } : undefined
-                }
+                style={areaVisibility[area] ? { backgroundColor: areaConfig[area].color } : undefined}
+                title={`Clique: mostrar/esconder | Duplo clique: zoom em ${areaConfig[area].name}`}
               >
-                {area.area}
+                {area}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Entity Type Filter Dropdown */}
-        <div className="relative">
-          <button
-            onClick={() => setShowFilterDropdown(!showFilterDropdown)}
-            className={`flex items-center gap-2 px-3 py-1.5 text-xs rounded-lg transition-all ${
-              activeFilterCount < 3
-                ? 'bg-purple-100 text-purple-700 border border-purple-200'
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-            }`}
-          >
-            <Filter className="w-3.5 h-3.5" />
-            <span>Filtrar Entidades</span>
-            {activeFilterCount < 3 && (
-              <span className="px-1.5 py-0.5 bg-purple-600 text-white rounded-full text-[10px]">
-                {activeFilterCount}
-              </span>
-            )}
-          </button>
-
-          {showFilterDropdown && (
-            <div className="absolute top-full right-0 mt-1 bg-white rounded-xl shadow-xl border border-gray-200 p-2 z-50 min-w-[200px]">
-              <div className="text-xs text-gray-500 px-2 py-1 border-b border-gray-100 mb-1">
-                Tipos de Entidade
-              </div>
-              {[
-                { key: 'conceito_cientifico', label: 'Conceitos Científicos', color: 'blue' },
-                { key: 'campo_semantico', label: 'Campos Semânticos', color: 'purple' },
-                { key: 'campo_lexical', label: 'Campos Lexicais', color: 'emerald' },
-              ].map(({ key, label, color }) => (
-                <button
-                  key={key}
-                  onClick={() => toggleEntityFilter(key as keyof typeof entityFilters)}
-                  className="w-full flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                  <div
-                    className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
-                      entityFilters[key as keyof typeof entityFilters]
-                        ? `bg-${color}-500 border-${color}-500`
-                        : 'border-gray-300'
-                    }`}
-                    style={{
-                      backgroundColor: entityFilters[key as keyof typeof entityFilters]
-                        ? color === 'blue' ? '#3b82f6' : color === 'purple' ? '#a855f7' : '#10b981'
-                        : 'transparent',
-                      borderColor: entityFilters[key as keyof typeof entityFilters]
-                        ? color === 'blue' ? '#3b82f6' : color === 'purple' ? '#a855f7' : '#10b981'
-                        : '#d1d5db',
-                    }}
-                  >
-                    {entityFilters[key as keyof typeof entityFilters] && (
-                      <Check className="w-3 h-3 text-white" />
-                    )}
-                  </div>
-                  <span className="text-sm text-gray-700">{label}</span>
-                  <div
-                    className="w-2.5 h-2.5 rounded-full ml-auto"
-                    style={{
-                      backgroundColor: color === 'blue' ? '#3b82f6' : color === 'purple' ? '#a855f7' : '#10b981',
-                    }}
-                  />
-                </button>
-              ))}
-            </div>
-          )}
+        {/* Node Limit Slider */}
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-gray-500">Nós:</span>
+          <input
+            type="range"
+            min={20}
+            max={150}
+            step={10}
+            value={maxNodes}
+            onChange={(e) => setMaxNodes(Number(e.target.value))}
+            className="w-24 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-500"
+          />
+          <span className="text-xs text-gray-600 font-medium w-8">{maxNodes}</span>
         </div>
 
-        {/* View Mode Toggle */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500">Layout:</span>
-          <div className="flex gap-1 bg-gray-100 rounded-lg p-0.5">
-            <button
-              onClick={() => setViewMode('all')}
-              className={`px-3 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
-                viewMode === 'all'
-                  ? 'bg-white text-gray-900 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <Network className="w-3 h-3" />
-              Radial
-            </button>
-            <button
-              onClick={() => setViewMode('clusters')}
-              className={`px-3 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
-                viewMode === 'clusters'
-                  ? 'bg-purple-500 text-white shadow-sm'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <Layers className="w-3 h-3" />
-              Clusters
-            </button>
-          </div>
+        {/* Labels Toggle */}
+        <button
+          onClick={() => setShowAllLabels(!showAllLabels)}
+          className={`px-3 py-1 text-xs rounded-lg transition-all flex items-center gap-1.5 ${
+            showAllLabels
+              ? 'bg-purple-100 text-purple-700 border border-purple-200'
+              : 'bg-gray-100 text-gray-500'
+          }`}
+        >
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+          </svg>
+          {showAllLabels ? 'Labels' : 'Hover'}
+        </button>
+
+        {/* Layout Toggle */}
+        <div className="flex gap-1 bg-gray-100 rounded-lg p-0.5">
+          <button
+            onClick={() => setViewMode('clusters')}
+            className={`px-3 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+              viewMode === 'clusters'
+                ? 'bg-purple-500 text-white shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Layers className="w-3 h-3" />
+            Clusters
+          </button>
+          <button
+            onClick={() => setViewMode('all')}
+            className={`px-3 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+              viewMode === 'all'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <Network className="w-3 h-3" />
+            Radial
+          </button>
         </div>
 
         {/* Animation Toggle */}
@@ -1014,13 +1009,33 @@ function NetworkTab({
         </button>
       </div>
 
-      {/* Click outside to close filter dropdown */}
-      {showFilterDropdown && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setShowFilterDropdown(false)}
-        />
-      )}
+      {/* Controls Row 2: Entity type filters */}
+      <div className="flex items-center gap-4 text-xs">
+        <span className="text-gray-500">Tipos:</span>
+        {[
+          { key: 'conceito_cientifico', label: 'Conceitos', color: '#3b82f6' },
+          { key: 'campo_semantico', label: 'Semânticos', color: '#a855f7' },
+          { key: 'campo_lexical', label: 'Lexicais', color: '#10b981' },
+        ].map(({ key, label, color }) => (
+          <button
+            key={key}
+            onClick={() => toggleEntityFilter(key as keyof typeof entityFilters)}
+            className={`flex items-center gap-1.5 px-2 py-1 rounded-lg transition-all ${
+              entityFilters[key as keyof typeof entityFilters]
+                ? 'bg-white shadow-sm'
+                : 'bg-gray-100 opacity-50'
+            }`}
+          >
+            <div
+              className="w-2.5 h-2.5 rounded-full"
+              style={{ backgroundColor: color, opacity: entityFilters[key as keyof typeof entityFilters] ? 1 : 0.3 }}
+            />
+            <span className={entityFilters[key as keyof typeof entityFilters] ? 'text-gray-700' : 'text-gray-400'}>
+              {label}
+            </span>
+          </button>
+        ))}
+      </div>
 
       {isLoading ? (
         <div className="h-[500px] bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl flex items-center justify-center">
@@ -1126,7 +1141,7 @@ function NetworkTab({
             <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-            {/* Cluster backgrounds (when in cluster mode) - Full quadrants */}
+            {/* Cluster backgrounds (when in cluster mode) - Full quadrants with clear separation */}
             {viewMode === 'clusters' && (
               <div
                 className="absolute inset-0 pointer-events-none"
@@ -1135,31 +1150,32 @@ function NetworkTab({
                   transformOrigin: 'center center',
                 }}
               >
-                {Object.entries(areaColors).map(([area, colors]) => {
-                  // Full quadrant positions matching the word cloud layout
-                  const regions: { [key: string]: { left: string; top: string; width: string; height: string } } = {
-                    CN: { left: '1%', top: '1%', width: '48%', height: '48%' },
-                    CH: { left: '51%', top: '1%', width: '48%', height: '48%' },
-                    LC: { left: '1%', top: '51%', width: '48%', height: '48%' },
-                    MT: { left: '51%', top: '51%', width: '48%', height: '48%' },
-                  };
-                  const region = regions[area];
-                  return (
+                {/* Area-specific backgrounds with better colors */}
+                {[
+                  { area: 'CN', left: '1%', top: '1%', width: '44%', height: '44%', bg: 'rgba(34, 197, 94, 0.08)', border: 'rgba(34, 197, 94, 0.25)', label: 'Ciências da Natureza' },
+                  { area: 'CH', left: '55%', top: '1%', width: '44%', height: '44%', bg: 'rgba(234, 179, 8, 0.08)', border: 'rgba(234, 179, 8, 0.25)', label: 'Ciências Humanas' },
+                  { area: 'LC', left: '1%', top: '55%', width: '44%', height: '44%', bg: 'rgba(239, 68, 68, 0.08)', border: 'rgba(239, 68, 68, 0.25)', label: 'Linguagens' },
+                  { area: 'MT', left: '55%', top: '55%', width: '44%', height: '44%', bg: 'rgba(59, 130, 246, 0.08)', border: 'rgba(59, 130, 246, 0.25)', label: 'Matemática' },
+                ].map(({ area, left, top, width, height, bg, border, label }) => (
+                  areaVisibility[area as keyof typeof areaVisibility] && (
                     <div
                       key={area}
-                      className="absolute rounded-2xl border border-dashed"
-                      style={{
-                        ...region,
-                        backgroundColor: colors.bg,
-                        borderColor: colors.border,
-                      }}
+                      className="absolute rounded-2xl border-2 border-dashed transition-all duration-300"
+                      style={{ left, top, width, height, backgroundColor: bg, borderColor: border }}
                     >
-                      <div className="absolute top-2 left-3 px-2 py-0.5 bg-slate-800/80 rounded text-xs text-slate-300 font-medium">
-                        {colors.label}
+                      <div
+                        className="absolute top-2 left-3 px-2 py-0.5 rounded text-[10px] font-semibold"
+                        style={{ backgroundColor: border, color: 'white' }}
+                      >
+                        {label}
                       </div>
                     </div>
-                  );
-                })}
+                  )
+                ))}
+
+                {/* Center cross separator */}
+                <div className="absolute left-[48%] top-0 w-[4%] h-full bg-gradient-to-b from-transparent via-slate-600/10 to-transparent" />
+                <div className="absolute top-[48%] left-0 w-full h-[4%] bg-gradient-to-r from-transparent via-slate-600/10 to-transparent" />
               </div>
             )}
 
@@ -1282,7 +1298,7 @@ function NetworkTab({
                 )}
               </svg>
 
-              {/* Nodes as Tags */}
+              {/* Nodes as Tags or Dots */}
               {Object.entries(nodePositions).map(([id, { x, y, node, emphasis }]) => {
                 const isHovered = hoveredNode === id;
                 const isConnected = connectedNodes.has(id) || selectedConnections.has(id);
@@ -1292,12 +1308,21 @@ function NetworkTab({
                 const isSemantic = node.type === 'campo_semantico';
                 const isLexical = node.type === 'campo_lexical';
 
+                // Determine if label should be shown
+                const isHighCount = node.count >= labelThreshold;
+                const isZoomedIn = transform.scale >= 1.3;
+                const shouldShowLabel = showAllLabels || isHovered || isSelected || isConnected || (isHighCount && isZoomedIn) || isSemantic;
+
                 // Tag colors based on type
                 const tagColors = {
                   bg: isSemantic ? 'rgba(139, 92, 246, 0.9)' : isLexical ? 'rgba(34, 197, 94, 0.9)' : 'rgba(59, 130, 246, 0.8)',
                   border: isSemantic ? 'rgba(167, 139, 250, 0.6)' : isLexical ? 'rgba(74, 222, 128, 0.5)' : 'rgba(96, 165, 250, 0.4)',
                   glow: isSemantic ? 'rgba(139, 92, 246, 0.5)' : isLexical ? 'rgba(34, 197, 94, 0.4)' : 'rgba(59, 130, 246, 0.3)',
+                  solid: isSemantic ? '#8b5cf6' : isLexical ? '#22c55e' : '#3b82f6',
                 };
+
+                // Node size based on count (for dot mode)
+                const dotSize = Math.max(6, Math.min(14, 6 + node.count * 0.8));
 
                 return (
                   <div
@@ -1307,7 +1332,7 @@ function NetworkTab({
                       left: `${x}%`,
                       top: `${y}%`,
                       zIndex: isHovered || isSelected ? 50 : isConnected ? 40 : isSemantic ? 30 : isLexical ? 20 : 10,
-                      opacity: isDimmed ? 0.3 : 1,
+                      opacity: isDimmed ? 0.25 : 1,
                     }}
                     onMouseEnter={() => setHoveredNode(id)}
                     onMouseLeave={() => setHoveredNode(null)}
@@ -1316,28 +1341,44 @@ function NetworkTab({
                       setSelectedNode(selectedNode === id ? null : id);
                     }}
                   >
-                    {/* Tag pill */}
-                    <div
-                      className={`relative px-2.5 py-1 rounded-full text-white font-medium whitespace-nowrap transition-all duration-200 ${
-                        isHovered || isSelected ? 'scale-110' : ''
-                      }`}
-                      style={{
-                        fontSize: isSemantic ? '11px' : '10px',
-                        backgroundColor: tagColors.bg,
-                        border: `1px solid ${isSelected ? 'white' : tagColors.border}`,
-                        boxShadow: isHovered || isSelected || isConnected
-                          ? `0 0 20px ${tagColors.glow}, 0 4px 12px rgba(0,0,0,0.3)`
-                          : '0 2px 8px rgba(0,0,0,0.2)',
-                        maxWidth: '140px',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {node.label.length > 20 ? node.label.slice(0, 20) + '...' : node.label}
-                      {node.is_interdisciplinary && (
-                        <span className="ml-1 text-amber-300">•</span>
-                      )}
-                    </div>
+                    {shouldShowLabel ? (
+                      /* Tag pill (full label) */
+                      <div
+                        className={`relative px-2 py-0.5 rounded-full text-white font-medium whitespace-nowrap transition-all duration-200 ${
+                          isHovered || isSelected ? 'scale-110' : ''
+                        }`}
+                        style={{
+                          fontSize: isSemantic ? '10px' : '9px',
+                          backgroundColor: tagColors.bg,
+                          border: `1px solid ${isSelected ? 'white' : tagColors.border}`,
+                          boxShadow: isHovered || isSelected || isConnected
+                            ? `0 0 15px ${tagColors.glow}, 0 2px 8px rgba(0,0,0,0.3)`
+                            : '0 1px 4px rgba(0,0,0,0.2)',
+                          maxWidth: isHovered ? '200px' : '100px',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {isHovered ? node.label : (node.label.length > 14 ? node.label.slice(0, 14) + '…' : node.label)}
+                        {node.is_interdisciplinary && (
+                          <span className="ml-0.5 text-amber-300">•</span>
+                        )}
+                      </div>
+                    ) : (
+                      /* Dot (collapsed mode) */
+                      <div
+                        className={`rounded-full transition-all duration-200 ${
+                          isHovered ? 'scale-150' : ''
+                        }`}
+                        style={{
+                          width: `${dotSize}px`,
+                          height: `${dotSize}px`,
+                          backgroundColor: tagColors.solid,
+                          border: node.is_interdisciplinary ? '2px solid #fbbf24' : `1px solid ${tagColors.border}`,
+                          boxShadow: `0 0 ${dotSize}px ${tagColors.glow}`,
+                        }}
+                      />
+                    )}
 
                     {/* Tooltip */}
                     {y < 50 ? (
