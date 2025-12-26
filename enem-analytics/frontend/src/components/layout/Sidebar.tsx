@@ -17,10 +17,12 @@ import {
   LogOut,
   Shield,
   Users,
+  AlertCircle,
 } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { useSidebar } from '@/lib/sidebar-context';
+import { API_BASE } from '@/lib/api';
 
 const adminMenuItems = [
   { label: 'MENU', type: 'header' as const },
@@ -55,25 +57,33 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
-    const subject = encodeURIComponent(`Contato X-TRI - ${formData.nomeEscola}`);
-    const body = encodeURIComponent(
-      `Nome: ${formData.nome}\n` +
-      `Telefone/WhatsApp: ${formData.telefone}\n` +
-      `Nome da Escola: ${formData.nomeEscola}\n` +
-      `Cargo: ${formData.cargo}\n` +
-      `Já conhecia a XTRI?: ${formData.conheciaXtri === 'sim' ? 'Sim' : 'Não'}\n\n` +
-      `Comentários:\n${formData.comentarios}`
-    );
+    try {
+      const response = await fetch(`${API_BASE}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nome: formData.nome,
+          telefone: formData.telefone,
+          nome_escola: formData.nomeEscola,
+          cargo: formData.cargo,
+          conhecia_xtri: formData.conheciaXtri === 'sim',
+          comentarios: formData.comentarios,
+        }),
+      });
 
-    window.location.href = `mailto:contato@xtri.online?subject=${subject}&body=${body}`;
+      if (!response.ok) {
+        throw new Error('Erro ao enviar mensagem');
+      }
 
-    setTimeout(() => {
-      setIsSubmitting(false);
       setIsSuccess(true);
       setTimeout(() => {
         setIsSuccess(false);
@@ -87,7 +97,11 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           comentarios: '',
         });
       }, 2000);
-    }, 500);
+    } catch {
+      setError('Erro ao enviar mensagem. Tente novamente.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -128,6 +142,12 @@ function ContactModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            {error && (
+              <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+                <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                {error}
+              </div>
+            )}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Nome completo *

@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 import pandas as pd
 from pathlib import Path
 
-from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights
+from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights, contact
 from api.auth import router as auth_router
 from api.admin import router as admin_router
 from database.config import engine
@@ -90,6 +90,7 @@ app.include_router(clusters.router)
 app.include_router(recommendations.router)
 app.include_router(tri_lists.router)
 app.include_router(gliner_insights.router, prefix="/api/gliner", tags=["GLiNER Insights"])
+app.include_router(contact.router)
 
 
 @app.get("/")
