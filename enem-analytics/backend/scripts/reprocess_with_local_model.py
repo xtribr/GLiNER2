@@ -97,7 +97,7 @@ def load_model():
     logger.info("Loading GLiNER2 base model...")
     model = GLiNER2.from_pretrained("fastino/gliner2-base-v1")
 
-    adapter_path = Path(__file__).parent.parent / "models" / "gliner2-enem-semantic" / "best"
+    adapter_path = Path(__file__).parent.parent / "models" / "gliner2-enem-semantic-v2" / "best"
     logger.info(f"Loading LoRA adapter from: {adapter_path}")
     model.load_adapter(str(adapter_path))
 
@@ -106,7 +106,7 @@ def load_model():
 
 def process_batch(model, texts: List[str], schema, batch_size: int = 8) -> List[Dict]:
     """Process a batch of texts."""
-    results = model.batch_extract(texts, schema, batch_size=batch_size, threshold=0.25)
+    results = model.batch_extract(texts, schema, batch_size=batch_size, threshold=0.6)
     return results
 
 
@@ -115,7 +115,7 @@ def main():
     data_dir = Path(__file__).parent.parent / "data"
     csv_file = data_dir / "conteudos_tri_final.csv"
     output_file = data_dir / "conteudos_tri_gliner_local.csv"
-    cache_file = data_dir / "gliner_cache_local.json"
+    cache_file = data_dir / "gliner_cache_v2.json"
 
     # Load data
     logger.info("Loading data...")
@@ -127,7 +127,7 @@ def main():
 
     # Create schema
     schema = model.create_schema()
-    schema.entities(ENTITY_TYPES, threshold=0.25)
+    schema.entities(ENTITY_TYPES, threshold=0.6)
 
     # Process in batches
     batch_size = 16

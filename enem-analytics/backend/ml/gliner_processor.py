@@ -24,6 +24,26 @@ api_client = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(api_client)
 GLiNER2API = api_client.GLiNER2API
 
+# Local model with trained adapter (lazy loaded)
+_local_model = None
+# v2: Trained with 30 epochs (v1) + 2 more epochs fine-tuning, lower LR
+ADAPTER_PATH = Path(__file__).parent.parent / "models" / "gliner2-enem-semantic-v2" / "best"
+
+
+def get_local_model():
+    """Lazy load local GLiNER2 model with trained ENEM adapter."""
+    global _local_model
+    if _local_model is None:
+        from gliner2 import GLiNER2
+        logger.info("Loading local GLiNER2 model...")
+        _local_model = GLiNER2.from_pretrained("fastino/gliner2-base-v1")
+        if ADAPTER_PATH.exists():
+            logger.info(f"Loading trained adapter from {ADAPTER_PATH}")
+            _local_model.load_adapter(str(ADAPTER_PATH))
+        else:
+            logger.warning(f"Adapter not found at {ADAPTER_PATH}, using base model")
+    return _local_model
+
 logger = logging.getLogger(__name__)
 
 # Educational entity types for ENEM content - ENHANCED for compound phrases and semantic fields
@@ -143,8 +163,82 @@ def clean_entities(entities_dict: Dict[str, List[str]]) -> Dict[str, List[str]]:
     return cleaned
 
 
+class GLiNERLocalProcessor:
+    """Process TRI content using local GLiNER2 model with trained ENEM adapter."""
+
+    def __init__(self, clear_cache: bool = False):
+        """Initialize local GLiNER processor with trained adapter."""
+        self._model = None  # Lazy loaded
+        self._cache = {}
+        self._cache_file = Path(__file__).parent.parent / "data" / "gliner_cache_v2.json"
+
+        if clear_cache and self._cache_file.exists():
+            self._cache_file.unlink()
+            logger.info("Local cache cleared")
+
+        self._load_cache()
+
+    @property
+    def model(self):
+        """Lazy load model on first access."""
+        if self._model is None:
+            self._model = get_local_model()
+        return self._model
+
+    def _load_cache(self):
+        """Load cached results."""
+        if self._cache_file.exists():
+            try:
+                with open(self._cache_file, 'r', encoding='utf-8') as f:
+                    self._cache = json.load(f)
+                logger.info(f"Loaded {len(self._cache)} cached local GLiNER results")
+            except Exception as e:
+                logger.warning(f"Failed to load cache: {e}")
+                self._cache = {}
+
+    def _save_cache(self):
+        """Save cache to disk."""
+        try:
+            self._cache_file.parent.mkdir(parents=True, exist_ok=True)
+            with open(self._cache_file, 'w', encoding='utf-8') as f:
+                json.dump(self._cache, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            logger.warning(f"Failed to save cache: {e}")
+
+    def extract_from_description(self, description: str) -> Dict[str, Any]:
+        """Extract entities from a single description using local model."""
+        cache_key = description[:100]
+        if cache_key in self._cache:
+            return self._cache[cache_key]
+
+        try:
+            labels = list(ENTITY_TYPES.keys())
+            result = self.model.extract_entities(description, labels, threshold=0.3)
+
+            # Clean and filter entities
+            if 'entities' in result:
+                result['entities'] = clean_entities(result['entities'])
+
+            self._cache[cache_key] = result
+            return result
+
+        except Exception as e:
+            logger.error(f"Local GLiNER extraction error: {e}")
+            return {"entities": {}, "error": str(e)}
+
+    def batch_extract(self, descriptions: List[str], batch_size: int = 20) -> List[Dict[str, Any]]:
+        """Batch extract entities from multiple descriptions."""
+        results = []
+        for desc in descriptions:
+            results.append(self.extract_from_description(desc))
+            if len(results) % 50 == 0:
+                self._save_cache()
+        self._save_cache()
+        return results
+
+
 class GLiNERProcessor:
-    """Process TRI content using GLiNER for entity extraction and classification."""
+    """Process TRI content using GLiNER API for entity extraction and classification."""
 
     def __init__(self, api_key: Optional[str] = None, clear_cache: bool = False):
         """Initialize GLiNER processor."""
@@ -201,10 +295,10 @@ class GLiNERProcessor:
         try:
             # Build extraction schema with enhanced descriptions
             schema = self.client.create_schema()
-            schema.entities(ENTITY_TYPES, threshold=0.25)  # Lower threshold for compound phrases
+            schema.entities(ENTITY_TYPES, threshold=0.6)
 
             # Extract
-            result = self.client.extract(description, schema, threshold=0.25)
+            result = self.client.extract(description, schema, threshold=0.6)
 
             # Clean and filter entities
             if 'entities' in result:
@@ -252,7 +346,7 @@ class GLiNERProcessor:
 
         # Build schema once
         schema = self.client.create_schema()
-        schema.entities(ENTITY_TYPES, threshold=0.3)
+        schema.entities(ENTITY_TYPES, threshold=0.6)
 
         # Process in batches
         for batch_start in range(0, len(uncached), batch_size):
@@ -260,7 +354,7 @@ class GLiNERProcessor:
             batch = uncached[batch_start:batch_end]
 
             try:
-                batch_results = self.client.batch_extract(batch, schema, threshold=0.3)
+                batch_results = self.client.batch_extract(batch, schema, threshold=0.6)
 
                 # Store results and update cache
                 for j, res in enumerate(batch_results):

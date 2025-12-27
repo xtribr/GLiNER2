@@ -162,40 +162,40 @@
     "Análise de dados"
   ],
   "habilidade_enem": [
-    "Identificar diferentes linguagens",
-    "Reconhecer recursos expressivos",
-    "Resolver situação-problema",
-    "Analisar informações em gráficos",
-    "Avaliar propostas de intervenção",
     "Interpretar fenômenos naturais",
-    "Compreender processos históricos",
+    "Reconhecer recursos expressivos",
+    "Analisar informações em gráficos",
+    "Aplicar conhecimentos matemáticos",
     "Relacionar conceitos científicos",
+    "Resolver situação-problema",
+    "Identificar diferentes linguagens",
+    "Compreender processos históricos",
     "Contextualizar produção artística",
-    "Aplicar conhecimentos matemáticos"
+    "Avaliar propostas de intervenção"
   ],
   "competencia_enem": [
-    "Dominar linguagens e seus recursos expressivos",
-    "Compreender fenômenos naturais e sociais",
     "Construir argumentação consistente",
-    "Elaborar propostas de intervenção",
+    "Compreender fenômenos naturais e sociais",
+    "Apropriar-se de conhecimentos científicos",
+    "Dominar linguagens e seus recursos expressivos",
     "Utilizar conhecimento geométrico",
-    "Apropriar-se de conhecimentos científicos"
+    "Elaborar propostas de intervenção"
   ],
   "objeto_conhecimento": [
-    "Estudo do texto e gêneros textuais",
-    "Conhecimentos numéricos e algébricos",
-    "Transformações químicas e energia",
-    "Ecologia e ciências ambientais",
-    "Diversidade cultural e movimentos sociais",
     "Hereditariedade e evolução",
-    "Fenômenos elétricos e magnéticos",
-    "Organização social e política"
+    "Conhecimentos numéricos e algébricos",
+    "Diversidade cultural e movimentos sociais",
+    "Organização social e política",
+    "Ecologia e ciências ambientais",
+    "Estudo do texto e gêneros textuais",
+    "Transformações químicas e energia",
+    "Fenômenos elétricos e magnéticos"
   ],
   "eixo_cognitivo": [
     "Dominar linguagens",
-    "Compreender fenômenos",
     "Enfrentar situações-problema",
+    "Elaborar propostas",
     "Construir argumentação",
-    "Elaborar propostas"
+    "Compreender fenômenos"
   ]
 }
