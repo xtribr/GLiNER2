@@ -109,6 +109,49 @@ class GlinerInsightsTest(unittest.TestCase):
         self.assertEqual(result["trending_concepts"], [])
         self.assertEqual(result["total_unique_concepts"], 0)
 
+    def test_study_focus_covers_all_four_tri_areas_for_strong_school(self):
+        """Regression: a school with no weak areas (z-scores all positive) used
+        to surface only 3 TRI areas because of a hardcoded slice [:3]. The
+        product expects all four TRI areas (CN, CH, LC, MT) every time."""
+        rows = []
+        for area in ("CN", "CH", "LC", "MT"):
+            for tri in (500.0, 550.0, 600.0, 650.0):
+                row = dict(REQUIRED_ROW)
+                row.update({
+                    "area_code": area,
+                    "tri_score": tri,
+                    "conceitos_cientificos": f"conceito_{area}_{int(tri)}",
+                })
+                rows.append(row)
+
+        fake_predict_model = types.SimpleNamespace(
+            predict_all_scores=lambda inep: {
+                "scores": {"cn": 600, "ch": 600, "lc": 600, "mt": 600, "redacao": 600}
+            }
+        )
+        fake_diagnosis_engine = types.SimpleNamespace(
+            diagnose=lambda inep: {"priority_areas": []}  # strong school: no weak areas
+        )
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            data_dir = Path(tmp_dir)
+            write_gliner_csv(data_dir, rows)
+
+            with patch.object(gliner_insights, "DADOS_DIR", data_dir), patch.object(
+                gliner_insights, "_gliner_df", None
+            ), patch(
+                "ml.prediction_model.ENEMPredictionModel", lambda: fake_predict_model
+            ), patch(
+                "ml.diagnosis_engine.DiagnosisEngine", lambda: fake_diagnosis_engine
+            ):
+                result = asyncio.run(
+                    gliner_insights.get_study_focus(codigo_inep="x", _=None)
+                )
+
+        areas = [a["area"] for a in result["focus_areas"]]
+        self.assertEqual(sorted(areas), ["CH", "CN", "LC", "MT"])
+        self.assertEqual(len(result["focus_areas"]), 4)
+
 
 if __name__ == "__main__":
     unittest.main()

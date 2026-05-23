@@ -885,7 +885,9 @@ async def get_study_focus(
     # Build study focus for weak areas
     focus_areas = []
 
-    for area_code in weak_areas[:3]:  # Focus on top 3 weak areas
+    # Cover all four TRI areas. Redacao is excluded from this panel because
+    # the GLiNER content CSV has no redacao items (no per-item TRI calibration).
+    for area_code in weak_areas[:4]:
         score_key = area_code.lower()
         predicted_score = predictions.get('scores', {}).get(score_key, 550)
 
