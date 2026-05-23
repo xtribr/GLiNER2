@@ -1639,28 +1639,23 @@ function NetworkTab({
                 </div>
               </div>
 
-              {/* Audit summary */}
-              {graphData?.similarity_audit && (
+              {/* Audit summary: only the interdisciplinary connections (the
+                  positive signal). The duplicate count is internal QA and
+                  belongs to the admin audit detail, not the main panel. */}
+              {graphData?.similarity_audit && graphData.similarity_audit.total_similarity_edges > 0 && (
                 <div className="flex items-center gap-2 text-[10px]">
-                  {graphData.similarity_audit.exact_duplicates > 0 && (
-                    <span className="px-2 py-0.5 bg-red-500/20 text-red-400 rounded">
-                      {graphData.similarity_audit.exact_duplicates} duplicatas
-                    </span>
-                  )}
-                  {graphData.similarity_audit.total_similarity_edges > 0 && (
-                    <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-400 rounded">
-                      {graphData.similarity_audit.total_similarity_edges} conexões detectadas
-                    </span>
-                  )}
+                  <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-400 rounded">
+                    {graphData.similarity_audit.total_similarity_edges} conexões interdisciplinares
+                  </span>
                 </div>
               )}
             </div>
 
-            {/* Expanded audit details (show on hover/click) */}
+            {/* Admin audit detail. Collapsed by default. */}
             {graphData?.similarity_audit && graphData.similarity_audit.exact_duplicates > 0 && (
               <details className="mt-3 text-xs">
-                <summary className="cursor-pointer text-slate-400 hover:text-slate-300 transition-colors">
-                  Ver relatório de auditoria ({graphData.similarity_audit.exact_duplicates + graphData.similarity_audit.similar_labels} itens)
+                <summary className="cursor-pointer text-slate-500 hover:text-slate-400 transition-colors">
+                  Auditoria interna ({graphData.similarity_audit.exact_duplicates + graphData.similarity_audit.similar_labels} itens)
                 </summary>
                 <div className="mt-2 p-3 bg-slate-800/50 rounded-lg max-h-40 overflow-y-auto">
                   {graphData.similarity_audit.details.duplicates.length > 0 && (
