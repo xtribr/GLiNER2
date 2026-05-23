@@ -1168,9 +1168,11 @@ function NetworkTab({
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-white">Rede Neural de Conhecimento</h3>
+                <h3 className="font-semibold text-white">Mapa de Conceitos do ENEM</h3>
                 <p className="text-xs text-slate-400">
-                  Visualização interativa • {filteredNodes.length} nós • {filteredEdges.length} conexões
+                  Top {filteredNodes.length} conceitos mais frequentes nos itens TRI do ENEM 2024
+                  {' • '}
+                  {filteredEdges.length} conexões
                 </p>
               </div>
             </div>
