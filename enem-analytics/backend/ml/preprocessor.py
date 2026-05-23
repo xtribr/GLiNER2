@@ -27,7 +27,6 @@ class ENEMPreprocessor:
         self.skills_df = None
         self.school_skills_df = None
         self.tri_content_df = None  # TRI content with GLiNER entities
-        self.skill_tri_map = None   # Mapping of skills to TRI difficulty
         self._load_data()
         self._compute_tri_mappings()
 
@@ -92,30 +91,11 @@ class ENEMPreprocessor:
         return df[~invalid_mask].reset_index(drop=True)
 
     def _compute_tri_mappings(self):
-        """Compute TRI difficulty mappings per skill and area"""
+        """Compute area-level TRI statistics from GLiNER-tagged content."""
         if self.tri_content_df is None:
-            self.skill_tri_map = {}
             self.area_tri_stats = {}
             return
 
-        # Compute average TRI score per skill (habilidade)
-        skill_stats = self.tri_content_df.groupby(['area_code', 'habilidade']).agg({
-            'tri_score': ['mean', 'std', 'min', 'max', 'count']
-        }).reset_index()
-        skill_stats.columns = ['area_code', 'habilidade', 'tri_mean', 'tri_std', 'tri_min', 'tri_max', 'tri_count']
-
-        self.skill_tri_map = {}
-        for _, row in skill_stats.iterrows():
-            key = f"{row['area_code']}_{row['habilidade']}"
-            self.skill_tri_map[key] = {
-                'mean': row['tri_mean'],
-                'std': row['tri_std'] if not pd.isna(row['tri_std']) else 50,
-                'min': row['tri_min'],
-                'max': row['tri_max'],
-                'count': row['tri_count']
-            }
-
-        # Compute area-level TRI statistics
         self.area_tri_stats = {}
         for area in ['CN', 'CH', 'LC', 'MT']:
             area_data = self.tri_content_df[self.tri_content_df['area_code'] == area]
@@ -128,8 +108,6 @@ class ENEMPreprocessor:
                     'p75': area_data['tri_score'].quantile(0.75),
                     'count': len(area_data)
                 }
-
-        print(f"Computed TRI mappings for {len(self.skill_tri_map)} skills")
 
     def create_lagged_features(self, school_df: pd.DataFrame, n_lags: int = 3) -> Dict[str, float]:
         """

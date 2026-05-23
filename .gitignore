@@ -1,5 +1,8 @@
 # Large data files
 microdados-enem/
+microdados-2024/
+microdados-2025/
+microdados de 2005 a 2015/
 enem-analytics/backend/data/microdados_censo_escolar_2024/
 enem-analytics/backend/data/microdados_censo_2024.zip
 dados/
@@ -38,3 +41,8 @@ Thumbs.db
 *.cache/
 .cache/
 .playwright-mcp/
+
+# Per-user agent state (not part of the project)
+.agents/
+.codex/
+.claude/worktrees/
