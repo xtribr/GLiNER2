@@ -1784,27 +1784,40 @@ function ConceptContextPanel({
         <p className="text-xs text-slate-400">Este conceito não tem itens TRI no acervo atual.</p>
       ) : (
         <>
-          <div className={`text-xs px-3 py-2 rounded-lg border ${STATUS_STYLES[context.status]} mb-3`}>
+          {/* Section 1: school-specific. What changes if you pick another school. */}
+          <p className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold mb-1.5">
+            Sua escola
+          </p>
+          <div className={`text-xs px-3 py-2 rounded-lg border ${STATUS_STYLES[context.status]} mb-2`}>
             <p className="font-semibold">{STATUS_LABELS[context.status]}</p>
-            {context.gap !== null && context.school_score !== null && (
+            {context.gap !== null && context.school_score !== null ? (
               <p className="text-[11px] mt-0.5 opacity-90">
-                Sua escola tira {context.school_score.toFixed(0)} em {context.dominant_area} • itens
-                deste conceito caem na média {context.tri_range.mean.toFixed(0)}
+                Score em {context.dominant_area}:{' '}
+                <span className="font-semibold">{context.school_score.toFixed(0)}</span>
                 {' '}({context.gap >= 0 ? '+' : ''}
-                {context.gap.toFixed(0)} pts)
+                {context.gap.toFixed(0)} pts vs média do ENEM)
+              </p>
+            ) : (
+              <p className="text-[11px] mt-0.5 opacity-90">
+                Sem nota em {context.dominant_area} para esta escola.
               </p>
             )}
           </div>
 
-          <div className="space-y-2 text-[11px]">
+          {/* Section 2: universal ENEM data. Same for every school. */}
+          <p className="text-[9px] uppercase tracking-wider text-slate-500 font-semibold mt-3 mb-1.5">
+            No ENEM 2024
+          </p>
+          <div className="space-y-2 text-[11px] bg-white/[0.03] rounded-lg p-3 border border-white/5">
             <div className="flex items-center justify-between">
-              <span className="text-slate-400">Itens TRI no ENEM</span>
+              <span className="text-slate-400">Itens TRI cobrindo este tema</span>
               <span className="font-semibold">{context.n_items_total}</span>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-slate-400">Faixa de dificuldade</span>
               <span className="font-mono text-[10px]">
                 {context.tri_range.min.toFixed(0)} – {context.tri_range.max.toFixed(0)}
+                {' '}<span className="text-slate-500">(média {context.tri_range.mean.toFixed(0)})</span>
               </span>
             </div>
             <div className="flex items-center justify-between">
