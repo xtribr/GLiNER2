@@ -666,6 +666,19 @@ function NetworkTab({
   const graphNodes = graphData?.nodes;
   const graphEdges = graphData?.edges;
 
+  // Label of the currently selected node (concept). Used to fetch the
+  // school-specific context for that concept.
+  const selectedConceptLabel = useMemo(() => {
+    if (!selectedNode || !graphNodes) return null;
+    return graphNodes.find((n) => n.id === selectedNode)?.label ?? null;
+  }, [selectedNode, graphNodes]);
+
+  const { data: conceptContext, isFetching: isFetchingContext } = useQuery({
+    queryKey: ['glinerConceptContext', codigoInep, selectedConceptLabel],
+    queryFn: () => api.getGlinerConceptContext(codigoInep, selectedConceptLabel!),
+    enabled: !!selectedConceptLabel,
+  });
+
   // Filter and sort nodes by relevance (count), then limit
   const filteredNodes = useMemo(() => {
     if (!graphNodes) return [];
@@ -1600,6 +1613,16 @@ function NetworkTab({
                 <span>Scroll para zoom • Arraste para mover</span>
               )}
             </div>
+
+            {/* Concept context panel (when a node is selected) */}
+            {selectedConceptLabel && (
+              <ConceptContextPanel
+                conceptLabel={selectedConceptLabel}
+                context={conceptContext}
+                isLoading={isFetchingContext}
+                onClose={() => setSelectedNode(null)}
+              />
+            )}
           </div>
 
           {/* Legend & Audit Info */}
@@ -1701,6 +1724,115 @@ function NetworkTab({
 
         </div>
       ) : null}
+    </div>
+  );
+}
+
+// === Concept Context Panel =================================================
+// Floating panel anchored to the right side of the network canvas. Appears
+// when the coordinator clicks a node and shows whether the concept is a
+// gargalo, no nivel or dominado relative to the school's score.
+
+type ConceptContext = NonNullable<Awaited<ReturnType<typeof api.getGlinerConceptContext>>>;
+
+const STATUS_LABELS: Record<ConceptContext['status'], string> = {
+  gargalo: 'Provável gargalo',
+  no_nivel: 'No seu nível',
+  dominado: 'Já dominado',
+  indefinido: 'Sem nota da escola nesta área',
+};
+
+const STATUS_STYLES: Record<ConceptContext['status'], string> = {
+  gargalo: 'bg-red-500/20 text-red-200 border-red-500/40',
+  no_nivel: 'bg-amber-500/20 text-amber-200 border-amber-500/40',
+  dominado: 'bg-emerald-500/20 text-emerald-200 border-emerald-500/40',
+  indefinido: 'bg-slate-500/20 text-slate-300 border-slate-500/40',
+};
+
+function ConceptContextPanel({
+  conceptLabel,
+  context,
+  isLoading,
+  onClose,
+}: {
+  conceptLabel: string;
+  context: ConceptContext | undefined;
+  isLoading: boolean;
+  onClose: () => void;
+}) {
+  return (
+    <div className="absolute top-4 right-4 w-72 max-w-[calc(100%-2rem)] bg-slate-900/95 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl p-4 text-white">
+      <div className="flex items-start justify-between gap-2 mb-3">
+        <div className="min-w-0">
+          <p className="text-[10px] uppercase tracking-wide text-slate-400 font-medium">
+            Conceito selecionado
+          </p>
+          <p className="text-sm font-semibold leading-tight break-words">{conceptLabel}</p>
+        </div>
+        <button
+          onClick={onClose}
+          className="flex-shrink-0 w-6 h-6 rounded-md bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-center text-xs"
+          aria-label="Fechar"
+        >
+          ×
+        </button>
+      </div>
+
+      {isLoading && !context ? (
+        <p className="text-xs text-slate-400">Carregando contexto da escola…</p>
+      ) : !context ? (
+        <p className="text-xs text-slate-400">Este conceito não tem itens TRI no acervo atual.</p>
+      ) : (
+        <>
+          <div className={`text-xs px-3 py-2 rounded-lg border ${STATUS_STYLES[context.status]} mb-3`}>
+            <p className="font-semibold">{STATUS_LABELS[context.status]}</p>
+            {context.gap !== null && context.school_score !== null && (
+              <p className="text-[11px] mt-0.5 opacity-90">
+                Sua escola tira {context.school_score.toFixed(0)} em {context.dominant_area} • itens
+                deste conceito caem na média {context.tri_range.mean.toFixed(0)}
+                {' '}({context.gap >= 0 ? '+' : ''}
+                {context.gap.toFixed(0)} pts)
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2 text-[11px]">
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400">Itens TRI no ENEM</span>
+              <span className="font-semibold">{context.n_items_total}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400">Faixa de dificuldade</span>
+              <span className="font-mono text-[10px]">
+                {context.tri_range.min.toFixed(0)} – {context.tri_range.max.toFixed(0)}
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-slate-400">Área dominante</span>
+              <span className="font-semibold">{context.dominant_area}</span>
+            </div>
+          </div>
+
+          {context.areas.length > 1 && (
+            <div className="mt-3 pt-3 border-t border-white/10">
+              <p className="text-[10px] text-slate-400 uppercase tracking-wide mb-1.5">
+                Também aparece em
+              </p>
+              <div className="flex flex-wrap gap-1">
+                {context.areas.slice(1).map((a) => (
+                  <span
+                    key={a.area}
+                    className="px-2 py-0.5 bg-white/5 text-[10px] text-slate-300 rounded"
+                    title={`${a.n_items} itens, faixa ${a.tri_min.toFixed(0)}-${a.tri_max.toFixed(0)}`}
+                  >
+                    {a.area} ({a.n_items})
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

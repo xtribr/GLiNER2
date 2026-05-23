@@ -1227,6 +1227,25 @@ export const api = {
       };
     }>(`/api/gliner/school/${codigo_inep}/knowledge-graph${area ? `?area=${area}` : ''}`),
 
+  getGlinerConceptContext: (codigo_inep: string, concept_label: string) =>
+    fetchAPI<{
+      codigo_inep: string;
+      concept: string;
+      n_items_total: number;
+      dominant_area: 'CN' | 'CH' | 'LC' | 'MT';
+      tri_range: { min: number; max: number; mean: number };
+      school_score: number | null;
+      gap: number | null;
+      status: 'gargalo' | 'no_nivel' | 'dominado' | 'indefinido';
+      areas: {
+        area: string;
+        n_items: number;
+        tri_mean: number;
+        tri_min: number;
+        tri_max: number;
+      }[];
+    }>(`/api/gliner/school/${codigo_inep}/concept/${encodeURIComponent(concept_label)}`),
+
   getGlinerStudyFocus: (codigo_inep: string) =>
     fetchAPI<{
       codigo_inep: string;

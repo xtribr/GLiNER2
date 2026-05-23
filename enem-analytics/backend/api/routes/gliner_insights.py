@@ -1050,6 +1050,39 @@ async def get_study_focus(
     }
 
 
+@router.get("/school/{codigo_inep}/concept/{concept_label:path}")
+async def get_concept_context(
+    codigo_inep: str,
+    concept_label: str,
+    _: UserProfile = Depends(get_authorized_school_user),
+) -> Dict[str, Any]:
+    """Bottom-sheet data: where this concept lives in TRI and how the
+    school sits relative to it. Powers click-on-node in Mapa de Conceitos.
+    """
+    from ml.concept_school_context import get_concept_school_context
+    from data.year_resolver import find_latest_enem_results_file
+
+    df = get_gliner_data()
+
+    enem_path = find_latest_enem_results_file(DADOS_DIR)
+    school_scores: Dict[str, Optional[float]] = {"CN": None, "CH": None, "LC": None, "MT": None}
+    if enem_path is not None and enem_path.exists():
+        enem_df = pd.read_csv(enem_path, dtype={"codigo_inep": str})
+        school_rows = enem_df[enem_df["codigo_inep"] == codigo_inep]
+        if len(school_rows) > 0:
+            latest = school_rows.sort_values("ano").iloc[-1]
+            for area, col in (("CN", "nota_cn"), ("CH", "nota_ch"),
+                              ("LC", "nota_lc"), ("MT", "nota_mt")):
+                value = latest.get(col)
+                if value is not None and not pd.isna(value):
+                    school_scores[area] = float(value)
+
+    result = get_concept_school_context(codigo_inep, concept_label, df, school_scores)
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"Conceito '{concept_label}' não encontrado no acervo TRI.")
+    return result
+
+
 @router.get("/global/trending-concepts")
 async def get_trending_concepts(
     area: Optional[str] = Query(None, pattern="^(CN|CH|LC|MT)$"),
