@@ -15,6 +15,7 @@ from data.year_resolver import (
     get_latest_year_from_df,
     get_previous_year_from_df,
 )
+from ml.content_bridge import infer_content_gaps
 
 
 @dataclass
@@ -71,6 +72,17 @@ class RecommendationEngine:
         # Precompute statistics
         self.area_stats = self._compute_area_stats()
         self.improvement_patterns = self._analyze_improvement_patterns()
+
+        # Content (GLiNER-extracted) for content-gap inference. Optional.
+        self.tri_content_df = self._load_tri_content()
+
+    def _load_tri_content(self) -> Optional[pd.DataFrame]:
+        path = self.data_dir / "conteudos_tri_gliner.csv"
+        if not path.exists():
+            return None
+        df = pd.read_csv(path, quoting=1)
+        df["tri_score"] = pd.to_numeric(df["tri_score"], errors="coerce")
+        return df[df["tri_score"].between(300, 900)].reset_index(drop=True)
 
     def _load_school_data(self) -> pd.DataFrame:
         """Load ENEM school data"""
@@ -339,6 +351,19 @@ class RecommendationEngine:
             # Generate action items
             action_items = self._generate_action_items(area, gap_to_mean, priority)
 
+            # Content focus: top conceitos in the school's TRI band (None for redacao).
+            content_focus = (
+                infer_content_gaps(
+                    area=area,
+                    score=float(school_score),
+                    tri_content_df=self.tri_content_df,
+                    band_width=40,
+                    top_n=5,
+                )
+                if area in ('CN', 'CH', 'LC', 'MT')
+                else None
+            )
+
             recommendations.append({
                 'area': area,
                 'area_name': self.AREA_DESCRIPTIONS.get(area, area),
@@ -349,7 +374,8 @@ class RecommendationEngine:
                 'difficulty': difficulty,
                 'gap_to_mean': round(float(gap_to_mean), 1),
                 'evidence': evidence,
-                'action_items': action_items
+                'action_items': action_items,
+                'content_focus': content_focus,
             })
 
         # Sort by priority

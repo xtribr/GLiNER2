@@ -13,6 +13,7 @@ from data.year_resolver import (
     find_latest_skills_file,
     get_latest_year_from_df,
 )
+from ml.content_bridge import infer_content_gaps
 
 
 class DiagnosisEngine:
@@ -50,6 +51,27 @@ class DiagnosisEngine:
 
         # Compute area statistics
         self.area_stats = self._compute_area_stats()
+
+        # Content (GLiNER-extracted) for content-gap inference. Optional.
+        self.tri_content_df = self._load_tri_content()
+
+    def _load_tri_content(self) -> Optional[pd.DataFrame]:
+        path = self.data_dir / "conteudos_tri_gliner.csv"
+        if not path.exists():
+            return None
+        df = pd.read_csv(path, quoting=1)
+        df["tri_score"] = pd.to_numeric(df["tri_score"], errors="coerce")
+        return df[df["tri_score"].between(300, 900)].reset_index(drop=True)
+
+    def _content_gaps_for_area(self, area: str, score: float) -> Dict:
+        """Top concepts in the TRI band around the school's score in this area."""
+        return infer_content_gaps(
+            area=area,
+            score=score,
+            tri_content_df=self.tri_content_df,
+            band_width=40,
+            top_n=5,
+        )
 
     def _load_skill_averages(self) -> Dict[str, float]:
         """Load national skill averages from the latest available skills file."""
@@ -255,6 +277,13 @@ class DiagnosisEngine:
         # Get skill-level data if available
         skill_gaps = self._get_skill_gaps(area_analysis)
 
+        # Content-level gaps per area (named conceitos at the school's TRI band).
+        content_gaps = {
+            a['area']: self._content_gaps_for_area(a['area'], a['school_score'])
+            for a in area_analysis
+            if a['area'] in ('CN', 'CH', 'LC', 'MT')
+        }
+
         return {
             'codigo_inep': codigo_inep,
             'school_info': school_info,
@@ -269,6 +298,7 @@ class DiagnosisEngine:
             'priority_areas': [a for a in area_analysis if a['priority_score'] > 0],
             'strengths': [a for a in area_analysis if a['z_score'] > 0.5],
             'skill_gaps': skill_gaps,
+            'content_gaps': content_gaps,
             'peer_comparison': {
                 'comparison_group': school_info.get('porte', 'all'),
                 'peer_count': peer_stats.get('CN', {}).get('count', 0)
