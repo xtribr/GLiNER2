@@ -199,6 +199,7 @@ export interface DiagnosisResult {
     gap: number;
     priority_score: number;
   }[];
+  content_gaps?: Record<string, ContentFocus>;
   peer_comparison: {
     comparison_group: string;
     peer_count: number;
@@ -244,6 +245,12 @@ export interface RecommendationEvidence {
   insight?: string;
 }
 
+export interface ContentFocus {
+  band: [number, number];
+  sample_size: number;
+  top_concepts: { concept: string; count: number }[];
+}
+
 export interface Recommendation {
   area: string;
   area_name: string;
@@ -255,6 +262,7 @@ export interface Recommendation {
   gap_to_mean: number;
   evidence: RecommendationEvidence;
   action_items: string[];
+  content_focus?: ContentFocus | null;
 }
 
 export interface SuccessStory {

@@ -751,14 +751,25 @@ export default function SchoolDetailPage() {
               </div>
               {recommendations?.quick_wins ? (
                 <div className="space-y-3">
-                  {recommendations.quick_wins.slice(0, 2).map((qw, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs">
-                      <ChevronRight className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-600 leading-relaxed">
-                        <span className="font-bold text-gray-900">{qw.area_name}:</span> +{formatTriScore(qw.expected_gain)} pts
-                      </span>
-                    </div>
-                  ))}
+                  {recommendations.quick_wins.slice(0, 2).map((qw, idx) => {
+                    const topConcepts = qw.content_focus?.top_concepts
+                      ?.slice(0, 2)
+                      .map((c) => c.concept)
+                      .join(', ');
+                    return (
+                      <div key={idx} className="flex items-start gap-2 text-xs">
+                        <ChevronRight className="h-4 w-4 text-amber-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-600 leading-relaxed">
+                          <span className="font-bold text-gray-900">{qw.area_name}:</span> +{formatTriScore(qw.expected_gain)} pts
+                          {topConcepts && (
+                            <span className="block text-[10px] text-gray-500 mt-0.5">
+                              foco: {topConcepts}
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                    );
+                  })}
                   {recommendations.summary.quick_wins_count > 2 && (
                     <p className="text-xs text-amber-600 font-bold mt-3 pt-2 border-t border-gray-100">
                       +{recommendations.summary.quick_wins_count - 2} mais oportunidades
@@ -781,32 +792,53 @@ export default function SchoolDetailPage() {
                 Áreas Prioritárias
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {diagnosis.priority_areas.slice(0, 3).map((area) => (
-                  <div
-                    key={area.area}
-                    className={`p-4 rounded-xl border ${
-                      area.status === 'critical' ? 'bg-red-50 border-red-200' :
-                      area.status === 'needs_attention' ? 'bg-yellow-50 border-yellow-200' :
-                      'bg-gray-50 border-gray-200'
-                    }`}
-                  >
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <p className="text-sm font-semibold text-gray-900">{area.area_name}</p>
-                        <p className="text-xs text-gray-500 mt-1 font-medium">
-                          Score: {formatTriScore(area.school_score)} | Nacional: {formatTriScore(area.national_avg)}
-                        </p>
+                {diagnosis.priority_areas.slice(0, 3).map((area) => {
+                  const contentGap = diagnosis.content_gaps?.[area.area];
+                  return (
+                    <div
+                      key={area.area}
+                      className={`p-4 rounded-xl border ${
+                        area.status === 'critical' ? 'bg-red-50 border-red-200' :
+                        area.status === 'needs_attention' ? 'bg-yellow-50 border-yellow-200' :
+                        'bg-gray-50 border-gray-200'
+                      }`}
+                    >
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <p className="text-sm font-semibold text-gray-900">{area.area_name}</p>
+                          <p className="text-xs text-gray-500 mt-1 font-medium">
+                            Score: {formatTriScore(area.school_score)} | Nacional: {formatTriScore(area.national_avg)}
+                          </p>
+                        </div>
+                        <span className={`text-xs font-bold px-2.5 py-1 rounded-lg ${
+                          area.gap_to_national < -20 ? 'bg-red-100 text-red-700' :
+                          area.gap_to_national < 0 ? 'bg-yellow-100 text-yellow-700' :
+                          'bg-green-100 text-green-700'
+                        }`}>
+                          {area.gap_to_national >= 0 ? '+' : ''}{formatTriScore(area.gap_to_national)}
+                        </span>
                       </div>
-                      <span className={`text-xs font-bold px-2.5 py-1 rounded-lg ${
-                        area.gap_to_national < -20 ? 'bg-red-100 text-red-700' :
-                        area.gap_to_national < 0 ? 'bg-yellow-100 text-yellow-700' :
-                        'bg-green-100 text-green-700'
-                      }`}>
-                        {area.gap_to_national >= 0 ? '+' : ''}{formatTriScore(area.gap_to_national)}
-                      </span>
+                      {contentGap && contentGap.top_concepts.length > 0 && (
+                        <div className="mt-3 pt-3 border-t border-gray-200/60">
+                          <p className="text-[10px] uppercase tracking-wide font-semibold text-gray-500 mb-1.5">
+                            Foco provável de gargalo
+                          </p>
+                          <div className="flex flex-wrap gap-1">
+                            {contentGap.top_concepts.slice(0, 4).map((c) => (
+                              <span
+                                key={c.concept}
+                                className="px-2 py-0.5 bg-white/70 text-gray-700 text-[10px] rounded-md border border-gray-200 line-clamp-1"
+                                title={`${c.count} itens TRI nesta faixa`}
+                              >
+                                {c.concept}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
