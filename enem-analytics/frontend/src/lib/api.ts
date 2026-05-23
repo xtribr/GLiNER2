@@ -1222,26 +1222,44 @@ export const api = {
   getGlinerStudyFocus: (codigo_inep: string) =>
     fetchAPI<{
       codigo_inep: string;
-      focus_areas: {
-        area: string;
-        area_name: string;
-        color: string;
-        current_score: number;
-        target_range: [number, number];
-        level: string;
-        study_sequence: {
-          concept: string;
-          frequency: number;
-          avg_difficulty: number;
-          semantic_fields: string[];
-          lexical_fields: string[];
-          related_processes: string[];
-          priority: 'high' | 'medium' | 'low';
-          estimated_impact: number;
-        }[];
-        total_concepts: number;
-        estimated_total_impact: number;
-      }[];
+      focus_areas: (
+        | {
+            area: string;
+            area_name: string;
+            color: string;
+            current_score: number;
+            target_range: [number, number];
+            level: string;
+            study_sequence: {
+              concept: string;
+              frequency: number;
+              avg_difficulty: number;
+              semantic_fields: string[];
+              lexical_fields: string[];
+              related_processes: string[];
+              priority: 'high' | 'medium' | 'low';
+              estimated_impact: number;
+            }[];
+            total_concepts: number;
+            estimated_total_impact: number;
+          }
+        | {
+            area: 'REDACAO';
+            area_name: 'Redação';
+            color: string;
+            kind: 'redacao_competencias';
+            n_redacoes: number;
+            gargalo_principal: 'C1' | 'C2' | 'C3' | 'C4' | 'C5' | null;
+            competencias: {
+              competencia: 'C1' | 'C2' | 'C3' | 'C4' | 'C5';
+              descricao: string;
+              media_escola: number | null;
+              media_nacional: number;
+              gap: number | null;
+              status: 'verde' | 'amarelo' | 'vermelho' | 'indisponivel';
+            }[];
+          }
+      )[];
       total_estimated_improvement: number;
       study_plan: {
         phase_1: { name: string; description: string; concepts_count: number };

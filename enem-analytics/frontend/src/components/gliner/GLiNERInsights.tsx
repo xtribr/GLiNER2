@@ -424,89 +424,192 @@ function StudyFocusTab({
 
       {/* Focus Areas Detail */}
       <div className="space-y-4">
-        {studyFocus.focus_areas.map((area) => (
-          <div key={area.area} className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div
-                  className="h-10 w-10 rounded-xl flex items-center justify-center text-white font-bold"
-                  style={{ backgroundColor: area.color }}
-                >
-                  {area.area}
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">{area.area_name}</h3>
-                  <p className="text-xs text-gray-500">
-                    Nível: <span className="font-medium capitalize">{area.level}</span> | Score:{' '}
-                    {area.current_score}
-                  </p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-xs text-gray-500">Itens TRI</p>
-                <p className="text-xl font-bold text-green-600">
-                  {area.estimated_total_impact} itens
-                </p>
-              </div>
-            </div>
+        {studyFocus.focus_areas.map((area) =>
+          'kind' in area && area.kind === 'redacao_competencias' ? (
+            <RedacaoCompetenciasCard key={area.area} area={area} />
+          ) : (
+            <TriAreaCard key={area.area} area={area as TriArea} />
+          )
+        )}
+      </div>
+    </div>
+  );
+}
 
-            {/* Study Sequence */}
-            <div className="space-y-2">
-              <p className="text-xs font-medium text-gray-500 mb-2">
-                Sequência de Estudo ({area.study_sequence.length} conceitos)
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {area.study_sequence.slice(0, 9).map((concept, idx) => (
-                  <div
-                    key={concept.concept}
-                    className={`p-3 rounded-lg border ${
+type StudyFocusResp = Awaited<ReturnType<typeof api.getGlinerStudyFocus>>;
+type TriArea = Exclude<StudyFocusResp['focus_areas'][number], { kind: 'redacao_competencias' }>;
+type RedacaoArea = Extract<StudyFocusResp['focus_areas'][number], { kind: 'redacao_competencias' }>;
+
+function TriAreaCard({ area }: { area: TriArea }) {
+  return (
+    <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div
+            className="h-10 w-10 rounded-xl flex items-center justify-center text-white font-bold"
+            style={{ backgroundColor: area.color }}
+          >
+            {area.area}
+          </div>
+          <div>
+            <h3 className="font-semibold text-gray-900">{area.area_name}</h3>
+            <p className="text-xs text-gray-500">
+              Nível: <span className="font-medium capitalize">{area.level}</span> | Score:{' '}
+              {area.current_score}
+            </p>
+          </div>
+        </div>
+        <div className="text-right">
+          <p className="text-xs text-gray-500">Itens TRI</p>
+          <p className="text-xl font-bold text-green-600">{area.estimated_total_impact} itens</p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <p className="text-xs font-medium text-gray-500 mb-2">
+          Sequência de Estudo ({area.study_sequence.length} conceitos)
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          {area.study_sequence.slice(0, 9).map((concept, idx) => (
+            <div
+              key={concept.concept}
+              className={`p-3 rounded-lg border ${
+                concept.priority === 'high'
+                  ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200'
+                  : concept.priority === 'medium'
+                  ? 'bg-blue-50 border-blue-200'
+                  : 'bg-gray-50 border-gray-200'
+              }`}
+            >
+              <div className="flex items-start justify-between mb-1">
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white ${
                       concept.priority === 'high'
-                        ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200'
+                        ? 'bg-amber-500'
                         : concept.priority === 'medium'
-                        ? 'bg-blue-50 border-blue-200'
-                        : 'bg-gray-50 border-gray-200'
+                        ? 'bg-blue-500'
+                        : 'bg-gray-400'
                     }`}
                   >
-                    <div className="flex items-start justify-between mb-1">
-                      <div className="flex items-center gap-2">
-                        <span
-                          className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white ${
-                            concept.priority === 'high'
-                              ? 'bg-amber-500'
-                              : concept.priority === 'medium'
-                              ? 'bg-blue-500'
-                              : 'bg-gray-400'
-                          }`}
-                        >
-                          {idx + 1}
-                        </span>
-                        <span className="text-xs font-medium text-gray-900 line-clamp-1">
-                          {concept.concept}
-                        </span>
-                      </div>
-                      <span className="text-[10px] text-blue-600 font-medium">
-                        {concept.estimated_impact}x
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 text-[10px] text-gray-500 ml-7">
-                      <span>TRI: {concept.avg_difficulty}</span>
-                      {concept.semantic_fields?.[0] && (
-                        <span className="px-1.5 py-0.5 bg-purple-100 text-purple-600 rounded">
-                          {concept.semantic_fields[0]}
-                        </span>
-                      )}
-                      {concept.lexical_fields?.[0] && (
-                        <span className="px-1.5 py-0.5 bg-green-100 text-green-600 rounded">
-                          {concept.lexical_fields[0]}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                    {idx + 1}
+                  </span>
+                  <span className="text-xs font-medium text-gray-900 line-clamp-1">
+                    {concept.concept}
+                  </span>
+                </div>
+                <span className="text-[10px] text-blue-600 font-medium">
+                  {concept.estimated_impact}x
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-[10px] text-gray-500 ml-7">
+                <span>TRI: {concept.avg_difficulty}</span>
+                {concept.semantic_fields?.[0] && (
+                  <span className="px-1.5 py-0.5 bg-purple-100 text-purple-600 rounded">
+                    {concept.semantic_fields[0]}
+                  </span>
+                )}
+                {concept.lexical_fields?.[0] && (
+                  <span className="px-1.5 py-0.5 bg-green-100 text-green-600 rounded">
+                    {concept.lexical_fields[0]}
+                  </span>
+                )}
               </div>
             </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function statusClasses(status: RedacaoArea['competencias'][number]['status']) {
+  switch (status) {
+    case 'vermelho':
+      return { bar: 'bg-red-500', badge: 'bg-red-100 text-red-700', track: 'bg-red-50' };
+    case 'amarelo':
+      return { bar: 'bg-amber-500', badge: 'bg-amber-100 text-amber-700', track: 'bg-amber-50' };
+    case 'verde':
+      return { bar: 'bg-emerald-500', badge: 'bg-emerald-100 text-emerald-700', track: 'bg-emerald-50' };
+    default:
+      return { bar: 'bg-gray-400', badge: 'bg-gray-100 text-gray-600', track: 'bg-gray-50' };
+  }
+}
+
+function RedacaoCompetenciasCard({ area }: { area: RedacaoArea }) {
+  return (
+    <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div
+            className="h-10 w-10 rounded-xl flex items-center justify-center text-white font-bold"
+            style={{ backgroundColor: area.color }}
+          >
+            R
           </div>
-        ))}
+          <div>
+            <h3 className="font-semibold text-gray-900">{area.area_name}</h3>
+            <p className="text-xs text-gray-500">
+              {area.n_redacoes} redações corrigidas
+              {area.gargalo_principal && (
+                <>
+                  {' '}| Gargalo: <span className="font-medium">{area.gargalo_principal}</span>
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+        <div className="text-right">
+          <p className="text-xs text-gray-500">Competências</p>
+          <p className="text-xl font-bold text-amber-600">{area.competencias.length} de 5</p>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        {area.competencias.map((c) => {
+          const cls = statusClasses(c.status);
+          // Bar fill: school value as a percentage of 200 (max per competency).
+          const schoolPct = c.media_escola != null ? Math.min(100, (c.media_escola / 200) * 100) : 0;
+          const nationalPct = Math.min(100, (c.media_nacional / 200) * 100);
+          return (
+            <div key={c.competencia} className="p-3 rounded-lg border border-gray-100">
+              <div className="flex items-start justify-between mb-2 gap-3">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm font-bold text-gray-900">{c.competencia}</span>
+                  <span className="text-xs text-gray-600">{c.descricao}</span>
+                </div>
+                {c.gap != null && (
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium whitespace-nowrap ${cls.badge}`}>
+                    {c.gap >= 0 ? '+' : ''}
+                    {c.gap.toFixed(0)} pts
+                  </span>
+                )}
+              </div>
+              <div className={`relative h-3 rounded ${cls.track} overflow-hidden`}>
+                {/* National mean marker */}
+                <div
+                  className="absolute top-0 bottom-0 w-0.5 bg-gray-400"
+                  style={{ left: `${nationalPct}%` }}
+                  title={`Média nacional: ${c.media_nacional.toFixed(0)}`}
+                />
+                {/* School bar */}
+                <div className={`h-full ${cls.bar}`} style={{ width: `${schoolPct}%` }} />
+              </div>
+              <div className="flex justify-between text-[10px] text-gray-500 mt-1">
+                <span>
+                  Escola:{' '}
+                  <span className="font-medium text-gray-900">
+                    {c.media_escola != null ? c.media_escola.toFixed(0) : '—'}
+                  </span>
+                </span>
+                <span>
+                  Nacional:{' '}
+                  <span className="font-medium text-gray-700">{c.media_nacional.toFixed(0)}</span>
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
