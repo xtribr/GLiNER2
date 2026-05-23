@@ -139,6 +139,10 @@ class GlinerInsightsTest(unittest.TestCase):
 
             with patch.object(gliner_insights, "DADOS_DIR", data_dir), patch.object(
                 gliner_insights, "_gliner_df", None
+            ), patch.object(
+                gliner_insights, "_redacao_df", None
+            ), patch.object(
+                gliner_insights, "_redacao_national_means", None
             ), patch(
                 "ml.prediction_model.ENEMPredictionModel", lambda: fake_predict_model
             ), patch(
@@ -151,6 +155,66 @@ class GlinerInsightsTest(unittest.TestCase):
         areas = [a["area"] for a in result["focus_areas"]]
         self.assertEqual(sorted(areas), ["CH", "CN", "LC", "MT"])
         self.assertEqual(len(result["focus_areas"]), 4)
+
+    def test_study_focus_appends_redacao_when_competencias_csv_present(self):
+        """When competencias_redacao_por_escola_{year}.csv exists, the panel
+        includes a fifth focus area for redacao with C1-C5 gaps."""
+        tri_rows = []
+        for area in ("CN", "CH", "LC", "MT"):
+            row = dict(REQUIRED_ROW)
+            row.update({"area_code": area, "tri_score": 550.0,
+                        "conceitos_cientificos": f"conceito_{area}"})
+            tri_rows.append(row)
+
+        red_rows = [
+            # School x: C3 is uniquely worst (gap = -40 vs national 110)
+            {"codigo_inep": "x", "ano": 2024, "n_redacoes": 50,
+             "media_c1": 100, "media_c2": 120, "media_c3": 70,
+             "media_c4": 120, "media_c5": 140},
+            # Second school broadens the national distribution.
+            {"codigo_inep": "y", "ano": 2024, "n_redacoes": 50,
+             "media_c1": 140, "media_c2": 180, "media_c3": 150,
+             "media_c4": 160, "media_c5": 110},
+        ]
+
+        fake_predict_model = types.SimpleNamespace(
+            predict_all_scores=lambda inep: {
+                "scores": {"cn": 600, "ch": 600, "lc": 600, "mt": 600, "redacao": 600}
+            }
+        )
+        fake_diagnosis_engine = types.SimpleNamespace(
+            diagnose=lambda inep: {"priority_areas": []}
+        )
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            data_dir = Path(tmp_dir)
+            write_gliner_csv(data_dir, tri_rows)
+            pd.DataFrame(red_rows).to_csv(
+                data_dir / "competencias_redacao_por_escola_2024.csv", index=False
+            )
+
+            with patch.object(gliner_insights, "DADOS_DIR", data_dir), patch.object(
+                gliner_insights, "_gliner_df", None
+            ), patch.object(
+                gliner_insights, "_redacao_df", None
+            ), patch.object(
+                gliner_insights, "_redacao_national_means", None
+            ), patch(
+                "ml.prediction_model.ENEMPredictionModel", lambda: fake_predict_model
+            ), patch(
+                "ml.diagnosis_engine.DiagnosisEngine", lambda: fake_diagnosis_engine
+            ):
+                result = asyncio.run(
+                    gliner_insights.get_study_focus(codigo_inep="x", _=None)
+                )
+
+        areas = [a["area"] for a in result["focus_areas"]]
+        self.assertEqual(len(result["focus_areas"]), 5)
+        self.assertIn("REDACAO", areas)
+        red = next(a for a in result["focus_areas"] if a["area"] == "REDACAO")
+        self.assertEqual(len(red["competencias"]), 5)
+        # School x has worst gap on C3 (80 vs national 100 → -20)
+        self.assertEqual(red["gargalo_principal"], "C3")
 
 
 if __name__ == "__main__":

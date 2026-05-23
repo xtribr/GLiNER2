@@ -93,6 +93,29 @@ router = APIRouter()
 # Cache the GLiNER data
 _gliner_df: Optional[pd.DataFrame] = None
 
+# Cache for redacao competencies (C1-C5 per school).
+_redacao_df: Optional[pd.DataFrame] = None
+_redacao_national_means: Optional[Dict[str, float]] = None
+
+
+def _get_redacao_data(data_dir: Path = None) -> Optional[pd.DataFrame]:
+    """Load and cache the C1-C5 per-school CSV. Returns None when missing."""
+    global _redacao_df, _redacao_national_means
+    if _redacao_df is not None:
+        return _redacao_df
+
+    base = data_dir or DADOS_DIR
+    # Prefer the most recent year file if multiple exist.
+    candidates = sorted(base.glob("competencias_redacao_por_escola_*.csv"))
+    if not candidates:
+        return None
+
+    df = pd.read_csv(candidates[-1], dtype={"codigo_inep": str})
+    from ml.redacao_gaps import compute_national_means
+    _redacao_df = df
+    _redacao_national_means = compute_national_means(df)
+    return _redacao_df
+
 REQUIRED_GLINER_COLUMNS = {
     "area_code",
     "tri_score",
@@ -975,16 +998,35 @@ async def get_study_focus(
             'estimated_total_impact': total_items_covered,  # Total TRI items covered
         })
 
+    # Add a fifth focus area for redacao based on C1-C5 per-school data.
+    # Different shape from TRI areas: competencias instead of study_sequence.
+    redacao_df = _get_redacao_data()
+    if redacao_df is not None and _redacao_national_means is not None:
+        from ml.redacao_gaps import infer_redacao_gaps
+        red_gaps = infer_redacao_gaps(codigo_inep, redacao_df, _redacao_national_means)
+        if red_gaps is not None:
+            focus_areas.append({
+                'area': 'REDACAO',
+                'area_name': 'Redação',
+                'color': '#f59e0b',
+                'kind': 'redacao_competencias',
+                'n_redacoes': red_gaps['n_redacoes'],
+                'competencias': red_gaps['competencias'],
+                'gargalo_principal': red_gaps['gargalo_principal'],
+            })
+
     return {
         'codigo_inep': codigo_inep,
         'focus_areas': focus_areas,
-        'total_estimated_improvement': sum(fa['estimated_total_impact'] for fa in focus_areas),
+        'total_estimated_improvement': sum(
+            fa.get('estimated_total_impact', 0) for fa in focus_areas
+        ),
         'study_plan': {
             'phase_1': {
                 'name': 'Fundamentos',
                 'description': 'Dominar conceitos básicos de cada área',
                 'concepts_count': sum(
-                    len([s for s in fa['study_sequence'] if s['priority'] == 'high'])
+                    len([s for s in fa.get('study_sequence', []) if s['priority'] == 'high'])
                     for fa in focus_areas
                 )
             },
@@ -992,7 +1034,7 @@ async def get_study_focus(
                 'name': 'Consolidação',
                 'description': 'Aprofundar em conceitos intermediários',
                 'concepts_count': sum(
-                    len([s for s in fa['study_sequence'] if s['priority'] == 'medium'])
+                    len([s for s in fa.get('study_sequence', []) if s['priority'] == 'medium'])
                     for fa in focus_areas
                 )
             },
@@ -1000,7 +1042,7 @@ async def get_study_focus(
                 'name': 'Excelência',
                 'description': 'Dominar conceitos avançados',
                 'concepts_count': sum(
-                    len([s for s in fa['study_sequence'] if s['priority'] == 'low'])
+                    len([s for s in fa.get('study_sequence', []) if s['priority'] == 'low'])
                     for fa in focus_areas
                 )
             }
