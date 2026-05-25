@@ -156,6 +156,61 @@ class GlinerInsightsTest(unittest.TestCase):
         self.assertEqual(sorted(areas), ["CH", "CN", "LC", "MT"])
         self.assertEqual(len(result["focus_areas"]), 4)
 
+    def test_study_focus_ignores_redacao_in_priority_areas(self):
+        """Regression: diagnosis_engine returns 'redacao' alongside the four TRI
+        codes (CN/CH/LC/MT). The study-focus endpoint must drop it from the TRI
+        loop — redacao has no per-item TRI calibration and is rendered
+        separately. The previous code crashed with KeyError on AREA_NAMES."""
+        rows = []
+        for area in ("CN", "CH", "LC", "MT"):
+            row = dict(REQUIRED_ROW)
+            row.update({
+                "area_code": area,
+                "tri_score": 550.0,
+                "conceitos_cientificos": f"conceito_{area}",
+            })
+            rows.append(row)
+
+        fake_predict_model = types.SimpleNamespace(
+            predict_all_scores=lambda inep: {
+                "scores": {"cn": 500, "ch": 500, "lc": 500, "mt": 500, "redacao": 500}
+            }
+        )
+        # Diagnosis flags redacao as critical alongside two TRI areas.
+        fake_diagnosis_engine = types.SimpleNamespace(
+            diagnose=lambda inep: {
+                "priority_areas": [
+                    {"area": "redacao", "status": "critical"},
+                    {"area": "MT", "status": "critical"},
+                    {"area": "CN", "status": "needs_attention"},
+                ]
+            }
+        )
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            data_dir = Path(tmp_dir)
+            write_gliner_csv(data_dir, rows)
+
+            with patch.object(gliner_insights, "DADOS_DIR", data_dir), patch.object(
+                gliner_insights, "_gliner_df", None
+            ), patch.object(
+                gliner_insights, "_redacao_df", None
+            ), patch.object(
+                gliner_insights, "_redacao_national_means", None
+            ), patch(
+                "ml.prediction_model.ENEMPredictionModel", lambda: fake_predict_model
+            ), patch(
+                "ml.diagnosis_engine.DiagnosisEngine", lambda: fake_diagnosis_engine
+            ):
+                result = asyncio.run(
+                    gliner_insights.get_study_focus(codigo_inep="x", _=None)
+                )
+
+        areas = [a["area"] for a in result["focus_areas"]]
+        self.assertNotIn("redacao", areas)
+        self.assertIn("MT", areas)
+        self.assertIn("CN", areas)
+
     def test_study_focus_appends_redacao_when_competencias_csv_present(self):
         """When competencias_redacao_por_escola_{year}.csv exists, the panel
         includes a fifth focus area for redacao with C1-C5 gaps."""

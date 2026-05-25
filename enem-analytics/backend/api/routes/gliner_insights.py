@@ -895,11 +895,16 @@ async def get_study_focus(
 
     df = get_gliner_data()
 
-    # Identify weak areas
+    # Identify weak areas. Diagnosis returns 'redacao' alongside the four TRI
+    # codes; we drop it here because redacao has no per-item TRI calibration
+    # in the GLiNER content CSV and is rendered separately further down.
     weak_areas = []
     if diagnosis:
         for area in diagnosis.get('priority_areas', []):
-            if area.get('status') in ['critical', 'needs_attention']:
+            if (
+                area.get('status') in ['critical', 'needs_attention']
+                and area.get('area') in AREA_NAMES
+            ):
                 weak_areas.append(area.get('area'))
 
     if not weak_areas:
