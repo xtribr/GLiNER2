@@ -36,12 +36,12 @@ export function BrainXInsights({ codigoInep }: BrainXInsightsProps) {
     queryFn: () => api.getGlinerConceptAnalysis(codigoInep, 15),
   });
 
-  const { data: studyFocus, isLoading: studyLoading } = useQuery({
+  const { data: studyFocus, isLoading: studyLoading, error: studyError } = useQuery({
     queryKey: ['glinerStudyFocus', codigoInep],
     queryFn: () => api.getGlinerStudyFocus(codigoInep),
   });
 
-  const isLoading = conceptsLoading || studyLoading;
+  const isLoading = conceptsLoading;
 
   if (isLoading) {
     return (
@@ -139,8 +139,20 @@ export function BrainXInsights({ codigoInep }: BrainXInsightsProps) {
           />
         )}
 
-        {activeTab === 'study' && studyFocus && (
-          <StudyFocusTab studyFocus={studyFocus} />
+        {activeTab === 'study' && (
+          studyLoading ? (
+            <div className="flex items-center justify-center py-12 text-purple-400">
+              <div className="animate-spin rounded-full h-6 w-6 border-2 border-purple-300 border-t-purple-600 mr-3" />
+              <span className="text-sm">Carregando foco de estudo…</span>
+            </div>
+          ) : studyError || !studyFocus ? (
+            <div className="flex flex-col items-center justify-center py-12 text-gray-400 gap-2">
+              <span className="text-sm">Não foi possível carregar os dados de foco de estudo.</span>
+              <span className="text-xs text-gray-300">Tente recarregar a página.</span>
+            </div>
+          ) : (
+            <StudyFocusTab studyFocus={studyFocus} />
+          )
         )}
 
         {activeTab === 'network' && (
