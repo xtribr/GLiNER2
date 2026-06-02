@@ -26,12 +26,3 @@ python-dotenv
 
 # Email
 resend
-
-# GLiNER2 ML dependencies - CPU only
---extra-index-url https://download.pytorch.org/whl/cpu
-torch
-transformers>=4.35.0
-safetensors>=0.4.0
-
-# DuckDB for fast analytical queries
-duckdb>=1.0.0
