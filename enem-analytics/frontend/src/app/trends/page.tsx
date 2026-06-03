@@ -2,8 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
-import { getLatestEnemYear } from '@/lib/enem-cycle';
-import { formatRanking, formatTriScore } from '@/lib/utils';
+import { formatTriScore } from '@/lib/utils';
 import Link from 'next/link';
 import { TrendingUp, TrendingDown, Bell } from 'lucide-react';
 

@@ -14,7 +14,6 @@ import {
   Globe,
   ChevronDown,
   ChevronUp,
-  Info,
   Filter,
   Database,
   FileText,

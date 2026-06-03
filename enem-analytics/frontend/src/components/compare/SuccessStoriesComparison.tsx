@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { api, SuccessStory } from '@/lib/api';
-import { Star, TrendingUp, Users, Sparkles, Loader2, ArrowUpRight, School } from 'lucide-react';
+import { Star, TrendingUp, Users, Sparkles, Loader2, School } from 'lucide-react';
 import { formatTriScore } from '@/lib/utils';
 
 interface SuccessStoriesComparisonProps {

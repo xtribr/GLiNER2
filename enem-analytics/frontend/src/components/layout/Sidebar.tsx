@@ -19,9 +19,7 @@ import {
   Shield,
   Users,
   Sparkles,
-  Menu,
   Crown,
-  Zap,
   MessageCircle,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -61,10 +59,10 @@ const adminMenuItems = [
     badge: null 
   },
   { 
-    icon: Sparkles, 
-    label: 'Oráculo', 
+    icon: Sparkles,
+    label: 'Oráculo',
     href: '/oraculo',
-    badge: { text: 'Novo', color: 'bg-amber-500' }
+    badge: null
   },
 ];
 

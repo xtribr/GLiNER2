@@ -9,19 +9,13 @@ import { formatTriScore } from '@/lib/utils';
 import Link from 'next/link';
 import {
   ArrowLeft,
-  TrendingUp,
   Target,
   Zap,
   BookOpen,
   Download,
   FileText,
-  Brain,
-  Sparkles,
   ChevronRight,
-  Users,
-  Award,
   BarChart3,
-  GraduationCap,
 } from 'lucide-react';
 import {
   BarChart,
@@ -31,12 +25,9 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  PieChart,
-  Pie,
   Cell,
   RadialBarChart,
   RadialBar,
-  Legend,
 } from 'recharts';
 
 interface AreaChartDatum {

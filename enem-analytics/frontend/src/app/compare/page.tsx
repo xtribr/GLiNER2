@@ -9,22 +9,16 @@ import {
   TrendingUp,
   TrendingDown,
   Trophy,
-  Target,
   BarChart3,
   LineChart,
   Download,
   Loader2,
-  ChevronDown,
   Sparkles,
-  Award,
   GraduationCap,
   AlertCircle
 } from 'lucide-react';
 import {
-  SummaryCards,
   RadarComparison,
-  BarComparison,
-  EvolutionChart,
   CompetitiveAnalysis,
   RankingComparison,
   SimilarSchoolsSuggestions,
@@ -45,8 +39,6 @@ import {
   RadialBar,
   BarChart,
   Bar,
-  Legend,
-  Cell,
 } from 'recharts';
 
 // XTRI Color Palette
@@ -74,13 +66,6 @@ const COLORS = {
   }
 };
 
-const AREA_NAMES: Record<string, string> = {
-  MT: 'Matemática',
-  LC: 'Linguagens',
-  CH: 'Ciências Humanas',
-  CN: 'Ciências da Natureza',
-  redacao: 'Redação',
-};
 
 export default function ComparePage() {
   const [search1, setSearch1] = useState('');

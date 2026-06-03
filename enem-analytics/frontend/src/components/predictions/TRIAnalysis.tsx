@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { api, TRIAreaAnalysis, TRIAreaProjection } from '@/lib/api';
+import { api, TRIAreaAnalysis } from '@/lib/api';
 import { formatTriScore } from '@/lib/utils';
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -434,13 +433,11 @@ function AreaCard({
   area,
   isExpanded,
   onToggle,
-  codigoInep,
   onOpenProjection
 }: {
   area: TRIAreaAnalysis;
   isExpanded: boolean;
   onToggle: () => void;
-  codigoInep: string;
   onOpenProjection: (area: string) => void;
 }) {
   const changeColor = area.display_mode === 'range'
@@ -716,7 +713,6 @@ export default function TRIAnalysis({ codigoInep }: TRIAnalysisProps) {
                   area={area}
                   isExpanded={expandedArea === area.area}
                   onToggle={() => setExpandedArea(expandedArea === area.area ? null : area.area)}
-                  codigoInep={codigoInep}
                   onOpenProjection={setProjectionArea}
                 />
               ))}

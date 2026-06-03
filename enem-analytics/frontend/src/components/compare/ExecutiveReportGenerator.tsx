@@ -421,7 +421,7 @@ export function generateExecutiveReport(data: ReportData): GeneratedReportFile {
     'Identificar recursos necessarios para implementacao',
   ];
 
-  actions.forEach((action, idx) => {
+  actions.forEach((action) => {
     addBox(margin, y, 5, 5, XTRI_PURPLE);
     addText(action, margin + 8, y + 4, { size: 9, color: GRAY_700 });
     y += 8;

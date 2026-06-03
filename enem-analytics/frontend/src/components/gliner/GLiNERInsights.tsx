@@ -6,21 +6,15 @@ import { api } from '@/lib/api';
 import {
   Brain,
   Sparkles,
-  TrendingUp,
   BookOpen,
   Target,
   Zap,
-  ChevronRight,
-  Info,
   Network,
   Lightbulb,
-  ArrowUpRight,
   ZoomIn,
   ZoomOut,
   Maximize2,
-  Filter,
   Layers,
-  Check,
 } from 'lucide-react';
 
 interface BrainXInsightsProps {
@@ -156,7 +150,7 @@ export function BrainXInsights({ codigoInep }: BrainXInsightsProps) {
         )}
 
         {activeTab === 'network' && (
-          <NetworkTab codigoInep={codigoInep} conceptAnalysis={conceptAnalysis} />
+          <NetworkTab codigoInep={codigoInep} />
         )}
       </div>
     </div>
@@ -245,7 +239,7 @@ function ConceptsTab({
               Conceitos Prioritários
             </h4>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
-              {areaData.top_concepts.slice(0, 9).map((concept, idx) => (
+              {areaData.top_concepts.slice(0, 9).map((concept) => (
                 <div
                   key={concept.concept}
                   className={`p-3 rounded-lg border transition-all ${
@@ -353,7 +347,7 @@ function ConceptsTab({
             Conceitos Mais Relevantes (Todas as Áreas)
           </h3>
           <div className="flex flex-wrap gap-2">
-            {conceptAnalysis.priority_concepts.slice(0, 20).map((concept, idx) => (
+            {conceptAnalysis.priority_concepts.slice(0, 20).map((concept) => (
               <span
                 key={concept.concept}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all hover:scale-105"
@@ -631,12 +625,9 @@ function RedacaoCompetenciasCard({ area }: { area: RedacaoArea }) {
 // Features: Entity filters, Flow animations, Zoom/Pan, Thematic clusters
 function NetworkTab({
   codigoInep,
-  conceptAnalysis,
 }: {
   codigoInep: string;
-  conceptAnalysis: Awaited<ReturnType<typeof api.getGlinerConceptAnalysis>> | undefined;
 }) {
-  const [networkArea, setNetworkArea] = useState<string | undefined>(undefined);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'all' | 'clusters'>('clusters');
@@ -647,7 +638,6 @@ function NetworkTab({
     campo_semantico: true,
     campo_lexical: true,
   });
-  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
   // Node limit and visibility controls
   const [maxNodes, setMaxNodes] = useState(150);
@@ -669,8 +659,8 @@ function NetworkTab({
   const [animationEnabled, setAnimationEnabled] = useState(false);
 
   const { data: graphData, isLoading } = useQuery({
-    queryKey: ['glinerGraph', codigoInep, networkArea],
-    queryFn: () => api.getGlinerKnowledgeGraph(codigoInep, networkArea),
+    queryKey: ['glinerGraph', codigoInep],
+    queryFn: () => api.getGlinerKnowledgeGraph(codigoInep),
   });
 
   // Pull nested fields out so React Compiler can preserve memoization; the
@@ -780,14 +770,6 @@ function NetworkTab({
   const resetView = useCallback(() => {
     setTransform({ scale: 1, x: 0, y: 0 });
   }, []);
-
-  // Area colors for clustering
-  const areaColors: { [key: string]: { bg: string; border: string; label: string } } = {
-    CN: { bg: 'rgba(34, 197, 94, 0.1)', border: 'rgba(34, 197, 94, 0.3)', label: 'Ciências da Natureza' },
-    CH: { bg: 'rgba(234, 179, 8, 0.1)', border: 'rgba(234, 179, 8, 0.3)', label: 'Ciências Humanas' },
-    LC: { bg: 'rgba(239, 68, 68, 0.1)', border: 'rgba(239, 68, 68, 0.3)', label: 'Linguagens' },
-    MT: { bg: 'rgba(59, 130, 246, 0.1)', border: 'rgba(59, 130, 246, 0.3)', label: 'Matemática' },
-  };
 
   // Enhanced node positioning with cluster support
   type GraphNode = {
@@ -1033,9 +1015,6 @@ function NetworkTab({
 
   const connectedNodes = hoveredNode ? getConnectedNodes(hoveredNode) : new Set<string>();
   const selectedConnections = selectedNode ? getConnectedNodes(selectedNode) : new Set<string>();
-
-  // Count active filters
-  const activeFilterCount = Object.values(entityFilters).filter(Boolean).length;
 
   // Area colors with full config
   const areaConfig: Record<string, { color: string; name: string }> = {
@@ -1445,7 +1424,7 @@ function NetworkTab({
               </svg>
 
               {/* Nodes as Tags or Dots */}
-              {Object.entries(nodePositions).map(([id, { x, y, node, emphasis }]) => {
+              {Object.entries(nodePositions).map(([id, { x, y, node }]) => {
                 const isHovered = hoveredNode === id;
                 const isConnected = connectedNodes.has(id) || selectedConnections.has(id);
                 const isSelected = selectedNode === id;
