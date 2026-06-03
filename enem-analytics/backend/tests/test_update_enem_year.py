@@ -8,6 +8,7 @@ import pandas as pd
 
 from scripts.update_enem_year import (
     SCORE_COLUMNS,
+    aggregate_inep_raw_to_enem_results,
     build_validation_report,
     coalesce_mapped_columns,
     enrich_with_censo,
@@ -17,6 +18,7 @@ from scripts.update_enem_year import (
     parse_integer,
     prepare_staging_dataframe,
     main,
+    select_inep_raw_member,
     to_consolidated_schema,
     transform_to_enem_results,
     validate_batch_size,
@@ -26,6 +28,7 @@ from scripts.update_enem_year import (
 
 DATA_FILE = Path(__file__).resolve().parents[1] / "data" / "enem_2018_2024_completo.csv"
 CENSO_FILE = Path(__file__).resolve().parents[1] / "data" / "censo_escolas_2024.csv"
+MICRODADOS_2024_FILE = Path(__file__).resolve().parents[3] / "microdados-2024" / "MICRODADOS_ENEM_2024.csv"
 
 
 def real_2024_sample(rows: int = 5) -> pd.DataFrame:
@@ -62,6 +65,19 @@ def real_uf_for_codes(codigo_inep: pd.Series) -> pd.Series:
     censo = pd.read_csv(CENSO_FILE, dtype={"codigo_inep": str}, usecols=["codigo_inep", "uf"])
     uf_by_code = censo.drop_duplicates("codigo_inep").set_index("codigo_inep")["uf"]
     return codigo_inep.map(uf_by_code)
+
+
+def real_microdados_2024_lines(limit: int = 200) -> tuple[list[str], list[str]]:
+    """Retorna linhas reais do microdado bruto 2024 sem carregar o arquivo completo."""
+    if not MICRODADOS_2024_FILE.exists():
+        raise unittest.SkipTest("microdados-2024/MICRODADOS_ENEM_2024.csv ausente")
+
+    with MICRODADOS_2024_FILE.open("r", encoding="latin-1", newline="") as handle:
+        header = handle.readline().rstrip("\n").rstrip("\r").split(";")
+        rows = []
+        for _, line in zip(range(limit), handle):
+            rows.append(line.rstrip("\n").rstrip("\r"))
+    return header, rows
 
 
 class UpdateEnemYearTest(unittest.TestCase):
@@ -227,6 +243,49 @@ class UpdateEnemYearTest(unittest.TestCase):
         self.assertEqual(len(loaded.dataframe), 1)
         self.assertEqual(loaded.source_member, "primeiro.csv")
 
+    def test_inep_raw_zip_auto_selects_resultados_member(self):
+        header, rows = real_microdados_2024_lines(20)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            zip_path = Path(tmp_dir) / "microdados_enem_2024.zip"
+            with zipfile.ZipFile(zip_path, "w") as archive:
+                archive.writestr("DADOS/ITENS_PROVA_2024.csv", "CO_POSICAO;CO_PROVA\n")
+                archive.writestr("DADOS/RESULTADOS_2024.csv", ";".join(header) + "\n" + "\n".join(rows))
+
+            selected = select_inep_raw_member(zip_path, 2024, member=None)
+
+        self.assertEqual(selected, "DADOS/RESULTADOS_2024.csv")
+
+    def test_inep_raw_aggregates_real_microdata_rows(self):
+        header, rows = real_microdados_2024_lines(500)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv_path = Path(tmp_dir) / "MICRODADOS_ENEM_2024.csv"
+            csv_path.write_text(";".join(header) + "\n" + "\n".join(rows), encoding="latin-1")
+
+            transformed, detection, loaded = aggregate_inep_raw_to_enem_results(
+                csv_path,
+                2024,
+                min_participants=1,
+            )
+
+        self.assertEqual(detection.name, "inep_raw_microdados")
+        self.assertEqual(loaded.encoding, "latin-1")
+        self.assertEqual(loaded.separator, ";")
+        self.assertGreater(loaded.raw_rows, 0)
+        self.assertGreaterEqual(len(transformed), 1)
+        self.assertTrue(set(SCORE_COLUMNS).issubset(transformed.columns))
+        self.assertTrue((transformed["num_participantes"] >= 1).all())
+        self.assertEqual(transformed["ano"].unique().tolist(), [2024])
+
+    def test_inep_raw_blocks_schema_drift(self):
+        header, rows = real_microdados_2024_lines(5)
+        drifted_header = [column for column in header if column != "TP_STATUS_REDACAO"]
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv_path = Path(tmp_dir) / "MICRODADOS_ENEM_2024.csv"
+            csv_path.write_text(";".join(drifted_header) + "\n" + "\n".join(rows), encoding="latin-1")
+
+            with self.assertRaisesRegex(ValueError, "Schema bruto INEP diferente"):
+                aggregate_inep_raw_to_enem_results(csv_path, 2024, min_participants=1)
+
     def test_consolidated_output_keeps_current_model_columns(self):
         raw = real_2024_sample()
         transformed, _ = transform_to_enem_results(raw, 2025)
@@ -266,6 +325,23 @@ class UpdateEnemYearTest(unittest.TestCase):
 
             with self.assertRaises(SystemExit):
                 parse_args(["--year", "2025", "--input", str(csv_path), "--apply", "--dry-run"])
+
+    def test_cli_accepts_explicit_inep_raw_contract(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv_path = Path(tmp_dir) / "MICRODADOS_ENEM_2025.csv"
+            csv_path.write_text("", encoding="utf-8")
+
+            args = parse_args([
+                "--year",
+                "2025",
+                "--input",
+                str(csv_path),
+                "--input-format",
+                "inep_raw",
+                "--dry-run",
+            ])
+
+        self.assertEqual(args.input_format, "inep_raw")
 
     def test_validation_helpers_reject_invalid_year_and_batch(self):
         with self.assertRaisesRegex(ValueError, "2018 a 2030"):

@@ -9,15 +9,17 @@ Supabase sem `--apply`.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import json
 import os
 import sys
 import uuid
 import zipfile
+from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from io import BytesIO
+from io import BytesIO, TextIOWrapper
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
@@ -35,6 +37,54 @@ if str(BACKEND_ROOT) not in sys.path:
 
 SCORE_COLUMNS = ["media_cn", "media_ch", "media_lc", "media_mt", "media_redacao"]
 OBJECTIVE_SCORE_COLUMNS = ["media_cn", "media_ch", "media_lc", "media_mt"]
+INEP_RAW_SCORE_COLUMNS = ["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]
+INEP_RAW_COMP_COLUMNS = ["NU_NOTA_COMP1", "NU_NOTA_COMP2", "NU_NOTA_COMP3", "NU_NOTA_COMP4", "NU_NOTA_COMP5"]
+INEP_RAW_PRESENCE_COLUMNS = ["TP_PRESENCA_CN", "TP_PRESENCA_CH", "TP_PRESENCA_LC", "TP_PRESENCA_MT"]
+INEP_RAW_MIN_PARTICIPANTS = 10
+INEP_RAW_EXPECTED_COLUMNS = [
+    "NU_SEQUENCIAL",
+    "NU_ANO",
+    "CO_ESCOLA",
+    "CO_MUNICIPIO_ESC",
+    "NO_MUNICIPIO_ESC",
+    "CO_UF_ESC",
+    "SG_UF_ESC",
+    "TP_DEPENDENCIA_ADM_ESC",
+    "TP_LOCALIZACAO_ESC",
+    "TP_SIT_FUNC_ESC",
+    "CO_MUNICIPIO_PROVA",
+    "NO_MUNICIPIO_PROVA",
+    "CO_UF_PROVA",
+    "SG_UF_PROVA",
+    "TP_PRESENCA_CN",
+    "TP_PRESENCA_CH",
+    "TP_PRESENCA_LC",
+    "TP_PRESENCA_MT",
+    "CO_PROVA_CN",
+    "CO_PROVA_CH",
+    "CO_PROVA_LC",
+    "CO_PROVA_MT",
+    "NU_NOTA_CN",
+    "NU_NOTA_CH",
+    "NU_NOTA_LC",
+    "NU_NOTA_MT",
+    "TX_RESPOSTAS_CN",
+    "TX_RESPOSTAS_CH",
+    "TX_RESPOSTAS_LC",
+    "TX_RESPOSTAS_MT",
+    "TP_LINGUA",
+    "TX_GABARITO_CN",
+    "TX_GABARITO_CH",
+    "TX_GABARITO_LC",
+    "TX_GABARITO_MT",
+    "TP_STATUS_REDACAO",
+    "NU_NOTA_COMP1",
+    "NU_NOTA_COMP2",
+    "NU_NOTA_COMP3",
+    "NU_NOTA_COMP4",
+    "NU_NOTA_COMP5",
+    "NU_NOTA_REDACAO",
+]
 INTEGER_COLUMNS = [
     "num_participantes",
     "ranking_nacional",
@@ -164,6 +214,29 @@ class LoadedCSV:
 
 
 @dataclass(frozen=True)
+class LoadedInepRaw:
+    """Metadados e auditoria da leitura streaming do microdado bruto INEP."""
+
+    encoding: str
+    separator: str
+    source_member: Optional[str]
+    sha256: str
+    byte_size: int
+    raw_rows: int
+    header_columns: int
+    column_count_errors: int
+    year_counts: dict[str, int]
+    school_nonempty_rows: int
+    school_empty_rows: int
+    all_four_present_rows: int
+    all_four_present_school_rows: int
+    distinct_schools_any: int
+    distinct_schools_aggregated: int
+    threshold_counts: dict[int, int]
+    bad_numeric_counts: dict[str, int]
+
+
+@dataclass(frozen=True)
 class FormatDetection:
     """Formato detectado e mapa de colunas para o schema interno."""
 
@@ -219,6 +292,376 @@ def _extract_csv_bytes(path: Path, member: Optional[str] = None) -> tuple[bytes,
                 + ", ".join(csv_members)
             )
         return archive.read(selected), selected
+
+
+def select_inep_raw_member(path: Path, year: int, member: Optional[str] = None) -> Optional[str]:
+    """Seleciona o CSV bruto de resultados dentro do ZIP oficial do INEP."""
+    if path.suffix.lower() != ".zip":
+        return None
+
+    with zipfile.ZipFile(path) as archive:
+        csv_members = [name for name in archive.namelist() if name.lower().endswith(".csv")]
+        if member:
+            if member not in csv_members:
+                raise ValueError(f"CSV '{member}' nao encontrado no ZIP. Opcoes: {csv_members}")
+            return member
+
+        preferred_names = [
+            f"DADOS/RESULTADOS_{year}.csv",
+            f"RESULTADOS_{year}.csv",
+            f"DADOS/MICRODADOS_ENEM_{year}.csv",
+            f"MICRODADOS_ENEM_{year}.csv",
+        ]
+        by_normalized_name = {name.replace("\\", "/").lower(): name for name in csv_members}
+        for preferred in preferred_names:
+            selected = by_normalized_name.get(preferred.lower())
+            if selected:
+                return selected
+
+        result_members = [
+            name for name in csv_members
+            if f"resultados_{year}".lower() in Path(name.replace("\\", "/")).name.lower()
+            or f"microdados_enem_{year}".lower() in Path(name.replace("\\", "/")).name.lower()
+        ]
+        if len(result_members) == 1:
+            return result_members[0]
+
+        raise ValueError(
+            "ZIP bruto INEP nao tem membro de resultados inequivoco. "
+            "Informe --zip-member com um destes CSVs: " + ", ".join(csv_members)
+        )
+
+
+def _read_input_sample(path: Path, member: Optional[str], size: int = 1024 * 1024) -> bytes:
+    """Le uma amostra binaria pequena sem carregar o microdado inteiro."""
+    if path.suffix.lower() != ".zip":
+        with path.open("rb") as handle:
+            return handle.read(size)
+
+    if member is None:
+        raise ValueError("member e obrigatorio para ler amostra de ZIP.")
+    with zipfile.ZipFile(path) as archive:
+        with archive.open(member) as handle:
+            return handle.read(size)
+
+
+def _detect_text_encoding(sample: bytes) -> str:
+    """Detecta encoding sem confundir amostras ASCII do INEP com UTF-8."""
+    if sample.startswith(b"\xef\xbb\xbf"):
+        return "utf-8-sig"
+    # O bruto oficial 2024 e latin-1. Se a amostra ainda e ASCII pura, manter
+    # latin-1 evita falha tardia quando aparecer municipio com acento.
+    if not any(byte >= 128 for byte in sample):
+        return "latin-1"
+    try:
+        sample.decode("utf-8")
+        return "utf-8"
+    except UnicodeDecodeError:
+        pass
+    return "latin-1"
+
+
+def _input_byte_size(path: Path, member: Optional[str]) -> int:
+    """Retorna tamanho do CSV de entrada ou do membro selecionado."""
+    if path.suffix.lower() != ".zip":
+        return path.stat().st_size
+    if member is None:
+        raise ValueError("member e obrigatorio para obter tamanho de ZIP.")
+    with zipfile.ZipFile(path) as archive:
+        return int(archive.getinfo(member).file_size)
+
+
+def _open_text_input(path: Path, member: Optional[str], encoding: str):
+    """Abre CSV direto ou membro ZIP como texto. O chamador fecha o contexto."""
+    if path.suffix.lower() != ".zip":
+        return path.open("r", encoding=encoding, newline="")
+
+    if member is None:
+        raise ValueError("member e obrigatorio para abrir ZIP.")
+    archive = zipfile.ZipFile(path)
+    binary = archive.open(member)
+    text = TextIOWrapper(binary, encoding=encoding, newline="")
+
+    class _ZipTextContext:
+        def __enter__(self):
+            return text
+
+        def __exit__(self, exc_type, exc, tb):
+            text.close()
+            binary.close()
+            archive.close()
+            return False
+
+    return _ZipTextContext()
+
+
+def is_probably_inep_raw_input(path: Path, year: int, member: Optional[str] = None) -> bool:
+    """Inspeciona apenas o header para evitar carregar microdados brutos via pandas."""
+    try:
+        selected_member = select_inep_raw_member(path, year, member=member) if path.suffix.lower() == ".zip" else None
+        sample = _read_input_sample(path, selected_member, size=64 * 1024)
+        encoding = _detect_text_encoding(sample)
+        header = sample.decode(encoding, errors="replace").splitlines()[0].split(";")
+    except Exception:
+        return False
+    return header[:4] == INEP_RAW_EXPECTED_COLUMNS[:4]
+
+
+def _validate_inep_raw_header(header: list[str]) -> None:
+    """Bloqueia drift de schema do CSV bruto antes de qualquer agregacao."""
+    if header == INEP_RAW_EXPECTED_COLUMNS:
+        return
+
+    expected = set(INEP_RAW_EXPECTED_COLUMNS)
+    found = set(header)
+    missing = sorted(expected - found)
+    extra = sorted(found - expected)
+    details = []
+    if missing:
+        details.append("faltantes=" + ", ".join(missing))
+    if extra:
+        details.append("extras=" + ", ".join(extra))
+    if len(header) != len(INEP_RAW_EXPECTED_COLUMNS):
+        details.append(f"colunas={len(header)} esperado={len(INEP_RAW_EXPECTED_COLUMNS)}")
+    raise ValueError("Schema bruto INEP diferente do contrato 2024: " + "; ".join(details))
+
+
+def _normalize_code_value(value: Any) -> Optional[str]:
+    text = str(value).strip()
+    if not text or text.lower() in {"nan", "none"}:
+        return None
+    digits = "".join(ch for ch in text.replace(".0", "") if ch.isdigit())
+    return digits.zfill(8) if digits else None
+
+
+def _counter_mode(counter: Counter[str]) -> Optional[str]:
+    if not counter:
+        return None
+    return counter.most_common(1)[0][0]
+
+
+def _map_localizacao(value: Optional[str]) -> Optional[str]:
+    if value == "1":
+        return "Urbana"
+    if value == "2":
+        return "Rural"
+    return value
+
+
+def _dependencia_from_code(value: Optional[str]) -> Optional[str]:
+    if value is None:
+        return None
+    return normalize_dependencia(pd.Series([value])).iloc[0]
+
+
+def aggregate_inep_raw_to_enem_results(
+    path: Path,
+    year: int,
+    *,
+    member: Optional[str] = None,
+    min_participants: int = INEP_RAW_MIN_PARTICIPANTS,
+) -> tuple[pd.DataFrame, FormatDetection, LoadedInepRaw]:
+    """Agrega o CSV bruto do INEP por escola usando leitura streaming."""
+    validate_year(year)
+    if min_participants < 1:
+        raise ValueError("min_participants deve ser maior ou igual a 1.")
+    if not path.exists():
+        raise FileNotFoundError(f"Arquivo de entrada nao encontrado: {path}")
+
+    selected_member = select_inep_raw_member(path, year, member=member) if path.suffix.lower() == ".zip" else None
+    sample = _read_input_sample(path, selected_member)
+    encoding = _detect_text_encoding(sample)
+    byte_size = _input_byte_size(path, selected_member)
+
+    year_counts: Counter[str] = Counter()
+    presence_by_school: Counter[str] = Counter()
+    any_by_school: Counter[str] = Counter()
+    bad_numeric_counts: Counter[str] = Counter()
+    aggregations: dict[str, dict[str, Any]] = {}
+
+    raw_rows = 0
+    column_count_errors = 0
+    school_nonempty_rows = 0
+    school_empty_rows = 0
+    all_four_present_rows = 0
+    all_four_present_school_rows = 0
+
+    with _open_text_input(path, selected_member, encoding) as handle:
+        reader = csv.reader(handle, delimiter=";")
+        try:
+            header = next(reader)
+        except StopIteration as exc:
+            raise ValueError("CSV bruto INEP vazio.") from exc
+
+        _validate_inep_raw_header(header)
+        indexes = {column: position for position, column in enumerate(header)}
+
+        for raw_rows, row in enumerate(reader, start=1):
+            if len(row) != len(header):
+                column_count_errors += 1
+                continue
+
+            row_year = row[indexes["NU_ANO"]]
+            year_counts[row_year] += 1
+
+            raw_school = row[indexes["CO_ESCOLA"]].strip()
+            codigo_inep = _normalize_code_value(raw_school)
+            if codigo_inep:
+                school_nonempty_rows += 1
+                any_by_school[codigo_inep] += 1
+            else:
+                school_empty_rows += 1
+
+            all_present = all(row[indexes[column]] == "1" for column in INEP_RAW_PRESENCE_COLUMNS)
+            if all_present:
+                all_four_present_rows += 1
+            if not codigo_inep or not all_present:
+                continue
+
+            all_four_present_school_rows += 1
+            presence_by_school[codigo_inep] += 1
+
+            numeric_values: dict[str, float] = {}
+            numeric_failed = False
+            for column in INEP_RAW_SCORE_COLUMNS:
+                value = row[indexes[column]].strip()
+                if not value:
+                    numeric_failed = True
+                    bad_numeric_counts[column] += 1
+                    break
+                try:
+                    numeric_values[column] = float(value)
+                except ValueError:
+                    numeric_failed = True
+                    bad_numeric_counts[column] += 1
+                    break
+            if numeric_failed:
+                continue
+
+            acc = aggregations.setdefault(
+                codigo_inep,
+                {
+                    "count": 0,
+                    "score_sums": defaultdict(float),
+                    "competency_sum": 0.0,
+                    "competency_count": 0,
+                    "uf": Counter(),
+                    "municipio": Counter(),
+                    "dependencia": Counter(),
+                    "localizacao": Counter(),
+                },
+            )
+            acc["count"] += 1
+            for source, target in [
+                ("NU_NOTA_CN", "media_cn"),
+                ("NU_NOTA_CH", "media_ch"),
+                ("NU_NOTA_LC", "media_lc"),
+                ("NU_NOTA_MT", "media_mt"),
+                ("NU_NOTA_REDACAO", "media_redacao"),
+            ]:
+                acc["score_sums"][target] += numeric_values[source]
+
+            comp_values = []
+            for column in INEP_RAW_COMP_COLUMNS:
+                value = row[indexes[column]].strip()
+                if not value:
+                    comp_values = []
+                    break
+                try:
+                    comp_values.append(float(value))
+                except ValueError:
+                    bad_numeric_counts[column] += 1
+                    comp_values = []
+                    break
+            if len(comp_values) == len(INEP_RAW_COMP_COLUMNS):
+                acc["competency_sum"] += sum(comp_values) / len(INEP_RAW_COMP_COLUMNS)
+                acc["competency_count"] += 1
+
+            for source, key in [
+                ("SG_UF_ESC", "uf"),
+                ("NO_MUNICIPIO_ESC", "municipio"),
+                ("TP_DEPENDENCIA_ADM_ESC", "dependencia"),
+                ("TP_LOCALIZACAO_ESC", "localizacao"),
+            ]:
+                value = row[indexes[source]].strip()
+                if value:
+                    acc[key][value] += 1
+
+    rows: list[dict[str, Any]] = []
+    for codigo_inep, acc in aggregations.items():
+        count = int(acc["count"])
+        if count < min_participants:
+            continue
+
+        media_cn = round(acc["score_sums"]["media_cn"] / count, 2)
+        media_ch = round(acc["score_sums"]["media_ch"] / count, 2)
+        media_lc = round(acc["score_sums"]["media_lc"] / count, 2)
+        media_mt = round(acc["score_sums"]["media_mt"] / count, 2)
+        media_redacao = round(acc["score_sums"]["media_redacao"] / count, 2)
+        media_geral = round((media_cn + media_ch + media_lc + media_mt + media_redacao) / 5.0, 2)
+        comp_count = int(acc["competency_count"])
+        competencia_redacao_media = (
+            round(acc["competency_sum"] / comp_count, 2) if comp_count else pd.NA
+        )
+
+        rows.append({
+            "codigo_inep": codigo_inep,
+            "ano": int(year),
+            "nome_escola": pd.NA,
+            "uf": _counter_mode(acc["uf"]),
+            "municipio": _counter_mode(acc["municipio"]),
+            "dependencia": _dependencia_from_code(_counter_mode(acc["dependencia"])),
+            "media_cn": media_cn,
+            "media_ch": media_ch,
+            "media_lc": media_lc,
+            "media_mt": media_mt,
+            "media_redacao": media_redacao,
+            "media_geral": media_geral,
+            "num_participantes": count,
+            "taxa_participacao": pd.NA,
+            "ranking_nacional": pd.NA,
+            "ranking_uf": pd.NA,
+            "ranking_municipio": pd.NA,
+            "localizacao": _map_localizacao(_counter_mode(acc["localizacao"])),
+            "porte": pd.NA,
+            "porte_label": pd.NA,
+            "nota_tri_media": media_geral,
+            "desempenho_habilidades": pd.NA,
+            "competencia_redacao_media": competencia_redacao_media,
+            "inep_nome": pd.NA,
+            "anos_participacao": pd.NA,
+        })
+
+    transformed = pd.DataFrame(rows)
+    for column in DB_COLUMNS:
+        if column not in transformed.columns:
+            transformed[column] = pd.NA
+    transformed = recalculate_rankings(transformed[DB_COLUMNS]) if len(transformed) else transformed[DB_COLUMNS]
+
+    loaded = LoadedInepRaw(
+        encoding=encoding,
+        separator=";",
+        source_member=selected_member,
+        sha256=sha256_file(path),
+        byte_size=byte_size,
+        raw_rows=int(raw_rows),
+        header_columns=len(INEP_RAW_EXPECTED_COLUMNS),
+        column_count_errors=int(column_count_errors),
+        year_counts=dict(year_counts),
+        school_nonempty_rows=int(school_nonempty_rows),
+        school_empty_rows=int(school_empty_rows),
+        all_four_present_rows=int(all_four_present_rows),
+        all_four_present_school_rows=int(all_four_present_school_rows),
+        distinct_schools_any=len(any_by_school),
+        distinct_schools_aggregated=len(transformed),
+        threshold_counts={
+            threshold: sum(1 for count in presence_by_school.values() if count >= threshold)
+            for threshold in [1, 10, 15, 20, 30]
+        },
+        bad_numeric_counts=dict(bad_numeric_counts),
+    )
+    detection = FormatDetection("inep_raw_microdados", {}, len(INEP_RAW_EXPECTED_COLUMNS))
+    return transformed, detection, loaded
 
 
 def load_csv_flexible(path: Path, member: Optional[str] = None) -> LoadedCSV:
@@ -436,11 +879,11 @@ def enrich_with_censo(df: pd.DataFrame, censo_file: Path) -> pd.DataFrame:
         if target not in result.columns:
             result[target] = mapped
         else:
-            result[target] = result[target].fillna(mapped)
+            result[target] = result[target].where(result[target].notna(), mapped)
 
     if "nome_escola" in result.columns and "nome_escola_censo" in censo.columns:
         mapped_name = result["codigo_inep"].map(censo["nome_escola_censo"])
-        result["nome_escola"] = result["nome_escola"].fillna(mapped_name)
+        result["nome_escola"] = result["nome_escola"].where(result["nome_escola"].notna(), mapped_name)
 
     return recalculate_rankings(result)
 
@@ -476,11 +919,13 @@ def recalculate_rankings(df: pd.DataFrame) -> pd.DataFrame:
 def build_validation_report(
     *,
     input_path: Path,
-    loaded: LoadedCSV,
+    loaded: LoadedCSV | LoadedInepRaw,
     detection: FormatDetection,
     raw_df: pd.DataFrame,
     transformed: pd.DataFrame,
     year: int,
+    raw_row_count: Optional[int] = None,
+    raw_audit: Optional[dict[str, Any]] = None,
 ) -> dict[str, Any]:
     """Monta relatorio objetivo com N, fonte e bloqueios."""
     errors: list[str] = []
@@ -517,9 +962,19 @@ def build_validation_report(
         elif incomplete_count:
             warnings.append(f"{incomplete_count} escolas sem as 5 notas completas; revisar antes do apply.")
 
-    mapped_ratio = len(transformed) / max(len(raw_df), 1)
-    if mapped_ratio < 0.95:
-        errors.append(f"Apenas {mapped_ratio:.1%} das linhas brutas sobreviveram a transformacao.")
+    source_row_count = int(raw_row_count if raw_row_count is not None else len(raw_df))
+    if detection.name == "inep_raw_microdados":
+        if raw_audit and raw_audit.get("column_count_errors"):
+            errors.append(f"Linhas com numero de colunas invalido: {raw_audit['column_count_errors']}")
+        if raw_audit:
+            year_counts = raw_audit.get("year_counts", {})
+            unexpected_years = sorted(str(item) for item in year_counts if str(item) != str(year))
+            if unexpected_years:
+                errors.append(f"CSV bruto contem anos diferentes de {year}: {', '.join(unexpected_years)}")
+    else:
+        mapped_ratio = len(transformed) / max(source_row_count, 1)
+        if mapped_ratio < 0.95:
+            errors.append(f"Apenas {mapped_ratio:.1%} das linhas brutas sobreviveram a transformacao.")
 
     for column in SCORE_COLUMNS + ["media_geral"]:
         if column in transformed.columns:
@@ -583,7 +1038,7 @@ def build_validation_report(
         "detected_format": detection.name,
         "mapped_columns": detection.mapped_columns,
         "counts": {
-            "raw_rows": int(len(raw_df)),
+            "raw_rows": source_row_count,
             "transformed_rows": int(len(transformed)),
             "unique_schools": int(transformed["codigo_inep"].nunique()),
             "ranked_rows": int(transformed["ranking_nacional"].notna().sum()),
@@ -842,7 +1297,19 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Atualizacao segura de dados ENEM por ano.")
     parser.add_argument("--year", type=int, required=True, help="Ano dos dados, ex.: 2025")
     parser.add_argument("--input", type=Path, required=True, help="CSV/ZIP real de entrada")
+    parser.add_argument(
+        "--input-format",
+        choices=["auto", "xtri_consolidado", "inep_oficial", "inep_raw"],
+        default="auto",
+        help="Formato da entrada. Use inep_raw para o CSV/ZIP bruto oficial do INEP.",
+    )
     parser.add_argument("--zip-member", help="Nome do CSV dentro do ZIP quando houver multiplos")
+    parser.add_argument(
+        "--min-participants",
+        type=int,
+        default=INEP_RAW_MIN_PARTICIPANTS,
+        help="Corte minimo de participantes presentes nas 4 areas para microdados brutos INEP.",
+    )
     parser.add_argument("--env", choices=["local", "production"], default="local")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true", help="Valida sem gravar. E o padrao.")
@@ -858,6 +1325,8 @@ def parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     try:
         validate_year(args.year)
         validate_batch_size(args.batch_size)
+        if args.min_participants < 1:
+            raise ValueError("--min-participants deve ser maior ou igual a 1.")
     except ValueError as exc:
         parser.error(str(exc))
     return args
@@ -868,18 +1337,61 @@ def main(argv: Optional[list[str]] = None) -> int:
     dry_run = not args.apply
     load_environment(args.env, args.confirm_production, require_supabase=args.apply)
 
-    loaded = load_csv_flexible(args.input, member=args.zip_member)
-    transformed, detection = transform_to_enem_results(loaded.dataframe, args.year)
+    use_inep_raw = (
+        args.input_format == "inep_raw"
+        or (
+            args.input_format == "auto"
+            and is_probably_inep_raw_input(args.input, args.year, member=args.zip_member)
+        )
+    )
+    if use_inep_raw:
+        transformed, detection, loaded = aggregate_inep_raw_to_enem_results(
+            args.input,
+            args.year,
+            member=args.zip_member,
+            min_participants=args.min_participants,
+        )
+        raw_df = pd.DataFrame()
+        raw_row_count = loaded.raw_rows
+        raw_audit = {
+            "header_columns": loaded.header_columns,
+            "column_count_errors": loaded.column_count_errors,
+            "year_counts": loaded.year_counts,
+            "school_nonempty_rows": loaded.school_nonempty_rows,
+            "school_empty_rows": loaded.school_empty_rows,
+            "all_four_present_rows": loaded.all_four_present_rows,
+            "all_four_present_school_rows": loaded.all_four_present_school_rows,
+            "distinct_schools_any": loaded.distinct_schools_any,
+            "distinct_schools_aggregated": loaded.distinct_schools_aggregated,
+            "threshold_counts": loaded.threshold_counts,
+            "bad_numeric_counts": loaded.bad_numeric_counts,
+            "min_participants": args.min_participants,
+        }
+    else:
+        loaded = load_csv_flexible(args.input, member=args.zip_member)
+        transformed, detection = transform_to_enem_results(loaded.dataframe, args.year)
+        if args.input_format != "auto" and detection.name != args.input_format:
+            raise ValueError(
+                f"Entrada detectada como {detection.name}, mas --input-format={args.input_format}."
+            )
+        raw_df = loaded.dataframe
+        raw_row_count = None
+        raw_audit = None
+
     if args.censo_file:
         transformed = enrich_with_censo(transformed, args.censo_file)
     report = build_validation_report(
         input_path=args.input,
         loaded=loaded,
         detection=detection,
-        raw_df=loaded.dataframe,
+        raw_df=raw_df,
         transformed=transformed,
         year=args.year,
+        raw_row_count=raw_row_count,
+        raw_audit=raw_audit,
     )
+    if raw_audit:
+        report["inep_raw_audit"] = raw_audit
     if args.censo_file:
         report["censo_source"] = {
             "path": str(args.censo_file),
