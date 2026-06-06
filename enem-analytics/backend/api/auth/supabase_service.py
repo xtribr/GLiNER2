@@ -171,19 +171,17 @@ def authenticate_with_token(access_token: str) -> Optional[UserProfile]:
         )
         return profile
 
-    # No profile found — build one from user metadata
-    metadata = user_data.get("user_metadata", {})
-    return UserProfile(
-        id=user_data["id"],
-        email=resolve_user_email(
-            user_data["id"],
-            token_email=user_data.get("email", ""),
-            access_token=access_token,
-        ),
-        codigo_inep=metadata.get("codigo_inep", ""),
-        nome_escola=metadata.get("nome_escola", ""),
-        is_admin=metadata.get("is_admin", False),
+    # Sem linha em profiles → acesso NEGADO (fail-closed).
+    # Segurança: is_admin e codigo_inep devem vir SEMPRE da tabela profiles
+    # (server-controlled). O user_metadata é gravável pelo próprio usuário
+    # (supabase.auth.updateUser), então derivar is_admin/codigo_inep dele
+    # permitiria escalonamento de privilégio / acesso a outra escola. Todo
+    # usuário legítimo tem perfil (criado no cadastro self-service e no
+    # create_admin), então a ausência de perfil é tratada como não-autenticado.
+    logger.warning(
+        f"Token válido sem perfil em profiles — acesso negado: {user_data['id']}"
     )
+    return None
 
 
 def create_profile(
