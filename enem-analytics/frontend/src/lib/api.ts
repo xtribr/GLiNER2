@@ -772,10 +772,12 @@ export const api = {
       body: JSON.stringify(data),
     }),
 
-  getTopSchools: (limit = 10, ano?: number, uf?: string) => {
+  getTopSchools: (limit = 10, ano?: number, uf?: string, tipo_escola?: string, porte?: number) => {
     const params = new URLSearchParams({ limit: limit.toString() });
     if (ano) params.set('ano', ano.toString());
     if (uf) params.set('uf', uf);
+    if (tipo_escola) params.set('tipo_escola', tipo_escola);
+    if (porte) params.set('porte', porte.toString());
     return fetchPublicAPI<{ ano: number; total: number; schools: TopSchool[] }>(
       `/api/schools/top?${params}`
     );
