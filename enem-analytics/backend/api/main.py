@@ -103,3 +103,14 @@ async def get_stats_endpoint(
     """Get general statistics"""
     from data.supabase_store import get_stats
     return get_stats()
+
+
+@app.get("/api/stats/by-uf")
+async def get_stats_by_uf_endpoint(
+    _: Optional[UserProfile] = Depends(get_optional_user),
+):
+    """Média TRI agregada por UF (mapa da vitrine pública). Sem token."""
+    from data.supabase_store import get_client
+    client = get_client()
+    result = client.rpc("get_uf_stats", {}).execute()
+    return {"by_uf": result.data or []}

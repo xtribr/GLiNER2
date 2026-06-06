@@ -20,6 +20,7 @@ import { api, type TopSchool } from '@/lib/api';
 import { getYearRangeLabel } from '@/lib/enem-cycle';
 import { formatTriScore } from '@/lib/utils';
 import { StatCardSkeleton, TableRowSkeleton } from '@/components/ui/skeleton';
+import BrazilChoropleth from '@/components/vitrine/BrazilChoropleth';
 
 const UF_OPTIONS = [
   '', 'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS',
@@ -278,11 +279,12 @@ export default function Vitrine() {
           </div>
         </Link>
 
-        {/* MAP placeholder */}
+        {/* MAP — choropleth por UF */}
         <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-          <h2 className="text-lg font-black tracking-tight text-slate-950">Mapa de Escolas</h2>
-          <div className="mt-4 flex h-56 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-[repeating-linear-gradient(45deg,#f8fafc,#f8fafc_10px,#f1f5f9_10px,#f1f5f9_20px)] text-sm text-slate-400">
-            <MapPin className="mr-2 h-5 w-5" /> Mapa de calor do Brasil — média TRI por escola (em breve)
+          <h2 className="text-lg font-black tracking-tight text-slate-950">Mapa de calor — média TRI por estado</h2>
+          <p className="mt-1 text-sm text-slate-500">Média geral do ENEM por UF, no último ano disponível.</p>
+          <div className="mt-4">
+            <BrazilChoropleth />
           </div>
         </section>
       </main>
