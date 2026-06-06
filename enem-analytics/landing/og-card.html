@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#fbfbfd; --ink:#1d1d1f; --muted:#5b7184;
+    --grad:linear-gradient(135deg,#28B7ED,#FF4B2E);
+  }
+  html,body{width:1200px;height:630px}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Helvetica,Arial,sans-serif;
+    background:
+      radial-gradient(900px 520px at 88% -8%, rgba(40,183,237,.16), transparent 60%),
+      radial-gradient(760px 520px at 108% 116%, rgba(255,75,46,.14), transparent 58%),
+      var(--bg);
+    color:var(--ink);
+    padding:74px 80px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  /* faixa de marca no rodapé */
+  body::after{content:"";position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--grad)}
+
+  .brand{display:flex;align-items:center;gap:16px}
+  .brand img{width:62px;height:62px;object-fit:contain;display:block}
+  .brand b{font-size:30px;font-weight:600;letter-spacing:-.01em}
+  .badge{
+    margin-left:8px;font-size:18px;font-weight:600;color:#0e7fb0;
+    background:rgba(40,183,237,.12);border:1px solid rgba(40,183,237,.28);
+    padding:8px 16px;border-radius:980px;letter-spacing:.01em
+  }
+
+  h1{font-size:96px;line-height:.98;font-weight:700;letter-spacing:-.035em;max-width:1040px}
+  .accent{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin-top:26px;font-size:34px;font-weight:500;color:var(--muted);letter-spacing:-.01em}
+
+  .foot{display:flex;align-items:center;justify-content:space-between}
+  .stats{display:flex;gap:54px}
+  .stat .n{font-size:46px;font-weight:700;letter-spacing:-.02em;line-height:1}
+  .stat .l{font-size:18px;font-weight:600;color:var(--muted);margin-top:7px;text-transform:uppercase;letter-spacing:.08em}
+  .url{font-size:30px;font-weight:600;color:var(--ink)}
+  .url span{color:#0e7fb0}
+</style>
+</head>
+<body>
+  <header class="brand">
+    <img src="/logo-x.png" alt="XTRI" />
+    <b>Ranking ENEM</b>
+    <span class="badge">Microdados oficiais do INEP</span>
+  </header>
+
+  <div>
+    <h1>O ranking do ENEM,<br /><span class="accent">escola por escola.</span></h1>
+    <p class="sub">Nota TRI, evolução histórica e diagnóstico por área.</p>
+  </div>
+
+  <footer class="foot">
+    <div class="stats">
+      <div class="stat"><div class="n">27.328</div><div class="l">escolas</div></div>
+      <div class="stat"><div class="n">2018–24</div><div class="l">série histórica</div></div>
+      <div class="stat"><div class="n">27</div><div class="l">estados</div></div>
+    </div>
+    <div class="url">rankingenem<span>.com</span></div>
+  </footer>
+</body>
+</html>
