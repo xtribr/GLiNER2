@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { api } from '@/lib/api';
+import { useAuth } from '@/lib/auth-context';
+import PublicSchoolSummary from '@/components/schools/PublicSchoolSummary';
 import { getNextEnemYear } from '@/lib/enem-cycle';
 import { formatTriScore } from '@/lib/utils';
 import Link from 'next/link';
@@ -41,6 +43,28 @@ function getInitialTab(): string {
 }
 
 export default function SchoolDetailPage() {
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const params = useParams();
+  const codigoInep = params.codigo_inep as string;
+
+  // Deslogado: resumo público (posição/TRI/áreas + CTA de cadastro).
+  // Logado (própria escola ou admin): dashboard profundo completo.
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-50">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-sky-400 border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <PublicSchoolSummary codigoInep={codigoInep} />;
+  }
+
+  return <SchoolDeepDashboard />;
+}
+
+function SchoolDeepDashboard() {
   const params = useParams();
   const codigo_inep = params.codigo_inep as string;
 

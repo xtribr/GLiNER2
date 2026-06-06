@@ -6,17 +6,18 @@ import Link from 'next/link';
 import {
   ArrowRight,
   BarChart3,
-  Bell,
   Calendar,
   ChevronRight,
   Database,
+  GitCompare,
   GraduationCap,
   MapPin,
   Medal,
   School,
-  Search,
+  Sparkles,
   ShieldCheck,
   Target,
+  TrendingUp,
 } from 'lucide-react';
 import { api, type TopSchool } from '@/lib/api';
 import { getLatestEnemYear, getNextEnemYear, getYearRangeLabel } from '@/lib/enem-cycle';
@@ -87,22 +88,18 @@ export default function Dashboard() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <Link
-              href="/schools"
-              className="hidden items-center gap-2 rounded-xl border border-[#28B7ED]/20 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-[#28B7ED]/50 hover:text-[#28B7ED] sm:flex"
+              href="/login"
+              className="hidden items-center rounded-xl border border-[#28B7ED]/20 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-[#28B7ED]/50 hover:text-[#28B7ED] sm:flex"
             >
-              <Search className="h-4 w-4" />
-              Buscar escola
+              Entrar
             </Link>
-            <button
-              className="relative rounded-xl border border-[#28B7ED]/20 bg-white p-2.5 text-slate-600 shadow-sm transition hover:border-[#FF4B2E]/40 hover:text-[#FF4B2E]"
-              aria-label="Ver notificações"
+            <Link
+              href="/cadastro"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105"
             >
-              <Bell className="h-5 w-5" />
-              <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#FF4B2E]" />
-            </button>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#28B7ED] to-[#FF4B2E] text-sm font-black text-white shadow-lg shadow-[#28B7ED]/20">
-              AD
-            </div>
+              Acessar análise gratuita
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </header>
@@ -132,17 +129,17 @@ export default function Dashboard() {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href="/schools"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-[#E9F8FE]"
+                  href="/cadastro"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105"
                 >
-                  Ver ranking completo
+                  Acessar análise gratuita
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/compare"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#FF4B2E]/50 bg-[#FF4B2E]/20 px-5 py-3 text-sm font-bold text-white backdrop-blur transition hover:bg-[#FF4B2E]/30"
+                  href="/schools"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/95 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-white"
                 >
-                  Comparar escolas
+                  Ver ranking completo
                   <ChevronRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -164,6 +161,30 @@ export default function Dashboard() {
                 value="TRI"
                 detail="Notas não são proporcionais aos acertos; padrão de resposta importa."
               />
+            </div>
+          </div>
+        </section>
+
+        <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="flex items-start gap-3 rounded-2xl border border-[#28B7ED]/20 bg-white p-5 shadow-sm">
+            <div className="rounded-xl bg-[#E9F8FE] p-2.5 text-[#139ED3]"><TrendingUp className="h-5 w-5" /></div>
+            <div>
+              <p className="text-sm font-black text-slate-950">Evolução histórica</p>
+              <p className="mt-1 text-xs leading-5 text-slate-500">Acompanhe a TRI da sua escola ao longo de toda a série do ENEM.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 rounded-2xl border border-[#FF4B2E]/20 bg-white p-5 shadow-sm">
+            <div className="rounded-xl bg-[#FFF0EB] p-2.5 text-[#FF4B2E]"><GitCompare className="h-5 w-5" /></div>
+            <div>
+              <p className="text-sm font-black text-slate-950">Comparativo por área</p>
+              <p className="mt-1 text-xs leading-5 text-slate-500">CN, CH, LC, MT e Redação contra a média nacional.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 rounded-2xl border border-[#28B7ED]/20 bg-white p-5 shadow-sm">
+            <div className="rounded-xl bg-[#E9F8FE] p-2.5 text-[#139ED3]"><Sparkles className="h-5 w-5" /></div>
+            <div>
+              <p className="text-sm font-black text-slate-950">Oráculo IA</p>
+              <p className="mt-1 text-xs leading-5 text-slate-500">Diagnóstico e recomendações da IA dedicada da XTRI.</p>
             </div>
           </div>
         </section>
