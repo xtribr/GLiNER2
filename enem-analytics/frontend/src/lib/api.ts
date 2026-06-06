@@ -753,6 +753,25 @@ async function downloadAuthenticatedFile(endpoint: string): Promise<void> {
 export const api = {
   getStats: () => fetchPublicAPI<Stats>('/api/stats'),
 
+  // Cadastro self-service (modelo A). Público — cria a conta no backend; o
+  // auto-login (supabase.auth.signInWithPassword) acontece no componente.
+  signup: (data: {
+    codigo_inep: string;
+    nome_escola: string;
+    nome_contato: string;
+    cargo: string;
+    email: string;
+    telefone: string;
+    senha: string;
+    aceite_termos: boolean;
+    website?: string;
+  }) =>
+    fetchPublicAPI<{ success: boolean; codigo_inep: string; email: string }>('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }),
+
   getTopSchools: (limit = 10, ano?: number, uf?: string) => {
     const params = new URLSearchParams({ limit: limit.toString() });
     if (ano) params.set('ano', ano.toString());
