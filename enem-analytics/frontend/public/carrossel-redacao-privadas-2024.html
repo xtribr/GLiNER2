@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carrossel · Redação ENEM 2024 · escolas privadas · X-TRI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#15161a; --ink-soft:#43474f; --muted:#86888f;
+    --bg:#fbfbfd; --bg-2:#f1f2f5; --line:rgba(0,0,0,0.085);
+    --blue:#2563eb; --blue-2:#3b82f6; --orange:#f9731a; --orange-ink:#e25c08;
+    --navy:#0f1830;
+    --f:"Hanken Grotesk",system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{font-family:var(--f);background:#d9dade;display:flex;flex-direction:column;align-items:center;gap:30px;padding:30px 0;}
+  .slide{
+    width:1080px;height:1350px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 70% at 100% 0%, rgba(249,115,26,0.07), transparent 46%),
+      radial-gradient(120% 70% at 0% 100%, rgba(37,99,235,0.07), transparent 46%),
+      linear-gradient(180deg,#ffffff, var(--bg) 55%, var(--bg-2));
+    color:var(--ink);padding:72px 78px;display:flex;flex-direction:column;
+  }
+  /* shared */
+  .brandrow{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:13px;}
+  .brand img{width:42px;height:42px;object-fit:contain;}
+  .brand .wm{font-weight:800;font-size:27px;letter-spacing:-.01em;}
+  .brand .wm i{font-style:normal;color:var(--orange-ink);}
+  .tag{font-weight:700;font-size:23px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .eyebrow{font-weight:800;font-size:27px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);}
+  .site{font-weight:800;font-size:30px;letter-spacing:-.01em;}
+  .site i{font-style:normal;color:var(--orange-ink);}
+  .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:30px;}
+  .dots{display:flex;gap:9px;}
+  .dots span{width:12px;height:12px;border-radius:99px;background:rgba(0,0,0,.14);}
+  .dots span.on{background:var(--orange);width:32px;}
+  .rule{height:3px;background:var(--ink);border-radius:9px;margin:26px 0 6px;opacity:.9;}
+
+  /* COVER */
+  .cv-title{font-weight:800;font-size:76px;line-height:.98;letter-spacing:-.035em;margin:26px 0 6px;}
+  .cv-title i{font-style:normal;color:var(--orange-ink);}
+  .cv-hero{margin:auto 0;display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
+  .cv-hero .big{font-weight:900;font-size:188px;line-height:.82;letter-spacing:-.04em;
+    background:linear-gradient(150deg,#fdba74,var(--orange) 70%,var(--orange-ink));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .cv-hero .big small{font-size:.26em;color:var(--muted);-webkit-text-fill-color:var(--muted);font-weight:700;}
+  .cv-hero .cap{font-weight:600;font-size:32px;line-height:1.3;color:var(--ink-soft);max-width:24ch;}
+  .cv-hero .cap b{color:var(--ink);font-weight:800;}
+  .cv-sub{font-weight:600;font-size:33px;line-height:1.3;color:var(--ink);}
+
+  /* RANKING (top 10) — mesmas linhas do post anterior */
+  .rhead{display:flex;align-items:flex-start;justify-content:space-between;}
+  .rname{font-weight:800;font-size:76px;line-height:.92;letter-spacing:-.035em;margin:12px 0 4px;}
+  .rname i{font-style:normal;color:var(--orange-ink);}
+  .rmeta{font-weight:600;font-size:26px;color:var(--muted);max-width:30ch;line-height:1.25;}
+  .rows{display:flex;flex-direction:column;justify-content:center;flex:1;}
+  .r{display:grid;grid-template-columns:auto auto 1fr auto;align-items:center;gap:22px;padding:11px 0;border-bottom:1px solid var(--line);}
+  .r:last-child{border-bottom:none;}
+  .pos{font-weight:800;font-size:30px;color:#b9bdc7;width:42px;text-align:center;}
+  .uf{width:78px;height:78px;border-radius:21px;display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:32px;color:#fff;background:linear-gradient(150deg,var(--blue-2),var(--blue));box-shadow:0 12px 22px -15px rgba(37,99,235,.85);}
+  .esc{min-width:0;font-weight:700;font-size:35px;line-height:1.08;letter-spacing:-.015em;}
+  .sc{font-weight:800;font-size:52px;letter-spacing:-.03em;white-space:nowrap;}
+  .r.king .uf{background:linear-gradient(150deg,#ffb066,var(--orange));box-shadow:0 12px 22px -14px rgba(249,115,26,.9);}
+  .r.king .sc{color:var(--orange-ink);}
+  .r.king .pos{color:var(--orange-ink);}
+  /* ranking compacto (slide do Top 10) */
+  .rank .rname{font-size:58px;}
+  .rank .r{padding:7px 0;gap:18px;}
+  .rank .uf{width:68px;height:68px;border-radius:18px;font-size:28px;}
+  .rank .esc{font-size:32px;}
+  .rank .sc{font-size:46px;}
+  .rank .pos{font-size:27px;width:36px;}
+
+  /* COMPETÊNCIA */
+  .ceyebrow{font-weight:800;font-size:29px;letter-spacing:.15em;text-transform:uppercase;color:var(--orange-ink);}
+  .cname{font-weight:800;font-size:92px;line-height:.9;letter-spacing:-.035em;margin:12px 0 20px;}
+  .cavalia{font-weight:500;font-size:34px;line-height:1.34;color:var(--ink-soft);max-width:23ch;}
+  .champ{margin-top:auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:26px;
+    background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px 32px;box-shadow:0 24px 50px -34px rgba(0,0,0,.45);}
+  .champ .uf{box-shadow:0 12px 22px -14px rgba(249,115,26,.9);background:linear-gradient(150deg,#ffb066,var(--orange));}
+  .champ .lbl{font-weight:700;font-size:23px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;}
+  .champ .esc{font-weight:800;font-size:40px;letter-spacing:-.02em;line-height:1.04;}
+  .champ .sc{font-weight:800;font-size:60px;color:var(--orange-ink);letter-spacing:-.03em;white-space:nowrap;}
+  .champ .sc small{font-size:.4em;color:var(--muted);font-weight:700;}
+  .cbar{height:14px;border-radius:99px;background:rgba(0,0,0,.07);overflow:hidden;margin:18px 0 0;}
+  .cbar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--orange),var(--orange-ink));}
+  .ctip{margin-top:20px;background:rgba(249,115,26,.08);border:1px solid rgba(249,115,26,.22);border-radius:20px;
+    padding:26px 30px;font-weight:600;font-size:31px;line-height:1.32;color:var(--ink);}
+  .ctip b{color:var(--orange-ink);font-weight:800;}
+
+  /* FECHO */
+  .fbig{font-weight:800;font-size:70px;line-height:1;letter-spacing:-.03em;margin:20px 0 8px;}
+  .fbig i{font-style:normal;color:var(--orange-ink);}
+  .cta{margin-top:auto;background:var(--navy);color:#fff;border-radius:32px;padding:46px 50px;box-shadow:0 30px 60px -30px rgba(15,24,48,.7);}
+  .cta .k{font-weight:800;font-size:46px;line-height:1.1;letter-spacing:-.02em;}
+  .cta .k i{font-style:normal;color:var(--orange);}
+  .cta .s{font-weight:500;font-size:28px;color:#aeb6c8;margin-top:14px;line-height:1.35;}
+  .cta .go{display:inline-flex;align-items:center;gap:12px;margin-top:26px;font-weight:800;font-size:33px;}
+  .cta .go i{font-style:normal;color:var(--orange);}
+</style>
+</head>
+<body><div id="app"></div>
+<script>
+const fmt = n => n.toFixed(1).replace('.', ',');
+const TOTAL = 8;
+const LOGO = `<div class="brand"><img src="/logo-xtri.png" alt="" onerror="this.style.display='none'"><span class="wm">X-TRI<i> Escolas</i></span></div>`;
+const dots = i => `<div class="dots">${Array.from({length:TOTAL},(_,k)=>`<span class="${k===i?'on':''}"></span>`).join('')}</div>`;
+const SITE = `<span class="site">ranking<i>enem</i>.com</span>`;
+
+const TOP10 = [
+  {uf:'MG',escola:'Colégio Apogeu',nota:931.9},
+  {uf:'CE',escola:'Farias Brito',nota:928.0},
+  {uf:'PA',escola:'Sistema de Ensino Equipe',nota:927.3},
+  {uf:'CE',escola:'Farias Brito (Pré-Vestibular)',nota:927.1},
+  {uf:'PI',escola:'CEV — Unidade Jockey',nota:926.1},
+  {uf:'CE',escola:'Diocesano Padre Anchieta',nota:923.6},
+  {uf:'MG',escola:'Colégio Fibonacci',nota:921.9},
+  {uf:'RN',escola:'Colégio Ciências Aplicadas',nota:921.0},
+  {uf:'GO',escola:'Colégio Galileu',nota:920.0},
+  {uf:'MG',escola:'Inst. Presbiteriano Gammon',nota:917.2},
+];
+const COMPS = [
+  {n:'C1',nome:'Norma culta',avalia:'Domínio do português formal: gramática, ortografia e concordância.',uf:'CE',escola:'Farias Brito (Pré-Vest.)',nota:166.4,dica:'Releia cortando vírgulas erradas e marcas de oralidade.'},
+  {n:'C2',nome:'Tema e estrutura',avalia:'Entender a proposta e manter a estrutura dissertativo-argumentativa, com repertório.',uf:'GO',escola:'Colégio Galileu',nota:197.3,dica:'Não fuja do tema. Use repertório legitimado: dados, história, citação.'},
+  {n:'C3',nome:'Argumentação',avalia:'Selecionar e organizar argumentos em defesa do seu ponto de vista.',uf:'MG',escola:'Colégio Apogeu',nota:184.3,dica:'Tese clara na introdução + argumentos com causa e consequência.'},
+  {n:'C4',nome:'Coesão',avalia:'Conectar ideias e parágrafos com os mecanismos da língua.',uf:'CE',escola:'Farias Brito',nota:194.7,dica:'Varie os conectivos e amarre cada parágrafo no anterior.'},
+  {n:'C5',nome:'Proposta de intervenção',avalia:'Propor uma solução para o problema, respeitando os direitos humanos.',uf:'MG',escola:'Colégio Apogeu',nota:197.1,dica:'5 elementos: agente + ação + meio + finalidade + detalhamento.'},
+];
+
+/* 1 — CAPA */
+const cover = `
+<section class="slide">
+  <div class="brandrow">${LOGO}<span class="tag">Redação · ENEM 2024</span></div>
+  <h1 class="cv-title">A redação quase <i>perfeita</i> existe</h1>
+  <div class="cv-hero">
+    <div class="big">931,9<small>/1000</small></div>
+    <div class="cap"><b>Colégio Apogeu (MG)</b> — a maior média de redação do país entre as escolas privadas no ENEM 2024.</div>
+  </div>
+  <p class="cv-sub">Quem domina cada uma das 5 competências?</p>
+  <div class="foot"><span class="site">arraste →</span>${SITE}</div>
+</section>`;
+
+/* 2 — TOP 10 */
+const rankRows = TOP10.map((d,i)=>`
+  <div class="r ${i===0?'king':''}">
+    <div class="pos">${i+1}</div>
+    <div class="uf">${d.uf}</div>
+    <div class="esc">${d.escola}</div>
+    <div class="sc">${fmt(d.nota)}</div>
+  </div>`).join('');
+const rankSlide = `
+<section class="slide rank">
+  <div class="brandrow">${LOGO}<span class="tag">Escolas privadas</span></div>
+  <div class="rhead">
+    <div><div class="eyebrow">Redação · ENEM 2024</div><div class="rname">Top 10 do <i>país</i></div></div>
+  </div>
+  <div class="rmeta" style="margin-top:6px">Maiores médias de redação (0–1000). Mínimo de 30 redações por escola.</div>
+  <div class="rule"></div>
+  <div class="rows">${rankRows}</div>
+  <div class="foot">${dots(1)}${SITE}</div>
+</section>`;
+
+/* 3–7 — COMPETÊNCIAS */
+const compSlide = (c,idx)=>`
+<section class="slide">
+  <div class="brandrow">${LOGO}<span class="tag">Redação · ENEM 2024</span></div>
+  <div class="ceyebrow">Competência ${c.n}</div>
+  <div class="cname">${c.nome}</div>
+  <div class="cavalia">${c.avalia}</div>
+  <div class="champ">
+    <div class="uf">${c.uf}</div>
+    <div><div class="lbl">quem mais domina</div><div class="esc">${c.escola}</div></div>
+    <div class="sc">${fmt(c.nota)}<small>/200</small></div>
+  </div>
+  <div class="cbar"><i style="width:${(c.nota/200*100).toFixed(1)}%"></i></div>
+  <div class="ctip"><b>Dica:</b> ${c.dica}</div>
+  <div class="foot">${dots(idx+2)}${SITE}</div>
+</section>`;
+
+/* 8 — FECHO */
+const fecho = `
+<section class="slide">
+  <div class="brandrow">${LOGO}<span class="tag">Redação · ENEM 2024</span></div>
+  <h2 class="fbig">Os <i>titãs</i> da redação:<br>Apogeu e Farias Brito</h2>
+  <div class="rmeta" style="margin-top:6px">Juntos, lideram 4 das 5 competências — e o ranking nacional.</div>
+  <div class="cta">
+    <div class="k">Em qual competência a <i>sua escola</i> mais perde ponto?</div>
+    <div class="s">Diagnóstico de redação, ranking e projeções — escola por escola.</div>
+    <div class="go">→ acesse <i>rankingenem.com</i></div>
+  </div>
+  <div class="foot">${dots(7)}${SITE}</div>
+</section>`;
+
+document.getElementById('app').innerHTML =
+  cover + rankSlide + COMPS.map(compSlide).join('') + fecho;
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carrossel · Melhores escolas privadas do Brasil · ENEM 2024 · X-TRI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#15161a; --ink-soft:#43474f; --muted:#86888f;
+    --bg:#fbfbfd; --bg-2:#f1f2f5; --line:rgba(0,0,0,0.085);
+    --blue:#2563eb; --blue-2:#3b82f6; --orange:#f9731a; --orange-ink:#e25c08;
+    --navy:#0f1830;
+    --f:"Hanken Grotesk",system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{-webkit-font-smoothing:antialiased;}
+  body{font-family:var(--f);background:#d9dade;display:flex;flex-direction:column;align-items:center;gap:30px;padding:30px 0;}
+
+  .slide{
+    width:1080px;height:1350px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 70% at 100% 0%, rgba(249,115,26,0.07), transparent 46%),
+      radial-gradient(120% 70% at 0% 100%, rgba(37,99,235,0.07), transparent 46%),
+      linear-gradient(180deg,#ffffff, var(--bg) 55%, var(--bg-2));
+    color:var(--ink);
+    padding:72px 78px;
+    display:flex;flex-direction:column;
+  }
+
+  /* ---- shared bits ---- */
+  .brandrow{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:13px;}
+  .brand img{width:42px;height:42px;object-fit:contain;}
+  .brand .wm{font-weight:800;font-size:27px;letter-spacing:-.01em;}
+  .brand .wm i{font-style:normal;color:var(--orange-ink);}
+  .tag{font-weight:700;font-size:23px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .eyebrow{font-weight:800;font-size:27px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange-ink);}
+  .site{font-weight:800;font-size:30px;letter-spacing:-.01em;}
+  .site i{font-style:normal;color:var(--orange-ink);}
+  .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:30px;}
+  .dots{display:flex;gap:10px;}
+  .dots span{width:13px;height:13px;border-radius:99px;background:rgba(0,0,0,.14);}
+  .dots span.on{background:var(--orange);width:34px;}
+
+  /* ---- COVER ---- */
+  .cv-title{font-weight:800;font-size:76px;line-height:.98;letter-spacing:-.035em;margin:26px 0 18px;}
+  .cv-title i{font-style:normal;color:var(--orange-ink);}
+  .cv-sub{font-weight:500;font-size:33px;line-height:1.32;color:var(--ink-soft);max-width:20ch;}
+  .heat{margin:24px 0 0;display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+  .cell{height:114px;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;box-shadow:0 10px 22px -14px rgba(0,0,0,.5);}
+  .cell .u{font-weight:800;font-size:31px;letter-spacing:.01em;line-height:1;}
+  .cell .n{font-weight:600;font-size:20px;opacity:.92;margin-top:5px;}
+  .legend{display:flex;align-items:center;gap:16px;margin-top:26px;font-weight:600;font-size:22px;color:var(--muted);}
+  .legend .scale{flex:1;height:12px;border-radius:99px;background:linear-gradient(90deg,hsl(216 72% 52%),hsl(206 86% 57%),hsl(30 92% 58%),hsl(15 92% 42%));}
+
+  /* ---- REGION SLIDE ---- */
+  .rhead{display:flex;align-items:flex-start;justify-content:space-between;}
+  .rname{font-weight:800;font-size:118px;line-height:.86;letter-spacing:-.04em;margin:18px 0 6px;}
+  .rmeta{font-weight:700;font-size:27px;color:var(--muted);}
+  .counter{font-weight:800;font-size:30px;color:var(--muted);text-align:right;line-height:1;}
+  .counter b{display:block;font-size:62px;color:var(--orange-ink);letter-spacing:-.02em;}
+  .rule{height:3px;background:var(--ink);border-radius:9px;margin:30px 0 6px;opacity:.9;}
+  .rows{display:flex;flex-direction:column;justify-content:center;flex:1;}
+  .r{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:30px;padding:22px 0;border-bottom:1px solid var(--line);}
+  .r:last-child{border-bottom:none;}
+  .uf{width:96px;height:96px;border-radius:26px;display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:38px;color:#fff;letter-spacing:.01em;
+      background:linear-gradient(150deg,var(--blue-2),var(--blue));box-shadow:0 14px 26px -16px rgba(37,99,235,.85);}
+  .esc{min-width:0;}
+  .esc .nm{font-weight:700;font-size:40px;line-height:1.06;letter-spacing:-.018em;}
+  .esc .st{font-weight:500;font-size:25px;color:var(--muted);margin-top:3px;}
+  .sc{font-weight:800;font-size:62px;letter-spacing:-.03em;white-space:nowrap;}
+  /* champion of region */
+  .r.king .uf{background:linear-gradient(150deg,#ffb066,var(--orange));box-shadow:0 14px 26px -14px rgba(249,115,26,.9);}
+  .r.king .sc{color:var(--orange-ink);}
+  .crown{font-size:23px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--orange-ink);margin-bottom:2px;}
+  /* dense (>=7 rows) */
+  .dense .r{padding:9px 0;gap:22px;}
+  .dense .uf{width:74px;height:74px;border-radius:20px;font-size:31px;}
+  .dense .esc .nm{font-size:33px;}
+  .dense .esc .st{font-size:21px;}
+  .dense .sc{font-size:50px;}
+  .dense .rname{font-size:84px;margin:10px 0 2px;}
+  .dense .rule{margin:14px 0 2px;}
+  .dense .crown{font-size:20px;margin-bottom:0;}
+
+  /* ---- FECHO ---- */
+  .fbig{font-weight:800;font-size:64px;line-height:1;letter-spacing:-.03em;margin:18px 0 8px;}
+  .fbig i{font-style:normal;color:var(--orange-ink);}
+  .cta{margin-top:26px;background:var(--navy);color:#fff;border-radius:32px;padding:40px 46px;
+       box-shadow:0 30px 60px -30px rgba(15,24,48,.7);}
+  .cta .k{font-weight:800;font-size:40px;line-height:1.1;letter-spacing:-.02em;}
+  .cta .k i{font-style:normal;color:var(--orange);}
+  .cta .s{font-weight:500;font-size:28px;color:#aeb6c8;margin-top:14px;}
+  .cta .go{display:inline-flex;align-items:center;gap:12px;margin-top:26px;font-weight:800;font-size:32px;}
+  .cta .go i{font-style:normal;color:var(--orange);}
+</style>
+</head>
+<body><div id="app"></div>
+
+<script>
+const fmt = n => n.toFixed(1).replace('.', ',');
+
+const NAT = [
+  {uf:'CE',estado:'Ceará',escola:'Farias Brito',nota:789.9},
+  {uf:'MS',estado:'Mato Grosso do Sul',escola:'Colégio Classe A',nota:761.8},
+  {uf:'RJ',estado:'Rio de Janeiro',escola:'Colégio Alfa CEM Bilíngue',nota:759.6},
+  {uf:'MG',estado:'Minas Gerais',escola:'Coleguium — Ouro Preto',nota:759.3},
+  {uf:'PI',estado:'Piauí',escola:'Inst. Educacional São José',nota:749.7},
+  {uf:'PA',estado:'Pará',escola:'Sistema de Ensino Equipe',nota:746.3},
+  {uf:'SP',estado:'São Paulo',escola:'Objetivo Colégio Integrado',nota:746.1},
+  {uf:'RN',estado:'Rio Grande do Norte',escola:'Colégio Ciências Aplicadas',nota:744.0},
+  {uf:'DF',estado:'Distrito Federal',escola:'Colégio Podion',nota:736.5},
+  {uf:'BA',estado:'Bahia',escola:'Colégio Bernoulli',nota:730.5},
+  {uf:'PE',estado:'Pernambuco',escola:'Colégio Cognitivo',nota:729.0},
+  {uf:'GO',estado:'Goiás',escola:'Colégio WR',nota:724.1},
+  {uf:'RS',estado:'Rio Grande do Sul',escola:'Colégio Regina Coeli',nota:722.2},
+  {uf:'ES',estado:'Espírito Santo',escola:'Centro Educ. Leonardo da Vinci',nota:717.5},
+  {uf:'PB',estado:'Paraíba',escola:'Colégio e Curso Evolução',nota:709.9},
+  {uf:'SE',estado:'Sergipe',escola:'Centro de Excelência Master',nota:704.5},
+  {uf:'TO',estado:'Tocantins',escola:'Colégio Olimpo Palmas',nota:698.2},
+  {uf:'PR',estado:'Paraná',escola:'Colégio do Bosque Mananciais',nota:693.5},
+  {uf:'MA',estado:'Maranhão',escola:'Montessoriano Reino Infantil',nota:692.6},
+  {uf:'SC',estado:'Santa Catarina',escola:'Colégio Energia',nota:692.1},
+  {uf:'MT',estado:'Mato Grosso',escola:'Colégio Íbero-Americano',nota:685.4},
+  {uf:'AM',estado:'Amazonas',escola:'Laviniense Ensino Integrado',nota:684.0},
+  {uf:'AC',estado:'Acre',escola:'Colégio Sigma',nota:678.6},
+  {uf:'AL',estado:'Alagoas',escola:'Colégio Contato Maceió',nota:675.0},
+  {uf:'RO',estado:'Rondônia',escola:'Inst. Educacional Soma',nota:664.1},
+  {uf:'AP',estado:'Amapá',escola:'Escola Conexão Aquarela',nota:660.4},
+  {uf:'RR',estado:'Roraima',escola:'Centro de Educ. Integrada Colmeia',nota:647.7},
+];
+const byUf = Object.fromEntries(NAT.map(d=>[d.uf,d]));
+const max = Math.max(...NAT.map(d=>d.nota)), min = Math.min(...NAT.map(d=>d.nota));
+// diverging azul (notas menores) -> laranja (maiores), sem passar pelo verde
+const heatColor = n => {
+  const t=(n-min)/(max-min);
+  if(t>=0.5){ const u=(t-0.5)*2; return `hsl(${30-u*15} 92% ${58-u*16}%)`; }
+  const u=t*2; return `hsl(${216-u*10} ${72+u*14}% ${52+u*5}%)`;
+};
+
+const REGIOES = [
+  {nome:'Nordeste',    ufs:['CE','PI','RN','BA','PE','PB','SE','MA','AL']},
+  {nome:'Centro-Oeste',ufs:['MS','DF','GO','MT']},
+  {nome:'Sudeste',     ufs:['RJ','MG','SP','ES']},
+  {nome:'Norte',       ufs:['PA','TO','AM','AC','RO','AP','RR']},
+  {nome:'Sul',         ufs:['RS','PR','SC']},
+];
+
+const LOGO = `<div class="brand"><img src="/logo-xtri.png" alt="" onerror="this.style.display='none'"><span class="wm">X-TRI<i> Escolas</i></span></div>`;
+const dots = i => `<div class="dots">${[0,1,2,3,4,5,6].map(k=>`<span class="${k===i?'on':''}"></span>`).join('')}</div>`;
+
+/* COVER */
+const heat = [...NAT].map(d=>`<div class="cell" style="background:${heatColor(d.nota)}"><span class="u">${d.uf}</span><span class="n">${fmt(d.nota)}</span></div>`).join('');
+const cover = `
+<section class="slide">
+  <div class="brandrow">${LOGO}<span class="tag">ENEM 2024 · INEP</span></div>
+  <h1 class="cv-title">As melhores escolas <i>privadas</i> do Brasil</h1>
+  <p class="cv-sub">A nº 1 de cada estado pela nota média no ENEM 2024.</p>
+  <div class="heat">${heat}</div>
+  <div class="legend"><span>menor</span><div class="scale"></div><span>maior nota</span></div>
+  <div class="foot"><span class="site">arraste →</span><span class="site">ranking<i>enem</i>.com</span></div>
+</section>`;
+
+/* REGION SLIDES */
+const regionSlide = (r, idx) => {
+  const list = r.ufs.map(u=>byUf[u]);
+  const dense = list.length>=7 ? 'dense' : '';
+  const rows = list.map((d,i)=>`
+    <div class="r ${i===0?'king':''}">
+      <div class="uf">${d.uf}</div>
+      <div class="esc">${i===0?'<div class="crown">★ destaque da região</div>':''}<div class="nm">${d.escola}</div><div class="st">${d.estado}</div></div>
+      <div class="sc">${fmt(d.nota)}</div>
+    </div>`).join('');
+  return `
+  <section class="slide ${dense}">
+    <div class="brandrow">${LOGO}<span class="tag">Escolas privadas</span></div>
+    <div class="rhead">
+      <div><div class="eyebrow">Região</div><div class="rname">${r.nome}</div><div class="rmeta">${list.length} estados · melhor escola privada de cada um</div></div>
+      <div class="counter">região<b>${String(idx+1).padStart(2,'0')}<span style="font-size:30px;color:var(--muted)">/5</span></b></div>
+    </div>
+    <div class="rule"></div>
+    <div class="rows">${rows}</div>
+    <div class="foot">${dots(idx+1)}<span class="site">ranking<i>enem</i>.com</span></div>
+  </section>`;
+};
+
+/* FECHO */
+const top5 = NAT.slice(0,5).map((d,i)=>`
+  <div class="r ${i===0?'king':''}">
+    <div class="uf">${d.uf}</div>
+    <div class="esc"><div class="nm">${d.escola}</div><div class="st">${d.estado}</div></div>
+    <div class="sc">${fmt(d.nota)}</div>
+  </div>`).join('');
+const fecho = `
+<section class="slide dense">
+  <div class="brandrow">${LOGO}<span class="tag">ENEM 2024</span></div>
+  <h2 class="fbig">As <i>5 maiores</i> notas<br>do país</h2>
+  <div class="rule"></div>
+  <div class="rows" style="flex:0;">${top5}</div>
+  <div class="cta">
+    <div class="k">E a <i>sua escola</i>,<br>onde está nesse mapa?</div>
+    <div class="s">Ranking, comparativo e projeções de desempenho — estado a estado.</div>
+    <div class="go">→ acesse <i>rankingenem.com</i></div>
+  </div>
+  <div class="foot">${dots(6)}<span class="site">ranking<i>enem</i>.com</span></div>
+</section>`;
+
+document.getElementById('app').innerHTML =
+  cover + REGIOES.map(regionSlide).join('') + fecho;
+</script>
+</body>
+</html>
