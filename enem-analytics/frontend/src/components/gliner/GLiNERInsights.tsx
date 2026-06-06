@@ -49,7 +49,7 @@ export function BrainXInsights({ codigoInep }: BrainXInsightsProps) {
             <div className="h-3 w-60 bg-purple-100 rounded mt-1 animate-pulse" />
           </div>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="h-40 bg-white/50 rounded-xl animate-pulse" />
           ))}
@@ -65,13 +65,13 @@ export function BrainXInsights({ codigoInep }: BrainXInsightsProps) {
   return (
     <div className="bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 rounded-2xl shadow-sm border border-purple-100 overflow-hidden">
       {/* Header */}
-      <div className="px-5 py-4 border-b border-purple-100/50 bg-white/60 backdrop-blur-sm">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600">
+      <div className="px-4 py-4 border-b border-purple-100/50 bg-white/60 backdrop-blur-sm sm:px-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="p-2 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 shrink-0">
               <Brain className="h-5 w-5 text-white" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-semibold text-gray-900">Inteligência BrainX</h2>
                 <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full font-medium flex items-center gap-1">
@@ -87,7 +87,7 @@ export function BrainXInsights({ codigoInep }: BrainXInsightsProps) {
           </div>
 
           {/* Tab Buttons */}
-          <div className="flex items-center gap-1 bg-white/80 rounded-lg p-1">
+          <div className="flex items-center gap-1 bg-white/80 rounded-lg p-1 overflow-x-auto">
             <button
               onClick={() => setActiveTab('concepts')}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
@@ -400,7 +400,7 @@ function StudyFocusTab({
       </div>
 
       {/* Study Plan Phases */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {Object.entries(studyFocus.study_plan).map(([key, phase], idx) => (
           <div
             key={key}
@@ -449,15 +449,15 @@ type RedacaoArea = Extract<StudyFocusResp['focus_areas'][number], { kind: 'redac
 function TriAreaCard({ area }: { area: TriArea }) {
   return (
     <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex min-w-0 items-center gap-3">
           <div
-            className="h-10 w-10 rounded-xl flex items-center justify-center text-white font-bold"
+            className="h-10 w-10 shrink-0 rounded-xl flex items-center justify-center text-white font-bold"
             style={{ backgroundColor: area.color }}
           >
             {area.area}
           </div>
-          <div>
+          <div className="min-w-0">
             <h3 className="font-semibold text-gray-900">{area.area_name}</h3>
             <p className="text-xs text-gray-500">
               Nível: <span className="font-medium capitalize">{area.level}</span> | Score:{' '}
@@ -465,7 +465,7 @@ function TriAreaCard({ area }: { area: TriArea }) {
             </p>
           </div>
         </div>
-        <div className="text-right">
+        <div className="text-right shrink-0">
           <p className="text-xs text-gray-500">Itens TRI</p>
           <p className="text-xl font-bold text-green-600">{area.estimated_total_impact} itens</p>
         </div>
@@ -545,15 +545,15 @@ function statusClasses(status: RedacaoArea['competencias'][number]['status']) {
 function RedacaoCompetenciasCard({ area }: { area: RedacaoArea }) {
   return (
     <div className="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3 mb-4">
+        <div className="flex min-w-0 items-center gap-3">
           <div
-            className="h-10 w-10 rounded-xl flex items-center justify-center text-white font-bold"
+            className="h-10 w-10 shrink-0 rounded-xl flex items-center justify-center text-white font-bold"
             style={{ backgroundColor: area.color }}
           >
             R
           </div>
-          <div>
+          <div className="min-w-0">
             <h3 className="font-semibold text-gray-900">{area.area_name}</h3>
             <p className="text-xs text-gray-500">
               {area.n_redacoes} redações corrigidas
@@ -565,7 +565,7 @@ function RedacaoCompetenciasCard({ area }: { area: RedacaoArea }) {
             </p>
           </div>
         </div>
-        <div className="text-right">
+        <div className="text-right shrink-0">
           <p className="text-xs text-gray-500">Competências</p>
           <p className="text-xl font-bold text-amber-600">{area.competencias.length} de 5</p>
         </div>
@@ -1122,7 +1122,7 @@ function NetworkTab({
       </div>
 
       {/* Controls Row 2: Entity type filters */}
-      <div className="flex items-center gap-4 text-xs">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs">
         <span className="text-gray-500">Tipos:</span>
         {[
           { key: 'conceito_cientifico', label: 'Conceitos', color: '#3b82f6' },
@@ -1163,15 +1163,15 @@ function NetworkTab({
       ) : graphData ? (
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-900 rounded-2xl overflow-hidden shadow-2xl">
           {/* Header Stats */}
-          <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative">
+          <div className="px-4 py-4 border-b border-white/10 flex flex-col gap-3 sm:px-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="relative shrink-0">
                 <div className="absolute inset-0 bg-purple-500 rounded-xl blur-lg opacity-50" />
                 <div className="relative p-2 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl">
                   <Network className="h-5 w-5 text-white" />
                 </div>
               </div>
-              <div>
+              <div className="min-w-0">
                 <h3 className="font-semibold text-white">Mapa de Conceitos do ENEM</h3>
                 <p className="text-xs text-slate-400">
                   Top {filteredNodes.length} conceitos mais frequentes nos itens TRI do ENEM 2024
@@ -1182,7 +1182,7 @@ function NetworkTab({
             </div>
 
             {/* Zoom Controls */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <div className="flex items-center gap-1 bg-white/10 rounded-lg p-1">
                 <button
                   onClick={() => handleZoom(-0.2)}
@@ -1210,7 +1210,7 @@ function NetworkTab({
                 </button>
               </div>
 
-              <div className="flex items-center gap-4 text-xs ml-4">
+              <div className="flex items-center gap-4 text-xs sm:ml-4">
                 {entityFilters.conceito_cientifico && (
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50" />

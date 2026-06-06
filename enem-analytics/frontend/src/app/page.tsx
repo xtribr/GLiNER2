@@ -53,6 +53,14 @@ function variacaoPct(s: TopSchool): number | null {
   return ((last - prev) / prev) * 100;
 }
 
+function medalClass(pos: number): string {
+  return pos === 1 ? 'bg-[#FFF0EB] text-[#FF4B2E]' : pos === 2 ? 'bg-slate-100 text-slate-600' : pos === 3 ? 'bg-[#FFF0EB] text-[#E43E24]' : 'bg-[#E9F8FE] text-[#139ED3]';
+}
+
+function schoolInitials(nome: string): string {
+  return nome.split(' ').filter((w) => w.length > 2).slice(0, 2).map((w) => w[0]).join('').toUpperCase() || nome.slice(0, 2).toUpperCase();
+}
+
 export default function Vitrine() {
   const [ano, setAno] = useState<number | undefined>(undefined);
   const [uf, setUf] = useState('');
@@ -108,9 +116,10 @@ export default function Vitrine() {
             <Link href="/login" className="hidden rounded-xl border border-[#28B7ED]/20 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-[#28B7ED]/50 hover:text-[#28B7ED] sm:block">
               Entrar
             </Link>
-            <Link href="/cadastro" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105">
-              Acessar análise gratuita
-              <ArrowRight className="h-4 w-4" />
+            <Link href="/cadastro" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-3 py-2 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105 sm:px-4">
+              <span className="sm:hidden">Acessar grátis</span>
+              <span className="hidden sm:inline">Acessar análise gratuita</span>
+              <ArrowRight className="h-4 w-4 flex-shrink-0" />
             </Link>
           </div>
         </div>
@@ -230,7 +239,30 @@ export default function Vitrine() {
             </Link>
           </div>
 
-          <div className="overflow-x-auto">
+          {/* Cards empilhados — mobile (<sm) */}
+          <ul className="divide-y divide-slate-100 sm:hidden">
+            {topLoading ? (
+              Array.from({ length: 8 }).map((_, i) => (
+                <li key={i} className="flex items-center gap-3 p-4">
+                  <div className="h-8 w-8 animate-pulse rounded-lg bg-slate-100" />
+                  <div className="h-9 w-9 animate-pulse rounded-xl bg-slate-100" />
+                  <div className="flex-1 space-y-2">
+                    <div className="h-3 w-3/4 animate-pulse rounded bg-slate-100" />
+                    <div className="h-2.5 w-1/3 animate-pulse rounded bg-slate-100" />
+                  </div>
+                </li>
+              ))
+            ) : ranked.length ? (
+              ranked.map((s, idx) => (
+                <RankCard key={s.codigo_inep} pos={idx + 1} school={s} metric={metric} />
+              ))
+            ) : (
+              <li className="p-8 text-center text-sm text-slate-400">Sem dados para este recorte.</li>
+            )}
+          </ul>
+
+          {/* Tabela — sm+ */}
+          <div className="hidden overflow-x-auto sm:block">
             <table className="w-full">
               <thead className="bg-slate-50/80">
                 <tr>
@@ -324,10 +356,42 @@ function StatCard({ icon: Icon, tone, value, label, sub }: {
   );
 }
 
+function RankCard({ pos, school, metric }: { pos: number; school: TopSchool; metric: AreaMetric }) {
+  const v = variacaoPct(school);
+  const medal = medalClass(pos);
+  const initials = schoolInitials(school.nome_escola);
+  return (
+    <li>
+      <Link href={`/schools/${school.codigo_inep}`} className="flex items-center gap-3 p-4 transition active:bg-[#E9F8FE]/50">
+        <span className={`inline-flex h-8 min-w-8 flex-shrink-0 items-center justify-center rounded-lg px-2 text-xs font-black ${medal}`}>{pos}º</span>
+        <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#28B7ED] to-[#139ED3] text-xs font-black text-white">{initials}</span>
+        <span className="min-w-0 flex-1">
+          <span className="line-clamp-1 text-sm font-bold text-slate-950">{school.nome_escola}</span>
+          <span className="mt-0.5 flex items-center gap-2 text-[11px]">
+            <span className="font-black text-slate-600">{school.uf || '--'}</span>
+            <span className={`rounded-full px-2 py-0.5 font-bold ${school.tipo_escola === 'Privada' ? 'bg-[#E9F8FE] text-[#139ED3]' : 'bg-[#FFF0EB] text-[#FF4B2E]'}`}>{school.tipo_escola || '--'}</span>
+          </span>
+        </span>
+        <span className="flex flex-shrink-0 flex-col items-end">
+          <span className="text-base font-black text-slate-950">{formatTriScore(school[metric])}</span>
+          {v == null ? (
+            <span className="text-[11px] text-slate-300">—</span>
+          ) : (
+            <span className={`inline-flex items-center gap-1 text-[11px] font-bold ${v >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+              {v >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
+              {v >= 0 ? '+' : ''}{v.toFixed(1)}%
+            </span>
+          )}
+        </span>
+      </Link>
+    </li>
+  );
+}
+
 function RankRow({ pos, school, metric }: { pos: number; school: TopSchool; metric: AreaMetric }) {
   const v = variacaoPct(school);
-  const medal = pos === 1 ? 'bg-[#FFF0EB] text-[#FF4B2E]' : pos === 2 ? 'bg-slate-100 text-slate-600' : pos === 3 ? 'bg-[#FFF0EB] text-[#E43E24]' : 'bg-[#E9F8FE] text-[#139ED3]';
-  const initials = school.nome_escola.split(' ').filter((w) => w.length > 2).slice(0, 2).map((w) => w[0]).join('').toUpperCase() || school.nome_escola.slice(0, 2).toUpperCase();
+  const medal = medalClass(pos);
+  const initials = schoolInitials(school.nome_escola);
   return (
     <tr className="transition hover:bg-[#E9F8FE]/50">
       <td className="px-4 py-3">

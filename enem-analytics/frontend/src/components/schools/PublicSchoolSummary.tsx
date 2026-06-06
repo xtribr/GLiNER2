@@ -33,19 +33,20 @@ export default function PublicSchoolSummary({ codigoInep }: PublicSchoolSummaryP
       {/* Header público */}
       <header className="sticky top-0 z-20 border-b border-[#28B7ED]/20 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl border border-[#28B7ED]/20 bg-white shadow-sm">
+          <Link href="/" className="flex min-w-0 items-center gap-3">
+            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-[#28B7ED]/20 bg-white shadow-sm">
               <Image src="/logo-x.png" alt="Logo XTRI" width={34} height={34} className="h-8 w-8 object-contain" />
             </div>
-            <span className="text-base font-bold text-slate-950">Ranking ENEM XTRI</span>
+            <span className="truncate text-base font-bold text-slate-950">Ranking ENEM XTRI</span>
           </Link>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
             <Link href="/login" className="hidden rounded-xl border border-[#28B7ED]/20 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-[#28B7ED]/50 hover:text-[#28B7ED] sm:block">
               Entrar
             </Link>
-            <Link href="/cadastro" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-4 py-2 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105">
-              Acessar análise gratuita
-              <ArrowRight className="h-4 w-4" />
+            <Link href="/cadastro" className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-3 py-2 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105 sm:px-4">
+              <span className="sm:hidden">Acessar grátis</span>
+              <span className="hidden sm:inline">Acessar análise gratuita</span>
+              <ArrowRight className="h-4 w-4 flex-shrink-0" />
             </Link>
           </div>
         </div>

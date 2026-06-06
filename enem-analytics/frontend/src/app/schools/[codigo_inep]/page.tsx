@@ -210,9 +210,9 @@ function SchoolDeepDashboard() {
   ].sort((a, b) => b.nota - a.nota) : [];
 
   return (
-    <div className="p-6 space-y-6 pb-8 max-w-[1600px] mx-auto">
+    <div className="p-4 sm:p-6 space-y-6 pb-8 max-w-[1600px] mx-auto">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl p-8 text-white bg-gradient-to-br from-slate-900 via-blue-900 to-blue-700">
+      <div className="relative overflow-hidden rounded-3xl p-6 sm:p-8 text-white bg-gradient-to-br from-slate-900 via-blue-900 to-blue-700">
         {/* Subtle glow — kept inside to avoid the sharp gradient corners */}
         <div className="pointer-events-none absolute -right-24 -top-24 w-72 h-72 rounded-full bg-sky-400/10 blur-3xl"></div>
 
@@ -228,8 +228,8 @@ function SchoolDeepDashboard() {
 
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">{school.nome_escola}</h1>
-              <div className="flex items-center gap-3 mt-3 text-white/80 text-sm">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{school.nome_escola}</h1>
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mt-3 text-white/80 text-sm">
                 <span className="font-medium">{school.uf}</span>
                 <span className="text-white/40">•</span>
                 <span>INEP: {school.codigo_inep}</span>
@@ -341,10 +341,10 @@ function SchoolDeepDashboard() {
       <TabPanel id="overview" active={activeTab}>
       <div className="space-y-6">
       {/* Main Chart Section */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-        <div className="flex items-center justify-between mb-6">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 mb-6">
           <h2 className="text-lg font-semibold text-gray-900">Evolução das Notas</h2>
-          <div className="flex items-center gap-4 text-sm">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
             {selectedAreas.map((area) => (
               <div key={area} className="flex items-center gap-2">
                 <div
@@ -632,7 +632,7 @@ function SchoolDeepDashboard() {
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
 
             {/* Prediction Card */}
