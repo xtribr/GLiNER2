@@ -235,7 +235,7 @@ export default function CadastroPage() {
                   {CARGOS.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </Field>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <Field label="E-mail institucional">
                   <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="voce@escola.com.br" className={inputCls} />
                 </Field>
@@ -314,7 +314,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 function Stepper({ label, state }: { label: string; state: 'idle' | 'on' | 'done' }) {
   return (
-    <div className="flex w-16 flex-col items-center gap-1">
+    <div className="flex w-14 flex-col items-center gap-1 sm:w-16">
       <div
         className={
           'flex h-9 w-9 items-center justify-center rounded-full text-sm font-black ' +
@@ -333,5 +333,5 @@ function Stepper({ label, state }: { label: string; state: 'idle' | 'on' | 'done
 }
 
 function Bar({ done }: { done: boolean }) {
-  return <div className={'mb-4 h-0.5 w-8 ' + (done ? 'bg-green-500' : 'bg-slate-200')} />;
+  return <div className={'mb-4 h-0.5 w-6 sm:w-8 ' + (done ? 'bg-green-500' : 'bg-slate-200')} />;
 }

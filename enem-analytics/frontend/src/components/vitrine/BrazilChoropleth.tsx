@@ -113,6 +113,7 @@ export default function BrazilChoropleth() {
               className="cursor-pointer transition-[stroke]"
               onMouseEnter={() => setHover(p.sigla)}
               onMouseLeave={() => setHover((h) => (h === p.sigla ? null : h))}
+              onClick={() => setHover((h) => (h === p.sigla ? null : p.sigla))}
             >
               <title>{`${p.sigla}${rec ? ` — média TRI ${formatTriScore(rec.media)} · ${rec.escolas} escolas` : ' — sem dados'}`}</title>
             </path>
@@ -120,13 +121,13 @@ export default function BrazilChoropleth() {
         })}
       </svg>
 
-      <div className="min-w-[150px]">
+      <div className="w-full sm:min-w-[150px]">
         <div className="rounded-2xl border border-slate-200 bg-slate-50 p-3 text-center">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-400">
-            {hovered ? hovered.uf : 'Passe o mouse'}
+            {hovered ? hovered.uf : 'Toque num estado'}
           </p>
           <p className="mt-1 text-2xl font-black text-slate-950">{hovered ? formatTriScore(hovered.media) : '—'}</p>
-          <p className="text-[11px] text-slate-500">{hovered ? `${hovered.escolas} escolas · média TRI` : 'sobre um estado'}</p>
+          <p className="text-[11px] text-slate-500">{hovered ? `${hovered.escolas} escolas · média TRI` : 'ou passe o mouse'}</p>
         </div>
         <div className="mt-3 px-1">
           <div className="h-2 w-full rounded-full" style={{ background: `linear-gradient(90deg, ${lerpColor(0)}, ${lerpColor(1)})` }} />

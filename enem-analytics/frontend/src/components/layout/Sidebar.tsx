@@ -363,7 +363,13 @@ function MenuItem({
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({
+  mobileOpen = false,
+  onMobileClose,
+}: {
+  mobileOpen?: boolean;
+  onMobileClose?: () => void;
+} = {}) {
   const pathname = usePathname();
   const { user, isAdmin, logout, isAuthenticated } = useAuth();
   const { collapsed, setCollapsed } = useSidebar();
@@ -383,9 +389,23 @@ export default function Sidebar() {
       <aside
         className={cn(
           "fixed left-0 top-0 z-40 h-screen bg-slate-950 text-white flex flex-col transition-all duration-300 ease-in-out border-r border-slate-800",
-          collapsed ? 'w-16' : 'w-56'
+          // Mobile: drawer com largura cheia, escondido por padrão (desliza pela esquerda).
+          "w-56",
+          mobileOpen ? "translate-x-0" : "-translate-x-full",
+          // Desktop (md+): sempre visível e com largura controlada pelo colapso.
+          "md:translate-x-0",
+          collapsed ? "md:w-16" : "md:w-56"
         )}
       >
+        {/* Close button (mobile drawer only) */}
+        <button
+          onClick={onMobileClose}
+          className="md:hidden absolute top-3 right-3 h-8 w-8 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center border border-slate-700 transition-colors"
+          aria-label="Fechar menu"
+        >
+          <X className="h-4 w-4 text-slate-300" />
+        </button>
+
         {/* Logo */}
         <div className="flex items-center justify-between px-3 py-4 border-b border-slate-800/50">
           <div className={cn(
@@ -407,7 +427,7 @@ export default function Sidebar() {
         {/* Toggle Button */}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="absolute -right-3 top-20 h-6 w-6 bg-slate-800 hover:bg-slate-700 rounded-full flex items-center justify-center border border-slate-700 transition-colors shadow-lg"
+          className="hidden md:flex absolute -right-3 top-20 h-6 w-6 bg-slate-800 hover:bg-slate-700 rounded-full items-center justify-center border border-slate-700 transition-colors shadow-lg"
         >
           {collapsed ? (
             <ChevronRight className="h-3 w-3 text-slate-400" />
@@ -417,7 +437,7 @@ export default function Sidebar() {
         </button>
 
         {/* Navigation - Primary */}
-        <nav className="flex-1 px-2 py-3 overflow-y-auto scrollbar-hide">
+        <nav onClick={onMobileClose} className="flex-1 px-2 py-3 overflow-y-auto scrollbar-hide">
           {!collapsed && (
             <div className="px-3 mb-2">
               <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">

@@ -1,12 +1,12 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Sidebar from './Sidebar';
 import { useAuth } from '@/lib/auth-context';
 import { useSidebar } from '@/lib/sidebar-context';
-import { LogOut, School } from 'lucide-react';
+import { LogOut, School, Menu } from 'lucide-react';
 
 // Rotas públicas (vitrine / funil). Acessíveis SEM sessão.
 // A página de detalhe /schools/[inep] permanece gated (resumo público virá em etapa
@@ -27,8 +27,14 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const router = useRouter();
   const { user, session, isAdmin, isLoading, logout } = useAuth();
   const { collapsed } = useSidebar();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const isLoginPage = pathname === '/login';
   const isPublic = isPublicPath(pathname);
+
+  // Fecha o drawer mobile ao trocar de rota.
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -98,18 +104,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         {/* Minimal Header for School Users */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
+            <div className="flex items-center justify-between gap-3 h-16">
               {/* Logo and School Name */}
-              <div className="flex items-center gap-4">
-                <div className="h-10 w-10 bg-gradient-to-br from-sky-400 to-orange-500 rounded-xl flex items-center justify-center p-1">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+                <div className="h-10 w-10 bg-gradient-to-br from-sky-400 to-orange-500 rounded-xl flex items-center justify-center p-1 flex-shrink-0">
                   <Image src="/logo-xtri.png" alt="X-TRI" width={32} height={32} />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <h1 className="text-lg font-bold text-gray-900">X-TRI Escolas</h1>
                   {user && (
                     <p className="text-xs text-gray-500 flex items-center gap-1">
-                      <School className="h-3 w-3" />
-                      {user.nome_escola}
+                      <School className="h-3 w-3 flex-shrink-0" />
+                      <span className="truncate">{user.nome_escola}</span>
                     </p>
                   )}
                 </div>
@@ -118,7 +124,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
               {/* Logout Button */}
               <button
                 onClick={logout}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors"
+                className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors flex-shrink-0"
               >
                 <LogOut className="h-4 w-4" />
                 Sair
@@ -138,10 +144,39 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   // Admin: layout completo com sidebar.
   return (
     <div className="flex bg-slate-50 min-h-screen">
-      <Sidebar />
-      <main className={`flex-1 min-h-screen transition-all duration-300 ease-in-out ${
-        collapsed ? 'ml-16' : 'ml-56'
-      }`}>
+      <Sidebar mobileOpen={mobileNavOpen} onMobileClose={() => setMobileNavOpen(false)} />
+
+      {/* Overlay para fechar o drawer no mobile */}
+      {mobileNavOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-30 bg-black/50"
+          onClick={() => setMobileNavOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      <main
+        className={`flex-1 min-w-0 min-h-screen transition-all duration-300 ease-in-out ml-0 ${
+          collapsed ? 'md:ml-16' : 'md:ml-56'
+        }`}
+      >
+        {/* Topo mobile com botão hambúrguer (oculto em md+) */}
+        <header className="md:hidden sticky top-0 z-20 flex items-center gap-3 bg-white border-b border-gray-200 px-4 h-14">
+          <button
+            onClick={() => setMobileNavOpen(true)}
+            className="p-2 -ml-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            aria-label="Abrir menu"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 bg-gradient-to-br from-sky-400 to-orange-500 rounded-lg flex items-center justify-center p-1">
+              <Image src="/logo-xtri.png" alt="X-TRI" width={24} height={24} />
+            </div>
+            <span className="font-bold text-gray-900">X-TRI Analytics</span>
+          </div>
+        </header>
+
         {children}
       </main>
     </div>

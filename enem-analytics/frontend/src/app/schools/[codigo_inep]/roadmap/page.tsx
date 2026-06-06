@@ -166,23 +166,23 @@ export default function RoadmapPage() {
     <div className="min-h-screen bg-slate-50">
       {/* Page Header */}
       <div className="bg-white border-b border-slate-200 sticky top-0 z-20">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+        <div className="px-4 py-4 sm:px-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-center gap-3 sm:gap-4">
               <Link
                 href={`/schools/${codigo_inep}`}
-                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-slate-100 rounded-lg transition-colors shrink-0"
               >
                 <ArrowLeft className="h-5 w-5 text-slate-600" />
               </Link>
-              <div>
+              <div className="min-w-0">
                 <h1 className="text-xl font-bold text-slate-900">Plano de Melhoria</h1>
-                <p className="text-sm text-slate-500">
+                <p className="text-sm text-slate-500 truncate">
                   {school?.nome_escola || 'Carregando...'}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               {cluster && (
                 <span className="px-3 py-1.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">
                   {cluster.persona?.name}
@@ -203,7 +203,7 @@ export default function RoadmapPage() {
         </div>
       </div>
 
-      <div className="px-6 py-6">
+      <div className="px-4 py-6 sm:px-6">
         {/* Top Stats Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {/* Current Score Card */}
@@ -275,14 +275,14 @@ export default function RoadmapPage() {
         <div className="grid min-w-0 grid-cols-1 gap-6 mb-6 lg:grid-cols-3">
           {/* Bar Chart - Scores by Area */}
           <div className="min-w-0 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm lg:col-span-2">
-            <div className="flex items-center justify-between mb-6">
-              <div>
+            <div className="flex items-center justify-between gap-3 mb-6">
+              <div className="min-w-0">
                 <h3 className="text-lg font-semibold text-slate-900">Desempenho por Área</h3>
                 <p className="text-sm text-slate-500">
                   Notas TRI previstas para {targetCycleYear || 'o próximo ciclo'}
                 </p>
               </div>
-              <select className="text-sm border border-slate-200 rounded-lg px-3 py-2 bg-white">
+              <select className="shrink-0 text-sm border border-slate-200 rounded-lg px-3 py-2 bg-white">
                 <option>Este ano</option>
                 <option>Comparar anos</option>
               </select>
@@ -421,7 +421,7 @@ export default function RoadmapPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
                   {triRecommendations.recommendations?.map((rec: TriRecommendation) => (
                     <div key={rec.area} className="border-l-4 bg-slate-50 rounded-r-xl p-3 flex flex-col" style={{ borderLeftColor: areaColors[rec.area] }}>
                       <div className="flex items-center gap-2 mb-2">

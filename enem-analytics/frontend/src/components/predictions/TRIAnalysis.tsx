@@ -148,7 +148,7 @@ function ProjectionModal({
       >
         {/* Header */}
         <div
-          className="sticky top-0 px-6 py-4 border-b flex items-center justify-between z-10"
+          className="sticky top-0 px-4 sm:px-6 py-4 border-b flex items-center justify-between gap-3 z-10"
           style={{ backgroundColor: `${data.color}10` }}
         >
           <div className="flex items-center gap-3">
@@ -173,9 +173,9 @@ function ProjectionModal({
           </button>
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="p-4 sm:p-6 space-y-6">
           {/* Key Metrics */}
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             <div className="bg-gray-50 rounded-xl p-4 text-center">
               <div className="text-2xl font-bold text-gray-900">{formatTriScore(data.current_score)}</div>
               <div className="text-xs text-gray-500">Score Atual ({data.current_year})</div>
@@ -305,7 +305,7 @@ function ProjectionModal({
           </div>
 
           {/* Trend Analysis */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-gray-50 rounded-xl p-4">
               <h4 className="text-sm font-semibold text-gray-900 mb-3">Análise de Tendência</h4>
               <div className="space-y-2">
@@ -456,16 +456,16 @@ function AreaCard({
       onClick={onToggle}
     >
       <div className="p-4">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div className="flex min-w-0 items-center gap-2">
             <div
-              className="w-3 h-3 rounded-full"
+              className="w-3 h-3 flex-shrink-0 rounded-full"
               style={{ backgroundColor: area.color }}
             />
-            <span className="font-semibold text-gray-900">{area.area_name}</span>
+            <span className="truncate font-semibold text-gray-900">{area.area_name}</span>
             <span className="text-xs text-gray-400">({area.area})</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-shrink-0 items-center gap-2">
             <button
               onClick={handlePredictionClick}
               className="px-3 py-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-medium rounded-full hover:from-blue-600 hover:to-indigo-700 transition-all shadow-sm hover:shadow flex items-center gap-1"
@@ -671,7 +671,7 @@ export default function TRIAnalysis({ codigoInep }: TRIAnalysisProps) {
           </div>
 
           {/* Summary Stats */}
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
             {data.area_analysis.map((area) => (
               <div
                 key={area.area}
