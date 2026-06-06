@@ -8,42 +8,76 @@ import { useAuth } from '@/lib/auth-context';
 import { useSidebar } from '@/lib/sidebar-context';
 import { LogOut, School } from 'lucide-react';
 
+// Rotas públicas (vitrine / funil). Acessíveis SEM sessão.
+// A página de detalhe /schools/[inep] permanece gated (resumo público virá em etapa
+// própria); aqui liberamos a vitrine `/`, a lista `/schools`, o cadastro e o login.
+function isPublicPath(pathname: string | null): boolean {
+  if (!pathname) return false;
+  if (pathname === '/') return true;
+  if (pathname === '/schools') return true;
+  // Detalhe da escola (/schools/{inep}) = resumo público; /roadmap segue gated.
+  if (/^\/schools\/[^/]+$/.test(pathname)) return true;
+  if (pathname.startsWith('/cadastro')) return true;
+  if (pathname === '/login') return true;
+  return false;
+}
+
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const { user, session, isAdmin, isLoading, logout } = useAuth();
   const { collapsed } = useSidebar();
   const isLoginPage = pathname === '/login';
+  const isPublic = isPublicPath(pathname);
 
   useEffect(() => {
-    if (isLoading || isLoginPage) return;
+    if (isLoading) return;
 
+    // Visitante deslogado: liberar rotas públicas, mandar o resto para login.
     if (!session) {
+      if (!isPublic) {
+        router.push('/login');
+      }
+      return;
+    }
+
+    // Sessão existe mas o perfil ainda está carregando.
+    if (!user) return;
+
+    // Modelo B (fail-closed): não-admin sem codigo_inep é um perfil malformado
+    // e não deve navegar o app — manda para o login em vez de renderizar o shell.
+    if (!isAdmin && !user.codigo_inep) {
       router.push('/login');
       return;
     }
 
-    if (!user) {
-      return;
-    }
-
-    if (!isAdmin && user?.codigo_inep) {
+    // Modelo B: usuário-escola (não admin) fica restrito ao próprio painel,
+    // inclusive longe da vitrine pública e da lista.
+    if (!isAdmin) {
       const allowedPaths = [
         `/schools/${user.codigo_inep}`,
         `/schools/${user.codigo_inep}/roadmap`,
       ];
-      const isAllowed = allowedPaths.some(p => pathname?.startsWith(p));
+      const isAllowed = allowedPaths.some((p) => pathname?.startsWith(p));
 
       if (!isAllowed) {
         router.push(`/schools/${user.codigo_inep}`);
       }
     }
-  }, [isLoading, isAdmin, isLoginPage, pathname, router, session, user]);
+  }, [isLoading, isAdmin, isPublic, pathname, router, session, user]);
 
+  // Página de login: sem chrome do app.
   if (isLoginPage) {
     return <>{children}</>;
   }
 
+  // Rota pública sem sessão (ou ainda carregando a auth): renderiza a vitrine
+  // imediatamente — ela traz o próprio header/hero e não depende de login.
+  if (isPublic && !session) {
+    return <>{children}</>;
+  }
+
+  // Carregando sessão/perfil (rotas autenticadas).
   if (isLoading || (session && !user)) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-slate-50">
@@ -52,11 +86,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     );
   }
 
+  // Rota gated sem sessão → o effect acima já redireciona para /login.
   if (!session) {
     return null;
   }
 
-  // For non-admin users, show full-width layout without sidebar
+  // Usuário-escola (não admin): layout enxuto, sem sidebar.
   if (!isAdmin) {
     return (
       <div className="min-h-screen bg-slate-50">
@@ -100,7 +135,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     );
   }
 
-  // Admin users see the full sidebar layout
+  // Admin: layout completo com sidebar.
   return (
     <div className="flex bg-slate-50 min-h-screen">
       <Sidebar />

@@ -10,6 +10,12 @@ dados/
 *.zip
 *.crdownload
 
+# Brainstorm visual companion (mockups)
+.superpowers/
+
+# Config de preview local (caminhos absolutos por máquina)
+.claude/launch.json
+
 # Python
 __pycache__/
 *.py[cod]

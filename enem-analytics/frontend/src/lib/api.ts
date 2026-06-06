@@ -666,6 +666,41 @@ async function fetchAPI<T>(endpoint: string, options?: RequestInit): Promise<T> 
   }
 }
 
+/**
+ * Public fetch — para endpoints abertos (vitrine pública). Não exige sessão e
+ * não redireciona em 401. Não anexa token: os endpoints públicos usam
+ * get_optional_user no backend e retornam dados sem autenticação.
+ */
+async function fetchPublicAPI<T>(endpoint: string, options?: RequestInit): Promise<T> {
+  try {
+    const response = await fetch(`${API_BASE}${endpoint}`, options);
+
+    if (!response.ok) {
+      let errorMessage = `Erro: ${response.status}`;
+      try {
+        const errorData = await response.json();
+        if (errorData.detail) {
+          errorMessage = errorData.detail;
+        }
+      } catch {
+        // Ignore JSON parse errors
+      }
+      throw new Error(errorMessage);
+    }
+
+    if (response.status === 204) {
+      return undefined as T;
+    }
+
+    return response.json();
+  } catch (error) {
+    if (error instanceof Error && error.message.includes('fetch')) {
+      throw new Error('Erro de conexão. Verifique sua internet.');
+    }
+    throw error;
+  }
+}
+
 async function downloadAuthenticatedFile(endpoint: string): Promise<void> {
   const token = await getSessionWithRetry();
 
@@ -716,13 +751,37 @@ async function downloadAuthenticatedFile(endpoint: string): Promise<void> {
 }
 
 export const api = {
-  getStats: () => fetchAPI<Stats>('/api/stats'),
+  getStats: () => fetchPublicAPI<Stats>('/api/stats'),
 
-  getTopSchools: (limit = 10, ano?: number, uf?: string) => {
+  getStatsByUf: () =>
+    fetchPublicAPI<{ by_uf: { uf: string; media: number; escolas: number }[] }>('/api/stats/by-uf'),
+
+  // Cadastro self-service (modelo A). Público — cria a conta no backend; o
+  // auto-login (supabase.auth.signInWithPassword) acontece no componente.
+  signup: (data: {
+    codigo_inep: string;
+    nome_escola: string;
+    nome_contato: string;
+    cargo: string;
+    email: string;
+    telefone: string;
+    senha: string;
+    aceite_termos: boolean;
+    website?: string;
+  }) =>
+    fetchPublicAPI<{ success: boolean; codigo_inep: string; email: string }>('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    }),
+
+  getTopSchools: (limit = 10, ano?: number, uf?: string, tipo_escola?: string, porte?: number) => {
     const params = new URLSearchParams({ limit: limit.toString() });
     if (ano) params.set('ano', ano.toString());
     if (uf) params.set('uf', uf);
-    return fetchAPI<{ ano: number; total: number; schools: TopSchool[] }>(
+    if (tipo_escola) params.set('tipo_escola', tipo_escola);
+    if (porte) params.set('porte', porte.toString());
+    return fetchPublicAPI<{ ano: number; total: number; schools: TopSchool[] }>(
       `/api/schools/top?${params}`
     );
   },
@@ -733,13 +792,30 @@ export const api = {
       return Promise.resolve([]);
     }
 
-    return fetchAPI<{ codigo_inep: string; nome_escola: string; uf: string | null; ultimo_ano: number }[]>(
+    return fetchPublicAPI<{ codigo_inep: string; nome_escola: string; uf: string | null; ultimo_ano: number }[]>(
       `/api/schools/search?q=${encodeURIComponent(query)}&limit=${limit}`
     );
   },
 
   getSchool: (codigo_inep: string) =>
     fetchAPI<SchoolDetail>(`/api/schools/${codigo_inep}`),
+
+  getSchoolSummary: (codigo_inep: string) =>
+    fetchPublicAPI<{
+      codigo_inep: string;
+      nome_escola: string;
+      uf: string | null;
+      tipo_escola: string | null;
+      anos_participacao: number;
+      ultimo_ano: number | null;
+      ranking_brasil: number | null;
+      nota_media: number | null;
+      nota_cn: number | null;
+      nota_ch: number | null;
+      nota_lc: number | null;
+      nota_mt: number | null;
+      nota_redacao: number | null;
+    }>(`/api/schools/${codigo_inep}/summary`),
 
   getSchoolHistory: (codigo_inep: string) =>
     fetchAPI<SchoolHistory>(`/api/schools/${codigo_inep}/history`),
@@ -762,7 +838,7 @@ export const api = {
         searchParams.set(key, value.toString());
       }
     });
-    return fetchAPI<SchoolSummary[]>(`/api/schools/?${searchParams}`);
+    return fetchPublicAPI<SchoolSummary[]>(`/api/schools/?${searchParams}`);
   },
 
   compareSchools: (inep1: string, inep2: string) =>

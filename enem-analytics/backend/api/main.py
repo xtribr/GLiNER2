@@ -10,10 +10,12 @@ load_dotenv()
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+from typing import Optional
 
 from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights, contact, oracle
 from api.auth import router as auth_router
-from api.auth.supabase_dependencies import UserProfile, get_current_admin
+from api.auth.signup import router as signup_router
+from api.auth.supabase_dependencies import UserProfile, get_current_admin, get_optional_user
 from api.admin import router as admin_router
 from data.supabase_store import init_database as init_supabase
 
@@ -63,6 +65,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(auth_router, tags=["Authentication"])
+app.include_router(signup_router, tags=["Cadastro"])
 app.include_router(admin_router, tags=["Admin"])
 app.include_router(schools.router, prefix="/api/schools", tags=["Schools"])
 app.include_router(predictions.router)
@@ -95,8 +98,19 @@ async def health():
 
 @app.get("/api/stats")
 async def get_stats_endpoint(
-    _: UserProfile = Depends(get_current_admin),
+    _: Optional[UserProfile] = Depends(get_optional_user),
 ):
     """Get general statistics"""
     from data.supabase_store import get_stats
     return get_stats()
+
+
+@app.get("/api/stats/by-uf")
+async def get_stats_by_uf_endpoint(
+    _: Optional[UserProfile] = Depends(get_optional_user),
+):
+    """Média TRI agregada por UF (mapa da vitrine pública). Sem token."""
+    from data.supabase_store import get_client
+    client = get_client()
+    result = client.rpc("get_uf_stats", {}).execute()
+    return {"by_uf": result.data or []}
