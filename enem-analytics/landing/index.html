@@ -33,10 +33,16 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "name": "XTRI Educação — Ranking ENEM",
+      "@type": "EducationalOrganization",
+      "name": "XTRI",
+      "alternateName": "X-TRI",
       "url": "https://rankingenem.com/",
-      "logo": "https://rankingenem.com/logo-x.png"
+      "logo": "https://rankingenem.com/logo-x.png",
+      "description": "Plataforma de análise de desempenho escolar no ENEM pela metodologia TRI. Mais de 20 anos de pesquisa em Psicometria dos Testes, Teoria de Resposta ao Item e Inteligência Artificial aplicada à educação.",
+      "founder": {"@type":"Person","name":"Professor Xandão"},
+      "areaServed": "BR",
+      "sameAs": ["https://xtri.online"],
+      "contactPoint": {"@type":"ContactPoint","telephone":"+55-84-99142-3557","email":"contato@xtri.online","contactType":"customer support","areaServed":"BR","availableLanguage":"Portuguese"}
     },
     {
       "@type": "WebSite",
@@ -160,6 +166,24 @@
   .step h3{margin-top:16px;font-size:18px;font-weight:600}
   .step p{margin-top:7px;color:var(--ink-2);font-size:14.5px;line-height:1.5}
 
+  /* Sobre a XTRI */
+  .about{max-width:780px;margin:40px auto 0;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:40px 44px}
+  .about .story{font-size:1.1rem;line-height:1.6;color:var(--ink)}
+  .about .story strong{font-weight:600}
+  .about .story + .story{margin-top:15px}
+  .about .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;text-align:center}
+  .about .nums .n{font-size:clamp(1.7rem,5vw,2.2rem);font-weight:700;letter-spacing:-.03em}
+  .about .nums .l{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+  .about .who{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+  .about .who .bar{width:4px;height:42px;border-radius:4px;background:var(--grad);flex:0 0 auto}
+  .about .who b{display:block;font-size:15px;font-weight:600}
+  .about .who span{font-size:13px;color:var(--ink-2)}
+  .trust{text-align:center;margin-top:34px}
+  .trust .t{font-size:12px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.08em}
+  .trust .logos{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:14px}
+  .trust .logos span{font-size:13px;font-weight:600;color:#7a7a80;background:#f0f0f3;border-radius:9px;padding:7px 13px}
+  @media(max-width:560px){.about{padding:26px 22px}.about .nums{gap:18px 10px}}
+
   /* FAQ */
   .faq{max-width:720px;margin:40px auto 0}
   details{border-top:1px solid var(--line);padding:18px 4px}
@@ -191,6 +215,7 @@
     <div class="nav-right">
       <a class="navsec" href="#ranking">Ranking</a>
       <a class="navsec" href="#como">Como funciona</a>
+      <a class="navsec" href="#sobre">Sobre</a>
       <a href="https://app.rankingenem.com/login">Entrar</a>
       <a class="nav-cta" href="https://app.rankingenem.com/cadastro">Analisar escola</a>
     </div>
@@ -247,6 +272,35 @@
   </div>
 </section>
 
+<section class="block wrap" id="sobre">
+  <p class="kicker">Quem está por trás</p>
+  <h2>A metodologia da XTRI</h2>
+  <p class="lead2">Não é só um ranking. São mais de 20 anos de pesquisa em avaliação educacional, aplicados à sua escola.</p>
+
+  <div class="about">
+    <p class="story">Muito mais que uma plataforma, a XTRI é a materialização de mais de <strong>20 anos de sala de aula e pesquisa</strong> do Professor Xandão — escritor, palestrante e especialista em <strong>Psicometria dos Testes</strong> e <strong>Neurociência aplicada à performance</strong>.</p>
+    <p class="story">A XTRI nasceu de uma constatação: escolas e alunos não sabiam interpretar nem usar seus próprios dados para evoluir. Para mudar isso, unimos a precisão matemática da <strong>Teoria de Resposta ao Item (TRI)</strong> a estratégias concretas de empoderamento escolar — do diagnóstico por IA à mentoria.</p>
+
+    <div class="nums">
+      <div><div class="n accent">+20</div><div class="l">anos de pesquisa</div></div>
+      <div><div class="n accent">+3.000</div><div class="l">aprovados</div></div>
+      <div><div class="n accent">100%</div><div class="l">base oficial INEP</div></div>
+    </div>
+
+    <div class="who">
+      <span class="bar"></span>
+      <div><b>Professor Xandão</b><span>Fundador &amp; CEO · Psicometria · TRI · IA aplicada ao ENEM</span></div>
+    </div>
+  </div>
+
+  <div class="trust">
+    <p class="t">Instituições que confiam na XTRI</p>
+    <div class="logos">
+      <span>Marista</span><span>Dom Barreto</span><span>Dom Bosco</span><span>GGE</span><span>Rede Inspira</span><span>Master</span><span>Máxima</span>
+    </div>
+  </div>
+</section>
+
 <section class="block wrap">
   <p class="kicker">Dúvidas</p>
   <h2>Perguntas frequentes</h2>
@@ -268,11 +322,13 @@
 
 <footer>
   <div class="wrap">
-    <span>Dados: Inep/MEC — Microdados ENEM</span>
+    <span>XTRI · Psicometria, TRI e IA aplicada ao ENEM · Natal/RN</span>
+    <a href="https://xtri.online" target="_blank" rel="noopener">xtri.online</a>
+    <a href="mailto:contato@xtri.online">contato@xtri.online</a>
+    <a href="https://wa.me/5584991423557" target="_blank" rel="noopener">WhatsApp (84) 99142-3557</a>
     <a href="https://app.rankingenem.com/">Ranking</a>
     <a href="https://app.rankingenem.com/cadastro">Cadastro</a>
-    <a href="https://app.rankingenem.com/login">Entrar</a>
-    <span>© 2026 XTRI Educação</span>
+    <span>© 2026 XTRI Educação · Dados: Inep/MEC</span>
   </div>
 </footer>
 
