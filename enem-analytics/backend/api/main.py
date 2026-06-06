@@ -14,6 +14,7 @@ from typing import Optional
 
 from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights, contact, oracle
 from api.auth import router as auth_router
+from api.auth.signup import router as signup_router
 from api.auth.supabase_dependencies import UserProfile, get_current_admin, get_optional_user
 from api.admin import router as admin_router
 from data.supabase_store import init_database as init_supabase
@@ -64,6 +65,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(auth_router, tags=["Authentication"])
+app.include_router(signup_router, tags=["Cadastro"])
 app.include_router(admin_router, tags=["Admin"])
 app.include_router(schools.router, prefix="/api/schools", tags=["Schools"])
 app.include_router(predictions.router)
