@@ -7,7 +7,7 @@ from pydantic import BaseModel
 import pandas as pd
 
 from api.auth.authorization import get_authorized_school_user
-from api.auth.supabase_dependencies import UserProfile, get_current_admin
+from api.auth.supabase_dependencies import UserProfile, get_current_admin, get_optional_user
 from data.year_resolver import find_latest_skills_file, get_file_year
 
 # Supabase-backed data layer. Imported as a module so route handlers named
@@ -293,7 +293,7 @@ async def list_schools(
     ano: Optional[int] = None,
     order_by: str = Query("ranking", regex="^(ranking|nota|nome)$"),
     order: str = Query("asc", regex="^(asc|desc)$"),
-    _: UserProfile = Depends(get_current_admin),
+    _: Optional[UserProfile] = Depends(get_optional_user),
 ):
     """
     List schools with pagination and filtering.
@@ -344,7 +344,7 @@ async def get_top_schools(
     tipo_escola: Optional[str] = None,
     localizacao: Optional[str] = None,
     porte: Optional[int] = None,
-    _: UserProfile = Depends(get_current_admin),
+    _: Optional[UserProfile] = Depends(get_optional_user),
 ):
     """
     Get top ranked schools.
@@ -369,7 +369,7 @@ async def get_top_schools(
 async def search_schools(
     q: str = Query(..., min_length=2),
     limit: int = Query(20, ge=1, le=100),
-    _: UserProfile = Depends(get_current_admin),
+    _: Optional[UserProfile] = Depends(get_optional_user),
 ):
     """
     Quick search for schools by name or INEP code.
@@ -417,6 +417,40 @@ async def get_school(
         melhor_ano=result.get("melhor_ano"),
         melhor_ranking=result.get("melhor_ranking")
     )
+
+
+@router.get("/{codigo_inep}/summary")
+async def get_school_summary(
+    codigo_inep: str,
+    _: Optional[UserProfile] = Depends(get_optional_user),
+):
+    """
+    Public summary for a school: latest-year snapshot only (ranking + scores).
+    Used by the public vitrine. Deep history/analysis stays behind auth.
+    """
+    result = supabase_store.get_school_detail(codigo_inep)
+
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"School {codigo_inep} not found")
+
+    historico = result.get("historico") or []
+    latest = historico[-1] if historico else {}
+
+    return {
+        "codigo_inep": result["codigo_inep"],
+        "nome_escola": result["nome_escola"],
+        "uf": result.get("uf"),
+        "tipo_escola": result.get("tipo_escola"),
+        "anos_participacao": len(historico),
+        "ultimo_ano": latest.get("ano"),
+        "ranking_brasil": latest.get("ranking_brasil"),
+        "nota_media": latest.get("nota_media"),
+        "nota_cn": latest.get("nota_cn"),
+        "nota_ch": latest.get("nota_ch"),
+        "nota_lc": latest.get("nota_lc"),
+        "nota_mt": latest.get("nota_mt"),
+        "nota_redacao": latest.get("nota_redacao"),
+    }
 
 
 @router.get("/{codigo_inep}/history")
