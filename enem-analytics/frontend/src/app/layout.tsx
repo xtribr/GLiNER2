@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "X-TRI Escolas - Ranking ENEM",
-  description: "Análise de dados do ENEM por escola - Rankings, tendências e previsões",
+  title: "Portal dos Microdados ENEM — Ranking e Nota TRI por Escola | XTRI",
+  description: "Portal dos Microdados ENEM: ranking por escola, nota TRI, tendências e diagnóstico, a partir dos dados oficiais do INEP.",
 };
 
 export default function RootLayout({
