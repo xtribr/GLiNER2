@@ -41,6 +41,20 @@ class UserProfile:
     is_active: bool = True
 
 
+@dataclass
+class Lead:
+    """Lead do cadastro público (origem='cadastro_publico')."""
+    id: str
+    nome_escola: str
+    codigo_inep: str
+    nome_contato: str
+    cargo: str
+    telefone: str
+    email: str
+    email_verified: bool
+    created_at: str
+
+
 def verify_token(access_token: str) -> Optional[dict]:
     """
     Verify a Supabase access token.
@@ -257,6 +271,41 @@ def list_all_profiles(skip: int = 0, limit: int = 100) -> list[UserProfile]:
         ]
     except Exception as e:
         logger.error(f"Failed to list profiles: {e}")
+        return []
+
+
+def list_leads(limit: int = 1000) -> list[Lead]:
+    """
+    Lista os leads do cadastro público (origem='cadastro_publico'),
+    mais recentes primeiro. Admin-only (chamado atrás de get_current_admin).
+    """
+    try:
+        supabase = get_supabase()
+        result = (
+            supabase.table("profiles")
+            .select("*")
+            .eq("origem", "cadastro_publico")
+            .order("created_at", desc=True)
+            .limit(limit)
+            .execute()
+        )
+
+        return [
+            Lead(
+                id=row["id"],
+                nome_escola=row.get("nome_escola", "") or "",
+                codigo_inep=row.get("codigo_inep", "") or "",
+                nome_contato=row.get("nome_contato", "") or "",
+                cargo=row.get("cargo", "") or "",
+                telefone=row.get("telefone", "") or "",
+                email=resolve_user_email(row["id"], profile_email=row.get("email", "")),
+                email_verified=row.get("email_verified", False),
+                created_at=row.get("created_at", "") or "",
+            )
+            for row in result.data
+        ]
+    except Exception as e:
+        logger.error(f"Failed to list leads: {e}")
         return []
 
 
