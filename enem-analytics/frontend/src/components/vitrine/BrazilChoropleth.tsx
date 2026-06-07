@@ -19,10 +19,11 @@ const W = 520;
 const H = 540;
 const PAD = 12;
 
-// Cor: escala da menor (cyan claro) à maior média (cyan profundo).
+// Cor: escala da menor (cyan claro e nítido) à maior média (azul profundo).
+// O piso é um cyan claramente visível (não quase-branco) para o mapa "ler" como pintado.
 function lerpColor(t: number): string {
-  const a = [219, 244, 253]; // #dbf4fd
-  const b = [10, 90, 140]; // #0a5a8c
+  const a = [144, 206, 240]; // #90cef0 — cyan claro visível
+  const b = [7, 64, 105]; // #074069 — azul profundo
   const clamped = Math.max(0, Math.min(1, t));
   const c = a.map((v, i) => Math.round(v + (b[i] - v) * clamped));
   return `rgb(${c[0]},${c[1]},${c[2]})`;
