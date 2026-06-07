@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, EmailStr
 
 from api.auth.supabase_dependencies import get_current_admin, UserProfile
-from api.auth.supabase_service import get_supabase, get_user_profile, list_all_profiles, update_profile
+from api.auth.supabase_service import get_supabase, get_user_profile, list_all_profiles, list_leads, update_profile
 
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
@@ -45,6 +45,29 @@ async def list_users(
             "is_active": p.is_active,
         }
         for p in profiles
+    ]
+
+
+@router.get("/leads")
+async def list_leads_endpoint(_: UserProfile = Depends(get_current_admin)):
+    """
+    Lista os leads do cadastro público (origem='cadastro_publico'),
+    mais recentes primeiro, com os dados de contato. Admin only.
+    """
+    leads = list_leads()
+    return [
+        {
+            "id": lead.id,
+            "nome_escola": lead.nome_escola,
+            "codigo_inep": lead.codigo_inep,
+            "nome_contato": lead.nome_contato,
+            "cargo": lead.cargo,
+            "telefone": lead.telefone,
+            "email": lead.email,
+            "email_verified": lead.email_verified,
+            "created_at": lead.created_at,
+        }
+        for lead in leads
     ]
 
 

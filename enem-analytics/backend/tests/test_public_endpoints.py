@@ -70,6 +70,7 @@ PUBLIC_PATHS = [
 GATED_PATHS = [
     "/api/schools/compare/11111111/22222222",
     "/api/schools/skills/all",
+    "/api/admin/leads",
 ]
 
 

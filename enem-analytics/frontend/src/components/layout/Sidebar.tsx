@@ -18,6 +18,7 @@ import {
   LogOut,
   Shield,
   Users,
+  UserPlus,
   Sparkles,
   Crown,
   MessageCircle,
@@ -67,17 +68,23 @@ const adminMenuItems = [
 ];
 
 const adminSecondaryItems = [
-  { 
-    icon: Shield, 
-    label: 'Admin', 
-    href: '/admin',
-    badge: null 
+  {
+    icon: UserPlus,
+    label: 'Leads',
+    href: '/admin/leads',
+    badge: null
   },
-  { 
-    icon: Users, 
-    label: 'Usuários', 
+  {
+    icon: Shield,
+    label: 'Admin',
+    href: '/admin',
+    badge: null
+  },
+  {
+    icon: Users,
+    label: 'Usuários',
     href: '/admin/users',
-    badge: null 
+    badge: null
   },
 ];
 

@@ -14,6 +14,19 @@ export interface User {
   created_at?: string;
 }
 
+// Lead capturado pelo cadastro público (origem='cadastro_publico')
+export interface Lead {
+  id: string;
+  nome_escola: string;
+  codigo_inep: string;
+  nome_contato: string;
+  cargo: string;
+  telefone: string;
+  email: string;
+  email_verified: boolean;
+  created_at: string;
+}
+
 export interface SchoolScore {
   ano: number;
   nota_cn: number | null;
@@ -1414,4 +1427,7 @@ export const api = {
 
   getAdminStats: () =>
     fetchAPI<{ total_users: number; active_users: number; inactive_users: number; admin_users: number }>('/api/admin/stats'),
+
+  getLeads: () =>
+    fetchAPI<Lead[]>('/api/admin/leads'),
 };
