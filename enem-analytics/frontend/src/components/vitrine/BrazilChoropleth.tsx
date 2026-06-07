@@ -59,8 +59,9 @@ export default function BrazilChoropleth() {
     [data],
   );
   const medias = (data?.by_uf ?? []).map((r) => r.media);
-  const min = medias.length ? Math.min(...medias) : 0;
-  const max = medias.length ? Math.max(...medias) : 1;
+  const hasData = medias.length > 0;
+  const min = hasData ? Math.min(...medias) : 0;
+  const max = hasData ? Math.max(...medias) : 1;
 
   const paths = useMemo(() => {
     if (!features || features.length === 0) return [];
@@ -133,9 +134,12 @@ export default function BrazilChoropleth() {
         <div className="mt-3 px-1">
           <div className="h-2 w-full rounded-full" style={{ background: `linear-gradient(90deg, ${lerpColor(0)}, ${lerpColor(1)})` }} />
           <div className="mt-1 flex justify-between text-[10px] font-semibold text-slate-400">
-            <span>{formatTriScore(min)}</span>
-            <span>{formatTriScore(max)}</span>
+            <span>{hasData ? formatTriScore(min) : '—'}</span>
+            <span>{hasData ? formatTriScore(max) : '—'}</span>
           </div>
+          <p className="mt-1 text-center text-[9px] font-semibold uppercase tracking-[0.12em] text-slate-400">
+            {hasData ? 'média TRI por estado' : 'carregando médias…'}
+          </p>
         </div>
       </div>
     </div>
