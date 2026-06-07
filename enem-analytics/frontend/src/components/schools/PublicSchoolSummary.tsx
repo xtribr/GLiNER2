@@ -138,6 +138,12 @@ export default function PublicSchoolSummary({ codigoInep }: PublicSchoolSummaryP
           </>
         )}
       </main>
+
+      <footer className="pb-6 text-center text-xs text-slate-500">
+        <Link href="/termos-de-uso" className="font-semibold text-[#139ED3] hover:underline">Termos de Uso</Link> ·{' '}
+        <Link href="/politica-de-privacidade" className="font-semibold text-[#139ED3] hover:underline">Política de Privacidade</Link> ·{' '}
+        <Link href="/politica-de-compliance-ia" className="font-semibold text-[#139ED3] hover:underline">Compliance IA</Link>
+      </footer>
     </div>
   );
 }
