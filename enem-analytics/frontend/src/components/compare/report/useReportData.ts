@@ -1,5 +1,7 @@
-import type { ReportData, ComparisonYearRow, ReportSchoolMeta } from './types';
-import type { DiagnosisComparisonResult, SchoolHistory } from '@/lib/api';
+import type { ReportData, ComparisonYearRow, ReportSchoolMeta, ProjectionRow } from './types';
+import type { DiagnosisComparisonResult, SchoolHistory, TRIAreaProjection } from '@/lib/api';
+import { api } from '@/lib/api';
+import { buildProjectionRows } from './reportMetrics';
 
 interface BuildArgs {
   diagnosis: DiagnosisComparisonResult;
@@ -7,6 +9,37 @@ interface BuildArgs {
   comparison?: { comparison: { ano: number; escola1: { nota_media: number|null; ranking: number|null }|null; escola2: { nota_media: number|null; ranking: number|null }|null }[] };
   nameA: string; nameB: string;
   ufA?: string|null; ufB?: string|null;
+}
+
+// Map diagnosis area codes (e.g. 'CH', 'RED', 'REDACAO') → backend lowercase (e.g. 'ch', 're')
+function diagAreaToBackendCode(area: string): string {
+  const upper = area.toUpperCase();
+  if (upper === 'RED' || upper === 'REDACAO' || upper === 'RE') return 're';
+  return area.toLowerCase().slice(0, 2);
+}
+
+export async function collectProjectionRows(
+  inepA: string,
+  inepB: string,
+  areaCodes: string[],
+): Promise<ProjectionRow[]> {
+  const backendCodes = areaCodes.map(diagAreaToBackendCode);
+
+  const settledA = await Promise.allSettled(
+    backendCodes.map(code => api.getAreaProjection(inepA, code)),
+  );
+  const settledB = await Promise.allSettled(
+    backendCodes.map(code => api.getAreaProjection(inepB, code)),
+  );
+
+  const projA: TRIAreaProjection[] = settledA
+    .filter((r): r is PromiseFulfilledResult<TRIAreaProjection> => r.status === 'fulfilled')
+    .map(r => r.value);
+  const projB: TRIAreaProjection[] = settledB
+    .filter((r): r is PromiseFulfilledResult<TRIAreaProjection> => r.status === 'fulfilled')
+    .map(r => r.value);
+
+  return buildProjectionRows(projA, projB);
 }
 
 export function buildPhase1ReportData(args: BuildArgs): ReportData {

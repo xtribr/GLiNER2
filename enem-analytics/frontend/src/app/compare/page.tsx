@@ -26,7 +26,7 @@ import {
   SuccessStoriesComparison,
   TRIAnalysisComparison,
 } from '@/components/compare';
-import { buildPhase1ReportData } from '@/components/compare/report/useReportData';
+import { buildPhase1ReportData, collectProjectionRows } from '@/components/compare/report/useReportData';
 import { generateReportPdf } from '@/components/compare/report/generateReportPdf';
 import {
   ResponsiveContainer,
@@ -77,6 +77,7 @@ export default function ComparePage() {
   const [school2Name, setSchool2Name] = useState('');
   const [isPdfExporting, setIsPdfExporting] = useState(false);
   const [pdfExportSuccess, setPdfExportSuccess] = useState(false);
+  const [pdfProgress, setPdfProgress] = useState('');
 
   // Anonymous display labels for privacy in comparisons
   const displayLabel1 = 'Escola 1';
@@ -167,6 +168,7 @@ export default function ComparePage() {
       return;
     }
     setIsPdfExporting(true);
+    setPdfProgress('');
     try {
       const reportData = buildPhase1ReportData({
         diagnosis: diagnosisComparison,
@@ -174,6 +176,19 @@ export default function ComparePage() {
         nameA: school1Name, nameB: school2Name,           // NOMES REAIS
         ufA: comparison?.escola1?.uf, ufB: comparison?.escola2?.uf,
       });
+
+      // Fetch TRI projections in parallel — graceful: failure does not block PDF
+      try {
+        setPdfProgress('Coletando projeções…');
+        const areaCodes = diagnosisComparison.area_comparison.map(a => a.area);
+        const rows = await collectProjectionRows(school1, school2, areaCodes);
+        if (rows.length > 0) reportData.projection = rows;
+      } catch {
+        // Projection fetch failed; proceed without projection section
+      } finally {
+        setPdfProgress('');
+      }
+
       await generateReportPdf(reportData);
       setPdfExportSuccess(true);
       setTimeout(() => setPdfExportSuccess(false), 2000);
@@ -182,6 +197,7 @@ export default function ComparePage() {
       alert('Erro ao gerar o relatório. Tente novamente.');
     } finally {
       setIsPdfExporting(false);
+      setPdfProgress('');
     }
   };
 
@@ -453,7 +469,7 @@ export default function ComparePage() {
                     <Download className="w-4 h-4" />
                   )}
                   {isPdfExporting
-                    ? 'Gerando PDF...'
+                    ? (pdfProgress || 'Gerando PDF...')
                     : pdfExportSuccess
                       ? 'PDF pronto'
                       : 'Exportar Relatório PDF'}
