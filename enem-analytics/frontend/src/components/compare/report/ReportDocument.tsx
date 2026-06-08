@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import './ReportDocument.css';
 import type { ReportData } from './types';
 import { areasWon, biggestGapArea, rankingGap, statusClass, statusLabel, fmt, winnerOfArea } from './reportMetrics';
-import { executiveSummary, areaParagraph } from './reportNarrative';
+import { executiveSummary, areaParagraph, projectionParagraph } from './reportNarrative';
 import { AreaBars, EvolutionLine, AreaRadar } from './ReportCharts';
 
 interface Props { data: ReportData; onReady?: () => void; }
@@ -82,7 +82,119 @@ export default function ReportDocument({ data: d, onReady }: Props) {
         </tbody>
       </table>
 
-      {/* Seções 4–8 e 11 entram nas Fases 2–3 (render condicional) */}
+      {/* Seção de Projeção TRI — renderizada apenas quando disponível */}
+      {d.projection && d.projection.length > 0 && (() => {
+        const rows = d.projection;
+        const targetYear = rows[0].target_year;
+        const riskLabel = (r: string | null) =>
+          r === 'conservative' ? 'Conservador' : r === 'outlier' ? 'Outlier' : r === 'normal' ? 'Normal' : '—';
+        const trendLabel = (dir: string | null, annual: number | null) => {
+          if (!dir || dir === 'insufficient_data') return '—';
+          const sign = (annual ?? 0) > 0 ? '+' : '';
+          return `${dir === 'ascending' ? '↑' : dir === 'descending' ? '↓' : '→'} ${sign}${fmt(annual)}/ano`;
+        };
+        return (
+          <>
+            <div className="sec">Projeção TRI — ENEM {targetYear} (cenários, predição oficial e conteúdos a focar)</div>
+            <p className="an">{projectionParagraph(rows)}</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th style={{ width: '10%' }}>Área</th>
+                  <th style={{ width: '5%' }}>Escola</th>
+                  <th style={{ width: '8%' }}>Atual</th>
+                  <th style={{ width: '8%' }}>Conserv.</th>
+                  <th style={{ width: '8%' }}>Realista</th>
+                  <th style={{ width: '8%' }}>Otimista</th>
+                  <th style={{ width: '12%' }}>Recomend. (Δ)</th>
+                  <th style={{ width: '14%' }}>Predição {targetYear} (Δ · Risco)</th>
+                  <th style={{ width: '10%' }}>Tendência/ano</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row) => (
+                  [
+                    <tr key={`${row.area}-A`}>
+                      <td rowSpan={2} style={{ fontWeight: 700, verticalAlign: 'middle' }}>{row.area_name}</td>
+                      <td className="a">A</td>
+                      <td className="a">{fmt(row.a.current)}</td>
+                      <td>{fmt(row.a.scenarios?.conservative)}</td>
+                      <td>{fmt(row.a.scenarios?.realistic)}</td>
+                      <td>{fmt(row.a.scenarios?.optimistic)}</td>
+                      <td className="a">{fmt(row.a.recommended)} ({row.a.potential_gain != null ? `+${fmt(row.a.potential_gain)}` : '—'})</td>
+                      <td className="a">{fmt(row.a.official_next)} ({row.a.official_change != null ? (row.a.official_change >= 0 ? '+' : '') + fmt(row.a.official_change) : '—'}) · {riskLabel(row.a.risk_level)}</td>
+                      <td>{trendLabel(row.a.trend_dir, row.a.trend_annual)}</td>
+                    </tr>,
+                    <tr key={`${row.area}-B`}>
+                      <td className="b">B</td>
+                      <td className="b">{fmt(row.b.current)}</td>
+                      <td>{fmt(row.b.scenarios?.conservative)}</td>
+                      <td>{fmt(row.b.scenarios?.realistic)}</td>
+                      <td>{fmt(row.b.scenarios?.optimistic)}</td>
+                      <td className="b">{fmt(row.b.recommended)} ({row.b.potential_gain != null ? `+${fmt(row.b.potential_gain)}` : '—'})</td>
+                      <td className="b">{fmt(row.b.official_next)} ({row.b.official_change != null ? (row.b.official_change >= 0 ? '+' : '') + fmt(row.b.official_change) : '—'}) · {riskLabel(row.b.risk_level)}</td>
+                      <td>{trendLabel(row.b.trend_dir, row.b.trend_annual)}</td>
+                    </tr>,
+                  ]
+                ))}
+              </tbody>
+            </table>
+
+            <div className="sec" style={{ marginTop: '6px' }}>Conteúdos a Focar por Área</div>
+            {rows.map((row) => {
+              const hasFocus = row.a_focus.length > 0 || row.b_focus.length > 0;
+              if (!hasFocus) return null;
+              return (
+                <div className="areablock" key={`focus-${row.area}`}>
+                  <div className="areahead">
+                    <span className="t">{row.area_name}</span>
+                    <span className="muted">stretch items (gap em pts TRI)</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '12px', marginTop: '4px' }}>
+                    <div style={{ flex: 1 }}>
+                      {row.a_focus.length > 0 && (
+                        <>
+                          <div className="cap" style={{ color: '#2563eb' }}>Escola A — conteúdos prioritários</div>
+                          <table style={{ marginTop: '2px' }}>
+                            <thead><tr><th>Habilidade</th><th>Gap (pts)</th></tr></thead>
+                            <tbody>
+                              {row.a_focus.map((item) => (
+                                <tr key={item.skill}>
+                                  <td className="a">{item.skill}</td>
+                                  <td>+{fmt(item.gap)}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </>
+                      )}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      {row.b_focus.length > 0 && (
+                        <>
+                          <div className="cap" style={{ color: '#16a34a' }}>Escola B — conteúdos prioritários</div>
+                          <table style={{ marginTop: '2px' }}>
+                            <thead><tr><th>Habilidade</th><th>Gap (pts)</th></tr></thead>
+                            <tbody>
+                              {row.b_focus.map((item) => (
+                                <tr key={item.skill}>
+                                  <td className="b">{item.skill}</td>
+                                  <td>+{fmt(item.gap)}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        );
+      })()}
 
       <div className="foot"><span>X-TRI Escolas · rankingenem.com</span><span>Base ENEM {d.baseYear}</span></div>
     </div>

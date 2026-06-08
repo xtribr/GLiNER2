@@ -1,4 +1,4 @@
-import type { ReportData } from './types';
+import type { ReportData, ProjectionRow } from './types';
 import type { DiagnosisComparisonArea } from '@/lib/api';
 import { areasWon, biggestGapArea, fmt } from './reportMetrics';
 
@@ -22,4 +22,29 @@ export function areaParagraph(ar: DiagnosisComparisonArea, d: ReportData): strin
   return `Em ${ar.area_name}, ${winnerName} vence por ${fmt(gap)} pts ` +
     `(${fmt(ar.school_1_score)} × ${fmt(ar.school_2_score)}). ` +
     `Onde agir: priorizar a escola com menor nota nesta área para reduzir a distância geral.`;
+}
+
+export function projectionParagraph(rows: ProjectionRow[]): string {
+  if (rows.length === 0) return '';
+
+  // Find the area with biggest projected gain considering both schools
+  let bestArea = rows[0];
+  let bestGain = Math.max(rows[0].a.potential_gain ?? 0, rows[0].b.potential_gain ?? 0);
+  for (const row of rows) {
+    const gain = Math.max(row.a.potential_gain ?? 0, row.b.potential_gain ?? 0);
+    if (gain > bestGain) { bestGain = gain; bestArea = row; }
+  }
+
+  // School with more upside: sum of potential_gain across all areas
+  const totalGainA = rows.reduce((s, r) => s + (r.a.potential_gain ?? 0), 0);
+  const totalGainB = rows.reduce((s, r) => s + (r.b.potential_gain ?? 0), 0);
+  const moreUpside = totalGainA >= totalGainB ? 'A' : 'B';
+
+  const targetYear = bestArea.target_year;
+
+  return `Para o ENEM ${targetYear}, a área com maior potencial de ganho projetado é ` +
+    `${bestArea.area_name} (até +${fmt(bestGain)} pts no cenário otimista). ` +
+    `A Escola ${moreUpside} apresenta maior margem de evolução agregada ` +
+    `(+${fmt(moreUpside === 'A' ? totalGainA : totalGainB)} pts nas áreas analisadas). ` +
+    `As predições oficiais e os conteúdos a focar por área estão detalhados na tabela abaixo.`;
 }

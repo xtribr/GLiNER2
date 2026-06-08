@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { executiveSummary, areaParagraph } from './reportNarrative';
+import { executiveSummary, areaParagraph, projectionParagraph } from './reportNarrative';
+import type { ProjectionRow } from './types';
 import type { ReportData } from './types';
 
 const base = {
@@ -24,5 +25,57 @@ describe('areaParagraph', () => {
     const p = areaParagraph(base.diagnosis.area_comparison[0], base);
     expect(p).toMatch(/212/);
     expect(p).toContain('CHRISTUS');   // vencedor da Redação (B)
+  });
+});
+
+// --- projectionParagraph ---
+
+function makeRow(area: string, areaName: string, gainA: number, gainB: number, year = 2026): ProjectionRow {
+  return {
+    area,
+    area_name: areaName,
+    target_year: year,
+    a: { current: 600, recommended: 600 + gainA, potential_gain: gainA, scenarios: { conservative: 605, realistic: 610, optimistic: 615 }, official_next: 610, official_change: 10, risk_level: 'normal', trend_dir: 'ascending', trend_annual: 5 },
+    b: { current: 580, recommended: 580 + gainB, potential_gain: gainB, scenarios: { conservative: 585, realistic: 590, optimistic: 595 }, official_next: 590, official_change: 10, risk_level: 'normal', trend_dir: 'stable', trend_annual: 0 },
+    a_focus: [{ skill: 'H1', gap: 30 }],
+    b_focus: [{ skill: 'H2', gap: 20 }],
+  };
+}
+
+describe('projectionParagraph', () => {
+  it('retorna string vazia para lista vazia', () => {
+    expect(projectionParagraph([])).toBe('');
+  });
+
+  it('menciona o ano alvo correto', () => {
+    const p = projectionParagraph([makeRow('MT', 'Matemática', 20, 15)]);
+    expect(p).toContain('2026');
+  });
+
+  it('identifica a área com maior ganho potencial', () => {
+    const rows = [
+      makeRow('MT', 'Matemática', 20, 15),
+      makeRow('CN', 'Ciências da Natureza', 35, 10),
+    ];
+    const p = projectionParagraph(rows);
+    expect(p).toContain('Ciências da Natureza'); // CN tem gain 35 > MT 20
+  });
+
+  it('identifica a escola com maior upside agregado', () => {
+    const rows = [
+      makeRow('MT', 'Matemática', 20, 30),   // B domina
+      makeRow('CH', 'Ciências Humanas', 10, 25),
+    ];
+    const p = projectionParagraph(rows);
+    expect(p).toContain('Escola B');           // totalB=55 > totalA=30
+  });
+
+  it('identifica Escola A quando ela tem mais upside', () => {
+    const rows = [
+      makeRow('MT', 'Matemática', 40, 10),
+      makeRow('LC', 'Linguagens', 20, 5),
+    ];
+    const p = projectionParagraph(rows);
+    expect(p).toContain('Escola A');           // totalA=60 > totalB=15
   });
 });
