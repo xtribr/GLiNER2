@@ -121,6 +121,13 @@ export function fmt(n: number | null | undefined): string {
   return n.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
+/** Formats a numeric delta as "+1,5 pts" or "−1,5 pts" (no raw floats, no "+-"). */
+export function signedPts(n: number): string {
+  const r = Math.round(n * 10) / 10;
+  const sign = r >= 0 ? '+' : '−';
+  return `${sign}${Math.abs(r).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} pts`;
+}
+
 export function winnerOfArea(ar: DiagnosisComparisonArea): Winner {
   return ar.difference > 0 ? 'A' : ar.difference < 0 ? 'B' : 'tie';
 }
@@ -289,8 +296,8 @@ export function buildRecommendations(d: ReportData): RecommendationRow[] {
     const projRow = projMap.get(canonicalAreaCode(ar.area));
     const projCell = projRow ? (laggardScope === 'B' ? projRow.b : projRow.a) : null;
     const gainStr = projCell?.potential_gain != null
-      ? `+${projCell.potential_gain} pts em ${ar.area_name}`
-      : `reduz gap de ${Math.abs(ar.difference)} pts`;
+      ? `${signedPts(projCell.potential_gain)} em ${ar.area_name}`
+      : `reduz gap de ${fmt(Math.abs(ar.difference))} pts em ${ar.area_name}`;
     return {
       scope: laggardScope,
       priority,

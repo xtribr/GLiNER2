@@ -14,6 +14,15 @@ interface BuildArgs {
 
 // Map diagnosis area codes (e.g. 'CH', 'RED', 'REDACAO') → backend lowercase (e.g. 'ch', 're')
 const DIAG_TO_BACKEND: Record<string, string> = { CN: 'cn', CH: 'ch', LC: 'lc', MT: 'mt', RED: 're', REDACAO: 're', RE: 're' };
+
+// INEP porte codes → human-readable label (same mapping used in schools/page.tsx)
+const PORTE_LABEL: Record<number, string> = {
+  1: 'Até 30 concluintes',
+  2: '31–100 concluintes',
+  3: '101–200 concluintes',
+  4: '201–400 concluintes',
+  5: '400+ concluintes',
+};
 function diagAreaToBackendCode(code: string): string {
   const u = (code || '').toUpperCase();
   return DIAG_TO_BACKEND[u] ?? u.toLowerCase();
@@ -76,7 +85,7 @@ export function buildPhase1ReportData(args: BuildArgs): ReportData {
     uf: uf ?? info.info.localizacao ?? null,
     cidade: info.info.localizacao ?? null,
     tipo_escola: info.info.tipo_escola,
-    porte_label: info.info.porte != null ? String(info.info.porte) : null,
+    porte_label: info.info.porte != null ? (PORTE_LABEL[info.info.porte] ?? String(info.info.porte)) : null,
     nota_media: last?.nota_media ?? null,
     ranking_brasil: last?.ranking_brasil ?? null,
     ranking_uf: last?.ranking_uf ?? null,

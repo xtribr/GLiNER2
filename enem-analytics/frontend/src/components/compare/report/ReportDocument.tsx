@@ -3,6 +3,11 @@ import { useEffect } from 'react';
 import './ReportDocument.css';
 import type { ReportData } from './types';
 import { areasWon, biggestGapArea, rankingGap, statusClass, statusLabel, fmt, winnerOfArea, canonicalAreaCode } from './reportMetrics';
+
+/** Renders a signed delta: +1,5 / −1,5 (no "+-") */
+function signedFmt(n: number): string {
+  return `${n >= 0 ? '+' : '−'}${fmt(Math.abs(n))}`;
+}
 import { executiveSummary, areaParagraph, projectionParagraph } from './reportNarrative';
 import { AreaBars, EvolutionLine, AreaRadar } from './ReportCharts';
 
@@ -31,7 +36,7 @@ export default function ReportDocument({ data: d, onReady }: Props) {
       <table>
         <thead><tr><th style={{ width: '24%' }}>Campo</th><th>Escola A — {d.schoolA.nome_escola}</th><th>Escola B — {d.schoolB.nome_escola}</th></tr></thead>
         <tbody>
-          <tr><td>INEP · UF · Cidade</td><td>{d.schoolA.codigo_inep} · {d.schoolA.uf} · {d.schoolA.cidade}</td><td>{d.schoolB.codigo_inep} · {d.schoolB.uf} · {d.schoolB.cidade}</td></tr>
+          <tr><td>INEP · UF · Localização</td><td>{d.schoolA.codigo_inep} · {d.schoolA.uf} · {d.schoolA.cidade}</td><td>{d.schoolB.codigo_inep} · {d.schoolB.uf} · {d.schoolB.cidade}</td></tr>
           <tr><td>Tipo · Porte</td><td>{d.schoolA.tipo_escola} · {d.schoolA.porte_label}</td><td>{d.schoolB.tipo_escola} · {d.schoolB.porte_label}</td></tr>
           <tr><td>Média geral (TRI)</td><td className="a">{fmt(d.schoolA.nota_media)}</td><td className="b">{fmt(d.schoolB.nota_media)}</td></tr>
           <tr><td>Ranking Brasil · UF</td><td>#{d.schoolA.ranking_brasil} · #{d.schoolA.ranking_uf}</td><td>#{d.schoolB.ranking_brasil} · #{d.schoolB.ranking_uf}</td></tr>
@@ -63,13 +68,20 @@ export default function ReportDocument({ data: d, onReady }: Props) {
       })}
 
       <div className="sec">Visão Gráfica</div>
-      <div className="grid2">
-        <div><div className="cap">Notas por área — A (azul) × B (verde)</div><AreaBars diagnosis={d.diagnosis} /></div>
-        <div><div className="cap">Radar das 5 áreas</div><AreaRadar diagnosis={d.diagnosis} /></div>
-      </div>
-      <div className="grid2">
-        <div><div className="cap">Evolução da média</div><EvolutionLine history={d.history} /></div>
-      </div>
+      {(() => {
+        const chartLegend = { a: d.schoolA.nome_escola.slice(0, 22), b: d.schoolB.nome_escola.slice(0, 22) };
+        return (
+          <>
+            <div className="grid2">
+              <div className="chartwrap"><div className="cap">Notas por área — A (azul) × B (verde)</div><AreaBars diagnosis={d.diagnosis} legend={chartLegend} /></div>
+              <div className="chartwrap"><div className="cap">Radar das 5 áreas</div><AreaRadar diagnosis={d.diagnosis} legend={chartLegend} /></div>
+            </div>
+            <div className="grid2">
+              <div className="chartwrap"><div className="cap">Evolução da média</div><EvolutionLine history={d.history} legend={chartLegend} /></div>
+            </div>
+          </>
+        );
+      })()}
 
       <div className="sec">Histórico Ano a Ano</div>
       <table>
@@ -90,8 +102,8 @@ export default function ReportDocument({ data: d, onReady }: Props) {
           r === 'conservative' ? 'Conservador' : r === 'outlier' ? 'Outlier' : r === 'normal' ? 'Normal' : '—';
         const trendLabel = (dir: string | null, annual: number | null) => {
           if (!dir || dir === 'insufficient_data') return '—';
-          const sign = (annual ?? 0) > 0 ? '+' : '';
-          return `${dir === 'ascending' ? '↑' : dir === 'descending' ? '↓' : '→'} ${sign}${fmt(annual)}/ano`;
+          const arrow = dir === 'ascending' ? '↑' : dir === 'descending' ? '↓' : '→';
+          return annual != null ? `${arrow} ${signedFmt(annual)}/ano` : `${arrow} —/ano`;
         };
         return (
           <>
@@ -122,8 +134,8 @@ export default function ReportDocument({ data: d, onReady }: Props) {
                       <td>{fmt(row.a.scenarios?.conservative)}</td>
                       <td>{fmt(row.a.scenarios?.realistic)}</td>
                       <td>{fmt(row.a.scenarios?.optimistic)}</td>
-                      <td className="a">{fmt(row.a.recommended)} ({row.a.potential_gain != null ? `+${fmt(row.a.potential_gain)}` : '—'})</td>
-                      <td className="a">{fmt(row.a.official_next)} ({row.a.official_change != null ? (row.a.official_change >= 0 ? '+' : '') + fmt(row.a.official_change) : '—'}) · {riskLabel(row.a.risk_level)}</td>
+                      <td className="a">{fmt(row.a.recommended)} ({row.a.potential_gain != null ? signedFmt(row.a.potential_gain) : '—'})</td>
+                      <td className="a">{fmt(row.a.official_next)} ({row.a.official_change != null ? signedFmt(row.a.official_change) : '—'}) · {riskLabel(row.a.risk_level)}</td>
                       <td>{trendLabel(row.a.trend_dir, row.a.trend_annual)}</td>
                     </tr>,
                     <tr key={`${row.area}-B`}>
@@ -132,8 +144,8 @@ export default function ReportDocument({ data: d, onReady }: Props) {
                       <td>{fmt(row.b.scenarios?.conservative)}</td>
                       <td>{fmt(row.b.scenarios?.realistic)}</td>
                       <td>{fmt(row.b.scenarios?.optimistic)}</td>
-                      <td className="b">{fmt(row.b.recommended)} ({row.b.potential_gain != null ? `+${fmt(row.b.potential_gain)}` : '—'})</td>
-                      <td className="b">{fmt(row.b.official_next)} ({row.b.official_change != null ? (row.b.official_change >= 0 ? '+' : '') + fmt(row.b.official_change) : '—'}) · {riskLabel(row.b.risk_level)}</td>
+                      <td className="b">{fmt(row.b.recommended)} ({row.b.potential_gain != null ? signedFmt(row.b.potential_gain) : '—'})</td>
+                      <td className="b">{fmt(row.b.official_next)} ({row.b.official_change != null ? signedFmt(row.b.official_change) : '—'}) · {riskLabel(row.b.risk_level)}</td>
                       <td>{trendLabel(row.b.trend_dir, row.b.trend_annual)}</td>
                     </tr>,
                   ]

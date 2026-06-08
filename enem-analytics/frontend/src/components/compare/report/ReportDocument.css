@@ -20,7 +20,8 @@
 .xtri-report .areahead .n{ font-size:11px; }
 .xtri-report .kpis{display:flex;gap:6px;margin:5px 0} .xtri-report .kpi{flex:1;background:#f8fafc;border:1px solid #eef2f6;border-radius:6px;padding:6px;text-align:center}
 .xtri-report .kpi .v{font-size:14px;font-weight:800} .xtri-report .kpi .l{font-size:7px;color:#64748b;text-transform:uppercase}
-.xtri-report .grid2{display:flex;gap:14px;align-items:flex-start} .xtri-report .grid2>div{flex:1}
+.xtri-report .grid2{display:flex;gap:14px;align-items:flex-start;page-break-inside:avoid;break-inside:avoid} .xtri-report .grid2>div{flex:1}
+.xtri-report .chartwrap{page-break-inside:avoid;break-inside:avoid}
 .xtri-report .cap{font-size:9.5px;font-weight:700;color:#0f172a;margin:2px 0 3px}
 .xtri-report .muted{color:#94a3b8;font-size:8.5px}
 .xtri-report .foot{margin-top:14px;border-top:1px solid #eef2f6;padding-top:6px;font-size:8px;color:#94a3b8;display:flex;justify-content:space-between}
