@@ -196,6 +196,202 @@ export default function ReportDocument({ data: d, onReady }: Props) {
         );
       })()}
 
+      {/* Seção Redação por Competência (C1–C5) */}
+      {d.redacaoCompetencias && d.redacaoCompetencias.length > 0 && (() => {
+        const rows = d.redacaoCompetencias!;
+        const diffs = rows.map(r => Math.abs((r.b ?? 0) - (r.a ?? 0)));
+        const maxDiff = Math.max(...diffs);
+        return (
+          <>
+            <div className="sec">Redação por Competência (C1–C5)</div>
+            <table>
+              <thead>
+                <tr>
+                  <th style={{ width: '32%' }}>Competência</th>
+                  <th style={{ width: '10%' }}>A</th>
+                  <th style={{ width: '10%' }}>B</th>
+                  <th style={{ width: '12%' }}>Média Nac.</th>
+                  <th style={{ width: '12%' }}>Diferença (B−A)</th>
+                  <th>Leitura</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((r) => {
+                  const diff = r.b != null && r.a != null ? r.b - r.a : null;
+                  const absDiff = diff != null ? Math.abs(diff) : 0;
+                  const isMax = maxDiff > 0 && absDiff === maxDiff;
+                  return (
+                    <tr key={r.comp}>
+                      <td>{r.comp} — {r.label}</td>
+                      <td className="a">{fmt(r.a)}</td>
+                      <td className="b">{fmt(r.b)}</td>
+                      <td>{fmt(r.nacional)}</td>
+                      <td>
+                        {diff != null
+                          ? isMax
+                            ? <b style={{ color: '#ff6b5c' }}>{diff >= 0 ? '+' : ''}{fmt(diff)}</b>
+                            : <>{diff >= 0 ? '+' : ''}{fmt(diff)}</>
+                          : '—'}
+                      </td>
+                      <td className="muted">{r.reading || '—'}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </>
+        );
+      })()}
+
+      {/* Seção Habilidades — Fortes e Fracas */}
+      {d.skills && (d.skills.a.length > 0 || d.skills.b.length > 0) && (() => {
+        const skillsA = d.skills!.a;
+        const skillsB = d.skills!.b;
+        const fortesA = skillsA.filter(s => s.kind === 'forte');
+        const fracasA = skillsA.filter(s => s.kind === 'fraca');
+        const fortesB = skillsB.filter(s => s.kind === 'forte');
+        const fracasB = skillsB.filter(s => s.kind === 'fraca');
+        return (
+          <>
+            <div className="sec">Habilidades — Fortes e Fracas</div>
+            <div className="grid2">
+              <div>
+                <div className="cap" style={{ color: '#2563eb' }}>Escola A — {d.schoolA.nome_escola}</div>
+                {fortesA.length > 0 && (
+                  <>
+                    <div className="muted" style={{ marginTop: '4px' }}>Pontos fortes</div>
+                    <ul style={{ margin: '2px 0 6px', paddingLeft: '14px' }}>
+                      {fortesA.map((s, i) => <li key={i}><span className="a">{s.area}</span> · {s.skill}</li>)}
+                    </ul>
+                  </>
+                )}
+                {fracasA.length > 0 && (
+                  <>
+                    <div className="muted">A reforçar</div>
+                    <ul style={{ margin: '2px 0', paddingLeft: '14px' }}>
+                      {fracasA.map((s, i) => <li key={i}><span className="a">{s.area}</span> · {s.skill}</li>)}
+                    </ul>
+                  </>
+                )}
+              </div>
+              <div>
+                <div className="cap" style={{ color: '#16a34a' }}>Escola B — {d.schoolB.nome_escola}</div>
+                {fortesB.length > 0 && (
+                  <>
+                    <div className="muted" style={{ marginTop: '4px' }}>Pontos fortes</div>
+                    <ul style={{ margin: '2px 0 6px', paddingLeft: '14px' }}>
+                      {fortesB.map((s, i) => <li key={i}><span className="b">{s.area}</span> · {s.skill}</li>)}
+                    </ul>
+                  </>
+                )}
+                {fracasB.length > 0 && (
+                  <>
+                    <div className="muted" style={{ marginTop: fortesB.length === 0 ? '4px' : undefined }}>A reforçar</div>
+                    <ul style={{ margin: '2px 0', paddingLeft: '14px' }}>
+                      {fracasB.map((s, i) => <li key={i}><span className="b">{s.area}</span> · {s.skill}</li>)}
+                    </ul>
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        );
+      })()}
+
+      {/* Seção Recomendações & Próximos Passos */}
+      {d.recommendations && d.recommendations.length > 0 && (
+        <>
+          <div className="sec">Recomendações &amp; Próximos Passos</div>
+          <table>
+            <thead>
+              <tr>
+                <th style={{ width: '20%' }}>Prioridade</th>
+                <th>Ação</th>
+                <th style={{ width: '22%' }}>Impacto esperado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {d.recommendations.map((rec, i) => (
+                <tr key={i}>
+                  <td className={rec.scope === 'A' ? 'a' : rec.scope === 'B' ? 'b' : undefined}>
+                    {rec.scope} · {rec.priority}
+                  </td>
+                  <td>{rec.action}</td>
+                  <td>{rec.impact}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
+
+      {/* Seção 11: Diagnóstico por Área — Síntese Acionável */}
+      {d.diagnosis.area_comparison.length > 0 && (() => {
+        const projMap = new Map((d.projection ?? []).map(p => [p.area, p]));
+        const recsByArea = new Map<string, string>();
+        for (const rec of (d.recommendations ?? [])) {
+          // Match recommendation action to area name for cross-reference
+          for (const ar of d.diagnosis.area_comparison) {
+            if (rec.action.toLowerCase().includes(ar.area_name.toLowerCase())) {
+              if (!recsByArea.has(ar.area)) recsByArea.set(ar.area, rec.action);
+            }
+          }
+        }
+        return (
+          <>
+            <div className="sec">Diagnóstico por Área — Síntese Acionável</div>
+            {d.diagnosis.area_comparison.map((ar) => {
+              const w = winnerOfArea(ar);
+              const cls = w === 'A' ? 'win-a' : w === 'B' ? 'gap' : '';
+              const projRow = projMap.get(ar.area);
+              const laggardCell = w === 'A' ? projRow?.b : w === 'B' ? projRow?.a : null;
+              const laggardLabel = w === 'A' ? 'B' : w === 'B' ? 'A' : null;
+              const topFocus = w === 'A'
+                ? projRow?.b_focus[0]?.skill
+                : w === 'B'
+                  ? projRow?.a_focus[0]?.skill
+                  : null;
+              const recAction = recsByArea.get(ar.area);
+              const targetYear = projRow?.target_year;
+              return (
+                <div className={`areablock ${cls}`} key={`synth-${ar.area}`}>
+                  <div className="areahead">
+                    <span className="t">{ar.area_name}
+                      <span className={`statusbadge ${statusClass(ar.school_1_status)}`}>A {statusLabel(ar.school_1_status)}</span>
+                      <span className={`statusbadge ${statusClass(ar.school_2_status)}`}>B {statusLabel(ar.school_2_status)}</span>
+                    </span>
+                    <span className="n"><span className="a">A {fmt(ar.school_1_score)}</span> · <span className="b">B {fmt(ar.school_2_score)}</span></span>
+                  </div>
+                  <div style={{ marginTop: '3px', fontSize: '9px', lineHeight: '1.5' }}>
+                    {laggardCell?.potential_gain != null && targetYear && (
+                      <div>
+                        <b className={laggardLabel === 'A' ? 'a' : 'b'}>Escola {laggardLabel}:</b>{' '}
+                        ganho potencial <b>+{fmt(laggardCell.potential_gain)}</b> pts rumo ao ENEM {targetYear}
+                        {laggardCell.recommended != null && <> (meta: {fmt(laggardCell.recommended)})</>}.
+                      </div>
+                    )}
+                    {topFocus && (
+                      <div>
+                        <span className="muted">Conteúdo prioritário:</span>{' '}{topFocus}.
+                      </div>
+                    )}
+                    {recAction
+                      ? <div><span className="muted">Ação:</span> {recAction}.</div>
+                      : w !== 'tie' && (
+                        <div className="muted">
+                          {w === 'A'
+                            ? `A lidera por ${fmt(ar.difference)} pts — manter e ampliar vantagem.`
+                            : `B lidera por ${fmt(Math.abs(ar.difference))} pts — Escola A deve priorizar esta área.`}
+                        </div>
+                      )}
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        );
+      })()}
+
       <div className="foot"><span>X-TRI Escolas · rankingenem.com</span><span>Base ENEM {d.baseYear}</span></div>
     </div>
   );
