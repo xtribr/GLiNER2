@@ -322,7 +322,10 @@ export default function Vitrine() {
       </main>
 
       <footer className="bg-[#061927] py-6 text-center text-xs text-slate-400">
-        Dados: Inep/MEC — Microdados ENEM · <Link href="/cadastro" className="text-[#28B7ED] hover:underline">Cadastre-se</Link> · © 2026 XTRI Educação
+        Dados: Inep/MEC — Microdados ENEM · <Link href="/cadastro" className="text-[#28B7ED] hover:underline">Cadastre-se</Link> ·{' '}
+        <Link href="/termos-de-uso" className="text-[#28B7ED] hover:underline">Termos de Uso</Link> ·{' '}
+        <Link href="/politica-de-privacidade" className="text-[#28B7ED] hover:underline">Política de Privacidade</Link> ·{' '}
+        <Link href="/politica-de-compliance-ia" className="text-[#28B7ED] hover:underline">Compliance IA</Link> · © 2026 XTRI Educação
       </footer>
     </div>
   );

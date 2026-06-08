@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useAuth } from '@/lib/auth-context';
 import { Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
 
@@ -133,6 +134,11 @@ export default function LoginPage() {
         {/* Footer */}
         <p className="text-center text-slate-500 text-sm mt-6">
           Problemas para acessar? Entre em contato com o administrador.
+        </p>
+        <p className="text-center text-slate-400 text-xs mt-3">
+          <Link href="/termos-de-uso" className="text-slate-300 hover:text-white hover:underline">Termos de Uso</Link> ·{' '}
+          <Link href="/politica-de-privacidade" className="text-slate-300 hover:text-white hover:underline">Política de Privacidade</Link> ·{' '}
+          <Link href="/politica-de-compliance-ia" className="text-slate-300 hover:text-white hover:underline">Compliance IA</Link>
         </p>
       </div>
     </div>

@@ -250,8 +250,8 @@ export default function CadastroPage() {
               <label className="mt-4 flex items-start gap-2 text-xs leading-relaxed text-slate-600">
                 <input type="checkbox" checked={aceite} onChange={(e) => setAceite(e.target.checked)} className="mt-0.5 h-4 w-4 accent-[#28B7ED]" />
                 <span>
-                  Li e aceito os <Link href="/termos" className="font-semibold text-[#139ED3] underline">Termos de Uso</Link> e a{' '}
-                  <Link href="/privacidade" className="font-semibold text-[#139ED3] underline">Política de Privacidade</Link>. Os dados exibidos derivam dos microdados públicos do INEP.
+                  Li e aceito os <Link href="/termos-de-uso" className="font-semibold text-[#139ED3] underline">Termos de Uso</Link> e a{' '}
+                  <Link href="/politica-de-privacidade" className="font-semibold text-[#139ED3] underline">Política de Privacidade</Link>. Os dados exibidos derivam dos microdados públicos do INEP.
                 </span>
               </label>
 
@@ -295,6 +295,12 @@ export default function CadastroPage() {
             </div>
           )}
         </div>
+
+        <footer className="mt-5 text-center text-xs text-slate-500">
+          <Link href="/termos-de-uso" className="font-semibold text-[#139ED3] hover:underline">Termos de Uso</Link> ·{' '}
+          <Link href="/politica-de-privacidade" className="font-semibold text-[#139ED3] hover:underline">Política de Privacidade</Link> ·{' '}
+          <Link href="/politica-de-compliance-ia" className="font-semibold text-[#139ED3] hover:underline">Compliance IA</Link>
+        </footer>
       </div>
     </div>
   );
