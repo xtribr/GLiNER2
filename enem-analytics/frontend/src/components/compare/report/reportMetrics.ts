@@ -1,4 +1,5 @@
-import type { DiagnosisComparisonResult, DiagnosisComparisonArea } from '@/lib/api';
+import type { DiagnosisComparisonResult, DiagnosisComparisonArea, TRIAreaProjection } from '@/lib/api';
+import type { ProjectionRow, ProjectionCell, ProjectionFocusItem } from './types';
 
 export type Winner = 'A' | 'B' | 'tie';
 type Status = 'excellent' | 'good' | 'needs_attention' | 'critical';
@@ -49,4 +50,68 @@ export function fmt(n: number | null | undefined): string {
 
 export function winnerOfArea(ar: DiagnosisComparisonArea): Winner {
   return ar.difference > 0 ? 'A' : ar.difference < 0 ? 'B' : 'tie';
+}
+
+function nullCell(): ProjectionCell {
+  return {
+    current: null, recommended: null, potential_gain: null,
+    scenarios: null, official_next: null, official_change: null,
+    risk_level: null, trend_dir: null, trend_annual: null,
+  };
+}
+
+function toCell(p: TRIAreaProjection): ProjectionCell {
+  return {
+    current: p.current_score,
+    recommended: p.projection.recommended,
+    potential_gain: p.projection.potential_gain,
+    scenarios: {
+      conservative: p.projection.scenarios.conservative,
+      realistic: p.projection.scenarios.realistic,
+      optimistic: p.projection.scenarios.optimistic,
+    },
+    official_next: p.official_prediction.display_score,
+    official_change: p.official_prediction.display_expected_change,
+    risk_level: p.official_prediction.risk_level,
+    trend_dir: p.historical_analysis.trend.direction,
+    trend_annual: p.historical_analysis.trend.annual_change,
+  };
+}
+
+function toFocus(p: TRIAreaProjection): ProjectionFocusItem[] {
+  return [...p.stretch_content.items]
+    .sort((a, b) => b.gap - a.gap)
+    .slice(0, 3)
+    .map(({ skill, gap }) => ({ skill, gap }));
+}
+
+export function buildProjectionRows(
+  projA: TRIAreaProjection[],
+  projB: TRIAreaProjection[],
+): ProjectionRow[] {
+  if (projA.length === 0 && projB.length === 0) return [];
+
+  const mapA = new Map(projA.map(p => [p.area, p]));
+  const mapB = new Map(projB.map(p => [p.area, p]));
+
+  // Union: A's areas first, then B-only areas
+  const areas: string[] = [
+    ...projA.map(p => p.area),
+    ...projB.filter(p => !mapA.has(p.area)).map(p => p.area),
+  ];
+
+  return areas.map(area => {
+    const a = mapA.get(area);
+    const b = mapB.get(area);
+    const meta = a ?? b!;
+    return {
+      area: meta.area,
+      area_name: meta.area_name,
+      target_year: a?.projection.target_year ?? b?.projection.target_year ?? 0,
+      a: a ? toCell(a) : nullCell(),
+      b: b ? toCell(b) : nullCell(),
+      a_focus: a ? toFocus(a) : [],
+      b_focus: b ? toFocus(b) : [],
+    };
+  });
 }
