@@ -122,16 +122,6 @@
   .sub{margin:20px auto 0;max-width:40ch;font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--ink-2);font-weight:400;line-height:1.45}
 
   /* Busca = CTA (refinada, clara) */
-  .search{margin:34px auto 0;display:flex;gap:8px;align-items:center;width:min(560px,94vw);
-    background:#fff;border:1px solid var(--line);border-radius:980px;padding:7px 7px 7px 20px;
-    box-shadow:0 1px 2px rgba(0,0,0,.04),0 18px 40px -24px rgba(0,0,0,.18)}
-  .search:focus-within{border-color:#cfd2d8;box-shadow:0 1px 2px rgba(0,0,0,.04),0 20px 48px -22px rgba(10,134,196,.35)}
-  .search svg{color:#9a9aa0;flex:0 0 auto}
-  .search input{flex:1;border:0;outline:0;font:inherit;font-size:16px;color:var(--ink);background:transparent;min-width:0}
-  .search input::placeholder{color:#9a9aa0}
-  .search button{flex:0 0 auto;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:15px;color:#fff;
-    background:var(--grad);padding:13px 22px;border-radius:980px;display:inline-flex;align-items:center;gap:7px;transition:filter .2s,transform .12s;box-shadow:0 8px 20px -8px rgba(255,75,46,.5)}
-  .search button:hover{filter:brightness(1.06);transform:translateY(-1px)}
   .hint{margin-top:14px;font-size:13px;color:var(--ink-2)}
   .hint a{color:var(--cyan);text-decoration:none;font-weight:500}
   .hint a:hover{text-decoration:underline}
@@ -230,11 +220,7 @@
   <h1>O ranking do ENEM, <span class="accent">escola por escola.</span></h1>
   <p class="sub">Nota TRI, evolução histórica e diagnóstico por área — de 27.328 escolas. Gratuito para a sua.</p>
 
-  <form class="search" id="cta" action="https://app.rankingenem.com/cadastro" method="get">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-    <input id="school" name="escola" placeholder="Digite o nome da sua escola" autocomplete="off" aria-label="Nome da sua escola" />
-    <button type="submit">Analisar →</button>
-  </form>
+  <a class="btn" href="https://app.rankingenem.com/cadastro">Analisar minha escola →</a>
   <p class="hint">Gratuito · sem cartão. <a href="https://app.rankingenem.com/">Só quero ver o ranking →</a></p>
 
   <div class="stats">
@@ -335,13 +321,5 @@
   </div>
 </footer>
 
-<script>
-  document.getElementById('cta').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var q = document.getElementById('school').value.trim();
-    var url = 'https://app.rankingenem.com/cadastro';
-    window.location.href = q ? url + '?escola=' + encodeURIComponent(q) : url;
-  });
-</script>
 </body>
 </html>
