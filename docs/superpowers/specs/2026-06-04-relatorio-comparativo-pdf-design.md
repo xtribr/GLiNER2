@@ -2,7 +2,17 @@
 
 **Data:** 2026-06-04
 **Página afetada:** `enem-analytics/frontend/src/app/compare/page.tsx`
-**Status:** ✅ **APROVADO** — formato validado em PDF real (protótipo) em 2026-06-04.
+**Status:** ✅ **APROVADO** — formato validado em PDF real (protótipo) em 2026-06-04; **direção reconfirmada em 2026-06-08**, pronta para implementação.
+
+## Atualização 2026-06-08 (reconfirmação + ajustes)
+
+Ao retomar o tema ("o relatório está muito fraco"), confirmou-se que esta spec **nunca foi implementada**: os componentes `components/compare/report/*` não existem e o PDF em produção ainda é o `ExecutiveReportGenerator.tsx` (jsPDF) pobre. O usuário reconfirmou a direção desta spec.
+
+**Decisões reconfirmadas:** nomes **reais** das escolas (des-hardcodar `displayLabel1/2` no fluxo de export; a anonimização da UI da página permanece como está); relatório **premium/exaustivo**; audiência **gestor/diretor** (tom acionável); marca **X-TRI Escolas**; seções profundas **simétricas para as duas escolas (A e B)**.
+
+**Extras a incorporar** (de um mockup visual de 2026-06-08): **radar das 5 áreas** — já previsto na §9; **badges coloridos de status por área** (excelente/bom/atenção/crítico) — refinamento visual da §3 (que já lista "Status A/B"). Ou seja, nenhum dos extras muda o escopo; são apresentação.
+
+**⚠️ Caveat de performance (novo, do mapeamento do código):** a coleta da §7 inclui `getGlinerStudyFocus` e conceitos GLiNER, cuja rota `api/routes/gliner_insights.py` **instancia os modelos ML por requisição** (dívida técnica HIGH conhecida — ver memória do projeto). Gerar o relatório dispara isso para A **e** B → latência perceptível. Mitigação dentro do escopo: buscar em paralelo, exibir progresso, e posicionar as seções GLiNER como as **últimas e condicionais** (degradam graciosamente se demorarem/falharem). Refatorar a rota para singletons fica **fora** deste escopo (item separado de dívida técnica).
 
 ## 0. Protótipo validado (2026-06-04)
 
