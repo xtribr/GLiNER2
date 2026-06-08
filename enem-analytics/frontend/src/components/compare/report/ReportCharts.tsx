@@ -25,7 +25,10 @@ export function AreaBars({ diagnosis }: { diagnosis: DiagnosisComparisonResult }
 
 export function EvolutionLine({ history }: { history: ComparisonYearRow[] }) {
   const ys = history.map(h => [h.a_media, h.b_media]).flat().filter((n): n is number => n != null);
-  const min = Math.min(...ys, 0), max = Math.max(...ys, 1);
+  const lo = ys.length ? Math.min(...ys) : 0;
+  const hi = ys.length ? Math.max(...ys) : 1;
+  const pad = (hi - lo) * 0.15 || 1; // padding p/ a tendência não colar nas bordas
+  const min = lo - pad, max = hi + pad;
   const norm = (v: number) => 105 - ((v - min) / (max - min || 1)) * 90;
   const xs = (i: number) => 20 + (i * 276) / Math.max(history.length - 1, 1);
   const line = (key: 'a_media'|'b_media') => history.map((h, i) => h[key] != null ? `${xs(i)},${norm(h[key]!)}` : '').filter(Boolean).join(' ');
