@@ -509,4 +509,23 @@ describe('buildRecommendations', () => {
     const unique = new Set(actions);
     expect(unique.size).toBe(actions.length);
   });
+
+  it('não lança quando area_comparison é vazio e retorna array', () => {
+    const emptyAreasDiag = makeDiagnosis();
+    (emptyAreasDiag as any).area_comparison = [];
+    const d: ReportData = {
+      generatedAt: new Date('2024-01-01'),
+      baseYear: 2024,
+      schoolA: makeSchoolMeta('Escola Alpha', 730),
+      schoolB: makeSchoolMeta('Escola Beta', 625),
+      diagnosis: emptyAreasDiag,
+      history: [],
+    };
+    expect(() => buildRecommendations(d)).not.toThrow();
+    const recs = buildRecommendations(d);
+    expect(Array.isArray(recs)).toBe(true);
+    // The always-on monitoring rec must still be present
+    const ambas = recs.find(r => r.scope === 'Ambas');
+    expect(ambas).toBeDefined();
+  });
 });

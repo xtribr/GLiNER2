@@ -318,19 +318,24 @@ export function buildRecommendations(d: ReportData): RecommendationRow[] {
     area_name: ar.area_name,
     score: leaderScope === 'A' ? ar.school_1_score : ar.school_2_score,
   }));
-  const leaderStrongestArea = [...leaderAreaScores].sort((x, y) => y.score - x.score)[0];
-
-  const benchmarkRec: RecommendationRow = {
-    scope: 'Benchmark',
-    priority: '—',
-    action: `${laggardName} espelhar a metodologia de ${leaderStrongestArea.area_name} da ${leaderName}`,
-    impact: 'estrutural',
-  };
+  const leaderStrongestArea = [...leaderAreaScores].sort((x, y) => y.score - x.score)[0] ?? null;
 
   const monitoringRec: RecommendationRow = {
     scope: 'Ambas',
     priority: '—',
     action: 'Monitoramento diagnóstico mensal por área para reajustar trilhas',
+    impact: 'estrutural',
+  };
+
+  if (!leaderStrongestArea) {
+    // No area data — return only the recs that don't depend on area names
+    return [...redacaoRecs, monitoringRec];
+  }
+
+  const benchmarkRec: RecommendationRow = {
+    scope: 'Benchmark',
+    priority: '—',
+    action: `${laggardName} espelhar a metodologia de ${leaderStrongestArea.area_name} da ${leaderName}`,
     impact: 'estrutural',
   };
 
