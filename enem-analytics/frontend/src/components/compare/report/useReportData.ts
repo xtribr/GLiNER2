@@ -13,10 +13,10 @@ interface BuildArgs {
 }
 
 // Map diagnosis area codes (e.g. 'CH', 'RED', 'REDACAO') → backend lowercase (e.g. 'ch', 're')
-function diagAreaToBackendCode(area: string): string {
-  const upper = area.toUpperCase();
-  if (upper === 'RED' || upper === 'REDACAO' || upper === 'RE') return 're';
-  return area.toLowerCase().slice(0, 2);
+const DIAG_TO_BACKEND: Record<string, string> = { CN: 'cn', CH: 'ch', LC: 'lc', MT: 'mt', RED: 're', REDACAO: 're', RE: 're' };
+function diagAreaToBackendCode(code: string): string {
+  const u = (code || '').toUpperCase();
+  return DIAG_TO_BACKEND[u] ?? u.toLowerCase();
 }
 
 export async function collectProjectionRows(

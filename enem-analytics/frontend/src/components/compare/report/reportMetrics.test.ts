@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { areasWon, biggestGapArea, rankingGap, trendOverYears, statusClass, fmt, buildProjectionRows, buildRedacaoRows, buildSkillRows, buildRecommendations } from './reportMetrics';
+import { areasWon, biggestGapArea, rankingGap, trendOverYears, statusClass, fmt, buildProjectionRows, buildRedacaoRows, buildSkillRows, buildRecommendations, canonicalAreaCode } from './reportMetrics';
 import type { DiagnosisComparisonResult, TRIAreaProjection } from '@/lib/api';
 import type { ReportData, ReportSchoolMeta } from './types';
 
@@ -527,5 +527,80 @@ describe('buildRecommendations', () => {
     // The always-on monitoring rec must still be present
     const ambas = recs.find(r => r.scope === 'Ambas');
     expect(ambas).toBeDefined();
+  });
+
+  // Issue 1 — redação area-code mismatch: diagnosis uses 'redacao', projection uses 'RE'
+  it('normaliza código de redação entre diagnosis (redacao) e projection (RE): impact usa potential_gain da projeção', () => {
+    // diagnosis area uses 'redacao' (lowercase, full word) — as returned by backend
+    // projection row uses area: 'RE' — as returned by the projection API
+    const diagWithRedacao = makeDiagnosis();
+    (diagWithRedacao as any).area_comparison = [
+      // A lidera em MT
+      { area: 'MT', area_name: 'Matemática', school_1_score: 750, school_2_score: 600, difference: 150, school_1_status: 'good', school_2_status: 'needs_attention' },
+      // A lidera em redação — laggard B loses it
+      { area: 'redacao', area_name: 'Redação', school_1_score: 680, school_2_score: 550, difference: 130, school_1_status: 'good', school_2_status: 'critical' },
+    ];
+
+    const dWithRed: ReportData = {
+      generatedAt: new Date('2024-01-01'),
+      baseYear: 2024,
+      schoolA: makeSchoolMeta('Escola Alpha', 720),
+      schoolB: makeSchoolMeta('Escola Beta', 580),
+      diagnosis: diagWithRedacao,
+      history: [],
+      projection: [
+        {
+          area: 'MT', area_name: 'Matemática', target_year: 2026,
+          a: { current: 750, recommended: 765, potential_gain: 15, scenarios: null, official_next: null, official_change: null, risk_level: null, trend_dir: null, trend_annual: null },
+          b: { current: 600, recommended: 640, potential_gain: 40, scenarios: null, official_next: null, official_change: null, risk_level: null, trend_dir: null, trend_annual: null },
+          a_focus: [], b_focus: [],
+        },
+        {
+          // Projection API returns area 'RE' for redação
+          area: 'RE', area_name: 'Redação', target_year: 2026,
+          a: { current: 680, recommended: 700, potential_gain: 20, scenarios: null, official_next: null, official_change: null, risk_level: null, trend_dir: null, trend_annual: null },
+          b: { current: 550, recommended: 590, potential_gain: 35, scenarios: null, official_next: null, official_change: null, risk_level: null, trend_dir: null, trend_annual: null },
+          a_focus: [], b_focus: [],
+        },
+      ],
+    };
+
+    const recs = buildRecommendations(dWithRed);
+    // Find the laggard (B) redação area recommendation from laggardAreaRecs
+    const redAreaRec = recs.find(r =>
+      r.scope === 'B' && r.action.toLowerCase().includes('redação'),
+    );
+    expect(redAreaRec).toBeDefined();
+    // The impact must reflect the projection potential_gain (35), NOT the gap fallback (130)
+    // i.e. it should contain '+' and '35', not 'reduz gap de 130'
+    expect(redAreaRec!.impact).toMatch(/\+/);
+    expect(redAreaRec!.impact).toMatch(/35/);
+    expect(redAreaRec!.impact).not.toMatch(/reduz gap/i);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// canonicalAreaCode
+// ─────────────────────────────────────────────────────────────────────────────
+
+describe('canonicalAreaCode', () => {
+  it('normaliza variantes de redação para RED', () => {
+    expect(canonicalAreaCode('RE')).toBe('RED');
+    expect(canonicalAreaCode('re')).toBe('RED');
+    expect(canonicalAreaCode('RED')).toBe('RED');
+    expect(canonicalAreaCode('redacao')).toBe('RED');
+    expect(canonicalAreaCode('REDACAO')).toBe('RED');
+    expect(canonicalAreaCode('REDAÇÃO')).toBe('RED');
+  });
+
+  it('passa CN/CH/LC/MT sem alteração', () => {
+    expect(canonicalAreaCode('CN')).toBe('CN');
+    expect(canonicalAreaCode('CH')).toBe('CH');
+    expect(canonicalAreaCode('LC')).toBe('LC');
+    expect(canonicalAreaCode('MT')).toBe('MT');
+  });
+
+  it('lida com string vazia sem lançar', () => {
+    expect(canonicalAreaCode('')).toBe('');
   });
 });

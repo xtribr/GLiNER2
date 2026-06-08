@@ -1,6 +1,14 @@
 import type { DiagnosisComparisonResult, DiagnosisComparisonArea, TRIAreaProjection } from '@/lib/api';
 import type { ProjectionRow, ProjectionCell, ProjectionFocusItem, ReportData, RedacaoCompRow, SkillRow, RecommendationRow } from './types';
 
+// Normaliza códigos de área entre o diagnóstico ('redacao','CN','CH','LC','MT')
+// e a projeção ('RE','CN','CH','LC','MT') para uma chave canônica.
+export function canonicalAreaCode(code: string): string {
+  const u = (code || '').toUpperCase();
+  if (u === 'RE' || u === 'RED' || u === 'REDACAO' || u === 'REDAÇÃO') return 'RED';
+  return u; // CN, CH, LC, MT
+}
+
 // ── Local type aliases derived from api.ts return shapes ─────────────────────
 
 type RedacaoFocusArea = {
@@ -273,12 +281,12 @@ export function buildRecommendations(d: ReportData): RecommendationRow[] {
   );
 
   const projMap = new Map(
-    (d.projection ?? []).map(p => [p.area, p]),
+    (d.projection ?? []).map(p => [canonicalAreaCode(p.area), p]),
   );
 
   const laggardAreaRecs: RecommendationRow[] = sortedByGap.map((ar, idx) => {
     const priority = idx < 2 ? 'Alta' : 'Média';
-    const projRow = projMap.get(ar.area);
+    const projRow = projMap.get(canonicalAreaCode(ar.area));
     const projCell = projRow ? (laggardScope === 'B' ? projRow.b : projRow.a) : null;
     const gainStr = projCell?.potential_gain != null
       ? `+${projCell.potential_gain} pts em ${ar.area_name}`

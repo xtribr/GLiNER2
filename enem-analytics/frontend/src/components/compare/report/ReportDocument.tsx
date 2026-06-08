@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import './ReportDocument.css';
 import type { ReportData } from './types';
-import { areasWon, biggestGapArea, rankingGap, statusClass, statusLabel, fmt, winnerOfArea } from './reportMetrics';
+import { areasWon, biggestGapArea, rankingGap, statusClass, statusLabel, fmt, winnerOfArea, canonicalAreaCode } from './reportMetrics';
 import { executiveSummary, areaParagraph, projectionParagraph } from './reportNarrative';
 import { AreaBars, EvolutionLine, AreaRadar } from './ReportCharts';
 
@@ -327,7 +327,7 @@ export default function ReportDocument({ data: d, onReady }: Props) {
 
       {/* Seção 11: Diagnóstico por Área — Síntese Acionável */}
       {d.diagnosis.area_comparison.length > 0 && (() => {
-        const projMap = new Map((d.projection ?? []).map(p => [p.area, p]));
+        const projMap = new Map((d.projection ?? []).map(p => [canonicalAreaCode(p.area), p]));
         const recsByArea = new Map<string, string>();
         for (const rec of (d.recommendations ?? [])) {
           // Match recommendation action to area name for cross-reference
@@ -343,7 +343,7 @@ export default function ReportDocument({ data: d, onReady }: Props) {
             {d.diagnosis.area_comparison.map((ar) => {
               const w = winnerOfArea(ar);
               const cls = w === 'A' ? 'win-a' : w === 'B' ? 'gap' : '';
-              const projRow = projMap.get(ar.area);
+              const projRow = projMap.get(canonicalAreaCode(ar.area));
               const laggardCell = w === 'A' ? projRow?.b : w === 'B' ? projRow?.a : null;
               const laggardLabel = w === 'A' ? 'B' : w === 'B' ? 'A' : null;
               const topFocus = w === 'A'
