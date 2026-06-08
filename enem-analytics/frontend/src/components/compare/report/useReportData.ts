@@ -1,7 +1,8 @@
-import type { ReportData, ComparisonYearRow, ReportSchoolMeta, ProjectionRow } from './types';
+import type { ReportData, ComparisonYearRow, ReportSchoolMeta, ProjectionRow, RedacaoCompRow, SkillRow } from './types';
 import type { DiagnosisComparisonResult, SchoolHistory, TRIAreaProjection } from '@/lib/api';
 import { api } from '@/lib/api';
-import { buildProjectionRows } from './reportMetrics';
+import { buildProjectionRows, buildRedacaoRows, buildSkillRows } from './reportMetrics';
+import type { StudyFocusResult, SchoolSkillsResult } from './reportMetrics';
 
 interface BuildArgs {
   diagnosis: DiagnosisComparisonResult;
@@ -40,6 +41,29 @@ export async function collectProjectionRows(
     .map(r => r.value);
 
   return buildProjectionRows(projA, projB);
+}
+
+// Returns RedacaoCompRow[] (empty on total failure)
+export async function collectRedacaoRows(inepA: string, inepB: string): Promise<RedacaoCompRow[]> {
+  const [a, b] = await Promise.allSettled([
+    api.getGlinerStudyFocus(inepA),
+    api.getGlinerStudyFocus(inepB),
+  ]);
+  const sa: StudyFocusResult | null = a.status === 'fulfilled' ? a.value : null;
+  const sb: StudyFocusResult | null = b.status === 'fulfilled' ? b.value : null;
+  return buildRedacaoRows(sa, sb);
+}
+
+// Returns { a: SkillRow[]; b: SkillRow[] }
+export async function collectSkills(inepA: string, inepB: string): Promise<{ a: SkillRow[]; b: SkillRow[] }> {
+  const [a, b] = await Promise.allSettled([
+    api.getSchoolSkills(inepA),
+    api.getSchoolSkills(inepB),
+  ]);
+  return {
+    a: buildSkillRows(a.status === 'fulfilled' ? (a.value as SchoolSkillsResult) : null),
+    b: buildSkillRows(b.status === 'fulfilled' ? (b.value as SchoolSkillsResult) : null),
+  };
 }
 
 export function buildPhase1ReportData(args: BuildArgs): ReportData {

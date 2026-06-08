@@ -26,8 +26,9 @@ import {
   SuccessStoriesComparison,
   TRIAnalysisComparison,
 } from '@/components/compare';
-import { buildPhase1ReportData, collectProjectionRows } from '@/components/compare/report/useReportData';
+import { buildPhase1ReportData, collectProjectionRows, collectRedacaoRows, collectSkills } from '@/components/compare/report/useReportData';
 import { generateReportPdf } from '@/components/compare/report/generateReportPdf';
+import { buildRecommendations } from '@/components/compare/report/reportMetrics';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -177,14 +178,21 @@ export default function ComparePage() {
         ufA: comparison?.escola1?.uf, ufB: comparison?.escola2?.uf,
       });
 
-      // Fetch TRI projections in parallel — graceful: failure does not block PDF
+      // Fetch all advanced data concurrently — graceful: failure does not block PDF
       try {
-        setPdfProgress('Coletando projeções…');
+        setPdfProgress('Coletando análises (projeções, redação, habilidades)…');
         const areaCodes = diagnosisComparison.area_comparison.map(a => a.area);
-        const rows = await collectProjectionRows(school1, school2, areaCodes);
-        if (rows.length > 0) reportData.projection = rows;
+        const [projection, redacao, skills] = await Promise.all([
+          collectProjectionRows(school1, school2, areaCodes),
+          collectRedacaoRows(school1, school2),
+          collectSkills(school1, school2),
+        ]);
+        if (projection.length) reportData.projection = projection;
+        if (redacao.length) reportData.redacaoCompetencias = redacao;
+        if (skills.a.length || skills.b.length) reportData.skills = skills;
+        reportData.recommendations = buildRecommendations(reportData);
       } catch {
-        // Projection fetch failed; proceed without projection section
+        // Advanced fetch failed; proceed without advanced sections
       } finally {
         setPdfProgress('');
       }
