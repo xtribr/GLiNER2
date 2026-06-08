@@ -22,18 +22,20 @@ export async function generateReportPdf(data: ReportData): Promise<GeneratedRepo
   await new Promise((r) => setTimeout(r, 400));
 
   const filename = `XTRI_Relatorio_${slug(data.schoolA.nome_escola)}_vs_${slug(data.schoolB.nome_escola)}.pdf`;
-  await html2pdf().set({
-    margin: 0,
-    filename,
-    image: { type: 'jpeg', quality: 0.96 },
-    html2canvas: { scale: 2, useCORS: true, logging: false },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    pagebreak: { mode: ['css', 'legacy'] },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } as any).from(container.firstElementChild as HTMLElement).save();
-
-  root.unmount();
-  document.body.removeChild(container);
+  try {
+    await html2pdf().set({
+      margin: 0,
+      filename,
+      image: { type: 'jpeg', quality: 0.96 },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'] },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } as any).from(container.firstElementChild as HTMLElement).save();
+  } finally {
+    root.unmount();
+    document.body.removeChild(container);
+  }
   return { filename };
 }
 
