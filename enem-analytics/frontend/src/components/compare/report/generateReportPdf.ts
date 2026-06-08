@@ -11,7 +11,7 @@ export async function generateReportPdf(data: ReportData): Promise<GeneratedRepo
   container.style.position = 'fixed';
   container.style.left = '-10000px';
   container.style.top = '0';
-  container.style.width = '210mm';
+  container.style.width = '188mm'; // largura útil A4 (210 - 11mm de margem em cada lado)
   document.body.appendChild(container);
 
   const root = createRoot(container);
@@ -24,7 +24,7 @@ export async function generateReportPdf(data: ReportData): Promise<GeneratedRepo
   const filename = `XTRI_Relatorio_${slug(data.schoolA.nome_escola)}_vs_${slug(data.schoolB.nome_escola)}.pdf`;
   try {
     await html2pdf().set({
-      margin: 0,
+      margin: [10, 11, 10, 11], // margem A4 (mm): topo, esq, base, dir — aplicada em todas as páginas
       filename,
       image: { type: 'jpeg', quality: 0.96 },
       html2canvas: { scale: 2, useCORS: true, logging: false },

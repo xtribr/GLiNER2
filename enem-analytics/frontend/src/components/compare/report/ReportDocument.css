@@ -1,6 +1,6 @@
 @page { size: A4; margin: 9mm 11mm 9mm; }
 .xtri-report * { box-sizing: border-box; }
-.xtri-report { font-family: -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; color:#334155; font-size:10px; line-height:1.36; margin:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+.xtri-report { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; color:#334155; font-size:10px; line-height:1.36; margin:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 .xtri-report .header { display:flex; align-items:center; gap:13px; border-bottom:2px solid #eef2f6; padding-bottom:11px; }
 .xtri-report .header img { width:48px; height:48px; object-fit:contain; }
 .xtri-report .header h1 { font-size:20px; color:#1e293b; margin:0; font-weight:800; }
