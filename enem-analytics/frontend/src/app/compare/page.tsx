@@ -26,7 +26,9 @@ import {
   SuccessStoriesComparison,
   TRIAnalysisComparison,
 } from '@/components/compare';
-import { generateExecutiveReport, type GeneratedReportFile } from '@/components/compare/ExecutiveReportGenerator';
+import { buildPhase1ReportData, collectProjectionRows, collectRedacaoRows, collectSkills } from '@/components/compare/report/useReportData';
+import { generateReportPdf } from '@/components/compare/report/generateReportPdf';
+import { buildRecommendations } from '@/components/compare/report/reportMetrics';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -76,7 +78,7 @@ export default function ComparePage() {
   const [school2Name, setSchool2Name] = useState('');
   const [isPdfExporting, setIsPdfExporting] = useState(false);
   const [pdfExportSuccess, setPdfExportSuccess] = useState(false);
-  const [pdfDownload, setPdfDownload] = useState<GeneratedReportFile | null>(null);
+  const [pdfProgress, setPdfProgress] = useState('');
 
   // Anonymous display labels for privacy in comparisons
   const displayLabel1 = 'Escola 1';
@@ -161,70 +163,49 @@ export default function ComparePage() {
     setSearch2(nome);
   };
 
-  useEffect(() => {
-    return () => {
-      if (pdfDownload?.url) {
-        URL.revokeObjectURL(pdfDownload.url);
-      }
-    };
-  }, [pdfDownload]);
-
   const handleExportPdf = async () => {
-    if (!school1 || !school2) {
-      alert('Selecione duas escolas antes de exportar o relatório.');
+    if (!school1 || !school2 || !diagnosisComparison) {
+      alert('Selecione duas escolas e aguarde o diagnóstico carregar.');
       return;
     }
-
-    if (loadingDiagnosis) {
-      alert('O diagnóstico comparativo ainda está carregando. Aguarde alguns segundos e tente novamente.');
-      return;
-    }
-
-    if (!diagnosisComparison) {
-      alert('Não foi possível carregar os dados do diagnóstico comparativo. Recarregue a comparação antes de exportar.');
-      return;
-    }
-
     setIsPdfExporting(true);
-    setPdfExportSuccess(false);
-
+    setPdfProgress('');
     try {
-      if (pdfDownload?.url) {
-        URL.revokeObjectURL(pdfDownload.url);
-      }
-
-      const generatedFile = generateExecutiveReport({
-        school1: {
-          codigo_inep: school1,
-          nome_escola: displayLabel1,
-          nota_media: getLatestScore(history1),
-          ranking: getLatestRanking(history1),
-          uf: comparison?.escola1?.uf || undefined,
-          tipo_escola: history1?.tipo_escola,
-        },
-        school2: {
-          codigo_inep: school2,
-          nome_escola: displayLabel2,
-          nota_media: getLatestScore(history2),
-          ranking: getLatestRanking(history2),
-          uf: comparison?.escola2?.uf || undefined,
-          tipo_escola: history2?.tipo_escola,
-        },
-        diagnosisComparison,
-        history1,
-        history2,
-        comparison,
-        generatedAt: new Date(),
+      const reportData = buildPhase1ReportData({
+        diagnosis: diagnosisComparison,
+        history1, history2, comparison,
+        nameA: school1Name, nameB: school2Name,           // NOMES REAIS
+        ufA: comparison?.escola1?.uf, ufB: comparison?.escola2?.uf,
       });
 
-      setPdfDownload(generatedFile);
+      // Fetch all advanced data concurrently — graceful: failure does not block PDF
+      try {
+        setPdfProgress('Coletando análises (projeções, redação, habilidades)…');
+        const areaCodes = diagnosisComparison.area_comparison.map(a => a.area);
+        const [projection, redacao, skills] = await Promise.all([
+          collectProjectionRows(school1, school2, areaCodes),
+          collectRedacaoRows(school1, school2),
+          collectSkills(school1, school2),
+        ]);
+        if (projection.length) reportData.projection = projection;
+        if (redacao.length) reportData.redacaoCompetencias = redacao;
+        if (skills.a.length || skills.b.length) reportData.skills = skills;
+        reportData.recommendations = buildRecommendations(reportData);
+      } catch {
+        // Advanced fetch failed; proceed without advanced sections
+      } finally {
+        setPdfProgress('');
+      }
+
+      await generateReportPdf(reportData);
       setPdfExportSuccess(true);
       setTimeout(() => setPdfExportSuccess(false), 2000);
-    } catch (error) {
-      console.error('Error exporting PDF:', error);
-      alert('Erro ao exportar PDF. Tente novamente.');
+    } catch (e) {
+      console.error('Erro ao exportar PDF:', e);
+      alert('Erro ao gerar o relatório. Tente novamente.');
     } finally {
       setIsPdfExporting(false);
+      setPdfProgress('');
     }
   };
 
@@ -496,38 +477,13 @@ export default function ComparePage() {
                     <Download className="w-4 h-4" />
                   )}
                   {isPdfExporting
-                    ? 'Gerando PDF...'
+                    ? (pdfProgress || 'Gerando PDF...')
                     : pdfExportSuccess
                       ? 'PDF pronto'
                       : 'Exportar Relatório PDF'}
                 </button>
               </div>
-              {pdfDownload && (
-                <div className="w-full max-w-md rounded-xl border border-purple-100 bg-purple-50 p-3 text-sm shadow-sm">
-                  <p className="font-semibold text-purple-900">PDF gerado, mas o navegador pode bloquear o download automático.</p>
-                  <p className="mt-1 text-xs text-purple-700">
-                    Arquivo: {pdfDownload.filename} ({Math.max(1, Math.round(pdfDownload.size / 1024))} KB)
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a
-                      href={pdfDownload.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-xs font-bold text-purple-700 ring-1 ring-purple-200 hover:bg-purple-100"
-                    >
-                      Visualizar PDF
-                    </a>
-                    <a
-                      href={pdfDownload.url}
-                      download={pdfDownload.filename}
-                      className="inline-flex items-center justify-center rounded-lg bg-purple-600 px-3 py-2 text-xs font-bold text-white hover:bg-purple-700"
-                    >
-                      Baixar novamente
-                    </a>
-                  </div>
-                </div>
-              )}
-              {!diagnosisComparison && (
+{!diagnosisComparison && (
                 <p className="text-xs text-gray-500">
                   {loadingDiagnosis ? 'Aguardando diagnóstico para habilitar o relatório completo.' : 'Diagnóstico ainda não disponível para exportação.'}
                 </p>
