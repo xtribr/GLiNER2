@@ -170,10 +170,11 @@ describe('buildProjectionRows', () => {
   it('a_focus ordenado por gap desc, máximo 3 itens', () => {
     const rows = buildProjectionRows([projA1], [projB1]);
     // stretch_content items: H1=30, H2=50, H3=10, H4=40 → desc: H2(50), H4(40), H1(30)
+    // a descrição do item (description) deve ser carregada junto, não só o código
     expect(rows[0].a_focus).toEqual([
-      { skill: 'H2', gap: 50 },
-      { skill: 'H4', gap: 40 },
-      { skill: 'H1', gap: 30 },
+      { skill: 'H2', gap: 50, description: 'desc2' },
+      { skill: 'H4', gap: 40, description: 'desc4' },
+      { skill: 'H1', gap: 30, description: 'desc1' },
     ]);
   });
 

@@ -176,7 +176,7 @@ export default function ReportDocument({ data: d, onReady }: Props) {
                             <tbody>
                               {row.a_focus.map((item) => (
                                 <tr key={item.skill}>
-                                  <td className="a">{item.skill}</td>
+                                  <td><span className="a">{item.skill}</span>{item.description ? ` — ${item.description}` : ''}</td>
                                   <td>+{fmt(item.gap)}</td>
                                 </tr>
                               ))}
@@ -194,7 +194,7 @@ export default function ReportDocument({ data: d, onReady }: Props) {
                             <tbody>
                               {row.b_focus.map((item) => (
                                 <tr key={item.skill}>
-                                  <td className="b">{item.skill}</td>
+                                  <td><span className="b">{item.skill}</span>{item.description ? ` — ${item.description}` : ''}</td>
                                   <td>+{fmt(item.gap)}</td>
                                 </tr>
                               ))}
@@ -361,10 +361,10 @@ export default function ReportDocument({ data: d, onReady }: Props) {
               const projRow = projMap.get(canonicalAreaCode(ar.area));
               const laggardCell = w === 'A' ? projRow?.b : w === 'B' ? projRow?.a : null;
               const laggardLabel = w === 'A' ? 'B' : w === 'B' ? 'A' : null;
-              const topFocus = w === 'A'
-                ? projRow?.b_focus[0]?.skill
+              const topFocusItem = w === 'A'
+                ? projRow?.b_focus[0]
                 : w === 'B'
-                  ? projRow?.a_focus[0]?.skill
+                  ? projRow?.a_focus[0]
                   : null;
               const recAction = recsByArea.get(canonicalAreaCode(ar.area));
               const targetYear = projRow?.target_year;
@@ -385,9 +385,10 @@ export default function ReportDocument({ data: d, onReady }: Props) {
                         {laggardCell.recommended != null && <> (meta: {fmt(laggardCell.recommended)})</>}.
                       </div>
                     )}
-                    {topFocus && (
+                    {topFocusItem && (
                       <div>
-                        <span className="muted">Conteúdo prioritário:</span>{' '}{topFocus}.
+                        <span className="muted">Conteúdo prioritário:</span>{' '}
+                        {topFocusItem.skill}{topFocusItem.description ? ` — ${topFocusItem.description}` : ''}.
                       </div>
                     )}
                     {recAction

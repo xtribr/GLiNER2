@@ -49,7 +49,7 @@ export interface ProjectionCell {
   trend_dir: 'ascending' | 'descending' | 'stable' | 'insufficient_data' | null;
   trend_annual: number | null;
 }
-export interface ProjectionFocusItem { skill: string; gap: number; }
+export interface ProjectionFocusItem { skill: string; gap: number; description?: string; }
 export interface ProjectionRow {
   area: string;
   area_name: string;

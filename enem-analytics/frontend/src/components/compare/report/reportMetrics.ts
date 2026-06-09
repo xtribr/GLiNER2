@@ -184,7 +184,7 @@ function toFocus(p: TRIAreaProjection): ProjectionFocusItem[] {
   return [...p.stretch_content.items]
     .sort((a, b) => b.gap - a.gap)
     .slice(0, 3)
-    .map(({ skill, gap }) => ({ skill, gap }));
+    .map(({ skill, gap, description }) => ({ skill, gap, description }));
 }
 
 export function buildProjectionRows(
