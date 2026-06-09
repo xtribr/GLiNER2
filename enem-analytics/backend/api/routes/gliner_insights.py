@@ -540,9 +540,13 @@ async def get_knowledge_graph(
         """Get the full area distribution for interdisciplinary concepts."""
         return dict(area_counter)
 
-    # Dedup GLOBAL entre tipos: a mesma chave canônica não vira dois nós
-    # (ex.: "divulgação científica" não aparece como conceito E como lexical).
-    used_keys: set = set()
+    # Dedup POR TIPO (chave canônica): funde variantes de acento/caixa/espaço
+    # DENTRO do mesmo tipo, mas permite que um termo apareça como conceito E como
+    # campo semântico/lexical — são entidades GLiNER distintas (cores distintas).
+    # (Dedup global entre tipos colapsava as camadas semântica/lexical.)
+    used_concept: set = set()
+    used_semantic: set = set()
+    used_lexical: set = set()
 
     # Dynamic limits: more nodes when showing all areas (4x for 4 areas)
     multiplier = 1 if area else 4
@@ -590,7 +594,7 @@ async def get_knowledge_graph(
     for ckey, (relevance, status, avg_tri, sscore) in scored_concepts:
         if concept_added >= concept_limit:
             break
-        if ckey in used_keys:
+        if ckey in used_concept:
             continue
         count = concept_counts[ckey]
         label = concept_display[ckey].most_common(1)[0][0]
@@ -614,12 +618,12 @@ async def get_knowledge_graph(
             'is_interdisciplinary': len(area_dist) > 1
         })
         node_ids.add(node_id)
-        used_keys.add(ckey)
+        used_concept.add(ckey)
         concept_added += 1
 
     # Add semantic field nodes - purple (second priority)
     for skey, count in semantic_counts.most_common(semantic_limit):
-        if skey in used_keys:
+        if skey in used_semantic:
             continue
         label = semantic_display[skey].most_common(1)[0][0]
         node_id = f"semantic_{skey}"
@@ -638,11 +642,11 @@ async def get_knowledge_graph(
             'is_interdisciplinary': len(area_dist) > 1
         })
         node_ids.add(node_id)
-        used_keys.add(skey)
+        used_semantic.add(skey)
 
     # Add lexical field nodes - green
     for lkey, count in lexical_counts.most_common(lexical_limit):
-        if lkey in used_keys:
+        if lkey in used_lexical:
             continue
         label = lexical_display[lkey].most_common(1)[0][0]
         node_id = f"lexical_{lkey}"
@@ -661,31 +665,37 @@ async def get_knowledge_graph(
             'is_interdisciplinary': len(area_dist) > 1
         })
         node_ids.add(node_id)
-        used_keys.add(lkey)
+        used_lexical.add(lkey)
 
-    # Add edges (concept-semantic relationships)
-    for (concept, sem), weight in concept_semantic_edges.most_common(concept_semantic_edge_limit):
-        source_id = f"concept_{concept}"
-        target_id = f"semantic_{sem}"
-        if source_id in node_ids and target_id in node_ids:
-            edges.append({
-                'source': source_id,
-                'target': target_id,
-                'weight': weight,
-                'type': 'concept-semantic'
-            })
+    # Add edges (concept-semantic) — filtra para nós VISÍVEIS e SÓ DEPOIS limita por
+    # peso. (Antes limitava por frequência antes de filtrar, então as arestas não
+    # acompanhavam os conceitos selecionados por relevância → grafo quase sem conexões.)
+    visible_sem_edges = sorted(
+        (((c, s), w) for (c, s), w in concept_semantic_edges.items()
+         if f"concept_{c}" in node_ids and f"semantic_{s}" in node_ids),
+        key=lambda x: -x[1],
+    )
+    for (concept, sem), weight in visible_sem_edges[:concept_semantic_edge_limit]:
+        edges.append({
+            'source': f"concept_{concept}",
+            'target': f"semantic_{sem}",
+            'weight': weight,
+            'type': 'concept-semantic'
+        })
 
-    # Add edges (concept-lexical relationships)
-    for (concept, lex), weight in concept_lexical_edges.most_common(concept_lexical_edge_limit):
-        source_id = f"concept_{concept}"
-        target_id = f"lexical_{lex}"
-        if source_id in node_ids and target_id in node_ids:
-            edges.append({
-                'source': source_id,
-                'target': target_id,
-                'weight': weight,
-                'type': 'concept-lexical'
-            })
+    # Add edges (concept-lexical) — mesma lógica: filtra pelos nós visíveis, depois limita
+    visible_lex_edges = sorted(
+        (((c, lx), w) for (c, lx), w in concept_lexical_edges.items()
+         if f"concept_{c}" in node_ids and f"lexical_{lx}" in node_ids),
+        key=lambda x: -x[1],
+    )
+    for (concept, lex), weight in visible_lex_edges[:concept_lexical_edge_limit]:
+        edges.append({
+            'source': f"concept_{concept}",
+            'target': f"lexical_{lex}",
+            'weight': weight,
+            'type': 'concept-lexical'
+        })
 
     # Add interdisciplinary edges (cross-area connections)
     # Connect concepts from different areas that share semantic/lexical fields
