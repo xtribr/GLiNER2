@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
+import { balancedSlice, relaxOverlaps } from './graphSampling';
 import {
   Brain,
   Sparkles,
@@ -692,11 +693,9 @@ function NetworkTab({
       return typeAllowed && areaAllowed;
     });
 
-    // Sort by count (relevance) descending
-    const sorted = [...filtered].sort((a, b) => b.count - a.count);
-
-    // Limit to maxNodes
-    return sorted.slice(0, maxNodes);
+    // Amostragem balanceada por área (round-robin) — evita que um corte global por
+    // frequência esvazie áreas/tipos quando o limite de nós é reduzido.
+    return balancedSlice(filtered, maxNodes);
   }, [graphNodes, entityFilters, areaVisibility, maxNodes]);
 
   // Filter edges to only include those with visible nodes
@@ -790,16 +789,17 @@ function NetworkTab({
     const positions: { [key: string]: { x: number; y: number; node: GraphNode; ring: number; emphasis: boolean; cluster?: string } } = {};
     const centerX = 50;
     const centerY = 50;
+    // Regiões (quadrantes) por área — usadas no clusters mode E na relaxação anti-sobreposição.
+    const clusterRegions: { [key: string]: { xMin: number; xMax: number; yMin: number; yMax: number } } = {
+      CN: { xMin: 2, xMax: 44, yMin: 2, yMax: 44 },      // Top-left
+      CH: { xMin: 56, xMax: 98, yMin: 2, yMax: 44 },     // Top-right
+      LC: { xMin: 2, xMax: 44, yMin: 56, yMax: 98 },     // Bottom-left
+      MT: { xMin: 56, xMax: 98, yMin: 56, yMax: 98 },    // Bottom-right
+    };
 
     if (viewMode === 'clusters') {
       // Word cloud style layout with CLEAR separation between quadrants
-      // Increased margins between areas for better readability
-      const areaRegions: { [key: string]: { xMin: number; xMax: number; yMin: number; yMax: number } } = {
-        CN: { xMin: 2, xMax: 44, yMin: 2, yMax: 44 },      // Top-left (green)
-        CH: { xMin: 56, xMax: 98, yMin: 2, yMax: 44 },     // Top-right (yellow)
-        LC: { xMin: 2, xMax: 44, yMin: 56, yMax: 98 },     // Bottom-left (red)
-        MT: { xMin: 56, xMax: 98, yMin: 56, yMax: 98 },    // Bottom-right (blue)
-      };
+      const areaRegions = clusterRegions;
 
       // Group nodes by area
       const nodesByArea: { [key: string]: GraphNode[] } = { CN: [], CH: [], LC: [], MT: [], other: [] };
@@ -994,6 +994,25 @@ function NetworkTab({
         };
       });
     }
+
+    // Relaxação anti-sobreposição: separa os nós dentro de cada cluster (ou do
+    // limite global no modo radial), mantendo o agrupamento por área.
+    const placed = Object.values(positions).map((p) => {
+      const len = (p.node.label || '').length;
+      const isPill = p.node.count >= 5; // nós com rótulo ocupam mais espaço
+      const rx = isPill ? Math.min(1.3 + len * 0.12, 3.0) : 0.9;
+      const ry = isPill ? 1.4 : 0.9;
+      return { id: p.node.id, x: p.x, y: p.y, rx, ry, cluster: p.cluster };
+    });
+    const relaxed = relaxOverlaps(placed, {
+      iterations: 60,
+      regions: viewMode === 'clusters' ? clusterRegions : undefined,
+      bounds: { xMin: 2, xMax: 98, yMin: 2, yMax: 98 },
+    });
+    relaxed.forEach((pos, id) => {
+      const p = positions[id];
+      if (p) { p.x = pos.x; p.y = pos.y; }
+    });
 
     return positions;
   }, [viewMode]);
@@ -1449,6 +1468,15 @@ function NetworkTab({
                 // Node size based on count (for dot mode)
                 const dotSize = Math.max(6, Math.min(14, 6 + node.count * 0.8));
 
+                // Status escola-aware (só conceitos): no_nivel = foco (zona de ganho),
+                // gargalo = gap a fechar, dominado = já mastered (esmaecido).
+                const isConcept = !isSemantic && !isLexical;
+                const status = (node as { status?: string }).status;
+                const statusRing = isConcept
+                  ? (status === 'no_nivel' ? '#22d3ee' : status === 'gargalo' ? '#f59e0b' : null)
+                  : null;
+                const isMastered = isConcept && status === 'dominado';
+
                 return (
                   <div
                     key={id}
@@ -1457,7 +1485,7 @@ function NetworkTab({
                       left: `${x}%`,
                       top: `${y}%`,
                       zIndex: isHovered || isSelected ? 50 : isConnected ? 40 : isSemantic ? 30 : isLexical ? 20 : 10,
-                      opacity: isDimmed ? 0.25 : 1,
+                      opacity: isDimmed ? 0.25 : isMastered ? 0.55 : 1,
                     }}
                     onMouseEnter={() => setHoveredNode(id)}
                     onMouseLeave={() => setHoveredNode(null)}
@@ -1475,10 +1503,12 @@ function NetworkTab({
                         style={{
                           fontSize: isSemantic ? '10px' : '9px',
                           backgroundColor: tagColors.bg,
-                          border: `1px solid ${isSelected ? 'white' : tagColors.border}`,
+                          border: isSelected ? '1px solid white' : statusRing ? `2px solid ${statusRing}` : `1px solid ${tagColors.border}`,
                           boxShadow: isHovered || isSelected || isConnected
                             ? `0 0 15px ${tagColors.glow}, 0 2px 8px rgba(0,0,0,0.3)`
-                            : '0 1px 4px rgba(0,0,0,0.2)',
+                            : statusRing
+                              ? `0 0 8px ${statusRing}99, 0 1px 4px rgba(0,0,0,0.25)`
+                              : '0 1px 4px rgba(0,0,0,0.2)',
                           maxWidth: isHovered ? '200px' : '100px',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
@@ -1499,7 +1529,7 @@ function NetworkTab({
                           width: `${dotSize}px`,
                           height: `${dotSize}px`,
                           backgroundColor: tagColors.solid,
-                          border: node.is_interdisciplinary ? '2px solid #fbbf24' : `1px solid ${tagColors.border}`,
+                          border: statusRing ? `2px solid ${statusRing}` : node.is_interdisciplinary ? '2px solid #fbbf24' : `1px solid ${tagColors.border}`,
                           boxShadow: `0 0 ${dotSize}px ${tagColors.glow}`,
                         }}
                       />
@@ -1642,15 +1672,27 @@ function NetworkTab({
                   )}
                 </div>
 
+                {/* Status escola-aware dos conceitos (anel ao redor do nó) */}
+                <div className="flex items-center gap-3 pl-3 border-l border-slate-700">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-blue-500" style={{ border: '2px solid #22d3ee' }} />
+                    <span className="text-[10px] text-cyan-300">No nível (foco)</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-blue-500" style={{ border: '2px solid #f59e0b' }} />
+                    <span className="text-[10px] text-amber-300">Gargalo</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-blue-500/50" />
+                    <span className="text-[10px] text-slate-500">Dominado</span>
+                  </div>
+                </div>
+
                 {/* Edge types legend */}
                 <div className="flex items-center gap-3 pl-3 border-l border-slate-700">
                   <div className="flex items-center gap-1.5">
                     <div className="w-6 h-0.5 bg-amber-400" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #fbbf24 0, #fbbf24 4px, transparent 4px, transparent 6px)' }} />
                     <span className="text-[10px] text-amber-400">Interdisciplinar</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-6 h-0.5 bg-cyan-400" style={{ backgroundImage: 'repeating-linear-gradient(90deg, #22d3ee 0, #22d3ee 2px, transparent 2px, transparent 4px)' }} />
-                    <span className="text-[10px] text-cyan-400">Similaridade</span>
                   </div>
                 </div>
               </div>

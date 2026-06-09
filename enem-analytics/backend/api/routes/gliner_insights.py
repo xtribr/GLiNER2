@@ -10,6 +10,8 @@ Provides rich educational analytics using GLiNER-extracted entities:
 """
 
 import logging
+import math
+import unicodedata
 from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple, Set
 from collections import Counter
@@ -84,6 +86,38 @@ def find_similar_labels(labels: List[Tuple[str, str, str]], threshold: float = 0
                 })
 
     return sorted(matches, key=lambda x: -x['similarity'])
+
+
+def canonical_key(label: str) -> str:
+    """Chave canônica para deduplicar rótulos: minúsculas, sem acento, espaços
+    colapsados. Funde variantes como 'Notação científica' / 'notacao cientifica'."""
+    s = unicodedata.normalize('NFD', (label or '').lower().strip())
+    s = ''.join(c for c in s if unicodedata.category(c) != 'Mn')
+    return ' '.join(s.split())
+
+
+def _school_area_scores(codigo_inep: str) -> Dict[str, Optional[float]]:
+    """Nota atual da escola por área (último ano disponível) — lookup leve no
+    enem_results, sem o modelo ML. Áreas sem nota ficam None."""
+    from data.year_resolver import find_latest_enem_results_file
+    scores: Dict[str, Optional[float]] = {"CN": None, "CH": None, "LC": None, "MT": None}
+    enem_path = find_latest_enem_results_file(DADOS_DIR)
+    if enem_path is None or not enem_path.exists():
+        return scores
+    try:
+        enem_df = pd.read_csv(enem_path, dtype={"codigo_inep": str})
+    except Exception:
+        return scores
+    rows = enem_df[enem_df["codigo_inep"] == codigo_inep]
+    if len(rows) == 0:
+        return scores
+    latest = rows.sort_values("ano").iloc[-1]
+    for area, col in (("CN", "nota_cn"), ("CH", "nota_ch"), ("LC", "nota_lc"), ("MT", "nota_mt")):
+        v = latest.get(col)
+        if v is not None and not pd.isna(v):
+            scores[area] = float(v)
+    return scores
+
 
 # Data paths
 DADOS_DIR = Path(__file__).parent.parent.parent / "data"
@@ -410,14 +444,8 @@ async def get_knowledge_graph(
     Returns nodes (concepts, themes, skills) and edges (relationships) for visualization.
     Each node includes its primary area for proper clustering.
     """
-    from ml.prediction_model import ENEMPredictionModel
-
-    try:
-        model = ENEMPredictionModel()
-        predictions = model.predict_all_scores(codigo_inep)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
-
+    # (removida a chamada de predição que era calculada e descartada aqui — só
+    #  desperdiçava o modelo ML e fazia o grafo dar 500 se a predição falhasse)
     df = get_gliner_data()
 
     if area:
@@ -435,10 +463,16 @@ async def get_knowledge_graph(
     lexical_counts = Counter()
     concept_counts = Counter()
 
-    # Track area distribution for each entity (for proper clustering)
+    # Track area distribution for each entity (for proper clustering).
+    # Tudo é agregado pela CHAVE CANÔNICA (sem acento/caixa/espaço) para fundir
+    # variantes; a grafia exibida é a forma mais frequente de cada chave.
     concept_areas: Dict[str, Counter] = {}
     semantic_areas: Dict[str, Counter] = {}
     lexical_areas: Dict[str, Counter] = {}
+    concept_display: Dict[str, Counter] = {}
+    semantic_display: Dict[str, Counter] = {}
+    lexical_display: Dict[str, Counter] = {}
+    concept_tri: Dict[str, list] = {}  # canonical -> lista de tri_score (dificuldade)
 
     for _, row in df.iterrows():
         concepts = parse_list_field(row.get('conceitos_cientificos'))
@@ -446,31 +480,55 @@ async def get_knowledge_graph(
         lexical_fields = parse_list_field(row.get('campos_lexicais'))
         processes = parse_list_field(row.get('processos_fenomenos'))
         row_area = row.get('area_code', '')
+        try:
+            tri = float(row.get('tri_score'))
+        except (TypeError, ValueError):
+            tri = None
 
+        # Chaves canônicas dos conceitos desta linha
+        ckeys = []
         for concept in concepts:
-            concept_counts[concept] += 1
-            # Track which area this concept appears in
-            if concept not in concept_areas:
-                concept_areas[concept] = Counter()
-            concept_areas[concept][row_area] += 1
+            ck = canonical_key(concept)
+            if not ck:
+                continue
+            ckeys.append(ck)
+            concept_counts[ck] += 1
+            concept_display.setdefault(ck, Counter())[concept] += 1
+            concept_areas.setdefault(ck, Counter())[row_area] += 1
+            if tri is not None:
+                concept_tri.setdefault(ck, []).append(tri)
 
-            for sem in semantic_fields:
-                semantic_counts[sem] += 1
-                if sem not in semantic_areas:
-                    semantic_areas[sem] = Counter()
-                semantic_areas[sem][row_area] += 1
-                edge_key = (concept, sem)
-                concept_semantic_edges[edge_key] += 1
+        # Campos contados UMA VEZ POR LINHA (corrige a inflação por nº de conceitos)
+        skeys = []
+        for sem in semantic_fields:
+            sk = canonical_key(sem)
+            if not sk:
+                continue
+            skeys.append(sk)
+            semantic_counts[sk] += 1
+            semantic_display.setdefault(sk, Counter())[sem] += 1
+            semantic_areas.setdefault(sk, Counter())[row_area] += 1
 
-            for lex in lexical_fields:
-                lexical_counts[lex] += 1
-                if lex not in lexical_areas:
-                    lexical_areas[lex] = Counter()
-                lexical_areas[lex][row_area] += 1
-                concept_lexical_edges[(concept, lex)] += 1
+        lkeys = []
+        for lex in lexical_fields:
+            lk = canonical_key(lex)
+            if not lk:
+                continue
+            lkeys.append(lk)
+            lexical_counts[lk] += 1
+            lexical_display.setdefault(lk, Counter())[lex] += 1
+            lexical_areas.setdefault(lk, Counter())[row_area] += 1
 
-            for proc in processes:
-                concept_process_edges[(concept, proc)] += 1
+        pkeys = [pk for pk in (canonical_key(p) for p in processes) if pk]
+
+        # Arestas: co-ocorrência conceito × campo na mesma linha
+        for ck in ckeys:
+            for sk in skeys:
+                concept_semantic_edges[(ck, sk)] += 1
+            for lk in lkeys:
+                concept_lexical_edges[(ck, lk)] += 1
+            for pk in pkeys:
+                concept_process_edges[(ck, pk)] += 1
 
     def get_primary_area(area_counter: Counter) -> str:
         """Get the most common area for an entity."""
@@ -482,14 +540,9 @@ async def get_knowledge_graph(
         """Get the full area distribution for interdisciplinary concepts."""
         return dict(area_counter)
 
-    # Track which labels have already been added PER TYPE (to avoid duplicates within same type)
-    added_concept_labels: set = set()
-    added_semantic_labels: set = set()
-    added_lexical_labels: set = set()
-
-    def normalize_label(label: str) -> str:
-        """Normalize label for deduplication comparison."""
-        return label.lower().strip()
+    # Dedup GLOBAL entre tipos: a mesma chave canônica não vira dois nós
+    # (ex.: "divulgação científica" não aparece como conceito E como lexical).
+    used_keys: set = set()
 
     # Dynamic limits: more nodes when showing all areas (4x for 4 areas)
     multiplier = 1 if area else 4
@@ -499,77 +552,116 @@ async def get_knowledge_graph(
     concept_semantic_edge_limit = 80 * multiplier
     concept_lexical_edge_limit = 60 * multiplier
 
-    # Add concept nodes - scientific concepts in blue (highest priority)
-    for concept, count in concept_counts.most_common(concept_limit):
-        normalized = normalize_label(concept)
-        if normalized in added_concept_labels:
-            continue  # Skip duplicate within same type
-        node_id = f"concept_{concept}"
-        if node_id not in node_ids:
-            primary_area = get_primary_area(concept_areas.get(concept, Counter()))
-            area_dist = get_area_distribution(concept_areas.get(concept, Counter()))
-            nodes.append({
-                'id': node_id,
-                'label': concept,
-                'type': 'conceito_cientifico',
-                'size': min(40, 15 + count * 2),
-                'color': '#3b82f6',  # blue
-                'count': count,
-                'area': primary_area,
-                'area_name': AREA_NAMES.get(primary_area, primary_area),
-                'area_distribution': area_dist,
-                'is_interdisciplinary': len(area_dist) > 1
-            })
-            node_ids.add(node_id)
-            added_concept_labels.add(normalized)
+    # --- Relevância escola-aware dos conceitos ---
+    # Nota ATUAL da escola por área (lookup leve, sem modelo ML) — prioriza
+    # conceitos na "zona de ganho" (no nível ou logo acima da escola), e não os
+    # mais frequentes/genéricos.
+    school_scores = _school_area_scores(codigo_inep)
+
+    def concept_meta(ckey: str):
+        cnt = concept_counts[ckey]
+        tris = concept_tri.get(ckey, [])
+        avg_tri = (sum(tris) / len(tris)) if tris else None
+        parea = get_primary_area(concept_areas.get(ckey, Counter()))
+        sscore = school_scores.get(parea)
+        status = 'indefinido'
+        stretch = 0.5
+        if avg_tri is not None and sscore is not None:
+            gap = sscore - avg_tri  # >0 = escola acima da dificuldade do conceito
+            if gap > 30:
+                status = 'dominado'
+            elif gap < -30:
+                status = 'gargalo'
+            else:
+                status = 'no_nivel'
+            # relevância máxima logo acima do nível atual (alvo = sscore + 15)
+            d = (avg_tri - (sscore + 15)) / 80.0
+            stretch = math.exp(-d * d)
+        relevance = math.log1p(cnt) * (0.4 + 0.6 * stretch)
+        return relevance, status, avg_tri, sscore
+
+    scored_concepts = sorted(
+        ((ck, concept_meta(ck)) for ck in concept_counts),
+        key=lambda x: -x[1][0],
+    )
+
+    # Add concept nodes — selecionados por RELEVÂNCIA (não só frequência), azul
+    concept_added = 0
+    for ckey, (relevance, status, avg_tri, sscore) in scored_concepts:
+        if concept_added >= concept_limit:
+            break
+        if ckey in used_keys:
+            continue
+        count = concept_counts[ckey]
+        label = concept_display[ckey].most_common(1)[0][0]
+        node_id = f"concept_{ckey}"
+        primary_area = get_primary_area(concept_areas.get(ckey, Counter()))
+        area_dist = get_area_distribution(concept_areas.get(ckey, Counter()))
+        nodes.append({
+            'id': node_id,
+            'label': label,
+            'type': 'conceito_cientifico',
+            'size': min(40, 15 + count * 2),
+            'color': '#3b82f6',  # blue
+            'count': count,
+            'relevance': round(relevance, 3),
+            'status': status,
+            'avg_tri': round(avg_tri) if avg_tri is not None else None,
+            'school_area_score': round(sscore) if sscore is not None else None,
+            'area': primary_area,
+            'area_name': AREA_NAMES.get(primary_area, primary_area),
+            'area_distribution': area_dist,
+            'is_interdisciplinary': len(area_dist) > 1
+        })
+        node_ids.add(node_id)
+        used_keys.add(ckey)
+        concept_added += 1
 
     # Add semantic field nodes - purple (second priority)
-    for sem, count in semantic_counts.most_common(semantic_limit):
-        normalized = normalize_label(sem)
-        if normalized in added_semantic_labels:
-            continue  # Skip duplicate within same type
-        node_id = f"semantic_{sem}"
-        if node_id not in node_ids:
-            primary_area = get_primary_area(semantic_areas.get(sem, Counter()))
-            area_dist = get_area_distribution(semantic_areas.get(sem, Counter()))
-            nodes.append({
-                'id': node_id,
-                'label': sem,
-                'type': 'campo_semantico',
-                'size': min(35, 12 + count * 1.5),
-                'color': '#8b5cf6',  # purple
-                'count': count,
-                'area': primary_area,
-                'area_name': AREA_NAMES.get(primary_area, primary_area),
-                'area_distribution': area_dist,
-                'is_interdisciplinary': len(area_dist) > 1
-            })
-            node_ids.add(node_id)
-            added_semantic_labels.add(normalized)
+    for skey, count in semantic_counts.most_common(semantic_limit):
+        if skey in used_keys:
+            continue
+        label = semantic_display[skey].most_common(1)[0][0]
+        node_id = f"semantic_{skey}"
+        primary_area = get_primary_area(semantic_areas.get(skey, Counter()))
+        area_dist = get_area_distribution(semantic_areas.get(skey, Counter()))
+        nodes.append({
+            'id': node_id,
+            'label': label,
+            'type': 'campo_semantico',
+            'size': min(35, 12 + count * 1.5),
+            'color': '#8b5cf6',  # purple
+            'count': count,
+            'area': primary_area,
+            'area_name': AREA_NAMES.get(primary_area, primary_area),
+            'area_distribution': area_dist,
+            'is_interdisciplinary': len(area_dist) > 1
+        })
+        node_ids.add(node_id)
+        used_keys.add(skey)
 
     # Add lexical field nodes - green
-    for lex, count in lexical_counts.most_common(lexical_limit):
-        normalized = normalize_label(lex)
-        if normalized in added_lexical_labels:
-            continue  # Skip duplicate within same type
-        node_id = f"lexical_{lex}"
-        if node_id not in node_ids:
-            primary_area = get_primary_area(lexical_areas.get(lex, Counter()))
-            area_dist = get_area_distribution(lexical_areas.get(lex, Counter()))
-            nodes.append({
-                'id': node_id,
-                'label': lex,
-                'type': 'campo_lexical',
-                'size': min(30, 10 + count * 1.2),
-                'color': '#22c55e',  # green
-                'count': count,
-                'area': primary_area,
-                'area_name': AREA_NAMES.get(primary_area, primary_area),
-                'area_distribution': area_dist,
-                'is_interdisciplinary': len(area_dist) > 1
-            })
-            node_ids.add(node_id)
-            added_lexical_labels.add(normalized)
+    for lkey, count in lexical_counts.most_common(lexical_limit):
+        if lkey in used_keys:
+            continue
+        label = lexical_display[lkey].most_common(1)[0][0]
+        node_id = f"lexical_{lkey}"
+        primary_area = get_primary_area(lexical_areas.get(lkey, Counter()))
+        area_dist = get_area_distribution(lexical_areas.get(lkey, Counter()))
+        nodes.append({
+            'id': node_id,
+            'label': label,
+            'type': 'campo_lexical',
+            'size': min(30, 10 + count * 1.2),
+            'color': '#22c55e',  # green
+            'count': count,
+            'area': primary_area,
+            'area_name': AREA_NAMES.get(primary_area, primary_area),
+            'area_distribution': area_dist,
+            'is_interdisciplinary': len(area_dist) > 1
+        })
+        node_ids.add(node_id)
+        used_keys.add(lkey)
 
     # Add edges (concept-semantic relationships)
     for (concept, sem), weight in concept_semantic_edges.most_common(concept_semantic_edge_limit):
@@ -672,8 +764,8 @@ async def get_knowledge_graph(
     # Find similar labels (threshold 0.65 for broader matching)
     similarity_matches = find_similar_labels(all_labels, threshold=0.65)
 
-    # Create edges for cross-area similar labels
-    similarity_edges_added = set()
+    # NOTA: não criamos mais arestas de "semantic_similarity" (eram string-fuzzy
+    # e geravam ligações enganosas). Mantemos só o relatório (auditoria).
     similarity_report = {
         'exact_duplicates': [],
         'similar_labels': [],
@@ -681,9 +773,6 @@ async def get_knowledge_graph(
     }
 
     for match in similarity_matches:
-        node1_id = match['node1_id']
-        node2_id = match['node2_id']
-
         # Categorize the match
         if match['similarity'] > 0.95:
             similarity_report['exact_duplicates'].append(match)
@@ -692,20 +781,8 @@ async def get_knowledge_graph(
         else:
             similarity_report['suggested_connections'].append(match)
 
-        # Only create edges for cross-area connections
-        if match['is_cross_area']:
-            edge_key = tuple(sorted([node1_id, node2_id]))
-            # Skip if edge already exists
-            if edge_key not in added_interdisciplinary and edge_key not in similarity_edges_added:
-                edges.append({
-                    'source': node1_id,
-                    'target': node2_id,
-                    'weight': match['similarity'],
-                    'type': 'semantic_similarity',
-                    'similarity': match['similarity'],
-                    'match_type': match['match_type']
-                })
-                similarity_edges_added.add(edge_key)
+        # (arestas de "semantic_similarity" removidas — eram fuzzy/ruído; mantemos
+        #  apenas co-ocorrência real e interdisciplinaridade por campo compartilhado)
 
     # Update interdisciplinary count
     similarity_edge_count = len([e for e in edges if e.get('type') == 'semantic_similarity'])
