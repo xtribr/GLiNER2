@@ -34,6 +34,8 @@ export interface ReportData {
   redacaoCompetencias?: RedacaoCompRow[];
   recommendations?: RecommendationRow[];
   skills?: { a: SkillRow[]; b: SkillRow[] };
+  /** true se as seções avançadas falharam ao carregar — o relatório imprime um aviso visível. */
+  advancedSectionsFailed?: boolean;
 }
 
 export interface ProjectionCell {
@@ -47,7 +49,7 @@ export interface ProjectionCell {
   trend_dir: 'ascending' | 'descending' | 'stable' | 'insufficient_data' | null;
   trend_annual: number | null;
 }
-export interface ProjectionFocusItem { skill: string; gap: number; }
+export interface ProjectionFocusItem { skill: string; gap: number; description?: string; }
 export interface ProjectionRow {
   area: string;
   area_name: string;
@@ -68,6 +70,9 @@ export interface RedacaoCompRow {
 export interface RecommendationRow {
   scope: 'A'|'B'|'Ambas'|'Benchmark'; priority: 'Alta'|'Média'|'Baixa'|'—';
   action: string; impact: string;
+  /** Código de área canônico quando a recomendação é específica de uma área
+   *  (usado pela Síntese por Área). Recomendações globais ficam sem areaCode. */
+  areaCode?: string;
 }
 export interface SkillRow { area: string; skill: string; kind: 'forte'|'fraca'; }
 

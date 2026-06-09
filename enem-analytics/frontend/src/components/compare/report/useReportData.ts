@@ -66,8 +66,10 @@ export async function collectRedacaoRows(inepA: string, inepB: string): Promise<
 // Returns { a: SkillRow[]; b: SkillRow[] }
 export async function collectSkills(inepA: string, inepB: string): Promise<{ a: SkillRow[]; b: SkillRow[] }> {
   const [a, b] = await Promise.allSettled([
-    api.getSchoolSkills(inepA),
-    api.getSchoolSkills(inepB),
+    // limit=30 = todas as habilidades por área; sem isto o backend devolve só as 10
+    // PIORES por área e os "Pontos fortes" sairiam do pool das mais fracas.
+    api.getSchoolSkills(inepA, 30),
+    api.getSchoolSkills(inepB, 30),
   ]);
   return {
     a: buildSkillRows(a.status === 'fulfilled' ? (a.value as SchoolSkillsResult) : null),
@@ -75,14 +77,26 @@ export async function collectSkills(inepA: string, inepB: string): Promise<{ a: 
   };
 }
 
+// Última entrada do histórico com nota_media não-nula — evita exibir '—' quando o
+// ano mais recente veio sem média (participou com notas incompletas). Cai para a
+// última entrada se nenhuma tiver média.
+function lastWithMedia(h?: SchoolHistory): SchoolHistory['history'][number] | undefined {
+  const arr = h?.history;
+  if (!arr || arr.length === 0) return undefined;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr[i].nota_media != null) return arr[i];
+  }
+  return arr[arr.length - 1];
+}
+
 export function buildPhase1ReportData(args: BuildArgs): ReportData {
   const { diagnosis, history1, history2, comparison } = args;
-  const lastA = history1?.history?.at(-1);
-  const lastB = history2?.history?.at(-1);
+  const lastA = lastWithMedia(history1);
+  const lastB = lastWithMedia(history2);
   const meta = (info: DiagnosisComparisonResult['school_1'], name: string, uf: string|null|undefined, last: typeof lastA): ReportSchoolMeta => ({
     codigo_inep: info.codigo_inep,
     nome_escola: name,                          // NOME REAL
-    uf: uf ?? info.info.localizacao ?? null,
+    uf: uf ?? null,                             // NÃO cair para localizacao ("Urbana"/"Rural") — não é UF
     cidade: info.info.localizacao ?? null,
     tipo_escola: info.info.tipo_escola,
     porte_label: info.info.porte != null ? (PORTE_LABEL[info.info.porte] ?? String(info.info.porte)) : null,

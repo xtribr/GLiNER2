@@ -16,8 +16,25 @@ describe('executiveSummary', () => {
   it('nomeia o líder, a vantagem e as áreas vencidas', () => {
     const s = executiveSummary(base);
     expect(s).toContain('CHRISTUS');
-    expect(s).toContain('99,2');       // |663.2-762.4|
+    expect(s).toContain('96,0');       // média diag: A (695,5) × B (791,5) → vantagem 96,0
     expect(s).toMatch(/Redação/);      // maior gap mencionado
+  });
+
+  // Regressão: líder/vantagem vêm do diagnóstico, não de nota_media (que pode ser null)
+  it('com nota_media null ainda nomeia o líder e a vantagem reais (sem vazar a nota inteira)', () => {
+    const baseNull = {
+      schoolA: { nome_escola: 'ALPHA', nota_media: null, ranking_brasil: null },
+      schoolB: { nome_escola: 'BETA', nota_media: null, ranking_brasil: 5 },
+      diagnosis: { area_comparison: [
+        { area:'MT', area_name:'Matemática', school_1_score:600, school_2_score:700, difference:-100, school_1_status:'good', school_2_status:'excellent' },
+        { area:'CH', area_name:'Ciências Humanas', school_1_score:620, school_2_score:680, difference:-60, school_1_status:'good', school_2_status:'good' },
+      ] },
+    } as unknown as ReportData;
+    const s = executiveSummary(baseNull);
+    // média diag: A=610, B=690 → BETA lidera por 80,0 pts (NÃO ~690)
+    expect(s).toContain('BETA');
+    expect(s).toContain('80,0');
+    expect(s).not.toMatch(/lidera por 6\d\d/);  // não apresenta a nota inteira como "vantagem"
   });
 });
 describe('areaParagraph', () => {
