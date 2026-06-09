@@ -1,16 +1,27 @@
 import type { ReportData, ProjectionRow } from './types';
 import type { DiagnosisComparisonArea } from '@/lib/api';
-import { areasWon, biggestGapArea, fmt } from './reportMetrics';
+import { areasWon, biggestGapArea, fmt, overallFromDiagnosis } from './reportMetrics';
 
 export function executiveSummary(d: ReportData): string {
-  const a = d.schoolA, b = d.schoolB;
-  const leader = (a.nota_media ?? 0) >= (b.nota_media ?? 0) ? a : b;
-  const diff = Math.abs((a.nota_media ?? 0) - (b.nota_media ?? 0));
-  const won = areasWon(d.diagnosis);
-  const wonLeader = leader === a ? won.a : won.b;
+  // Líder e vantagem vêm das notas de área do diagnóstico (sempre presentes),
+  // não de nota_media (history), que pode ser null e produzir um falso "lidera por ~600 pts".
+  const overall = overallFromDiagnosis(d.diagnosis);
   const big = biggestGapArea(d.diagnosis);
-  return `${leader.nome_escola} (média ${fmt(leader.nota_media)} · #${leader.ranking_brasil ?? '—'} no Brasil) ` +
-    `lidera por ${fmt(diff)} pontos na média geral, vencendo em ${wonLeader} das ${d.diagnosis.area_comparison.length} áreas. ` +
+
+  if (overall.leader === 'tie' || overall.advantage == null) {
+    return `As duas escolas têm desempenho médio equivalente nas áreas avaliadas. ` +
+      `A maior diferença pontual está em ${big.area_name} (${fmt(big.gap)} pts). ` +
+      `A leitura detalhada por área aponta onde concentrar esforço.`;
+  }
+
+  const isA = overall.leader === 'A';
+  const leaderName = isA ? d.schoolA.nome_escola : d.schoolB.nome_escola;
+  const leaderMean = isA ? overall.aMean : overall.bMean;
+  const leaderRank = isA ? d.schoolA.ranking_brasil : d.schoolB.ranking_brasil;
+  const won = areasWon(d.diagnosis);
+  const wonLeader = isA ? won.a : won.b;
+  return `${leaderName} (média ${fmt(leaderMean)} · #${leaderRank ?? '—'} no Brasil) ` +
+    `lidera por ${fmt(overall.advantage)} pontos na média geral, vencendo em ${wonLeader} das ${d.diagnosis.area_comparison.length} áreas. ` +
     `A maior diferença está em ${big.area_name} (${fmt(big.gap)} pts). ` +
     `As demais áreas são mais equilibradas; a leitura detalhada por área aponta onde concentrar esforço.`;
 }

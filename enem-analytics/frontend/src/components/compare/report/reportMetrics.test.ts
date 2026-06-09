@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { areasWon, biggestGapArea, rankingGap, trendOverYears, statusClass, fmt, buildProjectionRows, buildRedacaoRows, buildSkillRows, buildRecommendations, canonicalAreaCode } from './reportMetrics';
+import { areasWon, biggestGapArea, rankingGap, trendOverYears, statusClass, fmt, buildProjectionRows, buildRedacaoRows, buildSkillRows, buildRecommendations, canonicalAreaCode, overallFromDiagnosis } from './reportMetrics';
 import type { DiagnosisComparisonResult, TRIAreaProjection } from '@/lib/api';
 import type { ReportData, ReportSchoolMeta } from './types';
 
@@ -49,6 +49,23 @@ describe('fmt', () => {
   it('formata nota pt-BR com 1 casa', () => {
     expect(fmt(663.23)).toBe('663,2');
     expect(fmt(null)).toBe('—');
+  });
+});
+
+describe('overallFromDiagnosis', () => {
+  it('calcula média por escola, vantagem e líder a partir das áreas do diagnóstico', () => {
+    const r = overallFromDiagnosis(diag);
+    // A: (671+690+720+620+615)/5 = 663,2 ; B: (883+863+700+671+695)/5 = 762,4
+    expect(r.aMean).toBeCloseTo(663.2, 1);
+    expect(r.bMean).toBeCloseTo(762.4, 1);
+    expect(r.advantage).toBeCloseTo(99.2, 1);
+    expect(r.leader).toBe('B');
+  });
+  it('retorna líder "tie" e advantage null quando não há áreas', () => {
+    const empty = { area_comparison: [] } as unknown as DiagnosisComparisonResult;
+    const r = overallFromDiagnosis(empty);
+    expect(r.leader).toBe('tie');
+    expect(r.advantage).toBeNull();
   });
 });
 
@@ -576,6 +593,55 @@ describe('buildRecommendations', () => {
     expect(redAreaRec!.impact).toMatch(/\+/);
     expect(redAreaRec!.impact).toMatch(/35/);
     expect(redAreaRec!.impact).not.toMatch(/reduz gap/i);
+  });
+
+  // Regressão #1 — líder/laggard derivam do diagnóstico, não de nota_media (que pode ser null)
+  it('deriva líder/laggard do diagnóstico; nota_media null não inverte os papéis', () => {
+    // A lidera claramente no diagnóstico (vence MT e LC), mas A.nota_media é null e B
+    // tem nota real. Com a lógica antiga (nota_media ?? 0 → 0 >= 625 = false), B seria
+    // erroneamente nomeado líder.
+    const d2: ReportData = {
+      ...reportDataFixture,
+      schoolA: { ...makeSchoolMeta('Lider Real', 0), nota_media: null },
+      schoolB: makeSchoolMeta('Atrasada', 625),
+    };
+    const recs = buildRecommendations(d2);
+    const bench = recs.find(r => r.scope === 'Benchmark')!;
+    expect(bench.action).toContain('Atrasada');    // laggard (B) espelha...
+    expect(bench.action).toContain('Lider Real');  // ...o líder (A)
+    // recomendações de área Alta pertencem ao laggard B, não a A
+    expect(recs.some(r => r.scope === 'B' && r.priority === 'Alta')).toBe(true);
+    expect(recs.some(r => r.scope === 'A' && r.priority === 'Alta')).toBe(false);
+  });
+
+  // Regressão #2 — areaCode explícito nas recs de área; benchmark sem areaCode
+  it('marca areaCode nas recomendações de área do laggard e NÃO no benchmark', () => {
+    const recs = buildRecommendations(reportDataFixture);
+    const bench = recs.find(r => r.scope === 'Benchmark')!;
+    expect(bench.areaCode).toBeUndefined();
+    const mtRec = recs.find(r => r.scope === 'B' && r.action.toLowerCase().includes('matemática'))!;
+    expect(mtRec.areaCode).toBe('MT');
+  });
+
+  // Regressão #2 — área empatada não recebe ação (mesmo sendo a mais forte do líder)
+  it('não atribui areaCode a uma área empatada (impede benchmark de cair em empate)', () => {
+    const diagTie = makeDiagnosis();
+    (diagTie as any).area_comparison = [
+      // Empate na maior nota do líder A (CH 800×800) — não pode receber ação de área
+      { area: 'CH', area_name: 'Ciências Humanas', school_1_score: 800, school_2_score: 800, difference: 0, school_1_status: 'excellent', school_2_status: 'excellent' },
+      // A vence MT — laggard B perde aqui
+      { area: 'MT', area_name: 'Matemática', school_1_score: 750, school_2_score: 600, difference: 150, school_1_status: 'good', school_2_status: 'needs_attention' },
+    ];
+    const d2: ReportData = { ...reportDataFixture, diagnosis: diagTie, projection: undefined };
+    const recs = buildRecommendations(d2);
+    // Nenhuma recomendação aponta para a área empatada (CH)
+    expect(recs.some(r => r.areaCode === canonicalAreaCode('CH'))).toBe(false);
+    // O benchmark menciona "Ciências Humanas" no texto, mas SEM areaCode (não cola na área)
+    const bench = recs.find(r => r.scope === 'Benchmark')!;
+    expect(bench.areaCode).toBeUndefined();
+    expect(bench.action).toContain('Ciências Humanas');
+    // A única área com ação é MT (onde B perde)
+    expect(recs.some(r => r.areaCode === 'MT')).toBe(true);
   });
 });
 

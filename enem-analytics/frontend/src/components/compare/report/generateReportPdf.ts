@@ -70,9 +70,30 @@ export async function renderReportToHtml(data: ReportData): Promise<{ html: stri
  * "Salvar como PDF". Substitui o antigo fluxo html2pdf/html2canvas (que rasterizava
  * e colapsava os espaços do texto).
  */
-export async function generateReportPdf(data: ReportData): Promise<GeneratedReportFile> {
+export async function generateReportPdf(
+  data: ReportData,
+  targetWindow?: Window | null,
+): Promise<GeneratedReportFile> {
   const { html, filename } = await renderReportToHtml(data);
 
+  // Caminho preferido: aba aberta no gesto do clique (funciona no Safari, onde
+  // print via iframe oculto não dispara). A aba mostra o relatório e abre o
+  // diálogo de impressão; o usuário escolhe "Salvar como PDF".
+  if (targetWindow && !targetWindow.closed) {
+    targetWindow.document.open();
+    targetWindow.document.write(html);
+    targetWindow.document.close();
+    try { targetWindow.document.title = filename; } catch { /* noop */ }
+    const doPrint = () => { try { targetWindow.focus(); targetWindow.print(); } catch { /* noop */ } };
+    if (targetWindow.document.readyState === 'complete') {
+      setTimeout(doPrint, 500);
+    } else {
+      targetWindow.onload = () => setTimeout(doPrint, 500);
+    }
+    return { filename: `${filename}.pdf` };
+  }
+
+  // Fallback (sem janela pré-aberta / popup bloqueado): iframe oculto + print.
   const iframe = document.createElement('iframe');
   iframe.setAttribute('aria-hidden', 'true');
   iframe.style.position = 'fixed';
@@ -87,15 +108,11 @@ export async function generateReportPdf(data: ReportData): Promise<GeneratedRepo
   idoc.open();
   idoc.write(html);
   idoc.close();
-
-  // Aguarda layout + imagens (logo) antes de imprimir.
   await new Promise((r) => setTimeout(r, 400));
-
   const win = iframe.contentWindow!;
   win.focus();
   win.onafterprint = () => iframe.remove();
   win.print();
-  // Fallback: remove o iframe caso onafterprint não dispare (alguns navegadores).
   setTimeout(() => { if (document.body.contains(iframe)) iframe.remove(); }, 60000);
 
   return { filename: `${filename}.pdf` };

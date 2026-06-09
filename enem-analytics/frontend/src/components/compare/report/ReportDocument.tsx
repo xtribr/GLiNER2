@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import './ReportDocument.css';
 import type { ReportData } from './types';
-import { areasWon, biggestGapArea, rankingGap, statusClass, statusLabel, fmt, winnerOfArea, canonicalAreaCode } from './reportMetrics';
+import { areasWon, biggestGapArea, rankingGap, statusClass, statusLabel, fmt, winnerOfArea, canonicalAreaCode, overallFromDiagnosis } from './reportMetrics';
 
 /** Renders a signed delta: +1,5 / −1,5 (no "+-") */
 function signedFmt(n: number): string {
@@ -18,6 +18,9 @@ export default function ReportDocument({ data: d, onReady }: Props) {
   const won = areasWon(d.diagnosis);
   const big = biggestGapArea(d.diagnosis);
   const date = d.generatedAt.toLocaleDateString('pt-BR');
+  // Vantagem média e cor do líder derivam do diagnóstico (sempre presente).
+  const overall = overallFromDiagnosis(d.diagnosis);
+  const leaderColor = overall.leader === 'A' ? '#2563eb' : overall.leader === 'B' ? '#16a34a' : '#334155';
 
   return (
     <div className="xtri-report">
@@ -36,14 +39,14 @@ export default function ReportDocument({ data: d, onReady }: Props) {
       <table>
         <thead><tr><th style={{ width: '24%' }}>Campo</th><th>Escola A — {d.schoolA.nome_escola}</th><th>Escola B — {d.schoolB.nome_escola}</th></tr></thead>
         <tbody>
-          <tr><td>INEP · UF · Localização</td><td>{d.schoolA.codigo_inep} · {d.schoolA.uf} · {d.schoolA.cidade}</td><td>{d.schoolB.codigo_inep} · {d.schoolB.uf} · {d.schoolB.cidade}</td></tr>
+          <tr><td>INEP · UF · Localização</td><td>{d.schoolA.codigo_inep} · {d.schoolA.uf ?? '—'} · {d.schoolA.cidade ?? '—'}</td><td>{d.schoolB.codigo_inep} · {d.schoolB.uf ?? '—'} · {d.schoolB.cidade ?? '—'}</td></tr>
           <tr><td>Tipo · Porte</td><td>{d.schoolA.tipo_escola} · {d.schoolA.porte_label}</td><td>{d.schoolB.tipo_escola} · {d.schoolB.porte_label}</td></tr>
           <tr><td>Média geral (TRI)</td><td className="a">{fmt(d.schoolA.nota_media)}</td><td className="b">{fmt(d.schoolB.nota_media)}</td></tr>
           <tr><td>Ranking Brasil · UF</td><td>#{d.schoolA.ranking_brasil} · #{d.schoolA.ranking_uf}</td><td>#{d.schoolB.ranking_brasil} · #{d.schoolB.ranking_uf}</td></tr>
         </tbody>
       </table>
       <div className="kpis">
-        <div className="kpi"><div className="v" style={{ color: '#16a34a' }}>{fmt(Math.abs((d.schoolA.nota_media??0)-(d.schoolB.nota_media??0)))}</div><div className="l">Vantagem média</div></div>
+        <div className="kpi"><div className="v" style={{ color: leaderColor }}>{fmt(overall.advantage)}</div><div className="l">Vantagem média{overall.leader === 'tie' ? '' : ` (${overall.leader})`}</div></div>
         <div className="kpi"><div className="v">{won.a} × {won.b}</div><div className="l">Áreas A × B</div></div>
         <div className="kpi"><div className="v" style={{ color: '#ff6b5c' }}>{fmt(big.gap)}</div><div className="l">Maior gap ({big.area_name})</div></div>
         <div className="kpi"><div className="v">{rankingGap(d.schoolA.ranking_brasil, d.schoolB.ranking_brasil) ?? '—'}</div><div className="l">Gap de ranking</div></div>
@@ -342,12 +345,12 @@ export default function ReportDocument({ data: d, onReady }: Props) {
         const projMap = new Map((d.projection ?? []).map(p => [canonicalAreaCode(p.area), p]));
         const recsByArea = new Map<string, string>();
         for (const rec of (d.recommendations ?? [])) {
-          // Match recommendation action to area name for cross-reference
-          for (const ar of d.diagnosis.area_comparison) {
-            if (rec.action.toLowerCase().includes(ar.area_name.toLowerCase())) {
-              if (!recsByArea.has(ar.area)) recsByArea.set(ar.area, rec.action);
-            }
-          }
+          // Cross-referência por código de área EXPLÍCITO (não fuzzy match no texto):
+          // evita atribuir uma recomendação à área errada — ex.: o benchmark
+          // "espelhar a metodologia de X" caindo numa área empatada.
+          if (!rec.areaCode) continue;
+          const key = canonicalAreaCode(rec.areaCode);
+          if (!recsByArea.has(key)) recsByArea.set(key, rec.action);
         }
         return (
           <>
@@ -363,7 +366,7 @@ export default function ReportDocument({ data: d, onReady }: Props) {
                 : w === 'B'
                   ? projRow?.a_focus[0]?.skill
                   : null;
-              const recAction = recsByArea.get(ar.area);
+              const recAction = recsByArea.get(canonicalAreaCode(ar.area));
               const targetYear = projRow?.target_year;
               return (
                 <div className={`areablock ${cls}`} key={`synth-${ar.area}`}>
@@ -403,6 +406,13 @@ export default function ReportDocument({ data: d, onReady }: Props) {
           </>
         );
       })()}
+
+      {d.advancedSectionsFailed && (
+        <p className="muted" style={{ marginTop: '6px' }}>
+          Observação: algumas seções avançadas (projeção TRI, redação por competência e habilidades)
+          não puderam ser geradas e foram omitidas deste relatório.
+        </p>
+      )}
 
       <div className="foot"><span>X-TRI Escolas · rankingenem.com</span><span>Base ENEM {d.baseYear}</span></div>
     </div>

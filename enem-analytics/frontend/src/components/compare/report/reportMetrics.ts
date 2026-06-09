@@ -98,6 +98,28 @@ export function biggestGapArea(diag: DiagnosisComparisonResult) {
   };
 }
 
+/**
+ * Comparação agregada derivada das notas de área do diagnóstico — a base
+ * autoritativa e SEMPRE presente para "quem lidera no geral". Equivale à
+ * média geral (média das 5 áreas), mas nunca é null como `nota_media` (history).
+ */
+export function overallFromDiagnosis(diag: DiagnosisComparisonResult): {
+  aMean: number | null; bMean: number | null; advantage: number | null; leader: Winner;
+} {
+  let sumA = 0, sumB = 0, n = 0;
+  for (const ar of diag.area_comparison) {
+    if (ar.school_1_score == null || ar.school_2_score == null) continue;
+    sumA += ar.school_1_score; sumB += ar.school_2_score; n++;
+  }
+  if (n === 0) return { aMean: null, bMean: null, advantage: null, leader: 'tie' };
+  const aMean = sumA / n, bMean = sumB / n;
+  return {
+    aMean, bMean,
+    advantage: Math.abs(aMean - bMean),
+    leader: aMean > bMean ? 'A' : aMean < bMean ? 'B' : 'tie',
+  };
+}
+
 export function rankingGap(a: number | null, b: number | null): number | null {
   if (a == null || b == null) return null;
   return Math.abs(a - b);
@@ -269,10 +291,11 @@ export function buildSkillRows(skills: SchoolSkillsResult | null): SkillRow[] {
 // ── buildRecommendations ──────────────────────────────────────────────────────
 
 export function buildRecommendations(d: ReportData): RecommendationRow[] {
-  const aMedia = d.schoolA.nota_media ?? 0;
-  const bMedia = d.schoolB.nota_media ?? 0;
-
-  const leaderScope = aMedia >= bMedia ? 'A' : 'B';
+  // Líder/laggard derivados do diagnóstico (médias das áreas) — fonte autoritativa
+  // e sempre presente. NÃO usar nota_media (history), que pode ser null e, via `?? 0`,
+  // inverteria os papéis de líder e laggard.
+  const overall = overallFromDiagnosis(d.diagnosis);
+  const leaderScope: 'A' | 'B' = overall.leader === 'B' ? 'B' : 'A';
   const laggardScope = leaderScope === 'A' ? 'B' : 'A';
   const leaderName = leaderScope === 'A' ? d.schoolA.nome_escola : d.schoolB.nome_escola;
   const laggardName = laggardScope === 'A' ? d.schoolA.nome_escola : d.schoolB.nome_escola;
@@ -303,6 +326,7 @@ export function buildRecommendations(d: ReportData): RecommendationRow[] {
       priority,
       action: `Reforço focado em ${ar.area_name}`,
       impact: gainStr,
+      areaCode: canonicalAreaCode(ar.area),
     };
   });
 

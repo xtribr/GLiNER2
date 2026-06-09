@@ -168,6 +168,15 @@ export default function ComparePage() {
       alert('Selecione duas escolas e aguarde o diagnóstico carregar.');
       return;
     }
+    // Abre a aba de impressão DENTRO do gesto do clique (antes de qualquer await)
+    // para não ser bloqueada — necessário no Safari, onde print via iframe não funciona.
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(
+        '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Gerando relatório…</title></head>' +
+        '<body style="font-family:-apple-system,Helvetica,Arial,sans-serif;color:#334155;padding:48px;font-size:15px">Gerando relatório, aguarde…</body></html>'
+      );
+    }
     setIsPdfExporting(true);
     setPdfProgress('');
     try {
@@ -190,17 +199,24 @@ export default function ComparePage() {
         if (projection.length) reportData.projection = projection;
         if (redacao.length) reportData.redacaoCompetencias = redacao;
         if (skills.a.length || skills.b.length) reportData.skills = skills;
-        reportData.recommendations = buildRecommendations(reportData);
-      } catch {
-        // Advanced fetch failed; proceed without advanced sections
+      } catch (e) {
+        // Seções avançadas falharam — registra e sinaliza (não silenciar); o PDF
+        // imprime um aviso de que essas seções foram omitidas.
+        console.warn('Falha ao coletar seções avançadas do relatório:', e);
+        reportData.advancedSectionsFailed = true;
       } finally {
         setPdfProgress('');
       }
 
-      await generateReportPdf(reportData);
+      // Recomendações derivam do diagnóstico (sempre presente) — computa FORA do try
+      // para não serem suprimidas por uma falha nas seções avançadas.
+      reportData.recommendations = buildRecommendations(reportData);
+
+      await generateReportPdf(reportData, printWindow);
       setPdfExportSuccess(true);
       setTimeout(() => setPdfExportSuccess(false), 2000);
     } catch (e) {
+      if (printWindow && !printWindow.closed) printWindow.close();
       console.error('Erro ao exportar PDF:', e);
       alert('Erro ao gerar o relatório. Tente novamente.');
     } finally {
