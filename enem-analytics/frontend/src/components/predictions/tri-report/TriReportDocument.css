@@ -1,0 +1,84 @@
+@page { size: A4; margin: 9mm 11mm 9mm; }
+.xtri-tri * { box-sizing: border-box; }
+.xtri-tri { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; color:#334155; font-size:10px; line-height:1.4; margin:0; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+.xtri-tri .header { display:flex; align-items:center; gap:13px; border-bottom:2px solid #eef2f6; padding-bottom:11px; }
+.xtri-tri .header img { width:46px; height:46px; object-fit:contain; }
+.xtri-tri .header .htxt { flex:1; }
+.xtri-tri .header h1 { font-size:20px; color:#1e293b; margin:0; font-weight:800; }
+.xtri-tri .header .meta { font-size:9.5px; color:#94a3b8; margin-top:2px; }
+.xtri-tri .gaugewrap { display:flex; flex-direction:column; align-items:center; }
+.xtri-tri .gaugelbl { font-size:8px; color:#64748b; margin-top:2px; }
+.xtri-tri .sub { font-size:9.5px; color:#64748b; margin:7px 0 4px; }
+
+.xtri-tri .grid2 { display:flex; gap:12px; align-items:stretch; page-break-inside:avoid; break-inside:avoid; }
+.xtri-tri .grid2 > div { flex:1; }
+.xtri-tri .lcard { background:#f8fafc; border:1px solid #eef2f6; border-left:4px solid #3b82f6; border-radius:6px; padding:7px 11px; }
+.xtri-tri .lcard .ct { font-size:11px; font-weight:700; margin-bottom:2px; }
+.xtri-tri .lcard p { margin:0; font-size:9.7px; }
+
+.xtri-tri .secbar { background:#1e293b; color:#fff; font-weight:700; padding:4px 11px; border-radius:5px; margin:12px 0 6px; font-size:12px; page-break-after:avoid; }
+
+.xtri-tri .areasec { border:1px solid #eef2f6; border-top:3px solid #2ba9df; border-radius:7px; padding:8px 11px; margin:8px 0; }
+.xtri-tri .areahead { display:flex; align-items:center; gap:6px; margin-bottom:5px; }
+.xtri-tri .areahead .dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+.xtri-tri .areahead .atitle { font-size:13px; font-weight:800; color:#0f172a; }
+.xtri-tri .areahead .acode { font-size:10px; color:#94a3b8; }
+
+.xtri-tri .sum3 { display:flex; gap:10px; page-break-inside:avoid; }
+.xtri-tri .sum3 > div { flex:1; }
+.xtri-tri .sum3 .lbl { font-size:8.5px; color:#94a3b8; }
+.xtri-tri .sum3 .big { font-size:17px; font-weight:800; color:#0f172a; line-height:1.1; }
+
+.xtri-tri .estab { background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:5px 9px; margin:6px 0; page-break-inside:avoid; }
+.xtri-tri .estab .et { font-size:9.5px; font-weight:700; color:#92400e; }
+.xtri-tri .estab .er { font-size:9px; color:#b45309; margin-top:1px; }
+
+.xtri-tri .masteryrow { margin:7px 0 3px; }
+.xtri-tri .masterytop { display:flex; justify-content:space-between; font-size:8.5px; color:#64748b; margin-bottom:2px; }
+.xtri-tri .bar { width:100%; height:7px; background:#f1f5f9; border-radius:99px; overflow:hidden; }
+.xtri-tri .bar .barfill { height:7px; border-radius:99px; }
+.xtri-tri .gp { display:flex; gap:18px; font-size:9px; color:#64748b; margin-top:3px; }
+.xtri-tri .gp b { font-weight:800; }
+
+.xtri-tri .scenario { margin-top:9px; border-top:1px dashed #e2e8f0; padding-top:8px; }
+.xtri-tri .kpis4 { display:flex; gap:6px; page-break-inside:avoid; break-inside:avoid; }
+.xtri-tri .kpi { flex:1; background:#f8fafc; border:1px solid #eef2f6; border-radius:7px; padding:6px 4px; text-align:center; }
+.xtri-tri .kpi .kv { font-size:15px; font-weight:800; color:#0f172a; line-height:1.1; }
+.xtri-tri .kpi .kl { font-size:7.5px; color:#64748b; margin-top:1px; }
+.xtri-tri .kpi .ksub { font-size:8px; font-weight:700; margin-top:2px; }
+.xtri-tri .kpi.blue { background:#eff6ff; } .xtri-tri .kpi.blue .kv, .xtri-tri .kpi.blue .ksub { color:#2563eb; }
+.xtri-tri .kpi.amber { background:#fffbeb; } .xtri-tri .kpi.amber .kv, .xtri-tri .kpi.amber .ksub { color:#b45309; }
+.xtri-tri .kpi.green { background:#ecfdf5; } .xtri-tri .kpi.green .kv { color:#16a34a; }
+.xtri-tri .kpi.red { background:#fef2f2; } .xtri-tri .kpi.red .kv { color:#dc2626; }
+.xtri-tri .kpi.purple { background:#faf5ff; } .xtri-tri .kpi.purple .kv { color:#9333ea; }
+
+.xtri-tri .chartbox { border:1px solid #eef2f6; border-radius:7px; padding:6px 9px; margin:7px 0; page-break-inside:avoid; break-inside:avoid; }
+.xtri-tri .chartbox .cap { font-size:9.5px; font-weight:700; color:#0f172a; margin-bottom:2px; }
+
+.xtri-tri .box { background:#f8fafc; border:1px solid #eef2f6; border-radius:7px; padding:7px 10px; page-break-inside:avoid; break-inside:avoid; }
+.xtri-tri .box h4 { font-size:10px; font-weight:700; color:#0f172a; margin:0 0 4px; }
+.xtri-tri .box .kv2 { display:flex; justify-content:space-between; align-items:center; font-size:9.5px; color:#475569; padding:1.5px 0; }
+.xtri-tri .box .kv2 b { font-weight:700; }
+.xtri-tri .box .kv2.sep { border-top:1px solid #e2e8f0; margin-top:2px; padding-top:3px; }
+
+.xtri-tri .insights { margin:7px 0; }
+.xtri-tri .insight { border-left:4px solid #9ca3af; border-radius:5px; padding:5px 9px; margin:4px 0; background:#f8fafc; page-break-inside:avoid; }
+.xtri-tri .insight .ih { font-size:9.7px; font-weight:700; color:#374151; }
+.xtri-tri .insight .im { font-size:9.2px; color:#64748b; margin-top:1px; }
+.xtri-tri .insight.ins-pos { background:#ecfdf5; border-left-color:#22c55e; } .xtri-tri .insight.ins-pos .ih { color:#15803d; }
+.xtri-tri .insight.ins-warn { background:#fffbeb; border-left-color:#f59e0b; } .xtri-tri .insight.ins-warn .ih { color:#b45309; }
+.xtri-tri .insight.ins-info { background:#eff6ff; border-left-color:#3b82f6; } .xtri-tri .insight.ins-info .ih { color:#1d4ed8; }
+
+.xtri-tri .dominar { background:#fffbeb; border:1px solid #fde68a; border-radius:7px; padding:7px 10px; margin:7px 0; }
+.xtri-tri .dominar .dh { font-size:10px; font-weight:700; color:#92400e; }
+.xtri-tri .dominar .dsub { font-size:8.5px; color:#b45309; margin:1px 0 4px; }
+
+.xtri-tri table { width:100%; border-collapse:collapse; font-size:9.3px; margin-top:2px; }
+.xtri-tri th { background:#fed7aa; color:#7c2d12; text-align:left; padding:3px 7px; font-weight:700; }
+.xtri-tri td { padding:3px 7px; vertical-align:top; border-bottom:1px solid #fef3c7; }
+.xtri-tri td.gap { color:#dc2626; font-weight:700; white-space:nowrap; }
+.xtri-tri .code { font-family:'Courier New',monospace; font-weight:700; color:#b45309; }
+
+.xtri-tri .muted { color:#94a3b8; font-size:9px; font-style:italic; margin:6px 0; }
+.xtri-tri .foot { margin-top:12px; border-top:1px solid #eef2f6; padding-top:6px; font-size:8px; color:#94a3b8; display:flex; justify-content:space-between; }

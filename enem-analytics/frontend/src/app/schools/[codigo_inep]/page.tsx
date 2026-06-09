@@ -883,7 +883,7 @@ function SchoolDeepDashboard() {
 
       <TabPanel id="tri" active={activeTab}>
         {/* TRI Analysis Section */}
-        <TRIAnalysis codigoInep={codigo_inep} />
+        <TRIAnalysis codigoInep={codigo_inep} schoolName={school?.nome_escola} />
       </TabPanel>
 
       <TabPanel id="insights" active={activeTab}>
