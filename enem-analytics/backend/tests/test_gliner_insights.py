@@ -39,6 +39,25 @@ sys.modules.setdefault("api.auth.supabase_dependencies", dependencies_module)
 from api.routes import gliner_insights
 
 
+class CanonicalKeyTest(unittest.TestCase):
+    """Dedup de rótulos do mapa de conceitos: funde variantes de acento/caixa/espaço."""
+
+    def test_funde_variantes_de_acento_caixa_espaco(self):
+        ck = gliner_insights.canonical_key
+        self.assertEqual(ck("Notação científica"), ck("notacao cientifica"))
+        self.assertEqual(ck("Notação científica"), ck("NOTAÇÃO  CIENTÍFICA "))
+        self.assertEqual(ck("Função afim"), ck("funcao afim"))
+
+    def test_mantem_conceitos_distintos_separados(self):
+        ck = gliner_insights.canonical_key
+        self.assertNotEqual(ck("Geometria plana"), ck("Geometria espacial"))
+
+    def test_string_vazia_e_none(self):
+        ck = gliner_insights.canonical_key
+        self.assertEqual(ck(""), "")
+        self.assertEqual(ck(None), "")
+
+
 REQUIRED_ROW = {
     "area_code": "CN",
     "tri_score": "not-a-number",
