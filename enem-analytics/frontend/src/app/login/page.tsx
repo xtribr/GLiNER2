@@ -9,7 +9,7 @@ import { Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, isLoading: authLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -23,8 +23,14 @@ export default function LoginPage() {
     }
   }, [isAuthenticated, router]);
 
-  if (isAuthenticated) {
-    return null;
+  // Enquanto a sessão é restaurada (ou o usuário já está logado), mostra um loader
+  // na MESMA tela escura — evita "piscar" o formulário de login antes do redirect.
+  if (authLoading || isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div className="h-8 w-8 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+      </div>
+    );
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
