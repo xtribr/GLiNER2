@@ -254,6 +254,7 @@ class SchoolSummary(BaseModel):
     codigo_inep: str
     nome_escola: str
     uf: Optional[str] = None
+    municipio: Optional[str] = None
     tipo_escola: Optional[str] = None
     localizacao: Optional[str] = None
     porte: Optional[int] = None
@@ -287,6 +288,7 @@ async def list_schools(
     limit: int = Query(50, ge=1, le=200),
     search: Optional[str] = None,
     uf: Optional[str] = None,
+    municipio: Optional[str] = None,
     tipo_escola: Optional[str] = None,
     localizacao: Optional[str] = None,
     porte: Optional[int] = None,
@@ -300,6 +302,7 @@ async def list_schools(
 
     Filters:
     - uf: State code (e.g., SP, RJ, CE)
+    - municipio: Exact municipality name from INEP data
     - tipo_escola: "Privada" or "Pública"
     - localizacao: "Urbana" or "Rural"
     - porte: 1-5 (1=Muito pequena, 2=Pequena, 3=Média, 4=Grande, 5=Muito grande)
@@ -310,6 +313,7 @@ async def list_schools(
         limit=limit,
         search=search,
         uf=uf,
+        municipio=municipio,
         tipo_escola=tipo_escola,
         localizacao=localizacao,
         porte=porte,
@@ -323,6 +327,7 @@ async def list_schools(
             codigo_inep=str(r["codigo_inep"]),
             nome_escola=str(r["nome_escola"]),
             uf=r.get("uf"),
+            municipio=r.get("municipio"),
             tipo_escola=r.get("tipo_escola"),
             localizacao=r.get("localizacao"),
             porte=r.get("porte"),
@@ -341,6 +346,7 @@ async def get_top_schools(
     ano: Optional[int] = None,
     limit: int = Query(10, ge=1, le=100),
     uf: Optional[str] = None,
+    municipio: Optional[str] = None,
     tipo_escola: Optional[str] = None,
     localizacao: Optional[str] = None,
     porte: Optional[int] = None,
@@ -351,6 +357,7 @@ async def get_top_schools(
 
     Filters:
     - uf: State code (e.g., SP, RJ, CE)
+    - municipio: Exact municipality name from INEP data
     - tipo_escola: "Privada" or "Pública"
     - localizacao: "Urbana" or "Rural"
     - porte: 1-5 (1=Muito pequena, 2=Pequena, 3=Média, 4=Grande, 5=Muito grande)
@@ -359,10 +366,32 @@ async def get_top_schools(
         limit=limit,
         ano=ano,
         uf=uf,
+        municipio=municipio,
         tipo_escola=tipo_escola,
         localizacao=localizacao,
         porte=porte
     )
+
+
+@router.get("/municipios")
+async def list_municipios(
+    ano: Optional[int] = None,
+    uf: Optional[str] = None,
+    _: Optional[UserProfile] = Depends(get_optional_user),
+):
+    """
+    Lista municipios disponíveis no ranking.
+
+    Use com uf para popular filtro dependente de estado sem carregar uma lista
+    nacional grande no frontend.
+    """
+    municipios = supabase_store.list_municipios(ano=ano, uf=uf)
+    return {
+        "ano": ano or supabase_store.get_latest_year(),
+        "uf": uf.upper() if uf else None,
+        "total": len(municipios),
+        "municipios": municipios,
+    }
 
 
 @router.get("/search")

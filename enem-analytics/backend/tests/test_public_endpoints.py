@@ -41,6 +41,7 @@ def client(monkeypatch):
         supabase_store, "search_schools",
         lambda **kw: [{"codigo_inep": "11111111", "nome_escola": "Escola Teste"}],
     )
+    monkeypatch.setattr(supabase_store, "list_municipios", lambda **kw: ["Natal"])
     monkeypatch.setattr(
         supabase_store, "get_school_detail",
         lambda inep: {
@@ -63,6 +64,7 @@ PUBLIC_PATHS = [
     "/api/stats",
     "/api/schools/?limit=3",
     "/api/schools/top?limit=3",
+    "/api/schools/municipios?ano=2025&uf=RN",
     "/api/schools/search?q=col",
     "/api/schools/11111111/summary",
 ]
@@ -84,3 +86,46 @@ def test_public_endpoint_sem_token_retorna_200(client, path):
 def test_endpoint_gated_exige_auth(client, path):
     resp = client.get(path)
     assert resp.status_code in (401, 403), f"{path} deveria exigir auth, veio {resp.status_code}"
+
+
+def test_list_schools_repassa_filtro_municipio(client, monkeypatch):
+    from data import supabase_store
+
+    captured = {}
+
+    def fake_list_schools(**kwargs):
+        captured.update(kwargs)
+        return [{
+            "codigo_inep": "11111111",
+            "nome_escola": "Escola Teste",
+            "uf": "RN",
+            "municipio": "Natal",
+        }]
+
+    monkeypatch.setattr(supabase_store, "list_schools", fake_list_schools)
+
+    resp = client.get("/api/schools/?limit=3&uf=RN&municipio=Natal")
+
+    assert resp.status_code == 200
+    assert captured["uf"] == "RN"
+    assert captured["municipio"] == "Natal"
+    assert resp.json()[0]["municipio"] == "Natal"
+
+
+def test_top_schools_repassa_filtro_municipio(client, monkeypatch):
+    from data import supabase_store
+
+    captured = {}
+
+    def fake_top_schools(**kwargs):
+        captured.update(kwargs)
+        return {"ano": 2025, "total": 0, "schools": []}
+
+    monkeypatch.setattr(supabase_store, "get_top_schools", fake_top_schools)
+
+    resp = client.get("/api/schools/top?ano=2025&uf=RN&municipio=Natal")
+
+    assert resp.status_code == 200
+    assert captured["ano"] == 2025
+    assert captured["uf"] == "RN"
+    assert captured["municipio"] == "Natal"

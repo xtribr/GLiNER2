@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -64,6 +64,7 @@ function schoolInitials(nome: string): string {
 export default function Vitrine() {
   const [ano, setAno] = useState<number | undefined>(undefined);
   const [uf, setUf] = useState('');
+  const [municipio, setMunicipio] = useState('');
   const [rede, setRede] = useState('');
   const [areaKey, setAreaKey] = useState('media');
 
@@ -73,12 +74,25 @@ export default function Vitrine() {
   });
 
   const { data: topData, isLoading: topLoading } = useQuery({
-    queryKey: ['vitrineTop', ano, uf, rede],
-    queryFn: () => api.getTopSchools(50, ano, uf || undefined, rede || undefined),
+    queryKey: ['vitrineTop', ano, uf, municipio, rede],
+    queryFn: () => api.getTopSchools(50, ano, uf || undefined, rede || undefined, undefined, municipio || undefined),
+  });
+
+  const { data: municipiosData, isLoading: municipiosLoading } = useQuery({
+    queryKey: ['municipios', ano, uf],
+    queryFn: () => api.getMunicipios(ano, uf),
+    enabled: Boolean(uf),
   });
 
   const metric = AREA_TABS.find((t) => t.key === areaKey)?.metric ?? 'nota_media';
   const schools = topData?.schools ?? [];
+  const municipios = municipiosData?.municipios ?? [];
+
+  useEffect(() => {
+    if (municipio && municipios.length > 0 && !municipios.includes(municipio)) {
+      setMunicipio('');
+    }
+  }, [municipio, municipios]);
 
   const ranked = useMemo(() => {
     return [...schools]
@@ -177,7 +191,10 @@ export default function Vitrine() {
             {(years.length ? years : [latestYear]).filter(Boolean).map((y) => (
               <button
                 key={y}
-                onClick={() => setAno(y === latestYear && ano === undefined ? undefined : y)}
+                onClick={() => {
+                  setAno(y === latestYear && ano === undefined ? undefined : y);
+                  setMunicipio('');
+                }}
                 className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
                   (ano ?? latestYear) === y ? 'border-[#28B7ED] bg-[#28B7ED] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-[#28B7ED]/50'
                 }`}
@@ -187,8 +204,21 @@ export default function Vitrine() {
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <FilterSelect label="Estado" value={uf} onChange={setUf}
+            <FilterSelect label="Estado" value={uf} onChange={(value) => {
+              setUf(value);
+              setMunicipio('');
+            }}
               options={UF_OPTIONS.map((u) => ({ value: u, label: u || 'Todos' }))} />
+            <FilterSelect
+              label="Município"
+              value={municipio}
+              onChange={setMunicipio}
+              disabled={!uf || municipiosLoading}
+              options={[
+                { value: '', label: !uf ? 'Escolha um estado' : municipiosLoading ? 'Carregando...' : 'Todos' },
+                ...municipios.map((city) => ({ value: city, label: city })),
+              ]}
+            />
             <FilterSelect label="Rede" value={rede} onChange={setRede}
               options={[{ value: '', label: 'Todas' }, { value: 'Privada', label: 'Privada' }, { value: 'Pública', label: 'Pública' }]} />
             <div className="ml-auto flex flex-wrap gap-1">
@@ -230,7 +260,7 @@ export default function Vitrine() {
               <h2 className="text-xl font-black tracking-tight text-slate-950">Ranking das Escolas</h2>
               <p className="mt-1 text-sm text-slate-500">
                 {AREA_TABS.find((t) => t.key === areaKey)?.label} · {ano ?? latestYear ?? 'último ano'}
-                {uf ? ` · ${uf}` : ''}{rede ? ` · ${rede}` : ''}
+                {uf ? ` · ${uf}` : ''}{municipio ? ` · ${municipio}` : ''}{rede ? ` · ${rede}` : ''}
               </p>
             </div>
             <Link href="/cadastro" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105">
@@ -331,14 +361,20 @@ export default function Vitrine() {
   );
 }
 
-function FilterSelect({ label, value, onChange, options }: {
+function FilterSelect({ label, value, onChange, options, disabled = false }: {
   label: string; value: string; onChange: (v: string) => void;
   options: Array<{ value: string; label: string }>;
+  disabled?: boolean;
 }) {
   return (
-    <label className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs">
+    <label className={`flex max-w-full items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs ${disabled ? 'opacity-60' : ''}`}>
       <span className="font-semibold text-slate-500">{label}:</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="bg-transparent font-bold text-slate-700 outline-none">
+      <select
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        disabled={disabled}
+        className="min-w-0 max-w-[13rem] bg-transparent font-bold text-slate-700 outline-none disabled:cursor-not-allowed"
+      >
         {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
     </label>

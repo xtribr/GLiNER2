@@ -65,6 +65,7 @@ def list_schools(
     limit: int = 50,
     search: Optional[str] = None,
     uf: Optional[str] = None,
+    municipio: Optional[str] = None,
     tipo_escola: Optional[str] = None,
     localizacao: Optional[str] = None,
     porte: Optional[int] = None,
@@ -77,7 +78,7 @@ def list_schools(
     offset = (page - 1) * limit
 
     query = client.table("enem_results").select(
-        "codigo_inep, nome_escola, uf, dependencia, media_geral, "
+        "codigo_inep, nome_escola, uf, municipio, dependencia, media_geral, "
         "ranking_nacional, ranking_uf, num_participantes, "
         "localizacao, porte, porte_label, anos_participacao"
     ).eq("ano", target_ano)
@@ -87,6 +88,8 @@ def list_schools(
         query = query.or_(f"nome_escola.ilike.%{safe}%,codigo_inep.ilike.%{safe}%")
     if uf:
         query = query.eq("uf", uf.upper())
+    if municipio:
+        query = query.eq("municipio", municipio)
     if tipo_escola:
         query = query.eq("dependencia", tipo_escola)
     if localizacao:
@@ -111,6 +114,7 @@ def list_schools(
             "codigo_inep": r["codigo_inep"],
             "nome_escola": r["nome_escola"],
             "uf": r.get("uf"),
+            "municipio": r.get("municipio"),
             "tipo_escola": r.get("dependencia"),
             "localizacao": r.get("localizacao"),
             "porte": r.get("porte"),
@@ -127,6 +131,7 @@ def get_top_schools(
     limit: int = 10,
     ano: Optional[int] = None,
     uf: Optional[str] = None,
+    municipio: Optional[str] = None,
     tipo_escola: Optional[str] = None,
     localizacao: Optional[str] = None,
     porte: Optional[int] = None
@@ -135,7 +140,7 @@ def get_top_schools(
     target_ano = ano or get_latest_year()
 
     query = client.table("enem_results").select(
-        "ranking_nacional, codigo_inep, nome_escola, uf, dependencia, "
+        "ranking_nacional, codigo_inep, nome_escola, uf, municipio, dependencia, "
         "num_participantes, media_geral, media_cn, media_ch, media_lc, "
         "media_mt, media_redacao, localizacao, porte, porte_label, "
         "desempenho_habilidades, competencia_redacao_media"
@@ -143,6 +148,8 @@ def get_top_schools(
 
     if uf:
         query = query.eq("uf", uf.upper())
+    if municipio:
+        query = query.eq("municipio", municipio)
     if tipo_escola:
         query = query.eq("dependencia", tipo_escola)
     if localizacao:
@@ -180,6 +187,7 @@ def get_top_schools(
             "codigo_inep": r["codigo_inep"],
             "nome_escola": r["nome_escola"],
             "uf": r.get("uf"),
+            "municipio": r.get("municipio"),
             "tipo_escola": r.get("dependencia"),
             "localizacao": r.get("localizacao"),
             "porte": r.get("porte"),
@@ -201,6 +209,38 @@ def get_top_schools(
         "total": len(schools),
         "schools": schools
     }
+
+
+def list_municipios(ano: Optional[int] = None, uf: Optional[str] = None) -> List[str]:
+    """Lista municipios reais com escolas ranqueadas para alimentar filtros."""
+    client = get_client()
+    target_ano = ano or get_latest_year()
+    batch_size = 1000
+    offset = 0
+    municipios = set()
+
+    while True:
+        query = (
+            client.table("enem_results")
+            .select("municipio")
+            .eq("ano", target_ano)
+            .not_.is_("municipio", "null")
+        )
+        if uf:
+            query = query.eq("uf", uf.upper())
+
+        result = query.order("municipio").range(offset, offset + batch_size - 1).execute()
+        rows = result.data or []
+        for row in rows:
+            municipio = row.get("municipio")
+            if isinstance(municipio, str) and municipio.strip():
+                municipios.add(municipio.strip())
+
+        if len(rows) < batch_size:
+            break
+        offset += batch_size
+
+    return sorted(municipios, key=str.casefold)
 
 
 def search_schools(q: str, limit: int = 20) -> List[Dict[str, Any]]:

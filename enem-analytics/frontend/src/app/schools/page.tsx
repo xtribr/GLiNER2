@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { formatNumber, formatRanking, formatTriScore } from '@/lib/utils';
@@ -26,6 +26,7 @@ const PORTE_OPTIONS = [
 export default function SchoolsPage() {
   const [search, setSearch] = useState('');
   const [uf, setUf] = useState('');
+  const [municipio, setMunicipio] = useState('');
   const [tipoEscola, setTipoEscola] = useState<'Privada' | 'Pública' | ''>('');
   const [localizacao, setLocalizacao] = useState<'Urbana' | 'Rural' | ''>('');
   const [porte, setPorte] = useState('');
@@ -33,12 +34,13 @@ export default function SchoolsPage() {
   const limit = 50;
 
   const { data: schools, isLoading } = useQuery({
-    queryKey: ['schools', search, uf, tipoEscola, localizacao, porte, page],
+    queryKey: ['schools', search, uf, municipio, tipoEscola, localizacao, porte, page],
     queryFn: () => api.listSchools({
       page,
       limit,
       search: search || undefined,
       uf: uf || undefined,
+      municipio: municipio || undefined,
       tipo_escola: tipoEscola || undefined,
       localizacao: localizacao || undefined,
       porte: porte ? parseInt(porte) : undefined,
@@ -47,7 +49,21 @@ export default function SchoolsPage() {
     }),
   });
 
+  const { data: municipiosData, isLoading: municipiosLoading } = useQuery({
+    queryKey: ['municipios', uf],
+    queryFn: () => api.getMunicipios(undefined, uf),
+    enabled: Boolean(uf),
+  });
+
   const hasMore = schools?.length === limit;
+  const municipios = municipiosData?.municipios ?? [];
+
+  useEffect(() => {
+    if (municipio && municipios.length > 0 && !municipios.includes(municipio)) {
+      setMunicipio('');
+      setPage(1);
+    }
+  }, [municipio, municipios]);
 
   return (
     <div className="min-h-screen">
@@ -61,7 +77,7 @@ export default function SchoolsPage() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-slate-900">Escolas</h1>
-                <p className="text-sm text-slate-500">Busque e filtre escolas por nome ou estado</p>
+                <p className="text-sm text-slate-500">Busque e filtre escolas por nome, estado ou município</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -76,8 +92,8 @@ export default function SchoolsPage() {
       <div className="p-6 space-y-6">
       {/* Filters */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1">
+        <div className="flex flex-col gap-4 md:flex-row md:flex-wrap">
+          <div className="min-w-0 flex-1 md:min-w-[260px]">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
@@ -97,6 +113,7 @@ export default function SchoolsPage() {
               value={uf}
               onChange={(e) => {
                 setUf(e.target.value);
+                setMunicipio('');
                 setPage(1);
               }}
               className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#28B7ED] focus:border-[#28B7ED] outline-none bg-white ${uf ? 'text-slate-950' : 'text-slate-500'}`}
@@ -104,6 +121,24 @@ export default function SchoolsPage() {
               <option value="" className="text-slate-500">Todos os Estados</option>
               {UF_OPTIONS.filter(Boolean).map((state) => (
                 <option key={state} value={state} className="text-slate-950">{state}</option>
+              ))}
+            </select>
+          </div>
+          <div className="w-full md:w-56">
+            <select
+              value={municipio}
+              onChange={(e) => {
+                setMunicipio(e.target.value);
+                setPage(1);
+              }}
+              disabled={!uf || municipiosLoading}
+              className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#28B7ED] focus:border-[#28B7ED] outline-none bg-white disabled:cursor-not-allowed disabled:opacity-60 ${municipio ? 'text-slate-950' : 'text-slate-500'}`}
+            >
+              <option value="" className="text-slate-500">
+                {!uf ? 'Escolha um Estado' : municipiosLoading ? 'Carregando municípios' : 'Todos os Municípios'}
+              </option>
+              {municipios.map((city) => (
+                <option key={city} value={city} className="text-slate-950">{city}</option>
               ))}
             </select>
           </div>
@@ -166,6 +201,7 @@ export default function SchoolsPage() {
               onClick: () => {
                 setSearch('');
                 setUf('');
+                setMunicipio('');
                 setTipoEscola('');
                 setLocalizacao('');
                 setPorte('');
@@ -221,7 +257,9 @@ export default function SchoolsPage() {
                         >
                           {school.nome_escola}
                         </Link>
-                        <p className="text-gray-500 text-sm">{school.codigo_inep}</p>
+                        <p className="text-gray-500 text-sm">
+                          {school.codigo_inep}{school.municipio ? ` · ${school.municipio}` : ''}
+                        </p>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {school.uf && (

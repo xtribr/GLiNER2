@@ -45,6 +45,7 @@ export interface SchoolSummary {
   codigo_inep: string;
   nome_escola: string;
   uf: string | null;
+  municipio: string | null;
   tipo_escola: string | null;
   localizacao: string | null;
   porte: number | null;
@@ -76,6 +77,7 @@ export interface TopSchool {
   codigo_inep: string;
   nome_escola: string;
   uf: string | null;
+  municipio: string | null;
   tipo_escola: string | null;
   localizacao: string | null;
   porte: number | null;
@@ -788,10 +790,11 @@ export const api = {
       body: JSON.stringify(data),
     }),
 
-  getTopSchools: (limit = 10, ano?: number, uf?: string, tipo_escola?: string, porte?: number) => {
+  getTopSchools: (limit = 10, ano?: number, uf?: string, tipo_escola?: string, porte?: number, municipio?: string) => {
     const params = new URLSearchParams({ limit: limit.toString() });
     if (ano) params.set('ano', ano.toString());
     if (uf) params.set('uf', uf);
+    if (municipio) params.set('municipio', municipio);
     if (tipo_escola) params.set('tipo_escola', tipo_escola);
     if (porte) params.set('porte', porte.toString());
     return fetchPublicAPI<{ ano: number; total: number; schools: TopSchool[] }>(
@@ -807,6 +810,16 @@ export const api = {
 
     return fetchPublicAPI<{ codigo_inep: string; nome_escola: string; uf: string | null; ultimo_ano: number }[]>(
       `/api/schools/search?q=${encodeURIComponent(query)}&limit=${limit}`
+    );
+  },
+
+  getMunicipios: (ano?: number, uf?: string) => {
+    const params = new URLSearchParams();
+    if (ano) params.set('ano', ano.toString());
+    if (uf) params.set('uf', uf);
+    const suffix = params.toString();
+    return fetchPublicAPI<{ ano: number; uf: string | null; total: number; municipios: string[] }>(
+      `/api/schools/municipios${suffix ? `?${suffix}` : ''}`
     );
   },
 
@@ -838,6 +851,7 @@ export const api = {
     limit?: number;
     search?: string;
     uf?: string;
+    municipio?: string;
     tipo_escola?: 'Privada' | 'Pública';
     localizacao?: 'Urbana' | 'Rural';
     porte?: number;
