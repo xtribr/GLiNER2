@@ -17,6 +17,7 @@ from scripts.update_enem_year import (
     parse_args,
     parse_integer,
     prepare_staging_dataframe,
+    dataframe_to_records,
     main,
     select_inep_raw_member,
     to_consolidated_schema,
@@ -276,6 +277,36 @@ class UpdateEnemYearTest(unittest.TestCase):
         self.assertTrue((transformed["num_participantes"] >= 1).all())
         self.assertEqual(transformed["ano"].unique().tolist(), [2024])
 
+    def test_inep_raw_accepts_compatible_extra_columns_after_contract_prefix(self):
+        header, rows = real_microdados_2024_lines(500)
+        extra_columns = [
+            "TP_STATUS_REDACAO_AV1",
+            "NU_NOTA_AV1",
+            "NU_NOTA_COMP1_AV1",
+            "NU_NOTA_COMP2_AV1",
+            "NU_NOTA_COMP3_AV1",
+            "NU_NOTA_COMP4_AV1",
+            "NU_NOTA_COMP5_AV1",
+        ]
+        extended_rows = [row + ";" * len(extra_columns) for row in rows]
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv_path = Path(tmp_dir) / "MICRODADOS_ENEM_2024.csv"
+            csv_path.write_text(
+                ";".join(header + extra_columns) + "\n" + "\n".join(extended_rows),
+                encoding="latin-1",
+            )
+
+            transformed, detection, loaded = aggregate_inep_raw_to_enem_results(
+                csv_path,
+                2024,
+                min_participants=1,
+            )
+
+        self.assertEqual(detection.name, "inep_raw_microdados")
+        self.assertEqual(loaded.extra_header_columns, extra_columns)
+        self.assertEqual(loaded.header_columns, len(header) + len(extra_columns))
+        self.assertGreaterEqual(len(transformed), 1)
+
     def test_inep_raw_blocks_schema_drift(self):
         header, rows = real_microdados_2024_lines(5)
         drifted_header = [column for column in header if column != "TP_STATUS_REDACAO"]
@@ -283,7 +314,7 @@ class UpdateEnemYearTest(unittest.TestCase):
             csv_path = Path(tmp_dir) / "MICRODADOS_ENEM_2024.csv"
             csv_path.write_text(";".join(drifted_header) + "\n" + "\n".join(rows), encoding="latin-1")
 
-            with self.assertRaisesRegex(ValueError, "Schema bruto INEP diferente"):
+            with self.assertRaisesRegex(ValueError, "Schema bruto INEP incompativel"):
                 aggregate_inep_raw_to_enem_results(csv_path, 2024, min_participants=1)
 
     def test_consolidated_output_keeps_current_model_columns(self):
@@ -303,13 +334,16 @@ class UpdateEnemYearTest(unittest.TestCase):
     def test_prepare_staging_dataframe_adds_job_metadata_without_losing_rows(self):
         raw = real_2024_sample(4)
         transformed, _ = transform_to_enem_results(raw, 2025)
+        transformed.loc[0, "porte"] = 2.0
 
         staged = prepare_staging_dataframe(transformed, "00000000-0000-0000-0000-000000000001")
+        records = dataframe_to_records(staged.head(1))
 
         self.assertEqual(len(staged), len(transformed))
         self.assertEqual(staged["row_number"].tolist(), [1, 2, 3, 4])
         self.assertEqual(staged["import_job_id"].nunique(), 1)
         self.assertIn("ranking_municipio", staged.columns)
+        self.assertEqual(records[0]["porte"], 2)
 
     def test_parse_integer_handles_ptbr_thousand_separator(self):
         parsed = parse_integer(pd.Series(["1.234", "3.0", ""]))

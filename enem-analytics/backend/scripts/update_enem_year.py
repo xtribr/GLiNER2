@@ -224,6 +224,7 @@ class LoadedInepRaw:
     byte_size: int
     raw_rows: int
     header_columns: int
+    extra_header_columns: list[str]
     column_count_errors: int
     year_counts: dict[str, int]
     school_nonempty_rows: int
@@ -408,8 +409,12 @@ def is_probably_inep_raw_input(path: Path, year: int, member: Optional[str] = No
 
 
 def _validate_inep_raw_header(header: list[str]) -> None:
-    """Bloqueia drift de schema do CSV bruto antes de qualquer agregacao."""
+    """Bloqueia drift incompatível do CSV bruto antes de qualquer agregacao."""
     if header == INEP_RAW_EXPECTED_COLUMNS:
+        return
+
+    expected_prefix = header[:len(INEP_RAW_EXPECTED_COLUMNS)]
+    if expected_prefix == INEP_RAW_EXPECTED_COLUMNS:
         return
 
     expected = set(INEP_RAW_EXPECTED_COLUMNS)
@@ -421,9 +426,8 @@ def _validate_inep_raw_header(header: list[str]) -> None:
         details.append("faltantes=" + ", ".join(missing))
     if extra:
         details.append("extras=" + ", ".join(extra))
-    if len(header) != len(INEP_RAW_EXPECTED_COLUMNS):
-        details.append(f"colunas={len(header)} esperado={len(INEP_RAW_EXPECTED_COLUMNS)}")
-    raise ValueError("Schema bruto INEP diferente do contrato 2024: " + "; ".join(details))
+    details.append(f"prefixo_obrigatorio={len(INEP_RAW_EXPECTED_COLUMNS)} colunas")
+    raise ValueError("Schema bruto INEP incompativel com o contrato 2024: " + "; ".join(details))
 
 
 def _normalize_code_value(value: Any) -> Optional[str]:
@@ -645,7 +649,8 @@ def aggregate_inep_raw_to_enem_results(
         sha256=sha256_file(path),
         byte_size=byte_size,
         raw_rows=int(raw_rows),
-        header_columns=len(INEP_RAW_EXPECTED_COLUMNS),
+        header_columns=len(header),
+        extra_header_columns=header[len(INEP_RAW_EXPECTED_COLUMNS):],
         column_count_errors=int(column_count_errors),
         year_counts=dict(year_counts),
         school_nonempty_rows=int(school_nonempty_rows),
@@ -660,7 +665,7 @@ def aggregate_inep_raw_to_enem_results(
         },
         bad_numeric_counts=dict(bad_numeric_counts),
     )
-    detection = FormatDetection("inep_raw_microdados", {}, len(INEP_RAW_EXPECTED_COLUMNS))
+    detection = FormatDetection("inep_raw_microdados", {}, len(header))
     return transformed, detection, loaded
 
 
@@ -876,6 +881,8 @@ def enrich_with_censo(df: pd.DataFrame, censo_file: Path) -> pd.DataFrame:
         mapped = result["codigo_inep"].map(censo[source])
         if target == "dependencia":
             mapped = normalize_dependencia(mapped)
+        if target in INTEGER_COLUMNS:
+            mapped = parse_integer(mapped)
         if target not in result.columns:
             result[target] = mapped
         else:
@@ -1149,6 +1156,9 @@ def prepare_staging_dataframe(df: pd.DataFrame, import_job_id: str) -> pd.DataFr
     for column in STAGING_COLUMNS:
         if column not in staged.columns:
             staged[column] = pd.NA
+    for column in INTEGER_COLUMNS:
+        if column in staged.columns:
+            staged[column] = parse_integer(staged[column])
     return staged[STAGING_COLUMNS].copy()
 
 
@@ -1355,6 +1365,7 @@ def main(argv: Optional[list[str]] = None) -> int:
         raw_row_count = loaded.raw_rows
         raw_audit = {
             "header_columns": loaded.header_columns,
+            "extra_header_columns": loaded.extra_header_columns,
             "column_count_errors": loaded.column_count_errors,
             "year_counts": loaded.year_counts,
             "school_nonempty_rows": loaded.school_nonempty_rows,
