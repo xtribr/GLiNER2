@@ -1,0 +1,4794 @@
+{
+  "generated_at": "2026-06-23T18:49:37+00:00",
+  "model_version": "soft-cal-v1",
+  "targets": {
+    "cn": {
+      "metrics": {
+        "training_samples": 89812,
+        "train_samples": 71849,
+        "test_samples": 17963,
+        "train_rmse": 16.774312349822107,
+        "test_rmse": 16.813105168993477,
+        "test_r2": 0.8540963992021919
+      },
+      "latest_data_year": 2025,
+      "prediction_target_year": 2026,
+      "public_metrics": {
+        "rmse": 20.408785820654984,
+        "mae": 14.94159869422783,
+        "r2": 0.7753438123688988,
+        "bias": -3.1714028195568185
+      },
+      "backtest": {
+        "folds": [
+          {
+            "target_year": 2021,
+            "train_samples": 9633,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 17.280878380875322,
+              "mae": 13.583120985096054,
+              "r2": 0.8570811928320707,
+              "bias": 5.570355352978799
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 18.584591708427734,
+              "mae": 14.415151997589327,
+              "r2": 0.834703444356154,
+              "bias": 4.247586023429921
+            },
+            "top_10_pct": {
+              "count": 280,
+              "raw": {
+                "count": 280,
+                "rmse": 19.562890931776078,
+                "mae": 15.251571284676869,
+                "r2": 0.4556670125931116,
+                "bias": -8.200885625197543
+              },
+              "calibrated": {
+                "count": 280,
+                "rmse": 19.63703704480933,
+                "mae": 14.697069732912762,
+                "r2": 0.4515329957212282,
+                "bias": -1.5608562742420706
+              },
+              "raw_negative_share": 0.8607142857142858,
+              "calibrated_negative_share": 0.7071428571428572
+            }
+          },
+          {
+            "target_year": 2022,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 16.611986852343527,
+              "mae": 13.282735962542157,
+              "r2": 0.8089275904384815,
+              "bias": -8.312933691128771
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 18.89683053643316,
+              "mae": 14.719723047244026,
+              "r2": 0.7527520156324251,
+              "bias": -8.627933835587957
+            },
+            "top_10_pct": {
+              "count": 307,
+              "raw": {
+                "count": 307,
+                "rmse": 17.825361796367325,
+                "mae": 13.998042373132412,
+                "r2": 0.4580473322633254,
+                "bias": -9.803418495913293
+              },
+              "calibrated": {
+                "count": 307,
+                "rmse": 16.446187147079215,
+                "mae": 13.08109717864138,
+                "r2": 0.5386663775432754,
+                "bias": -2.810160729289035
+              },
+              "raw_negative_share": 0.8664495114006515,
+              "calibrated_negative_share": 0.7915309446254072
+            }
+          },
+          {
+            "target_year": 2023,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 21.73080424440948,
+              "mae": 16.778939049291655,
+              "r2": 0.7708211728788038,
+              "bias": -4.517682323558148
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 22.177106785956507,
+              "mae": 16.964182430360562,
+              "r2": 0.7613108550981871,
+              "bias": -4.907720675960146
+            },
+            "top_10_pct": {
+              "count": 305,
+              "raw": {
+                "count": 305,
+                "rmse": 34.35720958689844,
+                "mae": 30.27136690936746,
+                "r2": -0.6354923364505538,
+                "bias": -28.769399264499032
+              },
+              "calibrated": {
+                "count": 305,
+                "rmse": 30.389697383994754,
+                "mae": 25.562388113580013,
+                "r2": -0.2795742623135249,
+                "bias": -22.487862914802964
+              },
+              "raw_negative_share": 0.8032786885245902,
+              "calibrated_negative_share": 0.6786885245901639
+            }
+          },
+          {
+            "target_year": 2024,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 17.129279670820438,
+              "mae": 13.244587552739363,
+              "r2": 0.848061557888171,
+              "bias": 0.623244049171175
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 18.72869002156852,
+              "mae": 14.179272737730871,
+              "r2": 0.8183630201323007,
+              "bias": -0.518559463453621
+            },
+            "top_10_pct": {
+              "count": 291,
+              "raw": {
+                "count": 291,
+                "rmse": 25.543236262551822,
+                "mae": 21.04865715264924,
+                "r2": -0.06049170382093516,
+                "bias": -18.516774158902667
+              },
+              "calibrated": {
+                "count": 291,
+                "rmse": 24.567373283925082,
+                "mae": 19.334248835084995,
+                "r2": 0.018991243443617134,
+                "bias": -13.030475580231473
+              },
+              "raw_negative_share": 0.7697594501718213,
+              "calibrated_negative_share": 0.7353951890034365
+            }
+          },
+          {
+            "target_year": 2025,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 16.818655974018117,
+              "mae": 12.917702020638473,
+              "r2": 0.835127758463348,
+              "bias": -4.989722467078071
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 23.18464027660312,
+              "mae": 14.42966325821437,
+              "r2": 0.6866961785983386,
+              "bias": -6.0503861462122925
+            },
+            "top_10_pct": {
+              "count": 259,
+              "raw": {
+                "count": 259,
+                "rmse": 25.821740918545988,
+                "mae": 20.868461688812108,
+                "r2": 0.27529207272534306,
+                "bias": -16.935269486816306
+              },
+              "calibrated": {
+                "count": 259,
+                "rmse": 22.540017731005875,
+                "mae": 17.703871452388835,
+                "r2": 0.4477948153196971,
+                "bias": -10.073450738114056
+              },
+              "raw_negative_share": 0.7606177606177607,
+              "calibrated_negative_share": 0.7104247104247104
+            }
+          }
+        ],
+        "summary": {
+          "raw": {
+            "count": 15000,
+            "rmse": 18.01718140397904,
+            "mae": 13.961417114061542,
+            "r2": 0.82491144798216,
+            "bias": -2.325347815923003
+          },
+          "calibrated": {
+            "count": 15000,
+            "rmse": 20.408785820654984,
+            "mae": 14.94159869422783,
+            "r2": 0.7753438123688988,
+            "bias": -3.1714028195568185
+          }
+        },
+        "segments": {
+          "top_1_pct": {
+            "count": 137,
+            "raw": {
+              "count": 137,
+              "rmse": 37.48798744788056,
+              "mae": 31.234749817476946,
+              "r2": -0.7921041655236862,
+              "bias": -30.658129478590908
+            },
+            "calibrated": {
+              "count": 137,
+              "rmse": 26.588151369143503,
+              "mae": 20.46714433128628,
+              "r2": 0.09852168801171335,
+              "bias": -18.306974912951407
+            },
+            "raw_negative_share": 0.8978102189781022,
+            "calibrated_negative_share": 0.8467153284671532
+          },
+          "top_5_pct": {
+            "count": 719,
+            "raw": {
+              "count": 719,
+              "rmse": 29.03572981170475,
+              "mae": 23.57877717157085,
+              "r2": -0.14277638396065395,
+              "bias": -21.508300346968912
+            },
+            "calibrated": {
+              "count": 719,
+              "rmse": 24.48254339834188,
+              "mae": 18.794428824597638,
+              "r2": 0.18752720110032506,
+              "bias": -13.100633218467697
+            },
+            "raw_negative_share": 0.8511821974965229,
+            "calibrated_negative_share": 0.7719054242002782
+          },
+          "top_10_pct": {
+            "count": 1442,
+            "raw": {
+              "count": 1442,
+              "rmse": 25.358579354648462,
+              "mae": 20.340288962858192,
+              "r2": 0.1383804824857955,
+              "bias": -16.543120878154642
+            },
+            "calibrated": {
+              "count": 1442,
+              "rmse": 23.25619035798896,
+              "mae": 18.1270276358383,
+              "r2": 0.275325739807603,
+              "bias": -10.096705564988431
+            },
+            "raw_negative_share": 0.8134535367545076,
+            "calibrated_negative_share": 0.7253814147018031
+          },
+          "consistent": {
+            "count": 14939,
+            "raw": {
+              "count": 14939,
+              "rmse": 18.01099966639194,
+              "mae": 13.96175173385174,
+              "r2": 0.8252950923030784,
+              "bias": -2.3470558549956695
+            },
+            "calibrated": {
+              "count": 14939,
+              "rmse": 19.14941072116844,
+              "mae": 14.670011786279648,
+              "r2": 0.8025121885921427,
+              "bias": -2.8794885033480404
+            },
+            "raw_negative_share": 0.47881384296137625,
+            "calibrated_negative_share": 0.4274047794363746
+          },
+          "volatile": {
+            "count": 61,
+            "raw": {
+              "count": 61,
+              "rmse": 19.47209607749122,
+              "mae": 13.879468178885148,
+              "r2": 0.4407987668246638,
+              "bias": 2.990986539922203
+            },
+            "calibrated": {
+              "count": 61,
+              "rmse": 112.32620903229333,
+              "mae": 81.45367767517729,
+              "r2": -17.608223629710448,
+              "bias": -74.6616974071461
+            },
+            "raw_negative_share": 0.16393442622950818,
+            "calibrated_negative_share": 0.13114754098360656
+          },
+          "deciles": {
+            "1": {
+              "count": 1442,
+              "raw": {
+                "count": 1442,
+                "rmse": 25.358579354648462,
+                "mae": 20.340288962858192,
+                "r2": 0.1383804824857955,
+                "bias": -16.543120878154642
+              },
+              "calibrated": {
+                "count": 1442,
+                "rmse": 23.25619035798896,
+                "mae": 18.1270276358383,
+                "r2": 0.275325739807603,
+                "bias": -10.096705564988431
+              },
+              "raw_negative_share": 0.8134535367545076,
+              "calibrated_negative_share": 0.7253814147018031
+            },
+            "2": {
+              "count": 1501,
+              "raw": {
+                "count": 1501,
+                "rmse": 19.543081989214883,
+                "mae": 15.562820955886137,
+                "r2": -0.4517815121063333,
+                "bias": -6.772028675698542
+              },
+              "calibrated": {
+                "count": 1501,
+                "rmse": 21.773352298893933,
+                "mae": 16.615447589252963,
+                "r2": -0.8020455017418282,
+                "bias": -4.44518986969043
+              },
+              "raw_negative_share": 0.6975349766822119,
+              "calibrated_negative_share": 0.5949367088607594
+            },
+            "3": {
+              "count": 1401,
+              "raw": {
+                "count": 1401,
+                "rmse": 18.149895157878706,
+                "mae": 14.150589548870865,
+                "r2": -0.44931436334349173,
+                "bias": -4.252279507687445
+              },
+              "calibrated": {
+                "count": 1401,
+                "rmse": 19.562871504883105,
+                "mae": 14.994043410773601,
+                "r2": -0.683757563465432,
+                "bias": -3.542086973403898
+              },
+              "raw_negative_share": 0.5845824411134903,
+              "calibrated_negative_share": 0.5010706638115632
+            },
+            "4": {
+              "count": 1402,
+              "raw": {
+                "count": 1402,
+                "rmse": 18.340186401123088,
+                "mae": 14.380395622343093,
+                "r2": -0.7635788418902585,
+                "bias": -5.424860559723561
+              },
+              "calibrated": {
+                "count": 1402,
+                "rmse": 20.711319370677028,
+                "mae": 15.465386017563413,
+                "r2": -1.2490697293939053,
+                "bias": -5.665645224236973
+              },
+              "raw_negative_share": 0.5263908701854494,
+              "calibrated_negative_share": 0.4557774607703281
+            },
+            "5": {
+              "count": 1443,
+              "raw": {
+                "count": 1443,
+                "rmse": 16.927143919880518,
+                "mae": 13.337958811150886,
+                "r2": -0.7584112371250713,
+                "bias": -4.174795682537106
+              },
+              "calibrated": {
+                "count": 1443,
+                "rmse": 21.514553251517864,
+                "mae": 15.154152536801197,
+                "r2": -1.8406500965084067,
+                "bias": -6.009751729683337
+              },
+              "raw_negative_share": 0.47054747054747054,
+              "calibrated_negative_share": 0.43728343728343727
+            },
+            "6": {
+              "count": 1491,
+              "raw": {
+                "count": 1491,
+                "rmse": 15.132393585672947,
+                "mae": 11.861134367856414,
+                "r2": -0.6501184828323119,
+                "bias": -1.5654337210398759
+              },
+              "calibrated": {
+                "count": 1491,
+                "rmse": 19.853604074316547,
+                "mae": 13.763896564774544,
+                "r2": -1.8403939920707608,
+                "bias": -3.8792992664210075
+              },
+              "raw_negative_share": 0.40979208584842386,
+              "calibrated_negative_share": 0.3715627095908786
+            },
+            "7": {
+              "count": 1463,
+              "raw": {
+                "count": 1463,
+                "rmse": 14.595217936456109,
+                "mae": 11.508347253709482,
+                "r2": -0.49090127312478615,
+                "bias": 0.042038813449038
+              },
+              "calibrated": {
+                "count": 1463,
+                "rmse": 21.252463214854195,
+                "mae": 13.726109536593937,
+                "r2": -2.1611584380780897,
+                "bias": -3.1645650745365947
+              },
+              "raw_negative_share": 0.3814080656185919,
+              "calibrated_negative_share": 0.35269993164730007
+            },
+            "8": {
+              "count": 1517,
+              "raw": {
+                "count": 1517,
+                "rmse": 15.503655299661435,
+                "mae": 12.119580872688017,
+                "r2": -0.5132517484166386,
+                "bias": 1.9782166743500431
+              },
+              "calibrated": {
+                "count": 1517,
+                "rmse": 18.995324986630123,
+                "mae": 13.691122771336717,
+                "r2": -1.2716239188665632,
+                "bias": -0.8605005413708635
+              },
+              "raw_negative_share": 0.34080421885299933,
+              "calibrated_negative_share": 0.3210283454185893
+            },
+            "9": {
+              "count": 1552,
+              "raw": {
+                "count": 1552,
+                "rmse": 16.656495951270934,
+                "mae": 12.721367615082919,
+                "r2": -0.6322993803219916,
+                "bias": 4.631340911398668
+              },
+              "calibrated": {
+                "count": 1552,
+                "rmse": 18.2395963576743,
+                "mae": 13.704931847316365,
+                "r2": -0.9573251429868435,
+                "bias": 1.5006737662338954
+              },
+              "raw_negative_share": 0.32023195876288657,
+              "calibrated_negative_share": 0.2963917525773196
+            },
+            "10": {
+              "count": 1407,
+              "raw": {
+                "count": 1407,
+                "rmse": 18.294604919708156,
+                "mae": 14.162450092889205,
+                "r2": -0.546978323913814,
+                "bias": 8.027298777670186
+              },
+              "calibrated": {
+                "count": 1407,
+                "rmse": 19.116497723866154,
+                "mae": 14.615338056934286,
+                "r2": -0.689097880873305,
+                "bias": 3.949950674416743
+              },
+              "raw_negative_share": 0.25302061122956643,
+              "calibrated_negative_share": 0.2260127931769723
+            }
+          }
+        }
+      },
+      "current_cycle_audit": {
+        "latest_year": 2025,
+        "sample_size": 60,
+        "top_n": 20,
+        "raw_negative_share": 0.9833333333333333,
+        "display_negative_share": 0.9333333333333333,
+        "top_n_raw_negative_share": 1.0,
+        "top_n_display_negative_share": 0.9,
+        "raw_mean_delta": -39.04777893777068,
+        "display_mean_delta": -10.206405142511787,
+        "top_sample": [
+          {
+            "codigo_inep": "23246871",
+            "nome_escola": "ARI DE SA CAVALCANTE - MARIO MAMEDE",
+            "ranking_brasil": 1,
+            "current_score": 767.16,
+            "raw_score": 654.7673435795125,
+            "display_score": 749.8535357142853,
+            "raw_expected_change": -112.39265642048747,
+            "display_expected_change": -17.306464285714696,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "23246847",
+            "nome_escola": "FARIAS BRITO COLEGIO DE APLICACAO",
+            "ranking_brasil": 2,
+            "current_score": 744.18,
+            "raw_score": 654.7673435795125,
+            "display_score": 740.2949464285708,
+            "raw_expected_change": -89.41265642048745,
+            "display_expected_change": -3.8850535714291254,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "23246880",
+            "nome_escola": "CHRISTUS COLEGIO PRE UNIVERSITARIO",
+            "ranking_brasil": 3,
+            "current_score": 745.97,
+            "raw_score": 652.9931221010468,
+            "display_score": 725.7929761904759,
+            "raw_expected_change": -92.97687789895326,
+            "display_expected_change": -20.177023809524144,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "22144714",
+            "nome_escola": "SAO JOSE LESTE",
+            "ranking_brasil": 4,
+            "current_score": 738.5,
+            "raw_score": 636.0073436429932,
+            "display_score": 636.0073436429932,
+            "raw_expected_change": -102.49265635700681,
+            "display_expected_change": -102.49265635700681,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "23235543",
+            "nome_escola": "ARI DE SA CAVALCANTE - MAJOR FACUNDO",
+            "ranking_brasil": 5,
+            "current_score": 714.36,
+            "raw_score": 654.7673435795125,
+            "display_score": 707.5959821428567,
+            "raw_expected_change": -59.592656420487515,
+            "display_expected_change": -6.764017857143358,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "35399197",
+            "nome_escola": "OBJETIVO COLEGIO INTEGRADO",
+            "ranking_brasil": 6,
+            "current_score": 723.09,
+            "raw_score": 654.7673435795125,
+            "display_score": 715.5693749999997,
+            "raw_expected_change": -68.32265642048753,
+            "display_expected_change": -7.5206250000003365,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "35563006",
+            "nome_escola": "ETAPA III COLEGIO",
+            "ranking_brasil": 7,
+            "current_score": 717.46,
+            "raw_score": 653.8806503916301,
+            "display_score": 710.3023979591827,
+            "raw_expected_change": -63.57934960836997,
+            "display_expected_change": -7.1576020408173235,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "15167275",
+            "nome_escola": "COLEGIO EQUIPE LTDA",
+            "ranking_brasil": 8,
+            "current_score": 704.02,
+            "raw_score": 647.9075391318341,
+            "display_score": 688.5002775974021,
+            "raw_expected_change": -56.11246086816584,
+            "display_expected_change": -15.519722402597836,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "33184739",
+            "nome_escola": "COLEGIO ALFA CEM BILINGUE",
+            "ranking_brasil": 9,
+            "current_score": 694.68,
+            "raw_score": 646.0175687433106,
+            "display_score": 694.669517647056,
+            "raw_expected_change": -48.66243125668939,
+            "display_expected_change": -0.010482352943995465,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "33165920",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 10,
+            "current_score": 698.86,
+            "raw_score": 653.8806503916301,
+            "display_score": 688.9153214285712,
+            "raw_expected_change": -44.979349608369944,
+            "display_expected_change": -9.944678571428767,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "22025740",
+            "nome_escola": "INSTITUTO DOM BARRETO CENTRO",
+            "ranking_brasil": 11,
+            "current_score": 696.9,
+            "raw_score": 654.7673435795125,
+            "display_score": 686.5727807881769,
+            "raw_expected_change": -42.13265642048748,
+            "display_expected_change": -10.327219211823035,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "31004812",
+            "nome_escola": "COLEGIO SANTO ANTONIO",
+            "ranking_brasil": 12,
+            "current_score": 692.7,
+            "raw_score": 654.7673435795125,
+            "display_score": 689.6277874611799,
+            "raw_expected_change": -37.93265642048755,
+            "display_expected_change": -3.0722125388201675,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "23272333",
+            "nome_escola": "FARIAS BRITO COLEGIO PRE-VESTIBULAR CENTRAL",
+            "ranking_brasil": 13,
+            "current_score": 688.65,
+            "raw_score": 652.9931221010468,
+            "display_score": 677.7548986175112,
+            "raw_expected_change": -35.65687789895321,
+            "display_expected_change": -10.895101382488747,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "23245573",
+            "nome_escola": "MASTER COLEGIO",
+            "ranking_brasil": 14,
+            "current_score": 702.84,
+            "raw_score": 652.3333720035763,
+            "display_score": 688.3208484555978,
+            "raw_expected_change": -50.50662799642373,
+            "display_expected_change": -14.519151544402234,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "15181081",
+            "nome_escola": "COLEGIO INTEGRADO IN",
+            "ranking_brasil": 15,
+            "current_score": 675.7,
+            "raw_score": 497.07643971519843,
+            "display_score": 675.7,
+            "raw_expected_change": -178.6235602848016,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "53020570",
+            "nome_escola": "COL PODION ENS FUND E MEDIO",
+            "ranking_brasil": 16,
+            "current_score": 693.73,
+            "raw_score": 496.0266745611379,
+            "display_score": 693.73,
+            "raw_expected_change": -197.70332543886212,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "31349720",
+            "nome_escola": "FIBONACCI COLEGIO",
+            "ranking_brasil": 17,
+            "current_score": 697.49,
+            "raw_score": 648.7950674224174,
+            "display_score": 691.7655441374662,
+            "raw_expected_change": -48.69493257758256,
+            "display_expected_change": -5.724455862533773,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "31351725",
+            "nome_escola": "COLEGUIUM - UNIDADE OURO PRETO INTEGRAL",
+            "ranking_brasil": 18,
+            "current_score": 692.7,
+            "raw_score": 654.7673435795125,
+            "display_score": 683.4365590062108,
+            "raw_expected_change": -37.93265642048755,
+            "display_expected_change": -9.263440993789231,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "15172287",
+            "nome_escola": "PHYSICS COLEGIO E CURSO",
+            "ranking_brasil": 19,
+            "current_score": 680.44,
+            "raw_score": 611.2668704699004,
+            "display_score": 611.2668704699004,
+            "raw_expected_change": -69.17312953009969,
+            "display_expected_change": -69.17312953009969,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "cn"
+          },
+          {
+            "codigo_inep": "33135827",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 20,
+            "current_score": 687.33,
+            "raw_score": 650.1931172057671,
+            "display_score": 685.0638972125441,
+            "raw_expected_change": -37.136882794232974,
+            "display_expected_change": -2.2661027874559068,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "cn"
+          }
+        ]
+      },
+      "promotion_gates": {
+        "top10_signed_error_improvement": 0.38967346975495826,
+        "top20_negative_share": 0.9,
+        "rmse_degradation": 0.1327402085293854,
+        "pass_top10_signed_error_gate": true,
+        "pass_top20_negative_share_gate": true,
+        "pass_rmse_gate": true
+      }
+    },
+    "ch": {
+      "metrics": {
+        "training_samples": 89790,
+        "train_samples": 71832,
+        "test_samples": 17958,
+        "train_rmse": 18.965190639167023,
+        "test_rmse": 19.153225723747347,
+        "test_r2": 0.8384770866918715
+      },
+      "latest_data_year": 2025,
+      "prediction_target_year": 2026,
+      "public_metrics": {
+        "rmse": 23.686757541852057,
+        "mae": 17.201052123539256,
+        "r2": 0.7397030288099615,
+        "bias": -1.7649040076736102
+      },
+      "backtest": {
+        "folds": [
+          {
+            "target_year": 2021,
+            "train_samples": 9629,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 19.358016100053376,
+              "mae": 15.088745349966537,
+              "r2": 0.8442131779269961,
+              "bias": -0.21188420144448303
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 21.83428320120242,
+              "mae": 16.151721668070277,
+              "r2": 0.801807642914232,
+              "bias": 0.7504251238574542
+            },
+            "top_10_pct": {
+              "count": 276,
+              "raw": {
+                "count": 276,
+                "rmse": 20.367875966856566,
+                "mae": 16.199760798833015,
+                "r2": 0.21398705123613448,
+                "bias": -7.446983714983584
+              },
+              "calibrated": {
+                "count": 276,
+                "rmse": 21.268154667093924,
+                "mae": 16.862173258814806,
+                "r2": 0.1429664226068158,
+                "bias": -1.8282622917128932
+              },
+              "raw_negative_share": 0.8731884057971014,
+              "calibrated_negative_share": 0.7282608695652174
+            }
+          },
+          {
+            "target_year": 2022,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 21.72409448022732,
+              "mae": 17.726218093958174,
+              "r2": 0.7499212033124925,
+              "bias": -14.207166294822297
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 22.514044816697403,
+              "mae": 18.062945082556013,
+              "r2": 0.7314033710722747,
+              "bias": -13.52782522085198
+            },
+            "top_10_pct": {
+              "count": 317,
+              "raw": {
+                "count": 317,
+                "rmse": 24.778347031323147,
+                "mae": 20.25507257410339,
+                "r2": -0.6011829130817989,
+                "bias": -18.40282420953326
+              },
+              "calibrated": {
+                "count": 317,
+                "rmse": 22.853733163462646,
+                "mae": 18.08848886621434,
+                "r2": -0.3621050067564904,
+                "bias": -12.731566629246654
+              },
+              "raw_negative_share": 0.832807570977918,
+              "calibrated_negative_share": 0.7570977917981072
+            }
+          },
+          {
+            "target_year": 2023,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 21.454147289578433,
+              "mae": 16.798006992108796,
+              "r2": 0.784631049518163,
+              "bias": -6.043703600934661
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 23.104115408542963,
+              "mae": 17.25906678290656,
+              "r2": 0.7502305793510132,
+              "bias": -5.539841988245013
+            },
+            "top_10_pct": {
+              "count": 307,
+              "raw": {
+                "count": 307,
+                "rmse": 24.99261825302709,
+                "mae": 20.877840803203917,
+                "r2": -0.7174151524151116,
+                "bias": -19.331533431120196
+              },
+              "calibrated": {
+                "count": 307,
+                "rmse": 22.789607863065854,
+                "mae": 17.7815541436983,
+                "r2": -0.42799104440090985,
+                "bias": -12.447101233201689
+              },
+              "raw_negative_share": 0.8371335504885994,
+              "calibrated_negative_share": 0.7296416938110749
+            }
+          },
+          {
+            "target_year": 2024,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 22.65428388724578,
+              "mae": 18.218016440655642,
+              "r2": 0.7725348339901082,
+              "bias": 9.074602788658476
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 24.350191136948553,
+              "mae": 19.078955157094505,
+              "r2": 0.7372038669511991,
+              "bias": 8.821920577256668
+            },
+            "top_10_pct": {
+              "count": 291,
+              "raw": {
+                "count": 291,
+                "rmse": 24.600191706386155,
+                "mae": 20.010281079608106,
+                "r2": -0.034166575053611314,
+                "bias": -17.7885153343792
+              },
+              "calibrated": {
+                "count": 291,
+                "rmse": 22.633087902786674,
+                "mae": 18.16715772915255,
+                "r2": 0.1246109008400027,
+                "bias": -11.45409215870352
+              },
+              "raw_negative_share": 0.8041237113402062,
+              "calibrated_negative_share": 0.7216494845360825
+            }
+          },
+          {
+            "target_year": 2025,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 17.492162541245794,
+              "mae": 13.401425745174134,
+              "r2": 0.8376159900177484,
+              "bias": 1.9331489821935874
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 26.362138003141116,
+              "mae": 15.452571927068915,
+              "r2": 0.6311774113221879,
+              "bias": 0.6708014696148215
+            },
+            "top_10_pct": {
+              "count": 259,
+              "raw": {
+                "count": 259,
+                "rmse": 18.5154263660976,
+                "mae": 14.077301658510557,
+                "r2": 0.3771694408230758,
+                "bias": -9.386172867246753
+              },
+              "calibrated": {
+                "count": 259,
+                "rmse": 18.80559457249507,
+                "mae": 14.122318108309663,
+                "r2": 0.35749484499815587,
+                "bias": -1.1729048659774561
+              },
+              "raw_negative_share": 0.7297297297297297,
+              "calibrated_negative_share": 0.6833976833976834
+            }
+          }
+        ],
+        "summary": {
+          "raw": {
+            "count": 15000,
+            "rmse": 20.621066088114752,
+            "mae": 16.246482524372656,
+            "r2": 0.8027213380384612,
+            "bias": -1.8910004652698746
+          },
+          "calibrated": {
+            "count": 15000,
+            "rmse": 23.686757541852057,
+            "mae": 17.201052123539256,
+            "r2": 0.7397030288099615,
+            "bias": -1.7649040076736102
+          }
+        },
+        "segments": {
+          "top_1_pct": {
+            "count": 144,
+            "raw": {
+              "count": 144,
+              "rmse": 30.05366005884335,
+              "mae": 25.15516604744899,
+              "r2": -1.2029334870372455,
+              "bias": -23.108404794535375
+            },
+            "calibrated": {
+              "count": 144,
+              "rmse": 21.61748998085962,
+              "mae": 16.54281978854785,
+              "r2": -0.13976988534785972,
+              "bias": -10.308731949380574
+            },
+            "raw_negative_share": 0.9097222222222222,
+            "calibrated_negative_share": 0.7430555555555556
+          },
+          "top_5_pct": {
+            "count": 749,
+            "raw": {
+              "count": 749,
+              "rmse": 24.24528719941065,
+              "mae": 19.60621460704453,
+              "r2": -0.3821630492424768,
+              "bias": -16.78576466696758
+            },
+            "calibrated": {
+              "count": 749,
+              "rmse": 21.507359224172397,
+              "mae": 16.572602626800666,
+              "r2": -0.08762401987301027,
+              "bias": -8.487335532686233
+            },
+            "raw_negative_share": 0.8437917222963952,
+            "calibrated_negative_share": 0.753004005340454
+          },
+          "top_10_pct": {
+            "count": 1450,
+            "raw": {
+              "count": 1450,
+              "rmse": 22.980992615315373,
+              "mae": 18.462415197774124,
+              "r2": -0.09056545895745804,
+              "bias": -14.78022088140184
+            },
+            "calibrated": {
+              "count": 1450,
+              "rmse": 21.822462112289013,
+              "mae": 17.097428414740556,
+              "r2": 0.016619327707700693,
+              "bias": -8.27495880761914
+            },
+            "raw_negative_share": 0.8172413793103448,
+            "calibrated_negative_share": 0.7255172413793104
+          },
+          "consistent": {
+            "count": 14262,
+            "raw": {
+              "count": 14262,
+              "rmse": 20.46613346024302,
+              "mae": 16.130344538625998,
+              "r2": 0.8066519351916598,
+              "bias": -1.8751872833965648
+            },
+            "calibrated": {
+              "count": 14262,
+              "rmse": 21.14427223382652,
+              "mae": 16.464139691338314,
+              "r2": 0.7936266046668103,
+              "bias": -0.7890633892120057
+            },
+            "raw_negative_share": 0.5480297293507223,
+            "calibrated_negative_share": 0.46585331650539896
+          },
+          "volatile": {
+            "count": 738,
+            "raw": {
+              "count": 738,
+              "rmse": 23.41469061628456,
+              "mae": 18.490872704208517,
+              "r2": 0.5608160816821067,
+              "bias": -2.1965934190329524
+            },
+            "calibrated": {
+              "count": 738,
+              "rmse": 52.571782665357446,
+              "mae": 31.442034654772083,
+              "r2": -1.2139866065969276,
+              "bias": -20.623222301033223
+            },
+            "raw_negative_share": 0.11382113821138211,
+            "calibrated_negative_share": 0.1043360433604336
+          },
+          "deciles": {
+            "1": {
+              "count": 1450,
+              "raw": {
+                "count": 1450,
+                "rmse": 22.980992615315373,
+                "mae": 18.462415197774124,
+                "r2": -0.09056545895745804,
+                "bias": -14.78022088140184
+              },
+              "calibrated": {
+                "count": 1450,
+                "rmse": 21.822462112289013,
+                "mae": 17.097428414740556,
+                "r2": 0.016619327707700693,
+                "bias": -8.27495880761914
+              },
+              "raw_negative_share": 0.8172413793103448,
+              "calibrated_negative_share": 0.7255172413793104
+            },
+            "2": {
+              "count": 1507,
+              "raw": {
+                "count": 1507,
+                "rmse": 20.23910790342836,
+                "mae": 16.057989417262622,
+                "r2": -0.6077288460658554,
+                "bias": -5.8085206551718995
+              },
+              "calibrated": {
+                "count": 1507,
+                "rmse": 24.064103159732014,
+                "mae": 17.30066933887693,
+                "r2": -1.272842981663318,
+                "bias": -3.8657945646110967
+              },
+              "raw_negative_share": 0.6867949568679496,
+              "calibrated_negative_share": 0.5945587259455872
+            },
+            "3": {
+              "count": 1357,
+              "raw": {
+                "count": 1357,
+                "rmse": 20.80032397834289,
+                "mae": 16.1609325340051,
+                "r2": -0.4391967931225407,
+                "bias": -3.5517801440355328
+              },
+              "calibrated": {
+                "count": 1357,
+                "rmse": 22.375320850946327,
+                "mae": 16.906116655063546,
+                "r2": -0.6653998720818106,
+                "bias": -2.038340848988228
+              },
+              "raw_negative_share": 0.6153279292557111,
+              "calibrated_negative_share": 0.5187914517317612
+            },
+            "4": {
+              "count": 1384,
+              "raw": {
+                "count": 1384,
+                "rmse": 21.683155393490054,
+                "mae": 17.021687304669836,
+                "r2": -0.5785569282952316,
+                "bias": -5.458480429387104
+              },
+              "calibrated": {
+                "count": 1384,
+                "rmse": 23.497793273547465,
+                "mae": 17.7205248740104,
+                "r2": -0.8538280181080959,
+                "bias": -4.742523900355222
+              },
+              "raw_negative_share": 0.5960982658959537,
+              "calibrated_negative_share": 0.5
+            },
+            "5": {
+              "count": 1405,
+              "raw": {
+                "count": 1405,
+                "rmse": 20.58218573316159,
+                "mae": 16.205876841280144,
+                "r2": -0.6960963999863925,
+                "bias": -5.678466362209621
+              },
+              "calibrated": {
+                "count": 1405,
+                "rmse": 26.116349730834614,
+                "mae": 18.10062771629171,
+                "r2": -1.7308163719956782,
+                "bias": -6.574690086881725
+              },
+              "raw_negative_share": 0.5316725978647687,
+              "calibrated_negative_share": 0.46334519572953736
+            },
+            "6": {
+              "count": 1492,
+              "raw": {
+                "count": 1492,
+                "rmse": 18.865557009410054,
+                "mae": 14.867327846382171,
+                "r2": -0.4824699072366945,
+                "bias": -2.7314157522095153
+              },
+              "calibrated": {
+                "count": 1492,
+                "rmse": 23.896255999140624,
+                "mae": 16.366124908289773,
+                "r2": -1.3785174721525406,
+                "bias": -3.705797863162794
+              },
+              "raw_negative_share": 0.5093833780160858,
+              "calibrated_negative_share": 0.43766756032171583
+            },
+            "7": {
+              "count": 1500,
+              "raw": {
+                "count": 1500,
+                "rmse": 18.842190238344788,
+                "mae": 14.877383291614231,
+                "r2": -0.5019835025734452,
+                "bias": -0.6186886438803795
+              },
+              "calibrated": {
+                "count": 1500,
+                "rmse": 25.747917733526563,
+                "mae": 16.967806940263394,
+                "r2": -1.8047013247815986,
+                "bias": -2.5665839351134423
+              },
+              "raw_negative_share": 0.4533333333333333,
+              "calibrated_negative_share": 0.39066666666666666
+            },
+            "8": {
+              "count": 1555,
+              "raw": {
+                "count": 1555,
+                "rmse": 18.781313463551587,
+                "mae": 15.114486434828928,
+                "r2": -0.48525709170860143,
+                "bias": 2.508786471552963
+              },
+              "calibrated": {
+                "count": 1555,
+                "rmse": 23.628435384216044,
+                "mae": 16.73895298538158,
+                "r2": -1.3508214332717041,
+                "bias": 0.8888647324307923
+              },
+              "raw_negative_share": 0.3935691318327974,
+              "calibrated_negative_share": 0.33054662379421224
+            },
+            "9": {
+              "count": 1535,
+              "raw": {
+                "count": 1535,
+                "rmse": 20.030542705585887,
+                "mae": 15.93010572168202,
+                "r2": -0.6838166821003075,
+                "bias": 5.834836945455435
+              },
+              "calibrated": {
+                "count": 1535,
+                "rmse": 22.515288698300058,
+                "mae": 17.034376964374584,
+                "r2": -1.127474755745463,
+                "bias": 4.208348701015635
+              },
+              "raw_negative_share": 0.3700325732899023,
+              "calibrated_negative_share": 0.29576547231270356
+            },
+            "10": {
+              "count": 1424,
+              "raw": {
+                "count": 1424,
+                "rmse": 23.06134611429952,
+                "mae": 17.75965707155938,
+                "r2": -0.7093827956869547,
+                "bias": 11.970665350306716
+              },
+              "calibrated": {
+                "count": 1424,
+                "rmse": 23.167456421728577,
+                "mae": 17.795676253236405,
+                "r2": -0.725149475119995,
+                "bias": 9.889560599234617
+              },
+              "raw_negative_share": 0.29002808988764045,
+              "calibrated_negative_share": 0.22401685393258428
+            }
+          }
+        }
+      },
+      "current_cycle_audit": {
+        "latest_year": 2025,
+        "sample_size": 60,
+        "top_n": 20,
+        "raw_negative_share": 0.9333333333333333,
+        "display_negative_share": 0.85,
+        "top_n_raw_negative_share": 1.0,
+        "top_n_display_negative_share": 0.8,
+        "raw_mean_delta": -27.659990111701898,
+        "display_mean_delta": -4.516370287812325,
+        "top_sample": [
+          {
+            "codigo_inep": "23246871",
+            "nome_escola": "ARI DE SA CAVALCANTE - MARIO MAMEDE",
+            "ranking_brasil": 1,
+            "current_score": 739.75,
+            "raw_score": 653.5064305673361,
+            "display_score": 728.9919999999998,
+            "raw_expected_change": -86.24356943266389,
+            "display_expected_change": -10.758000000000152,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "23246847",
+            "nome_escola": "FARIAS BRITO COLEGIO DE APLICACAO",
+            "ranking_brasil": 2,
+            "current_score": 725.76,
+            "raw_score": 653.5064305673361,
+            "display_score": 724.6023214285713,
+            "raw_expected_change": -72.25356943266388,
+            "display_expected_change": -1.1576785714287325,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "23246880",
+            "nome_escola": "CHRISTUS COLEGIO PRE UNIVERSITARIO",
+            "ranking_brasil": 3,
+            "current_score": 714.28,
+            "raw_score": 653.5064305673361,
+            "display_score": 703.3536428571423,
+            "raw_expected_change": -60.77356943266386,
+            "display_expected_change": -10.926357142857682,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "22144714",
+            "nome_escola": "SAO JOSE LESTE",
+            "ranking_brasil": 4,
+            "current_score": 689.63,
+            "raw_score": 654.1724567435213,
+            "display_score": 654.1724567435213,
+            "raw_expected_change": -35.45754325647874,
+            "display_expected_change": -35.45754325647874,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "23235543",
+            "nome_escola": "ARI DE SA CAVALCANTE - MAJOR FACUNDO",
+            "ranking_brasil": 5,
+            "current_score": 713.6,
+            "raw_score": 653.5064305673361,
+            "display_score": 711.0011103896102,
+            "raw_expected_change": -60.09356943266391,
+            "display_expected_change": -2.598889610389847,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "35399197",
+            "nome_escola": "OBJETIVO COLEGIO INTEGRADO",
+            "ranking_brasil": 6,
+            "current_score": 692.73,
+            "raw_score": 653.5064305673361,
+            "display_score": 690.1345078903652,
+            "raw_expected_change": -39.22356943266391,
+            "display_expected_change": -2.595492109634847,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "35563006",
+            "nome_escola": "ETAPA III COLEGIO",
+            "ranking_brasil": 7,
+            "current_score": 689.16,
+            "raw_score": 653.5064305673361,
+            "display_score": 683.0819821428569,
+            "raw_expected_change": -35.65356943266386,
+            "display_expected_change": -6.078017857143095,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "15167275",
+            "nome_escola": "COLEGIO EQUIPE LTDA",
+            "ranking_brasil": 8,
+            "current_score": 679.53,
+            "raw_score": 653.5064305673361,
+            "display_score": 672.3349480519475,
+            "raw_expected_change": -26.023569432663862,
+            "display_expected_change": -7.1950519480524235,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "33184739",
+            "nome_escola": "COLEGIO ALFA CEM BILINGUE",
+            "ranking_brasil": 9,
+            "current_score": 679.42,
+            "raw_score": 653.5064305673361,
+            "display_score": 684.7820235294116,
+            "raw_expected_change": -25.91356943266385,
+            "display_expected_change": 5.362023529411658,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "33165920",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 10,
+            "current_score": 688.54,
+            "raw_score": 653.5064305673361,
+            "display_score": 682.3393035714282,
+            "raw_expected_change": -35.03356943266385,
+            "display_expected_change": -6.200696428571746,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "22025740",
+            "nome_escola": "INSTITUTO DOM BARRETO CENTRO",
+            "ranking_brasil": 11,
+            "current_score": 681.97,
+            "raw_score": 653.5064305673361,
+            "display_score": 677.2766293103444,
+            "raw_expected_change": -28.463569432663917,
+            "display_expected_change": -4.6933706896555805,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "31004812",
+            "nome_escola": "COLEGIO SANTO ANTONIO",
+            "ranking_brasil": 12,
+            "current_score": 685.37,
+            "raw_score": 653.5064305673361,
+            "display_score": 684.1124788431674,
+            "raw_expected_change": -31.863569432663894,
+            "display_expected_change": -1.2575211568325813,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "23272333",
+            "nome_escola": "FARIAS BRITO COLEGIO PRE-VESTIBULAR CENTRAL",
+            "ranking_brasil": 13,
+            "current_score": 684.8,
+            "raw_score": 653.5064305673361,
+            "display_score": 679.9272932027645,
+            "raw_expected_change": -31.293569432663844,
+            "display_expected_change": -4.872706797235423,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "23245573",
+            "nome_escola": "MASTER COLEGIO",
+            "ranking_brasil": 14,
+            "current_score": 675.6,
+            "raw_score": 651.9407408858095,
+            "display_score": 668.3042765444011,
+            "raw_expected_change": -23.65925911419049,
+            "display_expected_change": -7.295723455598932,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "15181081",
+            "nome_escola": "COLEGIO INTEGRADO IN",
+            "ranking_brasil": 15,
+            "current_score": 681.7,
+            "raw_score": 555.5217355153354,
+            "display_score": 681.7,
+            "raw_expected_change": -126.17826448466462,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "53020570",
+            "nome_escola": "COL PODION ENS FUND E MEDIO",
+            "ranking_brasil": 16,
+            "current_score": 677.0,
+            "raw_score": 555.5217355153354,
+            "display_score": 677.0,
+            "raw_expected_change": -121.47826448466458,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "31349720",
+            "nome_escola": "FIBONACCI COLEGIO",
+            "ranking_brasil": 17,
+            "current_score": 674.88,
+            "raw_score": 653.5064305673361,
+            "display_score": 673.5902152964959,
+            "raw_expected_change": -21.373569432663885,
+            "display_expected_change": -1.2897847035040968,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "31351725",
+            "nome_escola": "COLEGUIUM - UNIDADE OURO PRETO INTEGRAL",
+            "ranking_brasil": 18,
+            "current_score": 697.55,
+            "raw_score": 653.5064305673361,
+            "display_score": 693.4532111801238,
+            "raw_expected_change": -44.043569432663844,
+            "display_expected_change": -4.09678881987611,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "15172287",
+            "nome_escola": "PHYSICS COLEGIO E CURSO",
+            "ranking_brasil": 19,
+            "current_score": 685.73,
+            "raw_score": 605.4203971634481,
+            "display_score": 669.3787000000009,
+            "raw_expected_change": -80.3096028365519,
+            "display_expected_change": -16.351299999999128,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          },
+          {
+            "codigo_inep": "33135827",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 20,
+            "current_score": 672.95,
+            "raw_score": 649.1194336285586,
+            "display_score": 673.6033114111497,
+            "raw_expected_change": -23.830566371441478,
+            "display_expected_change": 0.6533114111496161,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "ch"
+          }
+        ]
+      },
+      "promotion_gates": {
+        "top10_signed_error_improvement": 0.4401329402301669,
+        "top20_negative_share": 0.8,
+        "rmse_degradation": 0.148667941833728,
+        "pass_top10_signed_error_gate": true,
+        "pass_top20_negative_share_gate": true,
+        "pass_rmse_gate": true
+      }
+    },
+    "lc": {
+      "metrics": {
+        "training_samples": 89805,
+        "train_samples": 71844,
+        "test_samples": 17961,
+        "train_rmse": 17.34981143932258,
+        "test_rmse": 17.481312235866646,
+        "test_r2": 0.8157764040525148
+      },
+      "latest_data_year": 2025,
+      "prediction_target_year": 2026,
+      "public_metrics": {
+        "rmse": 25.438395258216048,
+        "mae": 19.23999792475916,
+        "r2": 0.6144626042505513,
+        "bias": -2.669249770528945
+      },
+      "backtest": {
+        "folds": [
+          {
+            "target_year": 2021,
+            "train_samples": 9633,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 33.373459249648825,
+              "mae": 29.521985148245196,
+              "r2": 0.406457200769353,
+              "bias": 28.905262622120585
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 33.42078639887534,
+              "mae": 29.56168091790283,
+              "r2": 0.4047725922768487,
+              "bias": 28.85273300391056
+            },
+            "top_10_pct": {
+              "count": 287,
+              "raw": {
+                "count": 287,
+                "rmse": 16.650516843233003,
+                "mae": 13.656605393543485,
+                "r2": 0.12935711927194316,
+                "bias": 10.62022640155127
+              },
+              "calibrated": {
+                "count": 287,
+                "rmse": 19.69561239561277,
+                "mae": 16.429221774469138,
+                "r2": -0.21821401958080267,
+                "bias": 14.412609416647024
+              },
+              "raw_negative_share": 0.8745644599303136,
+              "calibrated_negative_share": 0.7212543554006968
+            }
+          },
+          {
+            "target_year": 2022,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 21.693787279422164,
+              "mae": 17.881262740107953,
+              "r2": 0.7354217331028998,
+              "bias": -12.057979222134819
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 21.965786641509634,
+              "mae": 17.45637457722543,
+              "r2": 0.7287455107698451,
+              "bias": -9.018656895433612
+            },
+            "top_10_pct": {
+              "count": 307,
+              "raw": {
+                "count": 307,
+                "rmse": 22.538765057254302,
+                "mae": 19.458801674798394,
+                "r2": -0.6158238758611048,
+                "bias": -18.293788966478964
+              },
+              "calibrated": {
+                "count": 307,
+                "rmse": 20.092671263315967,
+                "mae": 16.630414211030757,
+                "r2": -0.28413045392308245,
+                "bias": -13.800048431626845
+              },
+              "raw_negative_share": 0.7166123778501629,
+              "calibrated_negative_share": 0.6612377850162866
+            }
+          },
+          {
+            "target_year": 2023,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 21.597394290045745,
+              "mae": 17.687945044474095,
+              "r2": 0.6962158153228402,
+              "bias": -12.575998630108629
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 21.43749217392768,
+              "mae": 17.379725306322673,
+              "r2": 0.7006974589478951,
+              "bias": -10.370130282819174
+            },
+            "top_10_pct": {
+              "count": 295,
+              "raw": {
+                "count": 295,
+                "rmse": 24.37865289479661,
+                "mae": 20.87776227665246,
+                "r2": -0.9968215208902935,
+                "bias": -19.634287054664124
+              },
+              "calibrated": {
+                "count": 295,
+                "rmse": 22.12692052898382,
+                "mae": 17.85710035709997,
+                "r2": -0.6449844350634855,
+                "bias": -12.590906566624762
+              },
+              "raw_negative_share": 0.8745762711864407,
+              "calibrated_negative_share": 0.8101694915254237
+            }
+          },
+          {
+            "target_year": 2024,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 18.24442105596186,
+              "mae": 14.716422046756872,
+              "r2": 0.740605472463469,
+              "bias": -10.889889230962288
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 18.51862452922158,
+              "mae": 14.588080140700743,
+              "r2": 0.7327497691942746,
+              "bias": -9.821831101321969
+            },
+            "top_10_pct": {
+              "count": 316,
+              "raw": {
+                "count": 316,
+                "rmse": 21.379938060296947,
+                "mae": 18.172834540516707,
+                "r2": -0.5351850032214573,
+                "bias": -17.520123098220584
+              },
+              "calibrated": {
+                "count": 316,
+                "rmse": 19.12150338349067,
+                "mae": 15.201504684354399,
+                "r2": -0.22798172388792048,
+                "bias": -12.694218318062095
+              },
+              "raw_negative_share": 0.7911392405063291,
+              "calibrated_negative_share": 0.7056962025316456
+            }
+          },
+          {
+            "target_year": 2025,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 19.616231876877702,
+              "mae": 15.843511299130483,
+              "r2": 0.7248987477051148,
+              "bias": -12.119060633699487
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 28.87229632545827,
+              "mae": 17.21412868164411,
+              "r2": 0.4040304825702439,
+              "bias": -12.988363576980525
+            },
+            "top_10_pct": {
+              "count": 259,
+              "raw": {
+                "count": 259,
+                "rmse": 28.694399582239143,
+                "mae": 26.092657982324354,
+                "r2": -1.5878157253133907,
+                "bias": -25.87237491340553
+              },
+              "calibrated": {
+                "count": 259,
+                "rmse": 24.790626012603752,
+                "mae": 21.324580677944404,
+                "r2": -0.9315860111155452,
+                "bias": -20.424650153848262
+              },
+              "raw_negative_share": 0.8146718146718147,
+              "calibrated_negative_share": 0.7722007722007722
+            }
+          }
+        ],
+        "summary": {
+          "raw": {
+            "count": 15000,
+            "rmse": 23.530877933673224,
+            "mae": 19.13022525574292,
+            "r2": 0.6701144069254792,
+            "bias": -3.747533018956929
+          },
+          "calibrated": {
+            "count": 15000,
+            "rmse": 25.438395258216048,
+            "mae": 19.23999792475916,
+            "r2": 0.6144626042505513,
+            "bias": -2.669249770528945
+          }
+        },
+        "segments": {
+          "top_1_pct": {
+            "count": 142,
+            "raw": {
+              "count": 142,
+              "rmse": 27.684321211252666,
+              "mae": 23.639353273070835,
+              "r2": -1.2321364538848765,
+              "bias": -20.836642599393958
+            },
+            "calibrated": {
+              "count": 142,
+              "rmse": 19.825248880489426,
+              "mae": 15.663842368682353,
+              "r2": -0.1446962948528605,
+              "bias": -11.14267839706059
+            },
+            "raw_negative_share": 0.9577464788732394,
+            "calibrated_negative_share": 0.8661971830985915
+          },
+          "top_5_pct": {
+            "count": 729,
+            "raw": {
+              "count": 729,
+              "rmse": 24.163262171187537,
+              "mae": 20.753260542654548,
+              "r2": -0.7027068826297493,
+              "bias": -16.762968692058184
+            },
+            "calibrated": {
+              "count": 729,
+              "rmse": 20.239886824479782,
+              "mae": 16.351548103537517,
+              "r2": -0.19466164005243147,
+              "bias": -10.014660979942786
+            },
+            "raw_negative_share": 0.8600823045267489,
+            "calibrated_negative_share": 0.7887517146776406
+          },
+          "top_10_pct": {
+            "count": 1464,
+            "raw": {
+              "count": 1464,
+              "rmse": 22.912031547484062,
+              "mae": 19.503314116084596,
+              "r2": -0.3959881525130853,
+              "bias": -14.06940363264992
+            },
+            "calibrated": {
+              "count": 1464,
+              "rmse": 21.142563188990874,
+              "mae": 17.36018462653495,
+              "r2": -0.18869328622759673,
+              "bias": -8.95892812939916
+            },
+            "raw_negative_share": 0.8128415300546448,
+            "calibrated_negative_share": 0.73224043715847
+          },
+          "consistent": {
+            "count": 14928,
+            "raw": {
+              "count": 14928,
+              "rmse": 23.540409894545224,
+              "mae": 19.1377128770327,
+              "r2": 0.670568452749551,
+              "bias": -3.741276354890697
+            },
+            "calibrated": {
+              "count": 14928,
+              "rmse": 23.40851703292723,
+              "mae": 18.84759354260969,
+              "r2": 0.6742496077643911,
+              "bias": -2.240142052068191
+            },
+            "raw_negative_share": 0.6152867095391211,
+            "calibrated_negative_share": 0.5177518756698821
+          },
+          "volatile": {
+            "count": 72,
+            "raw": {
+              "count": 72,
+              "rmse": 21.46335363591689,
+              "mae": 17.5777917749951,
+              "r2": 0.4821111219308054,
+              "bias": -5.044748035355573
+            },
+            "calibrated": {
+              "count": 72,
+              "rmse": 145.6189986222983,
+              "mae": 100.59850649041492,
+              "r2": -22.83842193840522,
+              "bias": -91.63758339805864
+            },
+            "raw_negative_share": 0.1111111111111111,
+            "calibrated_negative_share": 0.027777777777777776
+          },
+          "deciles": {
+            "1": {
+              "count": 1464,
+              "raw": {
+                "count": 1464,
+                "rmse": 22.912031547484062,
+                "mae": 19.503314116084596,
+                "r2": -0.3959881525130853,
+                "bias": -14.06940363264992
+              },
+              "calibrated": {
+                "count": 1464,
+                "rmse": 21.142563188990874,
+                "mae": 17.36018462653495,
+                "r2": -0.18869328622759673,
+                "bias": -8.95892812939916
+              },
+              "raw_negative_share": 0.8128415300546448,
+              "calibrated_negative_share": 0.73224043715847
+            },
+            "2": {
+              "count": 1478,
+              "raw": {
+                "count": 1478,
+                "rmse": 22.531939961711675,
+                "mae": 18.96544032826399,
+                "r2": -1.3104729018886516,
+                "bias": -8.853906976870595
+              },
+              "calibrated": {
+                "count": 1478,
+                "rmse": 24.367606503752732,
+                "mae": 19.459348272682977,
+                "r2": -1.702274446549782,
+                "bias": -7.032306658087046
+              },
+              "raw_negative_share": 0.7185385656292287,
+              "calibrated_negative_share": 0.618403247631935
+            },
+            "3": {
+              "count": 1388,
+              "raw": {
+                "count": 1388,
+                "rmse": 22.829140313851624,
+                "mae": 18.960974793546654,
+                "r2": -1.3551414920955613,
+                "bias": -6.958675018880443
+              },
+              "calibrated": {
+                "count": 1388,
+                "rmse": 23.057338467107115,
+                "mae": 18.884526921008664,
+                "r2": -1.4024604036959962,
+                "bias": -5.468928043643482
+              },
+              "raw_negative_share": 0.6577809798270894,
+              "calibrated_negative_share": 0.5684438040345822
+            },
+            "4": {
+              "count": 1388,
+              "raw": {
+                "count": 1388,
+                "rmse": 24.62221305340795,
+                "mae": 20.589997715849304,
+                "r2": -1.7957866878340036,
+                "bias": -8.799890356874347
+              },
+              "calibrated": {
+                "count": 1388,
+                "rmse": 25.76094163308591,
+                "mae": 20.58836856938462,
+                "r2": -2.060365730326467,
+                "bias": -7.802372092911482
+              },
+              "raw_negative_share": 0.6829971181556196,
+              "calibrated_negative_share": 0.590778097982709
+            },
+            "5": {
+              "count": 1437,
+              "raw": {
+                "count": 1437,
+                "rmse": 24.60938722596548,
+                "mae": 20.867802023171542,
+                "r2": -1.5185645750902954,
+                "bias": -8.642342119652982
+              },
+              "calibrated": {
+                "count": 1437,
+                "rmse": 28.7047309120107,
+                "mae": 21.42783588633863,
+                "r2": -2.4265608667218697,
+                "bias": -8.497631541601484
+              },
+              "raw_negative_share": 0.6235212247738344,
+              "calibrated_negative_share": 0.5393180236604036
+            },
+            "6": {
+              "count": 1491,
+              "raw": {
+                "count": 1491,
+                "rmse": 23.306618869230036,
+                "mae": 19.343121155732543,
+                "r2": -1.088132860777038,
+                "bias": -5.7231637865786835
+              },
+              "calibrated": {
+                "count": 1491,
+                "rmse": 26.437644895564574,
+                "mae": 19.410712442904824,
+                "r2": -1.6868604414063162,
+                "bias": -5.573798909641709
+              },
+              "raw_negative_share": 0.6237424547283702,
+              "calibrated_negative_share": 0.5358819584171697
+            },
+            "7": {
+              "count": 1484,
+              "raw": {
+                "count": 1484,
+                "rmse": 23.22279050045679,
+                "mae": 18.680003274079162,
+                "r2": -0.7593963631414955,
+                "bias": -1.7090320409583617
+              },
+              "calibrated": {
+                "count": 1484,
+                "rmse": 29.172584717285382,
+                "mae": 19.613746336495343,
+                "r2": -1.776417037096353,
+                "bias": -1.9040444862395804
+              },
+              "raw_negative_share": 0.5822102425876011,
+              "calibrated_negative_share": 0.4858490566037736
+            },
+            "8": {
+              "count": 1535,
+              "raw": {
+                "count": 1535,
+                "rmse": 22.70176101649693,
+                "mae": 17.79382121868823,
+                "r2": -0.5694609559719652,
+                "bias": 0.4514515899246211
+              },
+              "calibrated": {
+                "count": 1535,
+                "rmse": 24.854592739079287,
+                "mae": 18.117754061431196,
+                "r2": -0.8812422493217331,
+                "bias": 0.6309807169303154
+              },
+              "raw_negative_share": 0.5198697068403909,
+              "calibrated_negative_share": 0.43908794788273614
+            },
+            "9": {
+              "count": 1546,
+              "raw": {
+                "count": 1546,
+                "rmse": 23.39466419911903,
+                "mae": 17.689847984251998,
+                "r2": -0.5079413042519267,
+                "bias": 3.8734607953291045
+              },
+              "calibrated": {
+                "count": 1546,
+                "rmse": 24.242207226830523,
+                "mae": 17.956969497909924,
+                "r2": -0.6191799754406719,
+                "bias": 4.565612904016802
+              },
+              "raw_negative_share": 0.49935316946959896,
+              "calibrated_negative_share": 0.3796895213454075
+            },
+            "10": {
+              "count": 1422,
+              "raw": {
+                "count": 1422,
+                "rmse": 24.685611961652466,
+                "mae": 18.657312430565963,
+                "r2": -0.3415730112004658,
+                "bias": 11.31661431391771
+              },
+              "calibrated": {
+                "count": 1422,
+                "rmse": 25.49515048319229,
+                "mae": 19.268168094802757,
+                "r2": -0.431006730444391,
+                "bias": 11.58967652067764
+              },
+              "raw_negative_share": 0.41631504922644164,
+              "calibrated_negative_share": 0.2805907172995781
+            }
+          }
+        }
+      },
+      "current_cycle_audit": {
+        "latest_year": 2025,
+        "sample_size": 60,
+        "top_n": 20,
+        "raw_negative_share": 1.0,
+        "display_negative_share": 0.9333333333333333,
+        "top_n_raw_negative_share": 1.0,
+        "top_n_display_negative_share": 0.9,
+        "raw_mean_delta": -39.553647168566116,
+        "display_mean_delta": -7.091307044910113,
+        "top_sample": [
+          {
+            "codigo_inep": "23246871",
+            "nome_escola": "ARI DE SA CAVALCANTE - MARIO MAMEDE",
+            "ranking_brasil": 1,
+            "current_score": 693.97,
+            "raw_score": 617.4482989312496,
+            "display_score": 683.41225,
+            "raw_expected_change": -76.52170106875042,
+            "display_expected_change": -10.557750000000055,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "23246847",
+            "nome_escola": "FARIAS BRITO COLEGIO DE APLICACAO",
+            "ranking_brasil": 2,
+            "current_score": 683.6,
+            "raw_score": 617.4482989312496,
+            "display_score": 679.8789821428569,
+            "raw_expected_change": -66.15170106875041,
+            "display_expected_change": -3.7210178571431243,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "23246880",
+            "nome_escola": "CHRISTUS COLEGIO PRE UNIVERSITARIO",
+            "ranking_brasil": 3,
+            "current_score": 674.04,
+            "raw_score": 616.9364289421192,
+            "display_score": 662.9261964285711,
+            "raw_expected_change": -57.1035710578808,
+            "display_expected_change": -11.113803571428889,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "22144714",
+            "nome_escola": "SAO JOSE LESTE",
+            "ranking_brasil": 4,
+            "current_score": 681.97,
+            "raw_score": 611.5886825068153,
+            "display_score": 611.5886825068153,
+            "raw_expected_change": -70.38131749318472,
+            "display_expected_change": -70.38131749318472,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "23235543",
+            "nome_escola": "ARI DE SA CAVALCANTE - MAJOR FACUNDO",
+            "ranking_brasil": 5,
+            "current_score": 675.91,
+            "raw_score": 617.4482989312496,
+            "display_score": 670.4754951298698,
+            "raw_expected_change": -58.46170106875036,
+            "display_expected_change": -5.434504870130127,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "35399197",
+            "nome_escola": "OBJETIVO COLEGIO INTEGRADO",
+            "ranking_brasil": 6,
+            "current_score": 670.7,
+            "raw_score": 617.4482989312496,
+            "display_score": 664.5706561461792,
+            "raw_expected_change": -53.251701068750435,
+            "display_expected_change": -6.129343853820842,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "35563006",
+            "nome_escola": "ETAPA III COLEGIO",
+            "ranking_brasil": 7,
+            "current_score": 665.38,
+            "raw_score": 617.4482989312496,
+            "display_score": 657.3501173469388,
+            "raw_expected_change": -47.931701068750385,
+            "display_expected_change": -8.029882653061236,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "15167275",
+            "nome_escola": "COLEGIO EQUIPE LTDA",
+            "ranking_brasil": 8,
+            "current_score": 658.84,
+            "raw_score": 616.9364289421192,
+            "display_score": 649.3612532467529,
+            "raw_expected_change": -41.90357105788087,
+            "display_expected_change": -9.478746753247151,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "33184739",
+            "nome_escola": "COLEGIO ALFA CEM BILINGUE",
+            "ranking_brasil": 9,
+            "current_score": 662.29,
+            "raw_score": 612.3124021466243,
+            "display_score": 662.0891764705882,
+            "raw_expected_change": -49.97759785337564,
+            "display_expected_change": -0.20082352941176396,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "33165920",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 10,
+            "current_score": 665.21,
+            "raw_score": 617.4482989312496,
+            "display_score": 654.7106785714283,
+            "raw_expected_change": -47.761701068750426,
+            "display_expected_change": -10.499321428571761,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "22025740",
+            "nome_escola": "INSTITUTO DOM BARRETO CENTRO",
+            "ranking_brasil": 11,
+            "current_score": 663.09,
+            "raw_score": 617.4482989312496,
+            "display_score": 656.8921151477831,
+            "raw_expected_change": -45.64170106875042,
+            "display_expected_change": -6.19788485221693,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "31004812",
+            "nome_escola": "COLEGIO SANTO ANTONIO",
+            "ranking_brasil": 12,
+            "current_score": 661.3,
+            "raw_score": 617.4482989312496,
+            "display_score": 656.0738462732917,
+            "raw_expected_change": -43.851701068750344,
+            "display_expected_change": -5.226153726708276,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "23272333",
+            "nome_escola": "FARIAS BRITO COLEGIO PRE-VESTIBULAR CENTRAL",
+            "ranking_brasil": 13,
+            "current_score": 669.21,
+            "raw_score": 615.8013248045085,
+            "display_score": 661.0987690092164,
+            "raw_expected_change": -53.40867519549158,
+            "display_expected_change": -8.11123099078361,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "23245573",
+            "nome_escola": "MASTER COLEGIO",
+            "ranking_brasil": 14,
+            "current_score": 657.74,
+            "raw_score": 615.8013248045085,
+            "display_score": 647.4508223938221,
+            "raw_expected_change": -41.938675195491555,
+            "display_expected_change": -10.289177606177873,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "15181081",
+            "nome_escola": "COLEGIO INTEGRADO IN",
+            "ranking_brasil": 15,
+            "current_score": 647.09,
+            "raw_score": 523.1952414161678,
+            "display_score": 647.09,
+            "raw_expected_change": -123.89475858383219,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "53020570",
+            "nome_escola": "COL PODION ENS FUND E MEDIO",
+            "ranking_brasil": 16,
+            "current_score": 658.61,
+            "raw_score": 522.6016276921011,
+            "display_score": 658.61,
+            "raw_expected_change": -136.00837230789887,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "31349720",
+            "nome_escola": "FIBONACCI COLEGIO",
+            "ranking_brasil": 17,
+            "current_score": 646.61,
+            "raw_score": 617.4482989312496,
+            "display_score": 642.4038130053906,
+            "raw_expected_change": -29.161701068750403,
+            "display_expected_change": -4.206186994609425,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "31351725",
+            "nome_escola": "COLEGUIUM - UNIDADE OURO PRETO INTEGRAL",
+            "ranking_brasil": 18,
+            "current_score": 665.71,
+            "raw_score": 617.4482989312496,
+            "display_score": 661.2909254658381,
+            "raw_expected_change": -48.261701068750426,
+            "display_expected_change": -4.41907453416195,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "15172287",
+            "nome_escola": "PHYSICS COLEGIO E CURSO",
+            "ranking_brasil": 19,
+            "current_score": 660.22,
+            "raw_score": 603.9062379394818,
+            "display_score": 646.4396714285748,
+            "raw_expected_change": -56.31376206051823,
+            "display_expected_change": -13.78032857142523,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          },
+          {
+            "codigo_inep": "33135827",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 20,
+            "current_score": 655.57,
+            "raw_score": 615.5968569074215,
+            "display_score": 649.6390091463416,
+            "raw_expected_change": -39.97314309257854,
+            "display_expected_change": -5.9309908536585,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "lc"
+          }
+        ]
+      },
+      "promotion_gates": {
+        "top10_signed_error_improvement": 0.36323327105288405,
+        "top20_negative_share": 0.9,
+        "rmse_degradation": 0.08106443499131506,
+        "pass_top10_signed_error_gate": true,
+        "pass_top20_negative_share_gate": true,
+        "pass_rmse_gate": true
+      }
+    },
+    "mt": {
+      "metrics": {
+        "training_samples": 89804,
+        "train_samples": 71843,
+        "test_samples": 17961,
+        "train_rmse": 26.042016490016707,
+        "test_rmse": 25.903943594913688,
+        "test_r2": 0.8692403658133645
+      },
+      "latest_data_year": 2025,
+      "prediction_target_year": 2026,
+      "public_metrics": {
+        "rmse": 30.01309986715404,
+        "mae": 22.749928254263196,
+        "r2": 0.8185122258517787,
+        "bias": -0.18001044057820692
+      },
+      "backtest": {
+        "folds": [
+          {
+            "target_year": 2021,
+            "train_samples": 9633,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 23.2331170234676,
+              "mae": 18.002867442198664,
+              "r2": 0.8711938144509661,
+              "bias": -7.370672936575314
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 25.240073405280896,
+              "mae": 19.13070506565995,
+              "r2": 0.8479792094502477,
+              "bias": -3.4238118383216953
+            },
+            "top_10_pct": {
+              "count": 266,
+              "raw": {
+                "count": 266,
+                "rmse": 29.561978834971,
+                "mae": 23.88734009094667,
+                "r2": 0.22703568764008453,
+                "bias": -18.609654587417904
+              },
+              "calibrated": {
+                "count": 266,
+                "rmse": 29.473913255218914,
+                "mae": 22.694652851352338,
+                "r2": 0.23163417257837704,
+                "bias": -4.350284259784622
+              },
+              "raw_negative_share": 0.8796992481203008,
+              "calibrated_negative_share": 0.7669172932330827
+            }
+          },
+          {
+            "target_year": 2022,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 26.989255019827855,
+              "mae": 20.86375767036005,
+              "r2": 0.827066989846547,
+              "bias": -13.00742389389816
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 27.12813536681587,
+              "mae": 20.75295732933027,
+              "r2": 0.8252826657264123,
+              "bias": -11.298572860786102
+            },
+            "top_10_pct": {
+              "count": 300,
+              "raw": {
+                "count": 300,
+                "rmse": 42.004360199879436,
+                "mae": 36.09565477417491,
+                "r2": -0.28791367966354087,
+                "bias": -34.956866243223956
+              },
+              "calibrated": {
+                "count": 300,
+                "rmse": 34.00433308441822,
+                "mae": 27.917684115814264,
+                "r2": 0.1559531930933169,
+                "bias": -21.980702341563404
+              },
+              "raw_negative_share": 0.89,
+              "calibrated_negative_share": 0.8033333333333333
+            }
+          },
+          {
+            "target_year": 2023,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 34.01196522303727,
+              "mae": 26.856065655100547,
+              "r2": 0.8050433383669707,
+              "bias": -3.6661891263428954
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 33.66477254901403,
+              "mae": 26.46407898158929,
+              "r2": 0.8090032418046704,
+              "bias": -2.9674626010771212
+            },
+            "top_10_pct": {
+              "count": 297,
+              "raw": {
+                "count": 297,
+                "rmse": 54.01946123470059,
+                "mae": 47.557166871531244,
+                "r2": -1.1089710978050342,
+                "bias": -46.52029086878448
+              },
+              "calibrated": {
+                "count": 297,
+                "rmse": 47.18300002276467,
+                "mae": 39.590200275178034,
+                "r2": -0.6089451289507406,
+                "bias": -35.69685050249607
+              },
+              "raw_negative_share": 0.7946127946127947,
+              "calibrated_negative_share": 0.6835016835016835
+            }
+          },
+          {
+            "target_year": 2024,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 27.54856305748823,
+              "mae": 21.79308836034762,
+              "r2": 0.8348959810908958,
+              "bias": 9.785600510422642
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 29.33370600146369,
+              "mae": 22.6949934428421,
+              "r2": 0.8128052721748291,
+              "bias": 10.07998738730611
+            },
+            "top_10_pct": {
+              "count": 291,
+              "raw": {
+                "count": 291,
+                "rmse": 30.85896455859627,
+                "mae": 23.866502314666167,
+                "r2": 0.41246599389574823,
+                "bias": -15.73920649123363
+              },
+              "calibrated": {
+                "count": 291,
+                "rmse": 30.46970419137354,
+                "mae": 23.97860932282871,
+                "r2": 0.4271950200961472,
+                "bias": -6.375354876922837
+              },
+              "raw_negative_share": 0.8109965635738832,
+              "calibrated_negative_share": 0.7491408934707904
+            }
+          },
+          {
+            "target_year": 2025,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 29.353653869263685,
+              "mae": 23.665176444057472,
+              "r2": 0.8435370209869931,
+              "bias": 7.349288170706348
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 33.721663150523874,
+              "mae": 24.706906451894376,
+              "r2": 0.7935070499293597,
+              "bias": 6.709807709987775
+            },
+            "top_10_pct": {
+              "count": 259,
+              "raw": {
+                "count": 259,
+                "rmse": 38.467960404299525,
+                "mae": 31.472506104503847,
+                "r2": 0.1939420505522459,
+                "bias": -28.222222741065707
+              },
+              "calibrated": {
+                "count": 259,
+                "rmse": 32.87812611873583,
+                "mae": 26.43373689980791,
+                "r2": 0.41118066990920854,
+                "bias": -17.478733169994108
+              },
+              "raw_negative_share": 0.8146718146718147,
+              "calibrated_negative_share": 0.6833976833976834
+            }
+          }
+        ],
+        "summary": {
+          "raw": {
+            "count": 15000,
+            "rmse": 28.444935273237956,
+            "mae": 22.23619111441287,
+            "r2": 0.8369819974864035,
+            "bias": -1.3818794551374753
+          },
+          "calibrated": {
+            "count": 15000,
+            "rmse": 30.01309986715404,
+            "mae": 22.749928254263196,
+            "r2": 0.8185122258517787,
+            "bias": -0.18001044057820692
+          }
+        },
+        "segments": {
+          "top_1_pct": {
+            "count": 139,
+            "raw": {
+              "count": 139,
+              "rmse": 53.58813622507225,
+              "mae": 45.81344282499408,
+              "r2": -1.2440343879943816,
+              "bias": -44.07045929090773
+            },
+            "calibrated": {
+              "count": 139,
+              "rmse": 37.00047069495475,
+              "mae": 29.010740195545296,
+              "r2": -0.0698101160306146,
+              "bias": -21.47909990049198
+            },
+            "raw_negative_share": 0.9856115107913669,
+            "calibrated_negative_share": 0.8776978417266187
+          },
+          "top_5_pct": {
+            "count": 716,
+            "raw": {
+              "count": 716,
+              "rmse": 44.5703086466273,
+              "mae": 37.011116662881975,
+              "r2": -0.4643761472463577,
+              "bias": -34.793976544944194
+            },
+            "calibrated": {
+              "count": 716,
+              "rmse": 36.35030241399572,
+              "mae": 28.795816053831867,
+              "r2": 0.025958592319861862,
+              "bias": -19.594237025963142
+            },
+            "raw_negative_share": 0.9008379888268156,
+            "calibrated_negative_share": 0.7905027932960894
+          },
+          "top_10_pct": {
+            "count": 1413,
+            "raw": {
+              "count": 1413,
+              "rmse": 40.247137533166,
+              "mae": 32.840579413958544,
+              "r2": -0.06762115993929863,
+              "bias": -29.117777183393024
+            },
+            "calibrated": {
+              "count": 1413,
+              "rmse": 35.58523342655878,
+              "mae": 28.30466068289121,
+              "r2": 0.1653837903903792,
+              "bias": -17.50571201346503
+            },
+            "raw_negative_share": 0.83793347487615,
+            "calibrated_negative_share": 0.7381457891012031
+          },
+          "consistent": {
+            "count": 14822,
+            "raw": {
+              "count": 14822,
+              "rmse": 28.38499878535008,
+              "mae": 22.20708684781433,
+              "r2": 0.8377806296261889,
+              "bias": -1.4761723367666562
+            },
+            "calibrated": {
+              "count": 14822,
+              "rmse": 28.652342439864576,
+              "mae": 22.32931667333021,
+              "r2": 0.8347105184349073,
+              "bias": 0.1648746608269184
+            },
+            "raw_negative_share": 0.5130886520037782,
+            "calibrated_negative_share": 0.4270678720820402
+          },
+          "volatile": {
+            "count": 178,
+            "raw": {
+              "count": 178,
+              "rmse": 33.056714253769655,
+              "mae": 24.659693583646416,
+              "r2": 0.7572398800196662,
+              "bias": 6.4698570140069736
+            },
+            "calibrated": {
+              "count": 178,
+              "rmse": 86.8801267220719,
+              "mae": 57.7741128193681,
+              "r2": -0.6768679628163594,
+              "bias": -28.89847658117797
+            },
+            "raw_negative_share": 0.3089887640449438,
+            "calibrated_negative_share": 0.19101123595505617
+          },
+          "deciles": {
+            "1": {
+              "count": 1413,
+              "raw": {
+                "count": 1413,
+                "rmse": 40.247137533166,
+                "mae": 32.840579413958544,
+                "r2": -0.06762115993929863,
+                "bias": -29.117777183393024
+              },
+              "calibrated": {
+                "count": 1413,
+                "rmse": 35.58523342655878,
+                "mae": 28.30466068289121,
+                "r2": 0.1653837903903792,
+                "bias": -17.50571201346503
+              },
+              "raw_negative_share": 0.83793347487615,
+              "calibrated_negative_share": 0.7381457891012031
+            },
+            "2": {
+              "count": 1510,
+              "raw": {
+                "count": 1510,
+                "rmse": 29.863159712799643,
+                "mae": 23.705768188611632,
+                "r2": -0.41956539840944473,
+                "bias": -11.664773798671506
+              },
+              "calibrated": {
+                "count": 1510,
+                "rmse": 33.04884759310332,
+                "mae": 24.753296609699262,
+                "r2": -0.738587415486013,
+                "bias": -7.922319208711012
+              },
+              "raw_negative_share": 0.6887417218543046,
+              "calibrated_negative_share": 0.5814569536423841
+            },
+            "3": {
+              "count": 1373,
+              "raw": {
+                "count": 1373,
+                "rmse": 29.09509631683038,
+                "mae": 22.881186711516854,
+                "r2": -0.30370807728043414,
+                "bias": -5.463180551463658
+              },
+              "calibrated": {
+                "count": 1373,
+                "rmse": 30.0418983703947,
+                "mae": 23.355477892138374,
+                "r2": -0.3899382387122623,
+                "bias": -3.4348936099351883
+              },
+              "raw_negative_share": 0.5644573925710124,
+              "calibrated_negative_share": 0.4632192279679534
+            },
+            "4": {
+              "count": 1389,
+              "raw": {
+                "count": 1389,
+                "rmse": 29.323493004660026,
+                "mae": 23.17621476148087,
+                "r2": -0.4375238593435753,
+                "bias": -6.851946183761082
+              },
+              "calibrated": {
+                "count": 1389,
+                "rmse": 31.372894348383184,
+                "mae": 24.279735806510498,
+                "r2": -0.6454808464793946,
+                "bias": -5.183688149117725
+              },
+              "raw_negative_share": 0.591792656587473,
+              "calibrated_negative_share": 0.490280777537797
+            },
+            "5": {
+              "count": 1427,
+              "raw": {
+                "count": 1427,
+                "rmse": 25.56534592482946,
+                "mae": 20.101462378899182,
+                "r2": -0.4184004131496182,
+                "bias": -6.162952326475977
+              },
+              "calibrated": {
+                "count": 1427,
+                "rmse": 29.675170592773664,
+                "mae": 21.742062843815326,
+                "r2": -0.9110935665820432,
+                "bias": -6.626535454524894
+              },
+              "raw_negative_share": 0.5024526979677646,
+              "calibrated_negative_share": 0.43307638402242465
+            },
+            "6": {
+              "count": 1491,
+              "raw": {
+                "count": 1491,
+                "rmse": 22.983241715636566,
+                "mae": 17.980553649365188,
+                "r2": -0.19480732730097938,
+                "bias": 0.7893425710916996
+              },
+              "calibrated": {
+                "count": 1491,
+                "rmse": 26.60571832400834,
+                "mae": 19.494769781052323,
+                "r2": -0.6011251741691019,
+                "bias": 0.2612749311652131
+              },
+              "raw_negative_share": 0.4835680751173709,
+              "calibrated_negative_share": 0.40643863179074446
+            },
+            "7": {
+              "count": 1478,
+              "raw": {
+                "count": 1478,
+                "rmse": 22.466881618272346,
+                "mae": 17.929142878589587,
+                "r2": -0.2007347598763145,
+                "bias": 4.030957882654342
+              },
+              "calibrated": {
+                "count": 1478,
+                "rmse": 27.734236923451324,
+                "mae": 19.90532578015609,
+                "r2": -0.8297591675306888,
+                "bias": 2.698185610796675
+              },
+              "raw_negative_share": 0.4181326116373478,
+              "calibrated_negative_share": 0.35115020297699595
+            },
+            "8": {
+              "count": 1539,
+              "raw": {
+                "count": 1539,
+                "rmse": 24.363482655390083,
+                "mae": 19.59994994916453,
+                "r2": -0.6518999476323268,
+                "bias": 7.902076266600523
+              },
+              "calibrated": {
+                "count": 1539,
+                "rmse": 27.129599908958323,
+                "mae": 20.795231149251816,
+                "r2": -1.0482915800082049,
+                "bias": 6.676576276617734
+              },
+              "raw_negative_share": 0.39766081871345027,
+              "calibrated_negative_share": 0.32423651721897334
+            },
+            "9": {
+              "count": 1568,
+              "raw": {
+                "count": 1568,
+                "rmse": 25.980074295871766,
+                "mae": 20.69178155858907,
+                "r2": -0.9039072278709281,
+                "bias": 12.315987463614134
+              },
+              "calibrated": {
+                "count": 1568,
+                "rmse": 27.258117577412396,
+                "mae": 21.28784938612708,
+                "r2": -1.0958332507940547,
+                "bias": 10.955956573969257
+              },
+              "raw_negative_share": 0.3514030612244898,
+              "calibrated_negative_share": 0.2780612244897959
+            },
+            "10": {
+              "count": 1409,
+              "raw": {
+                "count": 1409,
+                "rmse": 31.811578312398012,
+                "mae": 24.76505165457253,
+                "r2": -1.1240043763457828,
+                "bias": 19.41963294723314
+              },
+              "calibrated": {
+                "count": 1409,
+                "rmse": 31.66352122936185,
+                "mae": 24.611881843625373,
+                "r2": -1.1042793517748666,
+                "bias": 18.169442285018
+              },
+              "raw_negative_share": 0.2945351312987935,
+              "calibrated_negative_share": 0.1923349893541519
+            }
+          }
+        }
+      },
+      "current_cycle_audit": {
+        "latest_year": 2025,
+        "sample_size": 60,
+        "top_n": 20,
+        "raw_negative_share": 1.0,
+        "display_negative_share": 0.9333333333333333,
+        "top_n_raw_negative_share": 1.0,
+        "top_n_display_negative_share": 0.9,
+        "raw_mean_delta": -56.26294465696872,
+        "display_mean_delta": -14.36456946552962,
+        "top_sample": [
+          {
+            "codigo_inep": "23246871",
+            "nome_escola": "ARI DE SA CAVALCANTE - MARIO MAMEDE",
+            "ranking_brasil": 1,
+            "current_score": 897.45,
+            "raw_score": 774.3664716226479,
+            "display_score": 881.3753035714283,
+            "raw_expected_change": -123.0835283773522,
+            "display_expected_change": -16.07469642857177,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "23246847",
+            "nome_escola": "FARIAS BRITO COLEGIO DE APLICACAO",
+            "ranking_brasil": 2,
+            "current_score": 906.97,
+            "raw_score": 767.7291055495913,
+            "display_score": 900.0,
+            "raw_expected_change": -139.24089445040875,
+            "display_expected_change": -6.970000000000027,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "23246880",
+            "nome_escola": "CHRISTUS COLEGIO PRE UNIVERSITARIO",
+            "ranking_brasil": 3,
+            "current_score": 880.02,
+            "raw_score": 779.6386622383025,
+            "display_score": 863.099005952381,
+            "raw_expected_change": -100.38133776169752,
+            "display_expected_change": -16.920994047618933,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "22144714",
+            "nome_escola": "SAO JOSE LESTE",
+            "ranking_brasil": 4,
+            "current_score": 865.42,
+            "raw_score": 761.4420550438078,
+            "display_score": 761.4420550438078,
+            "raw_expected_change": -103.97794495619212,
+            "display_expected_change": -103.97794495619212,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "23235543",
+            "nome_escola": "ARI DE SA CAVALCANTE - MAJOR FACUNDO",
+            "ranking_brasil": 5,
+            "current_score": 844.79,
+            "raw_score": 767.7291055495913,
+            "display_score": 842.5049155844156,
+            "raw_expected_change": -77.06089445040868,
+            "display_expected_change": -2.285084415584379,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "35399197",
+            "nome_escola": "OBJETIVO COLEGIO INTEGRADO",
+            "ranking_brasil": 6,
+            "current_score": 871.56,
+            "raw_score": 767.7291055495913,
+            "display_score": 862.1483235049834,
+            "raw_expected_change": -103.83089445040866,
+            "display_expected_change": -9.411676495016536,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "35563006",
+            "nome_escola": "ETAPA III COLEGIO",
+            "ranking_brasil": 7,
+            "current_score": 870.74,
+            "raw_score": 774.3664716226479,
+            "display_score": 861.0219413265293,
+            "raw_expected_change": -96.37352837735216,
+            "display_expected_change": -9.71805867347075,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "15167275",
+            "nome_escola": "COLEGIO EQUIPE LTDA",
+            "ranking_brasil": 8,
+            "current_score": 843.12,
+            "raw_score": 774.3664716226479,
+            "display_score": 824.5399301948046,
+            "raw_expected_change": -68.75352837735215,
+            "display_expected_change": -18.58006980519542,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "33184739",
+            "nome_escola": "COLEGIO ALFA CEM BILINGUE",
+            "ranking_brasil": 9,
+            "current_score": 875.88,
+            "raw_score": 774.2292871913457,
+            "display_score": 774.2292871913457,
+            "raw_expected_change": -101.65071280865425,
+            "display_expected_change": -101.65071280865425,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "33165920",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 10,
+            "current_score": 833.4,
+            "raw_score": 774.3664716226479,
+            "display_score": 825.2287142857134,
+            "raw_expected_change": -59.03352837735213,
+            "display_expected_change": -8.171285714286569,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "22025740",
+            "nome_escola": "INSTITUTO DOM BARRETO CENTRO",
+            "ranking_brasil": 11,
+            "current_score": 847.35,
+            "raw_score": 767.7291055495913,
+            "display_score": 840.0361373152706,
+            "raw_expected_change": -79.62089445040874,
+            "display_expected_change": -7.313862684729429,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "31004812",
+            "nome_escola": "COLEGIO SANTO ANTONIO",
+            "ranking_brasil": 12,
+            "current_score": 845.37,
+            "raw_score": 767.7291055495913,
+            "display_score": 842.9384703027947,
+            "raw_expected_change": -77.64089445040872,
+            "display_expected_change": -2.431529697205292,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "23272333",
+            "nome_escola": "FARIAS BRITO COLEGIO PRE-VESTIBULAR CENTRAL",
+            "ranking_brasil": 13,
+            "current_score": 828.95,
+            "raw_score": 774.3664716226479,
+            "display_score": 818.2738433179723,
+            "raw_expected_change": -54.583528377352195,
+            "display_expected_change": -10.676156682027795,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "23245573",
+            "nome_escola": "MASTER COLEGIO",
+            "ranking_brasil": 14,
+            "current_score": 850.62,
+            "raw_score": 770.1194197658021,
+            "display_score": 837.8886312741306,
+            "raw_expected_change": -80.50058023419786,
+            "display_expected_change": -12.731368725869402,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "15181081",
+            "nome_escola": "COLEGIO INTEGRADO IN",
+            "ranking_brasil": 15,
+            "current_score": 834.47,
+            "raw_score": 570.9534661410366,
+            "display_score": 834.47,
+            "raw_expected_change": -263.5165338589634,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "53020570",
+            "nome_escola": "COL PODION ENS FUND E MEDIO",
+            "ranking_brasil": 16,
+            "current_score": 828.97,
+            "raw_score": 570.9534661410366,
+            "display_score": 828.97,
+            "raw_expected_change": -258.0165338589634,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "31349720",
+            "nome_escola": "FIBONACCI COLEGIO",
+            "ranking_brasil": 17,
+            "current_score": 819.46,
+            "raw_score": 767.7291055495913,
+            "display_score": 814.1285360512128,
+            "raw_expected_change": -51.730894450408755,
+            "display_expected_change": -5.3314639487872455,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "31351725",
+            "nome_escola": "COLEGUIUM - UNIDADE OURO PRETO INTEGRAL",
+            "ranking_brasil": 18,
+            "current_score": 819.45,
+            "raw_score": 767.7291055495913,
+            "display_score": 814.1733004658382,
+            "raw_expected_change": -51.720894450408764,
+            "display_expected_change": -5.276699534161821,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "15172287",
+            "nome_escola": "PHYSICS COLEGIO E CURSO",
+            "ranking_brasil": 19,
+            "current_score": 807.93,
+            "raw_score": 721.0280920316125,
+            "display_score": 721.0280920316125,
+            "raw_expected_change": -86.90190796838749,
+            "display_expected_change": -86.90190796838749,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "mt"
+          },
+          {
+            "codigo_inep": "33135827",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 20,
+            "current_score": 819.8,
+            "raw_score": 767.7291055495913,
+            "display_score": 817.4448850174208,
+            "raw_expected_change": -52.07089445040867,
+            "display_expected_change": -2.3551149825791526,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "mt"
+          }
+        ]
+      },
+      "promotion_gates": {
+        "top10_signed_error_improvement": 0.39879641556398737,
+        "top20_negative_share": 0.9,
+        "rmse_degradation": 0.05512983520097762,
+        "pass_top10_signed_error_gate": true,
+        "pass_top20_negative_share_gate": true,
+        "pass_rmse_gate": true
+      }
+    },
+    "redacao": {
+      "metrics": {
+        "training_samples": 89811,
+        "train_samples": 71848,
+        "test_samples": 17963,
+        "train_rmse": 48.621098031625756,
+        "test_rmse": 49.33402632710681,
+        "test_r2": 0.7929072276209383
+      },
+      "latest_data_year": 2025,
+      "prediction_target_year": 2026,
+      "public_metrics": {
+        "rmse": 74.32984646427433,
+        "mae": 52.25354367395855,
+        "r2": 0.5278777733153766,
+        "bias": -16.56650201107874
+      },
+      "backtest": {
+        "folds": [
+          {
+            "target_year": 2021,
+            "train_samples": 9632,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 47.21539930303048,
+              "mae": 36.515609912438435,
+              "r2": 0.8064277270658953,
+              "bias": -11.128614335642427
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 65.17377013287239,
+              "mae": 46.944427363943234,
+              "r2": 0.6311740201450615,
+              "bias": -25.97937542031922
+            },
+            "top_10_pct": {
+              "count": 280,
+              "raw": {
+                "count": 280,
+                "rmse": 41.70478109446878,
+                "mae": 34.13534480916777,
+                "r2": 0.15011126782251882,
+                "bias": -28.06595528144475
+              },
+              "calibrated": {
+                "count": 280,
+                "rmse": 41.13870118321706,
+                "mae": 32.71888248111414,
+                "r2": 0.1730266164339227,
+                "bias": -22.27541599692202
+              },
+              "raw_negative_share": 0.7821428571428571,
+              "calibrated_negative_share": 0.6392857142857142
+            }
+          },
+          {
+            "target_year": 2022,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 55.09098274971321,
+              "mae": 43.07658733977162,
+              "r2": 0.7903943726369691,
+              "bias": -7.813554290919645
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 71.8565381908133,
+              "mae": 51.876140184246694,
+              "r2": 0.6434056319246517,
+              "bias": -21.529811614305782
+            },
+            "top_10_pct": {
+              "count": 307,
+              "raw": {
+                "count": 307,
+                "rmse": 61.44716873913511,
+                "mae": 53.84021596615766,
+                "r2": -1.531637484972316,
+                "bias": -53.20912368742457
+              },
+              "calibrated": {
+                "count": 307,
+                "rmse": 57.98345876075985,
+                "mae": 49.53978615764945,
+                "r2": -1.2542703513803453,
+                "bias": -48.38660097282194
+              },
+              "raw_negative_share": 0.8110749185667753,
+              "calibrated_negative_share": 0.752442996742671
+            }
+          },
+          {
+            "target_year": 2023,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 55.6496078783271,
+              "mae": 42.88272060241479,
+              "r2": 0.7717486758531831,
+              "bias": -14.307363383182771
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 68.98764094235325,
+              "mae": 49.30127023764997,
+              "r2": 0.649222541387966,
+              "bias": -23.442885698120577
+            },
+            "top_10_pct": {
+              "count": 305,
+              "raw": {
+                "count": 305,
+                "rmse": 52.60062970984662,
+                "mae": 44.44468633782962,
+                "r2": -0.6438072670613137,
+                "bias": -41.480914786585004
+              },
+              "calibrated": {
+                "count": 305,
+                "rmse": 48.308267832283086,
+                "mae": 39.13132070691629,
+                "r2": -0.3864746718970127,
+                "bias": -33.31654045457815
+              },
+              "raw_negative_share": 0.7672131147540984,
+              "calibrated_negative_share": 0.6360655737704918
+            }
+          },
+          {
+            "target_year": 2024,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 60.07592229941149,
+              "mae": 45.913151091871065,
+              "r2": 0.5777106651589121,
+              "bias": -37.56753427622041
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 85.78148938060293,
+              "mae": 58.17384107625304,
+              "r2": 0.1390134161836346,
+              "bias": -49.222179982491596
+            },
+            "top_10_pct": {
+              "count": 291,
+              "raw": {
+                "count": 291,
+                "rmse": 45.28669614699781,
+                "mae": 36.163974246808,
+                "r2": -0.3247127902164162,
+                "bias": -32.99458919780233
+              },
+              "calibrated": {
+                "count": 291,
+                "rmse": 43.614452869705005,
+                "mae": 33.20967532663394,
+                "r2": -0.22868713354061776,
+                "bias": -24.50987827072369
+              },
+              "raw_negative_share": 0.7903780068728522,
+              "calibrated_negative_share": 0.6907216494845361
+            }
+          },
+          {
+            "target_year": 2025,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 58.39593294107449,
+              "mae": 49.40895734929963,
+              "r2": 0.6092755341009641,
+              "bias": 43.28380440231596
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 78.07617728710292,
+              "mae": 54.9720395076998,
+              "r2": 0.30153847646565435,
+              "bias": 37.34174265984347
+            },
+            "top_10_pct": {
+              "count": 259,
+              "raw": {
+                "count": 259,
+                "rmse": 30.602209878919464,
+                "mae": 23.71919625322891,
+                "r2": 0.5321703630974016,
+                "bias": 9.599185992679308
+              },
+              "calibrated": {
+                "count": 259,
+                "rmse": 35.65305982729763,
+                "mae": 28.196766830525444,
+                "r2": 0.36499701328479384,
+                "bias": 18.8673004294501
+              },
+              "raw_negative_share": 0.8223938223938224,
+              "calibrated_negative_share": 0.7258687258687259
+            }
+          }
+        ],
+        "summary": {
+          "raw": {
+            "count": 15000,
+            "rmse": 55.46240274793145,
+            "mae": 43.55940525915911,
+            "r2": 0.7371394963522545,
+            "bias": -5.506652376729858
+          },
+          "calibrated": {
+            "count": 15000,
+            "rmse": 74.32984646427433,
+            "mae": 52.25354367395855,
+            "r2": 0.5278777733153766,
+            "bias": -16.56650201107874
+          }
+        },
+        "segments": {
+          "top_1_pct": {
+            "count": 137,
+            "raw": {
+              "count": 137,
+              "rmse": 48.681683851223234,
+              "mae": 40.790060145672555,
+              "r2": -1.50289701007588,
+              "bias": -38.79426070123061
+            },
+            "calibrated": {
+              "count": 137,
+              "rmse": 39.42397861529501,
+              "mae": 30.01074609676016,
+              "r2": -0.6414690458048709,
+              "bias": -20.033233581495537
+            },
+            "raw_negative_share": 0.8978102189781022,
+            "calibrated_negative_share": 0.7445255474452555
+          },
+          "top_5_pct": {
+            "count": 719,
+            "raw": {
+              "count": 719,
+              "rmse": 47.96499506664991,
+              "mae": 39.38710248767846,
+              "r2": -0.4729972071035158,
+              "bias": -34.078981826019614
+            },
+            "calibrated": {
+              "count": 719,
+              "rmse": 45.08298148290639,
+              "mae": 35.51005374274909,
+              "r2": -0.3013028302643952,
+              "bias": -24.507555008346234
+            },
+            "raw_negative_share": 0.8525730180806675,
+            "calibrated_negative_share": 0.7468706536856745
+          },
+          "top_10_pct": {
+            "count": 1442,
+            "raw": {
+              "count": 1442,
+              "rmse": 48.05076535263355,
+              "mae": 39.049556530251614,
+              "r2": -0.19964698181677676,
+              "bias": -30.485841709576167
+            },
+            "calibrated": {
+              "count": 1442,
+              "rmse": 46.37015373717947,
+              "mae": 36.94315699714034,
+              "r2": -0.11719740497441089,
+              "bias": -23.230992775307804
+            },
+            "raw_negative_share": 0.7940360610263523,
+            "calibrated_negative_share": 0.688626907073509
+          },
+          "consistent": {
+            "count": 5023,
+            "raw": {
+              "count": 5023,
+              "rmse": 49.2455547284354,
+              "mae": 38.62104199447839,
+              "r2": 0.7707017936768932,
+              "bias": -14.366856756471165
+            },
+            "calibrated": {
+              "count": 5023,
+              "rmse": 72.31176511783158,
+              "mae": 49.44874426097672,
+              "r2": 0.505593109267605,
+              "bias": -27.49250001636047
+            },
+            "raw_negative_share": 0.4401751941071073,
+            "calibrated_negative_share": 0.3750746565797332
+          },
+          "volatile": {
+            "count": 9977,
+            "raw": {
+              "count": 9977,
+              "rmse": 58.34214440915406,
+              "mae": 46.04566352101049,
+              "r2": 0.5636515696308676,
+              "bias": -1.0459120139514102
+            },
+            "calibrated": {
+              "count": 9977,
+              "rmse": 75.3254057688984,
+              "mae": 53.66564224581459,
+              "r2": 0.27263633565975465,
+              "bias": -11.065721417660864
+            },
+            "raw_negative_share": 0.40252580936153154,
+            "calibrated_negative_share": 0.3672446627242658
+          },
+          "deciles": {
+            "1": {
+              "count": 1442,
+              "raw": {
+                "count": 1442,
+                "rmse": 48.05076535263355,
+                "mae": 39.049556530251614,
+                "r2": -0.19964698181677676,
+                "bias": -30.485841709576167
+              },
+              "calibrated": {
+                "count": 1442,
+                "rmse": 46.37015373717947,
+                "mae": 36.94315699714034,
+                "r2": -0.11719740497441089,
+                "bias": -23.230992775307804
+              },
+              "raw_negative_share": 0.7940360610263523,
+              "calibrated_negative_share": 0.688626907073509
+            },
+            "2": {
+              "count": 1501,
+              "raw": {
+                "count": 1501,
+                "rmse": 45.98850229156676,
+                "mae": 36.72665906915331,
+                "r2": -0.06995701293659984,
+                "bias": -14.931756984659925
+              },
+              "calibrated": {
+                "count": 1501,
+                "rmse": 51.38810529928278,
+                "mae": 38.05695589646427,
+                "r2": -0.33595862490822404,
+                "bias": -14.20104516924858
+              },
+              "raw_negative_share": 0.6255829447035309,
+              "calibrated_negative_share": 0.5396402398401066
+            },
+            "3": {
+              "count": 1401,
+              "raw": {
+                "count": 1401,
+                "rmse": 55.113313225016874,
+                "mae": 42.25977729344605,
+                "r2": -0.4256810822548014,
+                "bias": -13.488452750703667
+              },
+              "calibrated": {
+                "count": 1401,
+                "rmse": 61.672145963290795,
+                "mae": 44.7785705908532,
+                "r2": -0.785202423344433,
+                "bias": -14.833082176449901
+              },
+              "raw_negative_share": 0.5174875089221984,
+              "calibrated_negative_share": 0.4354032833690221
+            },
+            "4": {
+              "count": 1402,
+              "raw": {
+                "count": 1402,
+                "rmse": 57.47493909805096,
+                "mae": 45.04562993633768,
+                "r2": -0.6486461755245445,
+                "bias": -16.910542795821446
+              },
+              "calibrated": {
+                "count": 1402,
+                "rmse": 70.11974686145027,
+                "mae": 50.55836486889808,
+                "r2": -1.4538674459620586,
+                "bias": -22.24724704447528
+              },
+              "raw_negative_share": 0.4479315263908702,
+              "calibrated_negative_share": 0.398716119828816
+            },
+            "5": {
+              "count": 1443,
+              "raw": {
+                "count": 1443,
+                "rmse": 58.31402378910694,
+                "mae": 45.687471659665356,
+                "r2": -1.0488980004123136,
+                "bias": -17.75290735514072
+              },
+              "calibrated": {
+                "count": 1443,
+                "rmse": 83.60334357698211,
+                "mae": 56.88073622667077,
+                "r2": -3.211352676436089,
+                "bias": -29.48470881479774
+              },
+              "raw_negative_share": 0.39223839223839224,
+              "calibrated_negative_share": 0.3652113652113652
+            },
+            "6": {
+              "count": 1491,
+              "raw": {
+                "count": 1491,
+                "rmse": 54.23646246917336,
+                "mae": 42.464700218447305,
+                "r2": -0.8760569211617013,
+                "bias": -10.013909417925731
+              },
+              "calibrated": {
+                "count": 1491,
+                "rmse": 83.61109482659457,
+                "mae": 57.33231615470839,
+                "r2": -3.458524126176764,
+                "bias": -25.88776737954726
+              },
+              "raw_negative_share": 0.3420523138832998,
+              "calibrated_negative_share": 0.3132126089872569
+            },
+            "7": {
+              "count": 1463,
+              "raw": {
+                "count": 1463,
+                "rmse": 52.013327091666056,
+                "mae": 40.88325096901315,
+                "r2": -0.7216786744011237,
+                "bias": -1.386153544934516
+              },
+              "calibrated": {
+                "count": 1463,
+                "rmse": 84.6160607991945,
+                "mae": 55.91451350790968,
+                "r2": -3.5564691825909414,
+                "bias": -20.129654451303967
+              },
+              "raw_negative_share": 0.3198906356801094,
+              "calibrated_negative_share": 0.30006835269993165
+            },
+            "8": {
+              "count": 1517,
+              "raw": {
+                "count": 1517,
+                "rmse": 55.56503022806949,
+                "mae": 43.262219192111544,
+                "r2": -0.9587112720601085,
+                "bias": 3.683176471762812
+              },
+              "calibrated": {
+                "count": 1517,
+                "rmse": 81.92651669932164,
+                "mae": 57.58985378132809,
+                "r2": -3.2581042810486975,
+                "bias": -14.520152265833193
+              },
+              "raw_negative_share": 0.26367831245880025,
+              "calibrated_negative_share": 0.24917600527356626
+            },
+            "9": {
+              "count": 1552,
+              "raw": {
+                "count": 1552,
+                "rmse": 57.430750476068056,
+                "mae": 45.89064079963426,
+                "r2": -0.9176371080886965,
+                "bias": 10.945216548040268
+              },
+              "calibrated": {
+                "count": 1552,
+                "rmse": 82.23001884398168,
+                "mae": 59.74313645638953,
+                "r2": -2.93131842470229,
+                "bias": -9.391846730473906
+              },
+              "raw_negative_share": 0.26417525773195877,
+              "calibrated_negative_share": 0.23904639175257733
+            },
+            "10": {
+              "count": 1407,
+              "raw": {
+                "count": 1407,
+                "rmse": 69.14478112328221,
+                "mae": 56.272536989019834,
+                "r2": -0.32843001524921367,
+                "bias": 33.27781810816299
+              },
+              "calibrated": {
+                "count": 1407,
+                "rmse": 85.36714930934173,
+                "mae": 65.69808632390287,
+                "r2": -1.0248899532191764,
+                "bias": 7.9470333638982025
+              },
+              "raw_negative_share": 0.2224591329068941,
+              "calibrated_negative_share": 0.2025586353944563
+            }
+          }
+        }
+      },
+      "current_cycle_audit": {
+        "latest_year": 2025,
+        "sample_size": 60,
+        "top_n": 20,
+        "raw_negative_share": 1.0,
+        "display_negative_share": 0.25,
+        "top_n_raw_negative_share": 1.0,
+        "top_n_display_negative_share": 0.35,
+        "raw_mean_delta": -36.33042460777998,
+        "display_mean_delta": 1.3112659343835882,
+        "top_sample": [
+          {
+            "codigo_inep": "23246871",
+            "nome_escola": "ARI DE SA CAVALCANTE - MARIO MAMEDE",
+            "ranking_brasil": 1,
+            "current_score": 908.12,
+            "raw_score": 855.3311550853338,
+            "display_score": 908.1389642857143,
+            "raw_expected_change": -52.78884491466624,
+            "display_expected_change": 0.018964285714332618,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "23246847",
+            "nome_escola": "FARIAS BRITO COLEGIO DE APLICACAO",
+            "ranking_brasil": 2,
+            "current_score": 906.0,
+            "raw_score": 855.3311550853338,
+            "display_score": 910.116,
+            "raw_expected_change": -50.66884491466624,
+            "display_expected_change": 4.1159999999999854,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "23246880",
+            "nome_escola": "CHRISTUS COLEGIO PRE UNIVERSITARIO",
+            "ranking_brasil": 3,
+            "current_score": 882.35,
+            "raw_score": 849.5490733316436,
+            "display_score": 881.9997321428572,
+            "raw_expected_change": -32.8009266683564,
+            "display_expected_change": -0.35026785714285325,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "22144714",
+            "nome_escola": "SAO JOSE LESTE",
+            "ranking_brasil": 4,
+            "current_score": 893.64,
+            "raw_score": 853.4540162204463,
+            "display_score": 853.4540162204463,
+            "raw_expected_change": -40.18598377955368,
+            "display_expected_change": -40.18598377955368,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "23235543",
+            "nome_escola": "ARI DE SA CAVALCANTE - MAJOR FACUNDO",
+            "ranking_brasil": 5,
+            "current_score": 880.0,
+            "raw_score": 855.3311550853338,
+            "display_score": 886.0401948051949,
+            "raw_expected_change": -24.668844914666238,
+            "display_expected_change": 6.040194805194915,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "35399197",
+            "nome_escola": "OBJETIVO COLEGIO INTEGRADO",
+            "ranking_brasil": 6,
+            "current_score": 861.43,
+            "raw_score": 833.5318909255179,
+            "display_score": 855.7752890365448,
+            "raw_expected_change": -27.898109074482022,
+            "display_expected_change": -5.654710963455159,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "35563006",
+            "nome_escola": "ETAPA III COLEGIO",
+            "ranking_brasil": 7,
+            "current_score": 868.67,
+            "raw_score": 832.6313353211087,
+            "display_score": 864.4720127551009,
+            "raw_expected_change": -36.03866467889122,
+            "display_expected_change": -4.197987244899082,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "15167275",
+            "nome_escola": "COLEGIO EQUIPE LTDA",
+            "ranking_brasil": 8,
+            "current_score": 915.26,
+            "raw_score": 855.3311550853338,
+            "display_score": 914.5862126623372,
+            "raw_expected_change": -59.92884491466623,
+            "display_expected_change": -0.6737873376628158,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "33184739",
+            "nome_escola": "COLEGIO ALFA CEM BILINGUE",
+            "ranking_brasil": 9,
+            "current_score": 884.29,
+            "raw_score": 855.3311550853338,
+            "display_score": 888.7522705882359,
+            "raw_expected_change": -28.9588449146662,
+            "display_expected_change": 4.462270588235924,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "33165920",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 10,
+            "current_score": 908.28,
+            "raw_score": 855.3311550853338,
+            "display_score": 905.9556071428569,
+            "raw_expected_change": -52.94884491466621,
+            "display_expected_change": -2.324392857143039,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "22025740",
+            "nome_escola": "INSTITUTO DOM BARRETO CENTRO",
+            "ranking_brasil": 11,
+            "current_score": 871.28,
+            "raw_score": 842.127005372864,
+            "display_score": 874.8849051724136,
+            "raw_expected_change": -29.152994627135968,
+            "display_expected_change": 3.6049051724136234,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "31004812",
+            "nome_escola": "COLEGIO SANTO ANTONIO",
+            "ranking_brasil": 12,
+            "current_score": 872.32,
+            "raw_score": 850.9203720868496,
+            "display_score": 876.0926001552795,
+            "raw_expected_change": -21.399627913150425,
+            "display_expected_change": 3.772600155279406,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "23272333",
+            "nome_escola": "FARIAS BRITO COLEGIO PRE-VESTIBULAR CENTRAL",
+            "ranking_brasil": 13,
+            "current_score": 882.42,
+            "raw_score": 855.3311550853338,
+            "display_score": 883.9187955069123,
+            "raw_expected_change": -27.088844914666197,
+            "display_expected_change": 1.4987955069123018,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "23245573",
+            "nome_escola": "MASTER COLEGIO",
+            "ranking_brasil": 14,
+            "current_score": 856.76,
+            "raw_score": 843.7726344301861,
+            "display_score": 865.5285482625482,
+            "raw_expected_change": -12.987365569813846,
+            "display_expected_change": 8.768548262548165,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "15181081",
+            "nome_escola": "COLEGIO INTEGRADO IN",
+            "ranking_brasil": 15,
+            "current_score": 898.46,
+            "raw_score": 604.5889040559388,
+            "display_score": 898.46,
+            "raw_expected_change": -293.87109594406127,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "53020570",
+            "nome_escola": "COL PODION ENS FUND E MEDIO",
+            "ranking_brasil": 16,
+            "current_score": 877.32,
+            "raw_score": 593.2422104341194,
+            "display_score": 877.32,
+            "raw_expected_change": -284.0777895658806,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "31349720",
+            "nome_escola": "FIBONACCI COLEGIO",
+            "ranking_brasil": 17,
+            "current_score": 894.17,
+            "raw_score": 855.3311550853338,
+            "display_score": 901.2502435983831,
+            "raw_expected_change": -38.8388449146662,
+            "display_expected_change": 7.080243598383163,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "31351725",
+            "nome_escola": "COLEGUIUM - UNIDADE OURO PRETO INTEGRAL",
+            "ranking_brasil": 18,
+            "current_score": 856.0,
+            "raw_score": 843.7726344301861,
+            "display_score": 863.6987942546584,
+            "raw_expected_change": -12.227365569813855,
+            "display_expected_change": 7.698794254658424,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "15172287",
+            "nome_escola": "PHYSICS COLEGIO E CURSO",
+            "ranking_brasil": 19,
+            "current_score": 874.12,
+            "raw_score": 839.8466525393012,
+            "display_score": 865.573057142858,
+            "raw_expected_change": -34.2733474606988,
+            "display_expected_change": -8.546942857141971,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          },
+          {
+            "codigo_inep": "33135827",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 20,
+            "current_score": 867.74,
+            "raw_score": 846.6652854107999,
+            "display_score": 874.5379764808365,
+            "raw_expected_change": -21.074714589200084,
+            "display_expected_change": 6.797976480836496,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "redacao"
+          }
+        ]
+      },
+      "promotion_gates": {
+        "top10_signed_error_improvement": 0.23797436867191635,
+        "top20_negative_share": 0.35,
+        "rmse_degradation": 0.34018439125496713,
+        "pass_top10_signed_error_gate": true,
+        "pass_top20_negative_share_gate": true,
+        "pass_rmse_gate": true
+      }
+    },
+    "media": {
+      "metrics": {
+        "training_samples": 89812,
+        "train_samples": 71849,
+        "test_samples": 17963,
+        "train_rmse": 19.91945530966322,
+        "test_rmse": 19.995516442800657,
+        "test_r2": 0.8845126278744029
+      },
+      "latest_data_year": 2025,
+      "prediction_target_year": 2026,
+      "public_metrics": {
+        "rmse": 24.904240256157337,
+        "mae": 18.07165410681342,
+        "r2": 0.8156795603347113,
+        "bias": -5.4650310387203875
+      },
+      "backtest": {
+        "folds": [
+          {
+            "target_year": 2021,
+            "train_samples": 9633,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 18.427951921232548,
+              "mae": 14.445205628942336,
+              "r2": 0.9036664261489096,
+              "bias": 2.323562734719828
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 20.8765374454865,
+              "mae": 16.008638321457507,
+              "r2": 0.8763652744948236,
+              "bias": 0.12951969505964595
+            },
+            "top_10_pct": {
+              "count": 280,
+              "raw": {
+                "count": 280,
+                "rmse": 18.190710877656617,
+                "mae": 14.278215688051086,
+                "r2": 0.3775410100819009,
+                "bias": -10.66212072775549
+              },
+              "calibrated": {
+                "count": 280,
+                "rmse": 17.77047551263496,
+                "mae": 13.799842355702108,
+                "r2": 0.40596846699565703,
+                "bias": -1.9249053072713107
+              },
+              "raw_negative_share": 0.9107142857142857,
+              "calibrated_negative_share": 0.7321428571428571
+            }
+          },
+          {
+            "target_year": 2022,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 22.414989107709452,
+              "mae": 17.862638447220757,
+              "r2": 0.8554827052942066,
+              "bias": -11.444332564538428
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 24.999536965728517,
+              "mae": 19.24171978195065,
+              "r2": 0.8202343586164634,
+              "bias": -13.265687727579605
+            },
+            "top_10_pct": {
+              "count": 307,
+              "raw": {
+                "count": 307,
+                "rmse": 31.85917488173038,
+                "mae": 28.29608237334002,
+                "r2": -1.2052710876244266,
+                "bias": -28.014417697661873
+              },
+              "calibrated": {
+                "count": 307,
+                "rmse": 25.97031524173814,
+                "mae": 20.987164882571523,
+                "r2": -0.4653702785001126,
+                "bias": -18.94525959143176
+              },
+              "raw_negative_share": 0.9381107491856677,
+              "calibrated_negative_share": 0.8371335504885994
+            }
+          },
+          {
+            "target_year": 2023,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 24.27543705813314,
+              "mae": 19.2155818516699,
+              "r2": 0.8429638877386685,
+              "bias": -8.41309738097293
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 26.129470497742922,
+              "mae": 20.05310952804513,
+              "r2": 0.8180606505577026,
+              "bias": -9.987829351514952
+            },
+            "top_10_pct": {
+              "count": 305,
+              "raw": {
+                "count": 305,
+                "rmse": 36.67208343768201,
+                "mae": 33.4676588274279,
+                "r2": -2.0473360475433875,
+                "bias": -33.274257806487824
+              },
+              "calibrated": {
+                "count": 305,
+                "rmse": 32.16430871854254,
+                "mae": 27.46403159652671,
+                "r2": -1.3442159939694749,
+                "bias": -25.387610017259192
+              },
+              "raw_negative_share": 0.9311475409836065,
+              "calibrated_negative_share": 0.7147540983606557
+            }
+          },
+          {
+            "target_year": 2024,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 20.179239858455272,
+              "mae": 15.455470879289521,
+              "r2": 0.8617219405304775,
+              "bias": -5.696284419454932
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 25.22320923110106,
+              "mae": 18.22443040576183,
+              "r2": 0.7839549322111588,
+              "bias": -8.255268009209562
+            },
+            "top_10_pct": {
+              "count": 291,
+              "raw": {
+                "count": 291,
+                "rmse": 27.147009991345296,
+                "mae": 22.57912160579322,
+                "r2": -0.2850578782770441,
+                "bias": -21.500196421673675
+              },
+              "calibrated": {
+                "count": 291,
+                "rmse": 25.132123797877572,
+                "mae": 20.11229666320593,
+                "r2": -0.10137968998686708,
+                "bias": -14.968752492968358
+              },
+              "raw_negative_share": 0.8762886597938144,
+              "calibrated_negative_share": 0.7800687285223368
+            }
+          },
+          {
+            "target_year": 2025,
+            "train_samples": 10000,
+            "test_samples": 3000,
+            "raw": {
+              "count": 3000,
+              "rmse": 19.112959623689132,
+              "mae": 15.250150656526777,
+              "r2": 0.8797847695699079,
+              "bias": 5.693125440452355
+            },
+            "calibrated": {
+              "count": 3000,
+              "rmse": 26.85776865378232,
+              "mae": 16.83037249685199,
+              "r2": 0.7626203606254269,
+              "bias": 4.054110199642533
+            },
+            "top_10_pct": {
+              "count": 259,
+              "raw": {
+                "count": 259,
+                "rmse": 21.851959600542568,
+                "mae": 17.438991335184376,
+                "r2": 0.2942436704390494,
+                "bias": -15.132273348430004
+              },
+              "calibrated": {
+                "count": 259,
+                "rmse": 19.042104479902132,
+                "mae": 14.560030443767467,
+                "r2": 0.4640751545829854,
+                "bias": -6.713612030047722
+              },
+              "raw_negative_share": 0.8378378378378378,
+              "calibrated_negative_share": 0.749034749034749
+            }
+          }
+        ],
+        "summary": {
+          "raw": {
+            "count": 15000,
+            "rmse": 20.994403730114442,
+            "mae": 16.445809492729857,
+            "r2": 0.8690112517349672,
+            "bias": -3.5074052379588223
+          },
+          "calibrated": {
+            "count": 15000,
+            "rmse": 24.904240256157337,
+            "mae": 18.07165410681342,
+            "r2": 0.8156795603347113,
+            "bias": -5.4650310387203875
+          }
+        },
+        "segments": {
+          "top_1_pct": {
+            "count": 137,
+            "raw": {
+              "count": 137,
+              "rmse": 36.174377988694374,
+              "mae": 31.66962525382016,
+              "r2": -1.9414712521774202,
+              "bias": -31.227664694956736
+            },
+            "calibrated": {
+              "count": 137,
+              "rmse": 24.291725636736604,
+              "mae": 17.65348426906305,
+              "r2": -0.32641430945863736,
+              "bias": -15.380176042771946
+            },
+            "raw_negative_share": 0.9927007299270073,
+            "calibrated_negative_share": 0.8029197080291971
+          },
+          "top_5_pct": {
+            "count": 719,
+            "raw": {
+              "count": 719,
+              "rmse": 31.069300183182296,
+              "mae": 26.70875095840237,
+              "r2": -1.0599324719716599,
+              "bias": -26.07054359315466
+            },
+            "calibrated": {
+              "count": 719,
+              "rmse": 25.136226956521465,
+              "mae": 19.372124013836583,
+              "r2": -0.34831143995400526,
+              "bias": -15.217426557160964
+            },
+            "raw_negative_share": 0.9401947148817803,
+            "calibrated_negative_share": 0.7885952712100139
+          },
+          "top_10_pct": {
+            "count": 1442,
+            "raw": {
+              "count": 1442,
+              "rmse": 28.27159782663643,
+              "mae": 23.56425573282509,
+              "r2": -0.4627369881565655,
+              "bias": -22.129184898670548
+            },
+            "calibrated": {
+              "count": 1442,
+              "rmse": 24.825764546208372,
+              "mae": 19.63056264175825,
+              "r2": -0.1279005263159969,
+              "bias": -14.003551821848628
+            },
+            "raw_negative_share": 0.9008321775312067,
+            "calibrated_negative_share": 0.7635228848821082
+          },
+          "consistent": {
+            "count": 14811,
+            "raw": {
+              "count": 14811,
+              "rmse": 20.995400496081963,
+              "mae": 16.441035921489505,
+              "r2": 0.8696000282587171,
+              "bias": -3.622312521611273
+            },
+            "calibrated": {
+              "count": 14811,
+              "rmse": 23.472685583336457,
+              "mae": 17.742496530123876,
+              "r2": 0.837012336747017,
+              "bias": -5.229050030758793
+            },
+            "raw_negative_share": 0.47930592127472826,
+            "calibrated_negative_share": 0.42353656066437106
+          },
+          "volatile": {
+            "count": 189,
+            "raw": {
+              "count": 189,
+              "rmse": 20.916144370731093,
+              "mae": 16.819890781835,
+              "r2": 0.5610313285856835,
+              "bias": 5.497313165091205
+            },
+            "calibrated": {
+              "count": 189,
+              "rmse": 77.76460106112215,
+              "mae": 43.866113727706946,
+              "r2": -5.067840571312973,
+              "bias": -23.957701456282127
+            },
+            "raw_negative_share": 0.6666666666666666,
+            "calibrated_negative_share": 0.5555555555555556
+          },
+          "deciles": {
+            "1": {
+              "count": 1442,
+              "raw": {
+                "count": 1442,
+                "rmse": 28.27159782663643,
+                "mae": 23.56425573282509,
+                "r2": -0.4627369881565655,
+                "bias": -22.129184898670548
+              },
+              "calibrated": {
+                "count": 1442,
+                "rmse": 24.825764546208372,
+                "mae": 19.63056264175825,
+                "r2": -0.1279005263159969,
+                "bias": -14.003551821848628
+              },
+              "raw_negative_share": 0.9008321775312067,
+              "calibrated_negative_share": 0.7635228848821082
+            },
+            "2": {
+              "count": 1501,
+              "raw": {
+                "count": 1501,
+                "rmse": 20.538504226546397,
+                "mae": 16.206030853161536,
+                "r2": -2.9712084410829838,
+                "bias": -10.204085117056762
+              },
+              "calibrated": {
+                "count": 1501,
+                "rmse": 22.62767186571521,
+                "mae": 17.061703016079207,
+                "r2": -3.8201971758912574,
+                "bias": -8.043126894526294
+              },
+              "raw_negative_share": 0.7528314457028648,
+              "calibrated_negative_share": 0.6442371752165224
+            },
+            "3": {
+              "count": 1401,
+              "raw": {
+                "count": 1401,
+                "rmse": 21.422454933678925,
+                "mae": 16.43474673051704,
+                "r2": -3.650689776045332,
+                "bias": -7.080225666390713
+              },
+              "calibrated": {
+                "count": 1401,
+                "rmse": 23.384644286091227,
+                "mae": 17.337398277467496,
+                "r2": -4.541667074797172,
+                "bias": -6.2913657665397045
+              },
+              "raw_negative_share": 0.6031406138472519,
+              "calibrated_negative_share": 0.5060670949321913
+            },
+            "4": {
+              "count": 1402,
+              "raw": {
+                "count": 1402,
+                "rmse": 23.04873286992843,
+                "mae": 17.981090099328412,
+                "r2": -5.058471432703086,
+                "bias": -9.154113049700923
+              },
+              "calibrated": {
+                "count": 1402,
+                "rmse": 26.437171187053213,
+                "mae": 19.42712751426028,
+                "r2": -6.9707451158623,
+                "bias": -9.845286109435367
+              },
+              "raw_negative_share": 0.5592011412268189,
+              "calibrated_negative_share": 0.48787446504992865
+            },
+            "5": {
+              "count": 1443,
+              "raw": {
+                "count": 1443,
+                "rmse": 20.91586291878482,
+                "mae": 16.51440284413765,
+                "r2": -8.211063427213466,
+                "bias": -8.632947317264133
+              },
+              "calibrated": {
+                "count": 1443,
+                "rmse": 28.265421652273027,
+                "mae": 19.553228400865603,
+                "r2": -15.821671054485524,
+                "bias": -11.448468457632984
+              },
+              "raw_negative_share": 0.47886347886347885,
+              "calibrated_negative_share": 0.4386694386694387
+            },
+            "6": {
+              "count": 1491,
+              "raw": {
+                "count": 1491,
+                "rmse": 17.81682715692253,
+                "mae": 13.72919860938983,
+                "r2": -9.806063250847192,
+                "bias": -4.255349750456086
+              },
+              "calibrated": {
+                "count": 1491,
+                "rmse": 26.04450835363259,
+                "mae": 17.665210343276144,
+                "r2": -22.090806328579525,
+                "bias": -8.029327063870674
+              },
+              "raw_negative_share": 0.41851106639839036,
+              "calibrated_negative_share": 0.38497652582159625
+            },
+            "7": {
+              "count": 1463,
+              "raw": {
+                "count": 1463,
+                "rmse": 16.023113763564762,
+                "mae": 12.475425235925577,
+                "r2": -9.183038388253461,
+                "bias": -0.5161825474360047
+              },
+              "calibrated": {
+                "count": 1463,
+                "rmse": 26.310213446415357,
+                "mae": 16.70058123557841,
+                "r2": -26.45568549924719,
+                "bias": -5.524199295931348
+              },
+              "raw_negative_share": 0.37047163362952834,
+              "calibrated_negative_share": 0.3444976076555024
+            },
+            "8": {
+              "count": 1517,
+              "raw": {
+                "count": 1517,
+                "rmse": 17.243901008931477,
+                "mae": 13.811236148134128,
+                "r2": -8.53240712160501,
+                "bias": 2.8277905398704277
+              },
+              "calibrated": {
+                "count": 1517,
+                "rmse": 23.720848083331983,
+                "mae": 17.06400106778871,
+                "r2": -17.03814877713776,
+                "bias": -2.1143210757081725
+              },
+              "raw_negative_share": 0.3131179960448253,
+              "calibrated_negative_share": 0.2933421226104153
+            },
+            "9": {
+              "count": 1552,
+              "raw": {
+                "count": 1552,
+                "rmse": 18.424925375277347,
+                "mae": 14.565890759060162,
+                "r2": -5.619706672978324,
+                "bias": 6.8929808792302
+              },
+              "calibrated": {
+                "count": 1552,
+                "rmse": 22.59941735046824,
+                "mae": 16.880418582816272,
+                "r2": -8.959138122616183,
+                "bias": 1.5049733490767634
+              },
+              "raw_negative_share": 0.27512886597938147,
+              "calibrated_negative_share": 0.2545103092783505
+            },
+            "10": {
+              "count": 1407,
+              "raw": {
+                "count": 1407,
+                "rmse": 24.240515957400827,
+                "mae": 19.950337064200692,
+                "r2": -1.0423984294919504,
+                "bias": 16.353317106696657
+              },
+              "calibrated": {
+                "count": 1407,
+                "rmse": 24.901489618712205,
+                "mae": 19.813871394950315,
+                "r2": -1.1552983872953249,
+                "bias": 8.85857290159939
+              },
+              "raw_negative_share": 0.17484008528784648,
+              "calibrated_negative_share": 0.15991471215351813
+            }
+          }
+        }
+      },
+      "current_cycle_audit": {
+        "latest_year": 2025,
+        "sample_size": 60,
+        "top_n": 20,
+        "raw_negative_share": 1.0,
+        "display_negative_share": 0.8666666666666667,
+        "top_n_raw_negative_share": 1.0,
+        "top_n_display_negative_share": 0.85,
+        "raw_mean_delta": -39.373961582940595,
+        "display_mean_delta": -5.3717834943321385,
+        "top_sample": [
+          {
+            "codigo_inep": "23246871",
+            "nome_escola": "ARI DE SA CAVALCANTE - MARIO MAMEDE",
+            "ranking_brasil": 1,
+            "current_score": 801.29,
+            "raw_score": 707.1249347598174,
+            "display_score": 790.3544107142858,
+            "raw_expected_change": -94.16506524018257,
+            "display_expected_change": -10.935589285714173,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "23246847",
+            "nome_escola": "FARIAS BRITO COLEGIO DE APLICACAO",
+            "ranking_brasil": 2,
+            "current_score": 793.3,
+            "raw_score": 707.1249347598174,
+            "display_score": 791.337725,
+            "raw_expected_change": -86.17506524018256,
+            "display_expected_change": -1.962274999999977,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "23246880",
+            "nome_escola": "CHRISTUS COLEGIO PRE UNIVERSITARIO",
+            "ranking_brasil": 3,
+            "current_score": 779.33,
+            "raw_score": 707.1249347598174,
+            "display_score": 767.432685714286,
+            "raw_expected_change": -72.20506524018265,
+            "display_expected_change": -11.89731428571406,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "22144714",
+            "nome_escola": "SAO JOSE LESTE",
+            "ranking_brasil": 4,
+            "current_score": 773.83,
+            "raw_score": 700.7314843515254,
+            "display_score": 700.7314843515254,
+            "raw_expected_change": -73.09851564847463,
+            "display_expected_change": -73.09851564847463,
+            "display_mode": "delta",
+            "risk_level": "normal",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "23235543",
+            "nome_escola": "ARI DE SA CAVALCANTE - MAJOR FACUNDO",
+            "ranking_brasil": 5,
+            "current_score": 765.73,
+            "raw_score": 707.1249347598174,
+            "display_score": 763.5219146103894,
+            "raw_expected_change": -58.605065240182626,
+            "display_expected_change": -2.2080853896105737,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "35399197",
+            "nome_escola": "OBJETIVO COLEGIO INTEGRADO",
+            "ranking_brasil": 6,
+            "current_score": 763.9,
+            "raw_score": 707.1249347598174,
+            "display_score": 757.6380053156144,
+            "raw_expected_change": -56.775065240182585,
+            "display_expected_change": -6.261994684385627,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "35563006",
+            "nome_escola": "ETAPA III COLEGIO",
+            "ranking_brasil": 7,
+            "current_score": 762.28,
+            "raw_score": 707.1249347598174,
+            "display_score": 755.2440653061229,
+            "raw_expected_change": -55.15506524018258,
+            "display_expected_change": -7.035934693877039,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "15167275",
+            "nome_escola": "COLEGIO EQUIPE LTDA",
+            "ranking_brasil": 8,
+            "current_score": 760.15,
+            "raw_score": 705.2521143130077,
+            "display_score": 749.8612743506491,
+            "raw_expected_change": -54.897885686992254,
+            "display_expected_change": -10.288725649350908,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "33184739",
+            "nome_escola": "COLEGIO ALFA CEM BILINGUE",
+            "ranking_brasil": 9,
+            "current_score": 759.31,
+            "raw_score": 705.5863142122884,
+            "display_score": 762.3841247058818,
+            "raw_expected_change": -53.72368578771159,
+            "display_expected_change": 3.0741247058819,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "33165920",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 10,
+            "current_score": 758.86,
+            "raw_score": 707.1249347598174,
+            "display_score": 751.4315499999994,
+            "raw_expected_change": -51.73506524018262,
+            "display_expected_change": -7.428450000000566,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "22025740",
+            "nome_escola": "INSTITUTO DOM BARRETO CENTRO",
+            "ranking_brasil": 11,
+            "current_score": 752.12,
+            "raw_score": 707.1249347598174,
+            "display_score": 747.1341385467977,
+            "raw_expected_change": -44.99506524018261,
+            "display_expected_change": -4.985861453202347,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "31004812",
+            "nome_escola": "COLEGIO SANTO ANTONIO",
+            "ranking_brasil": 12,
+            "current_score": 751.41,
+            "raw_score": 707.1249347598174,
+            "display_score": 749.7674116071428,
+            "raw_expected_change": -44.285065240182576,
+            "display_expected_change": -1.642588392857192,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "23272333",
+            "nome_escola": "FARIAS BRITO COLEGIO PRE-VESTIBULAR CENTRAL",
+            "ranking_brasil": 13,
+            "current_score": 750.81,
+            "raw_score": 707.1249347598174,
+            "display_score": 744.1979699308753,
+            "raw_expected_change": -43.68506524018255,
+            "display_expected_change": -6.612030069124671,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "23245573",
+            "nome_escola": "MASTER COLEGIO",
+            "ranking_brasil": 14,
+            "current_score": 748.71,
+            "raw_score": 707.1249347598174,
+            "display_score": 741.4970003860999,
+            "raw_expected_change": -41.585065240182644,
+            "display_expected_change": -7.212999613900138,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "15181081",
+            "nome_escola": "COLEGIO INTEGRADO IN",
+            "ranking_brasil": 15,
+            "current_score": 747.48,
+            "raw_score": 555.2875898675278,
+            "display_score": 747.48,
+            "raw_expected_change": -192.19241013247222,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "53020570",
+            "nome_escola": "COL PODION ENS FUND E MEDIO",
+            "ranking_brasil": 16,
+            "current_score": 747.13,
+            "raw_score": 555.1229262126783,
+            "display_score": 747.13,
+            "raw_expected_change": -192.0070737873217,
+            "display_expected_change": 0.0,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "31349720",
+            "nome_escola": "FIBONACCI COLEGIO",
+            "ranking_brasil": 17,
+            "current_score": 746.52,
+            "raw_score": 705.2521143130077,
+            "display_score": 744.6260454177897,
+            "raw_expected_change": -41.26788568699226,
+            "display_expected_change": -1.8939545822103128,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "31351725",
+            "nome_escola": "COLEGUIUM - UNIDADE OURO PRETO INTEGRAL",
+            "ranking_brasil": 18,
+            "current_score": 746.28,
+            "raw_score": 707.1249347598174,
+            "display_score": 743.2089330745339,
+            "raw_expected_change": -39.15506524018258,
+            "display_expected_change": -3.0710669254660843,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "15172287",
+            "nome_escola": "PHYSICS COLEGIO E CURSO",
+            "ranking_brasil": 19,
+            "current_score": 741.69,
+            "raw_score": 677.5568224512252,
+            "display_score": 725.3269228571465,
+            "raw_expected_change": -64.13317754877482,
+            "display_expected_change": -16.363077142853513,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          },
+          {
+            "codigo_inep": "33135827",
+            "nome_escola": "COLEGIO E CURSO PENSI",
+            "ranking_brasil": 20,
+            "current_score": 740.68,
+            "raw_score": 707.1249347598174,
+            "display_score": 740.0594408536583,
+            "raw_expected_change": -33.55506524018256,
+            "display_expected_change": -0.620559146341634,
+            "display_mode": "range",
+            "risk_level": "conservative",
+            "area": "media"
+          }
+        ]
+      },
+      "promotion_gates": {
+        "top10_signed_error_improvement": 0.36719079866832705,
+        "top20_negative_share": 0.85,
+        "rmse_degradation": 0.1862323205890631,
+        "pass_top10_signed_error_gate": true,
+        "pass_top20_negative_share_gate": true,
+        "pass_rmse_gate": true
+      }
+    }
+  }
+}

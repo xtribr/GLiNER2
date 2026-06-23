@@ -538,38 +538,31 @@ class ENEMPreprocessor:
 
         return features
 
-    def prepare_training_dataset(
+    TARGET_COLS = ['nota_cn', 'nota_ch', 'nota_lc', 'nota_mt', 'nota_redacao', 'nota_media']
+
+    def _build_feature_base(
         self,
-        target_col: str = 'nota_media',
-        min_years: int = 3,
-        target_years: Optional[List[int]] = None,
-        verbose: bool = False,
+        min_years: int,
+        target_years: List[int],
     ) -> pd.DataFrame:
-        """Build the full temporal training dataset with metadata columns."""
-        all_years = sorted(self.df['ano'].unique())
-        if target_years is None:
-            # Target years: every year from 2020 onwards (need at least 2 prior years)
-            target_years = [y for y in all_years if y >= 2020]
-
-        if verbose:
-            print(f"Training with temporal pairs: {[(f'≤{y-1}', f'→{y}') for y in target_years]}")
-
+        """Constrói as features (independentes do target) UMA vez, guardando o valor-alvo
+        de cada área em colunas _tv_<col>. As 6 create_*_features só usam o historico da
+        escola (train_df), nao o target — entao a base e identica para os 6 targets."""
         rows = []
 
+        # Pré-agrupa por escola UMA vez (lookup O(1)). Antes, cada iteração fazia
+        # self.df[self.df['codigo_inep']==cod] — um scan O(N) do df inteiro por escola/ano,
+        # tornando o loop ~quadrático (~23k escolas × 6 anos × 143k linhas).
+        by_school = {cod: g for cod, g in self.df.groupby('codigo_inep', sort=False)}
+
         for target_year in target_years:
-            # Get schools that have data for the target year
             target_year_df = self.df[self.df['ano'] == target_year]
             schools_with_target = target_year_df['codigo_inep'].unique()
             total_schools = max(len(schools_with_target), 1)
 
             for codigo_inep in schools_with_target:
-                school_df = self.df[self.df['codigo_inep'] == codigo_inep]
+                school_df = by_school[codigo_inep]
                 target_row = school_df[school_df['ano'] == target_year].iloc[0]
-
-                # Get target value
-                target_val = target_row[target_col]
-                if pd.isna(target_val):
-                    continue
 
                 # Create features from data BEFORE target year
                 train_df = school_df[school_df['ano'] < target_year]
@@ -586,10 +579,12 @@ class ENEMPreprocessor:
                 features = {
                     'codigo_inep': codigo_inep,
                     '_target_year': target_year,
-                    '_target_value': float(target_val),
                     '_ranking_brasil': float(ranking_brasil) if pd.notna(ranking_brasil) else np.nan,
                     '_rank_percent': rank_percent,
                 }
+                for col in self.TARGET_COLS:
+                    val = target_row.get(col)
+                    features['_tv_' + col] = float(val) if pd.notna(val) else np.nan
                 features.update(self.create_lagged_features(train_df))
                 features.update(self.create_trend_features(train_df))
                 features.update(self.create_school_features(train_df))
@@ -600,6 +595,38 @@ class ENEMPreprocessor:
                 rows.append(features)
 
         return pd.DataFrame(rows)
+
+    def prepare_training_dataset(
+        self,
+        target_col: str = 'nota_media',
+        min_years: int = 3,
+        target_years: Optional[List[int]] = None,
+        verbose: bool = False,
+    ) -> pd.DataFrame:
+        """Build the full temporal training dataset with metadata columns.
+
+        A base de features e independente do target → construida UMA vez e cacheada;
+        cada target apenas seleciona seu _target_value (evita refazer o loop por escola
+        6x, um por target)."""
+        all_years = sorted(self.df['ano'].unique())
+        if target_years is None:
+            # Target years: every year from 2020 onwards (need at least 2 prior years)
+            target_years = [y for y in all_years if y >= 2020]
+
+        cache_key = (min_years, tuple(target_years))
+        if getattr(self, '_ptd_cache', None) is None or self._ptd_cache[0] != cache_key:
+            if verbose:
+                print(f"Training with temporal pairs: {[(f'≤{y-1}', f'→{y}') for y in target_years]}")
+            self._ptd_cache = (cache_key, self._build_feature_base(min_years, target_years))
+
+        base = self._ptd_cache[1]
+        if base.empty:
+            return base
+
+        tv_col = '_tv_' + target_col
+        out = base[base[tv_col].notna()].copy()
+        out['_target_value'] = out[tv_col]
+        return out.drop(columns=[c for c in out.columns if c.startswith('_tv_')])
 
     def prepare_training_data(self, target_col: str = 'nota_media', min_years: int = 3) -> Tuple[pd.DataFrame, pd.Series]:
         """
