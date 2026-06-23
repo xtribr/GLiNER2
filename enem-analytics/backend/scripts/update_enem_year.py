@@ -914,16 +914,22 @@ def enrich_with_censo(df: pd.DataFrame, censo_file: Path) -> pd.DataFrame:
 def recalculate_rankings(df: pd.DataFrame) -> pd.DataFrame:
     """Recalcula rankings sem ranquear escolas sem media_geral real."""
     df = df.copy()
+    # Ranking unico (ROW_NUMBER) com desempate deterministico por codigo_inep,
+    # consistente com os anos historicos (2018-2024). A pre-ordenacao garante que
+    # method="first" desempate por codigo_inep crescente dentro de cada empate de nota.
+    df = df.sort_values(
+        ["media_geral", "codigo_inep"], ascending=[False, True], na_position="last"
+    ).reset_index(drop=True)
     valid = df["media_geral"].notna()
     df["ranking_nacional"] = pd.NA
     df.loc[valid, "ranking_nacional"] = (
-        df.loc[valid, "media_geral"].rank(method="min", ascending=False).astype("Int64")
+        df.loc[valid, "media_geral"].rank(method="first", ascending=False).astype("Int64")
     )
 
     df["ranking_uf"] = pd.NA
     if "uf" in df.columns:
         df.loc[valid, "ranking_uf"] = (
-            df.loc[valid].groupby("uf")["media_geral"].rank(method="min", ascending=False).astype("Int64")
+            df.loc[valid].groupby("uf")["media_geral"].rank(method="first", ascending=False).astype("Int64")
         )
     df["ranking_municipio"] = pd.NA
     if "municipio" in df.columns:
@@ -933,7 +939,7 @@ def recalculate_rankings(df: pd.DataFrame) -> pd.DataFrame:
         df.loc[valid, "ranking_municipio"] = (
             df.loc[valid]
             .groupby(group_columns)["media_geral"]
-            .rank(method="min", ascending=False)
+            .rank(method="first", ascending=False)
             .astype("Int64")
         )
     return df.sort_values(["ranking_nacional", "codigo_inep"], na_position="last").reset_index(drop=True)
