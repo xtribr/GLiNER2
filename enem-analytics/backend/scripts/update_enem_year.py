@@ -40,6 +40,7 @@ OBJECTIVE_SCORE_COLUMNS = ["media_cn", "media_ch", "media_lc", "media_mt"]
 INEP_RAW_SCORE_COLUMNS = ["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]
 INEP_RAW_COMP_COLUMNS = ["NU_NOTA_COMP1", "NU_NOTA_COMP2", "NU_NOTA_COMP3", "NU_NOTA_COMP4", "NU_NOTA_COMP5"]
 INEP_RAW_PRESENCE_COLUMNS = ["TP_PRESENCA_CN", "TP_PRESENCA_CH", "TP_PRESENCA_LC", "TP_PRESENCA_MT"]
+INEP_RAW_VALID_REDACTION_STATUS = "1"
 INEP_RAW_MIN_PARTICIPANTS = 10
 INEP_RAW_EXPECTED_COLUMNS = [
     "NU_SEQUENCIAL",
@@ -231,6 +232,8 @@ class LoadedInepRaw:
     school_empty_rows: int
     all_four_present_rows: int
     all_four_present_school_rows: int
+    valid_redacao_school_rows: int
+    invalid_redacao_school_rows: int
     distinct_schools_any: int
     distinct_schools_aggregated: int
     threshold_counts: dict[int, int]
@@ -478,7 +481,7 @@ def aggregate_inep_raw_to_enem_results(
     byte_size = _input_byte_size(path, selected_member)
 
     year_counts: Counter[str] = Counter()
-    presence_by_school: Counter[str] = Counter()
+    eligible_by_school: Counter[str] = Counter()
     any_by_school: Counter[str] = Counter()
     bad_numeric_counts: Counter[str] = Counter()
     aggregations: dict[str, dict[str, Any]] = {}
@@ -489,6 +492,8 @@ def aggregate_inep_raw_to_enem_results(
     school_empty_rows = 0
     all_four_present_rows = 0
     all_four_present_school_rows = 0
+    valid_redacao_school_rows = 0
+    invalid_redacao_school_rows = 0
 
     with _open_text_input(path, selected_member, encoding) as handle:
         reader = csv.reader(handle, delimiter=";")
@@ -523,7 +528,6 @@ def aggregate_inep_raw_to_enem_results(
                 continue
 
             all_four_present_school_rows += 1
-            presence_by_school[codigo_inep] += 1
 
             numeric_values: dict[str, float] = {}
             numeric_failed = False
@@ -541,6 +545,16 @@ def aggregate_inep_raw_to_enem_results(
                     break
             if numeric_failed:
                 continue
+
+            redacao_status = row[indexes["TP_STATUS_REDACAO"]].strip()
+            redacao_score = numeric_values["NU_NOTA_REDACAO"]
+            redacao_valid = redacao_status == INEP_RAW_VALID_REDACTION_STATUS and redacao_score > 0
+            if not redacao_valid:
+                invalid_redacao_school_rows += 1
+                continue
+
+            valid_redacao_school_rows += 1
+            eligible_by_school[codigo_inep] += 1
 
             acc = aggregations.setdefault(
                 codigo_inep,
@@ -657,10 +671,12 @@ def aggregate_inep_raw_to_enem_results(
         school_empty_rows=int(school_empty_rows),
         all_four_present_rows=int(all_four_present_rows),
         all_four_present_school_rows=int(all_four_present_school_rows),
+        valid_redacao_school_rows=int(valid_redacao_school_rows),
+        invalid_redacao_school_rows=int(invalid_redacao_school_rows),
         distinct_schools_any=len(any_by_school),
         distinct_schools_aggregated=len(transformed),
         threshold_counts={
-            threshold: sum(1 for count in presence_by_school.values() if count >= threshold)
+            threshold: sum(1 for count in eligible_by_school.values() if count >= threshold)
             for threshold in [1, 10, 15, 20, 30]
         },
         bad_numeric_counts=dict(bad_numeric_counts),
@@ -1372,6 +1388,8 @@ def main(argv: Optional[list[str]] = None) -> int:
             "school_empty_rows": loaded.school_empty_rows,
             "all_four_present_rows": loaded.all_four_present_rows,
             "all_four_present_school_rows": loaded.all_four_present_school_rows,
+            "valid_redacao_school_rows": loaded.valid_redacao_school_rows,
+            "invalid_redacao_school_rows": loaded.invalid_redacao_school_rows,
             "distinct_schools_any": loaded.distinct_schools_any,
             "distinct_schools_aggregated": loaded.distinct_schools_aggregated,
             "threshold_counts": loaded.threshold_counts,

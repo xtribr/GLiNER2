@@ -1,3 +1,4 @@
+import csv
 import tempfile
 import unittest
 import zipfile
@@ -79,6 +80,41 @@ def real_microdados_2024_lines(limit: int = 200) -> tuple[list[str], list[str]]:
         for _, line in zip(range(limit), handle):
             rows.append(line.rstrip("\n").rstrip("\r"))
     return header, rows
+
+
+def real_microdados_2024_valid_and_invalid_redacao_rows() -> tuple[list[str], list[str]]:
+    """Busca linhas reais com mesma escola e redacao valida/invalida."""
+    if not MICRODADOS_2024_FILE.exists():
+        raise unittest.SkipTest("microdados-2024/MICRODADOS_ENEM_2024.csv ausente")
+
+    presence_columns = ["TP_PRESENCA_CN", "TP_PRESENCA_CH", "TP_PRESENCA_LC", "TP_PRESENCA_MT"]
+    score_columns = ["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]
+    by_school: dict[str, dict[str, str | None]] = {}
+
+    with MICRODADOS_2024_FILE.open("r", encoding="latin-1", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter=";")
+        header = reader.fieldnames or []
+        for row in reader:
+            codigo_inep = str(row.get("CO_ESCOLA", "")).strip()
+            if not codigo_inep:
+                continue
+            if not all(row.get(column) == "1" for column in presence_columns):
+                continue
+            if not all(str(row.get(column, "")).strip() for column in score_columns):
+                continue
+
+            status = str(row.get("TP_STATUS_REDACAO", "")).strip()
+            redacao = float(str(row.get("NU_NOTA_REDACAO", "0")).replace(",", "."))
+            slot = by_school.setdefault(codigo_inep, {"valid": None, "invalid": None})
+            serialized = ";".join(row[column] for column in header)
+            if status == "1" and redacao > 0 and slot["valid"] is None:
+                slot["valid"] = serialized
+            if (status != "1" or redacao <= 0) and slot["invalid"] is None:
+                slot["invalid"] = serialized
+            if slot["valid"] and slot["invalid"]:
+                return header, [slot["valid"], slot["invalid"]]
+
+    raise unittest.SkipTest("Nao encontrei escola real com redacao valida e invalida no microdado 2024")
 
 
 class UpdateEnemYearTest(unittest.TestCase):
@@ -276,6 +312,25 @@ class UpdateEnemYearTest(unittest.TestCase):
         self.assertTrue(set(SCORE_COLUMNS).issubset(transformed.columns))
         self.assertTrue((transformed["num_participantes"] >= 1).all())
         self.assertEqual(transformed["ano"].unique().tolist(), [2024])
+
+    def test_inep_raw_requires_valid_redacao_for_school_eligibility(self):
+        header, rows = real_microdados_2024_valid_and_invalid_redacao_rows()
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv_path = Path(tmp_dir) / "MICRODADOS_ENEM_2024.csv"
+            csv_path.write_text(";".join(header) + "\n" + "\n".join(rows), encoding="latin-1")
+
+            transformed, _, loaded = aggregate_inep_raw_to_enem_results(
+                csv_path,
+                2024,
+                min_participants=1,
+            )
+
+        self.assertEqual(len(transformed), 1)
+        self.assertEqual(int(transformed.iloc[0]["num_participantes"]), 1)
+        self.assertEqual(loaded.all_four_present_school_rows, 2)
+        self.assertEqual(loaded.valid_redacao_school_rows, 1)
+        self.assertEqual(loaded.invalid_redacao_school_rows, 1)
+        self.assertEqual(loaded.threshold_counts[1], 1)
 
     def test_inep_raw_accepts_compatible_extra_columns_after_contract_prefix(self):
         header, rows = real_microdados_2024_lines(500)
