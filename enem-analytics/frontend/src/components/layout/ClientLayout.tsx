@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Sidebar from './Sidebar';
 import { useAuth } from '@/lib/auth-context';
 import { useSidebar } from '@/lib/sidebar-context';
@@ -60,17 +61,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       return;
     }
 
-    // Modelo B: usuário-escola (não admin) fica restrito ao próprio painel,
-    // inclusive longe da vitrine pública e da lista.
+    // Usuário-escola (não admin): pode usar a vitrine `/` e a lista pública `/schools`
+    // (com todos os filtros) para montar seus próprios rankings, além do próprio painel.
+    // Continua bloqueado do DETALHE de OUTRAS escolas (não vaza painel profundo alheio).
     if (!isAdmin) {
-      const allowedPaths = [
-        `/schools/${user.codigo_inep}`,
-        `/schools/${user.codigo_inep}/roadmap`,
-      ];
-      const isAllowed = allowedPaths.some((p) => pathname?.startsWith(p));
+      const path = pathname ?? '';
+      const ownPrefix = `/schools/${user.codigo_inep}`;
+      const isOtherSchoolDetail =
+        /^\/schools\/[^/]+/.test(path) && !path.startsWith(ownPrefix);
+      const isAllowed = (isPublic || path.startsWith(ownPrefix)) && !isOtherSchoolDetail;
 
       if (!isAllowed) {
-        router.push(`/schools/${user.codigo_inep}`);
+        router.push(ownPrefix);
       }
     }
   }, [isLoading, isAdmin, isPublic, pathname, router, session, user]);
@@ -124,14 +126,22 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 </div>
               </div>
 
-              {/* Logout Button */}
-              <button
-                onClick={logout}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors flex-shrink-0"
-              >
-                <LogOut className="h-4 w-4" />
-                Sair
-              </button>
+              {/* Ações: ranking público + logout */}
+              <div className="flex items-center gap-1 flex-shrink-0">
+                <Link
+                  href="/schools"
+                  className="flex items-center gap-2 rounded-xl px-3 sm:px-4 py-2 text-sm font-semibold text-[#139ED3] transition-colors hover:bg-[#E9F8FE]"
+                >
+                  Ranking
+                </Link>
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-2 px-3 sm:px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sair
+                </button>
+              </div>
             </div>
           </div>
         </header>

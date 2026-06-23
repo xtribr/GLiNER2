@@ -6,35 +6,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   ArrowRight,
+  ChevronLeft,
   ChevronRight,
   Database,
   GitCompare,
   MapPin,
   School,
   Sparkles,
-  TrendingDown,
   TrendingUp,
   Trophy,
 } from 'lucide-react';
-import { api, type TopSchool } from '@/lib/api';
+import { api } from '@/lib/api';
 import { getYearRangeLabel } from '@/lib/enem-cycle';
-import { formatTriScore } from '@/lib/utils';
+import { formatNumber, formatRanking, formatTriScore } from '@/lib/utils';
 import { StatCardSkeleton, TableRowSkeleton } from '@/components/ui/skeleton';
+import { RangeSlider } from '@/components/ui/RangeSlider';
 import BrazilChoropleth from '@/components/vitrine/BrazilChoropleth';
 
 const UF_OPTIONS = [
   '', 'AC', 'AL', 'AM', 'AP', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS',
   'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO',
-];
-
-type AreaMetric = 'nota_media' | 'nota_mt' | 'nota_lc' | 'nota_cn' | 'nota_ch' | 'nota_redacao';
-const AREA_TABS: Array<{ key: string; label: string; metric: AreaMetric }> = [
-  { key: 'media', label: 'Média Geral', metric: 'nota_media' },
-  { key: 'mt', label: 'Matemática', metric: 'nota_mt' },
-  { key: 'lc', label: 'Linguagens', metric: 'nota_lc' },
-  { key: 'cn', label: 'Ciências', metric: 'nota_cn' },
-  { key: 'ch', label: 'Humanas', metric: 'nota_ch' },
-  { key: 'red', label: 'Redação', metric: 'nota_redacao' },
 ];
 
 const FEATURES = [
@@ -43,39 +34,70 @@ const FEATURES = [
   { icon: Sparkles, title: 'Oráculo IA', desc: 'Diagnóstico e recomendações da IA dedicada da XTRI.' },
 ];
 
-function variacaoPct(s: TopSchool): number | null {
-  const h = s.history;
-  if (!h || h.length < 2) return null;
-  const sorted = [...h].sort((a, b) => a.ano - b.ano);
-  const last = sorted[sorted.length - 1].nota_media;
-  const prev = sorted[sorted.length - 2].nota_media;
-  if (!prev) return null;
-  return ((last - prev) / prev) * 100;
-}
+const fmtNota = (v: number | null | undefined) =>
+  v == null ? '-' : v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-function medalClass(pos: number): string {
-  return pos === 1 ? 'bg-[#FFF0EB] text-[#FF4B2E]' : pos === 2 ? 'bg-slate-100 text-slate-600' : pos === 3 ? 'bg-[#FFF0EB] text-[#E43E24]' : 'bg-[#E9F8FE] text-[#139ED3]';
-}
-
-function schoolInitials(nome: string): string {
-  return nome.split(' ').filter((w) => w.length > 2).slice(0, 2).map((w) => w[0]).join('').toUpperCase() || nome.slice(0, 2).toUpperCase();
-}
+// Média só das 4 áreas objetivas (LC, CH, CN, MT) — sem redação
+const mediaObjetivas = (s: { media_cn: number | null; media_ch: number | null; media_lc: number | null; media_mt: number | null }) => {
+  const areas = [s.media_lc, s.media_ch, s.media_cn, s.media_mt];
+  return areas.every((v) => v != null) ? (areas as number[]).reduce((a, b) => a + b, 0) / 4 : null;
+};
 
 export default function Vitrine() {
   const [ano, setAno] = useState<number | undefined>(undefined);
   const [uf, setUf] = useState('');
   const [municipio, setMunicipio] = useState('');
-  const [rede, setRede] = useState('');
-  const [areaKey, setAreaKey] = useState('media');
+  const [rede, setRede] = useState<'Privada' | 'Pública' | ''>('');
+  const [localizacao, setLocalizacao] = useState<'Urbana' | 'Rural' | ''>('');
+  const [alunos, setAlunos] = useState<[number, number] | null>(null);
+  const [media, setMedia] = useState<[number, number] | null>(null);
+  const [page, setPage] = useState(1);
+  const limit = 50;
 
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['stats'],
     queryFn: api.getStats,
   });
 
-  const { data: topData, isLoading: topLoading } = useQuery({
-    queryKey: ['vitrineTop', ano, uf, municipio, rede],
-    queryFn: () => api.getTopSchools(50, ano, uf || undefined, rede || undefined, undefined, municipio || undefined),
+  // Limites dos sliders para o recorte categórico atual
+  const { data: bounds } = useQuery({
+    queryKey: ['filter-bounds', ano, uf, municipio, rede, localizacao],
+    queryFn: () => api.getFilterBounds({
+      ano,
+      uf: uf || undefined,
+      municipio: municipio || undefined,
+      tipo_escola: rede || undefined,
+      localizacao: localizacao || undefined,
+    }),
+  });
+
+  // Ao mudar o recorte categórico, os sliders voltam aos limites do recorte
+  useEffect(() => {
+    if (bounds) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reset dos sliders ao mudar os limites do recorte (sync com a query externa de bounds)
+      setAlunos([bounds.min_alunos, bounds.max_alunos]);
+      setMedia([Math.floor(bounds.min_media), Math.ceil(bounds.max_media)]);
+      setPage(1);
+    }
+  }, [bounds]);
+
+  const { data: schools, isLoading: schoolsLoading } = useQuery({
+    queryKey: ['vitrine-list', ano, uf, municipio, rede, localizacao, alunos, media, page],
+    queryFn: () => api.listSchools({
+      page,
+      limit,
+      ano,
+      uf: uf || undefined,
+      municipio: municipio || undefined,
+      tipo_escola: rede || undefined,
+      localizacao: localizacao || undefined,
+      min_participantes: alunos?.[0],
+      max_participantes: alunos?.[1],
+      min_media: media?.[0],
+      max_media: media?.[1],
+      order_by: 'ranking',
+      order: 'asc',
+    }),
   });
 
   const { data: municipiosData, isLoading: municipiosLoading } = useQuery({
@@ -84,22 +106,17 @@ export default function Vitrine() {
     enabled: Boolean(uf),
   });
 
-  const metric = AREA_TABS.find((t) => t.key === areaKey)?.metric ?? 'nota_media';
-  const schools = topData?.schools ?? [];
+  const rows = schools ?? [];
   const municipios = municipiosData?.municipios ?? [];
+  const hasMore = rows.length === limit;
 
   useEffect(() => {
     if (municipio && municipios.length > 0 && !municipios.includes(municipio)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- limpa o município quando ele sai da lista do novo recorte
       setMunicipio('');
+      setPage(1);
     }
   }, [municipio, municipios]);
-
-  const ranked = useMemo(() => {
-    return [...schools]
-      .filter((s) => s[metric] != null)
-      .sort((a, b) => (b[metric] ?? 0) - (a[metric] ?? 0))
-      .slice(0, 10);
-  }, [schools, metric]);
 
   const mediaNacional = useMemo(() => {
     if (!stats?.avg_scores) return null;
@@ -107,10 +124,12 @@ export default function Vitrine() {
     return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
   }, [stats]);
 
-  const maiorMedia = schools.length ? Math.max(...schools.map((s) => s.nota_media ?? 0)) : null;
   const yearRangeLabel = getYearRangeLabel(stats?.years);
   const years = (stats?.years ?? []).slice().sort((a, b) => b - a).slice(0, 6).reverse();
   const latestYear = years.length ? years[years.length - 1] : undefined;
+
+  // Maior média TRI do recorte atual (1ª colocada da página 1, sem filtro de página).
+  const topMedia = page === 1 && rows.length ? rows[0].ultima_nota : null;
 
   return (
     <div className="min-h-screen bg-[#f5fbff]">
@@ -185,7 +204,8 @@ export default function Vitrine() {
 
       {/* FILTER BAR */}
       <div className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-[1120px] flex-col gap-3 px-4 py-4 sm:px-6">
+        <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-4 py-4 sm:px-6">
+          {/* Ano */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="mr-1 text-xs font-bold text-slate-500">Ano:</span>
             {(years.length ? years : [latestYear]).filter(Boolean).map((y) => (
@@ -194,6 +214,7 @@ export default function Vitrine() {
                 onClick={() => {
                   setAno(y === latestYear && ano === undefined ? undefined : y);
                   setMunicipio('');
+                  setPage(1);
                 }}
                 className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
                   (ano ?? latestYear) === y ? 'border-[#28B7ED] bg-[#28B7ED] text-white' : 'border-slate-200 bg-white text-slate-600 hover:border-[#28B7ED]/50'
@@ -203,38 +224,75 @@ export default function Vitrine() {
               </button>
             ))}
           </div>
+
+          {/* Categóricos */}
           <div className="flex flex-wrap items-center gap-2">
-            <FilterSelect label="Estado" value={uf} onChange={(value) => {
-              setUf(value);
-              setMunicipio('');
-            }}
-              options={UF_OPTIONS.map((u) => ({ value: u, label: u || 'Todos' }))} />
+            <FilterSelect
+              label="Estado"
+              value={uf}
+              onChange={(value) => {
+                setUf(value);
+                setMunicipio('');
+                setPage(1);
+              }}
+              options={UF_OPTIONS.map((u) => ({ value: u, label: u || 'Todos' }))}
+            />
             <FilterSelect
               label="Município"
               value={municipio}
-              onChange={setMunicipio}
+              onChange={(value) => {
+                setMunicipio(value);
+                setPage(1);
+              }}
               disabled={!uf || municipiosLoading}
               options={[
                 { value: '', label: !uf ? 'Escolha um estado' : municipiosLoading ? 'Carregando...' : 'Todos' },
                 ...municipios.map((city) => ({ value: city, label: city })),
               ]}
             />
-            <FilterSelect label="Rede" value={rede} onChange={setRede}
-              options={[{ value: '', label: 'Todas' }, { value: 'Privada', label: 'Privada' }, { value: 'Pública', label: 'Pública' }]} />
-            <div className="ml-auto flex flex-wrap gap-1">
-              {AREA_TABS.map((t) => (
-                <button
-                  key={t.key}
-                  onClick={() => setAreaKey(t.key)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-bold transition ${
-                    areaKey === t.key ? 'bg-[#E9F8FE] text-[#139ED3]' : 'text-slate-500 hover:text-[#139ED3]'
-                  }`}
-                >
-                  {t.label}
-                </button>
-              ))}
-            </div>
+            <FilterSelect
+              label="Rede"
+              value={rede}
+              onChange={(value) => {
+                setRede(value as 'Privada' | 'Pública' | '');
+                setPage(1);
+              }}
+              options={[{ value: '', label: 'Todas' }, { value: 'Privada', label: 'Privada' }, { value: 'Pública', label: 'Pública' }]}
+            />
+            <FilterSelect
+              label="Localização"
+              value={localizacao}
+              onChange={(value) => {
+                setLocalizacao(value as 'Urbana' | 'Rural' | '');
+                setPage(1);
+              }}
+              options={[{ value: '', label: 'Todas' }, { value: 'Urbana', label: 'Urbana' }, { value: 'Rural', label: 'Rural' }]}
+            />
           </div>
+
+          {/* Range sliders */}
+          {bounds && alunos && media && bounds.max_alunos > 0 && (
+            <div className="grid gap-x-10 gap-y-5 border-t border-slate-100 pt-4 sm:grid-cols-2">
+              <div>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500">Alunos (participantes)</label>
+                <RangeSlider
+                  min={bounds.min_alunos}
+                  max={bounds.max_alunos}
+                  value={alunos}
+                  onChange={(v) => { setAlunos(v); setPage(1); }}
+                />
+              </div>
+              <div>
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500">Média geral</label>
+                <RangeSlider
+                  min={Math.floor(bounds.min_media)}
+                  max={Math.ceil(bounds.max_media)}
+                  value={media}
+                  onChange={(v) => { setMedia(v); setPage(1); }}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -247,7 +305,7 @@ export default function Vitrine() {
             <>
               <StatCard icon={TrendingUp} tone="cyan" value={formatTriScore(mediaNacional)} label="Média nacional TRI" sub={ano ? `ENEM ${ano}` : `ENEM ${latestYear ?? ''}`} />
               <StatCard icon={School} tone="cyan" value={stats?.total_schools?.toLocaleString('pt-BR') ?? '-'} label="Escolas no ranking" sub="Base consolidada" />
-              <StatCard icon={Trophy} tone="orange" value={formatTriScore(maiorMedia)} label="Maior média TRI" sub="Líder do recorte" />
+              <StatCard icon={Trophy} tone="orange" value={topMedia != null ? formatTriScore(topMedia) : '-'} label="Maior média TRI" sub="Líder do recorte" />
               <StatCard icon={MapPin} tone="orange" value={String(stats?.states?.length ?? 0)} label="UFs cobertas" sub="Brasil inteiro" />
             </>
           )}
@@ -259,8 +317,8 @@ export default function Vitrine() {
             <div>
               <h2 className="text-xl font-black tracking-tight text-slate-950">Ranking das Escolas</h2>
               <p className="mt-1 text-sm text-slate-500">
-                {AREA_TABS.find((t) => t.key === areaKey)?.label} · {ano ?? latestYear ?? 'último ano'}
-                {uf ? ` · ${uf}` : ''}{municipio ? ` · ${municipio}` : ''}{rede ? ` · ${rede}` : ''}
+                Por posição geral · {ano ?? latestYear ?? 'último ano'}
+                {uf ? ` · ${uf}` : ''}{municipio ? ` · ${municipio}` : ''}{rede ? ` · ${rede}` : ''}{localizacao ? ` · ${localizacao}` : ''}
               </p>
             </div>
             <Link href="/cadastro" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#28B7ED] to-[#FF4B2E] px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-[#28B7ED]/20 transition hover:brightness-105">
@@ -269,53 +327,96 @@ export default function Vitrine() {
             </Link>
           </div>
 
-          {/* Cards empilhados — mobile (<sm) */}
-          <ul className="divide-y divide-slate-100 sm:hidden">
-            {topLoading ? (
-              Array.from({ length: 8 }).map((_, i) => (
-                <li key={i} className="flex items-center gap-3 p-4">
-                  <div className="h-8 w-8 animate-pulse rounded-lg bg-slate-100" />
-                  <div className="h-9 w-9 animate-pulse rounded-xl bg-slate-100" />
-                  <div className="flex-1 space-y-2">
-                    <div className="h-3 w-3/4 animate-pulse rounded bg-slate-100" />
-                    <div className="h-2.5 w-1/3 animate-pulse rounded bg-slate-100" />
-                  </div>
-                </li>
-              ))
-            ) : ranked.length ? (
-              ranked.map((s, idx) => (
-                <RankCard key={s.codigo_inep} pos={idx + 1} school={s} metric={metric} />
-              ))
-            ) : (
-              <li className="p-8 text-center text-sm text-slate-400">Sem dados para este recorte.</li>
-            )}
-          </ul>
-
-          {/* Tabela — sm+ */}
-          <div className="hidden overflow-x-auto sm:block">
+          {/* Tabela */}
+          <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-slate-50/80">
                 <tr>
-                  <th className="px-4 py-3 text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400">#</th>
+                  <th className="px-4 py-3 text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Posição Geral</th>
+                  <th className="px-4 py-3 text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Posição</th>
                   <th className="px-4 py-3 text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Escola</th>
-                  <th className="px-4 py-3 text-center text-[10.5px] font-bold uppercase tracking-wider text-slate-400">UF</th>
-                  <th className="px-4 py-3 text-center text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Rede</th>
-                  <th className="px-4 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Média TRI</th>
-                  <th className="px-4 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Variação</th>
+                  <th className="px-4 py-3 text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Cidade</th>
+                  <th className="px-4 py-3 text-left text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Dependência</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">Alunos</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">LC</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">CH</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">CN</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">MT</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-400">RD</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-500">Média Obj.</th>
+                  <th className="px-3 py-3 text-right text-[10.5px] font-bold uppercase tracking-wider text-slate-700">Média Geral</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {topLoading ? (
-                  Array.from({ length: 8 }).map((_, i) => <TableRowSkeleton key={i} cols={6} />)
-                ) : ranked.length ? (
-                  ranked.map((s, idx) => (
-                    <RankRow key={s.codigo_inep} pos={idx + 1} school={s} metric={metric} />
+                {schoolsLoading ? (
+                  Array.from({ length: 10 }).map((_, i) => <TableRowSkeleton key={i} cols={13} />)
+                ) : rows.length ? (
+                  rows.map((school, i) => (
+                    <tr key={school.codigo_inep} className="transition hover:bg-[#E9F8FE]/50">
+                      <td className="whitespace-nowrap px-4 py-4 font-medium text-slate-500">
+                        {formatRanking(school.ultimo_ranking)}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-4 font-bold text-[#1B2A6B]">
+                        {(page - 1) * limit + i + 1}
+                      </td>
+                      <td className="px-4 py-4">
+                        <Link href={`/schools/${school.codigo_inep}`} className="font-bold text-slate-950 hover:text-[#139ED3]">
+                          {school.nome_escola}
+                        </Link>
+                        <p className="font-mono text-[11px] text-slate-400">{school.codigo_inep}</p>
+                      </td>
+                      <td className="px-4 py-4 text-sm">
+                        <span className="block max-w-[150px] truncate text-slate-900" title={school.municipio ?? ''}>{school.municipio || '-'}</span>
+                        {school.uf && <span className="block text-xs text-slate-400">{school.uf}</span>}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-4">
+                        {school.tipo_escola && (
+                          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                            school.tipo_escola === 'Privada' ? 'bg-[#E9F8FE] text-[#139ED3]' : 'bg-[#FFF0EB] text-[#FF4B2E]'
+                          }`}>
+                            {school.tipo_escola}
+                          </span>
+                        )}
+                        {school.localizacao && <span className="mt-1 block text-xs text-slate-400">{school.localizacao}</span>}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right text-slate-600">
+                        {school.qt_matriculas ? formatNumber(school.qt_matriculas) : '-'}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right tabular-nums text-slate-600">{fmtNota(school.media_lc)}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right tabular-nums text-slate-600">{fmtNota(school.media_ch)}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right tabular-nums text-slate-600">{fmtNota(school.media_cn)}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right tabular-nums text-slate-600">{fmtNota(school.media_mt)}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right tabular-nums text-slate-600">{fmtNota(school.media_redacao)}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right font-semibold tabular-nums text-slate-700">{fmtNota(mediaObjetivas(school))}</td>
+                      <td className="whitespace-nowrap px-3 py-4 text-right font-bold tabular-nums text-slate-950">{fmtNota(school.ultima_nota)}</td>
+                    </tr>
                   ))
                 ) : (
-                  <tr><td colSpan={6} className="p-8 text-center text-sm text-slate-400">Sem dados para este recorte.</td></tr>
+                  <tr><td colSpan={12} className="p-8 text-center text-sm text-slate-400">Sem dados para este recorte.</td></tr>
                 )}
               </tbody>
             </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="flex items-center justify-between border-t border-slate-100 px-6 py-4">
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+              className="flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Anterior
+            </button>
+            <span className="text-sm text-slate-600">Página {page}</span>
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              disabled={!hasMore}
+              className="flex items-center gap-1 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Próxima
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
 
           <div className="border-t border-slate-100 p-4 text-center">
@@ -392,78 +493,5 @@ function StatCard({ icon: Icon, tone, value, label, sub }: {
       <p className="text-xs font-bold text-slate-700">{label}</p>
       <p className="text-[11px] text-slate-400">{sub}</p>
     </div>
-  );
-}
-
-function RankCard({ pos, school, metric }: { pos: number; school: TopSchool; metric: AreaMetric }) {
-  const v = variacaoPct(school);
-  const medal = medalClass(pos);
-  const initials = schoolInitials(school.nome_escola);
-  return (
-    <li>
-      <Link href={`/schools/${school.codigo_inep}`} className="flex items-center gap-3 p-4 transition active:bg-[#E9F8FE]/50">
-        <span className={`inline-flex h-8 min-w-8 flex-shrink-0 items-center justify-center rounded-lg px-2 text-xs font-black ${medal}`}>{pos}º</span>
-        <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#28B7ED] to-[#139ED3] text-xs font-black text-white">{initials}</span>
-        <span className="min-w-0 flex-1">
-          <span className="line-clamp-1 text-sm font-bold text-slate-950">{school.nome_escola}</span>
-          <span className="mt-0.5 flex items-center gap-2 text-[11px]">
-            <span className="font-black text-slate-600">{school.uf || '--'}</span>
-            <span className={`rounded-full px-2 py-0.5 font-bold ${school.tipo_escola === 'Privada' ? 'bg-[#E9F8FE] text-[#139ED3]' : 'bg-[#FFF0EB] text-[#FF4B2E]'}`}>{school.tipo_escola || '--'}</span>
-          </span>
-        </span>
-        <span className="flex flex-shrink-0 flex-col items-end">
-          <span className="text-base font-black text-slate-950">{formatTriScore(school[metric])}</span>
-          {v == null ? (
-            <span className="text-[11px] text-slate-300">—</span>
-          ) : (
-            <span className={`inline-flex items-center gap-1 text-[11px] font-bold ${v >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-              {v >= 0 ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-              {v >= 0 ? '+' : ''}{v.toFixed(1)}%
-            </span>
-          )}
-        </span>
-      </Link>
-    </li>
-  );
-}
-
-function RankRow({ pos, school, metric }: { pos: number; school: TopSchool; metric: AreaMetric }) {
-  const v = variacaoPct(school);
-  const medal = medalClass(pos);
-  const initials = schoolInitials(school.nome_escola);
-  return (
-    <tr className="transition hover:bg-[#E9F8FE]/50">
-      <td className="px-4 py-3">
-        <span className={`inline-flex h-8 min-w-8 items-center justify-center rounded-lg px-2 text-xs font-black ${medal}`}>{pos}º</span>
-      </td>
-      <td className="px-4 py-3">
-        <Link href={`/schools/${school.codigo_inep}`} className="flex items-center gap-3 group">
-          <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#28B7ED] to-[#139ED3] text-xs font-black text-white">{initials}</span>
-          <span className="min-w-0">
-            <span className="line-clamp-1 text-sm font-bold text-slate-950 group-hover:text-[#139ED3]">{school.nome_escola}</span>
-            <span className="font-mono text-[11px] text-slate-400">{school.codigo_inep}</span>
-          </span>
-        </Link>
-      </td>
-      <td className="px-4 py-3 text-center">
-        <span className="inline-flex h-7 min-w-7 items-center justify-center rounded-lg bg-slate-100 px-2 text-[11px] font-black text-slate-600">{school.uf || '--'}</span>
-      </td>
-      <td className="px-4 py-3 text-center">
-        <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${school.tipo_escola === 'Privada' ? 'bg-[#E9F8FE] text-[#139ED3]' : 'bg-[#FFF0EB] text-[#FF4B2E]'}`}>{school.tipo_escola || '--'}</span>
-      </td>
-      <td className="px-4 py-3 text-right">
-        <span className="text-base font-black text-slate-950">{formatTriScore(school[metric])}</span>
-      </td>
-      <td className="px-4 py-3 text-right">
-        {v == null ? (
-          <span className="text-xs text-slate-300">—</span>
-        ) : (
-          <span className={`inline-flex items-center gap-1 text-xs font-bold ${v >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
-            {v >= 0 ? <TrendingUp className="h-3.5 w-3.5" /> : <TrendingDown className="h-3.5 w-3.5" />}
-            {v >= 0 ? '+' : ''}{v.toFixed(1)}%
-          </span>
-        )}
-      </td>
-    </tr>
   );
 }

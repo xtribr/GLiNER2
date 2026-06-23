@@ -52,7 +52,13 @@ export interface SchoolSummary {
   porte_label: string | null;
   qt_matriculas: number | null;
   ultimo_ranking: number | null;
+  ranking_uf: number | null;
   ultima_nota: number | null;
+  media_cn: number | null;
+  media_ch: number | null;
+  media_lc: number | null;
+  media_mt: number | null;
+  media_redacao: number | null;
   anos_participacao: number;
 }
 
@@ -855,6 +861,10 @@ export const api = {
     tipo_escola?: 'Privada' | 'Pública';
     localizacao?: 'Urbana' | 'Rural';
     porte?: number;
+    min_participantes?: number;
+    max_participantes?: number;
+    min_media?: number;
+    max_media?: number;
     ano?: number;
     order_by?: 'ranking' | 'nota' | 'nome';
     order?: 'asc' | 'desc';
@@ -866,6 +876,16 @@ export const api = {
       }
     });
     return fetchPublicAPI<SchoolSummary[]>(`/api/schools/?${searchParams}`);
+  },
+
+  getFilterBounds: (params: { uf?: string; municipio?: string; tipo_escola?: string; localizacao?: string; ano?: number }) => {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined && value !== '') searchParams.set(key, value.toString());
+    });
+    return fetchPublicAPI<{ min_alunos: number; max_alunos: number; min_media: number; max_media: number }>(
+      `/api/schools/filter-bounds?${searchParams}`
+    );
   },
 
   compareSchools: (inep1: string, inep2: string) =>

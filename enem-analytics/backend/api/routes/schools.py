@@ -261,7 +261,13 @@ class SchoolSummary(BaseModel):
     porte_label: Optional[str] = None
     qt_matriculas: Optional[int] = None
     ultimo_ranking: Optional[int] = None
+    ranking_uf: Optional[int] = None
     ultima_nota: Optional[float] = None
+    media_cn: Optional[float] = None
+    media_ch: Optional[float] = None
+    media_lc: Optional[float] = None
+    media_mt: Optional[float] = None
+    media_redacao: Optional[float] = None
     anos_participacao: Optional[int] = None
 
 
@@ -292,6 +298,10 @@ async def list_schools(
     tipo_escola: Optional[str] = None,
     localizacao: Optional[str] = None,
     porte: Optional[int] = None,
+    min_participantes: Optional[int] = Query(None, ge=0),
+    max_participantes: Optional[int] = Query(None, ge=0),
+    min_media: Optional[float] = Query(None, ge=0),
+    max_media: Optional[float] = Query(None, ge=0),
     ano: Optional[int] = None,
     order_by: str = Query("ranking", regex="^(ranking|nota|nome)$"),
     order: str = Query("asc", regex="^(asc|desc)$"),
@@ -317,6 +327,10 @@ async def list_schools(
         tipo_escola=tipo_escola,
         localizacao=localizacao,
         porte=porte,
+        min_participantes=min_participantes,
+        max_participantes=max_participantes,
+        min_media=min_media,
+        max_media=max_media,
         ano=ano,
         order_by=order_by,
         order=order
@@ -334,11 +348,33 @@ async def list_schools(
             porte_label=r.get("porte_label"),
             qt_matriculas=r.get("qt_matriculas"),
             ultimo_ranking=r.get("ultimo_ranking"),
+            ranking_uf=r.get("ranking_uf"),
             ultima_nota=r.get("ultima_nota"),
+            media_cn=r.get("media_cn"),
+            media_ch=r.get("media_ch"),
+            media_lc=r.get("media_lc"),
+            media_mt=r.get("media_mt"),
+            media_redacao=r.get("media_redacao"),
             anos_participacao=r.get("anos_participacao", 1)
         )
         for r in records
     ]
+
+
+@router.get("/filter-bounds")
+async def filter_bounds(
+    uf: Optional[str] = None,
+    municipio: Optional[str] = None,
+    tipo_escola: Optional[str] = None,
+    localizacao: Optional[str] = None,
+    ano: Optional[int] = None,
+    _: Optional[UserProfile] = Depends(get_optional_user),
+):
+    """Limites (min/max de alunos e media) do recorte atual, para os sliders de range."""
+    return supabase_store.get_filter_bounds(
+        uf=uf, municipio=municipio, tipo_escola=tipo_escola,
+        localizacao=localizacao, ano=ano,
+    )
 
 
 @router.get("/top")

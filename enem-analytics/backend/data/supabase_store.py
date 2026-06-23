@@ -69,6 +69,10 @@ def list_schools(
     tipo_escola: Optional[str] = None,
     localizacao: Optional[str] = None,
     porte: Optional[int] = None,
+    min_participantes: Optional[int] = None,
+    max_participantes: Optional[int] = None,
+    min_media: Optional[float] = None,
+    max_media: Optional[float] = None,
     ano: Optional[int] = None,
     order_by: str = "ranking",
     order: str = "asc"
@@ -79,6 +83,7 @@ def list_schools(
 
     query = client.table("enem_results").select(
         "codigo_inep, nome_escola, uf, municipio, dependencia, media_geral, "
+        "media_cn, media_ch, media_lc, media_mt, media_redacao, "
         "ranking_nacional, ranking_uf, num_participantes, "
         "localizacao, porte, porte_label, anos_participacao"
     ).eq("ano", target_ano)
@@ -96,6 +101,14 @@ def list_schools(
         query = query.eq("localizacao", localizacao)
     if porte is not None:
         query = query.eq("porte", porte)
+    if min_participantes is not None:
+        query = query.gte("num_participantes", min_participantes)
+    if max_participantes is not None:
+        query = query.lte("num_participantes", max_participantes)
+    if min_media is not None:
+        query = query.gte("media_geral", min_media)
+    if max_media is not None:
+        query = query.lte("media_geral", max_media)
 
     if order_by == "ranking":
         query = query.not_.is_("ranking_nacional", "null")
@@ -121,10 +134,58 @@ def list_schools(
             "porte_label": r.get("porte_label"),
             "qt_matriculas": r.get("num_participantes"),
             "ultimo_ranking": r.get("ranking_nacional"),
+            "ranking_uf": r.get("ranking_uf"),
             "ultima_nota": float(r["media_geral"]) if r.get("media_geral") else None,
+            "media_cn": float(r["media_cn"]) if r.get("media_cn") else None,
+            "media_ch": float(r["media_ch"]) if r.get("media_ch") else None,
+            "media_lc": float(r["media_lc"]) if r.get("media_lc") else None,
+            "media_mt": float(r["media_mt"]) if r.get("media_mt") else None,
+            "media_redacao": float(r["media_redacao"]) if r.get("media_redacao") else None,
             "anos_participacao": r.get("anos_participacao"),
         })
     return schools
+
+
+def get_filter_bounds(
+    uf: Optional[str] = None,
+    municipio: Optional[str] = None,
+    tipo_escola: Optional[str] = None,
+    localizacao: Optional[str] = None,
+    ano: Optional[int] = None,
+) -> Dict[str, Any]:
+    """Min/max de participantes e media_geral no recorte atual (alimenta os sliders)."""
+    client = get_client()
+    target_ano = ano or get_latest_year()
+
+    def _scoped():
+        q = (
+            client.table("enem_results")
+            .select("num_participantes, media_geral")
+            .eq("ano", target_ano)
+            .not_.is_("ranking_nacional", "null")
+        )
+        if uf:
+            q = q.eq("uf", uf.upper())
+        if municipio:
+            q = q.eq("municipio", municipio)
+        if tipo_escola:
+            q = q.eq("dependencia", tipo_escola)
+        if localizacao:
+            q = q.eq("localizacao", localizacao)
+        return q
+
+    def _edge(column: str, desc: bool):
+        rows = _scoped().order(column, desc=desc).limit(1).execute().data
+        return rows[0].get(column) if rows else None
+
+    max_part, min_part = _edge("num_participantes", True), _edge("num_participantes", False)
+    max_med, min_med = _edge("media_geral", True), _edge("media_geral", False)
+    return {
+        "min_alunos": int(min_part) if min_part is not None else 0,
+        "max_alunos": int(max_part) if max_part is not None else 0,
+        "min_media": round(float(min_med), 2) if min_med is not None else 0.0,
+        "max_media": round(float(max_med), 2) if max_med is not None else 0.0,
+    }
 
 
 def get_top_schools(
