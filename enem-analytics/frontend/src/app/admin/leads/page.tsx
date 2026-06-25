@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { api, type Lead } from '@/lib/api';
-import { Users, Search, Download, Phone, Mail, CheckCircle2, Clock, Loader2 } from 'lucide-react';
+import { Users, Search, Download, Phone, Mail, CheckCircle2, Clock, Loader2, ExternalLink } from 'lucide-react';
 
 function onlyDigits(s: string): string {
   return (s || '').replace(/\D/g, '');
@@ -152,7 +152,20 @@ export default function LeadsPage() {
               {filtered.map((l) => (
                 <tr key={l.id} className="transition hover:bg-sky-50/40">
                   <td className="px-4 py-3">
-                    <div className="font-semibold text-slate-900">{l.nome_escola}</div>
+                    {l.codigo_inep ? (
+                      <a
+                        href={`/schools/${l.codigo_inep}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Abrir os dados da escola nos microdados 2025"
+                        className="group inline-flex items-center gap-1.5 font-semibold text-slate-900 transition hover:text-sky-600 hover:underline"
+                      >
+                        {l.nome_escola}
+                        <ExternalLink className="h-3.5 w-3.5 shrink-0 text-slate-300 transition group-hover:text-sky-500" />
+                      </a>
+                    ) : (
+                      <div className="font-semibold text-slate-900">{l.nome_escola}</div>
+                    )}
                     <div className="font-mono text-[11px] text-slate-400">{l.codigo_inep}</div>
                   </td>
                   <td className="px-4 py-3">
