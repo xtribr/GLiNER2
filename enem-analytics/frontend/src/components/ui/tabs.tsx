@@ -23,7 +23,9 @@ export function Tabs({ tabs, active, onChange, className }: TabsProps) {
       role="tablist"
       aria-label="Seções da escola"
       className={cn(
-        "flex items-center gap-1 overflow-x-auto border-b border-slate-200 bg-white rounded-t-2xl px-2",
+        // Estilo "aba-pasta de fichário": a barra é a prateleira (border inferior),
+        // as abas se apoiam nela alinhadas pela base e a ativa sobe um degrau.
+        "flex items-end gap-1.5 overflow-x-auto border-b-2 border-slate-300 px-1",
         className
       )}
     >
@@ -39,18 +41,21 @@ export function Tabs({ tabs, active, onChange, className }: TabsProps) {
             id={`tab-${tab.id}`}
             onClick={() => onChange(tab.id)}
             className={cn(
-              "group relative flex items-center gap-2 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors",
-              "border-b-2 -mb-[1px]",
+              "group relative flex items-center gap-2 whitespace-nowrap rounded-t-[11px] border border-b-0 text-sm transition-all",
               isActive
-                ? "border-blue-600 text-blue-700"
-                : "border-transparent text-slate-500 hover:text-slate-900 hover:border-slate-200"
+                // Ativa: branca, sem borda embaixo (funde com o painel), sobe e quebra a prateleira.
+                ? "z-10 -mb-[2px] overflow-hidden border-slate-300 bg-white px-[18px] py-3 font-semibold text-[#1B2A6B]"
+                // Inativa: recolhida (slate, mais baixa); no hover sobe um degrau e clareia.
+                : "border-slate-200 bg-slate-100 px-4 py-[9px] font-medium text-slate-500 hover:-translate-y-px hover:bg-white hover:text-slate-700"
             )}
           >
+            {/* Etiqueta de cor no topo da aba ativa (a "tag" da pasta). */}
+            {isActive && <span aria-hidden="true" className="absolute inset-x-0 top-0 h-[3px] bg-[#139ED3]" />}
             {Icon && (
               <Icon
                 className={cn(
                   "h-4 w-4 transition-colors",
-                  isActive ? "text-blue-600" : "text-slate-400 group-hover:text-slate-600"
+                  isActive ? "text-[#139ED3]" : "text-slate-400 group-hover:text-slate-600"
                 )}
               />
             )}
@@ -59,7 +64,7 @@ export function Tabs({ tabs, active, onChange, className }: TabsProps) {
               <span
                 className={cn(
                   "ml-0.5 inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-semibold",
-                  isActive ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-600"
+                  isActive ? "bg-sky-100 text-sky-700" : "bg-slate-200 text-slate-600"
                 )}
               >
                 {tab.badge}

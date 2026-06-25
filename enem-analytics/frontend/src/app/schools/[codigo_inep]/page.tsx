@@ -29,9 +29,9 @@ import {
 } from 'recharts';
 
 const SCHOOL_DETAIL_TABS: TabDefinition[] = [
-  { id: 'overview', label: 'Visão Geral', icon: LayoutDashboard },
+  { id: 'overview', label: 'Geral', icon: LayoutDashboard },
   { id: 'historico', label: 'Histórico', icon: History },
-  { id: 'analise', label: 'Análise ML', icon: Brain },
+  { id: 'analise', label: 'Análise', icon: Brain },
   { id: 'tri', label: 'TRI', icon: Microscope },
   { id: 'insights', label: 'Conceitos', icon: Sparkles },
 ];
