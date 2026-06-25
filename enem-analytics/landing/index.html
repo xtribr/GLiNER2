@@ -15,6 +15,11 @@
 <meta name="robots" content="index,follow" />
 <meta name="theme-color" content="#ffffff" />
 
+<!-- Tipografia: display Bricolage Grotesque + dados Space Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="pt_BR" />
@@ -127,10 +132,25 @@
   .nav-right a:hover{color:var(--ink)}
   .nav-cta{background:var(--grad);color:#fff !important;padding:7px 15px;border-radius:980px;font-weight:600}
 
-  /* Hero */
-  .hero{text-align:center;padding:88px 0 64px}
-  .eyebrow{font-size:15px;font-weight:600;color:var(--cyan);margin-bottom:14px}
-  h1{font-size:clamp(2.6rem,6.2vw,4.6rem);font-weight:700;line-height:1.05;letter-spacing:-0.035em;max-width:16ch;margin:0 auto}
+  /* Hero — foto à direita (desktop) / topo (mobile), sem gradiente */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:0 0 56px}
+  .hero-figure img{display:block;width:100%;height:300px;object-fit:cover;object-position:50% 16%}
+  .hero-inner{position:relative;z-index:1;padding-top:38px}
+  .hero-copy{max-width:620px;margin:0 auto}
+  @media(min-width:1000px){
+    .hero{text-align:left;padding:0}
+    .hero-figure{position:absolute;top:0;right:0;bottom:0;width:50vw;z-index:0;overflow:hidden}
+    .hero-figure img{width:100%;height:100%;object-position:50% 14%}
+    .hero-inner{padding-top:100px;padding-bottom:100px}
+    .hero-copy{margin:0;max-width:440px}
+    .hero-copy h1{margin:0;max-width:13ch;font-size:clamp(2.2rem,3.4vw,3.3rem)}
+    .hero-copy .sub{margin-left:0;margin-right:0;max-width:38ch}
+    .hero-copy .search{margin-left:0;margin-right:0;width:min(440px,100%)}
+    .hero-copy .stats{padding:24px 0 0;gap:10px;max-width:440px}
+    .hero-copy .stats .n{font-size:1.4rem;letter-spacing:0;white-space:nowrap}
+  }
+  .eyebrow{font-family:"Space Mono",ui-monospace,SFMono-Regular,monospace;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+  h1{font-family:"Bricolage Grotesque",-apple-system,BlinkMacSystemFont,sans-serif;font-size:clamp(2.6rem,6.2vw,4.6rem);font-weight:800;line-height:1.0;letter-spacing:-0.035em;max-width:16ch;margin:0 auto}
   .sub{margin:20px auto 0;max-width:40ch;font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--ink-2);font-weight:400;line-height:1.45}
 
   /* Busca = CTA (refinada, clara) */
@@ -150,7 +170,7 @@
 
   /* Faixa de números */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 0;padding:34px 0;border-top:1px solid var(--line)}
-  .stats .n{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700;letter-spacing:-0.03em}
+  .stats .n{font-family:"Space Mono",ui-monospace,SFMono-Regular,monospace;font-size:clamp(1.55rem,3.7vw,2.3rem);font-weight:700;letter-spacing:-0.02em}
   .stats .l{font-size:13px;color:var(--ink-2);margin-top:4px}
   @media(max-width:640px){.stats{grid-template-columns:1fr 1fr;gap:24px 14px}.navsec{display:none}.nav-right{gap:14px}}
 
@@ -172,6 +192,28 @@
   .rscore{font-weight:700;font-size:16px;letter-spacing:-0.02em}
   .rank .more{display:block;text-align:center;padding:16px;font-size:14px;font-weight:600;color:var(--cyan);text-decoration:none;border-top:1px solid var(--line)}
   .rank .more:hover{background:#f5f5f7}
+
+  /* Mapa do Brasil por estado */
+  #mapa-uf{max-width:540px;margin:36px auto 0}
+  .maprow{position:relative}
+  .mapsvg{width:100%;height:auto;display:block}
+  .mapsvg path{cursor:pointer;transition:stroke .15s,stroke-width .15s}
+  .mapsvg path:hover{stroke:#FF4B2E;stroke-width:1.6}
+  .maptip{position:absolute;z-index:20;width:236px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 14px;box-shadow:0 12px 30px rgba(20,20,19,.13);pointer-events:none}
+  .maptip .th{display:flex;justify-content:space-between;align-items:flex-start}
+  .maptip .uf{font-size:20px;font-weight:800;line-height:1}
+  .maptip .dl{font-size:13px;font-weight:700}
+  .maptip .dl.up{color:#059669}.maptip .dl.dn{color:#e11d48}
+  .maptip .sub2{margin:3px 0 8px;font-size:12px;color:var(--ink-2)}
+  .maptip .tr{display:flex;justify-content:space-between;font-size:12px;padding:1.5px 0}
+  .maptip .tr b{font-weight:700}
+  .maptip .cta2{margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:12px;font-weight:700;color:var(--cyan)}
+  .maplegend{display:flex;flex-wrap:wrap;align-items:center;gap:6px;justify-content:center;max-width:360px;margin:18px auto 0;font-size:11px;font-weight:600;color:var(--ink-2)}
+  .maplegend .swatches{display:flex;gap:3px}
+  .maplegend .swatches i{width:20px;height:10px;border-radius:2px;display:block}
+  .maplegend em{flex-basis:100%;text-align:center;font-style:normal;text-transform:uppercase;letter-spacing:.1em;color:#9aa3bc}
+  .maperr{text-align:center;color:var(--ink-2);margin-top:24px;font-size:14px}
+  .maperr a{color:var(--cyan);font-weight:600;text-decoration:none}
 
   /* Como funciona */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
@@ -237,23 +279,28 @@
   </div>
 </nav>
 
-<header class="hero wrap">
-  <p class="eyebrow">Microdados ENEM 2025</p>
-  <h1>O ranking do ENEM 2025, <span class="accent">escola por escola.</span></h1>
-  <p class="sub">Nota TRI, evolução histórica e diagnóstico por área — de 28.333 escolas, já com os resultados do ENEM 2025. Gratuito para a sua.</p>
+<header class="hero">
+  <div class="hero-figure"><img src="/xandao.jpg" alt="Professor Xandão — fundador da XTRI, especialista em TRI e Psicometria" loading="eager" decoding="async" /></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Microdados ENEM 2025 · nota TRI oficial</p>
+      <h1>O ranking do ENEM 2025, <span class="accent">escola por escola.</span></h1>
+      <p class="sub">Nota TRI, evolução histórica e diagnóstico por área — de 28.333 escolas, já com os resultados do ENEM 2025. Gratuito para a sua.</p>
 
-  <form class="search" id="cta" action="https://app.rankingenem.com/cadastro" method="get">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-    <input id="school" name="escola" placeholder="Digite o nome da sua escola" autocomplete="off" aria-label="Nome da sua escola" />
-    <button type="submit">Analisar →</button>
-  </form>
-  <p class="hint">Gratuito · sem cartão. <a href="https://app.rankingenem.com/">Só quero ver o ranking →</a></p>
+      <form class="search" id="cta" action="https://app.rankingenem.com/cadastro" method="get">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="school" name="escola" placeholder="Digite o nome da sua escola" autocomplete="off" aria-label="Nome da sua escola" />
+        <button type="submit">Analisar →</button>
+      </form>
+      <p class="hint">Gratuito · sem cartão. <a href="https://app.rankingenem.com/">Só quero ver o ranking →</a></p>
 
-  <div class="stats">
-    <div><div class="n">28.333</div><div class="l">escolas analisadas</div></div>
-    <div><div class="n">2018–2025</div><div class="l">série histórica</div></div>
-    <div><div class="n">27</div><div class="l">estados (UFs)</div></div>
-    <div><div class="n">TRI</div><div class="l">critério oficial</div></div>
+      <div class="stats">
+        <div><div class="n">28.333</div><div class="l">escolas analisadas</div></div>
+        <div><div class="n">2018–2025</div><div class="l">série histórica</div></div>
+        <div><div class="n">27</div><div class="l">estados (UFs)</div></div>
+        <div><div class="n">TRI</div><div class="l">critério oficial</div></div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -285,6 +332,13 @@
     <div class="step"><div class="ic">📈</div><h3>2. Veja posição e evolução</h3><p>Ranking nacional, nota TRI por área e a série histórica 2018–2025.</p></div>
     <div class="step"><div class="ic">🎯</div><h3>3. Receba o diagnóstico</h3><p>Pontos fortes, lacunas e recomendações do Oráculo IA — para agir.</p></div>
   </div>
+</section>
+
+<section class="block wrap" id="mapa">
+  <p class="kicker">Brasil inteiro</p>
+  <h2>O mapa do ENEM 2025, <span class="accent">estado por estado.</span></h2>
+  <p class="lead2">A média TRI de cada estado em 2025, dos microdados oficiais do INEP. Passe o mouse num estado — e clique para ver as escolas.</p>
+  <div id="mapa-uf"><p class="maperr">Carregando o mapa…</p></div>
 </section>
 
 <section class="block wrap" id="sobre">
@@ -354,6 +408,45 @@
     var url = 'https://app.rankingenem.com/cadastro';
     window.location.href = q ? url + '?escola=' + encodeURIComponent(q) : url;
   });
+</script>
+
+<!-- Mapa do Brasil por estado — ao vivo (api.rankingenem.com) com fallback embutido -->
+<script>
+(function(){
+  var host=document.getElementById('mapa-uf'); if(!host) return;
+  var W=520,H=540,PAD=12, API='https://api.rankingenem.com/api/stats/by-uf';
+  var FB=[{"uf":"DF","media":567.6,"escolas":225,"media_cn":521.0,"media_ch":539.3,"media_lc":559.4,"media_mt":558.1,"media_redacao":660.2,"media_prev":570.1,"ano":2025,"ano_prev":2024},{"uf":"SC","media":551.2,"escolas":805,"media_cn":508.6,"media_ch":529.7,"media_lc":548.2,"media_mt":542.0,"media_redacao":627.8,"media_prev":559.3,"ano":2025,"ano_prev":2024},{"uf":"RS","media":549.5,"escolas":1131,"media_cn":500.2,"media_ch":523.8,"media_lc":546.6,"media_mt":540.0,"media_redacao":637.0,"media_prev":552.6,"ano":2025,"ano_prev":2024},{"uf":"RJ","media":547.5,"escolas":1663,"media_cn":501.6,"media_ch":521.2,"media_lc":542.8,"media_mt":532.7,"media_redacao":639.3,"media_prev":555.9,"ano":2025,"ano_prev":2024},{"uf":"ES","media":546.6,"escolas":369,"media_cn":503.1,"media_ch":518.1,"media_lc":534.8,"media_mt":535.3,"media_redacao":641.8,"media_prev":555.1,"ano":2025,"ano_prev":2024},{"uf":"SP","media":546.0,"escolas":5159,"media_cn":503.8,"media_ch":522.5,"media_lc":547.7,"media_mt":543.4,"media_redacao":612.7,"media_prev":553.4,"ano":2025,"ano_prev":2024},{"uf":"MG","media":545.6,"escolas":2593,"media_cn":500.3,"media_ch":517.8,"media_lc":536.2,"media_mt":533.5,"media_redacao":639.9,"media_prev":552.4,"ano":2025,"ano_prev":2024},{"uf":"PR","media":535.8,"escolas":1486,"media_cn":497.8,"media_ch":516.8,"media_lc":539.3,"media_mt":531.2,"media_redacao":593.9,"media_prev":539.4,"ano":2025,"ano_prev":2024},{"uf":"GO","media":531.0,"escolas":869,"media_cn":491.6,"media_ch":502.8,"media_lc":523.2,"media_mt":509.1,"media_redacao":628.3,"media_prev":536.0,"ano":2025,"ano_prev":2024},{"uf":"SE","media":530.7,"escolas":276,"media_cn":490.3,"media_ch":499.5,"media_lc":518.9,"media_mt":497.6,"media_redacao":647.3,"media_prev":535.1,"ano":2025,"ano_prev":2024},{"uf":"MS","media":529.3,"escolas":328,"media_cn":495.7,"media_ch":509.5,"media_lc":527.8,"media_mt":511.0,"media_redacao":602.7,"media_prev":536.0,"ano":2025,"ano_prev":2024},{"uf":"PB","media":528.9,"escolas":613,"media_cn":491.1,"media_ch":497.3,"media_lc":517.7,"media_mt":497.8,"media_redacao":640.5,"media_prev":531.2,"ano":2025,"ano_prev":2024},{"uf":"RN","media":526.3,"escolas":424,"media_cn":493.3,"media_ch":498.1,"media_lc":521.1,"media_mt":498.6,"media_redacao":620.2,"media_prev":531.0,"ano":2025,"ano_prev":2024},{"uf":"CE","media":525.9,"escolas":934,"media_cn":487.6,"media_ch":496.6,"media_lc":518.1,"media_mt":505.1,"media_redacao":622.3,"media_prev":531.8,"ano":2025,"ano_prev":2024},{"uf":"PE","media":525.3,"escolas":978,"media_cn":489.2,"media_ch":494.3,"media_lc":518.8,"media_mt":505.0,"media_redacao":619.1,"media_prev":529.3,"ano":2025,"ano_prev":2024},{"uf":"MT","media":520.9,"escolas":435,"media_cn":486.5,"media_ch":499.0,"media_lc":518.6,"media_mt":498.6,"media_redacao":601.7,"media_prev":526.5,"ano":2025,"ano_prev":2024},{"uf":"BA","media":517.1,"escolas":1350,"media_cn":485.4,"media_ch":491.9,"media_lc":512.5,"media_mt":487.4,"media_redacao":608.0,"media_prev":522.9,"ano":2025,"ano_prev":2024},{"uf":"RO","media":515.2,"escolas":204,"media_cn":483.6,"media_ch":491.4,"media_lc":509.8,"media_mt":489.1,"media_redacao":602.1,"media_prev":522.0,"ano":2025,"ano_prev":2024},{"uf":"AL","media":514.8,"escolas":352,"media_cn":480.5,"media_ch":489.0,"media_lc":511.1,"media_mt":487.5,"media_redacao":606.1,"media_prev":518.8,"ano":2025,"ano_prev":2024},{"uf":"PI","media":513.0,"escolas":547,"media_cn":475.4,"media_ch":481.6,"media_lc":504.3,"media_mt":488.1,"media_redacao":615.7,"media_prev":520.2,"ano":2025,"ano_prev":2024},{"uf":"RR","media":508.1,"escolas":53,"media_cn":480.9,"media_ch":495.4,"media_lc":512.4,"media_mt":480.6,"media_redacao":571.5,"media_prev":519.6,"ano":2025,"ano_prev":2024},{"uf":"PA","media":507.6,"escolas":837,"media_cn":475.2,"media_ch":486.1,"media_lc":498.7,"media_mt":475.1,"media_redacao":602.8,"media_prev":512.8,"ano":2025,"ano_prev":2024},{"uf":"AP","media":507.0,"escolas":104,"media_cn":472.6,"media_ch":487.8,"media_lc":504.6,"media_mt":462.5,"media_redacao":607.3,"media_prev":513.2,"ano":2025,"ano_prev":2024},{"uf":"TO","media":503.5,"escolas":243,"media_cn":471.1,"media_ch":483.4,"media_lc":502.4,"media_mt":472.3,"media_redacao":588.1,"media_prev":506.9,"ano":2025,"ano_prev":2024},{"uf":"AC","media":502.3,"escolas":99,"media_cn":468.7,"media_ch":484.2,"media_lc":503.8,"media_mt":469.1,"media_redacao":585.6,"media_prev":510.6,"ano":2025,"ano_prev":2024},{"uf":"MA","media":498.9,"escolas":734,"media_cn":466.3,"media_ch":475.9,"media_lc":495.2,"media_mt":464.5,"media_redacao":592.7,"media_prev":506.2,"ano":2025,"ano_prev":2024},{"uf":"AM","media":491.3,"escolas":356,"media_cn":464.6,"media_ch":479.8,"media_lc":496.8,"media_mt":457.9,"media_redacao":557.3,"media_prev":496.8,"ano":2025,"ano_prev":2024}];
+  function lerp(t){var a=[144,206,240],b=[7,64,105];t=Math.max(0,Math.min(1,t));return 'rgb('+a.map(function(v,i){return Math.round(v+(b[i]-v)*t)}).join(',')+')';}
+  function each(g,cb){if(g.type==='Polygon'){g.coordinates.forEach(function(r){r.forEach(cb)})}else{g.coordinates.forEach(function(p){p.forEach(function(r){r.forEach(cb)})})}}
+  function fmt(n){return (Math.round(n*10)/10).toFixed(1).replace('.',',');}
+  function fdl(d){return (d>=0?'+':'−')+Math.abs(d).toFixed(1).replace('.',',');}
+  function render(arr,geo){
+    var byUf={};arr.forEach(function(r){byUf[r.uf]=r});
+    var ms=arr.map(function(r){return r.media}),min=Math.min.apply(null,ms),max=Math.max.apply(null,ms),ano=(arr[0]||{}).ano;
+    var fs=geo.features,minX=1/0,minY=1/0,maxX=-1/0,maxY=-1/0;
+    fs.forEach(function(f){each(f.geometry,function(p){if(p[0]<minX)minX=p[0];if(p[0]>maxX)maxX=p[0];if(p[1]<minY)minY=p[1];if(p[1]>maxY)maxY=p[1];})});
+    var s=Math.min((W-2*PAD)/(maxX-minX),(H-2*PAD)/(maxY-minY)),offX=PAD+(W-2*PAD-(maxX-minX)*s)/2,offY=PAD+(H-2*PAD-(maxY-minY)*s)/2;
+    function px(x){return (offX+(x-minX)*s).toFixed(1)} function py(y){return (H-offY-(y-minY)*s).toFixed(1)}
+    function ring(r){var d='';for(var i=0;i<r.length;i++){d+=(i?'L':'M')+px(r[i][0])+' '+py(r[i][1])+' ';}return d+'Z';}
+    function fp(g){return g.type==='Polygon'?g.coordinates.map(ring).join(' '):g.coordinates.map(function(p){return p.map(ring).join(' ')}).join(' ');}
+    var paths='';fs.forEach(function(f){var sg=f.properties.sigla,r=byUf[sg],fill=r?lerp((r.media-min)/((max-min)||1)):'#e2e8f0';paths+='<path data-uf="'+sg+'" d="'+fp(f.geometry)+'" fill="'+fill+'" stroke="#fff" stroke-width="0.6"></path>';});
+    var sw='';for(var i=0;i<7;i++){sw+='<i style="background:'+lerp(i/6)+'"></i>';}
+    host.innerHTML='<div class="maprow"><svg viewBox="0 0 '+W+' '+H+'" class="mapsvg" role="img" aria-label="Mapa da média TRI por estado">'+paths+'</svg><div class="maptip" id="maptip" hidden></div></div><div class="maplegend"><span>'+fmt(min)+'</span><span class="swatches">'+sw+'</span><span>'+fmt(max)+'</span><em>média TRI por estado'+(ano?' · '+ano:'')+'</em></div>';
+    var svg=host.querySelector('.mapsvg'),tip=host.querySelector('#maptip');
+    function show(sg,e){var r=byUf[sg];if(!r){tip.hidden=true;return;}var dl=(r.media_prev!=null)?(r.media-r.media_prev):null;
+      var ar=[['Média Geral',r.media],['Redação',r.media_redacao],['Linguagens',r.media_lc],['Matemática',r.media_mt],['Natureza',r.media_cn],['Humanas',r.media_ch]],rows='';
+      ar.forEach(function(a){rows+='<div class="tr"><span>'+a[0]+'</span><b>'+fmt(a[1])+'</b></div>';});
+      tip.innerHTML='<div class="th"><span class="uf">'+r.uf+'</span>'+(dl!=null?'<span class="dl '+(dl>=0?'up':'dn')+'">'+(dl>=0?'▲':'▼')+' '+fdl(dl)+'</span>':'')+'</div><p class="sub2">'+r.escolas.toLocaleString('pt-BR')+' escolas · '+r.ano+'</p>'+rows+'<div class="cta2">Clique para ver as escolas →</div>';
+      tip.hidden=false;var hr=host.getBoundingClientRect(),x=e.clientX-hr.left,y=e.clientY-hr.top,fx=x>hr.width*0.5,fy=y>hr.height*0.62;
+      tip.style.left=x+'px';tip.style.top=y+'px';tip.style.transform='translate('+(fx?'calc(-100% - 16px)':'16px')+','+(fy?'calc(-100% - 16px)':'16px')+')';}
+    svg.addEventListener('mousemove',function(e){if(e.target.tagName==='path')show(e.target.getAttribute('data-uf'),e);});
+    svg.addEventListener('mouseleave',function(){tip.hidden=true;});
+    svg.addEventListener('click',function(e){if(e.target.tagName==='path')window.open('https://app.rankingenem.com/schools?uf='+e.target.getAttribute('data-uf'),'_blank','noopener');});
+  }
+  fetch('/brazil-uf.geojson').then(function(r){return r.json()}).then(function(geo){
+    fetch(API,{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){render((d.by_uf&&d.by_uf.length)?d.by_uf:FB,geo);}).catch(function(){render(FB,geo);});
+  }).catch(function(){host.innerHTML='<p class="maperr">Não foi possível carregar o mapa agora. <a href="https://app.rankingenem.com/">Ver na plataforma →</a></p>';});
+})();
 </script>
 </body>
 </html>
