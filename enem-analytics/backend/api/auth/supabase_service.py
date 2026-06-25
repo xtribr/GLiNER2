@@ -277,7 +277,7 @@ def list_all_profiles(skip: int = 0, limit: int = 100) -> list[UserProfile]:
 def list_leads(limit: int = 1000) -> list[Lead]:
     """
     Lista os leads do cadastro público (origem='cadastro_publico'),
-    mais recentes primeiro. Admin-only (chamado atrás de get_current_admin).
+    ativos e mais recentes primeiro. Admin-only (chamado atrás de get_current_admin).
     """
     try:
         supabase = get_supabase()
@@ -285,6 +285,7 @@ def list_leads(limit: int = 1000) -> list[Lead]:
             supabase.table("profiles")
             .select("*")
             .eq("origem", "cadastro_publico")
+            .eq("is_active", True)
             .order("created_at", desc=True)
             .limit(limit)
             .execute()
