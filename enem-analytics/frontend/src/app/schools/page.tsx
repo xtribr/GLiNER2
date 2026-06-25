@@ -35,6 +35,13 @@ export default function SchoolsPage() {
   const [page, setPage] = useState(1);
   const limit = 50;
 
+  // Pré-filtra por UF quando vem da URL (?uf=XX) — ex.: clique num estado no mapa da vitrine.
+  useEffect(() => {
+    const u = new URLSearchParams(window.location.search).get('uf')?.toUpperCase();
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- init do filtro a partir do query param (uma vez, no mount)
+    if (u && UF_OPTIONS.includes(u)) setUf(u);
+  }, []);
+
   // Limites dos sliders para o recorte categórico atual
   const { data: bounds } = useQuery({
     queryKey: ['filter-bounds', uf, municipio, tipoEscola, localizacao],

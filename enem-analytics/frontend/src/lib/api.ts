@@ -775,7 +775,13 @@ export const api = {
   getStats: () => fetchPublicAPI<Stats>('/api/stats'),
 
   getStatsByUf: () =>
-    fetchPublicAPI<{ by_uf: { uf: string; media: number; escolas: number }[] }>('/api/stats/by-uf'),
+    fetchPublicAPI<{
+      by_uf: {
+        uf: string; media: number; escolas: number;
+        media_cn: number; media_ch: number; media_lc: number; media_mt: number; media_redacao: number;
+        media_prev: number | null; ano: number; ano_prev: number | null;
+      }[];
+    }>('/api/stats/by-uf'),
 
   // Cadastro self-service (modelo A). Público — cria a conta no backend; o
   // auto-login (supabase.auth.signInWithPassword) acontece no componente.
