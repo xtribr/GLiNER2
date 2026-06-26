@@ -15,8 +15,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://app.rankingenem.com"),
   title: "Portal dos Microdados ENEM — Ranking e Nota TRI por Escola | XTRI",
   description: "Portal dos Microdados ENEM: ranking por escola, nota TRI, tendências e diagnóstico, a partir dos dados oficiais do INEP.",
+  openGraph: {
+    siteName: "X-TRI",
+    locale: "pt_BR",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({
