@@ -771,8 +771,62 @@ async function downloadAuthenticatedFile(endpoint: string): Promise<void> {
   window.URL.revokeObjectURL(downloadUrl);
 }
 
+export interface RedacaoCompetencia {
+  competencia: string;
+  nome: string;
+  nota_media: number;
+  concordancia_exata_pct: number;
+  divergencia_media_pts: number;
+  dist_niveis_pct: Record<string, number>;
+  dist_divergencia_pct: Record<string, number>;
+}
+
+export interface RedacaoStatusItem {
+  codigo: string;
+  label: string;
+  count: number;
+  pct: number;
+}
+
+export interface RedacaoAnalysis {
+  ano: number;
+  fonte: string;
+  observacao: string;
+  total_participantes: number;
+  redacoes_corrigidas: number;
+  presentes: number;
+  ausentes: number;
+  nota: {
+    media: number;
+    n: number;
+    nota_1000: number;
+    nota_zero: number;
+    histograma: { faixa: number; count: number }[];
+  };
+  status: {
+    descricao: string;
+    legenda: RedacaoStatusItem[];
+    problemas: RedacaoStatusItem[];
+    total_zeradas_anuladas: number;
+  };
+  divergencia_avaliadores: {
+    descricao: string;
+    pct_terceiro_avaliador: number;
+    competencia_mais_divergente: string;
+    competencia_mais_dificil: string;
+    niveis: number[];
+    por_competencia: RedacaoCompetencia[];
+  };
+  divergencia_por_uf: {
+    descricao: string;
+    ufs: { uf: string; divergencia_media: number; pct_terceiro: number; n: number }[];
+  };
+}
+
 export const api = {
   getStats: () => fetchPublicAPI<Stats>('/api/stats'),
+
+  getRedacaoAnalysis: () => fetchPublicAPI<RedacaoAnalysis>('/api/redacao/analysis'),
 
   getStatsByUf: () =>
     fetchPublicAPI<{

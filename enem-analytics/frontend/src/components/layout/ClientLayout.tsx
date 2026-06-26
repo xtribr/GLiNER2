@@ -16,6 +16,7 @@ function isPublicPath(pathname: string | null): boolean {
   if (!pathname) return false;
   if (pathname === '/') return true;
   if (pathname === '/schools') return true;
+  if (pathname === '/redacao') return true;
   // Detalhe da escola (/schools/{inep}) = resumo público; /roadmap segue gated.
   if (/^\/schools\/[^/]+$/.test(pathname)) return true;
   if (pathname === '/termos-de-uso') return true;
@@ -133,6 +134,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                   className="flex items-center gap-2 rounded-xl px-3 sm:px-4 py-2 text-sm font-semibold text-[#139ED3] transition-colors hover:bg-[#E9F8FE]"
                 >
                   Ranking
+                </Link>
+                <Link
+                  href="/redacao"
+                  className="flex items-center gap-2 rounded-xl px-3 sm:px-4 py-2 text-sm font-semibold text-[#FF4B2E] transition-colors hover:bg-[#FFF0EB]"
+                >
+                  Redação
                 </Link>
                 <button
                   onClick={logout}

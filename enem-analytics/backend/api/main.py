@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from typing import Optional
 
-from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights, contact, oracle
+from api.routes import schools, predictions, diagnosis, clusters, recommendations, tri_lists, gliner_insights, contact, oracle, redacao
 from api.auth import router as auth_router
 from api.auth.signup import router as signup_router
 from api.auth.supabase_dependencies import UserProfile, get_current_admin, get_optional_user
@@ -76,6 +76,7 @@ app.include_router(tri_lists.router)
 app.include_router(gliner_insights.router, prefix="/api/gliner", tags=["GLiNER Insights"])
 app.include_router(contact.router)
 app.include_router(oracle.router, tags=["Oracle"])
+app.include_router(redacao.router, tags=["Redação"])
 
 
 @app.get("/")

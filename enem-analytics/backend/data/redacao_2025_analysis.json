@@ -1,0 +1,463 @@
+{
+  "ano": 2025,
+  "fonte": "INEP — Microdados ENEM 2025 (RESULTADOS_2025.csv)",
+  "observacao": "Agregados nacionais anônimos. Nenhum dado individual/identificável.",
+  "total_participantes": 4810772,
+  "redacoes_corrigidas": 3457555,
+  "presentes": 3457555,
+  "ausentes": 1353217,
+  "nota": {
+    "media": 580.8,
+    "n": 3457555,
+    "nota_1000": 10,
+    "nota_zero": 211859,
+    "histograma": [
+      {
+        "faixa": 0,
+        "count": 212820
+      },
+      {
+        "faixa": 100,
+        "count": 2114
+      },
+      {
+        "faixa": 200,
+        "count": 29561
+      },
+      {
+        "faixa": 300,
+        "count": 189272
+      },
+      {
+        "faixa": 400,
+        "count": 492267
+      },
+      {
+        "faixa": 500,
+        "count": 743325
+      },
+      {
+        "faixa": 600,
+        "count": 773212
+      },
+      {
+        "faixa": 700,
+        "count": 463062
+      },
+      {
+        "faixa": 800,
+        "count": 378379
+      },
+      {
+        "faixa": 900,
+        "count": 173533
+      },
+      {
+        "faixa": 1000,
+        "count": 10
+      }
+    ]
+  },
+  "status": {
+    "descricao": "Situação oficial da redação (dicionário INEP). % sobre o total de participantes.",
+    "legenda": [
+      {
+        "codigo": "1",
+        "label": "Sem problemas",
+        "count": 3245696,
+        "pct": 67.47
+      },
+      {
+        "codigo": "(ausente)",
+        "label": "Ausente (não fez a redação)",
+        "count": 1353217,
+        "pct": 28.13
+      },
+      {
+        "codigo": "4",
+        "label": "Em branco",
+        "count": 114329,
+        "pct": 2.38
+      },
+      {
+        "codigo": "3",
+        "label": "Cópia do texto motivador",
+        "count": 54840,
+        "pct": 1.14
+      },
+      {
+        "codigo": "8",
+        "label": "Texto insuficiente",
+        "count": 16975,
+        "pct": 0.35
+      },
+      {
+        "codigo": "6",
+        "label": "Fuga ao tema",
+        "count": 13576,
+        "pct": 0.28
+      },
+      {
+        "codigo": "7",
+        "label": "Não atendimento ao tipo textual",
+        "count": 5661,
+        "pct": 0.12
+      },
+      {
+        "codigo": "9",
+        "label": "Parte desconectada",
+        "count": 3408,
+        "pct": 0.07
+      },
+      {
+        "codigo": "2",
+        "label": "Anulada",
+        "count": 3070,
+        "pct": 0.06
+      }
+    ],
+    "problemas": [
+      {
+        "codigo": "4",
+        "label": "Em branco",
+        "count": 114329,
+        "pct": 2.38
+      },
+      {
+        "codigo": "3",
+        "label": "Cópia do texto motivador",
+        "count": 54840,
+        "pct": 1.14
+      },
+      {
+        "codigo": "8",
+        "label": "Texto insuficiente",
+        "count": 16975,
+        "pct": 0.35
+      },
+      {
+        "codigo": "6",
+        "label": "Fuga ao tema",
+        "count": 13576,
+        "pct": 0.28
+      },
+      {
+        "codigo": "7",
+        "label": "Não atendimento ao tipo textual",
+        "count": 5661,
+        "pct": 0.12
+      },
+      {
+        "codigo": "9",
+        "label": "Parte desconectada",
+        "count": 3408,
+        "pct": 0.07
+      },
+      {
+        "codigo": "2",
+        "label": "Anulada",
+        "count": 3070,
+        "pct": 0.06
+      }
+    ],
+    "total_zeradas_anuladas": 211859
+  },
+  "divergencia_avaliadores": {
+    "descricao": "Notas dos dois avaliadores por competência: níveis 0–200 (passo 40), divergência e médias.",
+    "pct_terceiro_avaliador": 33.1,
+    "competencia_mais_divergente": "C5",
+    "competencia_mais_dificil": "C5",
+    "niveis": [
+      0,
+      40,
+      80,
+      120,
+      160,
+      200
+    ],
+    "por_competencia": [
+      {
+        "competencia": "C1",
+        "nome": "C1 — Norma culta",
+        "nota_media": 113.1,
+        "concordancia_exata_pct": 54.62,
+        "divergencia_media_pts": 20.71,
+        "dist_niveis_pct": {
+          "0": 6.12,
+          "40": 1.96,
+          "80": 20.2,
+          "120": 47.1,
+          "160": 23.95,
+          "200": 0.66
+        },
+        "dist_divergencia_pct": {
+          "0": 54.62,
+          "40": 40.04,
+          "80": 4.37,
+          "120": 0.89,
+          "160": 0.08,
+          "200": 0.0
+        }
+      },
+      {
+        "competencia": "C2",
+        "nome": "C2 — Compreensão da proposta",
+        "nota_media": 127.9,
+        "concordancia_exata_pct": 56.94,
+        "divergencia_media_pts": 21.54,
+        "dist_niveis_pct": {
+          "0": 6.06,
+          "40": 1.99,
+          "80": 7.26,
+          "120": 48.42,
+          "160": 23.31,
+          "200": 12.96
+        },
+        "dist_divergencia_pct": {
+          "0": 56.94,
+          "40": 33.75,
+          "80": 7.98,
+          "120": 1.19,
+          "160": 0.13,
+          "200": 0.01
+        }
+      },
+      {
+        "competencia": "C3",
+        "nome": "C3 — Argumentação",
+        "nota_media": 112.0,
+        "concordancia_exata_pct": 52.56,
+        "divergencia_media_pts": 22.04,
+        "dist_niveis_pct": {
+          "0": 6.2,
+          "40": 2.86,
+          "80": 21.34,
+          "120": 47.76,
+          "160": 18.03,
+          "200": 3.81
+        },
+        "dist_divergencia_pct": {
+          "0": 52.56,
+          "40": 40.65,
+          "80": 5.95,
+          "120": 0.78,
+          "160": 0.05,
+          "200": 0.0
+        }
+      },
+      {
+        "competencia": "C4",
+        "nome": "C4 — Coesão",
+        "nota_media": 119.1,
+        "concordancia_exata_pct": 49.18,
+        "divergencia_media_pts": 24.15,
+        "dist_niveis_pct": {
+          "0": 6.29,
+          "40": 3.09,
+          "80": 18.73,
+          "120": 40.48,
+          "160": 21.34,
+          "200": 10.07
+        },
+        "dist_divergencia_pct": {
+          "0": 49.18,
+          "40": 42.39,
+          "80": 7.36,
+          "120": 0.98,
+          "160": 0.07,
+          "200": 0.01
+        }
+      },
+      {
+        "competencia": "C5",
+        "nome": "C5 — Proposta de intervenção",
+        "nota_media": 106.0,
+        "concordancia_exata_pct": 50.69,
+        "divergencia_media_pts": 26.32,
+        "dist_niveis_pct": {
+          "0": 18.37,
+          "40": 6.63,
+          "80": 16.9,
+          "120": 23.82,
+          "160": 18.4,
+          "200": 15.88
+        },
+        "dist_divergencia_pct": {
+          "0": 50.69,
+          "40": 36.1,
+          "80": 10.43,
+          "120": 2.35,
+          "160": 0.36,
+          "200": 0.07
+        }
+      }
+    ]
+  },
+  "divergencia_por_uf": {
+    "descricao": "Divergência média entre Av1 e Av2 (soma das 5 competências, em pontos) por UF de aplicação da prova, e % que precisou de 3º avaliador.",
+    "ufs": [
+      {
+        "uf": "PI",
+        "divergencia_media": 118.96,
+        "pct_terceiro": 34.4,
+        "n": 89161
+      },
+      {
+        "uf": "AC",
+        "divergencia_media": 117.69,
+        "pct_terceiro": 34.21,
+        "n": 18991
+      },
+      {
+        "uf": "BA",
+        "divergencia_media": 116.35,
+        "pct_terceiro": 33.8,
+        "n": 302415
+      },
+      {
+        "uf": "MG",
+        "divergencia_media": 116.34,
+        "pct_terceiro": 33.44,
+        "n": 326835
+      },
+      {
+        "uf": "PR",
+        "divergencia_media": 116.34,
+        "pct_terceiro": 33.66,
+        "n": 142507
+      },
+      {
+        "uf": "MA",
+        "divergencia_media": 115.92,
+        "pct_terceiro": 33.6,
+        "n": 152518
+      },
+      {
+        "uf": "RO",
+        "divergencia_media": 115.73,
+        "pct_terceiro": 33.37,
+        "n": 31620
+      },
+      {
+        "uf": "AM",
+        "divergencia_media": 115.69,
+        "pct_terceiro": 33.31,
+        "n": 65626
+      },
+      {
+        "uf": "SP",
+        "divergencia_media": 115.69,
+        "pct_terceiro": 33.51,
+        "n": 544811
+      },
+      {
+        "uf": "RN",
+        "divergencia_media": 115.47,
+        "pct_terceiro": 33.41,
+        "n": 85759
+      },
+      {
+        "uf": "AP",
+        "divergencia_media": 115.4,
+        "pct_terceiro": 33.48,
+        "n": 22944
+      },
+      {
+        "uf": "RJ",
+        "divergencia_media": 115.26,
+        "pct_terceiro": 33.38,
+        "n": 235563
+      },
+      {
+        "uf": "MS",
+        "divergencia_media": 114.66,
+        "pct_terceiro": 33.22,
+        "n": 40989
+      },
+      {
+        "uf": "PE",
+        "divergencia_media": 114.43,
+        "pct_terceiro": 33.08,
+        "n": 202852
+      },
+      {
+        "uf": "MT",
+        "divergencia_media": 114.28,
+        "pct_terceiro": 33.28,
+        "n": 51597
+      },
+      {
+        "uf": "SC",
+        "divergencia_media": 113.89,
+        "pct_terceiro": 33.07,
+        "n": 79740
+      },
+      {
+        "uf": "PB",
+        "divergencia_media": 113.54,
+        "pct_terceiro": 32.87,
+        "n": 105666
+      },
+      {
+        "uf": "CE",
+        "divergencia_media": 113.33,
+        "pct_terceiro": 32.75,
+        "n": 216181
+      },
+      {
+        "uf": "RR",
+        "divergencia_media": 113.09,
+        "pct_terceiro": 32.57,
+        "n": 9030
+      },
+      {
+        "uf": "GO",
+        "divergencia_media": 113.08,
+        "pct_terceiro": 32.25,
+        "n": 118643
+      },
+      {
+        "uf": "SE",
+        "divergencia_media": 113.05,
+        "pct_terceiro": 32.85,
+        "n": 59927
+      },
+      {
+        "uf": "RS",
+        "divergencia_media": 112.87,
+        "pct_terceiro": 32.64,
+        "n": 132433
+      },
+      {
+        "uf": "TO",
+        "divergencia_media": 112.73,
+        "pct_terceiro": 32.08,
+        "n": 26650
+      },
+      {
+        "uf": "ES",
+        "divergencia_media": 112.08,
+        "pct_terceiro": 31.86,
+        "n": 60911
+      },
+      {
+        "uf": "PA",
+        "divergencia_media": 111.7,
+        "pct_terceiro": 31.17,
+        "n": 202633
+      },
+      {
+        "uf": "DF",
+        "divergencia_media": 111.21,
+        "pct_terceiro": 31.85,
+        "n": 60673
+      },
+      {
+        "uf": "AL",
+        "divergencia_media": 109.46,
+        "pct_terceiro": 31.68,
+        "n": 70880
+      }
+    ]
+  }
+}
