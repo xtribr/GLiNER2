@@ -149,19 +149,29 @@ async def signup(payload: SignupRequest, request: Request):
 
     supabase = get_supabase()
 
-    # 1 escola : 1 perfil
+    # 1 escola : 1 perfil — mas um cadastro ANTERIOR removido/desativado não pode
+    # bloquear um novo cadastro (auto-cura). Só perfis ATIVOS barram.
     existing = (
         supabase.table("profiles")
-        .select("id")
+        .select("id, is_active")
         .eq("codigo_inep", payload.codigo_inep)
         .limit(1)
         .execute()
     )
     if existing.data:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Esta escola já está cadastrada. Faça login ou fale com o suporte.",
-        )
+        prev = existing.data[0]
+        if prev.get("is_active"):
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="Esta escola já está cadastrada. Faça login ou fale com o suporte.",
+            )
+        # Resíduo de um cadastro removido/inativo → limpa (perfil + usuário de auth)
+        # para liberar o código INEP e evitar conflito de unicidade.
+        try:
+            supabase.table("profiles").delete().eq("id", prev["id"]).execute()
+            supabase.auth.admin.delete_user(prev["id"])
+        except Exception as exc:  # noqa: BLE001 - melhor-esforço; segue o cadastro
+            logger.warning(f"Falha ao limpar cadastro inativo {prev['id']}: {exc}")
 
     # Cria usuário no Supabase Auth (acesso imediato → email_confirm=True).
     # NÃO gravamos is_admin no user_metadata (is_admin vem só da tabela profiles).

@@ -224,22 +224,28 @@ async def delete_user(
     current_user: UserProfile = Depends(get_current_admin)
 ):
     """
-    Deactivate a school/user (soft delete).
-    Requires admin privileges.
+    Remove DEFINITIVAMENTE a escola/usuário: apaga o perfil e o usuário de auth,
+    liberando o código INEP e o e-mail para um novo cadastro. Requer admin.
+    (Para apenas desativar sem apagar, use PUT /users/{id} com is_active=false.)
     """
     if user_id == current_user.id:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Não é possível desativar seu próprio usuário"
+            detail="Não é possível excluir seu próprio usuário"
         )
 
-    updated = update_profile(user_id, is_active=False)
-
-    if not updated:
+    if not get_user_profile(user_id):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Usuário não encontrado"
         )
+
+    supabase = get_supabase()
+    supabase.table("profiles").delete().eq("id", user_id).execute()
+    try:
+        supabase.auth.admin.delete_user(user_id)
+    except Exception:  # noqa: BLE001 - perfil já removido; usuário de auth pode não existir
+        pass
 
     return None
 
