@@ -240,35 +240,120 @@ def create_profile(
         return None
 
 
-def list_all_profiles(skip: int = 0, limit: int = 100) -> list[UserProfile]:
+# PostgREST caps a single response (Supabase default max-rows ≈ 1000), so the
+# admin user list must page through ALL profiles in batches. Otherwise schools
+# beyond the first page silently vanish from "Usuários" while still appearing in
+# "Leads" (which reads the same table with its own 1000-row, date-ordered query).
+# Order by (created_at desc, id) for a TOTAL order so batch windows never skip or
+# duplicate rows that share a created_at timestamp at a page boundary.
+_PROFILE_PAGE_SIZE = 1000
+_PROFILE_FETCH_ALL_CAP = 20000  # safety stop; logged if hit (never silently truncate)
+
+
+def _build_auth_email_map() -> dict:
+    """Bulk {user_id: email} from Supabase Auth, paginated.
+
+    Resolves emails for the whole admin list in a handful of requests instead of
+    one admin HTTP call per row. `profiles.email` is not populated at signup, so
+    a per-row fallback to the Auth admin API turns a full-table user list into an
+    N+1 of blocking calls (slow / gateway-timeout / rate-limit). Best-effort:
+    returns {} on error, and callers fall back to profiles.email or "".
     """
-    List all user profiles (admin function).
+    emails: dict = {}
+    try:
+        supabase = get_supabase()
+        page = 1
+        per_page = 1000
+        while True:
+            users = supabase.auth.admin.list_users(page=page, per_page=per_page) or []
+            for u in users:
+                uid = getattr(u, "id", None)
+                email = getattr(u, "email", None)
+                if uid and email:
+                    emails[uid] = email
+            if not users:  # empty page → exhausted (robust to server per_page caps)
+                break
+            page += 1
+            if page > 100:  # safety: ~100k auth users
+                logger.warning("_build_auth_email_map stopped at page 100; some emails unresolved")
+                break
+    except Exception as e:  # noqa: BLE001 - email map is best-effort
+        logger.warning(f"Failed to build auth email map: {e}")
+    return emails
+
+
+def list_all_profiles(skip: int = 0, limit: Optional[int] = None) -> list[UserProfile]:
+    """
+    List user profiles (admin function).
 
     Args:
-        skip: Number of records to skip
-        limit: Maximum records to return
+        skip: Number of records to skip.
+        limit: Maximum records to return. When None (default), returns the FULL
+            table, paging through it in batches — the per-request row cap would
+            otherwise truncate the list and hide schools that exist as leads.
 
     Returns:
-        List of UserProfile objects
+        List of UserProfile objects, ordered by (created_at desc, id).
     """
     try:
         supabase = get_supabase()
-        result = supabase.table("profiles").select("*").range(skip, skip + limit - 1).execute()
 
-        return [
-            UserProfile(
-                id=row["id"],
-                email=resolve_user_email(
-                    row["id"],
-                    profile_email=row.get("email", ""),
-                ),
-                codigo_inep=row["codigo_inep"],
-                nome_escola=row["nome_escola"],
-                is_admin=row.get("is_admin", False),
-                is_active=row.get("is_active", True)
+        def _page(start: int, count: int) -> list[dict]:
+            return (
+                supabase.table("profiles")
+                .select("*")
+                .order("created_at", desc=True)
+                .order("id")
+                .range(start, start + count - 1)
+                .execute()
+                .data
+                or []
             )
-            for row in result.data
-        ]
+
+        rows: list[dict] = []
+        if limit is not None:
+            rows = _page(skip, limit)
+        else:
+            offset = skip
+            while True:
+                page = _page(offset, _PROFILE_PAGE_SIZE)
+                rows.extend(page)
+                offset += len(page)
+                if len(page) < _PROFILE_PAGE_SIZE:
+                    break  # short page → last page
+                if offset >= _PROFILE_FETCH_ALL_CAP:
+                    # Only warn if rows genuinely remain beyond the cap (avoids a
+                    # false positive when the table size is an exact multiple).
+                    if _page(offset, 1):
+                        logger.warning(
+                            "list_all_profiles hit safety cap of %s rows; some profiles "
+                            "were not returned. Raise _PROFILE_FETCH_ALL_CAP.",
+                            _PROFILE_FETCH_ALL_CAP,
+                        )
+                    break
+
+        # Resolve emails in ONE bulk pass — never one Auth call per row.
+        email_map = _build_auth_email_map()
+
+        profiles: list[UserProfile] = []
+        for row in rows:
+            # One malformed row must not blank the entire admin list (was the
+            # prior all-or-nothing failure mode).
+            try:
+                uid = row["id"]
+                profiles.append(
+                    UserProfile(
+                        id=uid,
+                        email=(row.get("email") or "") or email_map.get(uid, ""),
+                        codigo_inep=row["codigo_inep"],
+                        nome_escola=row["nome_escola"],
+                        is_admin=row.get("is_admin", False),
+                        is_active=row.get("is_active", True),
+                    )
+                )
+            except Exception as exc:  # noqa: BLE001
+                logger.error("Skipping malformed profile row %s: %s", row.get("id"), exc)
+        return profiles
     except Exception as e:
         logger.error(f"Failed to list profiles: {e}")
         return []
@@ -290,6 +375,11 @@ def list_leads(limit: int = 1000) -> list[Lead]:
             .limit(limit)
             .execute()
         )
+
+        # Never truncate leads silently — if the cap is reached, older leads are
+        # being dropped from the panel and the limit must be raised / paginated.
+        if len(result.data or []) >= limit:
+            logger.warning("list_leads hit the %s-row cap; older leads may be omitted.", limit)
 
         return [
             Lead(

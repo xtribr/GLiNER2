@@ -27,12 +27,15 @@ class UserUpdate(BaseModel):
 @router.get("/users")
 async def list_users(
     skip: int = 0,
-    limit: int = 100,
+    limit: Optional[int] = None,
     _: UserProfile = Depends(get_current_admin)
 ):
     """
     List all registered schools/users.
-    Requires admin privileges.
+
+    Returns the full set by default (limit omitted) so every registered school —
+    including those captured as public leads — appears. Pass `limit` for a
+    single bounded page. Requires admin privileges.
     """
     profiles = list_all_profiles(skip=skip, limit=limit)
     return [
@@ -260,13 +263,20 @@ async def get_admin_stats(
     """
     supabase = get_supabase()
 
-    # Get all profiles
-    result = supabase.table("profiles").select("is_active, is_admin").execute()
-    profiles = result.data or []
+    # Use exact COUNT head-queries instead of pulling rows: PostgREST silently
+    # caps a row response at ~1000, which would undercount once profiles exceed
+    # that (the same truncation class as the leads-vs-users bug). Counts are
+    # accurate at any table size and pull no rows.
+    def _count(query) -> int:
+        return query.limit(1).execute().count or 0
 
-    total_users = len(profiles)
-    active_users = sum(1 for p in profiles if p.get("is_active", True))
-    admin_users = sum(1 for p in profiles if p.get("is_admin", False))
+    total_users = _count(supabase.table("profiles").select("id", count="exact"))
+    active_users = _count(
+        supabase.table("profiles").select("id", count="exact").eq("is_active", True)
+    )
+    admin_users = _count(
+        supabase.table("profiles").select("id", count="exact").eq("is_admin", True)
+    )
 
     return {
         "total_users": total_users,

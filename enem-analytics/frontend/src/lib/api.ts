@@ -1494,8 +1494,15 @@ export const api = {
     }>(`/api/gliner/global/trending-concepts${area || limit ? `?${area ? `area=${area}` : ''}${limit ? `&limit=${limit}` : ''}` : ''}`),
 
   // Admin APIs
-  listUsers: (skip = 0, limit = 100) =>
-    fetchAPI<User[]>(`/api/admin/users?skip=${skip}&limit=${limit}`),
+  // No limit by default → backend returns ALL profiles (every school, incl.
+  // public leads). Pass skip/limit only for an explicit bounded page.
+  listUsers: (skip?: number, limit?: number) => {
+    const params = new URLSearchParams();
+    if (typeof skip === 'number') params.set('skip', String(skip));
+    if (typeof limit === 'number') params.set('limit', String(limit));
+    const query = params.toString();
+    return fetchAPI<User[]>(`/api/admin/users${query ? `?${query}` : ''}`);
+  },
 
   getUser: (userId: string) =>
     fetchAPI<User>(`/api/admin/users/${userId}`),
