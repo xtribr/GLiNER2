@@ -1,18 +1,23 @@
-"""
-Feature engineering and data preprocessing for ENEM ML models
-"""
+"""Feature engineering and data preprocessing for ENEM ML models."""
 
-import pandas as pd
-import numpy as np
-from typing import Dict, List, Tuple, Optional
+import logging
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
+import pandas as pd
 
 from data.year_resolver import (
+    file_sha256,
     find_latest_enem_results_file,
     find_latest_school_skills_file,
     find_latest_skills_file,
+    get_file_year,
     get_latest_year_from_df,
 )
+
+logger = logging.getLogger(__name__)
+
 
 class ENEMPreprocessor:
     """Preprocessor for ENEM school data - creates features for ML models"""
@@ -27,6 +32,9 @@ class ENEMPreprocessor:
         self.skills_df = None
         self.school_skills_df = None
         self.tri_content_df = None  # TRI content with GLiNER entities
+        self.source_files: Dict[str, Optional[Path]] = {}
+        self.source_years: Dict[str, Optional[int]] = {}
+        self._provenance_cache: Dict[bool, Dict[str, Dict[str, Any]]] = {}
         self._load_data()
         self._compute_tri_mappings()
 
@@ -37,27 +45,104 @@ class ENEMPreprocessor:
         if enem_file is None:
             raise FileNotFoundError("No consolidated ENEM dataset found in backend/data")
         self.df = pd.read_csv(enem_file, dtype={'codigo_inep': str})
+        self.source_files["enem_results"] = enem_file
+        self.source_years["enem_results"] = get_latest_year_from_df(self.df)
         print(f"Loaded {len(self.df)} ENEM records")
 
         # National skills data
         skills_file = find_latest_skills_file(self.data_path)
         if skills_file and skills_file.exists():
             self.skills_df = pd.read_csv(skills_file)
+            self.source_years["national_skills"] = get_latest_year_from_df(self.skills_df)
             print(f"Loaded {len(self.skills_df)} skill records")
+        self.source_files["national_skills"] = skills_file
+        self.source_years.setdefault("national_skills", get_file_year(skills_file) if skills_file else None)
 
         # School-level skills data
         school_skills_file = find_latest_school_skills_file(self.data_path)
-        if school_skills_file and school_skills_file.exists():
-            self.school_skills_df = pd.read_csv(school_skills_file)
-            print(f"Loaded {len(self.school_skills_df)} school skill records")
+        self.source_files["school_skills"] = school_skills_file
+        self.source_years["school_skills"] = (
+            get_file_year(school_skills_file) if school_skills_file else None
+        )
+        if school_skills_file:
+            # create_skill_aggregate_features ainda devolve placeholders e não lê
+            # este dataframe. Registrar a fonte sem carregar ~79 MB evita custo de
+            # memória e deixa explícito que ela NÃO participa dos modelos atuais.
+            logger.info(
+                "School skills source available but not used in current features: %s",
+                school_skills_file.name,
+            )
 
         # TRI content data with GLiNER entities
         tri_content_file = self.data_path / "conteudos_tri_gliner.csv"
+        self.source_files["tri_content"] = tri_content_file if tri_content_file.exists() else None
+        self.source_years["tri_content"] = None
         if tri_content_file.exists():
             # Use quoting=1 (QUOTE_ALL) to properly handle fields with commas
             self.tri_content_df = pd.read_csv(tri_content_file, quoting=1)
             self.tri_content_df = self._sanitize_tri_scores(self.tri_content_df)
             print(f"Loaded {len(self.tri_content_df)} TRI content records")
+
+    def get_data_provenance(self, include_hashes: bool = False) -> Dict[str, Dict[str, Any]]:
+        """Describe every model input and whether it affects current features."""
+        if include_hashes in self._provenance_cache:
+            return self._provenance_cache[include_hashes]
+
+        usage = {
+            "enem_results": True,
+            "national_skills": True,
+            "school_skills": False,
+            "tri_content": True,
+        }
+        provenance: Dict[str, Dict[str, Any]] = {}
+        for source_name, path in self.source_files.items():
+            entry: Dict[str, Any] = {
+                "file": path.name if path else None,
+                "year": self.source_years.get(source_name),
+                "bytes": path.stat().st_size if path and path.exists() else None,
+                "used_in_features": usage[source_name],
+            }
+            if source_name == "school_skills" and path:
+                entry["schema"] = (
+                    "granular_by_skill" if path.name.startswith("school_skills_")
+                    else "legacy_school_summary"
+                )
+            if include_hashes:
+                entry["sha256"] = file_sha256(path) if path and path.exists() else None
+            provenance[source_name] = entry
+
+        self._provenance_cache[include_hashes] = provenance
+        return provenance
+
+    def validate_training_sources(self, allow_year_mismatch: bool = False) -> list[str]:
+        """Block training when a year-bearing source used by features is stale."""
+        provenance = self.get_data_provenance(include_hashes=False)
+        result_year = provenance["enem_results"]["year"]
+        problems: list[str] = []
+
+        for source_name in ("enem_results", "national_skills", "tri_content"):
+            entry = provenance[source_name]
+            if entry["file"] is None:
+                problems.append(f"Fonte obrigatória ausente: {source_name}")
+
+        national_skills_year = provenance["national_skills"]["year"]
+        if (
+            result_year is not None
+            and national_skills_year is not None
+            and national_skills_year != result_year
+        ):
+            problems.append(
+                "Ano incompatível: resultados ENEM "
+                f"{result_year} e habilidades nacionais {national_skills_year}"
+            )
+
+        if problems and not allow_year_mismatch:
+            raise ValueError(
+                "Treinamento bloqueado por proveniência incompatível: " + "; ".join(problems)
+            )
+        if problems:
+            logger.warning("Training source override enabled: %s", "; ".join(problems))
+        return problems
 
     # Valid ENEM TRI score range. Items outside this corridor are either
     # corrupt exports or mislabeled raw difficulty parameters, and will bias

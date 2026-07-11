@@ -44,12 +44,19 @@ class _Tbl:
         self._row = row
         return self
 
+    def delete(self):
+        self._op = "delete"
+        return self
+
     def execute(self):
         if self._op == "select":
             return _Resp(self.parent.existing)
         if self._op == "insert":
             self.parent.inserts.append(self._row)
             return _Resp([self._row])
+        if self._op == "delete":
+            self.parent.profile_deleted = True
+            return _Resp(self.parent.existing)
         return _Resp([{}])
 
 
@@ -76,6 +83,7 @@ class FakeSupabase:
         self.inserts = []
         self.created = None
         self.deleted = None
+        self.profile_deleted = False
         self.auth = _Auth(self)
 
     def table(self, _name):
@@ -157,10 +165,23 @@ def test_signup_email_descartavel(ctx):
     assert resp.status_code == 400
 
 
-def test_signup_escola_duplicada(ctx):
+def test_signup_escola_ativa_duplicada(ctx):
     client, signup_module, mp = ctx
-    fake = FakeSupabase(existing=[{"id": "ja-existe"}])
+    fake = FakeSupabase(existing=[{"id": "ja-existe", "is_active": True}])
     mp.setattr(signup_module, "get_supabase", lambda: fake)
     resp = client.post("/api/auth/signup", json=VALID)
     assert resp.status_code == 409
     assert fake.created is None  # não cria auth user se a escola já existe
+
+
+def test_signup_escola_inativa_e_limpa_e_recadastra(ctx):
+    client, signup_module, mp = ctx
+    fake = FakeSupabase(existing=[{"id": "ja-existe", "is_active": False}])
+    mp.setattr(signup_module, "get_supabase", lambda: fake)
+
+    resp = client.post("/api/auth/signup", json=VALID)
+
+    assert resp.status_code == 201, resp.text
+    assert fake.profile_deleted is True
+    assert fake.deleted == "ja-existe"
+    assert fake.created is not None

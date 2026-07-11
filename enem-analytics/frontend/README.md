@@ -29,6 +29,19 @@ pnpm install
 pnpm dev
 ```
 
+## Testes
+
+```bash
+pnpm test          # unitários (Vitest)
+pnpm test:e2e      # Playwright; requer frontend e backend locais
+pnpm build         # TypeScript + build de produção
+```
+
+Os cenários autenticados do Playwright não guardam credenciais no repositório.
+Configure `E2E_ADMIN_EMAIL`, `E2E_ADMIN_PASSWORD`, `E2E_SCHOOL_EMAIL`,
+`E2E_SCHOOL_PASSWORD`, `E2E_SCHOOL_INEP` e `E2E_OTHER_SCHOOL_INEP` no ambiente
+local/CI. Os dois códigos INEP devem existir na base real.
+
 ## Docker / Coolify
 
 - Base Directory: `/enem-analytics/frontend`

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import re
 from pathlib import Path
 from typing import Iterable, Optional
@@ -9,6 +10,10 @@ from typing import Iterable, Optional
 import pandas as pd
 
 YEAR_PATTERN = re.compile(r"(?<!\d)(20\d{2})(?!\d)")
+SCHOOL_SKILLS_PATTERNS = (
+    "desempenho_habilidades_*.csv",  # resumo legado por escola
+    "school_skills_*.csv",  # desempenho por escola/área/habilidade
+)
 
 
 def extract_years_from_name(name: str) -> list[int]:
@@ -20,6 +25,15 @@ def get_file_year(path: Path | str) -> Optional[int]:
     """Return the maximum year present in a file path, if any."""
     years = extract_years_from_name(Path(path).name)
     return max(years) if years else None
+
+
+def file_sha256(path: Path | str, chunk_size: int = 1024 * 1024) -> str:
+    """Return a stable SHA-256 digest without loading the whole file in memory."""
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as handle:
+        for chunk in iter(lambda: handle.read(chunk_size), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def find_latest_yeared_file(
@@ -62,8 +76,25 @@ def find_latest_skills_file(data_dir: Path | str) -> Optional[Path]:
 
 
 def find_latest_school_skills_file(data_dir: Path | str) -> Optional[Path]:
-    """Resolve the latest school-level skills CSV."""
-    return find_latest_yeared_file(data_dir, "desempenho_habilidades_*.csv")
+    """Resolve both supported school-skill schemas, preferring the newest year.
+
+    If both schemas exist for the same year, the granular ``school_skills``
+    export wins because it contains area/skill-level observations.
+    """
+    candidates: list[tuple[int, int, Path]] = []
+    for priority, pattern in enumerate(SCHOOL_SKILLS_PATTERNS):
+        candidate = find_latest_yeared_file(data_dir, pattern)
+        if candidate is None:
+            continue
+        year = get_file_year(candidate)
+        if year is not None:
+            candidates.append((year, priority, candidate))
+
+    if not candidates:
+        return None
+
+    candidates.sort(key=lambda item: (item[0], item[1], item[2].name))
+    return candidates[-1][2]
 
 
 def find_latest_oracle_predictions_file(data_dir: Path | str) -> Optional[Path]:

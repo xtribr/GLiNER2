@@ -2,14 +2,16 @@
 """Retreina modelos preditivos e permite promocao controlada por gates."""
 
 import argparse
-from pathlib import Path
+import json
 import shutil
 import sys
+from pathlib import Path
 
 BACKEND_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BACKEND_ROOT))
 
 from ml.prediction_model import AUDIT_REPORT_NAME, ENEMPredictionModel, TARGETS
+from ml.preprocessor import ENEMPreprocessor
 
 
 def gates_pass(metrics: dict) -> bool:
@@ -55,13 +57,39 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Falha se qualquer target reprovar os gates de promocao.",
     )
+    parser.add_argument(
+        "--allow-source-year-mismatch",
+        action="store_true",
+        help="Permite treino com fontes ausentes/de anos distintos e registra o override.",
+    )
+    parser.add_argument(
+        "--validate-sources-only",
+        action="store_true",
+        help="Valida e imprime a proveniência sem treinar nem gravar artefatos.",
+    )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    preprocessor = ENEMPreprocessor()
+    preprocessor.validate_training_sources(
+        allow_year_mismatch=args.allow_source_year_mismatch
+    )
+    print(json.dumps(
+        preprocessor.get_data_provenance(include_hashes=True),
+        ensure_ascii=False,
+        indent=2,
+    ))
+    if args.validate_sources_only:
+        print("\nFontes validadas; nenhum modelo foi treinado ou alterado.")
+        return 0
+
     model = ENEMPredictionModel(model_dir=args.model_dir)
-    metrics = model.train_all()
+    model.preprocessor = preprocessor
+    metrics = model.train_all(
+        allow_source_year_mismatch=args.allow_source_year_mismatch
+    )
 
     print("\nRetraining complete.")
     for target, info in metrics.items():

@@ -86,6 +86,21 @@ pnpm install
 pnpm dev
 ```
 
+## Proveniência dos modelos preditivos
+
+Antes de qualquer retreino, valide as fontes reais e registre seus hashes:
+
+```bash
+cd enem-analytics/backend
+python scripts/retrain_prediction_models.py --validate-sources-only
+```
+
+O treino é bloqueado se resultados ENEM e habilidades nacionais tiverem anos
+incompatíveis. Um override exige `--allow-source-year-mismatch` e fica explícito
+na execução. `school_skills_*.csv` e `desempenho_habilidades_*.csv` são schemas
+distintos; a fonte granular é registrada no manifesto, mas ainda não participa
+das features dos modelos atuais.
+
 ## Autenticação
 
 - O login é feito no frontend diretamente pelo Supabase Auth.

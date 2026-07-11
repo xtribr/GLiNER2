@@ -472,9 +472,18 @@ class ENEMPredictionModel:
 
     def _write_audit_report(self, metrics_by_target: Dict[str, Dict[str, Any]]) -> Path:
         report_path = self.model_dir / AUDIT_REPORT_NAME
+        first_metadata = next(
+            (
+                artifact.get("metadata", {})
+                for artifact in self.model_artifacts.values()
+                if artifact.get("metadata")
+            ),
+            {},
+        )
         report = {
             "generated_at": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
             "model_version": MODEL_VERSION,
+            "data_provenance": first_metadata.get("data_provenance", {}),
             "targets": {},
         }
 
@@ -508,8 +517,12 @@ class ENEMPredictionModel:
         self,
         target: str = "nota_media",
         preprocessor: Optional[ENEMPreprocessor] = None,
+        allow_source_year_mismatch: bool = False,
     ) -> Dict[str, Any]:
         preprocessor = self._ensure_preprocessor(preprocessor)
+        preprocessor.validate_training_sources(
+            allow_year_mismatch=allow_source_year_mismatch
+        )
         dataset = preprocessor.prepare_training_dataset(target_col=target, min_years=3, verbose=True)
         if dataset.empty:
             raise ValueError(f"No training samples available for {target}")
@@ -560,6 +573,7 @@ class ENEMPredictionModel:
             "prediction_target_year": int(preprocessor.df["ano"].max()) + 1,
             "training_pairs": [f"<={year - 1}->{year}" for year in sorted(dataset["_target_year"].unique())],
             "evaluation_strategy": "rolling-origin-backtest",
+            "data_provenance": preprocessor.get_data_provenance(include_hashes=True),
             "public_metrics": public_metrics,
             "backtest": backtest_summary,
         }
@@ -586,15 +600,25 @@ class ENEMPredictionModel:
             "metadata": metadata,
         }
 
-    def train_all(self) -> Dict[str, Dict[str, Any]]:
+    def train_all(
+        self,
+        allow_source_year_mismatch: bool = False,
+    ) -> Dict[str, Dict[str, Any]]:
         preprocessor = self._ensure_preprocessor()
+        preprocessor.validate_training_sources(
+            allow_year_mismatch=allow_source_year_mismatch
+        )
         all_metrics: Dict[str, Dict[str, Any]] = {}
 
         for target in TARGETS:
             print(f"\n{'=' * 60}")
             print(f"Training model for {target}")
             print("=" * 60)
-            metrics = self.train(target, preprocessor=preprocessor)
+            metrics = self.train(
+                target,
+                preprocessor=preprocessor,
+                allow_source_year_mismatch=allow_source_year_mismatch,
+            )
             all_metrics[target] = metrics
 
             print(f"  Train RMSE: {metrics['train_rmse']:.2f}")

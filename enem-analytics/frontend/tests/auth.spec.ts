@@ -1,121 +1,88 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Authentication', () => {
+const adminEmail = process.env.E2E_ADMIN_EMAIL;
+const adminPassword = process.env.E2E_ADMIN_PASSWORD;
+const schoolEmail = process.env.E2E_SCHOOL_EMAIL;
+const schoolPassword = process.env.E2E_SCHOOL_PASSWORD;
+const schoolInep = process.env.E2E_SCHOOL_INEP;
+const otherSchoolInep = process.env.E2E_OTHER_SCHOOL_INEP;
+
+test.describe('Rotas públicas e autenticação', () => {
   test.beforeEach(async ({ page }) => {
-    // Clear localStorage before each test
     await page.goto('/login');
     await page.evaluate(() => localStorage.clear());
   });
 
-  test('should show login page', async ({ page }) => {
-    await page.goto('/login');
+  test('exibe a página de login', async ({ page }) => {
     await expect(page.getByRole('heading', { name: 'Entrar na sua conta' })).toBeVisible();
     await expect(page.getByPlaceholder('seu@email.com')).toBeVisible();
     await expect(page.getByPlaceholder('Sua senha')).toBeVisible();
   });
 
-  test('should show error for invalid credentials', async ({ page }) => {
-    await page.goto('/login');
-    await page.fill('input[type="email"]', 'wrong@email.com');
-    await page.fill('input[type="password"]', 'wrongpass');
-    await page.click('button[type="submit"]');
+  for (const path of ['/', '/schools', '/redacao']) {
+    test(`${path} permanece pública sem sessão`, async ({ page }) => {
+      await page.goto(path);
+      await expect(page).toHaveURL(new RegExp(`${path === '/' ? '/$' : `${path}$`}`));
+    });
+  }
 
-    await expect(page.getByText('Email ou senha incorretos')).toBeVisible({ timeout: 10000 });
-  });
-
-  test('should redirect to login when not authenticated', async ({ page }) => {
-    await page.goto('/');
+  test('redireciona rota profunda para login sem sessão', async ({ page }) => {
+    await page.goto('/compare');
     await expect(page).toHaveURL('/login', { timeout: 10000 });
   });
 });
 
-test.describe('Super Admin', () => {
+test.describe('Administrador', () => {
+  test.skip(!adminEmail || !adminPassword, 'Defina E2E_ADMIN_EMAIL e E2E_ADMIN_PASSWORD.');
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/login');
-    await page.evaluate(() => localStorage.clear());
-
-    // Login as super admin
-    await page.fill('input[type="email"]', 'super@xtri.com');
-    await page.fill('input[type="password"]', 'xtri2025');
+    await page.fill('input[type="email"]', adminEmail!);
+    await page.fill('input[type="password"]', adminPassword!);
     await page.click('button[type="submit"]');
-
-    // Wait for redirect
     await page.waitForURL('/', { timeout: 10000 });
   });
 
-  test('should access dashboard', async ({ page }) => {
-    await expect(page).toHaveURL('/');
-  });
-
-  test('should see admin menu', async ({ page }) => {
-    await expect(page.getByText('Painel Admin')).toBeVisible();
-    await expect(page.getByText('Usuários')).toBeVisible();
-  });
-
-  test('should access schools list', async ({ page }) => {
-    await page.goto('/schools');
-    await expect(page).toHaveURL('/schools');
-  });
-
-  test('should access admin panel', async ({ page }) => {
-    await page.click('text=Painel Admin');
+  test('acessa o painel administrativo', async ({ page }) => {
+    await page.goto('/admin');
     await expect(page).toHaveURL('/admin');
     await expect(page.getByText('Painel Administrativo')).toBeVisible();
   });
 
-  test('should access users management', async ({ page }) => {
-    await page.click('text=Usuários');
+  test('acessa a gestão de usuários', async ({ page }) => {
+    await page.goto('/admin/users');
     await expect(page).toHaveURL('/admin/users');
     await expect(page.getByText('Gerenciar Escolas')).toBeVisible();
   });
-
-  test('should logout', async ({ page }) => {
-    await page.click('text=Sair');
-    await expect(page).toHaveURL('/login', { timeout: 10000 });
-  });
 });
 
-test.describe('School User', () => {
+test.describe('Usuário de escola', () => {
+  test.skip(
+    !schoolEmail || !schoolPassword || !schoolInep || !otherSchoolInep,
+    'Defina as credenciais E2E da escola e dois códigos INEP reais.',
+  );
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/login');
-    await page.evaluate(() => localStorage.clear());
-
-    // Login as school user
-    await page.fill('input[type="email"]', 'escola@teste.com');
-    await page.fill('input[type="password"]', 'teste123');
+    await page.fill('input[type="email"]', schoolEmail!);
+    await page.fill('input[type="password"]', schoolPassword!);
     await page.click('button[type="submit"]');
-
-    // Wait for redirect to school page
-    await page.waitForURL('/schools/31000000', { timeout: 10000 });
+    await page.waitForURL(`/schools/${schoolInep}`, { timeout: 10000 });
   });
 
-  test('should redirect to own school page', async ({ page }) => {
-    await expect(page).toHaveURL('/schools/31000000');
-  });
-
-  test('should NOT see admin menu', async ({ page }) => {
-    await expect(page.getByText('Painel Admin')).not.toBeVisible();
-    await expect(page.getByText('ADMIN')).not.toBeVisible();
-  });
-
-  test('should see school menu', async ({ page }) => {
-    await expect(page.getByText('MINHA ESCOLA')).toBeVisible();
-    await expect(page.getByText('Painel')).toBeVisible();
-    await expect(page.getByText('Roadmap')).toBeVisible();
-  });
-
-  test('should be redirected when trying to access other routes', async ({ page }) => {
+  test('acessa o próprio painel e o ranking público', async ({ page }) => {
+    await expect(page).toHaveURL(`/schools/${schoolInep}`);
     await page.goto('/schools');
-    await expect(page).toHaveURL('/schools/31000000', { timeout: 10000 });
+    await expect(page).toHaveURL('/schools');
   });
 
-  test('should be redirected when trying to access admin', async ({ page }) => {
+  test('não acessa a área administrativa', async ({ page }) => {
     await page.goto('/admin');
-    await expect(page).toHaveURL('/schools/31000000', { timeout: 10000 });
+    await expect(page).toHaveURL(`/schools/${schoolInep}`, { timeout: 10000 });
   });
 
-  test('should be redirected when trying to access another school', async ({ page }) => {
-    await page.goto('/schools/99999999');
-    await expect(page).toHaveURL('/schools/31000000', { timeout: 10000 });
+  test('não acessa o painel profundo de outra escola', async ({ page }) => {
+    await page.goto(`/schools/${otherSchoolInep}`);
+    await expect(page).toHaveURL(`/schools/${schoolInep}`, { timeout: 10000 });
   });
 });

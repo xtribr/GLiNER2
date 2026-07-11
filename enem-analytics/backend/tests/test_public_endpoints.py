@@ -17,7 +17,7 @@ def client(monkeypatch):
     # teardown e sem get_optional_user). Purga-os para importar os módulos REAIS,
     # garantindo o comportamento de auth correto (get_current_admin levanta 403).
     for _name in (
-        "api.main", "api.routes.schools",
+        "api.main", "api.routes", "api.routes.schools", "api.routes.gliner_insights",
         "api.auth.supabase_dependencies", "api.auth.authorization", "api.auth",
     ):
         sys.modules.pop(_name, None)
@@ -70,8 +70,14 @@ PUBLIC_PATHS = [
 ]
 
 GATED_PATHS = [
+    "/api/schools/31350664",
+    "/api/schools/31350664/history",
     "/api/schools/compare/11111111/22222222",
     "/api/schools/skills/all",
+    "/api/predictions/31350664",
+    "/api/diagnosis/31350664",
+    "/api/recommendations/31350664",
+    "/api/gliner/school/31350664/concepts",
     "/api/admin/leads",
 ]
 

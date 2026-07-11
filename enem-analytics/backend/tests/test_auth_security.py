@@ -7,6 +7,9 @@ acesso (None) quando não há linha em `profiles`, mesmo com is_admin no metadat
 
 import sys
 
+import pytest
+from fastapi import HTTPException
+
 
 def test_token_sem_perfil_nega_acesso_mesmo_com_admin_no_metadata(monkeypatch):
     # Purga módulos de auth falsos (poluição do test_gliner_insights).
@@ -34,3 +37,49 @@ def test_token_sem_perfil_nega_acesso_mesmo_com_admin_no_metadata(monkeypatch):
 
     # Fail-closed: sem perfil → não autenticado (jamais admin via metadata).
     assert result is None
+
+
+def test_admin_pode_acessar_qualquer_escola():
+    from api.auth.authorization import ensure_school_access
+    from api.auth.supabase_service import UserProfile
+
+    admin = UserProfile(
+        id="admin",
+        email="admin@example.com",
+        codigo_inep="",
+        nome_escola="XTRI",
+        is_admin=True,
+    )
+
+    assert ensure_school_access(admin, "31350664") is admin
+
+
+def test_usuario_escola_pode_acessar_a_propria_escola():
+    from api.auth.authorization import ensure_school_access
+    from api.auth.supabase_service import UserProfile
+
+    school_user = UserProfile(
+        id="school-user",
+        email="school@example.com",
+        codigo_inep="31350664",
+        nome_escola="Escola",
+    )
+
+    assert ensure_school_access(school_user, "31350664") is school_user
+
+
+def test_usuario_escola_nao_pode_acessar_outra_escola():
+    from api.auth.authorization import ensure_school_access
+    from api.auth.supabase_service import UserProfile
+
+    school_user = UserProfile(
+        id="school-user",
+        email="school@example.com",
+        codigo_inep="31350664",
+        nome_escola="Escola",
+    )
+
+    with pytest.raises(HTTPException) as exc_info:
+        ensure_school_access(school_user, "23246847")
+
+    assert exc_info.value.status_code == 403

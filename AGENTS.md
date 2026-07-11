@@ -6,7 +6,7 @@ Guia para Codex (codex.ai/code) e demais agentes trabalharem neste repositório.
 
 **Ranking ENEM Analytics** é a plataforma da XTRI para análise de desempenho escolar no ENEM. Produto em produção em `rankingenem.com`.
 
-- Frontend: Next.js 14 (App Router) em `enem-analytics/frontend/`
+- Frontend: Next.js 16 (App Router) + React 19 em `enem-analytics/frontend/`
 - Backend: FastAPI em `enem-analytics/backend/`
 - Auth + DB: Supabase Postgres (RLS habilitado)
 - ML: scikit-learn + XGBoost (`backend/ml/`) servindo predições e clusters
@@ -71,7 +71,8 @@ cd enem-analytics/frontend
 pnpm install                      # pnpm pinado em 8.15.9 (lockfile v6)
 pnpm dev                          # localhost:3000
 pnpm build && pnpm start
-pnpm test                         # Playwright e2e
+pnpm test                         # Vitest unitário
+pnpm test:e2e                     # Playwright e2e (requer serviços locais)
 ```
 
 Variáveis: `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`. `NEXT_PUBLIC_*` é injetado em build — mudou, redeploy.
@@ -94,6 +95,16 @@ python scripts/update_enem_year.py \
 Aplica migration `backend/scripts/migrations/005_enem_results_atomic_import.sql` antes do primeiro `--apply`.
 
 Existe `scripts/import_enem_year.py` no mesmo diretório — **deprecated**, não usar.
+
+Antes de retreinar os modelos, valide a proveniência das fontes reais:
+
+```bash
+cd enem-analytics/backend
+python scripts/retrain_prediction_models.py --validate-sources-only
+```
+
+O manifesto inclui ano, tamanho, SHA-256 e uso efetivo de cada fonte. O treino
+é bloqueado se fontes usadas nas features tiverem anos incompatíveis.
 
 ## Autenticação
 
