@@ -149,6 +149,7 @@ export default function TriReportDocument({ data: d, onReady }: Props) {
   return (
     <div className="xtri-tri">
       <div className="header">
+        {/* eslint-disable-next-line @next/next/no-img-element -- html2pdf precisa capturar a imagem já renderizada no DOM. */}
         <img src="/logo-xtri.png" alt="X-TRI" />
         <div className="htxt">
           <h1>Relatório TRI</h1>

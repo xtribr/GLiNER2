@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/lib/api';
 import { formatNumber, formatRanking } from '@/lib/utils';
@@ -89,7 +89,7 @@ export default function SchoolsPage() {
   });
 
   const hasMore = schools?.length === limit;
-  const municipios = municipiosData?.municipios ?? [];
+  const municipios = useMemo(() => municipiosData?.municipios ?? [], [municipiosData]);
 
   useEffect(() => {
     if (municipio && municipios.length > 0 && !municipios.includes(municipio)) {

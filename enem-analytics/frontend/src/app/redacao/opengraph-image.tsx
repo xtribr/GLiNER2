@@ -29,7 +29,6 @@ export default async function Image() {
       >
         {/* topo */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logoSrc} width={104} height={104} style={{ objectFit: 'contain' }} alt="X-TRI" />
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
             <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: 5, color: DARK }}>REDAÇÃO · ENEM</div>

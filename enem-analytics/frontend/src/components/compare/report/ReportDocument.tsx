@@ -25,6 +25,7 @@ export default function ReportDocument({ data: d, onReady }: Props) {
   return (
     <div className="xtri-report">
       <div className="header">
+        {/* eslint-disable-next-line @next/next/no-img-element -- html2pdf precisa capturar a imagem já renderizada no DOM. */}
         <img src="/logo-xtri.png" alt="X-TRI" />
         <div>
           <h1>Relatório Comparativo de Escolas</h1>

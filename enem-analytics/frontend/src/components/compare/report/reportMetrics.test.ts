@@ -1,9 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { areasWon, biggestGapArea, rankingGap, trendOverYears, statusClass, fmt, buildProjectionRows, buildRedacaoRows, buildSkillRows, buildRecommendations, canonicalAreaCode, overallFromDiagnosis } from './reportMetrics';
-import type { DiagnosisComparisonResult, TRIAreaProjection } from '@/lib/api';
+import type { DiagnosisComparisonArea, DiagnosisComparisonResult, TRIAreaProjection } from '@/lib/api';
 import type { ReportData, ReportSchoolMeta } from './types';
 
-const area = (name: string, a: number, b: number, sa: any='good', sb: any='good') => ({
+const area = (
+  name: string,
+  a: number,
+  b: number,
+  sa: DiagnosisComparisonArea['school_1_status'] = 'good',
+  sb: DiagnosisComparisonArea['school_2_status'] = 'good',
+): DiagnosisComparisonArea => ({
   area: name.slice(0,2).toUpperCase(), area_name: name,
   school_1_score: a, school_2_score: b, difference: a - b,
   school_1_status: sa, school_2_status: sb,
@@ -105,14 +111,14 @@ function makeProj(overrides: Partial<TRIAreaProjection> & { area: string; area_n
       current_score: 600,
       raw_score: 598,
       display_score: 620,
-      confidence_interval: { low: 610, high: 630 } as any,
-      raw_confidence_interval: { low: 588, high: 608 } as any,
+      confidence_interval: { low: 610, high: 630 },
+      raw_confidence_interval: { low: 588, high: 608 },
       display_mode: 'delta',
       regime: 'regular',
       risk_level: 'normal',
       risk_reason: null,
       badge_text: null,
-      historical_corridor: { low: 580, high: 640 } as any,
+      historical_corridor: { low: 580, high: 640 },
       raw_expected_change: 10,
       display_expected_change: 20,
       model_info: {},
@@ -529,8 +535,10 @@ describe('buildRecommendations', () => {
   });
 
   it('não lança quando area_comparison é vazio e retorna array', () => {
-    const emptyAreasDiag = makeDiagnosis();
-    (emptyAreasDiag as any).area_comparison = [];
+    const emptyAreasDiag: DiagnosisComparisonResult = {
+      ...makeDiagnosis(),
+      area_comparison: [],
+    };
     const d: ReportData = {
       generatedAt: new Date('2024-01-01'),
       baseYear: 2024,
@@ -551,13 +559,15 @@ describe('buildRecommendations', () => {
   it('normaliza código de redação entre diagnosis (redacao) e projection (RE): impact usa potential_gain da projeção', () => {
     // diagnosis area uses 'redacao' (lowercase, full word) — as returned by backend
     // projection row uses area: 'RE' — as returned by the projection API
-    const diagWithRedacao = makeDiagnosis();
-    (diagWithRedacao as any).area_comparison = [
-      // A lidera em MT
-      { area: 'MT', area_name: 'Matemática', school_1_score: 750, school_2_score: 600, difference: 150, school_1_status: 'good', school_2_status: 'needs_attention' },
-      // A lidera em redação — laggard B loses it
-      { area: 'redacao', area_name: 'Redação', school_1_score: 680, school_2_score: 550, difference: 130, school_1_status: 'good', school_2_status: 'critical' },
-    ];
+    const diagWithRedacao: DiagnosisComparisonResult = {
+      ...makeDiagnosis(),
+      area_comparison: [
+        // A lidera em MT
+        { area: 'MT', area_name: 'Matemática', school_1_score: 750, school_2_score: 600, difference: 150, school_1_status: 'good', school_2_status: 'needs_attention' },
+        // A lidera em redação — laggard B loses it
+        { area: 'redacao', area_name: 'Redação', school_1_score: 680, school_2_score: 550, difference: 130, school_1_status: 'good', school_2_status: 'critical' },
+      ],
+    };
 
     const dWithRed: ReportData = {
       generatedAt: new Date('2024-01-01'),
@@ -626,13 +636,15 @@ describe('buildRecommendations', () => {
 
   // Regressão #2 — área empatada não recebe ação (mesmo sendo a mais forte do líder)
   it('não atribui areaCode a uma área empatada (impede benchmark de cair em empate)', () => {
-    const diagTie = makeDiagnosis();
-    (diagTie as any).area_comparison = [
-      // Empate na maior nota do líder A (CH 800×800) — não pode receber ação de área
-      { area: 'CH', area_name: 'Ciências Humanas', school_1_score: 800, school_2_score: 800, difference: 0, school_1_status: 'excellent', school_2_status: 'excellent' },
-      // A vence MT — laggard B perde aqui
-      { area: 'MT', area_name: 'Matemática', school_1_score: 750, school_2_score: 600, difference: 150, school_1_status: 'good', school_2_status: 'needs_attention' },
-    ];
+    const diagTie: DiagnosisComparisonResult = {
+      ...makeDiagnosis(),
+      area_comparison: [
+        // Empate na maior nota do líder A (CH 800×800) — não pode receber ação de área
+        { area: 'CH', area_name: 'Ciências Humanas', school_1_score: 800, school_2_score: 800, difference: 0, school_1_status: 'excellent', school_2_status: 'excellent' },
+        // A vence MT — laggard B perde aqui
+        { area: 'MT', area_name: 'Matemática', school_1_score: 750, school_2_score: 600, difference: 150, school_1_status: 'good', school_2_status: 'needs_attention' },
+      ],
+    };
     const d2: ReportData = { ...reportDataFixture, diagnosis: diagTie, projection: undefined };
     const recs = buildRecommendations(d2);
     // Nenhuma recomendação aponta para a área empatada (CH)

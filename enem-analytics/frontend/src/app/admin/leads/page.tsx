@@ -1,7 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/lib/auth-context';
 import { api, type Lead } from '@/lib/api';
 import { Users, Search, Download, Phone, Mail, CheckCircle2, Clock, Loader2, ExternalLink } from 'lucide-react';
@@ -48,31 +49,22 @@ function downloadCsv(leads: Lead[]): void {
 export default function LeadsPage() {
   const router = useRouter();
   const { session, user, isLoading: authLoading, isAdmin } = useAuth();
-  const [leads, setLeads] = useState<Lead[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     if (!authLoading && user && !isAdmin) router.push('/');
   }, [authLoading, isAdmin, router, user]);
 
-  const loadLeads = useCallback(async () => {
-    if (!isAdmin) return;
-    setLoading(true);
-    setError(null);
-    try {
-      setLeads(await api.getLeads());
-    } catch {
-      setError('Não foi possível carregar os leads. Tente novamente.');
-    } finally {
-      setLoading(false);
-    }
-  }, [isAdmin]);
-
-  useEffect(() => {
-    if (isAdmin) loadLeads();
-  }, [isAdmin, loadLeads]);
+  const {
+    data: leads = [],
+    isLoading: loading,
+    isError,
+  } = useQuery({
+    queryKey: ['admin-leads'],
+    queryFn: () => api.getLeads(),
+    enabled: isAdmin,
+    retry: false,
+  });
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -121,8 +113,10 @@ export default function LeadsPage() {
         />
       </div>
 
-      {error && (
-        <div className="mt-6 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">{error}</div>
+      {isError && (
+        <div className="mt-6 rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
+          Não foi possível carregar os leads. Tente novamente.
+        </div>
       )}
 
       {loading ? (

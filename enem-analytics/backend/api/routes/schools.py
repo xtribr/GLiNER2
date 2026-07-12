@@ -303,8 +303,8 @@ async def list_schools(
     min_media: Optional[float] = Query(None, ge=0),
     max_media: Optional[float] = Query(None, ge=0),
     ano: Optional[int] = None,
-    order_by: str = Query("ranking", regex="^(ranking|nota|nome)$"),
-    order: str = Query("asc", regex="^(asc|desc)$"),
+    order_by: str = Query("ranking", pattern="^(ranking|nota|nome)$"),
+    order: str = Query("asc", pattern="^(asc|desc)$"),
     _: Optional[UserProfile] = Depends(get_optional_user),
 ):
     """
@@ -639,7 +639,7 @@ async def compare_schools(
 
 @router.get("/skills/worst")
 async def get_worst_skills(
-    area: Optional[str] = Query(None, regex="^(CN|CH|LC|MT)$"),
+    area: Optional[str] = Query(None, pattern="^(CN|CH|LC|MT)$"),
     limit: int = Query(10, ge=1, le=30),
     _: UserProfile = Depends(get_current_admin),
 ):
@@ -677,7 +677,7 @@ async def get_worst_skills(
 
 @router.get("/skills/all")
 async def get_all_skills(
-    area: Optional[str] = Query(None, regex="^(CN|CH|LC|MT)$"),
+    area: Optional[str] = Query(None, pattern="^(CN|CH|LC|MT)$"),
     _: UserProfile = Depends(get_current_admin),
 ):
     """

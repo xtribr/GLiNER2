@@ -107,7 +107,7 @@ export default function Vitrine() {
   });
 
   const rows = schools ?? [];
-  const municipios = municipiosData?.municipios ?? [];
+  const municipios = useMemo(() => municipiosData?.municipios ?? [], [municipiosData]);
   const hasMore = rows.length === limit;
 
   useEffect(() => {

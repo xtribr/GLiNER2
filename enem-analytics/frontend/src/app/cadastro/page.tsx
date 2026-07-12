@@ -49,23 +49,43 @@ export default function CadastroPage() {
   // Busca typeahead com debounce
   useEffect(() => {
     const q = query.trim();
-    if (q.length < 2 || selected) {
-      setResults([]);
-      return;
-    }
-    setSearching(true);
+    if (q.length < 2 || selected) return;
+
+    let cancelled = false;
     const t = setTimeout(async () => {
       try {
         const data = await api.searchSchools(q, 8);
-        setResults(data as SchoolResult[]);
+        if (!cancelled) setResults(data as SchoolResult[]);
       } catch {
-        setResults([]);
+        if (!cancelled) setResults([]);
       } finally {
-        setSearching(false);
+        if (!cancelled) setSearching(false);
       }
     }, 300);
-    return () => clearTimeout(t);
+    return () => {
+      cancelled = true;
+      clearTimeout(t);
+    };
   }, [query, selected]);
+
+  function handleSchoolQueryChange(value: string) {
+    setQuery(value);
+    setResults([]);
+    setSearching(value.trim().length >= 2);
+  }
+
+  function handleSchoolSelection(school: SchoolResult) {
+    setSelected(school);
+    setResults([]);
+    setSearching(false);
+  }
+
+  function handleSchoolChange() {
+    setSelected(null);
+    setQuery('');
+    setResults([]);
+    setSearching(false);
+  }
 
   // Acesso imediato → redireciona ao painel após "pronto"
   useEffect(() => {
@@ -148,7 +168,7 @@ export default function CadastroPage() {
                     <p className="font-bold text-slate-950">{selected.nome_escola}</p>
                     <p className="text-xs text-slate-500">{selected.uf ? `${selected.uf} · ` : ''}INEP {selected.codigo_inep}</p>
                   </div>
-                  <button onClick={() => { setSelected(null); setQuery(''); }} className="text-xs font-semibold text-[#139ED3] hover:underline">
+                  <button onClick={handleSchoolChange} className="text-xs font-semibold text-[#139ED3] hover:underline">
                     trocar
                   </button>
                 </div>
@@ -159,7 +179,7 @@ export default function CadastroPage() {
                     <input
                       autoFocus
                       value={query}
-                      onChange={(e) => setQuery(e.target.value)}
+                      onChange={(e) => handleSchoolQueryChange(e.target.value)}
                       placeholder="Digite o nome da sua escola"
                       className="w-full bg-transparent text-sm text-slate-800 outline-none placeholder:text-slate-400"
                     />
@@ -169,7 +189,7 @@ export default function CadastroPage() {
                     {results.map((r) => (
                       <button
                         key={r.codigo_inep}
-                        onClick={() => setSelected(r)}
+                        onClick={() => handleSchoolSelection(r)}
                         className="flex w-full items-center justify-between rounded-xl border border-slate-200 p-3 text-left transition hover:border-[#28B7ED]"
                       >
                         <div>
