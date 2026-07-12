@@ -107,6 +107,9 @@ das features dos modelos atuais.
 - A API valida o access token do Supabase via header `Authorization: Bearer ...`.
 - O endpoint de perfil autenticado é `GET /api/auth/me`.
 - Não existe mais login JWT próprio da API.
+- O frontend nunca deriva `is_admin` ou `codigo_inep` de `user_metadata`.
+- Respostas `401/403` encerram o acesso local; indisponibilidade/timeout mantém a
+  sessão bloqueada e oferece retry, sem renderizar dados protegidos.
 
 ### Bootstrap do primeiro admin
 

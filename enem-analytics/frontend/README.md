@@ -57,6 +57,9 @@ No Coolify, configure as variáveis acima e faça novo deploy sempre que mudar:
 ## Fluxo de autenticação
 
 - Login é feito diretamente pelo Supabase Auth.
-- O frontend lê a sessão do Supabase e busca o perfil do usuário.
+- O frontend lê a sessão e valida o perfil exclusivamente em `GET /api/auth/me`.
+- `user_metadata` nunca concede perfil, escola ou privilégios administrativos.
+- Em timeout/indisponibilidade, o painel permanece bloqueado e oferece retry.
+- Em `401/403`, a sessão local é encerrada e o usuário volta ao login.
 - Usuário admin acessa o dashboard completo.
 - Usuário escola fica restrito à própria escola e ao roadmap.

@@ -7,11 +7,11 @@ import Link from 'next/link';
 import Sidebar from './Sidebar';
 import { useAuth } from '@/lib/auth-context';
 import { useSidebar } from '@/lib/sidebar-context';
-import { LogOut, School, Menu } from 'lucide-react';
+import { AlertTriangle, LogOut, Menu, RefreshCw, School } from 'lucide-react';
 
 // Rotas públicas (vitrine / funil). Acessíveis SEM sessão.
-// A página de detalhe /schools/[inep] permanece gated (resumo público virá em etapa
-// própria); aqui liberamos a vitrine `/`, a lista `/schools`, o cadastro e o login.
+// O detalhe /schools/[inep] oferece resumo público; o roadmap e os dados profundos
+// permanecem gated. A vitrine, a lista, o cadastro e o login também são públicos.
 function isPublicPath(pathname: string | null): boolean {
   if (!pathname) return false;
   if (pathname === '/') return true;
@@ -27,19 +27,109 @@ function isPublicPath(pathname: string | null): boolean {
   return false;
 }
 
+function ProfileValidationErrorState({
+  isRetrying,
+  onRetry,
+  onLogout,
+}: {
+  isRetrying: boolean;
+  onRetry: () => Promise<void>;
+  onLogout: () => Promise<void>;
+}) {
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-slate-50 p-4">
+      <section
+        role="alert"
+        aria-live="polite"
+        className="w-full max-w-lg rounded-2xl border border-amber-200 bg-white p-6 text-center shadow-sm sm:p-8"
+      >
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100">
+          <AlertTriangle className="h-6 w-6 text-amber-700" />
+        </div>
+        <h1 className="mt-4 text-xl font-bold text-slate-900">Não foi possível validar seu acesso</h1>
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          Sua sessão continua protegida, mas o perfil não pôde ser confirmado pela API.
+          Tente novamente antes de acessar dados da escola.
+        </p>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <button
+            type="button"
+            onClick={() => void onRetry()}
+            disabled={isRetrying}
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#139ED3] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0f88b8] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <RefreshCw className={`h-4 w-4 ${isRetrying ? 'animate-spin' : ''}`} />
+            {isRetrying ? 'Validando…' : 'Tentar novamente'}
+          </button>
+          <button
+            type="button"
+            onClick={() => void onLogout()}
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
+          >
+            <LogOut className="h-4 w-4" />
+            Sair com segurança
+          </button>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function AdminLayoutShell({
+  children,
+  collapsed,
+}: {
+  children: React.ReactNode;
+  collapsed: boolean;
+}) {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  return (
+    <div className="flex bg-slate-50 min-h-screen">
+      <Sidebar mobileOpen={mobileNavOpen} onMobileClose={() => setMobileNavOpen(false)} />
+
+      {mobileNavOpen && (
+        <div
+          className="md:hidden fixed inset-0 z-30 bg-black/50"
+          onClick={() => setMobileNavOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      <main
+        className={`flex-1 min-w-0 min-h-screen transition-all duration-300 ease-in-out ml-0 ${
+          collapsed ? 'md:ml-16' : 'md:ml-56'
+        }`}
+      >
+        <header className="md:hidden sticky top-0 z-20 flex items-center gap-3 bg-white border-b border-gray-200 px-4 h-14">
+          <button
+            onClick={() => setMobileNavOpen(true)}
+            className="p-2 -ml-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            aria-label="Abrir menu"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 bg-gradient-to-br from-sky-400 to-orange-500 rounded-lg flex items-center justify-center p-1">
+              <Image src="/logo-xtri.png" alt="X-TRI" width={24} height={24} />
+            </div>
+            <span className="font-bold text-gray-900">X-TRI Analytics</span>
+          </div>
+        </header>
+
+        {children}
+      </main>
+    </div>
+  );
+}
+
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, session, isAdmin, isLoading, logout } = useAuth();
+  const { user, session, isAdmin, isLoading, authError, logout, refreshUser } = useAuth();
   const { collapsed } = useSidebar();
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const isLoginPage = pathname === '/login';
   const isPublic = isPublicPath(pathname);
-
-  // Fecha o drawer mobile ao trocar de rota.
-  useEffect(() => {
-    setMobileNavOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -78,6 +168,18 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     }
   }, [isLoading, isAdmin, isPublic, pathname, router, session, user]);
 
+  const hasRecoverableValidationError = session && authError?.kind === 'unavailable';
+
+  if (hasRecoverableValidationError && (!isPublic || isLoginPage)) {
+    return (
+      <ProfileValidationErrorState
+        isRetrying={isLoading}
+        onRetry={refreshUser}
+        onLogout={logout}
+      />
+    );
+  }
+
   // Página de login: sem chrome do app.
   if (isLoginPage) {
     return <>{children}</>;
@@ -85,7 +187,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   // Rota pública sem sessão (ou ainda carregando a auth): renderiza a vitrine
   // imediatamente — ela traz o próprio header/hero e não depende de login.
-  if (isPublic && !session) {
+  if (isPublic && (!session || (!user && authError))) {
     return <>{children}</>;
   }
 
@@ -161,44 +263,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     );
   }
 
-  // Admin: layout completo com sidebar.
+  // A key por rota remonta apenas o shell administrativo e fecha o drawer móvel.
   return (
-    <div className="flex bg-slate-50 min-h-screen">
-      <Sidebar mobileOpen={mobileNavOpen} onMobileClose={() => setMobileNavOpen(false)} />
-
-      {/* Overlay para fechar o drawer no mobile */}
-      {mobileNavOpen && (
-        <div
-          className="md:hidden fixed inset-0 z-30 bg-black/50"
-          onClick={() => setMobileNavOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      <main
-        className={`flex-1 min-w-0 min-h-screen transition-all duration-300 ease-in-out ml-0 ${
-          collapsed ? 'md:ml-16' : 'md:ml-56'
-        }`}
-      >
-        {/* Topo mobile com botão hambúrguer (oculto em md+) */}
-        <header className="md:hidden sticky top-0 z-20 flex items-center gap-3 bg-white border-b border-gray-200 px-4 h-14">
-          <button
-            onClick={() => setMobileNavOpen(true)}
-            className="p-2 -ml-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
-            aria-label="Abrir menu"
-          >
-            <Menu className="h-5 w-5" />
-          </button>
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 bg-gradient-to-br from-sky-400 to-orange-500 rounded-lg flex items-center justify-center p-1">
-              <Image src="/logo-xtri.png" alt="X-TRI" width={24} height={24} />
-            </div>
-            <span className="font-bold text-gray-900">X-TRI Analytics</span>
-          </div>
-        </header>
-
-        {children}
-      </main>
-    </div>
+    <AdminLayoutShell key={pathname ?? 'admin'} collapsed={collapsed}>
+      {children}
+    </AdminLayoutShell>
   );
 }

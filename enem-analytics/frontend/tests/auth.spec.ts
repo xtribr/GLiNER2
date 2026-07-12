@@ -32,6 +32,27 @@ test.describe('Rotas públicas e autenticação', () => {
   });
 });
 
+test.describe('Validação fail-closed do perfil', () => {
+  test.skip(!adminEmail || !adminPassword, 'Defina E2E_ADMIN_EMAIL e E2E_ADMIN_PASSWORD.');
+
+  test('bloqueia o painel durante indisponibilidade e recupera por retry', async ({ page }) => {
+    await page.route('**/api/auth/me', async (route) => {
+      await route.fulfill({ status: 503, body: '{"detail":"indisponível"}' });
+    });
+
+    await page.goto('/login');
+    await page.fill('input[type="email"]', adminEmail!);
+    await page.fill('input[type="password"]', adminPassword!);
+    await page.click('button[type="submit"]');
+
+    await expect(page.getByRole('heading', { name: 'Não foi possível validar seu acesso' })).toBeVisible();
+
+    await page.unroute('**/api/auth/me');
+    await page.getByRole('button', { name: 'Tentar novamente' }).click();
+    await expect(page).toHaveURL('/', { timeout: 10000 });
+  });
+});
+
 test.describe('Administrador', () => {
   test.skip(!adminEmail || !adminPassword, 'Defina E2E_ADMIN_EMAIL e E2E_ADMIN_PASSWORD.');
 

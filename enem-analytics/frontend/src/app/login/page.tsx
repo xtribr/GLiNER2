@@ -9,12 +9,13 @@ import { Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { login, isAuthenticated, isLoading: authLoading, authError } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const displayedError = error || authError?.message || '';
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -69,10 +70,10 @@ export default function LoginPage() {
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Entrar na sua conta</h2>
 
-          {error && (
+          {displayedError && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl flex items-center gap-2 text-red-700 text-sm">
               <AlertCircle className="h-4 w-4 flex-shrink-0" />
-              {error}
+              {displayedError}
             </div>
           )}
 

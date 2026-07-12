@@ -111,6 +111,8 @@ O manifesto inclui ano, tamanho, SHA-256 e uso efetivo de cada fonte. O treino
 - Login: frontend → Supabase Auth direto.
 - API: valida `Authorization: Bearer <access_token>` do Supabase. Sem JWT próprio.
 - Perfil autenticado: `GET /api/auth/me`.
+- Frontend fail-closed: `is_admin` e `codigo_inep` vêm somente de `/api/auth/me`;
+  timeout bloqueia o painel com retry e `401/403` encerra a sessão local.
 - Bootstrap do primeiro admin: `python scripts/create_admin.py <email> <senha> "<nome>"`.
 
 ## Endpoints principais
