@@ -1,6 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { fetchValidatedProfile, ProfileValidationError } from './auth-profile';
+import {
+  fetchValidatedProfile,
+  ProfileValidationError,
+  SESSION_EXPIRED_MESSAGE,
+} from './auth-profile';
 
 const REAL_PROFILE = {
   id: 'perfil-xtri',
@@ -34,11 +38,22 @@ describe('fetchValidatedProfile', () => {
     expect(fetchImpl).toHaveBeenCalledOnce();
   });
 
-  it('trata 401 de perfil ausente como acesso negado sem fallback', async () => {
+  it('trata 401 como sessão expirada sem fallback nem retry', async () => {
     const fetchImpl = vi.fn().mockResolvedValue(response(401));
 
     await expect(fetchValidatedProfile('token', { apiBase: API_BASE, fetchImpl })).rejects.toMatchObject({
+      kind: 'session_expired',
+      message: SESSION_EXPIRED_MESSAGE,
+    });
+    expect(fetchImpl).toHaveBeenCalledOnce();
+  });
+
+  it('trata 403 como acesso desativado sem confundir com sessão expirada', async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(response(403));
+
+    await expect(fetchValidatedProfile('token', { apiBase: API_BASE, fetchImpl })).rejects.toMatchObject({
       kind: 'access_denied',
+      message: 'Seu acesso foi desativado. Fale com o suporte da XTRI.',
     });
     expect(fetchImpl).toHaveBeenCalledOnce();
   });

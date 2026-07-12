@@ -134,10 +134,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   useEffect(() => {
     if (isLoading) return;
 
-    // Visitante deslogado: liberar rotas públicas, mandar o resto para login.
+    // Sessão invalidada: sempre explicar no login, inclusive se o usuário estava
+    // na vitrine pública. Visitantes comuns continuam acessando rotas públicas.
     if (!session) {
-      if (!isPublic) {
-        router.push('/login');
+      const needsLoginExplanation =
+        authError?.kind === 'session_expired' || authError?.kind === 'access_denied';
+      if (!isLoginPage && (needsLoginExplanation || !isPublic)) {
+        router.replace('/login');
       }
       return;
     }
@@ -166,7 +169,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         router.push(ownPrefix);
       }
     }
-  }, [isLoading, isAdmin, isPublic, pathname, router, session, user]);
+  }, [authError?.kind, isLoading, isAdmin, isLoginPage, isPublic, pathname, router, session, user]);
 
   const hasRecoverableValidationError = session && authError?.kind === 'unavailable';
 

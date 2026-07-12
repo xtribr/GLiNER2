@@ -9,7 +9,7 @@ import { supabase, getUserFromSession, signIn, signOut } from './supabase';
 import type { User } from './supabase';
 
 export interface AuthError {
-  kind: 'access_denied' | 'unavailable';
+  kind: 'session_expired' | 'access_denied' | 'unavailable';
   message: string;
 }
 
@@ -76,7 +76,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setAuthError(issue);
       }
 
-      if (issue.kind === 'access_denied') {
+      if (issue.kind === 'session_expired' || issue.kind === 'access_denied') {
         try {
           await signOut();
         } catch {

@@ -7,7 +7,10 @@ export interface ValidatedAuthProfile {
   is_active: boolean;
 }
 
-export type ProfileValidationFailure = 'access_denied' | 'unavailable';
+export type ProfileValidationFailure = 'session_expired' | 'access_denied' | 'unavailable';
+
+export const SESSION_EXPIRED_MESSAGE =
+  'Sua sessão expirou. Entre novamente para acessar sua área.';
 
 export class ProfileValidationError extends Error {
   readonly kind: ProfileValidationFailure;
@@ -82,10 +85,14 @@ export async function fetchValidatedProfile(
         attempts[index],
       );
 
-      if (response.status === 401 || response.status === 403) {
+      if (response.status === 401) {
+        throw new ProfileValidationError('session_expired', SESSION_EXPIRED_MESSAGE);
+      }
+
+      if (response.status === 403) {
         throw new ProfileValidationError(
           'access_denied',
-          'Seu acesso não pôde ser validado. Entre novamente ou fale com o suporte.',
+          'Seu acesso foi desativado. Fale com o suporte da XTRI.',
         );
       }
 
@@ -100,7 +107,7 @@ export async function fetchValidatedProfile(
         return profile;
       }
     } catch (error) {
-      if (isProfileValidationError(error) && error.kind === 'access_denied') {
+      if (isProfileValidationError(error)) {
         throw error;
       }
     }

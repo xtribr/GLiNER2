@@ -35,6 +35,22 @@ test.describe('Rotas públicas e autenticação', () => {
 test.describe('Validação fail-closed do perfil', () => {
   test.skip(!adminEmail || !adminPassword, 'Defina E2E_ADMIN_EMAIL e E2E_ADMIN_PASSWORD.');
 
+  test('explica a sessão expirada ao recarregar uma rota pública', async ({ page }) => {
+    await page.goto('/login');
+    await page.fill('input[type="email"]', adminEmail!);
+    await page.fill('input[type="password"]', adminPassword!);
+    await page.click('button[type="submit"]');
+    await page.waitForURL('/', { timeout: 10000 });
+
+    await page.route('**/api/auth/me', async (route) => {
+      await route.fulfill({ status: 401, body: '{"detail":"token expirado"}' });
+    });
+    await page.reload();
+
+    await expect(page).toHaveURL('/login', { timeout: 10000 });
+    await expect(page.getByText('Sua sessão expirou. Entre novamente para acessar sua área.')).toBeVisible();
+  });
+
   test('bloqueia o painel durante indisponibilidade e recupera por retry', async ({ page }) => {
     await page.route('**/api/auth/me', async (route) => {
       await route.fulfill({ status: 503, body: '{"detail":"indisponível"}' });
