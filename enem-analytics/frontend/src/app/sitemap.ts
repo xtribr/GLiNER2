@@ -4,6 +4,8 @@ import { getSchoolSeoIndex } from '@/lib/school-seo';
 const BASE_URL = 'https://app.rankingenem.com';
 const BATCH_SIZE = 5000;
 
+export const revalidate = 86_400;
+
 const corePages: MetadataRoute.Sitemap = [
   { url: BASE_URL, changeFrequency: 'weekly', priority: 1 },
   { url: `${BASE_URL}/redacao`, changeFrequency: 'monthly', priority: 0.8 },
