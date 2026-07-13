@@ -897,10 +897,12 @@ export const api = {
       codigo_inep: string;
       nome_escola: string;
       uf: string | null;
+      municipio: string | null;
       tipo_escola: string | null;
       anos_participacao: number;
       ultimo_ano: number | null;
       ranking_brasil: number | null;
+      ranking_uf: number | null;
       nota_media: number | null;
       nota_cn: number | null;
       nota_ch: number | null;

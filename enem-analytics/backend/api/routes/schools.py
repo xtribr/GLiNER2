@@ -282,6 +282,19 @@ class SchoolDetail(BaseModel):
     melhor_ranking: Optional[int] = None
 
 
+class SchoolSeoIndexItem(BaseModel):
+    codigo_inep: str
+    ano: int
+
+
+class SchoolSeoIndex(BaseModel):
+    ano: int
+    offset: int
+    limit: int
+    total: int
+    schools: List[SchoolSeoIndexItem]
+
+
 def get_supabase_store():
     """Get Supabase store client"""
     from data.supabase_store import get_client
@@ -442,6 +455,15 @@ async def search_schools(
     return supabase_store.search_schools(q=q, limit=limit)
 
 
+@router.get("/seo-index", response_model=SchoolSeoIndex)
+async def get_school_seo_index(
+    offset: int = Query(0, ge=0),
+    limit: int = Query(5000, ge=1, le=5000),
+):
+    """Latest-year ranked school codes for the public sitemap."""
+    return supabase_store.list_school_seo_index(offset=offset, limit=limit)
+
+
 @router.get("/{codigo_inep}", response_model=SchoolDetail)
 async def get_school(
     codigo_inep: str,
@@ -505,10 +527,12 @@ async def get_school_summary(
         "codigo_inep": result["codigo_inep"],
         "nome_escola": result["nome_escola"],
         "uf": result.get("uf"),
+        "municipio": result.get("municipio"),
         "tipo_escola": result.get("tipo_escola"),
         "anos_participacao": len(historico),
         "ultimo_ano": latest.get("ano"),
         "ranking_brasil": latest.get("ranking_brasil"),
+        "ranking_uf": latest.get("ranking_uf"),
         "nota_media": latest.get("nota_media"),
         "nota_cn": latest.get("nota_cn"),
         "nota_ch": latest.get("nota_ch"),

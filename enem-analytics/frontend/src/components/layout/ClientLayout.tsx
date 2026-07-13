@@ -17,6 +17,7 @@ function isPublicPath(pathname: string | null): boolean {
   if (pathname === '/') return true;
   if (pathname === '/schools') return true;
   if (pathname === '/redacao') return true;
+  if (/^\/ranking-enem\/escola\/[^/]+$/.test(pathname)) return true;
   // Detalhe da escola (/schools/{inep}) = resumo público; /roadmap segue gated.
   if (/^\/schools\/[^/]+$/.test(pathname)) return true;
   if (pathname === '/termos-de-uso') return true;

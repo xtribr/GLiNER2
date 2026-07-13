@@ -16,14 +16,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://app.rankingenem.com"),
-  title: "Portal dos Microdados ENEM — Ranking e Nota TRI por Escola | XTRI",
+  title: {
+    default: "Portal dos Microdados ENEM — Ranking e Nota TRI por Escola | XTRI",
+    template: "%s | XTRI",
+  },
   description: "Portal dos Microdados ENEM: ranking por escola, nota TRI, tendências e diagnóstico, a partir dos dados oficiais do INEP.",
+  robots: { index: true, follow: true },
   openGraph: {
     siteName: "X-TRI",
     locale: "pt_BR",
     type: "website",
+    images: [{ url: "https://rankingenem.com/og.png", width: 1200, height: 630, alt: "Ranking ENEM XTRI" }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["https://rankingenem.com/og.png"] },
 };
 
 export default function RootLayout({

@@ -28,6 +28,9 @@
 <meta property="og:description" content="O ranking do ENEM 2025 por escola, com nota TRI e diagnóstico, a partir dos microdados oficiais do INEP. 28.333 escolas. Gratuito." />
 <meta property="og:url" content="https://rankingenem.com/" />
 <meta property="og:image" content="https://rankingenem.com/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Ranking ENEM 2025 da XTRI com dados oficiais do INEP" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Microdados ENEM 2025 — Ranking das Escolas | XTRI" />
 <meta name="twitter:description" content="Ranking do ENEM 2025 por escola, nota TRI e diagnóstico — dos microdados oficiais do INEP." />
@@ -47,7 +50,7 @@
       "description": "Plataforma de análise de desempenho escolar no ENEM pela metodologia TRI. Mais de 20 anos de pesquisa em Psicometria dos Testes, Teoria de Resposta ao Item e Inteligência Artificial aplicada à educação.",
       "founder": {"@type":"Person","name":"Professor Xandão"},
       "areaServed": "BR",
-      "sameAs": ["https://xtri.online"],
+      "sameAs": ["https://xtri.online","https://www.instagram.com/xandaoxtri/"],
       "contactPoint": {"@type":"ContactPoint","telephone":"+55-84-99142-3557","email":"contato@xtri.online","contactType":"customer support","areaServed":"BR","availableLanguage":"Portuguese"}
     },
     {
@@ -68,10 +71,15 @@
       "description": "Ranking e médias por escola no ENEM 2025 (nota TRI por área), derivado dos microdados oficiais do INEP/MEC. 28.333 escolas, série 2018–2025.",
       "keywords": ["microdados ENEM 2025","ranking ENEM 2025","nota TRI","INEP","desempenho escolar"],
       "temporalCoverage": "2018/2025",
+      "dateModified": "2026-07-13",
+      "version": "2025",
       "isAccessibleForFree": true,
       "spatialCoverage": {"@type":"Place","name":"Brasil"},
-      "creator": {"@type":"GovernmentOrganization","name":"INEP/MEC"},
-      "publisher": {"@type":"Organization","name":"XTRI"},
+      "creator": {"@type":"Organization","name":"INEP/MEC","url":"https://www.gov.br/inep"},
+      "publisher": {"@type":"Organization","name":"XTRI","url":"https://rankingenem.com/"},
+      "isBasedOn": "https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/microdados/enem",
+      "variableMeasured": ["Média geral","Ciências da Natureza","Ciências Humanas","Linguagens","Matemática","Redação","Ranking nacional","Ranking por UF"],
+      "license": "https://app.rankingenem.com/termos-de-uso",
       "url": "https://rankingenem.com/"
     },
     {
@@ -109,6 +117,7 @@
   :root{
     --ink:#1d1d1f; --ink-2:#6e6e73; --line:#e6e6eb; --bg:#fbfbfd; --card:#ffffff;
     --cyan:#139ED3; --cyan-2:#28B7ED; --accent:#FF4B2E; --grad:linear-gradient(135deg,#28B7ED,#FF4B2E); --radius:980px;
+    --accent-soft:#fff1eb; --accent-line:rgba(255,75,46,.18);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
@@ -133,7 +142,7 @@
   .nav-cta{background:var(--grad);color:#fff !important;padding:7px 15px;border-radius:980px;font-weight:600}
 
   /* Hero — foto à direita (desktop) / topo (mobile), sem gradiente */
-  .hero{position:relative;overflow:hidden;text-align:center;padding:0 0 56px}
+  .hero{position:relative;overflow:hidden;text-align:center;padding:0 0 18px}
   .hero-figure img{display:block;width:100%;height:300px;object-fit:cover;object-position:50% 16%}
   .hero-inner{position:relative;z-index:1;padding-top:38px}
   .hero-copy{max-width:620px;margin:0 auto}
@@ -142,14 +151,17 @@
     .hero-figure{position:absolute;top:0;right:0;bottom:0;width:50vw;z-index:0;overflow:hidden}
     .hero-figure img{width:100%;height:100%;object-position:50% 14%}
     .hero-inner{padding-top:100px;padding-bottom:100px}
-    .hero-copy{margin:0;max-width:440px}
+    .hero-copy{margin:0;max-width:500px}
     .hero-copy h1{margin:0;max-width:13ch;font-size:clamp(2.2rem,3.4vw,3.3rem)}
     .hero-copy .sub{margin-left:0;margin-right:0;max-width:38ch}
-    .hero-copy .search{margin-left:0;margin-right:0;width:min(440px,100%)}
-    .hero-copy .stats{padding:24px 0 0;gap:10px;max-width:440px}
+    .hero-copy .search{margin-left:0;margin-right:0;width:min(500px,100%)}
+    .hero-copy .stats{padding:24px 0 0;gap:0;max-width:500px}
+    .hero-copy .hero-proof{margin-left:0;margin-right:0;max-width:500px}
+    .hero-copy .hero-sample{margin-left:0;margin-right:0;max-width:500px}
+    .hero-copy .hero-actions{justify-content:flex-start}
     .hero-copy .stats .n{font-size:1.4rem;letter-spacing:0;white-space:nowrap}
   }
-  .eyebrow{font-family:"Space Mono",ui-monospace,SFMono-Regular,monospace;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
+  .eyebrow{font-family:"Space Mono",ui-monospace,SFMono-Regular,monospace;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
   h1{font-family:"Bricolage Grotesque",-apple-system,BlinkMacSystemFont,sans-serif;font-size:clamp(2.6rem,6.2vw,4.6rem);font-weight:800;line-height:1.0;letter-spacing:-0.035em;max-width:16ch;margin:0 auto}
   .sub{margin:20px auto 0;max-width:40ch;font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--ink-2);font-weight:400;line-height:1.45}
 
@@ -157,30 +169,62 @@
   .search{margin:34px auto 0;display:flex;gap:8px;align-items:center;width:min(560px,94vw);
     background:#fff;border:1px solid var(--line);border-radius:980px;padding:7px 7px 7px 20px;
     box-shadow:0 1px 2px rgba(0,0,0,.04),0 18px 40px -24px rgba(0,0,0,.18)}
-  .search:focus-within{border-color:#cfd2d8;box-shadow:0 1px 2px rgba(0,0,0,.04),0 20px 48px -22px rgba(10,134,196,.35)}
+  .search:focus-within{border-color:var(--accent-line);box-shadow:0 1px 2px rgba(0,0,0,.04),0 20px 48px -22px rgba(255,75,46,.28)}
   .search svg{color:#9a9aa0;flex:0 0 auto}
   .search input{flex:1;border:0;outline:0;font:inherit;font-size:16px;color:var(--ink);background:transparent;min-width:0}
   .search input::placeholder{color:#9a9aa0}
   .search button{flex:0 0 auto;border:0;cursor:pointer;font:inherit;font-weight:600;font-size:15px;color:#fff;
     background:var(--grad);padding:13px 22px;border-radius:980px;display:inline-flex;align-items:center;gap:7px;transition:filter .2s,transform .12s;box-shadow:0 8px 20px -8px rgba(255,75,46,.5)}
   .search button:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .mini-btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:980px;text-decoration:none;font-size:14px;font-weight:600;transition:background .2s,color .2s,border-color .2s}
+  .mini-btn.secondary{background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent)}
+  .mini-btn.secondary:hover{background:#ffe7dc}
   .hint{margin-top:14px;font-size:13px;color:var(--ink-2)}
   .hint a{color:var(--cyan);text-decoration:none;font-weight:500}
   .hint a:hover{text-decoration:underline}
+  .hero-proof{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px auto 0}
+  .hero-proof span{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:980px;background:var(--accent-soft);border:1px solid var(--accent-line);font-size:12.5px;font-weight:600;color:#9a4a35}
+  .hero-sample{margin:22px auto 0;padding:18px 18px 16px;background:linear-gradient(180deg,rgba(255,244,239,.96),rgba(255,255,255,.94));border:1px solid var(--accent-line);border-radius:22px;box-shadow:0 18px 40px -28px rgba(255,75,46,.22);text-align:left}
+  .hero-sample .sample-kicker{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .hero-sample h3{margin-top:9px;font-size:18px;line-height:1.2}
+  .hero-sample ul{margin:12px 0 0;padding-left:18px;color:var(--ink-2);font-size:14px}
+  .hero-sample li+li{margin-top:6px}
 
   /* Faixa de números */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 0;padding:34px 0;border-top:1px solid var(--line)}
-  .stats .n{font-family:"Space Mono",ui-monospace,SFMono-Regular,monospace;font-size:clamp(1.55rem,3.7vw,2.3rem);font-weight:700;letter-spacing:-0.02em}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:22px 0 0;padding:8px;background:linear-gradient(180deg,rgba(255,245,240,.98),rgba(255,255,255,.97));border:1px solid var(--accent-line);border-radius:28px;box-shadow:0 24px 50px -36px rgba(255,75,46,.28)}
+  .stats>div{padding:18px 12px 16px;position:relative;text-align:center}
+  .stats>div+div::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:1px;background:var(--line)}
+  .stats .n{font-family:"Space Mono",ui-monospace,SFMono-Regular,monospace;font-size:clamp(1.55rem,3.7vw,2.3rem);font-weight:700;letter-spacing:-0.02em;color:var(--accent)}
   .stats .l{font-size:13px;color:var(--ink-2);margin-top:4px}
-  @media(max-width:640px){.stats{grid-template-columns:1fr 1fr;gap:24px 14px}.navsec{display:none}.nav-right{gap:14px}}
+  @media(max-width:640px){
+    .stats{grid-template-columns:1fr 1fr;gap:0;padding:6px;border-radius:24px}
+    .stats>div{padding:16px 8px 14px}
+    .stats>div+div::before{display:none}
+    .stats>div:nth-child(odd)::after{content:"";position:absolute;right:0;top:14px;bottom:14px;width:1px;background:var(--line)}
+    .stats>div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+    .navsec{display:none}
+    .nav-right{gap:14px}
+    .search{flex-wrap:wrap;border-radius:24px;padding:14px}
+    .search svg{display:none}
+    .search input{width:100%}
+    .search button{width:100%;justify-content:center}
+    .hero-actions{flex-direction:column}
+    .mini-btn{width:100%}
+  }
 
   section.block{padding:72px 0}
-  .kicker{font-size:13px;font-weight:600;color:var(--cyan);text-align:center;letter-spacing:.02em}
+  #ranking.block{padding-top:30px}
+  #ranking{position:relative}
+  #ranking::before{content:"";position:absolute;inset:0;border-radius:32px;background:linear-gradient(180deg,rgba(255,75,46,.05),rgba(255,75,46,0));pointer-events:none}
+  .kicker{font-size:13px;font-weight:600;color:var(--accent);text-align:center;letter-spacing:.02em}
+  .kicker.warm{color:var(--accent)}
+  .kicker.neutral{color:#8a6f5a}
   h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-0.03em;text-align:center;margin-top:8px}
   .lead2{text-align:center;color:var(--ink-2);max-width:46ch;margin:14px auto 0;font-size:1.05rem}
 
   /* Ranking list */
-  .rank{margin:40px auto 0;max-width:760px;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+  .rank{margin:40px auto 0;max-width:760px;background:linear-gradient(180deg,#fffdfc,#ffffff);border:1px solid var(--accent-line);border-radius:22px;overflow:hidden;box-shadow:0 20px 40px -34px rgba(255,75,46,.2)}
   .rank a.row{display:flex;align-items:center;gap:14px;padding:15px 20px;text-decoration:none;border-top:1px solid var(--line);transition:background .15s}
   .rank a.row:first-child{border-top:0}
   .rank a.row:hover{background:#f5f5f7}
@@ -190,7 +234,7 @@
   .rname b{display:block;font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .rname span{font-size:12.5px;color:var(--ink-2)}
   .rscore{font-weight:700;font-size:16px;letter-spacing:-0.02em}
-  .rank .more{display:block;text-align:center;padding:16px;font-size:14px;font-weight:600;color:var(--cyan);text-decoration:none;border-top:1px solid var(--line)}
+  .rank .more{display:block;text-align:center;padding:16px;font-size:14px;font-weight:600;color:var(--accent);text-decoration:none;border-top:1px solid var(--line)}
   .rank .more:hover{background:#f5f5f7}
 
   /* Mapa do Brasil por estado */
@@ -207,24 +251,28 @@
   .maptip .sub2{margin:3px 0 8px;font-size:12px;color:var(--ink-2)}
   .maptip .tr{display:flex;justify-content:space-between;font-size:12px;padding:1.5px 0}
   .maptip .tr b{font-weight:700}
-  .maptip .cta2{margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:12px;font-weight:700;color:var(--cyan)}
+  .maptip .cta2{margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:12px;font-weight:700;color:var(--accent)}
+  .maptip .cta2 a{text-decoration:none;color:inherit}
   .maplegend{display:flex;flex-wrap:wrap;align-items:center;gap:6px;justify-content:center;max-width:360px;margin:18px auto 0;font-size:11px;font-weight:600;color:var(--ink-2)}
   .maplegend .swatches{display:flex;gap:3px}
   .maplegend .swatches i{width:20px;height:10px;border-radius:2px;display:block}
   .maplegend em{flex-basis:100%;text-align:center;font-style:normal;text-transform:uppercase;letter-spacing:.1em;color:#9aa3bc}
   .maperr{text-align:center;color:var(--ink-2);margin-top:24px;font-size:14px}
   .maperr a{color:var(--cyan);font-weight:600;text-decoration:none}
+  @media(max-width:760px){
+    .maptip{position:static;width:auto;margin-top:14px;transform:none !important;pointer-events:auto}
+  }
 
   /* Como funciona */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
   @media(max-width:760px){.steps{grid-template-columns:1fr;max-width:420px;margin-inline:auto}}
-  .step{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px}
-  .step .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:#eef7fc}
+  .step{background:linear-gradient(180deg,#fff8f4,#ffffff);border:1px solid var(--accent-line);border-radius:22px;padding:28px}
+  .step .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:#ffe8de}
   .step h3{margin-top:16px;font-size:18px;font-weight:600}
   .step p{margin-top:7px;color:var(--ink-2);font-size:14.5px;line-height:1.5}
 
   /* Sobre a XTRI */
-  .about{max-width:780px;margin:40px auto 0;background:var(--card);border:1px solid var(--line);border-radius:28px;padding:40px 44px}
+  .about{max-width:780px;margin:40px auto 0;background:linear-gradient(180deg,#ffffff,#fcfaf8);border:1px solid var(--line);border-radius:28px;padding:40px 44px}
   .about .story{font-size:1.1rem;line-height:1.6;color:var(--ink)}
   .about .story strong{font-weight:600}
   .about .story + .story{margin-top:15px}
@@ -232,7 +280,7 @@
   .about .nums .n{font-size:clamp(1.7rem,5vw,2.2rem);font-weight:700;letter-spacing:-.03em}
   .about .nums .l{font-size:12.5px;color:var(--ink-2);margin-top:2px}
   .about .who{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
-  .about .who .bar{width:4px;height:42px;border-radius:4px;background:var(--grad);flex:0 0 auto}
+  .about .who .bar{width:4px;height:42px;border-radius:4px;background:linear-gradient(180deg,var(--accent),#ff7a5f);flex:0 0 auto}
   .about .who b{display:block;font-size:15px;font-weight:600}
   .about .who span{font-size:13px;color:var(--ink-2)}
   .trust{text-align:center;margin-top:34px}
@@ -247,12 +295,12 @@
   details:last-child{border-bottom:1px solid var(--line)}
   summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
   summary::-webkit-details-marker{display:none}
-  summary::after{content:"+";color:var(--cyan);font-weight:400;font-size:22px;transition:transform .2s}
+  summary::after{content:"+";color:var(--accent);font-weight:400;font-size:22px;transition:transform .2s}
   details[open] summary::after{transform:rotate(45deg)}
   details p{margin-top:12px;color:var(--ink-2);font-size:15px;line-height:1.6}
 
   /* CTA final */
-  .final{text-align:center;background:linear-gradient(180deg,#f5f5f7,#fbfbfd);border-radius:28px;padding:64px 24px;margin:8px 0 0}
+  .final{text-align:center;background:linear-gradient(180deg,#fff3ef,#fbfbfd);border-radius:28px;padding:64px 24px;margin:8px 0 0}
   .final h2{margin:0}
   .btn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;text-decoration:none;font-weight:600;
     padding:15px 30px;border-radius:980px;margin-top:22px;font-size:16px;transition:filter .2s,transform .12s;box-shadow:0 12px 28px -10px rgba(255,75,46,.45)}
@@ -280,19 +328,38 @@
 </nav>
 
 <header class="hero">
-  <div class="hero-figure"><img src="/xandao.jpg" alt="Professor Xandão — fundador da XTRI, especialista em TRI e Psicometria" loading="eager" decoding="async" /></div>
+  <div class="hero-figure"><img src="/xandao.jpg" alt="Professor Xandão — fundador da XTRI, especialista em TRI e Psicometria" width="1300" height="866" loading="eager" decoding="async" /></div>
   <div class="wrap hero-inner">
     <div class="hero-copy">
       <p class="eyebrow">Microdados ENEM 2025 · nota TRI oficial</p>
       <h1>O ranking do ENEM 2025, <span class="accent">escola por escola.</span></h1>
-      <p class="sub">Nota TRI, evolução histórica e diagnóstico por área — de 28.333 escolas, já com os resultados do ENEM 2025. Gratuito para a sua.</p>
+      <p class="sub">Descubra a posição da sua escola, compare por área e veja onde agir primeiro com base nos microdados oficiais do INEP.</p>
 
       <form class="search" id="cta" action="https://app.rankingenem.com/cadastro" method="get">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
         <input id="school" name="escola" placeholder="Digite o nome da sua escola" autocomplete="off" aria-label="Nome da sua escola" />
-        <button type="submit">Analisar →</button>
+        <button type="submit">Buscar minha escola →</button>
       </form>
-      <p class="hint">Gratuito · sem cartão. <a href="https://app.rankingenem.com/">Só quero ver o ranking →</a></p>
+      <div class="hero-actions">
+        <a class="mini-btn secondary" href="https://app.rankingenem.com/">Ver ranking completo</a>
+      </div>
+      <p class="hint">Gratuito · sem cartão · acesso imediato após o cadastro.</p>
+
+      <div class="hero-proof" aria-label="Sinais de confiança">
+        <span>100% base oficial do INEP</span>
+        <span>+20 anos de pesquisa em TRI</span>
+        <span>28.333 escolas analisadas</span>
+      </div>
+
+      <div class="hero-sample" aria-label="Prévia do que a escola recebe">
+        <p class="sample-kicker">O que sua escola recebe</p>
+        <h3>Uma leitura prática do desempenho, não só a posição no ranking.</h3>
+        <ul>
+          <li>posição nacional e comparação com escolas parecidas</li>
+          <li>evolução histórica da nota TRI por área</li>
+          <li>diagnóstico inicial para orientar a ação pedagógica</li>
+        </ul>
+      </div>
 
       <div class="stats">
         <div><div class="n">28.333</div><div class="l">escolas analisadas</div></div>
@@ -305,21 +372,21 @@
 </header>
 
 <section class="block wrap" id="ranking">
-  <p class="kicker">ENEM 2025</p>
+  <p class="kicker warm">ENEM 2025</p>
   <h2>As melhores escolas do ENEM 2025</h2>
   <p class="lead2">Maiores notas TRI do país no ENEM 2025, segundo os microdados oficiais do INEP.</p>
 
   <div class="rank">
-    <a class="row" href="https://app.rankingenem.com/schools/23246871"><span class="pos m1">1º</span><span class="rname"><b>ARI DE SÁ CAVALCANTE — MÁRIO MAMEDE</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">801,3</span></a>
-    <a class="row" href="https://app.rankingenem.com/schools/23246847"><span class="pos m2">2º</span><span class="rname"><b>FARIAS BRITO COLÉGIO DE APLICAÇÃO</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">793,3</span></a>
-    <a class="row" href="https://app.rankingenem.com/schools/23246880"><span class="pos m3">3º</span><span class="rname"><b>CHRISTUS COLÉGIO PRÉ-UNIVERSITÁRIO</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">779,3</span></a>
-    <a class="row" href="https://app.rankingenem.com/"><span class="pos">4º</span><span class="rname"><b>INSTITUTO EDUCACIONAL SÃO JOSÉ</b><span>Teresina · PI · Privada</span></span><span class="rscore">773,8</span></a>
-    <a class="row" href="https://app.rankingenem.com/"><span class="pos">5º</span><span class="rname"><b>ARI DE SÁ CAVALCANTE — MAJOR FACUNDO</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">765,7</span></a>
-    <a class="row" href="https://app.rankingenem.com/"><span class="pos">6º</span><span class="rname"><b>OBJETIVO COLÉGIO INTEGRADO</b><span>São Paulo · SP · Privada</span></span><span class="rscore">763,9</span></a>
-    <a class="row" href="https://app.rankingenem.com/"><span class="pos">7º</span><span class="rname"><b>ETAPA III COLÉGIO</b><span>São Paulo · SP · Privada</span></span><span class="rscore">762,3</span></a>
-    <a class="row" href="https://app.rankingenem.com/"><span class="pos">8º</span><span class="rname"><b>EQUIPE — SISTEMA DE ENSINO INTEGRADO</b><span>Belém · PA · Privada</span></span><span class="rscore">760,2</span></a>
-    <a class="row" href="https://app.rankingenem.com/"><span class="pos">9º</span><span class="rname"><b>COLÉGIO ALFA CEM BILÍNGUE</b><span>Rio de Janeiro · RJ · Privada</span></span><span class="rscore">759,3</span></a>
-    <a class="row" href="https://app.rankingenem.com/"><span class="pos">10º</span><span class="rname"><b>COLÉGIO E CURSO PENSI</b><span>Niterói · RJ · Privada</span></span><span class="rscore">758,9</span></a>
+    <a class="row" href="https://app.rankingenem.com/ranking-enem/escola/23246871"><span class="pos m1">1º</span><span class="rname"><b>ARI DE SÁ CAVALCANTE — MÁRIO MAMEDE</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">801,3</span></a>
+    <a class="row" href="https://app.rankingenem.com/ranking-enem/escola/23246847"><span class="pos m2">2º</span><span class="rname"><b>FARIAS BRITO COLÉGIO DE APLICAÇÃO</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">793,3</span></a>
+    <a class="row" href="https://app.rankingenem.com/ranking-enem/escola/23246880"><span class="pos m3">3º</span><span class="rname"><b>CHRISTUS COLÉGIO PRÉ-UNIVERSITÁRIO</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">779,3</span></a>
+    <a class="row" href="https://app.rankingenem.com/cadastro?escola=INSTITUTO%20EDUCACIONAL%20S%C3%83O%20JOS%C3%89"><span class="pos">4º</span><span class="rname"><b>INSTITUTO EDUCACIONAL SÃO JOSÉ</b><span>Teresina · PI · Privada</span></span><span class="rscore">773,8</span></a>
+    <a class="row" href="https://app.rankingenem.com/cadastro?escola=ARI%20DE%20S%C3%81%20CAVALCANTE%20MAJOR%20FACUNDO"><span class="pos">5º</span><span class="rname"><b>ARI DE SÁ CAVALCANTE — MAJOR FACUNDO</b><span>Fortaleza · CE · Privada</span></span><span class="rscore">765,7</span></a>
+    <a class="row" href="https://app.rankingenem.com/cadastro?escola=OBJETIVO%20COL%C3%89GIO%20INTEGRADO"><span class="pos">6º</span><span class="rname"><b>OBJETIVO COLÉGIO INTEGRADO</b><span>São Paulo · SP · Privada</span></span><span class="rscore">763,9</span></a>
+    <a class="row" href="https://app.rankingenem.com/cadastro?escola=ETAPA%20III%20COL%C3%89GIO"><span class="pos">7º</span><span class="rname"><b>ETAPA III COLÉGIO</b><span>São Paulo · SP · Privada</span></span><span class="rscore">762,3</span></a>
+    <a class="row" href="https://app.rankingenem.com/cadastro?escola=EQUIPE%20SISTEMA%20DE%20ENSINO%20INTEGRADO"><span class="pos">8º</span><span class="rname"><b>EQUIPE — SISTEMA DE ENSINO INTEGRADO</b><span>Belém · PA · Privada</span></span><span class="rscore">760,2</span></a>
+    <a class="row" href="https://app.rankingenem.com/cadastro?escola=COL%C3%89GIO%20ALFA%20CEM%20BIL%C3%8DNGUE"><span class="pos">9º</span><span class="rname"><b>COLÉGIO ALFA CEM BILÍNGUE</b><span>Rio de Janeiro · RJ · Privada</span></span><span class="rscore">759,3</span></a>
+    <a class="row" href="https://app.rankingenem.com/cadastro?escola=COL%C3%89GIO%20E%20CURSO%20PENSI"><span class="pos">10º</span><span class="rname"><b>COLÉGIO E CURSO PENSI</b><span>Niterói · RJ · Privada</span></span><span class="rscore">758,9</span></a>
     <a class="more" href="https://app.rankingenem.com/">Ver o ranking completo (28.333 escolas) →</a>
   </div>
 </section>
@@ -335,14 +402,14 @@
 </section>
 
 <section class="block wrap" id="mapa">
-  <p class="kicker">Brasil inteiro</p>
+  <p class="kicker warm">Brasil inteiro</p>
   <h2>O mapa do ENEM 2025, <span class="accent">estado por estado.</span></h2>
-  <p class="lead2">A média TRI de cada estado em 2025, dos microdados oficiais do INEP. Passe o mouse num estado — e clique para ver as escolas.</p>
+  <p class="lead2">A média TRI de cada estado em 2025, dos microdados oficiais do INEP. Toque ou clique em um estado para ver o detalhe e abrir as escolas da UF.</p>
   <div id="mapa-uf"><p class="maperr">Carregando o mapa…</p></div>
 </section>
 
 <section class="block wrap" id="sobre">
-  <p class="kicker">Quem está por trás</p>
+  <p class="kicker neutral">Quem está por trás</p>
   <h2>A metodologia da XTRI</h2>
   <p class="lead2">Não é só um ranking. São mais de 20 anos de pesquisa em avaliação educacional, aplicados à sua escola.</p>
 
@@ -352,8 +419,8 @@
 
     <div class="nums">
       <div><div class="n accent">+20</div><div class="l">anos de pesquisa</div></div>
-      <div><div class="n accent">+3.000</div><div class="l">aprovados</div></div>
-      <div><div class="n accent">100%</div><div class="l">base oficial INEP</div></div>
+      <div><div class="n accent">+10.000</div><div class="l">aprovados</div></div>
+      <div><div class="n accent">1.4M</div><div class="l">base oficial SISU, INEP, ENEM</div></div>
     </div>
 
     <div class="who">
@@ -371,7 +438,7 @@
 </section>
 
 <section class="block wrap">
-  <p class="kicker">Dúvidas</p>
+  <p class="kicker neutral">Dúvidas</p>
   <h2>Perguntas frequentes</h2>
   <div class="faq">
     <details open><summary>De onde vêm os dados do ranking do ENEM 2025?</summary><p>Dos microdados oficiais do ENEM, publicados pelo Inep/MEC. Agregamos os resultados por escola (série 2018–2025, já com o ENEM 2025) usando a nota TRI.</p></details>
@@ -383,7 +450,7 @@
 
 <section class="wrap">
   <div class="final">
-    <p class="kicker">Gratuito</p>
+    <p class="kicker warm">Gratuito</p>
     <h2>Veja onde a sua escola está.</h2>
     <a class="btn" href="https://app.rankingenem.com/cadastro">Analisar minha escola →</a>
   </div>
@@ -436,12 +503,18 @@
     function show(sg,e){var r=byUf[sg];if(!r){tip.hidden=true;return;}var dl=(r.media_prev!=null)?(r.media-r.media_prev):null;
       var ar=[['Média Geral',r.media],['Redação',r.media_redacao],['Linguagens',r.media_lc],['Matemática',r.media_mt],['Natureza',r.media_cn],['Humanas',r.media_ch]],rows='';
       ar.forEach(function(a){rows+='<div class="tr"><span>'+a[0]+'</span><b>'+fmt(a[1])+'</b></div>';});
-      tip.innerHTML='<div class="th"><span class="uf">'+r.uf+'</span>'+(dl!=null?'<span class="dl '+(dl>=0?'up':'dn')+'">'+(dl>=0?'▲':'▼')+' '+fdl(dl)+'</span>':'')+'</div><p class="sub2">'+r.escolas.toLocaleString('pt-BR')+' escolas · '+r.ano+'</p>'+rows+'<div class="cta2">Clique para ver as escolas →</div>';
-      tip.hidden=false;var hr=host.getBoundingClientRect(),x=e.clientX-hr.left,y=e.clientY-hr.top,fx=x>hr.width*0.5,fy=y>hr.height*0.62;
+      tip.innerHTML='<div class="th"><span class="uf">'+r.uf+'</span>'+(dl!=null?'<span class="dl '+(dl>=0?'up':'dn')+'">'+(dl>=0?'▲':'▼')+' '+fdl(dl)+'</span>':'')+'</div><p class="sub2">'+r.escolas.toLocaleString('pt-BR')+' escolas · '+r.ano+'</p>'+rows+'<div class="cta2"><a href="https://app.rankingenem.com/schools?uf='+r.uf+'" target="_blank" rel="noopener">Ver escolas da UF →</a></div>';
+      tip.hidden=false;
+      if(window.matchMedia('(max-width: 760px)').matches){tip.style.left='';tip.style.top='';tip.style.transform='none';return;}
+      var hr=host.getBoundingClientRect(),x=e.clientX-hr.left,y=e.clientY-hr.top,fx=x>hr.width*0.5,fy=y>hr.height*0.62;
       tip.style.left=x+'px';tip.style.top=y+'px';tip.style.transform='translate('+(fx?'calc(-100% - 16px)':'16px')+','+(fy?'calc(-100% - 16px)':'16px')+')';}
-    svg.addEventListener('mousemove',function(e){if(e.target.tagName==='path')show(e.target.getAttribute('data-uf'),e);});
-    svg.addEventListener('mouseleave',function(){tip.hidden=true;});
-    svg.addEventListener('click',function(e){if(e.target.tagName==='path')window.open('https://app.rankingenem.com/schools?uf='+e.target.getAttribute('data-uf'),'_blank','noopener');});
+    svg.addEventListener('mousemove',function(e){if(window.matchMedia('(hover: hover)').matches&&e.target.tagName==='path')show(e.target.getAttribute('data-uf'),e);});
+    svg.addEventListener('mouseleave',function(){if(window.matchMedia('(hover: hover)').matches)tip.hidden=true;});
+    svg.addEventListener('click',function(e){
+      if(e.target.tagName!=='path')return;
+      if(window.matchMedia('(max-width: 760px)').matches){show(e.target.getAttribute('data-uf'),e);return;}
+      window.open('https://app.rankingenem.com/schools?uf='+e.target.getAttribute('data-uf'),'_blank','noopener');
+    });
   }
   fetch('/brazil-uf.geojson').then(function(r){return r.json()}).then(function(geo){
     fetch(API,{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){render((d.by_uf&&d.by_uf.length)?d.by_uf:FB,geo);}).catch(function(){render(FB,geo);});

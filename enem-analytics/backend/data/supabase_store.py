@@ -146,6 +146,49 @@ def list_schools(
     return schools
 
 
+def list_school_seo_index(
+    offset: int = 0,
+    limit: int = 5000,
+) -> Dict[str, Any]:
+    """Return a bounded latest-year school index for public SEO sitemaps."""
+    client = get_client()
+    target_ano = get_latest_year()
+    rows: List[Dict[str, Any]] = []
+    total = 0
+
+    # PostgREST commonly caps each response at 1,000 rows. Compose the public
+    # batch explicitly so the sitemap never skips schools between offsets.
+    page_size = 1000
+    for page_offset in range(offset, offset + limit, page_size):
+        page_end = min(page_offset + page_size, offset + limit) - 1
+        query = client.table("enem_results").select(
+            "codigo_inep, ano", count="exact" if page_offset == offset else None
+        )
+        result = (
+            query.eq("ano", target_ano)
+            .not_.is_("ranking_nacional", "null")
+            .order("codigo_inep")
+            .range(page_offset, page_end)
+            .execute()
+        )
+        if page_offset == offset:
+            total = result.count or 0
+        rows.extend(result.data)
+        if len(result.data) < page_end - page_offset + 1:
+            break
+
+    return {
+        "ano": target_ano,
+        "offset": offset,
+        "limit": limit,
+        "total": total,
+        "schools": [
+            {"codigo_inep": str(row["codigo_inep"]), "ano": int(row["ano"])}
+            for row in rows
+        ],
+    }
+
+
 def get_filter_bounds(
     uf: Optional[str] = None,
     municipio: Optional[str] = None,
@@ -334,7 +377,7 @@ def get_school_detail(codigo_inep: str) -> Optional[Dict[str, Any]]:
 
     result = client.table("enem_results").select(
         "ano, media_cn, media_ch, media_lc, media_mt, media_redacao, "
-        "media_geral, ranking_nacional, ranking_uf, nome_escola, uf, dependencia, "
+        "media_geral, ranking_nacional, ranking_uf, nome_escola, uf, municipio, dependencia, "
         "desempenho_habilidades, competencia_redacao_media"
     ).eq("codigo_inep", codigo_inep).order("ano").execute()
 
@@ -380,6 +423,7 @@ def get_school_detail(codigo_inep: str) -> Optional[Dict[str, Any]]:
         "codigo_inep": codigo_inep,
         "nome_escola": latest.get("nome_escola"),
         "uf": latest.get("uf"),
+        "municipio": latest.get("municipio"),
         "tipo_escola": latest.get("dependencia"),
         "historico": historico,
         "tendencia": tendencia,
